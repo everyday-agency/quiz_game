@@ -1,6 +1,6 @@
 # Under the Hood — Engineering Thinking Quiz
 
-A dependency-free browser quiz with exactly 1,200 scenario-based questions: 300 each for Laravel, TypeScript, MySQL, and Google Analytics. It focuses on architecture, behavior, tradeoffs, data integrity, type-system design, measurement design, attribution, privacy, security, testing, and production reasoning—not historical facts, syntax recall, or simple name trivia.
+A dependency-free browser quiz with exactly 1,500 scenario-based questions: 400 each for Laravel, TypeScript, and MySQL, plus 300 for Google Analytics. It focuses on architecture, behavior, code reading, APIs, tradeoffs, data integrity, type-system design, measurement design, attribution, privacy, security, testing, and production reasoning—not historical facts or simple name trivia.
 
 ## Run it
 
@@ -18,8 +18,9 @@ No package installation, database, build step, or internet connection is require
 
 ## What is included
 
-- 1,200 questions across four learning tracks and 100 domains
-- Exactly 300 questions and 25 domains per track
+- 1,500 questions across four learning tracks and 100 domains
+- 400 Laravel, 400 TypeScript, 400 MySQL, and 300 Google Analytics questions
+- Exactly 100 code-reading questions in each programming/database track
 - Four options and one correct answer per question
 - Learning mode with immediate explanations
 - A concrete walkthrough for every correct answer

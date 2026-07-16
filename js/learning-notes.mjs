@@ -1187,7 +1187,9 @@ function questionNumber(question) {
 }
 
 function shouldShowCorrectCode(question) {
-  return question.track !== 'Google Analytics' && (questionNumber(question) - 1) % 3 === 0;
+  return question.track !== 'Google Analytics'
+    && questionNumber(question) <= 300
+    && (questionNumber(question) - 1) % 3 === 0;
 }
 
 function curatedWrongCodeFor(question, option) {
@@ -1305,6 +1307,13 @@ export function buildLearningNotes(question, orderedOptions = question.options) 
   const guide = guideFor(question);
   const options = orderedOptions.map((option) => typeof option === 'string' ? option : option.text);
   const correct = question.options[question.answer];
+  const codeLanguage = question.code?.language === 'php'
+    ? 'PHP'
+    : question.code?.language === 'sql'
+      ? 'SQL'
+      : question.code?.language === 'json'
+        ? 'JSON configuration'
+        : 'TypeScript';
 
   const alternatives = options.flatMap((option, index) => {
     if (option === correct) return [];
@@ -1313,11 +1322,15 @@ export function buildLearningNotes(question, orderedOptions = question.options) 
     const diagnosedExample = diagnosis.example
       ? `${normalizeSentence(diagnosis.example)} In this scenario, ${guide.failure}; choosing it would leave the core problem unsolved.`
       : fallbackExample;
+    const codeReason = `This interpretation gives the displayed code behavior that it does not have. ${normalizeSentence(question.explanation)} The decisive result is “${correct}”, so “${option}” describes a different execution path, type rule, database guarantee, or API contract.`;
+    const codeExample = `Trace the displayed ${codeLanguage} in the exact order shown and inspect the value, branch, type, or affected rows named in the prompt. The observable outcome matches “${correct}”. For “${option}” to be true, the code would need an additional operator, guard, constraint, query clause, or API behavior that is not present.`;
     return [{
       number: index + 1,
       option,
-      reason: `${diagnosis.reason} The decisive issue here is ${guide.focus}. It does not establish “${correct}”.`,
-      example: diagnosedExample,
+      reason: question.code
+        ? codeReason
+        : `${diagnosis.reason} The decisive issue here is ${guide.focus}. It does not establish “${correct}”.`,
+      example: question.code ? codeExample : diagnosedExample,
       code: curatedWrongCodeFor(question, option),
     }];
   });
@@ -1325,7 +1338,9 @@ export function buildLearningNotes(question, orderedOptions = question.options) 
   return {
     correct,
     whyCorrect: normalizeSentence(question.explanation),
-    correctExample: `${guide.setup} The team applies “${correct}”. ${normalizeSentence(capitalize(guide.success))}`,
+    correctExample: question.code
+      ? `Read the displayed ${codeLanguage} from top to bottom and apply “${correct}”. ${normalizeSentence(question.explanation)} The code itself is the concrete example: its operator, API call, branch, constraint, or query clause produces that result.`
+      : `${guide.setup} The team applies “${correct}”. ${normalizeSentence(capitalize(guide.success))}`,
     correctCode: shouldShowCorrectCode(question) ? guide.code || null : null,
     alternatives,
   };

@@ -324,6 +324,10 @@ function renderQuestion() {
   $('#questionDifficulty').textContent = question.difficulty;
   $('#questionNumber').textContent = `Question ${state.current + 1} of ${state.session.length}`;
   $('#questionPrompt').textContent = question.prompt;
+  const questionCode = $('#questionCode');
+  questionCode.replaceChildren();
+  questionCode.hidden = !question.code;
+  if (question.code) questionCode.append(createCodeLesson(question.code, 'Read this code'));
   $('#progressBar').style.width = `${((state.current + 1) / state.session.length) * 100}%`;
   $('#feedbackPanel').hidden = true;
   $('#feedbackPanel').className = 'feedback-panel';
@@ -536,7 +540,7 @@ function renderBank() {
   const domain = $('#bankTopic').value;
   const difficulty = $('#bankDifficulty').value;
   const matches = QUESTION_BANK.filter((question) => {
-    const searchable = `${question.track} ${question.topic} ${question.prompt} ${question.explanation} ${question.options.join(' ')}`.toLowerCase();
+    const searchable = `${question.track} ${question.topic} ${question.prompt} ${question.code?.title || ''} ${question.code?.snippet || ''} ${question.explanation} ${question.options.join(' ')}`.toLowerCase();
     return (!term || searchable.includes(term))
       && (track === 'all' || question.track === track)
       && (domain === 'all' || domainKey(question.track, question.topic) === domain)
@@ -583,6 +587,7 @@ function renderBank() {
     correct.textContent = `Strongest answer: ${question.options[question.answer]}`;
     const explanation = document.createElement('p');
     explanation.textContent = question.explanation;
+    if (question.code) answer.append(createCodeLesson(question.code, 'Read this code'));
     answer.append(correct, explanation);
     details.addEventListener('toggle', () => {
       if (!details.open || answer.dataset.enriched === 'true') return;

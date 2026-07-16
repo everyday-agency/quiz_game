@@ -294,6 +294,8 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 .learning-notes .code-lesson > strong { display: block; margin-bottom: 8px; color: #fff; font-family: inherit; font-size: 11px; line-height: 1.45; }
 .code-lesson pre { max-width: 100%; margin: 0; overflow-x: auto; color: #e7e1e9; scrollbar-width: thin; }
 .code-lesson code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 10px; line-height: 1.6; white-space: pre; tab-size: 2; }
+.question-code { margin: 18px 0 22px; }
+.question-code[hidden] { display: none; }
 .missed-item > .review-answer { margin-top: 12px; color: var(--green); font-family: inherit; font-size: 12px; line-height: 1.55; }
 .missed-item > .learning-notes { margin-top: 12px; }
 .bank-answer > .learning-notes { margin-top: 15px; }
