@@ -84,6 +84,30 @@ function materialize(question) {
   };
 }
 
+function createCodeLesson(lesson, labelText) {
+  const section = document.createElement('section');
+  section.className = 'code-lesson';
+
+  const header = document.createElement('div');
+  header.className = 'code-lesson-header';
+  const label = document.createElement('span');
+  label.textContent = labelText;
+  const language = document.createElement('span');
+  language.className = 'code-language';
+  language.textContent = lesson.language;
+  header.append(label, language);
+
+  const title = document.createElement('strong');
+  title.textContent = lesson.title;
+  const pre = document.createElement('pre');
+  const code = document.createElement('code');
+  code.textContent = lesson.snippet;
+  pre.append(code);
+
+  section.append(header, title, pre);
+  return section;
+}
+
 function createLearningNotes(question, orderedOptions = question.options) {
   const notes = buildLearningNotes(question, orderedOptions);
   const wrapper = document.createElement('div');
@@ -97,6 +121,9 @@ function createLearningNotes(question, orderedOptions = question.options) {
   const exampleText = document.createElement('p');
   exampleText.textContent = notes.correctExample;
   correctExample.append(exampleLabel, exampleText);
+  if (notes.correctCode) {
+    correctExample.append(createCodeLesson(notes.correctCode, 'See the concept in code'));
+  }
 
   const alternativesHeading = document.createElement('h4');
   alternativesHeading.textContent = 'Why the other choices are weaker';
@@ -120,6 +147,9 @@ function createLearningNotes(question, orderedOptions = question.options) {
     prefix.textContent = 'Example: ';
     example.append(prefix, alternative.example);
     copy.append(option, reason, example);
+    if (alternative.code) {
+      copy.append(createCodeLesson(alternative.code, 'Why this can fail in code'));
+    }
     item.append(number, copy);
     alternatives.append(item);
   });

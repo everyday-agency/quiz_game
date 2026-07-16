@@ -6,6 +6,20 @@ const GUIDES = {
       setup: 'An endpoint serializes one hundred projects, and each project may have several related materials.',
       success: 'the query loads the required relation deliberately and the resource includes it only when that data is already available',
       failure: 'each serialized item can still lazy-load its relation and turn one endpoint into hundreds of queries',
+      code: {
+        language: 'php',
+        title: 'Load data deliberately, then serialize it',
+        snippet: `$projects = Project::query()
+    ->with('materials')
+    ->get();
+
+return ProjectResource::collection($projects);
+
+// Inside ProjectResource::toArray():
+'materials' => MaterialResource::collection(
+    $this->whenLoaded('materials')
+),`,
+      },
     },
     {
       topics: /Request lifecycle|Routing|Sessions, cookies/,
@@ -13,6 +27,22 @@ const GUIDES = {
       setup: 'A second request reaches the application through another route or with slightly different input.',
       success: 'The rule is applied at the same dependable request boundary before later code relies on it',
       failure: 'that alternate path can still bypass the intended rule or reach business code in the wrong state',
+      code: {
+        language: 'php',
+        title: 'Put a request-wide rule at the request boundary',
+        snippet: `final class EnsureAccountIsActive
+{
+    public function handle(Request $request, Closure $next)
+    {
+        abort_if($request->user()->account->suspended, 403);
+
+        return $next($request);
+    }
+}
+
+Route::middleware(['auth', EnsureAccountIsActive::class])
+    ->group(fn () => Route::resource('projects', ProjectController::class));`,
+      },
     },
     {
       topics: /Container|Application architecture|Collections/,
@@ -20,6 +50,21 @@ const GUIDES = {
       setup: 'A second controller, command, or test needs to perform the same operation with a different dependency.',
       success: 'The behavior remains reusable and the dependency can be replaced without rewriting the caller',
       failure: 'the duplicated or tightly coupled code still behaves differently in another caller',
+      code: {
+        language: 'php',
+        title: 'Depend on a contract and inject the implementation',
+        snippet: `$this->app->bind(
+    PaymentGateway::class,
+    StripeGateway::class,
+);
+
+final class Checkout
+{
+    public function __construct(
+        private PaymentGateway $gateway,
+    ) {}
+}`,
+      },
     },
     {
       topics: /Validation & input/,
@@ -27,6 +72,17 @@ const GUIDES = {
       setup: 'A client sends a nested payload with one missing field, an extra administrative field, and a value in the wrong format.',
       success: 'only the validated and normalized shape reaches the operation, while invalid combinations return useful errors',
       failure: 'unexpected fields or malformed values can still reach assignment and business logic',
+      code: {
+        language: 'php',
+        title: 'Use the validated shape, not the whole request',
+        snippet: `$data = $request->validate([
+    'name' => ['required', 'string', 'max:120'],
+    'budget' => ['required', 'numeric', 'min:0'],
+]);
+
+// admin is ignored because it was not validated.
+$project = Project::create($data);`,
+      },
     },
     {
       topics: /Authentication|Security & trust/,
@@ -34,6 +90,18 @@ const GUIDES = {
       setup: 'An attacker or ordinary user sends well-formed input for a resource they should not be allowed to change.',
       success: 'shape, identity, and permission are checked at the boundary that owns each guarantee',
       failure: 'valid-looking input can still cross the missing authorization or trust check',
+      code: {
+        language: 'php',
+        title: 'Validation and authorization answer different questions',
+        snippet: `public function update(UpdateProjectRequest $request, Project $project)
+{
+    // May this user update this project?
+    $this->authorize('update', $project);
+
+    // Does the input have the expected shape?
+    $project->update($request->validated());
+}`,
+      },
     },
     {
       topics: /Migrations|Eloquent|Relationships|Queries|Transactions|Seeders/,
@@ -41,6 +109,20 @@ const GUIDES = {
       setup: 'Two requests touch related records while production contains more rows and edge cases than local fixtures.',
       success: 'the database state stays valid and the application performs the intended amount of work',
       failure: 'the same race, invalid relationship, or hidden query cost can still appear under real data',
+      code: {
+        language: 'php',
+        title: 'Protect a read-then-write decision inside one transaction',
+        snippet: `DB::transaction(function () use ($seatId) {
+    $seat = Seat::query()
+        ->whereKey($seatId)
+        ->lockForUpdate()
+        ->firstOrFail();
+
+    throw_if($seat->reserved, SeatAlreadyReserved::class);
+
+    $seat->update(['reserved' => true]);
+});`,
+      },
     },
     {
       topics: /Cache & rate limiting/i,
@@ -48,6 +130,16 @@ const GUIDES = {
       setup: 'Two tenants request the same record ID while several workers refresh an expired cache key at once.',
       success: 'keys include the full security context and concurrent refresh or rate decisions use an atomic shared mechanism',
       failure: 'one tenant can still receive another tenant’s cached value or a burst can bypass or overload the limiter',
+      code: {
+        language: 'php',
+        title: 'Include the tenant and coordinate refreshes',
+        snippet: `$key = "tenant:{$tenantId}:project:{$projectId}";
+
+return Cache::lock("refresh:{$key}", 10)->block(
+    3,
+    fn () => Cache::remember($key, 300, $loadProject),
+);`,
+      },
     },
     {
       topics: /Events|Queues|Artisan|scheduling|Files, mail|notifications/i,
@@ -55,6 +147,20 @@ const GUIDES = {
       setup: 'A worker retries after a timeout, or the same command is triggered twice while an external service is slow.',
       success: 'retries and delayed execution preserve the intended result without duplicating irreversible effects',
       failure: 'a retry, stale cache entry, or repeated side effect can still produce a different outcome',
+      code: {
+        language: 'php',
+        title: 'Dispatch after commit and make retryable work idempotent',
+        snippet: `DB::transaction(function () use ($order) {
+    $order->markPaid();
+
+    SendReceipt::dispatch($order->id)->afterCommit();
+});
+
+final class SendReceipt implements ShouldQueue, ShouldBeUnique
+{
+    public function uniqueId(): string { return (string) $this->orderId; }
+}`,
+      },
     },
     {
       topics: /Testing|Configuration|deployment|Errors|Production performance/i,
@@ -62,6 +168,18 @@ const GUIDES = {
       setup: 'The same release runs under production configuration and encounters a failure that did not occur locally.',
       success: 'the behavior can be verified, observed, and recovered without hiding the real failure',
       failure: 'the release can still fail silently, behave differently, or exhaust resources in production',
+      code: {
+        language: 'php',
+        title: 'Make the behavior observable and test its contract',
+        snippet: `Log::error('Invoice generation failed', [
+    'invoice_id' => $invoice->id,
+    'request_id' => request()->header('X-Request-ID'),
+]);
+
+$this->postJson('/api/invoices', $payload)
+    ->assertUnprocessable()
+    ->assertJsonValidationErrors(['customer_id']);`,
+      },
     },
   ],
   TypeScript: [
@@ -71,6 +189,19 @@ const GUIDES = {
       setup: 'The same source is checked in CI, transformed by a build tool, and then executed by a particular runtime.',
       success: 'the team keeps type checking, emitted syntax, module resolution, available libraries, and runtime capabilities as separate explicit contracts',
       failure: 'one stage can still pass while the loader or runtime lacks what another configuration stage assumed',
+      code: {
+        language: 'json',
+        title: 'Compiler settings describe the build contract',
+        snippet: `{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true
+  }
+}`,
+      },
     },
     {
       topics: /inference|Narrowing|Unions|Nullability|Errors, unknown/i,
@@ -78,6 +209,21 @@ const GUIDES = {
       setup: 'A caller supplies another allowed member of the union, or a nullable value follows a less common branch.',
       success: 'unsafe operations are rejected until control flow has established the required fact',
       failure: 'another valid input can still reach code that assumes a property or value that was never proved',
+      code: {
+        language: 'typescript',
+        title: 'Narrow the union before using member-specific data',
+        snippet: `type Result =
+  | { ok: true; value: number }
+  | { ok: false; message: string };
+
+function print(result: Result) {
+  if (result.ok) {
+    console.log(result.value.toFixed(2));
+  } else {
+    console.error(result.message);
+  }
+}`,
+      },
     },
     {
       topics: /Objects|Functions|Generics|Classes|Arrays|Literals|keyof|Mapped|Conditional/i,
@@ -85,6 +231,18 @@ const GUIDES = {
       setup: 'A new caller uses the API with a different but structurally compatible object or generic argument.',
       success: 'the contract preserves the relationship the implementation needs while rejecting invalid combinations',
       failure: 'the type can still admit a combination that the implementation cannot handle safely',
+      code: {
+        language: 'typescript',
+        title: 'Let the generic preserve the key-to-value relationship',
+        snippet: `type User = { id: number; name: string; active: boolean };
+
+function read<K extends keyof User>(user: User, key: K): User[K] {
+  return user[key];
+}
+
+const name = read(user, "name");   // string
+const active = read(user, "active"); // boolean`,
+      },
     },
     {
       topics: /Modules|Declaration|Type performance/i,
@@ -92,6 +250,17 @@ const GUIDES = {
       setup: 'Another package or build target consumes the same code with its own module resolution and compiler context.',
       success: 'all consumers see one accurate contract and the project remains predictable to compile',
       failure: 'another build can still resolve a different shape, hide an error, or become costly to check',
+      code: {
+        language: 'typescript',
+        title: 'Export one public contract for every consumer',
+        snippet: `// billing/index.ts — the package boundary
+export type { Invoice, InvoiceStatus } from "./types.js";
+export { calculateTotal } from "./calculate-total.js";
+
+// consumer.ts
+import { calculateTotal } from "@acme/billing";
+import type { Invoice } from "@acme/billing";`,
+      },
     },
     {
       topics: /Async code|promises/i,
@@ -99,6 +268,19 @@ const GUIDES = {
       setup: 'One promise rejects after another task has started, or two operations complete in the opposite order.',
       success: 'callers can observe completion and failure through an explicit, correctly typed path',
       failure: 'a rejection can still escape, work can finish out of order, or a caller can assume completion too early',
+      code: {
+        language: 'typescript',
+        title: 'Return and await the promise so failure remains observable',
+        snippet: `async function loadUser(id: string): Promise<User> {
+  const response = await fetch("/api/users/" + id);
+
+  if (!response.ok) {
+    throw new Error("User request failed");
+  }
+
+  return parseUser(await response.json());
+}`,
+      },
     },
     {
       topics: /Runtime validation|DOM|React|Node & server/i,
@@ -106,6 +288,21 @@ const GUIDES = {
       setup: 'JSON, a DOM lookup, an environment variable, or a component prop arrives with an unexpected runtime value.',
       success: 'the value is checked or safely narrowed before typed code treats it as trustworthy',
       failure: 'the program can still compile while the unexpected runtime value reaches an unsafe operation',
+      code: {
+        language: 'typescript',
+        title: 'Treat external data as unknown, then prove its shape',
+        snippet: `function isUser(value: unknown): value is User {
+  return typeof value === "object"
+    && value !== null
+    && "id" in value
+    && typeof value.id === "number";
+}
+
+const payload: unknown = await response.json();
+if (!isUser(payload)) throw new Error("Invalid user payload");
+
+console.log(payload.id); // safely narrowed to User`,
+      },
     },
     {
       topics: /Testing|Refactoring/i,
@@ -113,6 +310,21 @@ const GUIDES = {
       setup: 'A teammate refactors the implementation or adds a new caller that was not represented by the original examples.',
       success: 'tests and types protect both runtime behavior and the intended public API',
       failure: 'the refactor can still compile or pass shallow tests while breaking a real caller',
+      code: {
+        language: 'typescript',
+        title: 'Inject unstable behavior and test the public result',
+        snippet: `interface Clock { now(): Date }
+
+function isExpired(expiresAt: Date, clock: Clock): boolean {
+  return expiresAt <= clock.now();
+}
+
+const fixedClock: Clock = {
+  now: () => new Date("2030-01-01T00:00:00Z"),
+};
+
+expect(isExpired(oldDate, fixedClock)).toBe(true);`,
+      },
     },
   ],
   MySQL: [
@@ -122,6 +334,18 @@ const GUIDES = {
       setup: 'A row arrives with a missing value, a duplicate relationship, or a document shape that the happy path did not use.',
       success: 'the representation expresses the fact precisely and enforceable invariants reject invalid state',
       failure: 'ambiguous or invalid data can still be stored and discovered only by later application code',
+      code: {
+        language: 'sql',
+        title: 'Represent the rule as an enforceable database invariant',
+        snippet: `CREATE TABLE memberships (
+  user_id BIGINT NOT NULL,
+  team_id BIGINT NOT NULL,
+  role VARCHAR(30) NOT NULL,
+  PRIMARY KEY (user_id, team_id),
+  CONSTRAINT chk_role CHECK (role IN ('member', 'admin')),
+  FOREIGN KEY (team_id) REFERENCES teams(id)
+);`,
+      },
     },
     {
       topics: /Joins|Aggregation|Subqueries|Query correctness|Pagination/i,
@@ -129,6 +353,19 @@ const GUIDES = {
       setup: 'The data includes an unmatched row, a NULL, a tie, and more than one related record.',
       success: 'the query returns the same logically correct rows for edge cases as it does for the simple example',
       failure: 'rows can still disappear, duplicate, compare as unknown, or move between pages unexpectedly',
+      code: {
+        language: 'sql',
+        title: 'Preserve unmatched rows and aggregate at the intended grain',
+        snippet: `SELECT
+  c.id,
+  c.name,
+  COUNT(o.id) AS order_count
+FROM customers AS c
+LEFT JOIN orders AS o
+  ON o.customer_id = c.id
+GROUP BY c.id, c.name
+ORDER BY c.id;`,
+      },
     },
     {
       topics: /Index design|EXPLAIN|Production performance/i,
@@ -136,13 +373,43 @@ const GUIDES = {
       setup: 'The table grows by one hundred times and one tenant owns far more rows than the others.',
       success: 'the optimizer can reach the needed rows with bounded work that matches the real workload',
       failure: 'the query can still scan, sort, fetch, or maintain far more entries than its small result suggests',
+      code: {
+        language: 'sql',
+        title: 'Match the composite index to filtering and ordering',
+        snippet: `CREATE INDEX idx_orders_tenant_status_created
+  ON orders (tenant_id, status, created_at DESC);
+
+EXPLAIN ANALYZE
+SELECT id, created_at
+FROM orders
+WHERE tenant_id = 42
+  AND status = 'paid'
+ORDER BY created_at DESC
+LIMIT 20;`,
+      },
     },
     {
       topics: /Transactions|Isolation|Locking|Concurrency/i,
       focus: 'the concurrency boundary: which invariant must remain true when two sessions act at the same time',
       setup: 'Two database sessions read the same initial state and attempt the operation before either one finishes.',
       success: 'the invariant is protected by an atomic statement, constraint, or deliberate locking boundary',
-      failure: 'both sessions can still make a individually reasonable decision that is wrong when combined',
+      failure: 'both sessions can still make an individually reasonable decision that is wrong when combined',
+      code: {
+        language: 'sql',
+        title: 'Lock the row before making a read-then-write decision',
+        snippet: `START TRANSACTION;
+
+SELECT reserved
+FROM seats
+WHERE id = 15
+FOR UPDATE;
+
+UPDATE seats
+SET reserved = TRUE
+WHERE id = 15 AND reserved = FALSE;
+
+COMMIT;`,
+      },
     },
     {
       topics: /Schema migrations|Partitioning|data lifecycle/i,
@@ -150,6 +417,20 @@ const GUIDES = {
       setup: 'A deployment runs while older application instances still serve traffic and late data continues to arrive.',
       success: 'the change remains compatible, observable, and recoverable throughout the transition',
       failure: 'one version can still see an incompatible schema or valid late data can be lost',
+      code: {
+        language: 'sql',
+        title: 'Use an expand-and-contract migration',
+        snippet: `-- Expand: safe while old code still runs.
+ALTER TABLE customers
+  ADD COLUMN display_name VARCHAR(200) NULL;
+
+-- Deploy code that writes both old_name and display_name.
+-- Backfill in small batches, then read display_name.
+
+-- Contract only after every old instance is gone.
+ALTER TABLE customers
+  DROP COLUMN old_name;`,
+      },
     },
     {
       topics: /Security & privileges/i,
@@ -157,6 +438,18 @@ const GUIDES = {
       setup: 'A user controls one query value while the application account can reach data belonging to many tenants.',
       success: 'values remain data, identifiers come from an allowlist, and the account has only the authority the operation needs',
       failure: 'input can still alter query structure or a compromised account can still reach more data than intended',
+      code: {
+        language: 'sql',
+        title: 'Bind values and keep the tenant predicate explicit',
+        snippet: `SELECT id, total, created_at
+FROM orders
+WHERE tenant_id = ?
+  AND customer_email = ?
+ORDER BY created_at DESC;
+
+-- The driver binds both ? values as data.
+-- The application account also receives only required privileges.`,
+      },
     },
     {
       topics: /Backup|Replication/i,
@@ -164,6 +457,17 @@ const GUIDES = {
       setup: 'The primary accepts a write just before a failure, while a mistake is also moving through the replication stream.',
       success: 'promotion and recovery use explicit progress coordinates, independent backups, and a tested stopping point',
       failure: 'acknowledged work can still be missing or the same accidental change can still exist on every replica',
+      code: {
+        language: 'sql',
+        title: 'Replication copies mistakes; recovery needs history',
+        snippet: `-- This mistake is copied to replicas too:
+DELETE FROM invoices WHERE paid_at IS NULL;
+
+-- Recovery is a separate procedure:
+-- 1. restore a backup to another server
+-- 2. replay binary logs only up to the safe timestamp
+-- 3. verify, then copy back the recovered rows`,
+      },
     },
     {
       topics: /Connections|configuration/i,
@@ -171,6 +475,16 @@ const GUIDES = {
       setup: 'Many application instances reconnect together and one reused session still carries state from its previous request.',
       success: 'connection demand remains bounded and every borrower receives the intended clean session contract',
       failure: 'the server can still be overwhelmed or the next request can inherit locks, transactions, or different settings',
+      code: {
+        language: 'sql',
+        title: 'Return pooled connections in a clean session state',
+        snippet: `ROLLBACK;
+SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+
+-- Only now should the pool lend this connection
+-- to the next request.`,
+      },
     },
     {
       topics: /Observability/i,
@@ -178,6 +492,19 @@ const GUIDES = {
       setup: 'Users report a slow tail while aggregate averages still look healthy and one tenant has unusually skewed data.',
       success: 'percentiles, query digests, and wait ownership reveal the actual expensive path without exposing sensitive values',
       failure: 'the incident can still hide inside averages or produce logs that show symptoms without identifying the blocker',
+      code: {
+        language: 'sql',
+        title: 'Measure the real execution instead of guessing',
+        snippet: `EXPLAIN ANALYZE
+SELECT id, created_at
+FROM events
+WHERE tenant_id = 42
+  AND event_type = 'purchase'
+ORDER BY created_at DESC
+LIMIT 50;
+
+-- Compare estimated rows, actual rows, loops, and time.`,
+      },
     },
     {
       topics: /Security|Backup|Replication|Connections|configuration|Observability/i,
@@ -267,9 +594,604 @@ const FALLBACK_GUIDES = {
   },
 };
 
+const DISTRACTOR_GUIDES = {
+  Laravel: [
+    {
+      pattern: /check copied into every controller|controller constructor queries|only controllers may create analytics records|billing APIs only work from controllers|only controllers may cache permissions|call the controller method from Artisan|domain code.*extend Controller|route closure\b/i,
+      reason: 'A controller or route closure handles one HTTP entry point. It does not protect commands, queued jobs, other controllers, or database writes that reach the same business operation.',
+      example: 'A second endpoint can call the operation without the duplicated controller check, so the rule disappears on that path.',
+      codeTopics: /Container|Application architecture|Testing|Security/i,
+      codeOptions: /check|put|move|only controller|controller action/i,
+      code: {
+        language: 'php',
+        title: 'A controller check protects only that controller',
+        snippet: `final class ProjectController
+{
+    public function publish(Project $project)
+    {
+        abort_unless(auth()->user()->is_admin, 403);
+        $project->publish();
+    }
+}
+
+// This command calls publish() without the controller check.
+$project->publish();`,
+      },
+    },
+    {
+      pattern: /\bmiddleware\b/i,
+      reason: 'Middleware surrounds HTTP requests. It is useful for request-wide concerns, but a command, queue worker, or direct service call does not pass through that HTTP pipeline.',
+      example: 'The web request is blocked correctly, while an Artisan command calls the same service and changes the record because no domain or persistence rule exists there.',
+    },
+    {
+      pattern: /\bvalidat|form request\b/i,
+      reason: 'Validation proves that input has an acceptable shape. It does not prove that the signed-in user owns the resource, that a concurrent update is safe, or that an external effect can be rolled back.',
+      example: 'The value `project_id: 42` can be a valid integer while project 42 still belongs to another account.',
+      codeTopics: /Authentication|authorization|Security|trust/i,
+      code: {
+        language: 'php',
+        title: 'Valid input can still be unauthorized',
+        snippet: `$data = $request->validate(['name' => ['required', 'string']]);
+
+// Validation passed, but whose project is this?
+$project = Project::findOrFail($request->project_id);
+$project->update($data); // unsafe without authorization`,
+      },
+    },
+    {
+      pattern: /\bauthoriz|\bpolicy\b|\bgate\b/i,
+      reason: 'Authorization answers whether an actor may perform an action. It does not validate payload shape, make several writes atomic, or improve query loading by itself.',
+      example: 'A user may be allowed to edit a project, yet a malformed budget still needs validation and two related writes may still need a transaction.',
+      codeTopics: /Validation|Transactions|Queries/i,
+      codeOptions: /authorization alone|policy alone|gate alone|only authoriz|authorize the input/i,
+      code: {
+        language: 'php',
+        title: 'Permission does not make an unsafe payload valid',
+        snippet: `$this->authorize('update', $project);
+
+// The user is allowed, but the payload is still unchecked.
+$project->update($request->all());
+
+// Prefer the validated shape:
+$project->update($request->validated());`,
+      },
+    },
+    {
+      pattern: /\btransaction|lockforupdate|database lock\b/i,
+      reason: 'A database transaction coordinates database work on the participating connection. It cannot undo an email, HTTP request, file upload, or other external side effect that already happened.',
+      example: 'The database update rolls back after an exception, but the customer has already received the email sent inside the transaction.',
+      codeTopics: /Events|Queues|Files|mail|notifications/i,
+      code: {
+        language: 'php',
+        title: 'The database cannot roll back an email',
+        snippet: `DB::transaction(function () use ($order) {
+    $order->update(['status' => 'paid']);
+    Mail::to($order->customer)->send(new Receipt($order));
+
+    throw new RuntimeException('Database will roll back');
+    // The email has already left the application.
+});`,
+      },
+    },
+    {
+      pattern: /\beager load|\bindex|\bcache\b/i,
+      reason: 'This primarily changes how quickly data is found or reused. Performance work does not automatically enforce ownership, authorization, uniqueness, atomicity, or side-effect safety.',
+      example: 'A cached lookup can become faster and still return another tenant’s value if the tenant is missing from the key.',
+      codeTopics: /Cache|Security|Queries|performance/i,
+      codeOptions: /cache/i,
+      code: {
+        language: 'php',
+        title: 'A fast cache key can still cross a tenant boundary',
+        snippet: `// Wrong: project 42 can exist in several tenant contexts.
+$project = Cache::remember("project:{$id}", 300, $load);
+
+// The security context belongs in the identity.
+$key = "tenant:{$tenantId}:project:{$id}";
+$project = Cache::remember($key, 300, $load);`,
+      },
+    },
+    {
+      pattern: /\bqueue|\bjob\b|\bevent\b|\bobserver\b|\blistener\b/i,
+      reason: 'Queues and events change timing or coupling. They do not automatically make work unique, order it after a transaction commits, or make a repeated external effect safe.',
+      example: 'A worker times out after sending a receipt, retries, and sends the same receipt again unless the job has an idempotency rule.',
+      codeTopics: /Events|Queues|Files|mail|notifications|scheduling/i,
+      codeOptions: /retry|duplicate|idempoten|unique|after commit|queue automatically/i,
+      code: {
+        language: 'php',
+        title: 'A retry repeats ordinary job code',
+        snippet: `public function handle(): void
+{
+    Mail::to($this->email)->send(new Receipt($this->orderId));
+
+    // If the worker times out here, Laravel may retry handle().
+    // Without uniqueness or an idempotency record, a second email is sent.
+}`,
+      },
+    },
+    {
+      pattern: /\bmigration|foreign key|unique constraint|database constraint\b/i,
+      reason: 'A schema constraint protects a persistent data invariant. It does not decide who may issue the write or validate presentation-specific request rules.',
+      example: 'A unique email constraint rejects duplicates, but it cannot decide whether the current user may edit that customer.',
+    },
+    {
+      pattern: /model binding|implicit binding/i,
+      reason: 'Model binding resolves a route value into a model. Finding a record is not the same as authorizing the current actor to view or change it.',
+      example: 'Laravel can successfully bind `/projects/42` even when project 42 belongs to another account, unless scoped binding or authorization adds that rule.',
+      codeTopics: /Routing|Authentication|authorization|Security/i,
+      codeOptions: /binding authoriz|binding proves ownership|no policy|without authorization/i,
+      code: {
+        language: 'php',
+        title: 'Successful binding still needs an access decision',
+        snippet: `public function show(Project $project)
+{
+    // Binding proved that the project exists.
+    // It did not prove that this user may see it.
+    $this->authorize('view', $project);
+
+    return new ProjectResource($project);
+}`,
+      },
+    },
+  ],
+  TypeScript: [
+    {
+      pattern: /type assertion|\bcast\b|\bassert\w*\b|\bany\b/i,
+      reason: 'An assertion or `any` changes what the compiler is willing to believe. It does not inspect, convert, or repair the runtime value.',
+      example: 'A string can be asserted as a number and the program still receives a string when it runs.',
+      code: {
+        language: 'typescript',
+        title: 'The assertion compiles, but the value is still wrong',
+        snippet: `type User = { age: number };
+
+const payload = JSON.parse('{"age":"old"}') as User;
+
+// Compiles because of the assertion.
+payload.age.toFixed(0);
+// Runtime error: "old" has no toFixed method.`,
+      },
+    },
+    {
+      pattern: /\binterface\b|type alias|\bgeneric\b/i,
+      reason: 'Interfaces, type aliases, and generics describe compile-time relationships. They are erased from emitted JavaScript and therefore cannot validate JSON or create missing runtime behavior.',
+      example: 'Declaring `interface User` does not make an API response contain a numeric `id`; the response must still be checked.',
+      codeTopics: /Runtime validation|DOM|React|Node & server/i,
+      code: {
+        language: 'typescript',
+        title: 'An interface is not a runtime validator',
+        snippet: `interface User { id: number }
+
+const value: unknown = await response.json();
+
+// User does not exist at runtime, so this is impossible:
+// if (value instanceof User) { ... }
+
+// Use a real validator or type guard instead.`,
+      },
+    },
+    {
+      pattern: /\bunion\b/i,
+      reason: 'A union lists several allowed possibilities. Code must still narrow the current value before using a property that exists on only one member.',
+      example: 'For `Cat | Dog`, both values are legal, so calling a dog-only method before checking the discriminant remains unsafe.',
+    },
+    {
+      pattern: /non-null|optional chaining|undefined|\bnull\b/i,
+      reason: 'Optional chaining changes the result to include `undefined`, and a non-null assertion only silences the compiler. Neither operation makes a missing runtime value appear.',
+      example: 'If `querySelector` returns `null`, adding `!` compiles but the property access still fails at runtime.',
+      codeTopics: /Nullability|DOM|React/i,
+      code: {
+        language: 'typescript',
+        title: 'The exclamation mark does not create the element',
+        snippet: `const button = document.querySelector("#save")!;
+
+// Compiles, but crashes if #save is absent.
+button.addEventListener("click", save);
+
+// Safer:
+const safeButton = document.querySelector("#save");
+if (safeButton) safeButton.addEventListener("click", save);`,
+      },
+    },
+    {
+      pattern: /\basync\b|\bpromise\b|\bawait\b/i,
+      reason: 'Promises model eventual completion or failure. They do not validate the resolved value, guarantee ordering between unrelated tasks, or make a forgotten promise observable.',
+      example: 'Calling an async save function without returning or awaiting it lets the caller continue before the save finishes and can hide a later rejection.',
+      codeTopics: /Async code|promises/i,
+      code: {
+        language: 'typescript',
+        title: 'Without await, “done” is printed too early',
+        snippet: `async function submit() {
+  saveInvoice();
+  console.log("done"); // runs before saveInvoice finishes
+}
+
+async function submitSafely() {
+  await saveInvoice();
+  console.log("done");
+}`,
+      },
+    },
+    {
+      pattern: /\breadonly\b|\bprivate\b|\bprotected\b/i,
+      reason: 'These modifiers constrain ordinary typed access. They do not validate external data, freeze every nested runtime object, or replace a business invariant.',
+      example: 'A readonly array property prevents reassignment through that type, but an aliased mutable array can still be changed elsewhere unless ownership is controlled.',
+    },
+    {
+      pattern: /\btsconfig\b|compiler option|\btarget\b|\blib\b/i,
+      reason: 'Compiler configuration controls checking and emitted syntax. It does not install APIs, change the runtime module loader, or make an old environment support a new feature.',
+      example: 'Including the DOM library supplies browser type declarations, but Node still does not gain a `document` object at runtime.',
+    },
+  ],
+  MySQL: [
+    {
+      pattern: /\bindex\b/i,
+      reason: 'A normal index is an access path. It may make a lookup faster, but it does not reject duplicates or enforce a business rule unless the index is explicitly UNIQUE and matches that rule.',
+      example: 'Two rows with the same email can be inserted through a normal email index because ordinary indexes allow duplicate keys.',
+      codeTopics: /Keys|constraints|Relational modeling/i,
+      code: {
+        language: 'sql',
+        title: 'A normal index still allows duplicates',
+        snippet: `CREATE INDEX idx_users_email ON users (email);
+
+INSERT INTO users (email) VALUES ('a@example.com');
+INSERT INTO users (email) VALUES ('a@example.com');
+-- Both inserts are allowed.
+
+-- Use UNIQUE only when duplicate email is truly invalid.`,
+      },
+    },
+    {
+      pattern: /\btransaction\b/i,
+      reason: 'A transaction groups work atomically, but isolation behavior still depends on the statements, constraints, isolation level, and locks used inside it.',
+      example: 'Two transactions can both read “no reservation exists” and both insert unless a unique constraint, atomic statement, or suitable lock protects the decision.',
+      codeTopics: /Transactions|Isolation|Locking|Concurrency/i,
+      code: {
+        language: 'sql',
+        title: 'BEGIN alone does not lock a missing business decision',
+        snippet: `START TRANSACTION;
+SELECT COUNT(*) FROM reservations WHERE seat_id = 15;
+-- Another transaction can read the same count here.
+INSERT INTO reservations (seat_id, user_id) VALUES (15, 7);
+COMMIT;
+
+-- A UNIQUE(seat_id) constraint makes the invariant enforceable.`,
+      },
+    },
+    {
+      pattern: /foreign key/i,
+      reason: 'A foreign key enforces that a referenced parent exists. It does not enforce uniqueness, ordering, authorization, or every rule about the relationship.',
+      example: 'A foreign key can prove that `team_id` exists while still allowing the same user-team membership to be inserted twice.',
+    },
+    {
+      pattern: /unique constraint|unique index|primary key/i,
+      reason: 'A unique key protects one uniqueness rule. It does not make reads fresh, choose a query order, prevent every race, or optimize unrelated predicates.',
+      example: 'A unique email prevents duplicates, but a replica may still return the old email briefly and a query by status still needs its own access path.',
+      codeTopics: /Keys|constraints|Index design|Replication/i,
+      code: {
+        language: 'sql',
+        title: 'One unique key does not optimize a different predicate',
+        snippet: `ALTER TABLE users ADD CONSTRAINT uq_users_email UNIQUE (email);
+
+-- The constraint protects email uniqueness.
+-- It does not create an access path for this filter:
+SELECT id FROM users
+WHERE status = 'trial'
+ORDER BY created_at DESC;`,
+      },
+    },
+    {
+      pattern: /inner join|left join|\bjoin\b/i,
+      reason: 'A join defines which result rows combine. It does not repair source data, and filters placed in the wrong clause can silently remove or multiply rows.',
+      example: 'A LEFT JOIN followed by `WHERE orders.status = "paid"` removes customers without orders, behaving like an inner join for that condition.',
+      codeTopics: /Joins|Aggregation|Query correctness/i,
+      code: {
+        language: 'sql',
+        title: 'A WHERE filter can cancel the outer-join behavior',
+        snippet: `-- Customers without orders disappear:
+SELECT c.id
+FROM customers AS c
+LEFT JOIN orders AS o ON o.customer_id = c.id
+WHERE o.status = 'paid';
+
+-- Keep the condition inside ON when unmatched customers matter.`,
+      },
+    },
+    {
+      pattern: /\breplica|replication\b/i,
+      reason: 'Replication copies changes for availability or read scaling. It can lag, and it also copies accidental updates or deletes, so it is neither guaranteed-fresh reading nor an independent backup.',
+      example: 'A DELETE reaches the replica seconds later; both servers then lack the rows, while a retained backup could restore an earlier point.',
+      codeTopics: /Backup|Replication|read scaling/i,
+      code: {
+        language: 'sql',
+        title: 'The replica faithfully copies the destructive statement',
+        snippet: `-- Executed accidentally on the primary:
+DELETE FROM invoices WHERE customer_id = 42;
+
+-- Replication sends the same change to the replica.
+-- The replica improves availability; it does not preserve old history.
+-- A backup plus binary logs provides a recovery point.`,
+      },
+    },
+    {
+      pattern: /\bbackup\b|snapshot/i,
+      reason: 'A backup provides a historical recovery source. It does not keep a live service available, make current reads faster, or prove the restore procedure works without testing it.',
+      example: 'A nightly backup may restore yesterday’s state, but it cannot serve traffic when the primary fails at noon without a separate failover design.',
+      codeTopics: /Backup|Replication|recovery/i,
+      code: {
+        language: 'sql',
+        title: 'A backup is useful only through a tested restore path',
+        snippet: `-- Restore into an isolated server first.
+-- Then verify expected data before promotion:
+SELECT COUNT(*) AS invoices
+FROM invoices
+WHERE created_at < '2030-01-01 12:00:00';
+
+-- A successful backup file alone does not prove recovery time or correctness.`,
+      },
+    },
+    {
+      pattern: /\bpartition/i,
+      reason: 'Partitioning organizes a large table and can enable pruning or lifecycle operations. It does not automatically replace useful indexes or improve a query that cannot eliminate partitions.',
+      example: 'A query without the partition key can still inspect every partition, sometimes doing more planning work than the unpartitioned table.',
+      codeTopics: /Partitioning|Index design|performance/i,
+      code: {
+        language: 'sql',
+        title: 'Without the partition key, pruning cannot help',
+        snippet: `-- Assume events is partitioned by occurred_on.
+EXPLAIN
+SELECT *
+FROM events
+WHERE user_id = 42;
+
+-- No occurred_on predicate: many partitions may be visited.
+-- The user_id access path still needs intentional index design.`,
+      },
+    },
+    {
+      pattern: /\bexplain\b/i,
+      reason: 'EXPLAIN provides evidence about the chosen plan; it is a diagnostic tool, not a change that fixes the query by itself.',
+      example: 'Seeing a full scan explains the cost, but the team must still change the query, statistics, index, or data model and measure again.',
+      codeTopics: /EXPLAIN|Observability|performance/i,
+      code: {
+        language: 'sql',
+        title: 'Measure, change one mechanism, then measure again',
+        snippet: `EXPLAIN ANALYZE
+SELECT * FROM orders WHERE customer_id = 42;
+
+CREATE INDEX idx_orders_customer ON orders (customer_id);
+
+EXPLAIN ANALYZE
+SELECT * FROM orders WHERE customer_id = 42;
+-- Compare actual rows and execution time; EXPLAIN itself changed nothing.`,
+      },
+    },
+    {
+      pattern: /\bnull\b/i,
+      reason: 'NULL means unknown, so ordinary equality produces UNKNOWN rather than TRUE. SQL needs `IS NULL`, `IS NOT NULL`, or an explicit three-valued-logic design.',
+      example: '`WHERE deleted_at = NULL` returns no rows even when deleted_at is NULL.',
+      codeTopics: /NULL|Query correctness/i,
+      code: {
+        language: 'sql',
+        title: 'NULL requires IS NULL',
+        snippet: `SELECT NULL = NULL;       -- NULL (unknown), not TRUE
+
+SELECT *
+FROM users
+WHERE deleted_at = NULL; -- returns no matching rows
+
+SELECT *
+FROM users
+WHERE deleted_at IS NULL; -- correct null check`,
+      },
+    },
+  ],
+};
+
+const WRONG_CODE_LESSONS = new Map([
+  ['LQ-045::The validation rule alone', {
+    language: 'php',
+    title: 'Validation can race; the database constraint decides',
+    snippet: `// Request A and request B can both pass this check.
+$request->validate(['name' => ['unique:materials,name']]);
+
+// The final guarantee belongs in the schema.
+Schema::table('materials', function (Blueprint $table) {
+    $table->unique('name');
+});
+
+// The application must handle a duplicate-key conflict.`,
+  }],
+  ['LQ-137::The queue name contains “payments”', {
+    language: 'php',
+    title: 'A queue label does not deduplicate a repeated charge',
+    snippet: `$key = "charge-order:{$order->id}";
+
+$gateway->charge(
+    amount: $order->total,
+    idempotencyKey: $key,
+);
+
+// A retry sends the same key, so the provider can return
+// the original result instead of charging a second time.`,
+  }],
+  ['LQ-147::Cache keys must always be numeric', {
+    language: 'php',
+    title: 'The key needs identity, not a particular data type',
+    snippet: `// Wrong: every account shares one value.
+Cache::remember('dashboard', 300, $buildDashboard);
+
+// Right: the account is part of the cached value's identity.
+$key = "account:{$account->id}:dashboard";
+Cache::remember($key, 300, $buildDashboard);`,
+  }],
+  ['LQ-186::A larger SQL transaction that automatically rolls back S3', {
+    language: 'php',
+    title: 'A database rollback cannot remove an S3 object',
+    snippet: `DB::transaction(function () use ($upload) {
+    $file = File::create(['status' => 'pending']);
+    Storage::disk('s3')->put($file->path, $upload);
+
+    throw new RuntimeException('DB rolls back');
+    // S3 is a different system; its write already happened.
+});
+
+// Use explicit states and compensation for cross-system work.`,
+  }],
+  ['LQ-230::Validate that notes are strings and then render raw', {
+    language: 'php',
+    title: 'A valid string can still contain executable markup',
+    snippet: `$request->validate(['note' => ['required', 'string']]);
+
+// Blade escapes by default:
+{{ $project->note }}
+
+// Raw output would execute allowed-looking HTML such as <script>:
+{!! $project->note !!}
+
+// Sanitize only when the product intentionally supports HTML.`,
+  }],
+  ['TQ-006::Assert each push result as boolean', {
+    language: 'typescript',
+    title: 'Annotate the collection once instead of lying at each push',
+    snippet: `const names: string[] = [];
+
+if (user.name) names.push(user.name);
+if (team.name) names.push(team.name);
+
+// names.push(true); // compile error at the real mistake
+
+// An assertion would only silence that useful error.`,
+  }],
+  ['TQ-074::It throws immediately when result is null', {
+    language: 'typescript',
+    title: 'The non-null assertion adds no runtime check',
+    snippet: `const result: Project | null = await findProject(id);
+
+console.log(result!.name);
+// If result is null, the property access crashes here.
+
+if (!result) throw new Error('Project not found');
+console.log(result.name); // now control flow proved Project`,
+  }],
+  ['TQ-110::The promise is converted to boolean', {
+    language: 'typescript',
+    title: 'The promise keeps running unless the caller observes it',
+    snippet: `async function submit() {
+  saveInvoice();
+  showSuccess(); // runs before the save finishes
+}
+
+async function submitSafely() {
+  await saveInvoice();
+  showSuccess();
+}
+
+// await also routes rejection into this function's error path.`,
+  }],
+  ['TQ-182::Cast it immediately to the desired interface', {
+    language: 'typescript',
+    title: 'Casting JSON does not validate the JSON',
+    snippet: `const value: unknown = JSON.parse(input);
+
+if (!isProject(value)) {
+  throw new Error('Invalid project JSON');
+}
+
+console.log(value.id); // value is Project after the guard
+
+// "as Project" would skip the runtime check entirely.`,
+  }],
+  ['TQ-270::Any makes runtime values valid', {
+    language: 'typescript',
+    title: 'Any removes the test’s guardrail; it changes no value',
+    snippet: `type Action = { type: 'increment'; amount: number };
+
+const impossible = {
+  type: 'increment',
+  amount: 'many',
+} as any;
+
+reducer(state, impossible);
+// Runtime still receives the string "many".`,
+  }],
+  ['MQ-026::<> converts NULL to an empty string', {
+    language: 'sql',
+    title: 'Comparisons with NULL produce UNKNOWN',
+    snippet: `SELECT NULL <> 'archived'; -- NULL, not TRUE
+
+SELECT *
+FROM projects
+WHERE status <> 'archived';
+-- WHERE keeps TRUE only, so NULL statuses are excluded.
+
+-- Include them deliberately when that is the business rule:
+WHERE status <> 'archived' OR status IS NULL;`,
+  }],
+  ['MQ-030::NULL rows are deleted during joins', {
+    language: 'sql',
+    title: 'The WHERE clause filters the generated NULL row',
+    snippet: `-- This rejects parents whose child columns are NULL:
+SELECT p.id
+FROM parents AS p
+LEFT JOIN children AS c ON c.parent_id = p.id
+WHERE c.active = 1;
+
+-- Put the child condition in ON when unmatched parents must remain:
+LEFT JOIN children AS c
+  ON c.parent_id = p.id AND c.active = 1;`,
+  }],
+  ['MQ-050::INNER JOIN projects', {
+    language: 'sql',
+    title: 'INNER JOIN has no output row for an unmatched customer',
+    snippet: `SELECT c.id, c.name, p.id AS project_id
+FROM customers AS c
+LEFT JOIN projects AS p
+  ON p.customer_id = c.id;
+
+-- With LEFT JOIN, p.id is NULL for a customer with zero projects.
+-- INNER JOIN would remove that customer from the result.`,
+  }],
+  ['MQ-118::MySQL creates a new server for the inner transaction', {
+    language: 'sql',
+    title: 'A savepoint is not an independently durable transaction',
+    snippet: `START TRANSACTION;
+INSERT INTO orders (id) VALUES (10);
+
+SAVEPOINT nested_work;
+INSERT INTO order_items (order_id) VALUES (10);
+RELEASE SAVEPOINT nested_work;
+
+ROLLBACK;
+-- Both inserts roll back because the outer transaction never committed.`,
+  }],
+  ['MQ-231::Replicas never contain table data', {
+    language: 'sql',
+    title: 'A replica contains live data—and copies live mistakes',
+    snippet: `-- The replica contains copied table data for serving reads.
+SELECT COUNT(*) FROM invoices;
+
+-- This accidental primary change is copied too:
+DELETE FROM invoices;
+
+-- A backup is separate history that can be restored
+-- after the live replication chain has copied the mistake.`,
+  }],
+]);
+
 function guideFor(question) {
   return GUIDES[question.track]?.find((guide) => guide.topics.test(question.topic))
     || FALLBACK_GUIDES[question.track];
+}
+
+function questionNumber(question) {
+  return Number(question.id.split('-').at(-1));
+}
+
+function shouldShowCorrectCode(question) {
+  return question.track !== 'Google Analytics' && (questionNumber(question) - 1) % 3 === 0;
+}
+
+function curatedWrongCodeFor(question, option) {
+  return WRONG_CODE_LESSONS.get(`${question.id}::${option}`) || null;
 }
 
 function normalizeSentence(text) {
@@ -284,6 +1206,18 @@ function capitalize(text) {
 function distractorDiagnosis(option, question) {
   const text = option.toLowerCase();
   const topic = question.topic.toLowerCase();
+
+  const trackDiagnosis = DISTRACTOR_GUIDES[question.track]
+    ?.find((diagnosis) => diagnosis.pattern.test(option));
+  if (trackDiagnosis) {
+    const { codeTopics, codeOptions, ...diagnosis } = trackDiagnosis;
+    const codeTopicMismatch = diagnosis.code && codeTopics && !codeTopics.test(question.topic);
+    const codeOptionMismatch = diagnosis.code && codeOptions && !codeOptions.test(option);
+    if (codeTopicMismatch || codeOptionMismatch) {
+      return { ...diagnosis, code: null };
+    }
+    return diagnosis;
+  }
 
   if (/\b(always|never|every|automatically|impossible|permanently)\b/.test(text)) {
     const absoluteExamples = {
@@ -326,7 +1260,7 @@ function distractorDiagnosis(option, question) {
     };
   }
 
-  if (question.track === 'TypeScript' && /\b(type assertion|cast|\bas\s|\bany\b)/.test(text)) {
+  if (question.track === 'TypeScript' && /\b(type assertion|cast|assert\w*|any)\b/.test(text)) {
     return {
       reason: 'A TypeScript assertion or escape hatch changes what the compiler believes; it does not inspect or repair the runtime value.',
       example: 'JSON containing `{ "count": "many" }` can be asserted as `{ count: number }` and still produce incorrect behavior when the code uses `count` numerically.',
@@ -376,11 +1310,15 @@ export function buildLearningNotes(question, orderedOptions = question.options) 
     if (option === correct) return [];
     const diagnosis = distractorDiagnosis(option, question);
     const fallbackExample = `${guide.setup} If the team instead chooses “${option}”, ${guide.failure}; the original symptom remains possible.`;
+    const diagnosedExample = diagnosis.example
+      ? `${normalizeSentence(diagnosis.example)} In this scenario, ${guide.failure}; choosing it would leave the core problem unsolved.`
+      : fallbackExample;
     return [{
       number: index + 1,
       option,
       reason: `${diagnosis.reason} The decisive issue here is ${guide.focus}. It does not establish “${correct}”.`,
-      example: diagnosis.example || fallbackExample,
+      example: diagnosedExample,
+      code: curatedWrongCodeFor(question, option),
     }];
   });
 
@@ -388,6 +1326,7 @@ export function buildLearningNotes(question, orderedOptions = question.options) 
     correct,
     whyCorrect: normalizeSentence(question.explanation),
     correctExample: `${guide.setup} The team applies “${correct}”. ${normalizeSentence(capitalize(guide.success))}`,
+    correctCode: shouldShowCorrectCode(question) ? guide.code || null : null,
     alternatives,
   };
 }

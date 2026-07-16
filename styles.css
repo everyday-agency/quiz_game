@@ -288,6 +288,12 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 .learning-notes .choice-analysis p { margin: 5px 0 0; color: #5d5860; font-family: inherit; font-size: 11px; line-height: 1.55; }
 .learning-notes .choice-analysis .choice-example { margin-top: 7px; padding: 8px 9px; border-radius: 7px; color: #655f67; background: rgba(245, 241, 234, .9); }
 .choice-example b { color: var(--purple); }
+.code-lesson { min-width: 0; margin-top: 12px; padding: 11px 12px 12px; border: 1px solid rgba(255, 255, 255, .08); border-radius: 9px; color: #f7f3ed; background: #1f1d21; }
+.code-lesson-header { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 7px; color: #bfb7c4; font-size: 8px; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+.code-lesson-header .code-language { color: #c6b9ff; }
+.learning-notes .code-lesson > strong { display: block; margin-bottom: 8px; color: #fff; font-family: inherit; font-size: 11px; line-height: 1.45; }
+.code-lesson pre { max-width: 100%; margin: 0; overflow-x: auto; color: #e7e1e9; scrollbar-width: thin; }
+.code-lesson code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 10px; line-height: 1.6; white-space: pre; tab-size: 2; }
 .missed-item > .review-answer { margin-top: 12px; color: var(--green); font-family: inherit; font-size: 12px; line-height: 1.55; }
 .missed-item > .learning-notes { margin-top: 12px; }
 .bank-answer > .learning-notes { margin-top: 15px; }

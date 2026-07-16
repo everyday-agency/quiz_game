@@ -11,6 +11,14 @@ assert.equal(CURRICULUM.length, 100, 'Curriculum must contain one entry per trac
 const prompts = new Set();
 const ids = new Set();
 const prefixByTrack = { Laravel: 'LQ', TypeScript: 'TQ', MySQL: 'MQ', 'Google Analytics': 'GQ' };
+const codeCoverage = Object.fromEntries(TRACKS.map((track) => [track, { correct: 0, alternatives: 0 }]));
+const supportedCodeLanguages = new Set(['php', 'typescript', 'json', 'sql']);
+
+function assertCodeLesson(lesson, context) {
+  assert(supportedCodeLanguages.has(lesson.language), `${context} uses an unsupported code language`);
+  assert(lesson.title.length >= 20, `${context} needs a useful code title`);
+  assert(lesson.snippet.length >= 80 && lesson.snippet.includes('\n'), `${context} needs a substantial multiline code example`);
+}
 
 for (const track of TRACKS) {
   const trackQuestions = QUESTION_BANK.filter((question) => question.track === track);
@@ -43,6 +51,10 @@ for (const question of QUESTION_BANK) {
   assert.equal(notes.correct, question.options[question.answer], `${question.id} teaching notes identify the wrong correct answer`);
   assert(notes.whyCorrect.length >= 45, `${question.id} needs a complete correct-answer explanation`);
   assert(notes.correctExample.length >= 140, `${question.id} needs a concrete correct-answer example`);
+  if (notes.correctCode) {
+    codeCoverage[question.track].correct += 1;
+    assertCodeLesson(notes.correctCode, `${question.id} correct-answer lesson`);
+  }
   assert.equal(notes.alternatives.length, 3, `${question.id} must explain all three wrong choices`);
   assert.deepEqual(
     new Set(notes.alternatives.map((alternative) => alternative.option)),
@@ -52,8 +64,19 @@ for (const question of QUESTION_BANK) {
   notes.alternatives.forEach((alternative) => {
     assert(alternative.reason.length >= 140, `${question.id} has a shallow wrong-answer explanation`);
     assert(alternative.example.length >= 90, `${question.id} has a shallow wrong-answer example`);
+    if (alternative.code) {
+      codeCoverage[question.track].alternatives += 1;
+      assertCodeLesson(alternative.code, `${question.id} wrong-answer lesson`);
+    }
   });
 }
+
+for (const track of ['Laravel', 'TypeScript', 'MySQL']) {
+  assert.equal(codeCoverage[track].correct, 100, `${track} should use code for one-third of correct-answer lessons`);
+  assert.equal(codeCoverage[track].alternatives, 5, `${track} should include five curated code-backed wrong-answer explanations`);
+  assert(codeCoverage[track].correct < 300, `${track} should not force code into every explanation`);
+}
+assert.deepEqual(codeCoverage['Google Analytics'], { correct: 0, alternatives: 0 }, 'This teaching-code pass should stay scoped to the three programming/database tracks');
 
 for (const track of TRACKS) {
   for (const topic of TRACK_TOPICS[track]) {
@@ -72,6 +95,7 @@ assert(html.includes('id="trackControl"'), 'index.html must expose the learning-
 assert(html.includes('id="bankTrack"'), 'question bank must expose the track filter');
 assert(app.includes("from './questions.mjs'"), 'app must load the question bank');
 assert(app.includes('question.track'), 'app must render and filter questions by track');
+assert(app.includes('createCodeLesson'), 'app must render optional code walkthroughs');
 
 console.log(`✓ ${QUESTION_BANK.length} questions across ${TRACKS.length} learning tracks`);
 console.log(`✓ ${TOPICS.length} domains × 12 scenarios`);
@@ -80,3 +104,4 @@ console.log(`✓ four unique options and one valid answer per question`);
 console.log(`✓ unique IDs and prompts`);
 console.log(`✓ all three difficulty levels represented in every domain`);
 console.log(`✓ correct examples and explanations for all 3,600 wrong choices`);
+console.log(`✓ 300 selective correct-answer code walkthroughs and ${Object.values(codeCoverage).reduce((total, coverage) => total + coverage.alternatives, 0)} code-backed wrong-answer explanations`);
