@@ -120,6 +120,20 @@ for (const question of QUESTION_BANK.filter((candidate) => candidate.roadmap !==
   assert(Array.isArray(question.roadmapConcepts) && question.roadmapConcepts.length >= 3, `${question.id} needs explicit roadmap concept coverage`);
 }
 
+const requiredRoadmapConcepts = {
+  Laravel: ['Laravel Herd', 'Breeze', 'Jetstream', 'Inertia', 'Livewire', 'route model binding', 'Form Requests', 'Sanctum', 'Passport', 'Eloquent queries', 'Blade escaping', 'queues', 'Pest', 'PHPUnit', 'Octane', 'Pulse', 'Forge', 'Laravel Cloud'],
+  PHP: ['strict types', 'associative arrays', 'match', 'first-class callables', 'superglobals', 'file uploads', 'CSRF', 'PDO', 'prepared statements', 'transactions', 'interfaces', 'traits', 'Composer', 'attributes', 'generators', 'PHPStan', 'PSR-7', 'PHP-FPM'],
+  TypeScript: ['type inference', 'type predicates', 'type aliases vs interfaces', 'hybrid types', 'generic constraints', 'non-null assertion', 'decorators', 'module resolution', 'Awaited', 'variadic tuples', 'satisfies keyword', 'mapped types', 'conditional types', 'runtime validation', 'React props', 'tsconfig.json', 'module augmentation', 'type tests'],
+  React: ['Vite', 'functional components', 'JSX', 'render props', 'higher-order components', 'lists and keys', 'useState', 'useEffect', 'useRef', 'useReducer', 'useMemo', 'useCallback', 'custom hooks', 'MobX', 'Zustand', 'React Router', 'TanStack Router', 'React Aria', 'TanStack Query', 'Apollo Client', 'React Testing Library', 'Next.js', 'Zod', 'React Hook Form', 'error boundaries', 'Suspense', 'React Native'],
+};
+
+for (const [track, required] of Object.entries(requiredRoadmapConcepts)) {
+  const covered = new Set(QUESTION_BANK
+    .filter((question) => question.track === track && question.roadmap === true)
+    .flatMap((question) => question.roadmapConcepts));
+  required.forEach((concept) => assert(covered.has(concept), `${track} roadmap is missing ${concept}`));
+}
+
 for (const track of TRACKS) {
   for (const topic of TRACK_TOPICS[track]) {
     const topicQuestions = QUESTION_BANK.filter((question) => question.track === track && question.topic === topic);

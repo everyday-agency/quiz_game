@@ -26,11 +26,11 @@ const specs = [
       ['Rendering calculated values through JSX expressions', ['type PriceProps = { net: number; taxRate: number };', '', 'export function Price({ net, taxRate }: PriceProps) {', '  const gross = net * (1 + taxRate);', '  return (', '    <>', '      <strong>{gross.toFixed(2)}</strong>', '      <small> including tax</small>', '    </>', '  );', '}']],
       ['Keeping render calculation pure', ['type GreetingProps = { name: string; hour: number };', '', 'export function Greeting({ name, hour }: GreetingProps) {', '  const period = hour < 12 ? "morning" : "evening";', '', '  return <h1>Good {period}, {name}</h1>;', '}', '', '// The component does not mutate props or external state while rendering.']],
     ]),
-  spec('Props, state & composition', ['props vs state', 'composition', 'children', 'one-way data flow', 'lifting state'],
+  spec('Props, state & composition', ['props vs state', 'composition', 'children', 'one-way data flow', 'lifting state', 'render props', 'higher-order components'],
     'props are read-only inputs while owned state changes through its setter, and composition passes behavior or UI through explicit boundaries',
     'a child may mutate a prop object to update its parent and children automatically share private state without lifting it', [
       ['Composing a panel through children', ['type PanelProps = {', '  title: string;', '  children: React.ReactNode;', '};', '', 'export function Panel({ title, children }: PanelProps) {', '  return <section aria-label={title}>', '    <h2>{title}</h2>', '    {children}', '  </section>;', '}']],
-      ['Lifting shared selection state to the parent', ['function ProductPicker() {', '  const [selectedId, setSelectedId] = useState<number | null>(null);', '', '  return products.map(product => (', '    <ProductRow', '      key={product.id}', '      product={product}', '      selected={product.id === selectedId}', '      onSelect={() => setSelectedId(product.id)}', '    />', '  ));', '}']],
+      ['Stateful render props and higher-order composition', ['type PointerProps = { render: (point: { x: number; y: number }) => React.ReactNode };', '', 'function Pointer({ render }: PointerProps) {', '  const [point, setPoint] = useState({ x: 0, y: 0 });', '  return <div onPointerMove={event => setPoint({ x: event.clientX, y: event.clientY })}>', '    {render(point)}', '  </div>;', '}', '', 'function withPanel<Props extends object>(Component: React.ComponentType<Props>) {', '  return function Panelled(props: Props) {', '    return <Panel title="Details"><Component {...props} /></Panel>;', '  };', '}']],
     ]),
   spec('Conditional rendering', ['conditional rendering', 'ternary operator', 'logical AND', 'early return', 'preserving state'],
     'conditional branches choose which element description React reconciles, and an early return can represent loading or missing data explicitly',
@@ -167,4 +167,3 @@ const specs = [
 ];
 
 export const reactQuestions = roadmapBank('React', 'tsx', specs, { extended: true });
-

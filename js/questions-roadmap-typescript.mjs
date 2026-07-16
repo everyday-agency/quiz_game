@@ -41,7 +41,7 @@ function isActive(entry: Entry): entry is Exclude<Entry, null> {
 const active = entries.filter(isActive);
 active[0]?.id.toUpperCase();`, 'the predicate tells TypeScript that filtered elements are non-null objects, matching the runtime condition', 'the predicate converts null elements into objects at runtime rather than merely describing the successful branch'),
   ]),
-  s('Objects & structural typing', ['object types', 'type compatibility', 'type aliases', 'interfaces', 'excess properties'], [
+  s('Objects & structural typing', ['object types', 'type compatibility', 'type aliases vs interfaces', 'interfaces', 'extending interfaces', 'interface declaration', 'hybrid types', 'excess properties'], [
     l('Structural compatibility retains extra runtime fields', String.raw`type Named = { name: string };
 
 const employee = {
@@ -51,15 +51,19 @@ const employee = {
 
 const named: Named = employee;
 console.log(employee.department, named.name);`, 'employee is assignable because it has the required name member and its extra department field remains on the runtime object', 'assigning to Named deletes department from employee so the original object is transformed'),
-    l('Fresh literal excess-property diagnostics', String.raw`interface ConnectionOptions {
-  host: string;
-  secure?: boolean;
+    l('Extending an interface into a callable hybrid contract', String.raw`interface Described {
+  description: string;
 }
 
-const options: ConnectionOptions = {
-  host: 'db.internal',
-  secrue: true,
-};`, 'the misspelled fresh-literal property is rejected because it is not part of ConnectionOptions', 'optional secure means any similarly spelled property is accepted and renamed during JavaScript emission'),
+interface Parser extends Described {
+  (source: string): string[];
+  version: string;
+}
+
+const parser: Parser = Object.assign(
+  (source: string) => source.split(/\s+/),
+  { description: 'Token parser', version: '1.0' },
+);`, 'the hybrid interface requires a call signature plus the inherited description and its own version property', 'interface inheritance copies runtime methods into the function automatically without the assigned properties'),
   ]),
   s('Functions & call signatures', ['typing functions', 'call signatures', 'overloads', 'callbacks', 'optional parameters', 'variadic functions'], [
     l('Overloads expose precise caller-facing results', String.raw`function normalize(value: string): string;
@@ -142,7 +146,7 @@ function city(account: Account): string {
 
 const result = city({ profile: {} });`, 'the chain produces undefined when profile or address is absent and the final coalescing expression returns Unknown', 'one optional-chain operator at the first property automatically protects every later property access'),
   ]),
-  s('Classes & encapsulation', ['classes', 'constructor parameters', 'access modifiers', 'abstract classes', 'inheritance', 'polymorphism', 'method overriding'], [
+  s('Classes & encapsulation', ['classes', 'constructor parameters', 'constructor overloading', 'access modifiers', 'abstract classes', 'inheritance', 'polymorphism', 'method overriding', 'decorators'], [
     l('ECMAScript private fields enforce runtime privacy', String.raw`class Counter {
   #value = 0;
 
@@ -154,17 +158,28 @@ const result = city({ profile: {} });`, 'the chain produces undefined when profi
 const counter = new Counter();
 counter.increment();
 // counter.#value is a syntax error outside the class.`, 'the hash-prefixed field is private in emitted JavaScript as well as in TypeScript checking', 'a hash-prefixed field is merely a compile-time convention and becomes a public value property at runtime'),
-    l('Abstract methods and override checking', String.raw`abstract class Formatter {
+    l('A method decorator wraps a concrete abstract-class implementation', String.raw`function logged<This, Args extends unknown[], Return>(
+  original: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
+) {
+  return function (this: This, ...args: Args): Return {
+    console.log(String(context.name), args);
+    return original.call(this, ...args);
+  };
+}
+
+abstract class Formatter {
   abstract format(value: number): string;
 }
 
 class CurrencyFormatter extends Formatter {
+  @logged
   override format(value: number): string {
     return new Intl.NumberFormat('de-CH', {
       style: 'currency', currency: 'CHF',
     }).format(value);
   }
-}`, 'the abstract class requires concrete subclasses to implement the compatible method and override documents the inherited member', 'abstract supplies a default runtime implementation so subclasses may omit format without becoming abstract'),
+}`, 'the abstract class requires the compatible override and the decorator replaces that concrete method with a logging wrapper that still calls the original', 'the decorator implements the abstract method by itself or changes only editor metadata without wrapping runtime behavior'),
   ]),
   s('Modules & resolution', ['external modules', 'ambient modules', 'namespaces', 'type-only imports', 'module resolution'], [
     l('Type-only imports disappear from emitted JavaScript', String.raw`import type { User } from './types.js';

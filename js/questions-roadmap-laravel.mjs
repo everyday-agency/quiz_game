@@ -4,8 +4,15 @@ const s = (topic, concepts, lessons) => ({ topic, concepts, lessons });
 const l = (title, snippet, behavior, pitfall) => ({ title, snippet, behavior, pitfall });
 
 const specs = [
-  s('Request lifecycle & middleware', ['what Laravel is', 'project structure', 'request-response flow', 'service providers', 'global middleware', 'route middleware'], [
-    l('Provider registration before boot-time consumption', String.raw`final class BillingProvider extends ServiceProvider
+  s('Request lifecycle & middleware', ['what Laravel is', 'why web frameworks', 'Laravel for full stack', 'Laravel for frontend', 'Laravel Herd', 'installation', 'create a project', 'project structure', 'request-response flow', 'service providers', 'global middleware', 'route middleware'], [
+    l('Installation choices still enter the same provider lifecycle', String.raw`/*
+Created with Laravel Herd / the Laravel installer, then optionally:
+php artisan breeze:install react
+
+Blade, Livewire, or an Inertia frontend still enters public/index.php
+and boots the same application service providers.
+*/
+final class BillingProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -13,7 +20,7 @@ const specs = [
     }
 
     public function boot(Gateway $gateway): void {}
-}`, 'the container binding exists before Laravel invokes provider boot methods and can be injected into boot', 'putting the binding only in boot makes it reliably available to every other provider while they boot'),
+}`, 'the project and starter-kit choice do not bypass Laravel startup: the container binding exists before provider boot methods and can be injected into boot', 'a Breeze, Livewire, Inertia, or frontend starter kit replaces the Laravel request lifecycle and makes provider registration unnecessary'),
     l('Middleware unwinding around the downstream response', String.raw`public function handle(Request $request, Closure $next): Response
 {
     $started = hrtime(true);
@@ -78,8 +85,10 @@ public function store(StoreUserRequest $request): Response
     return response($user, 201);
 }`, 'the normalized email is validated and only fields admitted by the rules reach mass assignment', 'validated returns the complete request including any attacker-supplied administrative field'),
   ]),
-  s('Authentication & authorization', ['starter-kit authentication', 'manual authentication', 'Sanctum', 'Passport', 'gates', 'policies', 'authorization'], [
-    l('Policy authorization against the concrete model', String.raw`public function update(Request $request, Invoice $invoice): RedirectResponse
+  s('Authentication & authorization', ['starter kits', 'Breeze', 'Jetstream', 'Inertia', 'Livewire', 'starter-kit authentication', 'manual authentication', 'Sanctum', 'Passport', 'gates', 'policies', 'authorization'], [
+    l('Starter-kit authentication still needs model authorization', String.raw`// Breeze or Jetstream may scaffold authentication through
+// Blade, Livewire, or Inertia. The server policy still owns permission.
+public function update(Request $request, Invoice $invoice): RedirectResponse
 {
     Gate::authorize('update', $invoice);
 
@@ -463,4 +472,3 @@ Pulse::handleExceptionsUsing(fn ($e) => report($e));`, 'the application exposes 
 ];
 
 export const laravelRoadmapQuestions = roadmapBank('Laravel', 'php', specs);
-
