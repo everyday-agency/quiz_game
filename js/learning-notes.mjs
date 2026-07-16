@@ -1,7 +1,14 @@
 const GUIDES = {
   Laravel: [
     {
-      topics: /Request lifecycle|Routing|APIs, resources|Sessions, cookies/,
+      topics: /APIs, resources & Inertia/,
+      focus: 'the query-and-serialization boundary: selecting the data up front without letting a resource trigger hidden database work',
+      setup: 'An endpoint serializes one hundred projects, and each project may have several related materials.',
+      success: 'the query loads the required relation deliberately and the resource includes it only when that data is already available',
+      failure: 'each serialized item can still lazy-load its relation and turn one endpoint into hundreds of queries',
+    },
+    {
+      topics: /Request lifecycle|Routing|Sessions, cookies/,
       focus: 'the request boundary and the order in which Laravel resolves, checks, and transforms a request',
       setup: 'A second request reaches the application through another route or with slightly different input.',
       success: 'The rule is applied at the same dependable request boundary before later code relies on it',
@@ -15,7 +22,14 @@ const GUIDES = {
       failure: 'the duplicated or tightly coupled code still behaves differently in another caller',
     },
     {
-      topics: /Validation|Authentication|Security & trust/,
+      topics: /Validation & input/,
+      focus: 'the input boundary: turning an untrusted payload into a deliberately shaped value before domain behavior uses it',
+      setup: 'A client sends a nested payload with one missing field, an extra administrative field, and a value in the wrong format.',
+      success: 'only the validated and normalized shape reaches the operation, while invalid combinations return useful errors',
+      failure: 'unexpected fields or malformed values can still reach assignment and business logic',
+    },
+    {
+      topics: /Authentication|Security & trust/,
       focus: 'the trust boundary: what is known about the input, the actor, and the action being attempted',
       setup: 'An attacker or ordinary user sends well-formed input for a resource they should not be allowed to change.',
       success: 'shape, identity, and permission are checked at the boundary that owns each guarantee',
@@ -29,7 +43,14 @@ const GUIDES = {
       failure: 'the same race, invalid relationship, or hidden query cost can still appear under real data',
     },
     {
-      topics: /Events|Queues|Cache|Artisan|scheduling|Files, mail|notifications/i,
+      topics: /Cache & rate limiting/i,
+      focus: 'the derived-state boundary: cache identity, freshness, atomic updates, and the real subject being throttled',
+      setup: 'Two tenants request the same record ID while several workers refresh an expired cache key at once.',
+      success: 'keys include the full security context and concurrent refresh or rate decisions use an atomic shared mechanism',
+      failure: 'one tenant can still receive another tenant’s cached value or a burst can bypass or overload the limiter',
+    },
+    {
+      topics: /Events|Queues|Artisan|scheduling|Files, mail|notifications/i,
       focus: 'the side-effect boundary: when work happens, whether it may repeat, and which system owns the durable truth',
       setup: 'A worker retries after a timeout, or the same command is triggered twice while an external service is slow.',
       success: 'retries and delayed execution preserve the intended result without duplicating irreversible effects',
