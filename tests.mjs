@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { QUESTION_BANK, TRACKS, TRACK_TOPICS, TOPICS, DIFFICULTIES, CURRICULUM } from './js/questions.mjs';
+import { buildLearningNotes } from './js/learning-notes.mjs';
 
 assert.equal(QUESTION_BANK.length, 900, 'Question bank must contain exactly 900 questions');
 assert.deepEqual(TRACKS, ['Laravel', 'TypeScript', 'MySQL'], 'The three learning tracks must be stable');
@@ -37,6 +38,21 @@ for (const question of QUESTION_BANK) {
   assert.equal(new Set(question.options).size, 4, `${question.id} options must be unique`);
   assert(Number.isInteger(question.answer) && question.answer >= 0 && question.answer < 4, `${question.id} answer index is invalid`);
   assert(question.explanation.length >= 45, `${question.id} explanation is too short`);
+
+  const notes = buildLearningNotes(question);
+  assert.equal(notes.correct, question.options[question.answer], `${question.id} teaching notes identify the wrong correct answer`);
+  assert(notes.whyCorrect.length >= 45, `${question.id} needs a complete correct-answer explanation`);
+  assert(notes.correctExample.length >= 140, `${question.id} needs a concrete correct-answer example`);
+  assert.equal(notes.alternatives.length, 3, `${question.id} must explain all three wrong choices`);
+  assert.deepEqual(
+    new Set(notes.alternatives.map((alternative) => alternative.option)),
+    new Set(question.options.filter((_, index) => index !== question.answer)),
+    `${question.id} teaching notes do not cover the exact wrong choices`,
+  );
+  notes.alternatives.forEach((alternative) => {
+    assert(alternative.reason.length >= 140, `${question.id} has a shallow wrong-answer explanation`);
+    assert(alternative.example.length >= 90, `${question.id} has a shallow wrong-answer example`);
+  });
 }
 
 for (const track of TRACKS) {
@@ -63,3 +79,4 @@ console.log(`✓ 300 questions each for Laravel, TypeScript, and MySQL`);
 console.log(`✓ four unique options and one valid answer per question`);
 console.log(`✓ unique IDs and prompts`);
 console.log(`✓ all three difficulty levels represented in every domain`);
+console.log(`✓ correct examples and explanations for all 2,700 wrong choices`);

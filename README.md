@@ -22,6 +22,8 @@ No package installation, database, build step, or internet connection is require
 - Exactly 300 questions and 25 domains per track
 - Four options and one correct answer per question
 - Learning mode with immediate explanations
+- A concrete walkthrough for every correct answer
+- A reason and counterexample for all 2,700 wrong choices
 - Exam mode with feedback at the end
 - Mixed-track or single-track practice sessions
 - Randomized questions and answer order
@@ -49,4 +51,4 @@ Run:
 node tests.mjs
 ```
 
-This validates the exact total and per-track counts, IDs, option counts, answer indexes, domain coverage, difficulty coverage, and duplicate prompts.
+This validates the exact total and per-track counts, IDs, option counts, answer indexes, domain coverage, difficulty coverage, duplicate prompts, correct-answer examples, and complete wrong-answer teaching notes.

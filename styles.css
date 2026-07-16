@@ -267,6 +267,24 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 .bank-answer strong { display: block; color: var(--green); font-size: 12px; }
 .bank-answer p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
 
+/* Teaching notes */
+.learning-notes { margin-top: 17px; padding-top: 17px; border-top: 1px solid rgba(85, 80, 87, .16); }
+.learning-example { padding: 13px 15px; border: 1px solid rgba(31, 132, 102, .2); border-radius: 11px; background: rgba(255, 255, 255, .72); }
+.learning-label { display: block; margin-bottom: 5px; color: var(--green); font-size: 9px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+.feedback-label { margin-top: 13px; margin-bottom: 0; color: #4f755f; }
+.learning-notes .learning-example p { margin: 0; color: #454148; font-family: inherit; font-size: 12px; line-height: 1.65; }
+.learning-notes h4 { margin: 18px 0 9px; color: #4d4850; font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.choice-analysis-list { display: grid; gap: 8px; }
+.choice-analysis { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; padding: 12px; border: 1px solid rgba(85, 80, 87, .13); border-radius: 10px; background: rgba(255, 255, 255, .62); }
+.choice-analysis-number { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid #d1c9bf; border-radius: 7px; color: var(--muted); background: #f8f5f0; font-size: 10px; font-weight: 850; }
+.choice-analysis strong { display: block; color: var(--ink); font-family: inherit; font-size: 12px; line-height: 1.4; }
+.learning-notes .choice-analysis p { margin: 5px 0 0; color: #5d5860; font-family: inherit; font-size: 11px; line-height: 1.55; }
+.learning-notes .choice-analysis .choice-example { margin-top: 7px; padding: 8px 9px; border-radius: 7px; color: #655f67; background: rgba(245, 241, 234, .9); }
+.choice-example b { color: var(--purple); }
+.missed-item > .review-answer { margin-top: 12px; color: var(--green); font-family: inherit; font-size: 12px; line-height: 1.55; }
+.missed-item > .learning-notes { margin-top: 12px; }
+.bank-answer > .learning-notes { margin-top: 15px; }
+
 .toast { position: fixed; left: 50%; bottom: 24px; z-index: 20; transform: translate(-50%, 20px); padding: 10px 15px; color: white; background: var(--ink); border-radius: 9px; opacity: 0; pointer-events: none; transition: .2s ease; font-size: 12px; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 

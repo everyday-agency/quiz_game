@@ -1,4 +1,5 @@
 import { QUESTION_BANK, TRACKS, TRACK_TOPICS, DIFFICULTIES } from './questions.mjs';
+import { buildLearningNotes } from './learning-notes.mjs';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -80,6 +81,50 @@ function materialize(question) {
       correct: index === question.answer,
     }))),
   };
+}
+
+function createLearningNotes(question, orderedOptions = question.options) {
+  const notes = buildLearningNotes(question, orderedOptions);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'learning-notes';
+
+  const correctExample = document.createElement('section');
+  correctExample.className = 'learning-example';
+  const exampleLabel = document.createElement('span');
+  exampleLabel.className = 'learning-label';
+  exampleLabel.textContent = 'Concrete example';
+  const exampleText = document.createElement('p');
+  exampleText.textContent = notes.correctExample;
+  correctExample.append(exampleLabel, exampleText);
+
+  const alternativesHeading = document.createElement('h4');
+  alternativesHeading.textContent = 'Why the other choices are weaker';
+  const alternatives = document.createElement('div');
+  alternatives.className = 'choice-analysis-list';
+
+  notes.alternatives.forEach((alternative) => {
+    const item = document.createElement('article');
+    item.className = 'choice-analysis';
+    const number = document.createElement('span');
+    number.className = 'choice-analysis-number';
+    number.textContent = String(alternative.number);
+    const copy = document.createElement('div');
+    const option = document.createElement('strong');
+    option.textContent = alternative.option;
+    const reason = document.createElement('p');
+    reason.textContent = alternative.reason;
+    const example = document.createElement('p');
+    example.className = 'choice-example';
+    const prefix = document.createElement('b');
+    prefix.textContent = 'Example: ';
+    example.append(prefix, alternative.example);
+    copy.append(option, reason, example);
+    item.append(number, copy);
+    alternatives.append(item);
+  });
+
+  wrapper.append(correctExample, alternativesHeading, alternatives);
+  return wrapper;
 }
 
 function setupTracks() {
@@ -251,6 +296,7 @@ function renderQuestion() {
   $('#progressBar').style.width = `${((state.current + 1) / state.session.length) * 100}%`;
   $('#feedbackPanel').hidden = true;
   $('#feedbackPanel').className = 'feedback-panel';
+  $('#learningNotes').replaceChildren();
   $('#answerHint').textContent = state.mode === 'learn'
     ? 'Choose the strongest answer.'
     : 'Your answer is saved without feedback.';
@@ -334,7 +380,9 @@ function revealAnswer(answer) {
   panel.classList.add(answer.correct ? 'correct' : 'wrong');
   $('#feedbackIcon').textContent = answer.correct ? '✓' : '↯';
   $('#feedbackTitle').textContent = answer.correct ? 'Sound reasoning' : 'Revisit the boundary';
-  $('#feedbackText').textContent = question.explanation;
+  const learning = buildLearningNotes(question, question.displayOptions);
+  $('#feedbackText').textContent = learning.whyCorrect;
+  $('#learningNotes').replaceChildren(createLearningNotes(question, question.displayOptions));
   $('#answerHint').textContent = answer.correct
     ? `Current streak: ${state.streak}`
     : `Correct answer: ${answer.correctText}`;
@@ -438,8 +486,9 @@ function renderResults(correct, percent) {
     prompt.textContent = answer.question.prompt;
     summary.append(topic, prompt);
     const explanation = document.createElement('p');
+    explanation.className = 'review-answer';
     explanation.textContent = `Correct: ${answer.correctText}. ${answer.question.explanation}`;
-    details.append(summary, explanation);
+    details.append(summary, explanation, createLearningNotes(answer.question, answer.question.displayOptions));
     missedList.append(details);
   });
   if (missed.length > 8) {
@@ -504,6 +553,11 @@ function renderBank() {
     const explanation = document.createElement('p');
     explanation.textContent = question.explanation;
     answer.append(correct, explanation);
+    details.addEventListener('toggle', () => {
+      if (!details.open || answer.dataset.enriched === 'true') return;
+      answer.append(createLearningNotes(question));
+      answer.dataset.enriched = 'true';
+    });
     details.append(summary, answer);
     list.append(details);
   });
