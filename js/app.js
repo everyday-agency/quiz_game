@@ -10,6 +10,7 @@ const TRACK_META = {
   Laravel: { mark: 'L', detail: 'Application architecture' },
   TypeScript: { mark: 'TS', detail: 'Type-system design' },
   MySQL: { mark: 'DB', detail: 'Data & query reasoning' },
+  'Google Analytics': { mark: 'GA', detail: 'Measurement & insight' },
 };
 
 const topicControl = $('#topicControl');

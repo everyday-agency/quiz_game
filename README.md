@@ -1,6 +1,6 @@
 # Under the Hood — Engineering Thinking Quiz
 
-A dependency-free browser quiz with exactly 900 scenario-based questions: 300 Laravel, 300 TypeScript, and 300 MySQL. It focuses on architecture, behavior, tradeoffs, data integrity, type-system design, concurrency, security, testing, and production reasoning—not historical facts, syntax recall, or simple name trivia.
+A dependency-free browser quiz with exactly 1,200 scenario-based questions: 300 each for Laravel, TypeScript, MySQL, and Google Analytics. It focuses on architecture, behavior, tradeoffs, data integrity, type-system design, measurement design, attribution, privacy, security, testing, and production reasoning—not historical facts, syntax recall, or simple name trivia.
 
 ## Run it
 
@@ -18,12 +18,12 @@ No package installation, database, build step, or internet connection is require
 
 ## What is included
 
-- 900 questions across three learning tracks and 75 domains
+- 1,200 questions across four learning tracks and 100 domains
 - Exactly 300 questions and 25 domains per track
 - Four options and one correct answer per question
 - Learning mode with immediate explanations
 - A concrete walkthrough for every correct answer
-- A reason and counterexample for all 2,700 wrong choices
+- A reason and counterexample for all 3,600 wrong choices
 - Exam mode with feedback at the end
 - Mixed-track or single-track practice sessions
 - Randomized questions and answer order
@@ -40,8 +40,9 @@ The curriculum follows modern, stable concepts from:
 - Laravel 13: request lifecycle, service container, validation, authorization, Eloquent, transactions, queues, testing, deployment, and production operations
 - TypeScript 6: inference, narrowing, structural typing, generics, modules, async behavior, runtime trust boundaries, TSConfig, declarations, testing, and maintainable type design
 - MySQL 8.4 LTS: relational modeling, indexes, optimizer reasoning, transactions, MVCC, locking, migrations, query semantics, security, recovery, replication, observability, and capacity
+- Google Analytics 4: collection, streams, events, dimensions and metrics, reporting scope, acquisition, explorations, audiences, attribution, consent, product links, APIs, BigQuery, and Analytics 360 governance
 
-Useful official references include the [Laravel documentation](https://laravel.com/docs/13.x), [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html), [TSConfig reference](https://www.typescriptlang.org/tsconfig/), and [MySQL 8.4 Reference Manual](https://dev.mysql.com/doc/refman/8.4/en/).
+Useful official references include the [Laravel documentation](https://laravel.com/docs/13.x), [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html), [TSConfig reference](https://www.typescriptlang.org/tsconfig/), [MySQL 8.4 Reference Manual](https://dev.mysql.com/doc/refman/8.4/en/), [Google Analytics Help](https://support.google.com/analytics/), and [Google Analytics developer documentation](https://developers.google.com/analytics).
 
 ## Integrity check
 

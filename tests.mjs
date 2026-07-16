@@ -3,14 +3,14 @@ import { readFile } from 'node:fs/promises';
 import { QUESTION_BANK, TRACKS, TRACK_TOPICS, TOPICS, DIFFICULTIES, CURRICULUM } from './js/questions.mjs';
 import { buildLearningNotes } from './js/learning-notes.mjs';
 
-assert.equal(QUESTION_BANK.length, 900, 'Question bank must contain exactly 900 questions');
-assert.deepEqual(TRACKS, ['Laravel', 'TypeScript', 'MySQL'], 'The three learning tracks must be stable');
-assert.equal(TOPICS.length, 75, 'Question bank must contain exactly 75 track-specific domains');
-assert.equal(CURRICULUM.length, 75, 'Curriculum must contain one entry per track-specific domain');
+assert.equal(QUESTION_BANK.length, 1200, 'Question bank must contain exactly 1,200 questions');
+assert.deepEqual(TRACKS, ['Laravel', 'TypeScript', 'MySQL', 'Google Analytics'], 'The four learning tracks must be stable');
+assert.equal(TOPICS.length, 100, 'Question bank must contain exactly 100 track-specific domains');
+assert.equal(CURRICULUM.length, 100, 'Curriculum must contain one entry per track-specific domain');
 
 const prompts = new Set();
 const ids = new Set();
-const prefixByTrack = { Laravel: 'LQ', TypeScript: 'TQ', MySQL: 'MQ' };
+const prefixByTrack = { Laravel: 'LQ', TypeScript: 'TQ', MySQL: 'MQ', 'Google Analytics': 'GQ' };
 
 for (const track of TRACKS) {
   const trackQuestions = QUESTION_BANK.filter((question) => question.track === track);
@@ -75,8 +75,8 @@ assert(app.includes('question.track'), 'app must render and filter questions by 
 
 console.log(`✓ ${QUESTION_BANK.length} questions across ${TRACKS.length} learning tracks`);
 console.log(`✓ ${TOPICS.length} domains × 12 scenarios`);
-console.log(`✓ 300 questions each for Laravel, TypeScript, and MySQL`);
+console.log(`✓ 300 questions each for Laravel, TypeScript, MySQL, and Google Analytics`);
 console.log(`✓ four unique options and one valid answer per question`);
 console.log(`✓ unique IDs and prompts`);
 console.log(`✓ all three difficulty levels represented in every domain`);
-console.log(`✓ correct examples and explanations for all 2,700 wrong choices`);
+console.log(`✓ correct examples and explanations for all 3,600 wrong choices`);

@@ -187,6 +187,57 @@ const GUIDES = {
       failure: 'the incident can still expose data, lose acknowledged work, amplify load, or remain impossible to diagnose',
     },
   ],
+  'Google Analytics': [
+    {
+      topics: /Collection|Properties|streams|Google tag|Tag Manager|Events & parameters/i,
+      focus: 'the collection contract: which real interaction owns the event, which identifiers and parameters describe it, and whether it is emitted exactly once',
+      setup: 'A user performs the same business action on web and app while a developer validates the event in DebugView.',
+      success: 'the correct stream receives one consistently named event with the expected parameters, identity context, consent state, and no prohibited personal data',
+      failure: 'the event can still be missing, duplicated, mis-scoped, or populated with values that make later reporting misleading',
+    },
+    {
+      topics: /Key events|conversions|Attribution|Google Ads|campaign tagging/i,
+      focus: 'the outcome-and-credit boundary: separating collected behavior, business importance, advertising conversion use, and the scope that assigns channel credit',
+      setup: 'A customer encounters several campaigns, completes one lead, and later returns through another source.',
+      success: 'one trustworthy outcome is classified for the intended purpose and analyzed with the matching user, session, or event attribution scope',
+      failure: 'the same action can still be double counted, optimized as the wrong goal, or credited to a dimension that answers a different acquisition question',
+    },
+    {
+      topics: /Dimensions|metrics|scope|Users|identity|sessions|Acquisition/i,
+      focus: 'the reporting grain: what each field describes, which records it can group, and whether the chosen user, session, event, or item scope answers the stated question',
+      setup: 'One person arrives through search, returns through email, views several products, and purchases one item.',
+      success: 'dimensions group the intended grain and metrics aggregate compatible records without changing the business claim',
+      failure: 'a plausible-looking total can still combine incompatible scopes or be labeled as original acquisition, session acquisition, or key-event credit incorrectly',
+    },
+    {
+      topics: /Realtime|DebugView|data quality|Traffic hygiene|cross-domain|Consent|privacy|retention/i,
+      focus: 'the trust-and-quality boundary: validating what was collected, respecting consent, preventing contamination, and distinguishing operational signals from processed reporting',
+      setup: 'A release changes tags while employees, test devices, redirects, and consent choices all affect the incoming stream.',
+      success: 'the team verifies the payload and identity path, tests irreversible filters, honors consent, and documents every downstream copy',
+      failure: 'production data can still be polluted, permanently discarded, split across domains, or collected in violation of the intended privacy contract',
+    },
+    {
+      topics: /Reports workspace|Comparisons|filters|custom reports|Exploration|Funnels|paths|segments|Sampling|thresholds|cardinality|Audiences/i,
+      focus: 'the analysis boundary: selecting the surface, scope, subset, and data-quality assumptions that can actually answer the business question',
+      setup: 'An analyst compares a routine dashboard with a custom exploration over a large, high-cardinality dataset.',
+      success: 'the chosen technique matches the question and its sampling, thresholding, cardinality, membership, and access limitations are made explicit',
+      failure: 'a removable filter can be mistaken for security, an audience for a retroactive segment, or a sampled aggregate for raw individual truth',
+    },
+    {
+      topics: /Access|governance|Product integrations|Analytics 360/i,
+      focus: 'the governance boundary: who may change or see which dataset, how product links move specific assets, and where enterprise subsets or consolidation are enforced',
+      setup: 'Regional teams, an agency, and several linked advertising products need different authority over overlapping data.',
+      success: 'least-privilege roles, intentional links, and the appropriate property or subproperty boundary enforce the real ownership model',
+      failure: 'a shared login, report filter, or overlapping conversion link can still expose data or activate the same business outcome twice',
+    },
+    {
+      topics: /Measurement Protocol|Data API|Data Import|BigQuery/i,
+      focus: 'the data-flow boundary: distinguishing event ingestion, processed reporting queries, query-time enrichment, and raw warehouse export',
+      setup: 'A server records an offline order, a dashboard requests a report, and a warehouse joins exported events to CRM data.',
+      success: 'each interface owns one deliberate direction of data with stable identifiers, units, deduplication, and documented processing differences',
+      failure: 'a reporting API can be mistaken for collection, an export for a reverse sync, or a query-time join for a rewrite of historical raw events',
+    },
+  ],
 };
 
 const FALLBACK_GUIDES = {
@@ -207,6 +258,12 @@ const FALLBACK_GUIDES = {
     setup: 'Production data grows and two sessions exercise the edge case concurrently.',
     success: 'the database preserves the intended result under realistic data and timing',
     failure: 'the original correctness or performance problem can still occur',
+  },
+  'Google Analytics': {
+    focus: 'the Google Analytics boundary that owns collection, processing, reporting scope, activation, or governance in this scenario',
+    setup: 'The same customer journey is measured across another device, campaign, reporting surface, or downstream integration.',
+    success: 'the implementation preserves the intended business meaning and makes its scope and data-quality limits explicit',
+    failure: 'the report can still look plausible while measuring a different action, grain, identity, or attribution claim',
   },
 };
 
@@ -233,6 +290,7 @@ function distractorDiagnosis(option, question) {
       Laravel: 'A new route or worker can take a path that the assumption did not cover; without an enforced boundary, the next request can still violate the rule.',
       TypeScript: 'A different caller, browser, or runtime value can violate the assumption even though the current example compiles; TypeScript does not make “automatic” runtime behavior appear.',
       MySQL: 'A NULL, skewed row set, or second concurrent session is enough to violate the assumption; the database needs an explicit constraint, access path, or protocol.',
+      'Google Analytics': 'A second stream, reporting scope, consent state, or processing surface can violate the assumption; GA4 needs an explicit collection and analysis contract.',
     };
     return {
       reason: 'This relies on an absolute assumption instead of a mechanism that enforces the behavior.',

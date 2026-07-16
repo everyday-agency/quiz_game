@@ -13,8 +13,13 @@ import { mysqlQuestions2 } from './questions-mysql-2.mjs';
 import { mysqlQuestions3 } from './questions-mysql-3.mjs';
 import { mysqlQuestions4 } from './questions-mysql-4.mjs';
 import { mysqlQuestions5 } from './questions-mysql-5.mjs';
+import { googleAnalyticsQuestions1 } from './questions-ga-1.mjs';
+import { googleAnalyticsQuestions2 } from './questions-ga-2.mjs';
+import { googleAnalyticsQuestions3 } from './questions-ga-3.mjs';
+import { googleAnalyticsQuestions4 } from './questions-ga-4.mjs';
+import { googleAnalyticsQuestions5 } from './questions-ga-5.mjs';
 
-export const TRACKS = ['Laravel', 'TypeScript', 'MySQL'];
+export const TRACKS = ['Laravel', 'TypeScript', 'MySQL', 'Google Analytics'];
 export const DIFFICULTIES = ['Foundation', 'Applied', 'Advanced'];
 
 const trackBanks = [
@@ -32,6 +37,11 @@ const trackBanks = [
     track: 'MySQL',
     prefix: 'MQ',
     questions: [...mysqlQuestions1, ...mysqlQuestions2, ...mysqlQuestions3, ...mysqlQuestions4, ...mysqlQuestions5],
+  },
+  {
+    track: 'Google Analytics',
+    prefix: 'GQ',
+    questions: [...googleAnalyticsQuestions1, ...googleAnalyticsQuestions2, ...googleAnalyticsQuestions3, ...googleAnalyticsQuestions4, ...googleAnalyticsQuestions5],
   },
 ];
 
