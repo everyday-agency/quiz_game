@@ -574,11 +574,23 @@ const FALLBACK_GUIDES = {
     success: 'the framework and application preserve the intended rule on every path',
     failure: 'another execution path can still reproduce the original problem',
   },
+  PHP: {
+    focus: 'the exact PHP runtime, type, request, persistence, or object-model rule demonstrated by the displayed code',
+    setup: 'The same code runs with a second legal input, another request, or a production configuration that exposes the edge case.',
+    success: 'the implementation preserves the stated value, control-flow, security, or resource-management guarantee',
+    failure: 'the alternative still assumes behavior that the operator, API, type declaration, or runtime does not provide',
+  },
   TypeScript: {
     focus: 'the exact guarantee expressed by the type system and the separate behavior of runtime values',
     setup: 'A second caller supplies a legal edge-case value that the first example did not contain.',
     success: 'the compiler and runtime boundary each enforce the guarantee they actually own',
     failure: 'the program can still compile while an unproved assumption reaches runtime',
+  },
+  React: {
+    focus: 'the React render, identity, state, effect, data-flow, accessibility, or framework boundary visible in the displayed component code',
+    setup: 'The component rerenders with another prop, a reordered list, a pending request, or an unmount at the difficult moment.',
+    success: 'the component preserves the intended UI and lifecycle behavior through React’s actual render and commit model',
+    failure: 'the alternative still relies on lifecycle, identity, cache, or DOM behavior that React and the shown library do not guarantee',
   },
   MySQL: {
     focus: 'the database mechanism that owns the required correctness, access, or recovery guarantee',
@@ -1187,7 +1199,7 @@ function questionNumber(question) {
 }
 
 function shouldShowCorrectCode(question) {
-  return question.track !== 'Google Analytics'
+  return ['Laravel', 'TypeScript', 'MySQL'].includes(question.track)
     && questionNumber(question) <= 300
     && (questionNumber(question) - 1) % 3 === 0;
 }
@@ -1225,6 +1237,8 @@ function distractorDiagnosis(option, question) {
     const absoluteExamples = {
       Laravel: 'A new route or worker can take a path that the assumption did not cover; without an enforced boundary, the next request can still violate the rule.',
       TypeScript: 'A different caller, browser, or runtime value can violate the assumption even though the current example compiles; TypeScript does not make “automatic” runtime behavior appear.',
+      PHP: 'Another valid input, request, or process can take a different branch; PHP does not add a missing type check, security boundary, transaction, or cleanup step automatically.',
+      React: 'Another render, reordered key, pending request, or unmount can violate the assumption; React only provides the state and lifecycle behavior established by the shown component contract.',
       MySQL: 'A NULL, skewed row set, or second concurrent session is enough to violate the assumption; the database needs an explicit constraint, access path, or protocol.',
       'Google Analytics': 'A second stream, reporting scope, consent state, or processing surface can violate the assumption; GA4 needs an explicit collection and analysis contract.',
     };
@@ -1309,6 +1323,8 @@ export function buildLearningNotes(question, orderedOptions = question.options) 
   const correct = question.options[question.answer];
   const codeLanguage = question.code?.language === 'php'
     ? 'PHP'
+    : question.code?.language === 'tsx'
+      ? 'React/TSX'
     : question.code?.language === 'sql'
       ? 'SQL'
       : question.code?.language === 'json'

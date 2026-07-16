@@ -3,17 +3,17 @@ import { readFile } from 'node:fs/promises';
 import { QUESTION_BANK, TRACKS, TRACK_TOPICS, TOPICS, DIFFICULTIES, CURRICULUM } from './js/questions.mjs';
 import { buildLearningNotes } from './js/learning-notes.mjs';
 
-assert.equal(QUESTION_BANK.length, 1500, 'Question bank must contain exactly 1,500 questions');
-assert.deepEqual(TRACKS, ['Laravel', 'TypeScript', 'MySQL', 'Google Analytics'], 'The four learning tracks must be stable');
-assert.equal(TOPICS.length, 100, 'Question bank must contain exactly 100 track-specific domains');
-assert.equal(CURRICULUM.length, 100, 'Curriculum must contain one entry per track-specific domain');
+assert.equal(QUESTION_BANK.length, 2500, 'Question bank must contain exactly 2,500 questions');
+assert.deepEqual(TRACKS, ['Laravel', 'PHP', 'TypeScript', 'React', 'MySQL', 'Google Analytics'], 'The six learning tracks must be stable');
+assert.equal(TOPICS.length, 150, 'Question bank must contain exactly 150 track-specific domains');
+assert.equal(CURRICULUM.length, 150, 'Curriculum must contain one entry per track-specific domain');
 
 const prompts = new Set();
 const ids = new Set();
-const prefixByTrack = { Laravel: 'LQ', TypeScript: 'TQ', MySQL: 'MQ', 'Google Analytics': 'GQ' };
+const prefixByTrack = { Laravel: 'LQ', PHP: 'PQ', TypeScript: 'TQ', React: 'RQ', MySQL: 'MQ', 'Google Analytics': 'GQ' };
 const codeCoverage = Object.fromEntries(TRACKS.map((track) => [track, { correct: 0, alternatives: 0 }]));
 const questionCodeCoverage = Object.fromEntries(TRACKS.map((track) => [track, 0]));
-const supportedCodeLanguages = new Set(['php', 'typescript', 'json', 'sql']);
+const supportedCodeLanguages = new Set(['php', 'typescript', 'tsx', 'json', 'sql']);
 
 function assertCodeLesson(lesson, context) {
   assert(supportedCodeLanguages.has(lesson.language), `${context} uses an unsupported code language`);
@@ -23,7 +23,14 @@ function assertCodeLesson(lesson, context) {
 
 for (const track of TRACKS) {
   const trackQuestions = QUESTION_BANK.filter((question) => question.track === track);
-  const expectedTrackCount = track === 'Google Analytics' ? 300 : 400;
+  const expectedTrackCount = {
+    Laravel: 600,
+    PHP: 300,
+    TypeScript: 600,
+    React: 300,
+    MySQL: 400,
+    'Google Analytics': 300,
+  }[track];
   assert.equal(trackQuestions.length, expectedTrackCount, `${track} has the wrong question count`);
   assert.equal(TRACK_TOPICS[track].length, 25, `${track} must contain exactly 25 domains`);
 
@@ -51,7 +58,9 @@ for (const question of QUESTION_BANK) {
   if (question.code) {
     questionCodeCoverage[question.track] += 1;
     assertCodeLesson(question.code, `${question.id} question code`);
-    assert(Number(question.id.slice(3)) > 300, `${question.id} unexpectedly adds code to an existing question`);
+    if (['Laravel', 'TypeScript', 'MySQL'].includes(question.track)) {
+      assert(Number(question.id.slice(3)) > 300, `${question.id} unexpectedly adds code to an existing question`);
+    }
   }
 
   const notes = buildLearningNotes(question);
@@ -84,17 +93,44 @@ for (const track of ['Laravel', 'TypeScript', 'MySQL']) {
   assert(codeCoverage[track].correct < 300, `${track} should not force code into every explanation`);
 }
 assert.deepEqual(codeCoverage['Google Analytics'], { correct: 0, alternatives: 0 }, 'This teaching-code pass should stay scoped to the three programming/database tracks');
+assert.deepEqual(codeCoverage.PHP, { correct: 0, alternatives: 0 }, 'PHP questions already carry their teaching code in the prompt');
+assert.deepEqual(codeCoverage.React, { correct: 0, alternatives: 0 }, 'React questions already carry their teaching code in the prompt');
 assert.deepEqual(questionCodeCoverage, {
-  Laravel: 100,
-  TypeScript: 100,
+  Laravel: 300,
+  PHP: 300,
+  TypeScript: 300,
+  React: 300,
   MySQL: 100,
   'Google Analytics': 0,
-}, 'Each programming/database track must contain exactly 100 code-reading questions');
+}, 'The programming tracks must contain their intended code-reading question totals');
+
+const roadmapCoverage = Object.fromEntries(TRACKS.map((track) => [track,
+  QUESTION_BANK.filter((question) => question.track === track && question.roadmap === true).length,
+]));
+assert.deepEqual(roadmapCoverage, {
+  Laravel: 200,
+  PHP: 200,
+  TypeScript: 200,
+  React: 200,
+  MySQL: 0,
+  'Google Analytics': 0,
+}, 'Roadmap expansions must contribute exactly 200 direct roadmap questions to each requested track');
+
+for (const question of QUESTION_BANK.filter((candidate) => candidate.roadmap !== undefined)) {
+  assert(Array.isArray(question.roadmapConcepts) && question.roadmapConcepts.length >= 3, `${question.id} needs explicit roadmap concept coverage`);
+}
 
 for (const track of TRACKS) {
   for (const topic of TRACK_TOPICS[track]) {
     const topicQuestions = QUESTION_BANK.filter((question) => question.track === track && question.topic === topic);
-    const expectedTopicCount = track === 'Google Analytics' ? 12 : 16;
+    const expectedTopicCount = {
+      Laravel: 24,
+      PHP: 12,
+      TypeScript: 24,
+      React: 12,
+      MySQL: 16,
+      'Google Analytics': 12,
+    }[track];
     assert.equal(topicQuestions.length, expectedTopicCount, `${track} / ${topic} has the wrong question count`);
     for (const difficulty of DIFFICULTIES) {
       assert(topicQuestions.some((question) => question.difficulty === difficulty), `${track} / ${topic} is missing ${difficulty} coverage`);
@@ -114,11 +150,12 @@ assert(html.includes('id="questionCode"'), 'quiz view must expose the question-c
 assert(app.includes("createCodeLesson(question.code, 'Read this code')"), 'app must render code inside code-reading questions');
 
 console.log(`✓ ${QUESTION_BANK.length} questions across ${TRACKS.length} learning tracks`);
-console.log(`✓ 25 domains per track: 16 code-enriched scenarios for Laravel, TypeScript, and MySQL; 12 for Google Analytics`);
-console.log(`✓ 400 questions each for Laravel, TypeScript, and MySQL; 300 for Google Analytics`);
-console.log(`✓ exactly 100 code-reading questions in each programming/database track`);
+console.log(`✓ 25 domains per track across six tracks and 150 track-specific domains`);
+console.log(`✓ 600 Laravel, 600 TypeScript, 400 MySQL, and 300 each for PHP, React, and Google Analytics`);
+console.log(`✓ exactly 200 direct roadmap questions for Laravel, TypeScript, PHP, and React`);
+console.log(`✓ 1,300 code-reading questions across the five programming/database tracks`);
 console.log(`✓ four unique options and one valid answer per question`);
 console.log(`✓ unique IDs and prompts`);
 console.log(`✓ all three difficulty levels represented in every domain`);
-console.log(`✓ correct examples and explanations for all 4,500 wrong choices`);
+console.log(`✓ correct examples and explanations for all 7,500 wrong choices`);
 console.log(`✓ 300 selective correct-answer code walkthroughs and ${Object.values(codeCoverage).reduce((total, coverage) => total + coverage.alternatives, 0)} code-backed wrong-answer explanations`);

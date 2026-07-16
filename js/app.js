@@ -8,7 +8,9 @@ const trackSlug = (track) => track.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
 const TRACK_META = {
   Laravel: { mark: 'L', detail: 'Application architecture' },
+  PHP: { mark: 'PHP', detail: 'Language & backend runtime' },
   TypeScript: { mark: 'TS', detail: 'Type-system design' },
+  React: { mark: 'R', detail: 'Components & application state' },
   MySQL: { mark: 'DB', detail: 'Data & query reasoning' },
   'Google Analytics': { mark: 'GA', detail: 'Measurement & insight' },
 };
@@ -534,6 +536,8 @@ function renderResults(correct, percent) {
   }
 }
 
+let bankRenderLimit = 100;
+
 function renderBank() {
   const term = $('#bankSearch').value.trim().toLowerCase();
   const track = $('#bankTrack').value;
@@ -547,7 +551,9 @@ function renderBank() {
       && (difficulty === 'all' || question.difficulty === difficulty);
   });
 
-  $('#bankCount').textContent = `${matches.length.toLocaleString()} of ${QUESTION_BANK.length.toLocaleString()} scenarios`;
+  const visibleMatches = matches.slice(0, bankRenderLimit);
+  const showing = visibleMatches.length < matches.length ? ` · showing ${visibleMatches.length.toLocaleString()}` : '';
+  $('#bankCount').textContent = `${matches.length.toLocaleString()} of ${QUESTION_BANK.length.toLocaleString()} scenarios${showing}`;
   const list = $('#bankList');
   list.replaceChildren();
   if (!matches.length) {
@@ -558,7 +564,7 @@ function renderBank() {
     return;
   }
 
-  matches.forEach((question) => {
+  visibleMatches.forEach((question) => {
     const details = document.createElement('details');
     details.className = 'bank-question';
     const summary = document.createElement('summary');
@@ -583,20 +589,37 @@ function renderBank() {
 
     const answer = document.createElement('div');
     answer.className = 'bank-answer';
-    const correct = document.createElement('strong');
-    correct.textContent = `Strongest answer: ${question.options[question.answer]}`;
-    const explanation = document.createElement('p');
-    explanation.textContent = question.explanation;
-    if (question.code) answer.append(createCodeLesson(question.code, 'Read this code'));
-    answer.append(correct, explanation);
     details.addEventListener('toggle', () => {
       if (!details.open || answer.dataset.enriched === 'true') return;
+      const correct = document.createElement('strong');
+      correct.textContent = `Strongest answer: ${question.options[question.answer]}`;
+      const explanation = document.createElement('p');
+      explanation.textContent = question.explanation;
+      if (question.code) answer.append(createCodeLesson(question.code, 'Read this code'));
+      answer.append(correct, explanation);
       answer.append(createLearningNotes(question));
       answer.dataset.enriched = 'true';
     });
     details.append(summary, answer);
     list.append(details);
   });
+
+  if (visibleMatches.length < matches.length) {
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'secondary-button bank-more';
+    more.textContent = `Show ${Math.min(100, matches.length - visibleMatches.length).toLocaleString()} more`;
+    more.addEventListener('click', () => {
+      bankRenderLimit += 100;
+      renderBank();
+    });
+    list.append(more);
+  }
+}
+
+function resetBankAndRender() {
+  bankRenderLimit = 100;
+  renderBank();
 }
 
 let toastTimer;
@@ -678,12 +701,12 @@ $('#brandButton').addEventListener('click', () => {
   showView('home');
 });
 
-$('#bankSearch').addEventListener('input', renderBank);
-$('#bankDifficulty').addEventListener('change', renderBank);
-$('#bankTopic').addEventListener('change', renderBank);
+$('#bankSearch').addEventListener('input', resetBankAndRender);
+$('#bankDifficulty').addEventListener('change', resetBankAndRender);
+$('#bankTopic').addEventListener('change', resetBankAndRender);
 $('#bankTrack').addEventListener('change', () => {
   setupBankTopics();
-  renderBank();
+  resetBankAndRender();
 });
 
 document.addEventListener('keydown', (event) => {

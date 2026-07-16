@@ -4,12 +4,16 @@ import { questions3 } from './questions-3.mjs';
 import { questions4 } from './questions-4.mjs';
 import { questions5 } from './questions-5.mjs';
 import { laravelCodeQuestions } from './questions-code-laravel.mjs';
+import { laravelRoadmapQuestions } from './questions-roadmap-laravel.mjs';
+import { phpQuestions } from './questions-php.mjs';
 import { typescriptQuestions1 } from './questions-ts-1.mjs';
 import { typescriptQuestions2 } from './questions-ts-2.mjs';
 import { typescriptQuestions3 } from './questions-ts-3.mjs';
 import { typescriptQuestions4 } from './questions-ts-4.mjs';
 import { typescriptQuestions5 } from './questions-ts-5.mjs';
 import { typescriptCodeQuestions } from './questions-code-typescript.mjs';
+import { typescriptRoadmapQuestions } from './questions-roadmap-typescript.mjs';
+import { reactQuestions } from './questions-react.mjs';
 import { mysqlQuestions1 } from './questions-mysql-1.mjs';
 import { mysqlQuestions2 } from './questions-mysql-2.mjs';
 import { mysqlQuestions3 } from './questions-mysql-3.mjs';
@@ -22,19 +26,29 @@ import { googleAnalyticsQuestions3 } from './questions-ga-3.mjs';
 import { googleAnalyticsQuestions4 } from './questions-ga-4.mjs';
 import { googleAnalyticsQuestions5 } from './questions-ga-5.mjs';
 
-export const TRACKS = ['Laravel', 'TypeScript', 'MySQL', 'Google Analytics'];
+export const TRACKS = ['Laravel', 'PHP', 'TypeScript', 'React', 'MySQL', 'Google Analytics'];
 export const DIFFICULTIES = ['Foundation', 'Applied', 'Advanced'];
 
 const trackBanks = [
   {
     track: 'Laravel',
     prefix: 'LQ',
-    questions: [...questions1, ...questions2, ...questions3, ...questions4, ...questions5, ...laravelCodeQuestions],
+    questions: [...questions1, ...questions2, ...questions3, ...questions4, ...questions5, ...laravelCodeQuestions, ...laravelRoadmapQuestions],
+  },
+  {
+    track: 'PHP',
+    prefix: 'PQ',
+    questions: phpQuestions,
   },
   {
     track: 'TypeScript',
     prefix: 'TQ',
-    questions: [...typescriptQuestions1, ...typescriptQuestions2, ...typescriptQuestions3, ...typescriptQuestions4, ...typescriptQuestions5, ...typescriptCodeQuestions],
+    questions: [...typescriptQuestions1, ...typescriptQuestions2, ...typescriptQuestions3, ...typescriptQuestions4, ...typescriptQuestions5, ...typescriptCodeQuestions, ...typescriptRoadmapQuestions],
+  },
+  {
+    track: 'React',
+    prefix: 'RQ',
+    questions: reactQuestions,
   },
   {
     track: 'MySQL',

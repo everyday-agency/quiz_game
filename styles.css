@@ -7,8 +7,13 @@
   --red: #ee382f;
   --red-dark: #b91f23;
   --red-soft: #ffe6df;
+  --php: #777bb4;
+  --php-dark: #4f568f;
+  --php-soft: #eeeffa;
   --typescript: #3178c6;
   --typescript-soft: #e7f1fc;
+  --react: #087ea4;
+  --react-soft: #e2f5fb;
   --mysql: #c56a16;
   --mysql-soft: #fff0de;
   --analytics: #5f49c7;
@@ -114,11 +119,15 @@ button { color: inherit; }
 .track-choice small { margin-top: 2px; color: var(--muted); font-size: 9px; line-height: 1.25; }
 .track-check input:checked + .track-choice { box-shadow: inset 0 0 0 1px currentColor; }
 .track-check[data-track="laravel"] input:checked + .track-choice { color: var(--red-dark); border-color: var(--red); background: var(--red-soft); }
+.track-check[data-track="php"] input:checked + .track-choice { color: var(--php-dark); border-color: var(--php); background: var(--php-soft); }
 .track-check[data-track="typescript"] input:checked + .track-choice { color: #1f5e9f; border-color: var(--typescript); background: var(--typescript-soft); }
+.track-check[data-track="react"] input:checked + .track-choice { color: var(--react); border-color: var(--react); background: var(--react-soft); }
 .track-check[data-track="mysql"] input:checked + .track-choice { color: #8b4a0d; border-color: var(--mysql); background: var(--mysql-soft); }
 .track-check[data-track="google-analytics"] input:checked + .track-choice { color: #4934ad; border-color: var(--analytics); background: var(--analytics-soft); }
 .track-check[data-track="laravel"] .track-mark { background: var(--red); }
+.track-check[data-track="php"] .track-mark { background: var(--php); }
 .track-check[data-track="typescript"] .track-mark { background: var(--typescript); }
+.track-check[data-track="react"] .track-mark { background: var(--react); }
 .track-check[data-track="mysql"] .track-mark { background: var(--mysql); }
 .track-check[data-track="google-analytics"] .track-mark { background: var(--analytics); }
 .track-check input:focus-visible + .track-choice { outline: 3px solid rgba(111,91,211,.25); outline-offset: 2px; }
@@ -150,7 +159,9 @@ button { color: inherit; }
 .topic-section-label { grid-column: 1 / -1; margin-top: 6px; padding: 7px 8px 3px; border-top: 1px solid var(--line); color: var(--muted); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
 .topic-section-label:first-child { margin-top: 0; border-top: 0; }
 .topic-section-label[data-track="laravel"] { color: var(--red-dark); }
+.topic-section-label[data-track="php"] { color: var(--php-dark); }
 .topic-section-label[data-track="typescript"] { color: var(--typescript); }
+.topic-section-label[data-track="react"] { color: var(--react); }
 .topic-section-label[data-track="mysql"] { color: var(--mysql); }
 .topic-section-label[data-track="google-analytics"] { color: var(--analytics); }
 .topic-empty { grid-column: 1 / -1; margin: 8px 0; padding: 15px; color: var(--muted); background: #f3efe8; border-radius: 9px; text-align: center; font-size: 11px; }
@@ -193,7 +204,9 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 .track-pill, .topic-pill, .difficulty-pill { display: inline-block; padding: 5px 8px; border-radius: 7px; font-weight: 800; }
 .track-pill { margin-right: 6px; color: white; background: var(--ink); }
 .track-pill[data-track="laravel"] { background: var(--red); }
+.track-pill[data-track="php"] { background: var(--php); }
 .track-pill[data-track="typescript"] { background: var(--typescript); }
+.track-pill[data-track="react"] { background: var(--react); }
 .track-pill[data-track="mysql"] { background: var(--mysql); }
 .track-pill[data-track="google-analytics"] { background: var(--analytics); }
 .topic-pill { margin-right: 6px; color: var(--purple); background: var(--purple-soft); }
@@ -259,6 +272,7 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 .bank-toolbar select { padding: 0 12px; border: 1px solid var(--line); border-radius: 11px; background: white; color: var(--ink); }
 .bank-count { margin: 18px 0 8px; color: var(--muted); font-size: 11px; }
 .bank-list { display: grid; gap: 8px; }
+.bank-more { width: min(260px, 100%); margin: 18px auto 0; }
 .bank-question { border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.7); overflow: hidden; }
 .bank-question summary { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; align-items: center; gap: 15px; padding: 17px 19px; cursor: pointer; list-style: none; }
 .bank-question summary::-webkit-details-marker { display: none; }
@@ -267,7 +281,9 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 .bank-tags { display: flex; gap: 5px; }
 .bank-tags span { padding: 4px 7px; border-radius: 6px; background: #f1ede7; color: var(--muted); font-size: 9px; font-weight: 700; }
 .bank-tags .bank-track-tag[data-track="laravel"] { color: var(--red-dark); background: var(--red-soft); }
+.bank-tags .bank-track-tag[data-track="php"] { color: var(--php-dark); background: var(--php-soft); }
 .bank-tags .bank-track-tag[data-track="typescript"] { color: #1f5e9f; background: var(--typescript-soft); }
+.bank-tags .bank-track-tag[data-track="react"] { color: var(--react); background: var(--react-soft); }
 .bank-tags .bank-track-tag[data-track="mysql"] { color: #8b4a0d; background: var(--mysql-soft); }
 .bank-tags .bank-track-tag[data-track="google-analytics"] { color: #4934ad; background: var(--analytics-soft); }
 .bank-answer { padding: 0 20px 19px 78px; }
