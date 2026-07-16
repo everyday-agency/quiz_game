@@ -13,7 +13,13 @@ const ids = new Set();
 const prefixByTrack = { Laravel: 'LQ', PHP: 'PQ', TypeScript: 'TQ', React: 'RQ', MySQL: 'MQ', 'Google Analytics': 'GQ' };
 const codeCoverage = Object.fromEntries(TRACKS.map((track) => [track, { correct: 0, alternatives: 0 }]));
 const questionCodeCoverage = Object.fromEntries(TRACKS.map((track) => [track, 0]));
+const answerLengthStats = Object.fromEntries(TRACKS.map((track) => [track, {
+  characters: { ranks: [0, 0, 0, 0], correct: 0, wrong: 0 },
+  words: { ranks: [0, 0, 0, 0], correct: 0, wrong: 0 },
+}]));
 const supportedCodeLanguages = new Set(['php', 'typescript', 'tsx', 'json', 'sql']);
+
+const wordCount = (value) => value.trim().split(/\s+/).length;
 
 function assertCodeLesson(lesson, context) {
   assert(supportedCodeLanguages.has(lesson.language), `${context} uses an unsupported code language`);
@@ -51,9 +57,28 @@ for (const question of QUESTION_BANK) {
   assert(TRACKS.includes(question.track), `${question.id} has an unknown track`);
   assert(TRACK_TOPICS[question.track].includes(question.topic), `${question.id} has an unknown domain`);
   assert(DIFFICULTIES.includes(question.difficulty), `${question.id} has an unknown difficulty`);
+  assert.equal(question.coreOptions.length, 4, `${question.id} must preserve four semantic answer cores`);
+  assert.equal(new Set(question.coreOptions).size, 4, `${question.id} semantic answer cores must be unique`);
   assert.equal(question.options.length, 4, `${question.id} must have four options`);
   assert.equal(new Set(question.options).size, 4, `${question.id} options must be unique`);
   assert(Number.isInteger(question.answer) && question.answer >= 0 && question.answer < 4, `${question.id} answer index is invalid`);
+  question.options.forEach((option, index) => {
+    assert(option.startsWith(question.coreOptions[index]), `${question.id} changed the meaning of option ${index + 1}`);
+    assert(/(?:Reasoning check|Evidence to inspect):/.test(option), `${question.id} option ${index + 1} lacks its neutral reasoning check`);
+  });
+
+  for (const [metric, measure] of [['characters', (value) => value.length], ['words', wordCount]]) {
+    const lengths = question.options.map(measure);
+    assert.equal(new Set(lengths).size, 4, `${question.id} ${metric} must produce four distinct length ranks`);
+    const correctLength = lengths[question.answer];
+    const correctRank = lengths.filter((length, index) => index !== question.answer && length < correctLength).length;
+    const stats = answerLengthStats[question.track][metric];
+    stats.ranks[correctRank] += 1;
+    stats.correct += correctLength;
+    stats.wrong += lengths.reduce((total, length, index) =>
+      total + (index === question.answer ? 0 : length), 0) / 3;
+  }
+
   assert(question.explanation.length >= 45, `${question.id} explanation is too short`);
   if (question.code) {
     questionCodeCoverage[question.track] += 1;
@@ -64,7 +89,7 @@ for (const question of QUESTION_BANK) {
   }
 
   const notes = buildLearningNotes(question);
-  assert.equal(notes.correct, question.options[question.answer], `${question.id} teaching notes identify the wrong correct answer`);
+  assert.equal(notes.correct, question.coreOptions[question.answer], `${question.id} teaching notes identify the wrong correct answer`);
   assert(notes.whyCorrect.length >= 45, `${question.id} needs a complete correct-answer explanation`);
   assert(notes.correctExample.length >= 140, `${question.id} needs a concrete correct-answer example`);
   if (notes.correctCode) {
@@ -74,7 +99,7 @@ for (const question of QUESTION_BANK) {
   assert.equal(notes.alternatives.length, 3, `${question.id} must explain all three wrong choices`);
   assert.deepEqual(
     new Set(notes.alternatives.map((alternative) => alternative.option)),
-    new Set(question.options.filter((_, index) => index !== question.answer)),
+    new Set(question.coreOptions.filter((_, index) => index !== question.answer)),
     `${question.id} teaching notes do not cover the exact wrong choices`,
   );
   notes.alternatives.forEach((alternative) => {
@@ -85,6 +110,22 @@ for (const question of QUESTION_BANK) {
       assertCodeLesson(alternative.code, `${question.id} wrong-answer lesson`);
     }
   });
+}
+
+for (const track of TRACKS) {
+  const trackQuestionCount = QUESTION_BANK.filter((question) => question.track === track).length;
+  for (const [metric, stats] of Object.entries(answerLengthStats[track])) {
+    assert.deepEqual(
+      stats.ranks,
+      Array(4).fill(trackQuestionCount / 4),
+      `${track} correct answers must occupy every ${metric} rank equally often`,
+    );
+    const averageRatio = stats.correct / stats.wrong;
+    assert(
+      averageRatio >= 0.95 && averageRatio <= 1.05,
+      `${track} correct-answer ${metric} average must stay within 5% of wrong-answer average`,
+    );
+  }
 }
 
 for (const track of ['Laravel', 'TypeScript', 'MySQL']) {
@@ -169,6 +210,8 @@ console.log(`✓ 600 Laravel, 600 TypeScript, 400 MySQL, and 300 each for PHP, R
 console.log(`✓ exactly 200 direct roadmap questions for Laravel, TypeScript, PHP, and React`);
 console.log(`✓ 1,300 code-reading questions across the five programming/database tracks`);
 console.log(`✓ four unique options and one valid answer per question`);
+console.log(`✓ correct answers occupy each character-length and word-count rank exactly 25% of the time`);
+console.log(`✓ correct and wrong answer lengths stay within a 5% average band in every track`);
 console.log(`✓ unique IDs and prompts`);
 console.log(`✓ all three difficulty levels represented in every domain`);
 console.log(`✓ correct examples and explanations for all 7,500 wrong choices`);

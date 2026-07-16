@@ -25,6 +25,7 @@ import { googleAnalyticsQuestions2 } from './questions-ga-2.mjs';
 import { googleAnalyticsQuestions3 } from './questions-ga-3.mjs';
 import { googleAnalyticsQuestions4 } from './questions-ga-4.mjs';
 import { googleAnalyticsQuestions5 } from './questions-ga-5.mjs';
+import { balanceAnswerLengths } from './answer-balance.mjs';
 
 export const TRACKS = ['Laravel', 'PHP', 'TypeScript', 'React', 'MySQL', 'Google Analytics'];
 export const DIFFICULTIES = ['Foundation', 'Applied', 'Advanced'];
@@ -63,11 +64,18 @@ const trackBanks = [
 ];
 
 export const QUESTION_BANK = trackBanks.flatMap(({ track, prefix, questions }) =>
-  questions.map((question, index) => ({
-    ...question,
-    track: question.track || track,
-    id: `${prefix}-${String(index + 1).padStart(3, '0')}`,
-  }))
+  questions.map((question, index) => {
+    const normalizedQuestion = {
+      ...question,
+      track: question.track || track,
+      id: `${prefix}-${String(index + 1).padStart(3, '0')}`,
+    };
+    return {
+      ...normalizedQuestion,
+      coreOptions: [...question.options],
+      options: balanceAnswerLengths(normalizedQuestion, index, prefix),
+    };
+  })
 );
 
 export const TRACK_TOPICS = Object.fromEntries(TRACKS.map((track) => [

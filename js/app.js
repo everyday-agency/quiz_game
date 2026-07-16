@@ -81,6 +81,7 @@ function materialize(question) {
     ...question,
     displayOptions: shuffle(question.options.map((text, index) => ({
       text,
+      sourceText: question.coreOptions?.[index] || text,
       correct: index === question.answer,
     }))),
   };
@@ -383,10 +384,11 @@ function selectOption(index) {
 function recordAnswer() {
   const question = state.session[state.current];
   const option = question.displayOptions[state.selectedOption];
+  const correctOption = question.displayOptions.find((item) => item.correct);
   const answer = {
     question,
-    selectedText: option.text,
-    correctText: question.displayOptions.find((item) => item.correct).text,
+    selectedText: option.sourceText || option.text,
+    correctText: correctOption.sourceText || correctOption.text,
     selectedIndex: state.selectedOption,
     correct: option.correct,
   };
@@ -544,7 +546,7 @@ function renderBank() {
   const domain = $('#bankTopic').value;
   const difficulty = $('#bankDifficulty').value;
   const matches = QUESTION_BANK.filter((question) => {
-    const searchable = `${question.track} ${question.topic} ${question.prompt} ${question.code?.title || ''} ${question.code?.snippet || ''} ${question.explanation} ${question.options.join(' ')}`.toLowerCase();
+    const searchable = `${question.track} ${question.topic} ${question.prompt} ${question.code?.title || ''} ${question.code?.snippet || ''} ${question.explanation} ${question.options.join(' ')} ${(question.coreOptions || []).join(' ')}`.toLowerCase();
     return (!term || searchable.includes(term))
       && (track === 'all' || question.track === track)
       && (domain === 'all' || domainKey(question.track, question.topic) === domain)
@@ -592,7 +594,7 @@ function renderBank() {
     details.addEventListener('toggle', () => {
       if (!details.open || answer.dataset.enriched === 'true') return;
       const correct = document.createElement('strong');
-      correct.textContent = `Strongest answer: ${question.options[question.answer]}`;
+      correct.textContent = `Strongest answer: ${(question.coreOptions || question.options)[question.answer]}`;
       const explanation = document.createElement('p');
       explanation.textContent = question.explanation;
       if (question.code) answer.append(createCodeLesson(question.code, 'Read this code'));

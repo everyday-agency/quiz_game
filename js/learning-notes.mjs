@@ -1319,8 +1319,13 @@ function distractorDiagnosis(option, question) {
 
 export function buildLearningNotes(question, orderedOptions = question.options) {
   const guide = guideFor(question);
-  const options = orderedOptions.map((option) => typeof option === 'string' ? option : option.text);
-  const correct = question.options[question.answer];
+  const sourceOptions = question.coreOptions || question.options;
+  const options = orderedOptions.map((option) => {
+    if (typeof option !== 'string') return option.sourceText || option.text;
+    const displayedIndex = question.options.indexOf(option);
+    return displayedIndex >= 0 ? sourceOptions[displayedIndex] : option;
+  });
+  const correct = sourceOptions[question.answer];
   const codeLanguage = question.code?.language === 'php'
     ? 'PHP'
     : question.code?.language === 'tsx'
