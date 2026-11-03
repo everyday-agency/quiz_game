@@ -15,14 +15,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate:
+    uses: ./.github/workflows/validate.yml
+
   build:
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Validate the 900-question bank
-        run: node tests.mjs
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          package-manager-cache: false
+
+      - name: Prepare only the static runtime files
+        run: node tools/build-site.mjs
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -30,7 +39,7 @@ jobs:
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: _site
 
   deploy:
     environment:

@@ -292,6 +292,7 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 
 /* Teaching notes */
 .learning-notes { margin-top: 17px; padding-top: 17px; border-top: 1px solid rgba(85, 80, 87, .16); }
+.question-context { color: #57515f; line-height: 1.6; font-size: 14px; }
 .learning-example { padding: 13px 15px; border: 1px solid rgba(31, 132, 102, .2); border-radius: 11px; background: rgba(255, 255, 255, .72); }
 .learning-label { display: block; margin-bottom: 5px; color: var(--green); font-size: 9px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
 .feedback-label { margin-top: 13px; margin-bottom: 0; color: #4f755f; }

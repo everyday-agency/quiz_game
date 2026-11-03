@@ -1,0 +1,86 @@
+[
+  {
+    "id": "PQ-002",
+    "filesSha256": "32a758f715541ee38b2081fe83ca9f6b79ea3a76637370b394146ca0176450fc",
+    "correctOption": "It prints 30 with or without the declaration.",
+    "stdout": "30",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-004",
+    "filesSha256": "261d6fbe0d84aeefa862fe2ab78d340cb125d6d1b653171477263631df1ee66b",
+    "correctOption": "It prints 3.0.",
+    "stdout": "3.0",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-005",
+    "filesSha256": "c2b8d9ec09d474bfe52c977ac2ef33b2a97c4174d26a438037d83d6b7f72d999",
+    "correctOption": "TypeError",
+    "stdout": "TypeError",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-014",
+    "filesSha256": "80a43278ad4fd6b8d404f632e6b519bbfdfedfd27cb45834272b85b4f9660132",
+    "correctOption": "8 12",
+    "stdout": "8 12",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-021",
+    "filesSha256": "33c5723552191121de1020113d9a1fddec6cb6eeb6a8922a38a668a2c38c594a",
+    "correctOption": "8 12|123",
+    "stdout": "8 12|123",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-041",
+    "filesSha256": "847c963c4d92dd2874b99de7670f144df443e200bfaec135db3aed3c767fade5",
+    "correctOption": "7|Ada|viewer",
+    "stdout": "7|Ada|viewer",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-053",
+    "filesSha256": "6b89a609a8a024574a97d382d95abc295162df04e61f1d6163f4151e110818f0",
+    "correctOption": "[false,true,0]",
+    "stdout": "[false,true,0]",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-061",
+    "filesSha256": "bd4a472f4ec1a4607529d7353d6a55dda7c19ab9befff8236397e4c61bc9354c",
+    "correctOption": "string one",
+    "stdout": "string one",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-113",
+    "filesSha256": "de38060d3ec0fe31bf9d16417639c32b8e0ec83523db537a895133c906d9185b",
+    "correctOption": "[\"7\",\"ada@example.test\"] and E_DEPRECATED about the omitted escape argument",
+    "stdout": "[\"7\",\"ada@example.test\"]",
+    "diagnostic": "fgetcsv-escape-deprecation"
+  },
+  {
+    "id": "PQ-137",
+    "filesSha256": "5c68507fe201aa30f856acbc9755e74bf48f11daaa200756965a14beec3ff1af",
+    "correctOption": "png",
+    "stdout": "png",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-197",
+    "filesSha256": "738993aebb3b4df39f2e2ab910391a165fe98f5f2add5feded3f541b8b2e1776",
+    "correctOption": "[false,1,\"new\"]",
+    "stdout": "[false,1,\"new\"]",
+    "diagnostic": null
+  },
+  {
+    "id": "PQ-281",
+    "filesSha256": "f3fdb413863af127ac6b009fb595641e28b6833c62d785b7855559ea140b85c6",
+    "correctOption": "none|old!|b",
+    "stdout": "none|old!|b",
+    "diagnostic": null
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "count": 20,
+  "trackCounts": {
+    "PHP": 12,
+    "Laravel": 8
+  },
+  "difficultyCounts": {
+    "Foundation": 5,
+    "Applied": 14,
+    "Advanced": 1
+  },
+  "sourceKeyCounts": [
+    5,
+    4,
+    6,
+    5
+  ],
+  "uniqueLongestCorrect": [
+    "PQ-113",
+    "LQ-453"
+  ],
+  "limits": "Structural and cue checks do not prove that all distractors are equally attractive or that difficulty is calibrated. Independent blind review and learner response data remain necessary."
+}

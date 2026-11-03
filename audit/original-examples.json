@@ -1,0 +1,607 @@
+[
+  {
+    "difficulty": "Foundation",
+    "prompt": "Attaching context while preserving normal exception reporting: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "returning false allows Laravel default reporting to continue while the added context enriches the log record. Reasoning check: compare this claim with operator semantics and the exact input types.",
+      "returning false marks the exception as handled and guarantees it will never reach configured log channels. Reasoning check: compare this claim with control flow, runtime behavior, and the failure path.",
+      "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the exact input types, runtime behavior, side effects, and the failure path.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with control flow and the data boundary."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that returning false allows Laravel default reporting to continue while the added context enriches the log record. The tempting mistake is to assume that returning false marks the exception as handled and guarantees it will never reach configured log channels. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Errors, logging & observability",
+    "code": {
+      "language": "php",
+      "title": "Attaching context while preserving normal exception reporting",
+      "snippet": "$exceptions->report(function (PaymentFailed $exception) {\n    Log::withContext([\n        'payment_id' => $exception->paymentId,\n        'request_id' => request()->header('X-Request-ID'),\n    ]);\n\n    return false;\n});"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "error handling",
+      "exceptions",
+      "message customization",
+      "HTTP exceptions",
+      "logging",
+      "log stacks",
+      "Telescope",
+      "Debugbar"
+    ],
+    "track": "Laravel",
+    "id": "LQ-545",
+    "coreOptions": [
+      "returning false allows Laravel default reporting to continue while the added context enriches the log record",
+      "returning false marks the exception as handled and guarantees it will never reach configured log channels",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Retry policy with backoff and an absolute deadline: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "failed attempts use increasing delays but retries stop when the attempt limit or absolute retry deadline is reached. Evidence to inspect: the exact input types, side effects, and runtime behavior.",
+      "backoff makes the external CRM operation idempotent and guarantees it cannot run twice. Reasoning check: compare this claim with the API contract, the exact input types, side effects, and lifecycle timing.",
+      "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: control flow, runtime behavior, side effects, the data boundary, and the failure path.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the API contract, configuration, the exact input types, the failure path, and operator semantics."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that failed attempts use increasing delays but retries stop when the attempt limit or absolute retry deadline is reached. The tempting mistake is to assume that backoff makes the external CRM operation idempotent and guarantees it cannot run twice. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Queues & background work",
+    "code": {
+      "language": "php",
+      "title": "Retry policy with backoff and an absolute deadline",
+      "snippet": "final class SyncCustomer implements ShouldQueue\n{\n    public int $tries = 5;\n    public function backoff(): array { return [10, 60, 300]; }\n    public function retryUntil(): DateTime { return now()->addHour(); }\n\n    public function handle(CrmClient $crm): void {\n        $crm->sync($this->customerId);\n    }\n}"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "queues",
+      "jobs",
+      "retry policy",
+      "unique jobs",
+      "job middleware",
+      "Horizon"
+    ],
+    "track": "Laravel",
+    "id": "LQ-489",
+    "coreOptions": [
+      "failed attempts use increasing delays but retries stop when the attempt limit or absolute retry deadline is reached",
+      "backoff makes the external CRM operation idempotent and guarantees it cannot run twice",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Applied",
+    "prompt": "Capturing by value versus by reference: which review comment best preserves the guarantee demonstrated by this implementation?",
+    "options": [
+      "Keep the relevant mechanism because closures capture variables explicitly and a static local retains its value between calls in the same request. Evidence to inspect: runtime behavior, the observable output, and control flow.",
+      "Remove the relevant mechanism because ordinary local variables are shared globally and closures automatically see every outer variable by reference. Evidence to inspect: operator semantics and control flow.",
+      "Replace the implementation with a comment describing the intended result. Evidence to inspect: control flow, the data boundary, lifecycle timing, the failure path, state changes, and configuration.",
+      "Suppress every failure so callers always receive a successful-looking value. Evidence to inspect: operator semantics, runtime behavior, side effects, the exact input types, the displayed values, and lifecycle timing."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that closures capture variables explicitly and a static local retains its value between calls in the same request. The tempting mistake is to assume that ordinary local variables are shared globally and closures automatically see every outer variable by reference. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Variables, scope & constants",
+    "code": {
+      "language": "php",
+      "title": "Capturing by value versus by reference",
+      "snippet": "<?php\n$rate = 2;\n$byValue = fn (int $n) => $n * $rate;\n$byReference = function (int $n) use (&$rate): int {\n    return $n * $rate;\n};\n\n$rate = 3;\necho $byValue(4), \" \", $byReference(4);"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "variables",
+      "constants",
+      "local scope",
+      "global scope",
+      "static variables"
+    ],
+    "track": "PHP",
+    "id": "PQ-014",
+    "coreOptions": [
+      "Keep the relevant mechanism because closures capture variables explicitly and a static local retains its value between calls in the same request",
+      "Remove the relevant mechanism because ordinary local variables are shared globally and closures automatically see every outer variable by reference",
+      "Replace the implementation with a comment describing the intended result",
+      "Suppress every failure so callers always receive a successful-looking value"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Variables, scope & constants: integration review across two cooperating code paths: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "the combined example preserves the shared guarantee across both cooperating paths: closures capture variables explicitly and a static local retains its value between calls in the same request. Reasoning check: compare this claim with control flow.",
+      "either guarantee appears automatically even if its corresponding operator, guard, hook, constraint, or API call is removed. Reasoning check: compare this claim with lifecycle timing, runtime behavior, operator semantics, state changes, side effects, and the observable output.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with control flow, configuration, runtime behavior, state changes, the exact input types, side effects, the observable output, the stated constraints, and the failure path.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the exact input types, control flow, operator semantics, the observable output, side effects, and lifecycle timing."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that the combined example preserves the shared guarantee across both cooperating paths: closures capture variables explicitly and a static local retains its value between calls in the same request. The tempting mistake is to assume that either guarantee appears automatically even if its corresponding operator, guard, hook, constraint, or API call is removed. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Variables, scope & constants",
+    "code": {
+      "language": "php",
+      "title": "Variables, scope & constants: integration review across two cooperating code paths",
+      "snippet": "<?php\n$rate = 2;\n$byValue = fn (int $n) => $n * $rate;\n$byReference = function (int $n) use (&$rate): int {\n    return $n * $rate;\n};\n\n$rate = 3;\necho $byValue(4), \" \", $byReference(4);\n\n// --- cooperating path ---\n<?php\nfunction nextSequence(): int {\n    static $value = 0;\n    return ++$value;\n}\n\necho nextSequence();\necho nextSequence();\necho nextSequence();"
+    },
+    "roadmap": false,
+    "roadmapConcepts": [
+      "variables",
+      "constants",
+      "local scope",
+      "global scope",
+      "static variables"
+    ],
+    "track": "PHP",
+    "id": "PQ-021",
+    "coreOptions": [
+      "the combined example preserves the shared guarantee across both cooperating paths: closures capture variables explicitly and a static local retains its value between calls in the same request",
+      "either guarantee appears automatically even if its corresponding operator, guard, hook, constraint, or API call is removed",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Included files keep their own call-site rules: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. Reasoning check: compare this claim with configuration and runtime behavior.",
+      "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. Evidence to inspect: the displayed values, the exact input types, configuration, and the failure path.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with control flow, state changes, lifecycle timing, and the data boundary.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: configuration, operator semantics, the data boundary, the observable output, the displayed values, state changes, and the API contract."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. The tempting mistake is to assume that strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Syntax & execution model",
+    "code": {
+      "language": "php",
+      "title": "Included files keep their own call-site rules",
+      "snippet": "<?php\ndeclare(strict_types=1);\n\nrequire __DIR__ . '/legacy.php';\n\necho formatTotal('12');\n// The coercion decision belongs to the file that calls formatTotal()."
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "PHP tags",
+      "statements",
+      "expressions",
+      "strict types",
+      "CLI execution"
+    ],
+    "track": "PHP",
+    "id": "PQ-005",
+    "coreOptions": [
+      "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file",
+      "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Dirty-state inspection before and after persistence: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "isDirty is true before save, wasChanged records the persisted change after save, and the saved attribute is no longer dirty. Evidence to inspect: control flow and the observable output.",
+      "wasChanged predicts unsaved changes before persistence and remains identical to isDirty at every point. Evidence to inspect: configuration, lifecycle timing, the API contract, the observable output, and the data boundary.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with the failure path, the displayed values, control flow, configuration, runtime behavior, the data boundary, and lifecycle timing.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: the displayed values, configuration, the exact input types, and the API contract."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that isDirty is true before save, wasChanged records the persisted change after save, and the saved attribute is no longer dirty. The tempting mistake is to assume that wasChanged predicts unsaved changes before persistence and remains identical to isDirty at every point. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Eloquent state & assignment",
+    "code": {
+      "language": "php",
+      "title": "Dirty-state inspection before and after persistence",
+      "snippet": "$user->name = 'Grace';\n\n$before = $user->isDirty('name');\n$user->save();\n$after = $user->wasChanged('name');\n$stillDirty = $user->isDirty('name');\n"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "CRUD",
+      "mass assignment",
+      "casts",
+      "accessors",
+      "mutators",
+      "dirty state"
+    ],
+    "track": "Laravel",
+    "id": "LQ-453",
+    "coreOptions": [
+      "isDirty is true before save, wasChanged records the persisted change after save, and the saved attribute is no longer dirty",
+      "wasChanged predicts unsaved changes before persistence and remains identical to isDirty at every point",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Reading CSV through a stream handle: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "JSON_THROW_ON_ERROR turns invalid JSON into an exception and stream handles should be closed even when parsing fails. Reasoning check: compare this claim with the displayed values, operator semantics, and side effects.",
+      "json_decode always throws automatically and file_get_contents guarantees valid UTF-8 JSON. Evidence to inspect: state changes, the data boundary, control flow, and side effects.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with the displayed values, operator semantics, the API contract, lifecycle timing, runtime behavior, and side effects.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: control flow, runtime behavior, the observable output, the failure path, and the API contract."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that jSON_THROW_ON_ERROR turns invalid JSON into an exception and stream handles should be closed even when parsing fails. The tempting mistake is to assume that json_decode always throws automatically and file_get_contents guarantees valid UTF-8 JSON. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Files & structured data",
+    "code": {
+      "language": "php",
+      "title": "Reading CSV through a stream handle",
+      "snippet": "<?php\n$handle = fopen(__DIR__ . '/users.csv', 'rb');\n\ntry {\n    while (($row = fgetcsv($handle)) !== false) {\n        [$id, $email] = $row;\n        echo \"$id:$email\n\";\n    }\n} finally { fclose($handle); }"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "file operations",
+      "streams",
+      "JSON",
+      "CSV",
+      "XML"
+    ],
+    "track": "PHP",
+    "id": "PQ-113",
+    "coreOptions": [
+      "JSON_THROW_ON_ERROR turns invalid JSON into an exception and stream handles should be closed even when parsing fails",
+      "json_decode always throws automatically and file_get_contents guarantees valid UTF-8 JSON",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "topic": "Validation & input",
+    "difficulty": "Advanced",
+    "prompt": "A form request normalizes a phone number before rules run. Where does that transformation belong if downstream validation must see the normalized value?",
+    "options": [
+      "Input preparation before validation. Reasoning check: compare this claim with the guarantee actually provided, ownership of the decision, and configuration.",
+      "A response middleware after the controller. Reasoning check: compare this claim with the stated constraints.",
+      "The migration down method. Evidence to inspect: the stated constraints, configuration, and the scenario’s stated boundary.",
+      "A queued notification after commit. Reasoning check: compare this claim with the trade-off, the failure mode, and a counterexample."
+    ],
+    "answer": 0,
+    "explanation": "Preparation changes the candidate input before validators inspect it. Response or post-commit work happens far too late.",
+    "track": "Laravel",
+    "id": "LQ-046",
+    "coreOptions": [
+      "Input preparation before validation",
+      "A response middleware after the controller",
+      "The migration down method",
+      "A queued notification after commit"
+    ]
+  },
+  {
+    "difficulty": "Advanced",
+    "prompt": "Expression evaluation with strict scalar calls: which interpretation is the dangerous trap when this code is changed or reused?",
+    "options": [
+      "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. Evidence to inspect: operator semantics, the stated constraints, and lifecycle timing.",
+      "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. Evidence to inspect: the failure path.",
+      "The exact API contract shown in the snippet continues to apply. Evidence to inspect: the displayed values, lifecycle timing, operator semantics, configuration, and the API contract.",
+      "A focused test should observe the value, branch, side effect, or rendered output involved. Reasoning check: compare this claim with side effects, runtime behavior, and operator semantics."
+    ],
+    "answer": 0,
+    "explanation": "The unsafe interpretation is that strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. In this snippet, PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. A reviewer has to follow the actual operator, branch, framework lifecycle, or library contract rather than infer behavior from a familiar-looking name.",
+    "topic": "Syntax & execution model",
+    "code": {
+      "language": "php",
+      "title": "Expression evaluation with strict scalar calls",
+      "snippet": "<?php\ndeclare(strict_types=1);\n\nfunction twice(int $value): int {\n    return $value * 2;\n}\n\n$subtotal = 10 + 5;\necho twice($subtotal);"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "PHP tags",
+      "statements",
+      "expressions",
+      "strict types",
+      "CLI execution"
+    ],
+    "track": "PHP",
+    "id": "PQ-004",
+    "coreOptions": [
+      "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file",
+      "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file",
+      "The exact API contract shown in the snippet continues to apply",
+      "A focused test should observe the value, branch, side effect, or rendered output involved"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Named route generation inside a prefixed group: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "the generated URL is /admin/reports and the route also carries the reports rate limiter. Evidence to inspect: the displayed values and configuration.",
+      "the name prefix changes the URL path twice or the middleware runs while generating the URL. Evidence to inspect: state changes, the API contract, and lifecycle timing.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with operator semantics, configuration, the displayed values, the failure path, and side effects.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: control flow, the API contract, state changes, the stated constraints, and side effects."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that the generated URL is /admin/reports and the route also carries the reports rate limiter. The tempting mistake is to assume that the name prefix changes the URL path twice or the middleware runs while generating the URL. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Routing & model binding",
+    "code": {
+      "language": "php",
+      "title": "Named route generation inside a prefixed group",
+      "snippet": "Route::prefix('admin')->name('admin.')->group(function () {\n    Route::get('/reports', ReportController::class)\n        ->middleware('throttle:reports')\n        ->name('reports');\n});\n\n$url = route('admin.reports');"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "basic routes",
+      "view routes",
+      "redirect routes",
+      "parameters",
+      "named routes",
+      "groups",
+      "route model binding",
+      "rate limiting",
+      "CORS",
+      "route caching"
+    ],
+    "track": "Laravel",
+    "id": "LQ-413",
+    "coreOptions": [
+      "the generated URL is /admin/reports and the route also carries the reports rate limiter",
+      "the name prefix changes the URL path twice or the middleware runs while generating the URL",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Applied",
+    "prompt": "When does passedValidation execute in relation to the rules method?",
+    "options": [
+      "After validation succeeds, allowing normalization before controller use. Reasoning check: compare this claim with operator semantics, the exact input types, the observable output, side effects, and runtime behavior.",
+      "Before rules are evaluated, so it decides whether rules exist. Evidence to inspect: the exact input types, operator semantics, and the API contract.",
+      "Only after the model has been saved. Reasoning check: compare this claim with the API contract and the failure path.",
+      "Only when validation fails. Reasoning check: compare this claim with operator semantics, control flow, lifecycle timing, the API contract, configuration, side effects, and the data boundary."
+    ],
+    "answer": 0,
+    "explanation": "passedValidation is a post-validation hook. It is suitable for normalizing already accepted values before the request reaches the controller.",
+    "topic": "Validation & input",
+    "code": {
+      "language": "php",
+      "title": "Validated input and normalization in a Form Request",
+      "snippet": "final class StoreProjectRequest extends FormRequest\n{\n    public function rules(): array\n    {\n        return [\n            'name' => ['required', 'string', 'max:120'],\n            'budget' => ['required', 'decimal:0,2', 'min:0'],\n        ];\n    }\n\n    protected function passedValidation(): void\n    {\n        $this->merge(['name' => $this->string('name')->trim()->toString()]);\n    }\n}"
+    },
+    "track": "Laravel",
+    "id": "LQ-314",
+    "coreOptions": [
+      "After validation succeeds, allowing normalization before controller use",
+      "Before rules are evaluated, so it decides whether rules exist",
+      "Only after the model has been saved",
+      "Only when validation fails"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Associative destructuring with defaults: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "array_map transforms values, array_filter preserves original keys, and array_values can intentionally reindex the result. Evidence to inspect: control flow, the observable output, the data boundary, and lifecycle timing.",
+      "all PHP array functions preserve identical keys and the spread operator always behaves like array_merge for every key type. Evidence to inspect: operator semantics, lifecycle timing, side effects, the API contract, and configuration.",
+      "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the observable output. Keep the judgment limited to the exact scenario shown; distinguish an explicit guarantee from behavior that merely seems likely.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with side effects, the API contract, and lifecycle timing."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that array_map transforms values, array_filter preserves original keys, and array_values can intentionally reindex the result. The tempting mistake is to assume that all PHP array functions preserve identical keys and the spread operator always behaves like array_merge for every key type. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Arrays & destructuring",
+    "code": {
+      "language": "php",
+      "title": "Associative destructuring with defaults",
+      "snippet": "<?php\n$row = [\"id\" => 7, \"name\" => \"Ada\"];\n\n[\"id\" => $id, \"name\" => $name] = $row;\n$role = $row[\"role\"] ?? \"viewer\";\n\n$result = compact(\"id\", \"name\", \"role\");\nprint_r($result);"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "indexed arrays",
+      "associative arrays",
+      "spread",
+      "destructuring",
+      "array functions"
+    ],
+    "track": "PHP",
+    "id": "PQ-041",
+    "coreOptions": [
+      "array_map transforms values, array_filter preserves original keys, and array_values can intentionally reindex the result",
+      "all PHP array functions preserve identical keys and the spread operator always behaves like array_merge for every key type",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Validating an uploaded image before storage: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them. Reasoning check: compare this claim with side effects.",
+      "the browser-provided filename and MIME type are trustworthy enough to use directly as a server path. Evidence to inspect: side effects, runtime behavior, and the failure path.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with side effects, operator semantics, the stated constraints, the API contract, and control flow.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: lifecycle timing, the failure path, the exact input types, and the data boundary."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them. The tempting mistake is to assume that the browser-provided filename and MIME type are trustworthy enough to use directly as a server path. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Forms & file uploads",
+    "code": {
+      "language": "php",
+      "title": "Validating an uploaded image before storage",
+      "snippet": "<?php\n$file = $_FILES[\"avatar\"] ?? null;\nif (!$file || $file[\"error\"] !== UPLOAD_ERR_OK) {\n    throw new RuntimeException(\"Upload failed\");\n}\n\n$mime = (new finfo(FILEINFO_MIME_TYPE))->file($file[\"tmp_name\"]);\nif (!in_array($mime, [\"image/png\", \"image/jpeg\"], true)) {\n    throw new RuntimeException(\"Unsupported image\");\n}"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "form handling",
+      "multipart forms",
+      "file uploads",
+      "upload errors",
+      "safe filenames"
+    ],
+    "track": "PHP",
+    "id": "PQ-133",
+    "coreOptions": [
+      "uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them",
+      "the browser-provided filename and MIME type are trustworthy enough to use directly as a server path",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Generating a server-controlled destination name: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them. Reasoning check: compare this claim with the API contract, side effects, state changes, and the failure path.",
+      "the browser-provided filename and MIME type are trustworthy enough to use directly as a server path. Evidence to inspect: the displayed values and state changes.",
+      "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the API contract, the exact input types, and side effects.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: configuration, the API contract, operator semantics, the failure path, and state changes."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them. The tempting mistake is to assume that the browser-provided filename and MIME type are trustworthy enough to use directly as a server path. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Forms & file uploads",
+    "code": {
+      "language": "php",
+      "title": "Generating a server-controlled destination name",
+      "snippet": "<?php\n$extension = match ($mime) {\n    \"image/png\" => \"png\",\n    \"image/jpeg\" => \"jpg\",\n};\n\n$target = __DIR__ . \"/uploads/\" . bin2hex(random_bytes(16)) . \".$extension\";\nif (!move_uploaded_file($file[\"tmp_name\"], $target)) {\n    throw new RuntimeException(\"Move failed\");\n}"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "form handling",
+      "multipart forms",
+      "file uploads",
+      "upload errors",
+      "safe filenames"
+    ],
+    "track": "PHP",
+    "id": "PQ-137",
+    "coreOptions": [
+      "uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them",
+      "the browser-provided filename and MIME type are trustworthy enough to use directly as a server path",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "PSR-7 methods return a changed copy: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "HTTP clients must check transport and protocol failures and PSR interfaces let middleware and messages cooperate through stable contracts. Reasoning check: compare this claim with control flow.",
+      "a successful network connection guarantees a successful HTTP response and PSR-7 response objects are mutated in place. Evidence to inspect: the exact input types, state changes, the API contract, and side effects.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with configuration, the observable output, and runtime behavior.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: the displayed values, state changes, the API contract, the exact input types, and operator semantics."
+    ],
+    "answer": 0,
+    "explanation": "The displayed PHP code demonstrates that HTTP clients must check transport and protocol failures and PSR interfaces let middleware and messages cooperate through stable contracts. The tempting mistake is to assume that a successful network connection guarantees a successful HTTP response and PSR-7 response objects are mutated in place. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "APIs, integrations & PSRs",
+    "code": {
+      "language": "php",
+      "title": "PSR-7 methods return a changed copy",
+      "snippet": "<?php\nuse Psr\\Http\\Message\\ResponseInterface;\n\nfunction asJson(ResponseInterface $response, array $data): ResponseInterface {\n    $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));\n    return $response\n        ->withHeader(\"Content-Type\", \"application/json\")\n        ->withStatus(200);\n}"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "REST APIs",
+      "cURL",
+      "Guzzle",
+      "PSR-7",
+      "PSR-15"
+    ],
+    "track": "PHP",
+    "id": "PQ-281",
+    "coreOptions": [
+      "HTTP clients must check transport and protocol failures and PSR interfaces let middleware and messages cooperate through stable contracts",
+      "a successful network connection guarantees a successful HTTP response and PSR-7 response objects are mutated in place",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Storing an upload through an explicit filesystem disk: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "the upload is stored on the s3 disk and the generated URL grants time-limited access to that object path. Evidence to inspect: side effects.",
+      "temporaryUrl moves the object into local public storage and makes it permanently public. Evidence to inspect: runtime behavior, the displayed values, control flow, the observable output, and state changes.",
+      "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: side effects, the API contract, control flow, the failure path, and operator semantics.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: the observable output, runtime behavior, control flow, and side effects."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that the upload is stored on the s3 disk and the generated URL grants time-limited access to that object path. The tempting mistake is to assume that temporaryUrl moves the object into local public storage and makes it permanently public. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Files, mail & notifications",
+    "code": {
+      "language": "php",
+      "title": "Storing an upload through an explicit filesystem disk",
+      "snippet": "$path = $request->file('avatar')->storePublicly(\n    'avatars/' . $request->user()->id,\n    's3',\n);\n\n$url = Storage::disk('s3')->temporaryUrl(\n    $path,\n    now()->addMinutes(10),\n);"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "file storage",
+      "uploads",
+      "mail",
+      "notifications",
+      "temporary URLs"
+    ],
+    "track": "Laravel",
+    "id": "LQ-521",
+    "coreOptions": [
+      "the upload is stored on the s3 disk and the generated URL grants time-limited access to that object path",
+      "temporaryUrl moves the object into local public storage and makes it permanently public",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Reading environment values only while building configuration: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "application code reads the cached configuration value instead of calling env after configuration has been cached. Evidence to inspect: the displayed values.",
+      "env remains a reliable runtime configuration API everywhere after config:cache. Evidence to inspect: runtime behavior, the observable output, state changes, and operator semantics.",
+      "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with the displayed values, side effects, control flow, runtime behavior, and operator semantics.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with control flow, the API contract, runtime behavior, and state changes."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that application code reads the cached configuration value instead of calling env after configuration has been cached. The tempting mistake is to assume that env remains a reliable runtime configuration API everywhere after config:cache. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Configuration & deployment",
+    "code": {
+      "language": "php",
+      "title": "Reading environment values only while building configuration",
+      "snippet": "// config/services.php\nreturn [\n    'billing' => [\n        'key' => env('BILLING_KEY'),\n        'timeout' => 5,\n    ],\n];\n\n// Application code\n$key = config('services.billing.key');"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "configuration",
+      "environment variables",
+      "config cache",
+      "deployment",
+      "health route",
+      "Laravel Cloud",
+      "Forge"
+    ],
+    "track": "Laravel",
+    "id": "LQ-537",
+    "coreOptions": [
+      "application code reads the cached configuration value instead of calling env after configuration has been cached",
+      "env remains a reliable runtime configuration API everywhere after config:cache",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  },
+  {
+    "difficulty": "Foundation",
+    "prompt": "Atomic deployment steps around cached framework state: after tracing the displayed code, which description of its behavior is accurate?",
+    "options": [
+      "the release rebuilds cached configuration, routes, and events and asks long-lived queue workers to restart gracefully. Evidence to inspect: the observable output, operator semantics, and runtime behavior.",
+      "queue workers reload changed application code immediately without a restart signal because each job reboots PHP. Evidence to inspect: the API contract, runtime behavior, lifecycle timing, the observable output, and operator semantics.",
+      "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the stated constraints, lifecycle timing, the displayed values, and state changes.",
+      "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the API contract, lifecycle timing, the displayed values, the data boundary, and configuration."
+    ],
+    "answer": 0,
+    "explanation": "The displayed Laravel code demonstrates that the release rebuilds cached configuration, routes, and events and asks long-lived queue workers to restart gracefully. The tempting mistake is to assume that queue workers reload changed application code immediately without a restart signal because each job reboots PHP. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+    "topic": "Configuration & deployment",
+    "code": {
+      "language": "php",
+      "title": "Atomic deployment steps around cached framework state",
+      "snippet": "php artisan down --retry=60\nphp artisan migrate --force\nphp artisan config:cache\nphp artisan route:cache\nphp artisan event:cache\nphp artisan queue:restart\nphp artisan up"
+    },
+    "roadmap": true,
+    "roadmapConcepts": [
+      "configuration",
+      "environment variables",
+      "config cache",
+      "deployment",
+      "health route",
+      "Laravel Cloud",
+      "Forge"
+    ],
+    "track": "Laravel",
+    "id": "LQ-541",
+    "coreOptions": [
+      "the release rebuilds cached configuration, routes, and events and asks long-lived queue workers to restart gracefully",
+      "queue workers reload changed application code immediately without a restart signal because each job reboots PHP",
+      "The snippet changes editor hints but cannot affect the executed program",
+      "The runtime skips the shown branch and supplies a safe default automatically"
+    ]
+  }
+]

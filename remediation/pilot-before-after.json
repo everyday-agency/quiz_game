@@ -1,0 +1,2210 @@
+[
+  {
+    "id": "PQ-002",
+    "issue": "The generic preserve-the-mechanism answer did not test whether strict typing changes this integer argument at all; obviously nontechnical distractors revealed the key.",
+    "before": {
+      "difficulty": "Applied",
+      "prompt": "Expression evaluation with strict scalar calls: which review comment best preserves the guarantee demonstrated by this implementation?",
+      "options": [
+        "Keep the relevant mechanism because PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. Evidence to inspect: operator semantics and the stated constraints.",
+        "Remove the relevant mechanism because strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. Reasoning check: compare this claim with the failure path.",
+        "Replace the implementation with a comment describing the intended result. Evidence to inspect: the displayed values, lifecycle timing, operator semantics, configuration, the API contract, the data boundary, and the exact input types.",
+        "Suppress every failure so callers always receive a successful-looking value. Reasoning check: compare this claim with side effects, runtime behavior, operator semantics, lifecycle timing, state changes, the failure path, and the exact input types."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. The tempting mistake is to assume that strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Syntax & execution model",
+      "code": {
+        "language": "php",
+        "title": "Expression evaluation with strict scalar calls",
+        "snippet": "<?php\ndeclare(strict_types=1);\n\nfunction twice(int $value): int {\n    return $value * 2;\n}\n\n$subtotal = 10 + 5;\necho twice($subtotal);"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "track": "PHP",
+      "id": "PQ-002",
+      "coreOptions": [
+        "Keep the relevant mechanism because PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file",
+        "Remove the relevant mechanism because strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file",
+        "Replace the implementation with a comment describing the intended result",
+        "Suppress every failure so callers always receive a successful-looking value"
+      ]
+    },
+    "after": {
+      "difficulty": "Foundation",
+      "prompt": "A reviewer proposes removing declare(strict_types=1) from this file. What changes for the exact invocation shown?",
+      "options": [
+        "It prints 30 only after removing the declaration.",
+        "It prints 15 with the declaration and 30 without it.",
+        "It prints 30 with or without the declaration.",
+        "It prints 30 with the declaration and raises TypeError without it."
+      ],
+      "answer": 2,
+      "explanation": "10 + 5 evaluates to integer 15. The int parameter already accepts it, so both modes return integer 30. This call does not demonstrate a coercion difference.",
+      "topic": "Syntax & execution model",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\ndeclare(strict_types=1);\nfunction twice(int $value): int { return $value * 2; }\n$subtotal = 10 + 5;\necho twice($subtotal);"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "track": "PHP",
+      "id": "PQ-002",
+      "coreOptions": [
+        "It prints 30 only after removing the declaration.",
+        "It prints 15 with the declaration and 30 without it.",
+        "It prints 30 with or without the declaration.",
+        "It prints 30 with the declaration and raises TypeError without it."
+      ],
+      "revision": 2,
+      "family": "php-scalar-strictness",
+      "objective": "Determine whether removing strict_types changes a call whose argument already has the required scalar type.",
+      "difficultyReason": "One argument-type check after evaluating an integer expression.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "30"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "10 + 5 evaluates to integer 15. The int parameter already accepts it, so both modes return integer 30. This call does not demonstrate a coercion difference.",
+        "rationales": [
+          "The original call already passes an int and does not fail.",
+          "strict_types does not change multiplication or expression evaluation.",
+          "Both variants pass the same integer argument and compute 15 * 2.",
+          "Removing strict scalar checking cannot make this already-valid int argument fail."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-002@2:1",
+        "PQ-002@2:2",
+        "PQ-002@2:3",
+        "PQ-002@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-004",
+    "issue": "The negative-stem key was a misconception, but generated learning notes presented it as true. The revision uses a positive, executable strict-typing question.",
+    "before": {
+      "difficulty": "Advanced",
+      "prompt": "Expression evaluation with strict scalar calls: which interpretation is the dangerous trap when this code is changed or reused?",
+      "options": [
+        "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. Evidence to inspect: operator semantics, the stated constraints, and lifecycle timing.",
+        "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. Evidence to inspect: the failure path.",
+        "The exact API contract shown in the snippet continues to apply. Evidence to inspect: the displayed values, lifecycle timing, operator semantics, configuration, and the API contract.",
+        "A focused test should observe the value, branch, side effect, or rendered output involved. Reasoning check: compare this claim with side effects, runtime behavior, and operator semantics."
+      ],
+      "answer": 0,
+      "explanation": "The unsafe interpretation is that strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. In this snippet, PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. A reviewer has to follow the actual operator, branch, framework lifecycle, or library contract rather than infer behavior from a familiar-looking name.",
+      "topic": "Syntax & execution model",
+      "code": {
+        "language": "php",
+        "title": "Expression evaluation with strict scalar calls",
+        "snippet": "<?php\ndeclare(strict_types=1);\n\nfunction twice(int $value): int {\n    return $value * 2;\n}\n\n$subtotal = 10 + 5;\necho twice($subtotal);"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "track": "PHP",
+      "id": "PQ-004",
+      "coreOptions": [
+        "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file",
+        "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file",
+        "The exact API contract shown in the snippet continues to apply",
+        "A focused test should observe the value, branch, side effect, or rendered output involved"
+      ]
+    },
+    "after": {
+      "difficulty": "Foundation",
+      "prompt": "The caller uses strict scalar typing. What happens when the integer literal is passed to this float parameter?",
+      "options": [
+        "It raises TypeError before half runs.",
+        "It prints 3.0.",
+        "It prints 6.0.",
+        "It emits an argument warning, then prints 3.0."
+      ],
+      "answer": 1,
+      "explanation": "Strict scalar argument checking permits an int argument for a float parameter. half receives 6.0, divides by two, and number_format prints 3.0 without a diagnostic.",
+      "topic": "Syntax & execution model",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\ndeclare(strict_types=1);\nfunction half(float $value): float { return $value / 2; }\necho number_format(half(6), 1, '.', '');"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "track": "PHP",
+      "id": "PQ-004",
+      "coreOptions": [
+        "It raises TypeError before half runs.",
+        "It prints 3.0.",
+        "It prints 6.0.",
+        "It emits an argument warning, then prints 3.0."
+      ],
+      "revision": 2,
+      "family": "php-scalar-strictness",
+      "objective": "Recognize the int-to-float exception to strict scalar argument checking.",
+      "difficultyReason": "Applies one scalar typing exception and reads a numeric output.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "3.0"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "Strict scalar argument checking permits an int argument for a float parameter. half receives 6.0, divides by two, and number_format prints 3.0 without a diagnostic.",
+        "rationales": [
+          "An int is accepted for a float parameter even in strict mode.",
+          "The widening conversion is permitted, and the result is formatted with one decimal place.",
+          "The function divides its input by two.",
+          "This permitted conversion produces no argument warning."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-004@2:1",
+        "PQ-004@2:2",
+        "PQ-004@2:3",
+        "PQ-004@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-005",
+    "issue": "The required legacy file and function signature were missing, and a comment gave away the intended call-site rule.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Included files keep their own call-site rules: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. Reasoning check: compare this claim with configuration and runtime behavior.",
+        "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. Evidence to inspect: the displayed values, the exact input types, configuration, and the failure path.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with control flow, state changes, lifecycle timing, and the data boundary.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: configuration, operator semantics, the data boundary, the observable output, the displayed values, state changes, and the API contract."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file. The tempting mistake is to assume that strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Syntax & execution model",
+      "code": {
+        "language": "php",
+        "title": "Included files keep their own call-site rules",
+        "snippet": "<?php\ndeclare(strict_types=1);\n\nrequire __DIR__ . '/legacy.php';\n\necho formatTotal('12');\n// The coercion decision belongs to the file that calls formatTotal()."
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "track": "PHP",
+      "id": "PQ-005",
+      "coreOptions": [
+        "PHP evaluates expressions before passing their results to functions and strict_types affects scalar calls made from the declaring file",
+        "strict_types converts PHP into a globally strict language and prevents every implicit conversion in every included file",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "Run caller.php. legacy.php has no strict_types declaration. Which text does the caller print?",
+      "options": [
+        "12.00",
+        "12",
+        "An empty string",
+        "TypeError"
+      ],
+      "answer": 3,
+      "explanation": "The strict caller passes a string to an int parameter. The call raises TypeError before the function body executes; the catch prints TypeError. The included file’s coercive mode does not control this call.",
+      "topic": "Syntax & execution model",
+      "code": {
+        "language": "php",
+        "title": "Two files in the same directory",
+        "files": [
+          {
+            "name": "caller.php",
+            "kind": "php-file",
+            "snippet": "<?php\ndeclare(strict_types=1);\nrequire __DIR__ . '/legacy.php';\ntry {\n    echo formatTotal('12');\n} catch (TypeError $error) {\n    echo 'TypeError';\n}"
+          },
+          {
+            "name": "legacy.php",
+            "kind": "php-file",
+            "snippet": "<?php\nfunction formatTotal(int $amount): string {\n    return number_format($amount, 2, '.', '');\n}"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "track": "PHP",
+      "id": "PQ-005",
+      "coreOptions": [
+        "12.00",
+        "12",
+        "An empty string",
+        "TypeError"
+      ],
+      "revision": 2,
+      "family": "php-scalar-strictness",
+      "objective": "Apply scalar argument strictness at a call site across an included file.",
+      "difficultyReason": "Distinguishes the calling file from the file defining the function.",
+      "assumptions": "Both files exist exactly as shown. Execute caller.php only; the required file emits no output when loaded.",
+      "validation": {
+        "kind": "php-output",
+        "entryFile": "caller.php",
+        "stdout": "TypeError"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "learning": {
+        "trace": "The strict caller passes a string to an int parameter. The call raises TypeError before the function body executes; the catch prints TypeError. The included file’s coercive mode does not control this call.",
+        "rationales": [
+          "This would be the formatted result if a coercive caller accepted the numeric string.",
+          "The function is not entered, and its normal return would include two decimal places.",
+          "The catch branch emits text, so execution is not silent.",
+          "The caller’s strict mode rejects the string argument and the catch handles that error."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-005@2:1",
+        "PQ-005@2:2",
+        "PQ-005@2:3",
+        "PQ-005@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-014",
+    "issue": "The explanation discussed a static local absent from the snippet; comment replacement and failure suppression were trivial distractors.",
+    "before": {
+      "difficulty": "Applied",
+      "prompt": "Capturing by value versus by reference: which review comment best preserves the guarantee demonstrated by this implementation?",
+      "options": [
+        "Keep the relevant mechanism because closures capture variables explicitly and a static local retains its value between calls in the same request. Evidence to inspect: runtime behavior, the observable output, and control flow.",
+        "Remove the relevant mechanism because ordinary local variables are shared globally and closures automatically see every outer variable by reference. Evidence to inspect: operator semantics and control flow.",
+        "Replace the implementation with a comment describing the intended result. Evidence to inspect: control flow, the data boundary, lifecycle timing, the failure path, state changes, and configuration.",
+        "Suppress every failure so callers always receive a successful-looking value. Evidence to inspect: operator semantics, runtime behavior, side effects, the exact input types, the displayed values, and lifecycle timing."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that closures capture variables explicitly and a static local retains its value between calls in the same request. The tempting mistake is to assume that ordinary local variables are shared globally and closures automatically see every outer variable by reference. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Variables, scope & constants",
+      "code": {
+        "language": "php",
+        "title": "Capturing by value versus by reference",
+        "snippet": "<?php\n$rate = 2;\n$byValue = fn (int $n) => $n * $rate;\n$byReference = function (int $n) use (&$rate): int {\n    return $n * $rate;\n};\n\n$rate = 3;\necho $byValue(4), \" \", $byReference(4);"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "variables",
+        "constants",
+        "local scope",
+        "global scope",
+        "static variables"
+      ],
+      "track": "PHP",
+      "id": "PQ-014",
+      "coreOptions": [
+        "Keep the relevant mechanism because closures capture variables explicitly and a static local retains its value between calls in the same request",
+        "Remove the relevant mechanism because ordinary local variables are shared globally and closures automatically see every outer variable by reference",
+        "Replace the implementation with a comment describing the intended result",
+        "Suppress every failure so callers always receive a successful-looking value"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "After rate changes, what does the program print when it invokes both callables?",
+      "options": [
+        "8 8",
+        "12 12",
+        "8 12",
+        "12 8"
+      ],
+      "answer": 2,
+      "explanation": "The arrow captures the value 2 when created. The explicit reference points to rate, which later becomes 3. Their results are 4 * 2 and 4 * 3.",
+      "topic": "Variables, scope & constants",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\n$rate = 2;\n$byValue = fn (int $n) => $n * $rate;\n$byReference = function (int $n) use (&$rate): int { return $n * $rate; };\n$rate = 3;\necho $byValue(4), ' ', $byReference(4);"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "variables",
+        "constants",
+        "local scope",
+        "global scope",
+        "static variables"
+      ],
+      "track": "PHP",
+      "id": "PQ-014",
+      "coreOptions": [
+        "8 8",
+        "12 12",
+        "8 12",
+        "12 8"
+      ],
+      "revision": 2,
+      "family": "php-capture-and-static",
+      "objective": "Distinguish arrow capture by value from closure capture by reference.",
+      "difficultyReason": "Tracks two captures across a later mutation.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "8 12"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "The arrow captures the value 2 when created. The explicit reference points to rate, which later becomes 3. Their results are 4 * 2 and 4 * 3.",
+        "rationales": [
+          "This assumes the explicit reference captured a value instead.",
+          "This assumes the arrow also observes the later variable assignment.",
+          "The first retains 2 and the second reads 3.",
+          "This reverses the capture mechanisms."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-014@2:1",
+        "PQ-014@2:2",
+        "PQ-014@2:3",
+        "PQ-014@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-021",
+    "issue": "Two PHP opening tags were concatenated inside one open block, causing a parse error in a question that assumed normal execution.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Variables, scope & constants: integration review across two cooperating code paths: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "the combined example preserves the shared guarantee across both cooperating paths: closures capture variables explicitly and a static local retains its value between calls in the same request. Reasoning check: compare this claim with control flow.",
+        "either guarantee appears automatically even if its corresponding operator, guard, hook, constraint, or API call is removed. Reasoning check: compare this claim with lifecycle timing, runtime behavior, operator semantics, state changes, side effects, and the observable output.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with control flow, configuration, runtime behavior, state changes, the exact input types, side effects, the observable output, the stated constraints, and the failure path.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the exact input types, control flow, operator semantics, the observable output, side effects, and lifecycle timing."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that the combined example preserves the shared guarantee across both cooperating paths: closures capture variables explicitly and a static local retains its value between calls in the same request. The tempting mistake is to assume that either guarantee appears automatically even if its corresponding operator, guard, hook, constraint, or API call is removed. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Variables, scope & constants",
+      "code": {
+        "language": "php",
+        "title": "Variables, scope & constants: integration review across two cooperating code paths",
+        "snippet": "<?php\n$rate = 2;\n$byValue = fn (int $n) => $n * $rate;\n$byReference = function (int $n) use (&$rate): int {\n    return $n * $rate;\n};\n\n$rate = 3;\necho $byValue(4), \" \", $byReference(4);\n\n// --- cooperating path ---\n<?php\nfunction nextSequence(): int {\n    static $value = 0;\n    return ++$value;\n}\n\necho nextSequence();\necho nextSequence();\necho nextSequence();"
+      },
+      "roadmap": false,
+      "roadmapConcepts": [
+        "variables",
+        "constants",
+        "local scope",
+        "global scope",
+        "static variables"
+      ],
+      "track": "PHP",
+      "id": "PQ-021",
+      "coreOptions": [
+        "the combined example preserves the shared guarantee across both cooperating paths: closures capture variables explicitly and a static local retains its value between calls in the same request",
+        "either guarantee appears automatically even if its corresponding operator, guard, hook, constraint, or API call is removed",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "This is one complete PHP file. What exact output is produced by the two callables and the three sequence calls?",
+      "options": [
+        "8 8|123",
+        "8 12|123",
+        "8 12|111",
+        "12 12|123"
+      ],
+      "answer": 1,
+      "explanation": "The two captures produce 8 and 12. The static local initializes once to 0 and retains each increment, so successive calls return 1, 2 and 3.",
+      "topic": "Variables, scope & constants",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\n$rate = 2;\n$byValue = fn (int $n) => $n * $rate;\n$byReference = function (int $n) use (&$rate): int { return $n * $rate; };\n$rate = 3;\necho $byValue(4), ' ', $byReference(4), '|';\nfunction nextSequence(): int {\n    static $value = 0;\n    return ++$value;\n}\necho nextSequence(), nextSequence(), nextSequence();"
+          }
+        ]
+      },
+      "roadmap": false,
+      "roadmapConcepts": [
+        "variables",
+        "constants",
+        "local scope",
+        "global scope",
+        "static variables"
+      ],
+      "track": "PHP",
+      "id": "PQ-021",
+      "coreOptions": [
+        "8 8|123",
+        "8 12|123",
+        "8 12|111",
+        "12 12|123"
+      ],
+      "revision": 2,
+      "family": "php-capture-and-static",
+      "objective": "Trace closure captures and a static local across repeated calls in one valid PHP file.",
+      "difficultyReason": "Combines capture timing with persistent function-local state.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "8 12|123"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "The two captures produce 8 and 12. The static local initializes once to 0 and retains each increment, so successive calls return 1, 2 and 3.",
+        "rationales": [
+          "The reference capture reads the changed rate, producing 12 rather than 8.",
+          "Both capture semantics and the retained static local are reflected in this output.",
+          "A static local is not reinitialized on every call.",
+          "The arrow keeps its captured value 2 rather than observing the later 3."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-021@2:1",
+        "PQ-021@2:2",
+        "PQ-021@2:3",
+        "PQ-021@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-041",
+    "issue": "The answer and explanation discussed array_map/filter/values although the snippet used associative destructuring and null coalescing.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Associative destructuring with defaults: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "array_map transforms values, array_filter preserves original keys, and array_values can intentionally reindex the result. Evidence to inspect: control flow, the observable output, the data boundary, and lifecycle timing.",
+        "all PHP array functions preserve identical keys and the spread operator always behaves like array_merge for every key type. Evidence to inspect: operator semantics, lifecycle timing, side effects, the API contract, and configuration.",
+        "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the observable output. Keep the judgment limited to the exact scenario shown; distinguish an explicit guarantee from behavior that merely seems likely.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with side effects, the API contract, and lifecycle timing."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that array_map transforms values, array_filter preserves original keys, and array_values can intentionally reindex the result. The tempting mistake is to assume that all PHP array functions preserve identical keys and the spread operator always behaves like array_merge for every key type. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Arrays & destructuring",
+      "code": {
+        "language": "php",
+        "title": "Associative destructuring with defaults",
+        "snippet": "<?php\n$row = [\"id\" => 7, \"name\" => \"Ada\"];\n\n[\"id\" => $id, \"name\" => $name] = $row;\n$role = $row[\"role\"] ?? \"viewer\";\n\n$result = compact(\"id\", \"name\", \"role\");\nprint_r($result);"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "indexed arrays",
+        "associative arrays",
+        "spread",
+        "destructuring",
+        "array functions"
+      ],
+      "track": "PHP",
+      "id": "PQ-041",
+      "coreOptions": [
+        "array_map transforms values, array_filter preserves original keys, and array_values can intentionally reindex the result",
+        "all PHP array functions preserve identical keys and the spread operator always behaves like array_merge for every key type",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Foundation",
+      "prompt": "Which values are passed to printf after the row is destructured and role is assigned?",
+      "options": [
+        "7|Ada|viewer",
+        "0|Ada|viewer",
+        "7|Ada|",
+        "7|viewer|Ada"
+      ],
+      "answer": 0,
+      "explanation": "Associative destructuring reads the named id and name keys. The absent role triggers the right operand of ??, yielding viewer.",
+      "topic": "Arrays & destructuring",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\n$row = ['id' => 7, 'name' => 'Ada'];\n['id' => $id, 'name' => $name] = $row;\n$role = $row['role'] ?? 'viewer';\nprintf('%d|%s|%s', $id, $name, $role);"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "indexed arrays",
+        "associative arrays",
+        "spread",
+        "destructuring",
+        "array functions"
+      ],
+      "track": "PHP",
+      "id": "PQ-041",
+      "coreOptions": [
+        "7|Ada|viewer",
+        "0|Ada|viewer",
+        "7|Ada|",
+        "7|viewer|Ada"
+      ],
+      "revision": 2,
+      "family": "php-destructuring",
+      "objective": "Read associative destructuring and a default supplied by null coalescing.",
+      "difficultyReason": "Directly traces known keys and one missing key.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "7|Ada|viewer"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "Associative destructuring reads the named id and name keys. The absent role triggers the right operand of ??, yielding viewer.",
+        "rationales": [
+          "The named keys produce 7 and Ada; the missing key uses viewer.",
+          "Destructuring does not replace the supplied id with an array position.",
+          "Null coalescing supplies viewer rather than an empty value.",
+          "Destructuring follows explicit key names, not the order of later variable assignments."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-041@2:1",
+        "PQ-041@2:2",
+        "PQ-041@2:3",
+        "PQ-041@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-053",
+    "issue": "The shared answer mixed increment behavior from another example into a short-circuiting question; it did not ask the learner to trace calls.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Short circuiting controls side effects: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "pre-increment changes the value before returning it, post-increment returns the old value, and short-circuit operators may skip the right side. Evidence to inspect: the displayed values.",
+        "prefix and postfix increment always return the same value and both sides of boolean expressions are always evaluated. Evidence to inspect: control flow, the displayed values, and state changes.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with the displayed values, side effects, state changes, configuration, the exact input types, and the data boundary.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with lifecycle timing, the exact input types, control flow, the failure path, and runtime behavior."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that pre-increment changes the value before returning it, post-increment returns the old value, and short-circuit operators may skip the right side. The tempting mistake is to assume that prefix and postfix increment always return the same value and both sides of boolean expressions are always evaluated. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Operators & expressions",
+      "code": {
+        "language": "php",
+        "title": "Short circuiting controls side effects",
+        "snippet": "<?php\n$calls = 0;\n$check = function () use (&$calls): bool {\n    $calls++;\n    return true;\n};\n\n$first = false && $check();\n$second = true || $check();\necho $calls;"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "arithmetic operators",
+        "assignment operators",
+        "increment",
+        "precedence",
+        "short circuiting"
+      ],
+      "track": "PHP",
+      "id": "PQ-053",
+      "coreOptions": [
+        "pre-increment changes the value before returning it, post-increment returns the old value, and short-circuit operators may skip the right side",
+        "prefix and postfix increment always return the same value and both sides of boolean expressions are always evaluated",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "Which JSON array is emitted? Its elements are the first boolean result, the second result, and the number of calls to check.",
+      "options": [
+        "[false,true,2]",
+        "[false,true,1]",
+        "[true,true,0]",
+        "[false,true,0]"
+      ],
+      "answer": 3,
+      "explanation": "false determines && without its right operand; true determines || without its right operand. Neither call occurs, so calls remains 0 and the results are false and true.",
+      "topic": "Operators & expressions",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\n$calls = 0;\n$check = function () use (&$calls): bool { $calls++; return true; };\n$first = false && $check();\n$second = true || $check();\necho json_encode([$first, $second, $calls]);"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "arithmetic operators",
+        "assignment operators",
+        "increment",
+        "precedence",
+        "short circuiting"
+      ],
+      "track": "PHP",
+      "id": "PQ-053",
+      "coreOptions": [
+        "[false,true,2]",
+        "[false,true,1]",
+        "[true,true,0]",
+        "[false,true,0]"
+      ],
+      "revision": 2,
+      "family": "php-short-circuit",
+      "objective": "Account for skipped side effects and boolean results under short-circuit evaluation.",
+      "difficultyReason": "Tracks two branches and a captured mutable counter.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "[false,true,0]"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "false determines && without its right operand; true determines || without its right operand. Neither call occurs, so calls remains 0 and the results are false and true.",
+        "rationales": [
+          "This evaluates both right operands despite short-circuiting.",
+          "Both right operands are skipped, not only one.",
+          "The first expression remains false; skipping its right operand does not change that result.",
+          "The boolean values and unchanged counter all follow from short-circuiting."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-053@2:1",
+        "PQ-053@2:2",
+        "PQ-053@2:3",
+        "PQ-053@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-061",
+    "issue": "The shared answer combined match and loop-control facts, instead of discriminating between strict and loose matching in this program.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Match expressions are strict and non-fallthrough: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "match uses strict comparison and returns a value, while loop control levels decide which enclosing structure is affected. Evidence to inspect: the displayed values.",
+        "match falls through like switch and break without a level always exits every enclosing loop. Reasoning check: compare this claim with control flow and operator semantics.",
+        "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: operator semantics, the API contract, the displayed values, and the exact input types.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the observable output, state changes, the displayed values, and the failure path."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that match uses strict comparison and returns a value, while loop control levels decide which enclosing structure is affected. The tempting mistake is to assume that match falls through like switch and break without a level always exits every enclosing loop. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Control flow & pattern matching",
+      "code": {
+        "language": "php",
+        "title": "Match expressions are strict and non-fallthrough",
+        "snippet": "<?php\n$status = \"1\";\n\n$label = match ($status) {\n    1 => \"integer one\",\n    \"1\" => \"string one\",\n    default => \"other\",\n};\n\necho $label;"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "if and else",
+        "loops",
+        "switch",
+        "match",
+        "break and continue"
+      ],
+      "track": "PHP",
+      "id": "PQ-061",
+      "coreOptions": [
+        "match uses strict comparison and returns a value, while loop control levels decide which enclosing structure is affected",
+        "match falls through like switch and break without a level always exits every enclosing loop",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Foundation",
+      "prompt": "Which label is selected by this match expression for the given status value?",
+      "options": [
+        "integer one",
+        "string one",
+        "other",
+        "integer onestring one"
+      ],
+      "answer": 1,
+      "explanation": "match uses strict identity. The string value does not match integer 1, matches string 1, and returns that arm without fallthrough.",
+      "topic": "Control flow & pattern matching",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\n$status = '1';\necho match ($status) {\n    1 => 'integer one',\n    '1' => 'string one',\n    default => 'other',\n};"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "if and else",
+        "loops",
+        "switch",
+        "match",
+        "break and continue"
+      ],
+      "track": "PHP",
+      "id": "PQ-061",
+      "coreOptions": [
+        "integer one",
+        "string one",
+        "other",
+        "integer onestring one"
+      ],
+      "revision": 2,
+      "family": "php-match",
+      "objective": "Use match’s strict comparison to distinguish numeric strings from integers.",
+      "difficultyReason": "Applies one comparison rule to explicit match arms.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "string one"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "match uses strict identity. The string value does not match integer 1, matches string 1, and returns that arm without fallthrough.",
+        "rationales": [
+          "That arm would match integer 1, not the provided string.",
+          "Both type and value match the second arm.",
+          "A matching string arm exists, so the default is not selected.",
+          "match returns a single matching arm and does not fall through."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-061@2:1",
+        "PQ-061@2:2",
+        "PQ-061@2:3",
+        "PQ-061@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-113",
+    "issue": "The answer discussed JSON in a CSV snippet, omitted the input fixture and missed the PHP 8.4+ escape-argument deprecation.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Reading CSV through a stream handle: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "JSON_THROW_ON_ERROR turns invalid JSON into an exception and stream handles should be closed even when parsing fails. Reasoning check: compare this claim with the displayed values, operator semantics, and side effects.",
+        "json_decode always throws automatically and file_get_contents guarantees valid UTF-8 JSON. Evidence to inspect: state changes, the data boundary, control flow, and side effects.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with the displayed values, operator semantics, the API contract, lifecycle timing, runtime behavior, and side effects.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: control flow, runtime behavior, the observable output, the failure path, and the API contract."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that jSON_THROW_ON_ERROR turns invalid JSON into an exception and stream handles should be closed even when parsing fails. The tempting mistake is to assume that json_decode always throws automatically and file_get_contents guarantees valid UTF-8 JSON. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Files & structured data",
+      "code": {
+        "language": "php",
+        "title": "Reading CSV through a stream handle",
+        "snippet": "<?php\n$handle = fopen(__DIR__ . '/users.csv', 'rb');\n\ntry {\n    while (($row = fgetcsv($handle)) !== false) {\n        [$id, $email] = $row;\n        echo \"$id:$email\n\";\n    }\n} finally { fclose($handle); }"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "file operations",
+        "streams",
+        "JSON",
+        "CSV",
+        "XML"
+      ],
+      "track": "PHP",
+      "id": "PQ-113",
+      "coreOptions": [
+        "JSON_THROW_ON_ERROR turns invalid JSON into an exception and stream handles should be closed even when parsing fails",
+        "json_decode always throws automatically and file_get_contents guarantees valid UTF-8 JSON",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "The stream opens successfully. Which row and diagnostic does the fgetcsv call produce on PHP 8.4 or 8.5 with E_ALL?",
+      "options": [
+        "[\"7\",\"ada@example.test\"] with no diagnostic",
+        "[\"7\",\"ada@example.test\"] and E_WARNING about the omitted escape argument",
+        "[\"7\",\"ada@example.test\"] and E_DEPRECATED about the omitted escape argument",
+        "No row; a TypeError is thrown for the omitted escape argument"
+      ],
+      "answer": 2,
+      "explanation": "The row parses into two strings. PHP 8.4+ also emits E_DEPRECATED when fgetcsv relies on the default escape argument. Supplying escape: \"\" explicitly avoids this deprecation for conventional doubled-quote CSV.",
+      "topic": "Files & structured data",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\n$handle = fopen('php://memory', 'r+');\nfwrite($handle, \"7,ada@example.test\n\");\nrewind($handle);\n$row = fgetcsv($handle);\nfclose($handle);\necho json_encode($row);"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "file operations",
+        "streams",
+        "JSON",
+        "CSV",
+        "XML"
+      ],
+      "track": "PHP",
+      "id": "PQ-113",
+      "coreOptions": [
+        "[\"7\",\"ada@example.test\"] with no diagnostic",
+        "[\"7\",\"ada@example.test\"] and E_WARNING about the omitted escape argument",
+        "[\"7\",\"ada@example.test\"] and E_DEPRECATED about the omitted escape argument",
+        "No row; a TypeError is thrown for the omitted escape argument"
+      ],
+      "revision": 2,
+      "family": "php-csv",
+      "objective": "Distinguish successful CSV parsing from version-specific deprecation diagnostics.",
+      "difficultyReason": "Combines stream state, parsed fields and the PHP 8.4+ escape-argument change.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "[\"7\",\"ada@example.test\"]",
+        "diagnostic": "fgetcsv-escape-deprecation"
+      },
+      "references": [
+        "https://www.php.net/manual/en/function.fgetcsv.php"
+      ],
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "The row parses into two strings. PHP 8.4+ also emits E_DEPRECATED when fgetcsv relies on the default escape argument. Supplying escape: \"\" explicitly avoids this deprecation for conventional doubled-quote CSV.",
+        "rationales": [
+          "The data result is right, but PHP 8.4+ emits the deprecation under E_ALL.",
+          "The diagnostic level is E_DEPRECATED, not E_WARNING.",
+          "The successful row and nonfatal deprecation occur together.",
+          "The omitted optional argument is deprecated, not a missing-required-argument TypeError."
+        ]
+      },
+      "optionIds": [
+        "PQ-113@2:1",
+        "PQ-113@2:2",
+        "PQ-113@2:3",
+        "PQ-113@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-137",
+    "issue": "The destination fragment depended on undefined upstream upload variables and its shared guarantee mentioned a size check not present in the code.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Generating a server-controlled destination name: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them. Reasoning check: compare this claim with the API contract, side effects, state changes, and the failure path.",
+        "the browser-provided filename and MIME type are trustworthy enough to use directly as a server path. Evidence to inspect: the displayed values and state changes.",
+        "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the API contract, the exact input types, and side effects.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: configuration, the API contract, operator semantics, the failure path, and state changes."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them. The tempting mistake is to assume that the browser-provided filename and MIME type are trustworthy enough to use directly as a server path. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Forms & file uploads",
+      "code": {
+        "language": "php",
+        "title": "Generating a server-controlled destination name",
+        "snippet": "<?php\n$extension = match ($mime) {\n    \"image/png\" => \"png\",\n    \"image/jpeg\" => \"jpg\",\n};\n\n$target = __DIR__ . \"/uploads/\" . bin2hex(random_bytes(16)) . \".$extension\";\nif (!move_uploaded_file($file[\"tmp_name\"], $target)) {\n    throw new RuntimeException(\"Move failed\");\n}"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "form handling",
+        "multipart forms",
+        "file uploads",
+        "upload errors",
+        "safe filenames"
+      ],
+      "track": "PHP",
+      "id": "PQ-137",
+      "coreOptions": [
+        "uploaded files require error, size, MIME, and destination checks before move_uploaded_file stores them",
+        "the browser-provided filename and MIME type are trustworthy enough to use directly as a server path",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "An earlier upload step has established UPLOAD_ERR_OK and obtained MIME and byte count on the server. Which result does this destination decision produce for the supplied values?",
+      "options": [
+        "too large",
+        "unsupported",
+        "png",
+        "image/png"
+      ],
+      "answer": 2,
+      "explanation": "2 * 1024 * 1024 equals 2097152. The test uses >, so an exactly two-MiB upload is accepted. The PNG MIME arm returns the extension png.",
+      "topic": "Forms & file uploads",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\nfunction chooseExtension(string $detectedMime, int $bytes): string {\n    if ($bytes > 2 * 1024 * 1024) {\n        throw new LengthException('too large');\n    }\n    return match ($detectedMime) {\n        'image/png' => 'png',\n        'image/jpeg' => 'jpg',\n        default => throw new InvalidArgumentException('unsupported'),\n    };\n}\ntry {\n    echo chooseExtension('image/png', 2097152);\n} catch (LengthException | InvalidArgumentException $error) {\n    echo $error->getMessage();\n}"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "form handling",
+        "multipart forms",
+        "file uploads",
+        "upload errors",
+        "safe filenames"
+      ],
+      "track": "PHP",
+      "id": "PQ-137",
+      "coreOptions": [
+        "too large",
+        "unsupported",
+        "png",
+        "image/png"
+      ],
+      "revision": 2,
+      "family": "php-upload-validation",
+      "objective": "Trace a server-side upload size boundary before choosing a destination extension.",
+      "difficultyReason": "Combines byte units, an exclusive upper-bound check, and MIME-to-extension mapping.",
+      "assumptions": "The byte count and MIME are trusted results of server-side checks, not browser metadata. The code chooses an extension only; it neither moves a file nor claims to implement all upload protections.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "png"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "learning": {
+        "trace": "2 * 1024 * 1024 equals 2097152. The test uses >, so an exactly two-MiB upload is accepted. The PNG MIME arm returns the extension png.",
+        "rationales": [
+          "The boundary value would be rejected by >=, but the shown condition uses >.",
+          "image/png is explicitly allowed by the match expression.",
+          "The size passes and the MIME is mapped to png.",
+          "The function returns an extension, not the input MIME string."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-137@2:1",
+        "PQ-137@2:2",
+        "PQ-137@2:3",
+        "PQ-137@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-197",
+    "issue": "The generic answer combined constructor promotion and readonly behavior with a clone snippet; it did not test scalar copying versus object aliasing.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Clone creates a distinct object identity: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "constructor promotion initializes typed properties and readonly prevents reassignment after initialization without making referenced objects deeply immutable. Evidence to inspect: configuration, runtime behavior, control flow, the API contract, state changes, and the failure path.",
+        "readonly recursively freezes every object and array reachable from the property and cloning preserves object identity. Reasoning check: compare this claim with side effects, operator semantics, and the exact input types.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with runtime behavior, the data boundary, the exact input types, configuration, control flow, and the observable output.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the exact input types, operator semantics, side effects, and the failure path."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that constructor promotion initializes typed properties and readonly prevents reassignment after initialization without making referenced objects deeply immutable. The tempting mistake is to assume that readonly recursively freezes every object and array reachable from the property and cloning preserves object identity. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Classes & object lifecycle",
+      "code": {
+        "language": "php",
+        "title": "Clone creates a distinct object identity",
+        "snippet": "<?php\nfinal class Counter {\n    public function __construct(public int $value) {}\n}\n\n$first = new Counter(1);\n$second = clone $first;\n$second->value++;\n\nvar_dump($first === $second, $first->value, $second->value);"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "classes",
+        "constructors",
+        "properties",
+        "readonly",
+        "object identity"
+      ],
+      "track": "PHP",
+      "id": "PQ-197",
+      "coreOptions": [
+        "constructor promotion initializes typed properties and readonly prevents reassignment after initialization without making referenced objects deeply immutable",
+        "readonly recursively freezes every object and array reachable from the property and cloning preserves object identity",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "After cloning the counter and mutating both a scalar and a nested object through the clone, which JSON array is printed?",
+      "options": [
+        "[false,1,\"old\"]",
+        "[true,2,\"new\"]",
+        "[false,2,\"new\"]",
+        "[false,1,\"new\"]"
+      ],
+      "answer": 3,
+      "explanation": "clone creates a distinct Counter and copies its scalar value. It does not clone the nested meta object, so both counters still refer to the same meta instance.",
+      "topic": "Classes & object lifecycle",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\nfinal class Counter {\n    public function __construct(public int $value, public object $meta) {}\n}\n$first = new Counter(1, (object) ['label' => 'old']);\n$second = clone $first;\n$second->value++;\n$second->meta->label = 'new';\necho json_encode([$first === $second, $first->value, $first->meta->label]);"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "classes",
+        "constructors",
+        "properties",
+        "readonly",
+        "object identity"
+      ],
+      "track": "PHP",
+      "id": "PQ-197",
+      "coreOptions": [
+        "[false,1,\"old\"]",
+        "[true,2,\"new\"]",
+        "[false,2,\"new\"]",
+        "[false,1,\"new\"]"
+      ],
+      "revision": 2,
+      "family": "php-clone",
+      "objective": "Distinguish a shallow clone’s identity and scalar state from a shared nested object.",
+      "difficultyReason": "Tracks scalar copying and nested-object aliasing in the same operation.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "[false,1,\"new\"]"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "clone creates a distinct Counter and copies its scalar value. It does not clone the nested meta object, so both counters still refer to the same meta instance.",
+        "rationales": [
+          "This assumes cloning the outer object also clones its nested object.",
+          "The counters have distinct identity and the original scalar stays 1.",
+          "The scalar is copied into the clone; incrementing it does not update the first counter.",
+          "Distinct outer identity, independent scalar, and shared nested object produce this result."
+        ]
+      },
+      "references": [
+        "https://www.php.net/manual/en/"
+      ],
+      "optionIds": [
+        "PQ-197@2:1",
+        "PQ-197@2:2",
+        "PQ-197@2:3",
+        "PQ-197@2:4"
+      ]
+    }
+  },
+  {
+    "id": "PQ-281",
+    "issue": "The example blurred immutable message updates and a mutable body stream, with unspecified collaborators and a generic protocol explanation.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "PSR-7 methods return a changed copy: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "HTTP clients must check transport and protocol failures and PSR interfaces let middleware and messages cooperate through stable contracts. Reasoning check: compare this claim with control flow.",
+        "a successful network connection guarantees a successful HTTP response and PSR-7 response objects are mutated in place. Evidence to inspect: the exact input types, state changes, the API contract, and side effects.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with configuration, the observable output, and runtime behavior.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: the displayed values, state changes, the API contract, the exact input types, and operator semantics."
+      ],
+      "answer": 0,
+      "explanation": "The displayed PHP code demonstrates that HTTP clients must check transport and protocol failures and PSR interfaces let middleware and messages cooperate through stable contracts. The tempting mistake is to assume that a successful network connection guarantees a successful HTTP response and PSR-7 response objects are mutated in place. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "APIs, integrations & PSRs",
+      "code": {
+        "language": "php",
+        "title": "PSR-7 methods return a changed copy",
+        "snippet": "<?php\nuse Psr\\Http\\Message\\ResponseInterface;\n\nfunction asJson(ResponseInterface $response, array $data): ResponseInterface {\n    $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));\n    return $response\n        ->withHeader(\"Content-Type\", \"application/json\")\n        ->withStatus(200);\n}"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "REST APIs",
+        "cURL",
+        "Guzzle",
+        "PSR-7",
+        "PSR-15"
+      ],
+      "track": "PHP",
+      "id": "PQ-281",
+      "coreOptions": [
+        "HTTP clients must check transport and protocol failures and PSR interfaces let middleware and messages cooperate through stable contracts",
+        "a successful network connection guarantees a successful HTTP response and PSR-7 response objects are mutated in place",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "This minimal model illustrates immutable header updates with a shared mutable body. It is not a complete PSR-7 implementation. What text is printed?",
+      "options": [
+        "none|old!|b",
+        "none|old|b",
+        "b|old!|b",
+        "none|old!|none"
+      ],
+      "answer": 0,
+      "explanation": "The cloned message receives its own changed headers array, so the original has no X-Trace header. Both messages reference the same body object, which now contains old!. Real PSR-7 streams may similarly be mutable; message immutability is not a deep-copy guarantee.",
+      "topic": "APIs, integrations & PSRs",
+      "code": {
+        "language": "php",
+        "title": "Program to inspect",
+        "files": [
+          {
+            "name": "main.php",
+            "kind": "php-file",
+            "snippet": "<?php\nfinal class Message {\n    public function __construct(public array $headers, public object $body) {}\n    public function withHeader(string $name, string $value): self {\n        $copy = clone $this;\n        $copy->headers[$name] = $value;\n        return $copy;\n    }\n}\n$original = new Message([], (object) ['text' => 'old']);\n$changed = $original->withHeader('X-Trace', 'b');\n$changed->body->text .= '!';\necho $original->headers['X-Trace'] ?? 'none';\necho '|', $original->body->text, '|', $changed->headers['X-Trace'];"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "REST APIs",
+        "cURL",
+        "Guzzle",
+        "PSR-7",
+        "PSR-15"
+      ],
+      "track": "PHP",
+      "id": "PQ-281",
+      "coreOptions": [
+        "none|old!|b",
+        "none|old|b",
+        "b|old!|b",
+        "none|old!|none"
+      ],
+      "revision": 2,
+      "family": "php-message-aliasing",
+      "objective": "Explain why cloning a message to change headers need not isolate its mutable body object.",
+      "difficultyReason": "Combines cloning, copied array state, and a shared object reference.",
+      "validation": {
+        "kind": "php-output",
+        "stdout": "none|old!|b"
+      },
+      "references": [
+        "https://www.php-fig.org/psr/psr-7/#13-streams"
+      ],
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "label": "PHP 8.4–8.5 CLI; E_ALL; no custom error handler."
+      },
+      "assumptions": "Execute the complete program once in a fresh process with only the definitions and input shown.",
+      "learning": {
+        "trace": "The cloned message receives its own changed headers array, so the original has no X-Trace header. Both messages reference the same body object, which now contains old!. Real PSR-7 streams may similarly be mutable; message immutability is not a deep-copy guarantee.",
+        "rationales": [
+          "The headers differ while the aliased body reflects the mutation.",
+          "This assumes the mutable body was deep-cloned.",
+          "Changing the clone’s headers does not change the original headers array.",
+          "The returned message is stored in changed and contains the new header."
+        ]
+      },
+      "optionIds": [
+        "PQ-281@2:1",
+        "PQ-281@2:2",
+        "PQ-281@2:3",
+        "PQ-281@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-046",
+    "issue": "The stem paraphrased the keyed answer, alternatives were unrelated lifecycle stages, and Advanced difficulty was unjustified.",
+    "before": {
+      "topic": "Validation & input",
+      "difficulty": "Advanced",
+      "prompt": "A form request normalizes a phone number before rules run. Where does that transformation belong if downstream validation must see the normalized value?",
+      "options": [
+        "Input preparation before validation. Reasoning check: compare this claim with the guarantee actually provided, ownership of the decision, and configuration.",
+        "A response middleware after the controller. Reasoning check: compare this claim with the stated constraints.",
+        "The migration down method. Evidence to inspect: the stated constraints, configuration, and the scenario’s stated boundary.",
+        "A queued notification after commit. Reasoning check: compare this claim with the trade-off, the failure mode, and a counterexample."
+      ],
+      "answer": 0,
+      "explanation": "Preparation changes the candidate input before validators inspect it. Response or post-commit work happens far too late.",
+      "track": "Laravel",
+      "id": "LQ-046",
+      "coreOptions": [
+        "Input preparation before validation",
+        "A response middleware after the controller",
+        "The migration down method",
+        "A queued notification after commit"
+      ]
+    },
+    "after": {
+      "topic": "Validation & input",
+      "difficulty": "Applied",
+      "prompt": "Both the email rule and the controller’s validated() payload must see the trimmed, lowercase address. Which hook should replace NORMALIZE_HERE?",
+      "options": [
+        "prepareForValidation",
+        "passedValidation",
+        "failedValidation",
+        "An Eloquent saving observer"
+      ],
+      "answer": 0,
+      "explanation": "prepareForValidation runs before the validator captures the request data. The normalized address therefore participates in validation and is returned by validated(). passedValidation runs after that data has already been validated.",
+      "track": "Laravel",
+      "id": "LQ-046",
+      "coreOptions": [
+        "prepareForValidation",
+        "passedValidation",
+        "failedValidation",
+        "An Eloquent saving observer"
+      ],
+      "revision": 2,
+      "family": "laravel-validation-data",
+      "objective": "Choose a normalization hook that changes both validated input and the returned validated payload.",
+      "difficultyReason": "Connects request mutation timing with the validator’s separate data snapshot.",
+      "code": {
+        "language": "php",
+        "title": "Application code to inspect",
+        "files": [
+          {
+            "name": "StoreUserRequest.php",
+            "kind": "laravel-fragment",
+            "snippet": "final class StoreUserRequest extends FormRequest\n{\n    public function rules(): array { return ['email' => ['required', 'email']]; }\n    protected function NORMALIZE_HERE(): void {\n        $this->merge(['email' => strtolower(trim($this->input('email')))]);\n    }\n}\n// Controller: $email = $request->validated('email');",
+            "context": ""
+          }
+        ]
+      },
+      "assumptions": "Authorization succeeds. The email input is the string \" ADA@example.test \". No middleware or other hook transforms it. NORMALIZE_HERE is a method-name placeholder.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "prepareForValidation"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "learning": {
+        "trace": "prepareForValidation runs before the validator captures the request data. The normalized address therefore participates in validation and is returned by validated(). passedValidation runs after that data has already been validated.",
+        "rationales": [
+          "This hook changes the input before validator construction.",
+          "A later request merge does not replace the validator’s stored data.",
+          "This hook handles a failed validation, not preparation for successful validation.",
+          "An observer runs at persistence time and does not alter the validator’s input."
+        ]
+      },
+      "references": [
+        "https://laravel.com/docs/13.x"
+      ],
+      "optionIds": [
+        "LQ-046@2:1",
+        "LQ-046@2:2",
+        "LQ-046@2:3",
+        "LQ-046@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-314",
+    "issue": "Post-validation merge changed the request but did not change the validator snapshot returned by validated(). The original text implied a normalization guarantee for controller persistence.",
+    "before": {
+      "difficulty": "Applied",
+      "prompt": "When does passedValidation execute in relation to the rules method?",
+      "options": [
+        "After validation succeeds, allowing normalization before controller use. Reasoning check: compare this claim with operator semantics, the exact input types, the observable output, side effects, and runtime behavior.",
+        "Before rules are evaluated, so it decides whether rules exist. Evidence to inspect: the exact input types, operator semantics, and the API contract.",
+        "Only after the model has been saved. Reasoning check: compare this claim with the API contract and the failure path.",
+        "Only when validation fails. Reasoning check: compare this claim with operator semantics, control flow, lifecycle timing, the API contract, configuration, side effects, and the data boundary."
+      ],
+      "answer": 0,
+      "explanation": "passedValidation is a post-validation hook. It is suitable for normalizing already accepted values before the request reaches the controller.",
+      "topic": "Validation & input",
+      "code": {
+        "language": "php",
+        "title": "Validated input and normalization in a Form Request",
+        "snippet": "final class StoreProjectRequest extends FormRequest\n{\n    public function rules(): array\n    {\n        return [\n            'name' => ['required', 'string', 'max:120'],\n            'budget' => ['required', 'decimal:0,2', 'min:0'],\n        ];\n    }\n\n    protected function passedValidation(): void\n    {\n        $this->merge(['name' => $this->string('name')->trim()->toString()]);\n    }\n}"
+      },
+      "track": "Laravel",
+      "id": "LQ-314",
+      "coreOptions": [
+        "After validation succeeds, allowing normalization before controller use",
+        "Before rules are evaluated, so it decides whether rules exist",
+        "Only after the model has been saved",
+        "Only when validation fails"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "The request contains name=\"  Ada  \". After successful resolution, what do input(\"name\") and validated(\"name\") return, in that order?",
+      "options": [
+        "\"Ada\", \"Ada\"",
+        "\"  Ada  \", \"  Ada  \"",
+        "\"  Ada  \", \"Ada\"",
+        "\"Ada\", \"  Ada  \""
+      ],
+      "answer": 3,
+      "explanation": "The validator receives the original spaced string. passedValidation subsequently merges a trimmed string into the request, but validated() reads the existing validator data, not the changed request bag.",
+      "topic": "Validation & input",
+      "code": {
+        "language": "php",
+        "title": "Application code to inspect",
+        "files": [
+          {
+            "name": "StoreProjectRequest.php",
+            "kind": "laravel-fragment",
+            "snippet": "final class StoreProjectRequest extends FormRequest\n{\n    public function rules(): array { return ['name' => ['required', 'string', 'max:120']]; }\n    protected function passedValidation(): void {\n        $this->merge(['name' => trim($this->input('name'))]);\n    }\n}",
+            "context": ""
+          }
+        ]
+      },
+      "track": "Laravel",
+      "id": "LQ-314",
+      "coreOptions": [
+        "\"Ada\", \"Ada\"",
+        "\"  Ada  \", \"  Ada  \"",
+        "\"  Ada  \", \"Ada\"",
+        "\"Ada\", \"  Ada  \""
+      ],
+      "revision": 2,
+      "family": "laravel-validation-data",
+      "objective": "Distinguish request input after passedValidation from the validator’s accepted snapshot.",
+      "difficultyReason": "Traces two data stores through validation and a later merge.",
+      "assumptions": "Authorization succeeds. TrimStrings is disabled for this request, no earlier normalization occurs, and the ordinary FormRequest validator is used.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "passedValidation"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "learning": {
+        "trace": "The validator receives the original spaced string. passedValidation subsequently merges a trimmed string into the request, but validated() reads the existing validator data, not the changed request bag.",
+        "rationales": [
+          "This would fit normalization before validation, not the shown post-validation merge.",
+          "The request bag is changed by merge, so input() is trimmed.",
+          "This reverses which store is changed by merge.",
+          "The request is trimmed while the validator retains the originally accepted value."
+        ]
+      },
+      "references": [
+        "https://laravel.com/docs/13.x"
+      ],
+      "optionIds": [
+        "LQ-314@2:1",
+        "LQ-314@2:2",
+        "LQ-314@2:3",
+        "LQ-314@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-413",
+    "issue": "route() defaults to an absolute URL; the original answer supplied only a path and no origin premise.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Named route generation inside a prefixed group: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "the generated URL is /admin/reports and the route also carries the reports rate limiter. Evidence to inspect: the displayed values and configuration.",
+        "the name prefix changes the URL path twice or the middleware runs while generating the URL. Evidence to inspect: state changes, the API contract, and lifecycle timing.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with operator semantics, configuration, the displayed values, the failure path, and side effects.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: control flow, the API contract, state changes, the stated constraints, and side effects."
+      ],
+      "answer": 0,
+      "explanation": "The displayed Laravel code demonstrates that the generated URL is /admin/reports and the route also carries the reports rate limiter. The tempting mistake is to assume that the name prefix changes the URL path twice or the middleware runs while generating the URL. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Routing & model binding",
+      "code": {
+        "language": "php",
+        "title": "Named route generation inside a prefixed group",
+        "snippet": "Route::prefix('admin')->name('admin.')->group(function () {\n    Route::get('/reports', ReportController::class)\n        ->middleware('throttle:reports')\n        ->name('reports');\n});\n\n$url = route('admin.reports');"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "basic routes",
+        "view routes",
+        "redirect routes",
+        "parameters",
+        "named routes",
+        "groups",
+        "route model binding",
+        "rate limiting",
+        "CORS",
+        "route caching"
+      ],
+      "track": "Laravel",
+      "id": "LQ-413",
+      "coreOptions": [
+        "the generated URL is /admin/reports and the route also carries the reports rate limiter",
+        "the name prefix changes the URL path twice or the middleware runs while generating the URL",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "What is assigned to url? The current request origin is https://quiz.example.test and the application has no base-path prefix or forced URL overrides.",
+      "options": [
+        "/admin/reports",
+        "https://quiz.example.test/admin/admin/reports",
+        "https://quiz.example.test/admin/reports",
+        "https://quiz.example.test/reports"
+      ],
+      "answer": 2,
+      "explanation": "prefix contributes admin to the path; name contributes admin. only to the route name. route() generates an absolute URL by default using the supplied origin.",
+      "topic": "Routing & model binding",
+      "code": {
+        "language": "php",
+        "title": "Application code to inspect",
+        "files": [
+          {
+            "name": "routes/web.php",
+            "kind": "laravel-fragment",
+            "snippet": "Route::prefix('admin')->name('admin.')->group(function () {\n    Route::get('/reports', ReportController::class)->name('reports');\n});\n$url = route('admin.reports');",
+            "context": ""
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "basic routes",
+        "view routes",
+        "redirect routes",
+        "parameters",
+        "named routes",
+        "groups",
+        "route model binding",
+        "rate limiting",
+        "CORS",
+        "route caching"
+      ],
+      "track": "Laravel",
+      "id": "LQ-413",
+      "coreOptions": [
+        "/admin/reports",
+        "https://quiz.example.test/admin/admin/reports",
+        "https://quiz.example.test/admin/reports",
+        "https://quiz.example.test/reports"
+      ],
+      "revision": 2,
+      "family": "laravel-route-generation",
+      "objective": "Distinguish route name prefixes, URL path prefixes and absolute URL generation.",
+      "difficultyReason": "Combines named-route resolution with URL origin behavior.",
+      "assumptions": "The route is registered as shown and ReportController exists. No URL defaults or missing-route resolver intervene.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "routeAbsolute"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "learning": {
+        "trace": "prefix contributes admin to the path; name contributes admin. only to the route name. route() generates an absolute URL by default using the supplied origin.",
+        "rationales": [
+          "That would be the relative result requested with absolute: false.",
+          "The name prefix does not add another path segment.",
+          "The origin and single path prefix are combined.",
+          "The group’s path prefix must be included."
+        ]
+      },
+      "references": [
+        "https://laravel.com/docs/13.x"
+      ],
+      "optionIds": [
+        "LQ-413@2:1",
+        "LQ-413@2:2",
+        "LQ-413@2:3",
+        "LQ-413@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-453",
+    "issue": "The dirty-state answer assumed an initial name different from Grace without saying so.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Dirty-state inspection before and after persistence: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "isDirty is true before save, wasChanged records the persisted change after save, and the saved attribute is no longer dirty. Evidence to inspect: control flow and the observable output.",
+        "wasChanged predicts unsaved changes before persistence and remains identical to isDirty at every point. Evidence to inspect: configuration, lifecycle timing, the API contract, the observable output, and the data boundary.",
+        "The snippet changes editor hints but cannot affect the executed program. Reasoning check: compare this claim with the failure path, the displayed values, control flow, configuration, runtime behavior, the data boundary, and lifecycle timing.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Evidence to inspect: the displayed values, configuration, the exact input types, and the API contract."
+      ],
+      "answer": 0,
+      "explanation": "The displayed Laravel code demonstrates that isDirty is true before save, wasChanged records the persisted change after save, and the saved attribute is no longer dirty. The tempting mistake is to assume that wasChanged predicts unsaved changes before persistence and remains identical to isDirty at every point. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Eloquent state & assignment",
+      "code": {
+        "language": "php",
+        "title": "Dirty-state inspection before and after persistence",
+        "snippet": "$user->name = 'Grace';\n\n$before = $user->isDirty('name');\n$user->save();\n$after = $user->wasChanged('name');\n$stillDirty = $user->isDirty('name');\n"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "CRUD",
+        "mass assignment",
+        "casts",
+        "accessors",
+        "mutators",
+        "dirty state"
+      ],
+      "track": "Laravel",
+      "id": "LQ-453",
+      "coreOptions": [
+        "isDirty is true before save, wasChanged records the persisted change after save, and the saved attribute is no longer dirty",
+        "wasChanged predicts unsaved changes before persistence and remains identical to isDirty at every point",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "The user was freshly retrieved with name=\"Grace\". What are before, after and stillDirty after this code runs?",
+      "options": [
+        "false, false, false",
+        "true, true, false",
+        "false, true, false",
+        "true, false, true"
+      ],
+      "answer": 0,
+      "explanation": "The current name equals the retrieved original name. No name change is dirty or recorded by the save, and it remains clean afterward; timestamps are a different attribute.",
+      "topic": "Eloquent state & assignment",
+      "code": {
+        "language": "php",
+        "title": "Application code to inspect",
+        "files": [
+          {
+            "name": "controller.php",
+            "kind": "laravel-fragment",
+            "snippet": "$user->name = 'Grace';\n$before = $user->isDirty('name');\n$user->save();\n$after = $user->wasChanged('name');\n$stillDirty = $user->isDirty('name');",
+            "context": ""
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "CRUD",
+        "mass assignment",
+        "casts",
+        "accessors",
+        "mutators",
+        "dirty state"
+      ],
+      "track": "Laravel",
+      "id": "LQ-453",
+      "coreOptions": [
+        "false, false, false",
+        "true, true, false",
+        "false, true, false",
+        "true, false, true"
+      ],
+      "revision": 2,
+      "family": "laravel-dirty-state",
+      "objective": "Determine attribute dirty and saved-change flags when assigning an unchanged value.",
+      "difficultyReason": "Distinguishes current attributes, original values and the most recent save.",
+      "assumptions": "The model has no previous changes, custom name casts/mutators, or observers that change name. The existing row is saved successfully. Timestamp changes do not change name.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "unchangedAttribute"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "learning": {
+        "trace": "The current name equals the retrieved original name. No name change is dirty or recorded by the save, and it remains clean afterward; timestamps are a different attribute.",
+        "rationales": [
+          "All three name-specific checks are false for this unchanged value.",
+          "Assignment alone does not make an equal value dirty.",
+          "A successful save does not imply that this particular attribute changed.",
+          "There is no unsaved name difference before or after the save."
+        ]
+      },
+      "references": [
+        "https://laravel.com/docs/13.x"
+      ],
+      "optionIds": [
+        "LQ-453@2:1",
+        "LQ-453@2:2",
+        "LQ-453@2:3",
+        "LQ-453@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-142",
+    "issue": "The general lock recommendation lacked the class-scoped key and lease-expiry details needed to assess an actual WithoutOverlapping configuration.",
+    "before": {
+      "topic": "Queues & background work",
+      "difficulty": "Advanced",
+      "prompt": "Two different job types must never update the same project concurrently. Unique-job constraints apply only to one class. What mechanism is more direct?",
+      "options": [
+        "A shared runtime lock/without-overlapping key based on project ID. Reasoning check: compare this claim with the trade-off.",
+        "Give both jobs random IDs. Reasoning check: compare this claim with the failure mode, the data flow, timing, a counterexample, and the scenario’s stated boundary.",
+        "Put the project name into APP_KEY. Reasoning check: compare this claim with the trade-off, the guarantee actually provided, and the data flow.",
+        "Disable queue retries globally. Evidence to inspect: a counterexample, the missing guarantee, and the failure mode."
+      ],
+      "answer": 0,
+      "explanation": "A shared lock key can coordinate heterogeneous jobs around the same resource, not just deduplicate one job class.",
+      "track": "Laravel",
+      "id": "LQ-142",
+      "coreOptions": [
+        "A shared runtime lock/without-overlapping key based on project ID",
+        "Give both jobs random IDs",
+        "Put the project name into APP_KEY",
+        "Disable queue retries globally"
+      ]
+    },
+    "after": {
+      "topic": "Queues & background work",
+      "difficulty": "Advanced",
+      "prompt": "Two different job classes use this middleware to update the same project. Both critical sections finish within 90 seconds. Which replacement coordinates the classes and keeps the lease alive for the full section?",
+      "options": [
+        "Use shared() and expireAfter(120) in both classes.",
+        "Use shared() and keep expireAfter(30) in both classes.",
+        "Give both classes the same uniqueId() and use expireAfter(120).",
+        "Use releaseAfter(120) and keep expireAfter(30) in both classes."
+      ],
+      "answer": 0,
+      "explanation": "WithoutOverlapping normally namespaces lock identity by job class. shared() coordinates the two classes, and a 120-second lease covers the bounded 90-second critical section. releaseAfter controls contention delay, not lock ownership duration.",
+      "track": "Laravel",
+      "id": "LQ-142",
+      "coreOptions": [
+        "Use shared() and expireAfter(120) in both classes.",
+        "Use shared() and keep expireAfter(30) in both classes.",
+        "Give both classes the same uniqueId() and use expireAfter(120).",
+        "Use releaseAfter(120) and keep expireAfter(30) in both classes."
+      ],
+      "revision": 2,
+      "family": "laravel-job-locks",
+      "objective": "Coordinate different job classes with a shared overlap key and a lease that covers the critical section.",
+      "difficultyReason": "Requires resolving both class-scoped lock identity and expiry during a bounded critical section.",
+      "code": {
+        "language": "php",
+        "title": "Application code to inspect",
+        "files": [
+          {
+            "name": "Job.php (method fragment)",
+            "kind": "laravel-fragment",
+            "snippet": "public function middleware(): array\n{\n    return [(new WithoutOverlapping('project:' . $this->projectId))\n        ->releaseAfter(5)\n        ->expireAfter(30)];\n}",
+            "context": "Place this method in each job class. WithoutOverlapping is Laravel’s queue middleware."
+          }
+        ]
+      },
+      "assumptions": "The jobs use the same project ID and a shared lock-capable cache. No clock jump, cache outage, process pause beyond the stated 90-second bound, or other lock holder is involved.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "sharedOverlapLock"
+      },
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "learning": {
+        "trace": "WithoutOverlapping normally namespaces lock identity by job class. shared() coordinates the two classes, and a 120-second lease covers the bounded 90-second critical section. releaseAfter controls contention delay, not lock ownership duration.",
+        "rationales": [
+          "Both the cross-class lock scope and the too-short lease are corrected.",
+          "The shared lock can still expire while a 90-second section is running.",
+          "uniqueId is not the shared-key switch used by WithoutOverlapping.",
+          "Changing the contention delay fixes neither the class-scoped key nor the short lease."
+        ]
+      },
+      "references": [
+        "https://laravel.com/docs/13.x"
+      ],
+      "optionIds": [
+        "LQ-142@2:1",
+        "LQ-142@2:2",
+        "LQ-142@2:3",
+        "LQ-142@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-489",
+    "issue": "The key incorrectly combined tries and retryUntil as simultaneous limits; customerId was undeclared in the displayed job.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Retry policy with backoff and an absolute deadline: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "failed attempts use increasing delays but retries stop when the attempt limit or absolute retry deadline is reached. Evidence to inspect: the exact input types, side effects, and runtime behavior.",
+        "backoff makes the external CRM operation idempotent and guarantees it cannot run twice. Reasoning check: compare this claim with the API contract, the exact input types, side effects, and lifecycle timing.",
+        "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: control flow, runtime behavior, side effects, the data boundary, and the failure path.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with the API contract, configuration, the exact input types, the failure path, and operator semantics."
+      ],
+      "answer": 0,
+      "explanation": "The displayed Laravel code demonstrates that failed attempts use increasing delays but retries stop when the attempt limit or absolute retry deadline is reached. The tempting mistake is to assume that backoff makes the external CRM operation idempotent and guarantees it cannot run twice. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Queues & background work",
+      "code": {
+        "language": "php",
+        "title": "Retry policy with backoff and an absolute deadline",
+        "snippet": "final class SyncCustomer implements ShouldQueue\n{\n    public int $tries = 5;\n    public function backoff(): array { return [10, 60, 300]; }\n    public function retryUntil(): DateTime { return now()->addHour(); }\n\n    public function handle(CrmClient $crm): void {\n        $crm->sync($this->customerId);\n    }\n}"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "queues",
+        "jobs",
+        "retry policy",
+        "unique jobs",
+        "job middleware",
+        "Horizon"
+      ],
+      "track": "Laravel",
+      "id": "LQ-489",
+      "coreOptions": [
+        "failed attempts use increasing delays but retries stop when the attempt limit or absolute retry deadline is reached",
+        "backoff makes the external CRM operation idempotent and guarantees it cannot run twice",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "Five attempts of this job have thrown ordinary exceptions, but its queued retry deadline is still in the future. Which rule governs retry eligibility?",
+      "options": [
+        "The tries property stops the job after attempt five.",
+        "The backoff array stops the job after attempt three.",
+        "The retryUntil deadline takes precedence over tries.",
+        "The earlier of the tries limit and deadline stops retries."
+      ],
+      "answer": 2,
+      "explanation": "When retryUntil is supplied, Laravel uses its deadline instead of the numeric tries limit for these ordinary retries.",
+      "topic": "Queues & background work",
+      "code": {
+        "language": "php",
+        "title": "Queued customer synchronization",
+        "files": [
+          {
+            "name": "SyncCustomer.php",
+            "kind": "laravel-fragment",
+            "snippet": "final class SyncCustomer implements ShouldQueue\n{\n    public int $tries = 5;\n    public function __construct(public int $customerId) {}\n    public function backoff(): array { return [10, 60, 300]; }\n    public function retryUntil(): DateTime { return now()->addHour(); }\n    public function handle(CrmClient $crm): void {\n        $crm->sync($this->customerId);\n    }\n}"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "queues",
+        "jobs",
+        "retry policy",
+        "unique jobs",
+        "job middleware",
+        "Horizon"
+      ],
+      "track": "Laravel",
+      "id": "LQ-489",
+      "coreOptions": [
+        "The tries property stops the job after attempt five.",
+        "The backoff array stops the job after attempt three.",
+        "The retryUntil deadline takes precedence over tries.",
+        "The earlier of the tries limit and deadline stops retries."
+      ],
+      "revision": 2,
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "assumptions": "Laravel aliases and the CRM client are supplied by the application. The job payload contains a future retryUntil timestamp. Only ordinary handler exceptions occur; no maxExceptions, timeout-failure, cancellation or custom middleware limit applies.",
+      "learning": {
+        "trace": "When retryUntil is supplied, Laravel uses its deadline instead of the numeric tries limit for these ordinary retries.",
+        "rationales": [
+          "The numeric tries limit does not take precedence when retryUntil is present.",
+          "The array supplies delays; its length is not an attempt cap.",
+          "The future retry deadline allows further ordinary attempts under the stated exclusions.",
+          "This incorrectly treats tries and retryUntil as simultaneous limits."
+        ]
+      },
+      "family": "laravel-queue-retry",
+      "references": [
+        "https://laravel.com/docs/13.x/queues#time-based-attempts"
+      ],
+      "objective": "Resolve the precedence of time-based and count-based queue retry policies.",
+      "difficultyReason": "Distinguishes related APIs whose superficially similar controls have different effects.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "retryUntilPrecedence"
+      },
+      "optionIds": [
+        "LQ-489@2:1",
+        "LQ-489@2:2",
+        "LQ-489@2:3",
+        "LQ-489@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-545",
+    "issue": "The key reversed registered reporting callback semantics: false stops default reporting.",
+    "before": {
+      "difficulty": "Foundation",
+      "prompt": "Attaching context while preserving normal exception reporting: after tracing the displayed code, which description of its behavior is accurate?",
+      "options": [
+        "returning false allows Laravel default reporting to continue while the added context enriches the log record. Reasoning check: compare this claim with operator semantics and the exact input types.",
+        "returning false marks the exception as handled and guarantees it will never reach configured log channels. Reasoning check: compare this claim with control flow, runtime behavior, and the failure path.",
+        "The snippet changes editor hints but cannot affect the executed program. Evidence to inspect: the exact input types, runtime behavior, side effects, and the failure path.",
+        "The runtime skips the shown branch and supplies a safe default automatically. Reasoning check: compare this claim with control flow and the data boundary."
+      ],
+      "answer": 0,
+      "explanation": "The displayed Laravel code demonstrates that returning false allows Laravel default reporting to continue while the added context enriches the log record. The tempting mistake is to assume that returning false marks the exception as handled and guarantees it will never reach configured log channels. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Errors, logging & observability",
+      "code": {
+        "language": "php",
+        "title": "Attaching context while preserving normal exception reporting",
+        "snippet": "$exceptions->report(function (PaymentFailed $exception) {\n    Log::withContext([\n        'payment_id' => $exception->paymentId,\n        'request_id' => request()->header('X-Request-ID'),\n    ]);\n\n    return false;\n});"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "error handling",
+        "exceptions",
+        "message customization",
+        "HTTP exceptions",
+        "logging",
+        "log stacks",
+        "Telescope",
+        "Debugbar"
+      ],
+      "track": "Laravel",
+      "id": "LQ-545",
+      "coreOptions": [
+        "returning false allows Laravel default reporting to continue while the added context enriches the log record",
+        "returning false marks the exception as handled and guarantees it will never reach configured log channels",
+        "The snippet changes editor hints but cannot affect the executed program",
+        "The runtime skips the shown branch and supplies a safe default automatically"
+      ]
+    },
+    "after": {
+      "difficulty": "Foundation",
+      "prompt": "When PaymentFailed is reported through this callback, what happens to Laravel’s default exception logging for this reporting pass?",
+      "options": [
+        "It logs once with payment_id context.",
+        "It skips default logging after the callback returns.",
+        "It logs once without payment_id because callback context is discarded.",
+        "It logs twice: once for withContext and once for the exception."
+      ],
+      "answer": 1,
+      "explanation": "Returning false from a registered reporting callback stops propagation to the default logging stack. Adding context alone emits no record and does not change response rendering.",
+      "topic": "Errors, logging & observability",
+      "code": {
+        "language": "php",
+        "title": "Registered exception reporting callback",
+        "files": [
+          {
+            "name": "bootstrap/app.php (withExceptions callback)",
+            "kind": "laravel-fragment",
+            "snippet": "$exceptions->report(function (PaymentFailed $exception) {\n    Log::withContext(['payment_id' => $exception->paymentId]);\n    return false;\n});"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "error handling",
+        "exceptions",
+        "message customization",
+        "HTTP exceptions",
+        "logging",
+        "log stacks",
+        "Telescope",
+        "Debugbar"
+      ],
+      "track": "Laravel",
+      "id": "LQ-545",
+      "coreOptions": [
+        "It logs once with payment_id context.",
+        "It skips default logging after the callback returns.",
+        "It logs once without payment_id because callback context is discarded.",
+        "It logs twice: once for withContext and once for the exception."
+      ],
+      "revision": 2,
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "assumptions": "This callback is registered through withExceptions. It is the only reporting callback. PaymentFailed has a paymentId and no custom report method. Log::withContext succeeds and does not itself emit a log record. Default exception logging is enabled.",
+      "learning": {
+        "trace": "Returning false from a registered reporting callback stops propagation to the default logging stack. Adding context alone emits no record and does not change response rendering.",
+        "rationales": [
+          "That would occur if propagation were allowed; the explicit false stops it.",
+          "The registered callback’s false return stops default reporting.",
+          "withContext is not discarded on callback return; the false result stops the record from being emitted.",
+          "withContext does not emit a record, and returning false also prevents the normal exception record."
+        ]
+      },
+      "family": "laravel-exception-reporting",
+      "references": [
+        "https://laravel.com/docs/13.x/errors#reporting-exceptions"
+      ],
+      "objective": "Determine default logging behavior after a registered reporting callback returns false.",
+      "difficultyReason": "Applies one registered callback contract to an explicit reporting context.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "reportCallbackFalse"
+      },
+      "optionIds": [
+        "LQ-545@2:1",
+        "LQ-545@2:2",
+        "LQ-545@2:3",
+        "LQ-545@2:4"
+      ]
+    }
+  },
+  {
+    "id": "LQ-546",
+    "issue": "The review recommendation preserved the same inverted false-return rule and used generic comment/suppression distractors.",
+    "before": {
+      "difficulty": "Applied",
+      "prompt": "Attaching context while preserving normal exception reporting: which review comment best preserves the guarantee demonstrated by this implementation?",
+      "options": [
+        "Keep the relevant mechanism because returning false allows Laravel default reporting to continue while the added context enriches the log record. Reasoning check: compare this claim with operator semantics and the exact input types.",
+        "Remove the relevant mechanism because returning false marks the exception as handled and guarantees it will never reach configured log channels. Evidence to inspect: control flow, runtime behavior, and the failure path.",
+        "Replace the implementation with a comment describing the intended result. Reasoning check: compare this claim with the exact input types, runtime behavior, side effects, the failure path, and operator semantics.",
+        "Suppress every failure so callers always receive a successful-looking value. Evidence to inspect: control flow, the data boundary, the exact input types, state changes, and the failure path."
+      ],
+      "answer": 0,
+      "explanation": "The displayed Laravel code demonstrates that returning false allows Laravel default reporting to continue while the added context enriches the log record. The tempting mistake is to assume that returning false marks the exception as handled and guarantees it will never reach configured log channels. The values, control flow, and API contract visible in the snippet are the deciding evidence.",
+      "topic": "Errors, logging & observability",
+      "code": {
+        "language": "php",
+        "title": "Attaching context while preserving normal exception reporting",
+        "snippet": "$exceptions->report(function (PaymentFailed $exception) {\n    Log::withContext([\n        'payment_id' => $exception->paymentId,\n        'request_id' => request()->header('X-Request-ID'),\n    ]);\n\n    return false;\n});"
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "error handling",
+        "exceptions",
+        "message customization",
+        "HTTP exceptions",
+        "logging",
+        "log stacks",
+        "Telescope",
+        "Debugbar"
+      ],
+      "track": "Laravel",
+      "id": "LQ-546",
+      "coreOptions": [
+        "Keep the relevant mechanism because returning false allows Laravel default reporting to continue while the added context enriches the log record",
+        "Remove the relevant mechanism because returning false marks the exception as handled and guarantees it will never reach configured log channels",
+        "Replace the implementation with a comment describing the intended result",
+        "Suppress every failure so callers always receive a successful-looking value"
+      ]
+    },
+    "after": {
+      "difficulty": "Applied",
+      "prompt": "The payment ID must enrich the normal exception log. Which smallest edit lets default reporting continue after this callback?",
+      "options": [
+        "Change Log::withContext to Log::info and retain return false.",
+        "Call report($exception) inside this callback and retain return false.",
+        "Replace return false with throw $exception.",
+        "Remove return false so the callback returns null."
+      ],
+      "answer": 3,
+      "explanation": "A registered callback returning null allows default reporting to continue. Log::withContext adds context for the normal record; there is no need to report the same exception recursively.",
+      "topic": "Errors, logging & observability",
+      "code": {
+        "language": "php",
+        "title": "Registered exception reporting callback",
+        "files": [
+          {
+            "name": "bootstrap/app.php (withExceptions callback)",
+            "kind": "laravel-fragment",
+            "snippet": "$exceptions->report(function (PaymentFailed $exception) {\n    Log::withContext(['payment_id' => $exception->paymentId]);\n    return false;\n});"
+          }
+        ]
+      },
+      "roadmap": true,
+      "roadmapConcepts": [
+        "error handling",
+        "exceptions",
+        "message customization",
+        "HTTP exceptions",
+        "logging",
+        "log stacks",
+        "Telescope",
+        "Debugbar"
+      ],
+      "track": "Laravel",
+      "id": "LQ-546",
+      "coreOptions": [
+        "Change Log::withContext to Log::info and retain return false.",
+        "Call report($exception) inside this callback and retain return false.",
+        "Replace return false with throw $exception.",
+        "Remove return false so the callback returns null."
+      ],
+      "revision": 2,
+      "changeKind": "editorial-pilot",
+      "status": "pilot",
+      "versions": {
+        "php": "8.4–8.5",
+        "laravel": "13.0.0",
+        "label": "Laravel 13.0.0 reference · PHP 8.4–8.5."
+      },
+      "assumptions": "This callback is registered through withExceptions. It is the only reporting callback. PaymentFailed has a paymentId and no custom report method. Log::withContext succeeds and does not itself emit a log record. Default exception logging is enabled.",
+      "learning": {
+        "trace": "A registered callback returning null allows default reporting to continue. Log::withContext adds context for the normal record; there is no need to report the same exception recursively.",
+        "rationales": [
+          "This emits a separate message while still stopping the normal exception log.",
+          "Reporting the same exception from its reporting callback risks recursion.",
+          "Throwing disrupts reporting instead of allowing the normal logging path to continue.",
+          "Without a false result or stop flag, the registered callback permits propagation."
+        ]
+      },
+      "family": "laravel-exception-reporting",
+      "references": [
+        "https://laravel.com/docs/13.x/errors#reporting-exceptions"
+      ],
+      "objective": "Repair context enrichment without suppressing or recursively invoking default reporting.",
+      "difficultyReason": "Distinguishes related APIs whose superficially similar controls have different effects.",
+      "validation": {
+        "kind": "laravel-contract",
+        "case": "reportCallbackNull"
+      },
+      "optionIds": [
+        "LQ-546@2:1",
+        "LQ-546@2:2",
+        "LQ-546@2:3",
+        "LQ-546@2:4"
+      ]
+    }
+  }
+]

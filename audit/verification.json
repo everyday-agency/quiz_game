@@ -1,0 +1,15 @@
+{
+  "sourceFilesVerified": 41,
+  "changedSourceFiles": [],
+  "questionRecordsVerified": 2500,
+  "changedQuestionRecords": [],
+  "brokenLocalReportLinks": [],
+  "combinedDraft": {
+    "exitStatus": 0,
+    "output": "8 12|123"
+  },
+  "includeDraft": {
+    "exitStatus": 255,
+    "typeError": true
+  }
+}

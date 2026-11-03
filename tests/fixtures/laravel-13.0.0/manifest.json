@@ -1,0 +1,66 @@
+{
+  "tag": "v13.0.0",
+  "sources": [
+    {
+      "file": "ReportableHandler.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Foundation/Exceptions/ReportableHandler.php",
+      "sha256": "c1d7bba78db63e0a6b30d1aa208b2d450c64f980d0c22ccb14d989f2227e0eba"
+    },
+    {
+      "file": "Handler.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Foundation/Exceptions/Handler.php",
+      "sha256": "5b100b0b2dcbc2eaa3eb4fa563fa73cd7485104d7fd7d76b71ec487024f445fd"
+    },
+    {
+      "file": "Worker.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Queue/Worker.php",
+      "sha256": "002efc037959a269071ca0c9e9fa75096a094ba8b38ffe7fefe9954b73a67bbe"
+    },
+    {
+      "file": "Queue.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Queue/Queue.php",
+      "sha256": "58c370e81229318c0903bb3caa41593911bb80b1b14954c6fb9eb174ed01a00d"
+    },
+    {
+      "file": "WithoutOverlapping.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Queue/Middleware/WithoutOverlapping.php",
+      "sha256": "c2d6123b7dffbe1d23bb2cacc3ead2112246b1af8673db2170f541fe2a8a726d"
+    },
+    {
+      "file": "ValidatesWhenResolvedTrait.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Validation/ValidatesWhenResolvedTrait.php",
+      "sha256": "b316bc93ae2979a859a378068b4b613d4908ff1ef8c24696ba36168c4ac28723"
+    },
+    {
+      "file": "FormRequest.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Foundation/Http/FormRequest.php",
+      "sha256": "10b64a0685cf174326a631737c48eb28ea66e3f845ebbe960b36ad2d0363e53a"
+    },
+    {
+      "file": "Validator.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Validation/Validator.php",
+      "sha256": "55bd2dbf2e51336744f40482898ad480e6e33086fa9f3e70386eddde0e7a8ac5"
+    },
+    {
+      "file": "HasAttributes.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php",
+      "sha256": "79ed5cc30d84b53cd2df8f4da435bf4e83cce5ea9d1a12018d5abc1f2b057ea6"
+    },
+    {
+      "file": "UrlGenerator.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Routing/UrlGenerator.php",
+      "sha256": "12f612729d48eb5cc56ea734e3e9900f58701e665b4d29c4a9bc3b504fae50a2"
+    },
+    {
+      "file": "RouteUrlGenerator.php",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/src/Illuminate/Routing/RouteUrlGenerator.php",
+      "sha256": "b191c259e0e0612c743027c9ff7d6dfeb27100ddbeddcf81211b18bde34c5d58"
+    },
+    {
+      "file": "LICENSE.md",
+      "url": "https://raw.githubusercontent.com/laravel/framework/v13.0.0/LICENSE.md",
+      "sha256": "7b4f9149597fbae2ce689bc9317d1869e17f1b3fa5f01c289998c108f8c37cf7"
+    }
+  ],
+  "methodsSha256": "1e5768680dff0de2bf2231be1b409e43f4c2d012ae21de601a6e06911a9fd771"
+}

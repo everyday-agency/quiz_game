@@ -1,0 +1,37 @@
+name: Validate remediation
+
+on:
+  pull_request:
+  push:
+    branches: ['remediation/**']
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.4', '8.5']
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: none
+      - name: Check archive, identities, grading, PHP and framework contracts
+        run: node tests.mjs
+      - name: Prepare static artifact
+        run: node tools/build-site.mjs
+      - name: Exercise real Chrome against the prepared artifact
+        if: matrix.php == '8.5'
+        run: node tests/browser.mjs
+        env:
+          QUIZ_SITE_DIR: _site

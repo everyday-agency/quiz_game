@@ -1,0 +1,190 @@
+[
+  {
+    "php": "8.5.2",
+    "lintedDistinctSources": 76,
+    "executedPilotFixtures": [
+      {
+        "id": "PQ-002",
+        "stdout": "30",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-004",
+        "stdout": "3.0",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-005",
+        "stdout": "TypeError",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-014",
+        "stdout": "8 12",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-021",
+        "stdout": "8 12|123",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-041",
+        "stdout": "7|Ada|viewer",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-053",
+        "stdout": "[false,true,0]",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-061",
+        "stdout": "string one",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-113",
+        "stdout": "[\"7\",\"ada@example.test\"]",
+        "diagnostic": "fgetcsv-escape-deprecation"
+      },
+      {
+        "id": "PQ-137",
+        "stdout": "png",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-197",
+        "stdout": "[false,1,\"new\"]",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-281",
+        "stdout": "none|old!|b",
+        "diagnostic": null
+      }
+    ],
+    "laravel": {
+      "php": "8.5.2",
+      "frameworkReference": "v13.0.0",
+      "checks": [
+        "reportCallbackFalse",
+        "context attached even when no record emitted: 0",
+        "reportCallbackNull",
+        "context attached even when no record emitted: 1",
+        "handler-level record contains payment_id",
+        "exception report method false delegates to default logging",
+        "retryUntil serialized as an absolute timestamp",
+        "retryUntilPrecedence",
+        "tries applies when retryUntil is absent",
+        "expired deadline fails without sliding on retry",
+        "backoff uses the last entry for later attempts",
+        "prepareForValidation",
+        "passedValidation",
+        "unchangedAttribute",
+        "different attribute value is dirty",
+        "changed attribute is recorded and then clean",
+        "routeAbsolute",
+        "explicit relative route generation",
+        "sharedOverlapLock: shared=0, ttl=120",
+        "sharedOverlapLock: shared=1, ttl=30",
+        "sharedOverlapLock: shared=1, ttl=120",
+        "releaseAfter is contention delay"
+      ]
+    }
+  },
+  {
+    "php": "8.4.17",
+    "lintedDistinctSources": 76,
+    "executedPilotFixtures": [
+      {
+        "id": "PQ-002",
+        "stdout": "30",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-004",
+        "stdout": "3.0",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-005",
+        "stdout": "TypeError",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-014",
+        "stdout": "8 12",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-021",
+        "stdout": "8 12|123",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-041",
+        "stdout": "7|Ada|viewer",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-053",
+        "stdout": "[false,true,0]",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-061",
+        "stdout": "string one",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-113",
+        "stdout": "[\"7\",\"ada@example.test\"]",
+        "diagnostic": "fgetcsv-escape-deprecation"
+      },
+      {
+        "id": "PQ-137",
+        "stdout": "png",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-197",
+        "stdout": "[false,1,\"new\"]",
+        "diagnostic": null
+      },
+      {
+        "id": "PQ-281",
+        "stdout": "none|old!|b",
+        "diagnostic": null
+      }
+    ],
+    "laravel": {
+      "php": "8.4.17",
+      "frameworkReference": "v13.0.0",
+      "checks": [
+        "reportCallbackFalse",
+        "context attached even when no record emitted: 0",
+        "reportCallbackNull",
+        "context attached even when no record emitted: 1",
+        "handler-level record contains payment_id",
+        "exception report method false delegates to default logging",
+        "retryUntil serialized as an absolute timestamp",
+        "retryUntilPrecedence",
+        "tries applies when retryUntil is absent",
+        "expired deadline fails without sliding on retry",
+        "backoff uses the last entry for later attempts",
+        "prepareForValidation",
+        "passedValidation",
+        "unchangedAttribute",
+        "different attribute value is dirty",
+        "changed attribute is recorded and then clean",
+        "routeAbsolute",
+        "explicit relative route generation",
+        "sharedOverlapLock: shared=0, ttl=120",
+        "sharedOverlapLock: shared=1, ttl=30",
+        "sharedOverlapLock: shared=1, ttl=120",
+        "releaseAfter is contention delay"
+      ]
+    }
+  }
+]

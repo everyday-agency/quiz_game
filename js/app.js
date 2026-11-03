@@ -1,5 +1,6 @@
 import { QUESTION_BANK, TRACKS, TRACK_TOPICS, DIFFICULTIES } from './questions.mjs';
 import { buildLearningNotes } from './learning-notes.mjs';
+import { gradeAnswer, gradeSession } from './exam.mjs';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -36,6 +37,7 @@ const state = {
   answers: [],
   streak: 0,
   bestStreak: 0,
+  completed: false,
   stats: savedStats,
 };
 
@@ -82,7 +84,7 @@ function materialize(question) {
     displayOptions: shuffle(question.options.map((text, index) => ({
       text,
       sourceText: question.coreOptions?.[index] || text,
-      correct: index === question.answer,
+      id: question.optionIds[index],
     }))),
   };
 }
@@ -102,12 +104,29 @@ function createCodeLesson(lesson, labelText) {
 
   const title = document.createElement('strong');
   title.textContent = lesson.title;
-  const pre = document.createElement('pre');
-  const code = document.createElement('code');
-  code.textContent = lesson.snippet;
-  pre.append(code);
-
-  section.append(header, title, pre);
+  section.append(header, title);
+  if (lesson.context) {
+    const context = document.createElement('p');
+    context.textContent = lesson.context;
+    section.append(context);
+  }
+  for (const file of lesson.files || [{ snippet: lesson.snippet }]) {
+    if (file.name) {
+      const filename = document.createElement('h4');
+      filename.textContent = `${file.name}${file.kind === 'php-fragment' ? ' · contextual fragment' : ''}`;
+      section.append(filename);
+    }
+    if (file.context) {
+      const context = document.createElement('p');
+      context.textContent = file.context;
+      section.append(context);
+    }
+    const pre = document.createElement('pre');
+    const code = document.createElement('code');
+    code.textContent = file.snippet;
+    pre.append(code);
+    section.append(pre);
+  }
   return section;
 }
 
@@ -149,7 +168,8 @@ function createLearningNotes(question, orderedOptions = question.options) {
     const prefix = document.createElement('b');
     prefix.textContent = 'Example: ';
     example.append(prefix, alternative.example);
-    copy.append(option, reason, example);
+    copy.append(option, reason);
+    if (alternative.example) copy.append(example);
     if (alternative.code) {
       copy.append(createCodeLesson(alternative.code, 'Why this can fail in code'));
     }
@@ -311,6 +331,7 @@ function startSession(sourceQuestions = null) {
   state.answers = [];
   state.streak = 0;
   state.bestStreak = 0;
+  state.completed = false;
   showView('quiz');
   renderQuestion();
 }
@@ -327,6 +348,9 @@ function renderQuestion() {
   $('#questionDifficulty').textContent = question.difficulty;
   $('#questionNumber').textContent = `Question ${state.current + 1} of ${state.session.length}`;
   $('#questionPrompt').textContent = question.prompt;
+  const context = $('#questionContext');
+  context.textContent = [question.versions?.label, question.assumptions].filter(Boolean).join(' ');
+  context.hidden = !context.textContent;
   const questionCode = $('#questionCode');
   questionCode.replaceChildren();
   questionCode.hidden = !question.code;
@@ -334,16 +358,19 @@ function renderQuestion() {
   $('#progressBar').style.width = `${((state.current + 1) / state.session.length) * 100}%`;
   $('#feedbackPanel').hidden = true;
   $('#feedbackPanel').className = 'feedback-panel';
+  $('#feedbackText').textContent = '';
+  $('#feedbackTitle').textContent = '';
+  $('#feedbackIcon').textContent = '';
   $('#learningNotes').replaceChildren();
   $('#answerHint').textContent = state.mode === 'learn'
     ? 'Choose the strongest answer.'
-    : 'Your answer is saved without feedback.';
+    : 'Answers are kept for this session. Results appear after submission.';
 
   const action = $('#questionAction');
   action.disabled = true;
   action.textContent = state.mode === 'learn'
     ? 'Check answer'
-    : state.current === state.session.length - 1 ? 'Finish exam' : 'Save & next';
+    : state.current === state.session.length - 1 ? 'Submit exam' : 'Next question';
 
   const list = $('#optionList');
   list.replaceChildren();
@@ -382,19 +409,23 @@ function selectOption(index) {
 }
 
 function recordAnswer() {
+  if (state.completed || state.selectedOption === null || state.answers.length !== state.current) return null;
   const question = state.session[state.current];
   const option = question.displayOptions[state.selectedOption];
-  const correctOption = question.displayOptions.find((item) => item.correct);
-  const answer = {
+  let answer = {
     question,
+    questionId: question.id,
+    revision: question.revision,
+    selectedOptionId: option.id,
     selectedText: option.sourceText || option.text,
-    correctText: correctOption.sourceText || correctOption.text,
+    correctText: null,
     selectedIndex: state.selectedOption,
-    correct: option.correct,
+    correct: null,
   };
+  if (state.mode === 'learn') answer = gradeAnswer(answer);
   state.answers.push(answer);
 
-  if (answer.correct) {
+  if (state.mode === 'learn' && answer.correct) {
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
   } else {
@@ -410,7 +441,7 @@ function revealAnswer(answer) {
   $$('.option-button').forEach((button, index) => {
     button.disabled = true;
     button.classList.remove('selected');
-    if (question.displayOptions[index].correct) button.classList.add('correct');
+    if (question.displayOptions[index].id === question.optionIds[question.answer]) button.classList.add('correct');
     if (index === answer.selectedIndex && !answer.correct) button.classList.add('wrong');
   });
 
@@ -438,12 +469,22 @@ function advanceQuestion() {
 }
 
 function updateMetrics() {
+  if (state.mode === 'exam') {
+    $('#scoreMetric').textContent = `${state.answers.length} of ${state.session.length} answered`;
+    $('#streakMetric').textContent = '';
+    $('#streakMetric').hidden = true;
+    return;
+  }
+  $('#streakMetric').hidden = false;
   const correct = state.answers.filter((answer) => answer.correct).length;
   $('#scoreMetric').textContent = `${correct} correct`;
   $('#streakMetric').textContent = `${state.streak} streak`;
 }
 
 function finishSession() {
+  if (state.completed || state.answers.length !== state.session.length) return;
+  state.completed = true;
+  Object.assign(state, gradeSession(state.answers));
   const correct = state.answers.filter((answer) => answer.correct).length;
   const percent = Math.round((correct / state.answers.length) * 100);
   state.stats.answered += state.answers.length;
@@ -527,7 +568,11 @@ function renderResults(correct, percent) {
     const explanation = document.createElement('p');
     explanation.className = 'review-answer';
     explanation.textContent = `Correct: ${answer.correctText}. ${answer.question.explanation}`;
-    details.append(summary, explanation, createLearningNotes(answer.question, answer.question.displayOptions));
+    details.append(summary);
+    if (answer.question.code) details.append(createCodeLesson(answer.question.code, 'Question code'));
+    const selected = document.createElement('p');
+    selected.textContent = `Your answer: ${answer.selectedText}`;
+    details.append(selected, explanation, createLearningNotes(answer.question, answer.question.displayOptions));
     missedList.append(details);
   });
   if (missed.length > 8) {
@@ -546,7 +591,7 @@ function renderBank() {
   const domain = $('#bankTopic').value;
   const difficulty = $('#bankDifficulty').value;
   const matches = QUESTION_BANK.filter((question) => {
-    const searchable = `${question.track} ${question.topic} ${question.prompt} ${question.code?.title || ''} ${question.code?.snippet || ''} ${question.explanation} ${question.options.join(' ')} ${(question.coreOptions || []).join(' ')}`.toLowerCase();
+    const searchable = `${question.id} ${question.track} ${question.topic} ${question.prompt} ${question.code?.title || ''} ${question.code?.snippet || ''} ${(question.code?.files || []).map(file => file.snippet).join(' ')} ${question.explanation} ${question.options.join(' ')} ${(question.coreOptions || []).join(' ')}`.toLowerCase();
     return (!term || searchable.includes(term))
       && (track === 'all' || question.track === track)
       && (domain === 'all' || domainKey(question.track, question.topic) === domain)
@@ -598,6 +643,11 @@ function renderBank() {
       const explanation = document.createElement('p');
       explanation.textContent = question.explanation;
       if (question.code) answer.append(createCodeLesson(question.code, 'Read this code'));
+      if (question.versions || question.assumptions) {
+        const context = document.createElement('p');
+        context.textContent = [question.versions?.label, question.assumptions].filter(Boolean).join(' ');
+        answer.append(context);
+      }
       answer.append(correct, explanation);
       answer.append(createLearningNotes(question));
       answer.dataset.enriched = 'true';
@@ -670,6 +720,7 @@ $('#questionAction').addEventListener('click', () => {
     return;
   }
   const answer = recordAnswer();
+  if (!answer) return;
   if (state.mode === 'learn') revealAnswer(answer);
   else advanceQuestion();
 });
