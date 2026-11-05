@@ -42,8 +42,10 @@ try {
   await new Promise((resolve,reject)=>{ws.addEventListener('open',resolve,{once:true});ws.addEventListener('error',reject,{once:true});});
   let nextId=0;
   const pending = new Map();
+  let loadCount = 0;
   ws.addEventListener('message',event=>{
     const data=JSON.parse(event.data);
+    if(data.method==='Page.loadEventFired') loadCount++;
     if(data.id){const p=pending.get(data.id);pending.delete(data.id);data.error?p.reject(new Error(JSON.stringify(data.error))):p.resolve(data.result);}
     if(data.method==='Runtime.exceptionThrown') errors.push(data.params.exceptionDetails);
   });
@@ -58,6 +60,12 @@ try {
     if(result.exceptionDetails)throw new Error(JSON.stringify(result.exceptionDetails));
     return result.result.value;
   };
+  const loadPage=async(method,params={})=>{
+    const previous=loadCount;
+    await call(method,params);
+    for(let i=0;i<300;i++){if(loadCount>previous)return;await delay(50);}
+    throw new Error(`Timed out waiting for page load: ${method}`);
+  };
   const until=async expression=>{for(let i=0;i<100;i++){if(await evaluate(expression))return;await delay(30);}throw new Error(`Timed out: ${expression}`);};
   const click=async selector=>{
     const point=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)}); if(!e)throw new Error('Missing element');e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()`);
@@ -71,10 +79,11 @@ try {
   const shot=async name=>{await evaluate(`Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))`);const result=await call('Page.captureScreenshot',{format:'png'});await writeFile(join(reportDir,`${name}.png`),Buffer.from(result.data,'base64'));};
   await call('Page.enable');await call('Runtime.enable');
   await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
-  await call('Page.navigate',{url:origin});
+  await loadPage('Page.navigate',{url:origin});
   await until(`document.querySelector('#availableCount')?.textContent==='560 available'`);
   const legacy={answered:37,correct:19,sessions:2,best:80};
-  await evaluate(`localStorage.setItem('laravelQuizStats',${JSON.stringify(JSON.stringify(legacy))});location.reload();`);
+  await evaluate(`localStorage.setItem('laravelQuizStats',${JSON.stringify(JSON.stringify(legacy))});`);
+  await loadPage('Page.reload');
   await until(`document.querySelector('#lifetimeCount')?.textContent==='0 PHP answers'`);
   check('legacy totals are preserved without being counted as PHP release progress');
   assert.equal(await evaluate(`document.querySelectorAll('#trackControl,#bankTrack,#collectionLink').length`),0);
@@ -125,7 +134,7 @@ try {
   assert(await evaluate(`document.querySelector('#feedbackPanel').hidden && document.querySelector('#feedbackText').textContent==='' && document.querySelector('#learningNotes').textContent==='' && document.querySelectorAll('#quizView .correct,#quizView .wrong').length===0 && document.querySelector('#scoreMetric').textContent==='0 of 10 answered' && document.querySelector('#streakMetric').hidden`));
   check('switching from revealed Learn feedback to Exam clears all previous correctness indicators');
   // Reload an unfinished review: saved aggregates must survive and not count it.
-  await call('Page.reload');await until(`document.querySelector('#lifetimeCount')?.textContent==='10 PHP answers'`);
+  await loadPage('Page.reload');await until(`document.querySelector('#lifetimeCount')?.textContent==='10 PHP answers'`);
   assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodPhpEngineerV1Stats'))`),expectedStats);
   check('current local progress survives reload; unfinished review adds no aggregate counts');
   await click('[data-view="bank"]');

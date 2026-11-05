@@ -39,8 +39,10 @@ try{
   ws=new WebSocket(tab.webSocketDebuggerUrl);
   await new Promise((resolve,reject)=>{ws.addEventListener('open',resolve,{once:true});ws.addEventListener('error',reject,{once:true});});
   const pending=new Map();let nextId=0;
+  let loadCount = 0;
   ws.addEventListener('message',event=>{
     const data=JSON.parse(event.data);
+    if(data.method==='Page.loadEventFired') loadCount++;
     if(data.id){const p=pending.get(data.id);pending.delete(data.id);data.error?p.reject(new Error(JSON.stringify(data.error))):p.resolve(data.result);}
     if(data.method==='Runtime.exceptionThrown')errors.push(data.params.exceptionDetails);
   });
@@ -49,6 +51,12 @@ try{
     pending.set(id,{resolve:v=>{clearTimeout(timer);resolve(v);},reject:e=>{clearTimeout(timer);reject(e);}});ws.send(JSON.stringify({id,method,params}));
   });
   const evaluate=async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw new Error(JSON.stringify(r.exceptionDetails));return r.result.value;};
+  const loadPage=async(method,params={})=>{
+    const previous=loadCount;
+    await call(method,params);
+    for(let i=0;i<300;i++){if(loadCount>previous)return;await delay(50);}
+    throw new Error(`Timed out waiting for page load: ${method}`);
+  };
   const until=async expression=>{for(let i=0;i<100;i++){if(await evaluate(expression))return;await delay(30);}throw new Error(`Timed out: ${expression}`);};
   const click=async selector=>{
     const point=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)throw new Error('Missing control');e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2};})()`);
@@ -60,9 +68,10 @@ try{
   const stats=()=>evaluate(`({main:localStorage.getItem('underTheHoodStats'),legacy:localStorage.getItem('laravelQuizStats'),pilot:JSON.parse(localStorage.getItem('underTheHoodPhpEngineerV1Stats'))})`);
   await call('Page.enable');await call('Runtime.enable');
   await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
-  await call('Page.navigate',{url:origin});await until(`document.querySelector('#availableCount')?.textContent==='560 available'`);
+  await loadPage('Page.navigate',{url:origin});await until(`document.querySelector('#availableCount')?.textContent==='560 available'`);
   const main={answered:37,correct:19,sessions:2,best:80},legacy={answered:11,correct:7,sessions:1,best:70};
-  await evaluate(`localStorage.setItem('underTheHoodStats',${JSON.stringify(JSON.stringify(main))});localStorage.setItem('laravelQuizStats',${JSON.stringify(JSON.stringify(legacy))});location.reload();`);
+  await evaluate(`localStorage.setItem('underTheHoodStats',${JSON.stringify(JSON.stringify(main))});localStorage.setItem('laravelQuizStats',${JSON.stringify(JSON.stringify(legacy))});`);
+  await loadPage('Page.reload');
   await until(`document.querySelector('#lifetimeCount')?.textContent==='0 PHP answers'`);
   assert.equal(await evaluate(`document.querySelectorAll('#trackControl,#bankTrack,#collectionLink').length`),0);
   // Select the 20 retained pilot domains through the ordinary PHP setup controls.
@@ -150,7 +159,7 @@ try{
   assert(new Set(displayedKeyPositions.map(item=>item.position)).size>1);
   check('real browser option shuffling moves keyed answers while preserving grading');
 
-  await call('Page.reload');await until(`document.querySelector('#lifetimeCount')?.textContent==='40 PHP answers'`);
+  await loadPage('Page.reload');await until(`document.querySelector('#lifetimeCount')?.textContent==='40 PHP answers'`);
   assert.deepEqual(await stats(),{main:JSON.stringify(main),legacy:JSON.stringify(legacy),pilot:expectedPilot});
   await click('[data-view="bank"]');
   await click('#bankSearch');await call('Input.insertText',{text:'PHP-PILOT-003'});
@@ -160,7 +169,7 @@ try{
   await evaluate(`document.querySelector('.bank-question').scrollIntoView({behavior:'instant'})`);
   assert(await evaluate(`document.documentElement.scrollWidth<=window.innerWidth`));await shot('browser-mobile-files');
   check('pilot progress survives reload; multi-file bank review works at a 390px mobile viewport');
-  await call('Page.navigate',{url:origin+'/?collection=php-pilot-v1'});
+  await loadPage('Page.navigate',{url:origin+'/?collection=php-pilot-v1'});
   await until(`document.querySelector('#lifetimeCount')?.textContent==='40 PHP answers'`);
   assert.equal(await evaluate(`new URL(location.href).searchParams.has('collection')`),false);
   assert.equal(await evaluate(`document.querySelector('#availableCount').textContent`),'560 available');

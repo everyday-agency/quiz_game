@@ -13,16 +13,16 @@
     "no uncaught JavaScript exceptions"
   ],
   "examIds": [
-    "PHP-E26-0257",
-    "PHP-E26-0522",
-    "PHP-E26-0517",
-    "PHP-E26-0303",
-    "PHP-E26-0030",
-    "PHP-E26-0050",
-    "PHP-E26-0368",
-    "PHP-E26-0318",
-    "PHP-E26-0533",
-    "PHP-E26-0250"
+    "PHP-E26-0507",
+    "PHP-E26-0127",
+    "PHP-PILOT-002",
+    "PHP-E26-0340",
+    "PHP-E26-0259",
+    "PHP-E26-0016",
+    "PHP-E26-0462",
+    "PHP-E26-0107",
+    "PHP-E26-0578",
+    "PHP-E26-0070"
   ],
   "expectedStats": {
     "answered": 10,

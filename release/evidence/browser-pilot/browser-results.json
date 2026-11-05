@@ -11,64 +11,169 @@
     "retired pilot bookmarks open the PHP release and preserve historical/current totals and raises no JavaScript errors"
   ],
   "learnIds": [
-    "PHP-PILOT-011",
+    "PHP-PILOT-008",
     "PHP-PILOT-001",
+    "PHP-PILOT-015",
+    "PHP-PILOT-003",
+    "PHP-PILOT-016",
     "PHP-PILOT-010",
-    "PHP-PILOT-005",
+    "PHP-PILOT-009",
+    "PHP-PILOT-011",
+    "PHP-PILOT-020",
     "PHP-PILOT-019",
-    "PHP-PILOT-012",
+    "PHP-PILOT-004",
     "PHP-PILOT-018",
     "PHP-PILOT-002",
-    "PHP-PILOT-013",
-    "PHP-PILOT-017",
-    "PHP-PILOT-004",
-    "PHP-PILOT-016",
-    "PHP-PILOT-007",
     "PHP-PILOT-014",
-    "PHP-PILOT-003",
-    "PHP-PILOT-009",
-    "PHP-PILOT-015",
-    "PHP-PILOT-020",
-    "PHP-PILOT-008",
-    "PHP-PILOT-006"
+    "PHP-PILOT-005",
+    "PHP-PILOT-012",
+    "PHP-PILOT-006",
+    "PHP-PILOT-013",
+    "PHP-PILOT-007",
+    "PHP-PILOT-017"
   ],
   "examIds": [
+    "PHP-PILOT-014",
+    "PHP-PILOT-006",
+    "PHP-PILOT-009",
     "PHP-PILOT-015",
+    "PHP-PILOT-005",
+    "PHP-PILOT-010",
+    "PHP-PILOT-013",
     "PHP-PILOT-019",
     "PHP-PILOT-016",
-    "PHP-PILOT-010",
-    "PHP-PILOT-018",
-    "PHP-PILOT-017",
-    "PHP-PILOT-001",
     "PHP-PILOT-003",
-    "PHP-PILOT-011",
-    "PHP-PILOT-004",
-    "PHP-PILOT-013",
-    "PHP-PILOT-002",
     "PHP-PILOT-020",
-    "PHP-PILOT-006",
-    "PHP-PILOT-012",
-    "PHP-PILOT-005",
-    "PHP-PILOT-007",
+    "PHP-PILOT-002",
+    "PHP-PILOT-017",
+    "PHP-PILOT-011",
+    "PHP-PILOT-001",
     "PHP-PILOT-008",
-    "PHP-PILOT-014",
-    "PHP-PILOT-009"
+    "PHP-PILOT-012",
+    "PHP-PILOT-004",
+    "PHP-PILOT-007",
+    "PHP-PILOT-018"
   ],
   "displayedKeyPositions": [
     {
+      "id": "PHP-PILOT-008",
+      "position": 1,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-001",
+      "position": 2,
+      "sourcePosition": 2
+    },
+    {
+      "id": "PHP-PILOT-015",
+      "position": 0,
+      "sourcePosition": 0
+    },
+    {
+      "id": "PHP-PILOT-003",
+      "position": 1,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-016",
+      "position": 3,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-010",
+      "position": 1,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-009",
+      "position": 3,
+      "sourcePosition": 2
+    },
+    {
       "id": "PHP-PILOT-011",
+      "position": 1,
+      "sourcePosition": 3
+    },
+    {
+      "id": "PHP-PILOT-020",
+      "position": 0,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-019",
+      "position": 2,
+      "sourcePosition": 0
+    },
+    {
+      "id": "PHP-PILOT-004",
+      "position": 1,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-018",
       "position": 0,
       "sourcePosition": 3
     },
     {
-      "id": "PHP-PILOT-001",
+      "id": "PHP-PILOT-002",
+      "position": 3,
+      "sourcePosition": 1
+    },
+    {
+      "id": "PHP-PILOT-014",
+      "position": 2,
+      "sourcePosition": 3
+    },
+    {
+      "id": "PHP-PILOT-005",
+      "position": 1,
+      "sourcePosition": 2
+    },
+    {
+      "id": "PHP-PILOT-012",
+      "position": 1,
+      "sourcePosition": 0
+    },
+    {
+      "id": "PHP-PILOT-006",
+      "position": 3,
+      "sourcePosition": 3
+    },
+    {
+      "id": "PHP-PILOT-013",
+      "position": 2,
+      "sourcePosition": 0
+    },
+    {
+      "id": "PHP-PILOT-007",
+      "position": 3,
+      "sourcePosition": 2
+    },
+    {
+      "id": "PHP-PILOT-017",
       "position": 0,
       "sourcePosition": 2
     },
     {
-      "id": "PHP-PILOT-010",
+      "id": "PHP-PILOT-014",
+      "position": 1,
+      "sourcePosition": 3
+    },
+    {
+      "id": "PHP-PILOT-006",
       "position": 3,
-      "sourcePosition": 1
+      "sourcePosition": 3
+    },
+    {
+      "id": "PHP-PILOT-009",
+      "position": 0,
+      "sourcePosition": 2
+    },
+    {
+      "id": "PHP-PILOT-015",
+      "position": 1,
+      "sourcePosition": 0
     },
     {
       "id": "PHP-PILOT-005",
@@ -76,22 +181,7 @@
       "sourcePosition": 2
     },
     {
-      "id": "PHP-PILOT-019",
-      "position": 3,
-      "sourcePosition": 0
-    },
-    {
-      "id": "PHP-PILOT-012",
-      "position": 2,
-      "sourcePosition": 0
-    },
-    {
-      "id": "PHP-PILOT-018",
-      "position": 2,
-      "sourcePosition": 3
-    },
-    {
-      "id": "PHP-PILOT-002",
+      "id": "PHP-PILOT-010",
       "position": 0,
       "sourcePosition": 1
     },
@@ -101,66 +191,6 @@
       "sourcePosition": 0
     },
     {
-      "id": "PHP-PILOT-017",
-      "position": 1,
-      "sourcePosition": 2
-    },
-    {
-      "id": "PHP-PILOT-004",
-      "position": 1,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-016",
-      "position": 0,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-007",
-      "position": 0,
-      "sourcePosition": 2
-    },
-    {
-      "id": "PHP-PILOT-014",
-      "position": 2,
-      "sourcePosition": 3
-    },
-    {
-      "id": "PHP-PILOT-003",
-      "position": 2,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-009",
-      "position": 0,
-      "sourcePosition": 2
-    },
-    {
-      "id": "PHP-PILOT-015",
-      "position": 0,
-      "sourcePosition": 0
-    },
-    {
-      "id": "PHP-PILOT-020",
-      "position": 2,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-008",
-      "position": 1,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-006",
-      "position": 0,
-      "sourcePosition": 3
-    },
-    {
-      "id": "PHP-PILOT-015",
-      "position": 2,
-      "sourcePosition": 0
-    },
-    {
       "id": "PHP-PILOT-019",
       "position": 1,
       "sourcePosition": 0
@@ -171,44 +201,14 @@
       "sourcePosition": 1
     },
     {
-      "id": "PHP-PILOT-010",
-      "position": 3,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-018",
-      "position": 2,
-      "sourcePosition": 3
-    },
-    {
-      "id": "PHP-PILOT-017",
-      "position": 2,
-      "sourcePosition": 2
-    },
-    {
-      "id": "PHP-PILOT-001",
-      "position": 3,
-      "sourcePosition": 2
-    },
-    {
       "id": "PHP-PILOT-003",
-      "position": 0,
+      "position": 3,
       "sourcePosition": 1
     },
     {
-      "id": "PHP-PILOT-011",
+      "id": "PHP-PILOT-020",
       "position": 1,
-      "sourcePosition": 3
-    },
-    {
-      "id": "PHP-PILOT-004",
-      "position": 2,
       "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-013",
-      "position": 2,
-      "sourcePosition": 0
     },
     {
       "id": "PHP-PILOT-002",
@@ -216,14 +216,24 @@
       "sourcePosition": 1
     },
     {
-      "id": "PHP-PILOT-020",
-      "position": 0,
-      "sourcePosition": 1
+      "id": "PHP-PILOT-017",
+      "position": 3,
+      "sourcePosition": 2
     },
     {
-      "id": "PHP-PILOT-006",
-      "position": 1,
+      "id": "PHP-PILOT-011",
+      "position": 0,
       "sourcePosition": 3
+    },
+    {
+      "id": "PHP-PILOT-001",
+      "position": 1,
+      "sourcePosition": 2
+    },
+    {
+      "id": "PHP-PILOT-008",
+      "position": 1,
+      "sourcePosition": 1
     },
     {
       "id": "PHP-PILOT-012",
@@ -231,9 +241,9 @@
       "sourcePosition": 0
     },
     {
-      "id": "PHP-PILOT-005",
+      "id": "PHP-PILOT-004",
       "position": 0,
-      "sourcePosition": 2
+      "sourcePosition": 1
     },
     {
       "id": "PHP-PILOT-007",
@@ -241,19 +251,9 @@
       "sourcePosition": 2
     },
     {
-      "id": "PHP-PILOT-008",
-      "position": 0,
-      "sourcePosition": 1
-    },
-    {
-      "id": "PHP-PILOT-014",
-      "position": 2,
+      "id": "PHP-PILOT-018",
+      "position": 1,
       "sourcePosition": 3
-    },
-    {
-      "id": "PHP-PILOT-009",
-      "position": 2,
-      "sourcePosition": 2
     }
   ],
   "mainStats": {
