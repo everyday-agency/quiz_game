@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { delimiter } from 'node:path';
+import { tokenizerFlags } from '../../tools/php-tokenizer.mjs';
 import { PHP_PILOT_QUESTIONS as questions } from '../../js/php-pilot/questions.mjs';
 import { OUTPUTS, PATCHES, TEST_CASES, executableFiles, testCaseFiles } from './fixtures.mjs';
 import { executableFiles as oldExecutableFiles, testCaseFiles as oldTestCaseFiles } from '../../php-pilot/formatting/before/fixtures.mjs';
@@ -104,7 +105,7 @@ const report = [];
 for (const php of runtimes) {
   const version = execFileSync(php, ['-n', '-r', 'echo PHP_VERSION;'], { encoding: 'utf8' });
   assert(/^8\.[45]\./.test(version));
-  const tokens = JSON.parse(execFileSync(php, ['-n', '-r', tokenize], { input: JSON.stringify(pairs.flatMap(p => [p.before, p.after])), env: {}, encoding: 'utf8', timeout: 5000, maxBuffer: 4 * 1024 * 1024 }));
+  const tokens = JSON.parse(execFileSync(php, ['-n', ...tokenizerFlags(php), '-r', tokenize], { input: JSON.stringify(pairs.flatMap(p => [p.before, p.after])), env: {}, encoding: 'utf8', timeout: 5000, maxBuffer: 4 * 1024 * 1024 }));
   pairs.forEach((pair, i) => assert.deepEqual(tokens[i * 2 + 1], tokens[i * 2], `${version}: non-whitespace token change in ${pair.label}`));
   for (const unit of units) {
     const source = unit.kind === 'fragment' ? `<?php\nclass Sender\n{\n${unit.source}\n}\n` : unit.source;

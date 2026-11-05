@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
+import {tokenizerFlags} from './php-tokenizer.mjs';
 import {PHP_PILOT_QUESTIONS} from '../js/php-pilot/questions.mjs';
 import {QUESTION_BANK} from '../release/archive/pre-php-only/js/questions.mjs';
 const batch=Number(process.env.BATCH||1);
@@ -25,7 +26,7 @@ const sources=[];
 // Layout checks inspect PHP tokens, so braces in a serialized string or a
 // comment cannot be mistaken for compressed executable blocks. No code runs.
 const sourceList=qs.flatMap(q=>q.context.files.map(f=>f.source));
-const tokenized=spawnSync(process.env.PHP_BIN||'php',['-n','-r',`
+const tokenized=spawnSync(process.env.PHP_BIN||'php',['-n',...tokenizerFlags(process.env.PHP_BIN||'php'),'-r',`
 $sources = json_decode(stream_get_contents(STDIN), true, 512, JSON_THROW_ON_ERROR);
 $result = [];
 foreach ($sources as $source) {

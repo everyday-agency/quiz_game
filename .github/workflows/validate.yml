@@ -26,7 +26,7 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
           tools: none
-          extensions: pdo_sqlite, ctype, mbstring, openssl, intl, bcmath, zip, sodium
+          extensions: tokenizer, pdo_sqlite, ctype, mbstring, openssl, intl, bcmath, zip, sodium
       - name: Check archive, identities, grading, PHP and framework contracts
         run: node tests.mjs
       - name: Prepare static artifact
