@@ -1,3 +1,4 @@
+import {swipeLeft} from '../chrome-touch.mjs';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {readFile,writeFile,mkdtemp,rm,mkdir} from 'node:fs/promises';
@@ -101,8 +102,12 @@ try{
         // and center that scroller itself before sending a native touch gesture.
         const target=await evaluate(`(()=>{const choices=[...document.querySelectorAll('#optionList .code-choice')];const index=choices.findIndex(e=>e.scrollWidth>e.clientWidth+1);if(index<0)throw new Error('Expected a long method choice');const e=choices[index];e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return{index,x:r.x+r.width/2,y:r.y+r.height/2,width:e.clientWidth,contentWidth:e.scrollWidth};})()`);
         await call('Emulation.setTouchEmulationEnabled',{enabled:true});
-        await call('Input.synthesizeScrollGesture',{x:target.x,y:target.y,xDistance:-180,yDistance:0,gestureSourceType:'touch'});
-        await until(`document.querySelectorAll('#optionList .code-choice')[${target.index}].scrollLeft>0`);
+        await swipeLeft(call,target);
+        try { await until(`document.querySelectorAll('#optionList .code-choice')[${target.index}].scrollLeft>0`); }
+        catch(error){
+          console.log('Scroll diagnostics',await call('Browser.getVersion'),target,await evaluate(`(()=>{const e=document.querySelectorAll('#optionList .code-choice')[${target.index}];const r=e.getBoundingClientRect();return{scrollLeft:e.scrollLeft,clientWidth:e.clientWidth,scrollWidth:e.scrollWidth,rect:r.toJSON(),hit:document.elementFromPoint(${target.x},${target.y})?.outerHTML.slice(0,400),viewport:{width:innerWidth,height:innerHeight}};})()`));
+          await shot('browser-mobile-scroll-failure');throw error;
+        }
         assert.equal(await evaluate(`document.querySelectorAll('.option-button.selected').length`),0,'Scrolling a method choice selected an answer');
         await call('Emulation.setTouchEmulationEnabled',{enabled:false});
         await evaluate(`document.querySelectorAll('#optionList .code-choice')[${target.index}].scrollLeft=0`);

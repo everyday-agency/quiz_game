@@ -1,3 +1,4 @@
+import {swipeLeft} from '../chrome-touch.mjs';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {readFile,writeFile,mkdtemp,rm,mkdir} from 'node:fs/promises';
@@ -181,7 +182,7 @@ try{
   await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
   const point=await evaluate(`(()=>{const e=document.querySelector('.bank-answer .code-scroll');e.scrollIntoView({behavior:'instant',block:'center'});const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:Math.max(20,Math.min(innerHeight-20,r.y+40)),overflow:e.scrollWidth>e.clientWidth};})()`);
   assert(point.overflow);await call('Emulation.setTouchEmulationEnabled',{enabled:true});
-  await call('Input.synthesizeScrollGesture',{x:point.x,y:point.y,xDistance:-200,yDistance:0,gestureSourceType:'touch'});
+  await swipeLeft(call,point);
   await until(`document.querySelector('.bank-answer .code-scroll').scrollLeft>0`);
   assert(await evaluate(`document.documentElement.scrollWidth<=innerWidth`));await shot('review-mobile-long-line-scrolled');
   await call('Emulation.setTouchEmulationEnabled',{enabled:false});

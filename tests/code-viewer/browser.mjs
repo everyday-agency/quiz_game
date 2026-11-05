@@ -1,3 +1,4 @@
+import {swipeLeft} from '../chrome-touch.mjs';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {readFile,writeFile,mkdtemp,rm,mkdir} from 'node:fs/promises';
@@ -137,7 +138,7 @@ try{
       const scroller='.bank-answer > .code-lesson .code-scroll';
       const mobile=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(scroller)});e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2,overflow:e.scrollWidth>e.clientWidth,gutter:e.querySelector('.code-gutter').getBoundingClientRect().x,pageFits:document.documentElement.scrollWidth<=innerWidth};})()`);
       assert(mobile.overflow&&mobile.pageFits);
-      await call('Input.synthesizeScrollGesture',{x:mobile.x,y:mobile.y,xDistance:-180,yDistance:0,gestureSourceType:'touch'});
+      await swipeLeft(call,mobile);
       await until(`document.querySelector(${JSON.stringify(scroller)}).scrollLeft>0`);
       assert.equal(await evaluate(`document.querySelector(${JSON.stringify(scroller)}).querySelector('.code-gutter').getBoundingClientRect().x`),mobile.gutter);
       await shot('PHP-PILOT-013-mobile-scrolled');
@@ -157,7 +158,7 @@ try{
       await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
       assert.equal(await evaluate(`getComputedStyle(document.querySelector('#viewerFixture .code-gutter')).display`),'block');
       const gutterLeft=await evaluate(`document.querySelector('#viewerFixture .code-gutter').getBoundingClientRect().x`);
-      const point=await evaluate(`(()=>{const e=document.querySelector('#viewerFixture .code-scroll');e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2};})()`);
+      const point=await evaluate(`(async()=>{const e=document.querySelector('#viewerFixture .code-scroll');e.scrollIntoView({block:'center',behavior:'instant'});await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2};})()`);
       await call('Input.dispatchMouseEvent',{type:'mouseWheel',...point,deltaX:500,deltaY:0});
       await until(`document.querySelector('#viewerFixture .code-scroll').scrollLeft>0`);
       assert.equal(await evaluate(`document.querySelector('#viewerFixture .code-gutter').getBoundingClientRect().x`),gutterLeft);

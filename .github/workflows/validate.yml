@@ -59,3 +59,10 @@ jobs:
         run: node tests/php-expansion/browser.mjs
         env:
           QUIZ_SITE_DIR: _site
+      - name: Preserve failed mobile scroll diagnostics
+        if: failure() && matrix.php == '8.5'
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-scroll-diagnostics
+          path: php-pilot/browser-mobile-scroll-failure.png
+          if-no-files-found: ignore
