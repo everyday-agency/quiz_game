@@ -97,14 +97,15 @@ try{
         const methods=await evaluate(`[...document.querySelectorAll('#optionList .code-choice code')].map(e=>({source:e.textContent,whitespace:getComputedStyle(e).whiteSpace,font:getComputedStyle(e).fontFamily}))`);
         assert.deepEqual(methods.map(m=>m.source),view.options);
         assert(methods.every(m=>m.whitespace==='pre'&&m.font.includes('monospace')));
-        await evaluate(`document.querySelector('#optionList').scrollIntoView({behavior:'instant'})`);
-        const target=await evaluate(`(()=>{const e=document.querySelector('#optionList .code-choice');const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2};})()`);
+        // Shuffled short methods can fit on Linux fonts. Exercise an actual overflow,
+        // and center that scroller itself before sending a native touch gesture.
+        const target=await evaluate(`(()=>{const choices=[...document.querySelectorAll('#optionList .code-choice')];const index=choices.findIndex(e=>e.scrollWidth>e.clientWidth+1);if(index<0)throw new Error('Expected a long method choice');const e=choices[index];e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return{index,x:r.x+r.width/2,y:r.y+r.height/2,width:e.clientWidth,contentWidth:e.scrollWidth};})()`);
         await call('Emulation.setTouchEmulationEnabled',{enabled:true});
-        await call('Input.synthesizeScrollGesture',{...target,xDistance:-180,yDistance:0,gestureSourceType:'touch'});
-        await until(`document.querySelector('#optionList .code-choice').scrollLeft>0`);
+        await call('Input.synthesizeScrollGesture',{x:target.x,y:target.y,xDistance:-180,yDistance:0,gestureSourceType:'touch'});
+        await until(`document.querySelectorAll('#optionList .code-choice')[${target.index}].scrollLeft>0`);
         assert.equal(await evaluate(`document.querySelectorAll('.option-button.selected').length`),0,'Scrolling a method choice selected an answer');
         await call('Emulation.setTouchEmulationEnabled',{enabled:false});
-        await evaluate(`document.querySelector('#optionList .code-choice').scrollLeft=0`);
+        await evaluate(`document.querySelectorAll('#optionList .code-choice')[${target.index}].scrollLeft=0`);
         await shot('browser-mobile-method-choices');
       }
       await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
