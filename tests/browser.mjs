@@ -1,16 +1,19 @@
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { readFile, writeFile, mkdtemp, rm, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { QUESTION_BANK } from '../js/questions.mjs';
-import { PILOT_IDS } from '../js/bank/pilot.mjs';
+import { PHP_PILOT_BANK } from '../js/php-pilot/questions.mjs';
+const PILOT_IDS = PHP_PILOT_BANK.map(q => q.id);
 
 // Real Chrome, real DOM input, isolated origin/profile. No app state injection.
 const root = fileURLToPath(new URL('../', import.meta.url));
+const reportDir = join(root,process.env.BROWSER_REPORT_DIR || 'remediation');
+await mkdir(reportDir,{recursive:true});
 const siteRoot = resolve(root,process.env.QUIZ_SITE_DIR || '.') + '/';
 const chrome = process.env.CHROME_BIN || ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','/usr/bin/google-chrome','/usr/bin/chromium'].find(existsSync);
 assert(chrome, 'Install Chrome or set CHROME_BIN');
@@ -65,28 +68,27 @@ try {
     await call('Input.dispatchKeyEvent',{type:'keyDown',key,code,windowsVirtualKeyCode:virtual});
     await call('Input.dispatchKeyEvent',{type:'keyUp',key,code,windowsVirtualKeyCode:virtual});
   };
-  const shot=async name=>{await evaluate(`Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))`);const result=await call('Page.captureScreenshot',{format:'png'});await writeFile(join(root,`remediation/${name}.png`),Buffer.from(result.data,'base64'));};
+  const shot=async name=>{await evaluate(`Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))`);const result=await call('Page.captureScreenshot',{format:'png'});await writeFile(join(reportDir,`${name}.png`),Buffer.from(result.data,'base64'));};
   await call('Page.enable');await call('Runtime.enable');
   await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
   await call('Page.navigate',{url:origin});
-  await until(`document.querySelector('#availableCount')?.textContent==='2,500 available'`);
+  await until(`document.querySelector('#availableCount')?.textContent==='560 available'`);
   const legacy={answered:37,correct:19,sessions:2,best:80};
   await evaluate(`localStorage.setItem('laravelQuizStats',${JSON.stringify(JSON.stringify(legacy))});location.reload();`);
-  await until(`document.querySelector('#lifetimeCount')?.textContent==='37 answered'`);
-  check('legacy local progress loads without migration loss');
-  // Limit the random exam to PHP using the same controls a learner uses.
-  for(const track of ['laravel','typescript','react','mysql','google-analytics'])await click(`[data-track="${track}"] .track-choice`);
-  assert.equal(await evaluate(`document.querySelector('#availableCount').textContent`),'300 available');
+  await until(`document.querySelector('#lifetimeCount')?.textContent==='0 PHP answers'`);
+  check('legacy totals are preserved without being counted as PHP release progress');
+  assert.equal(await evaluate(`document.querySelectorAll('#trackControl,#bankTrack,#collectionLink').length`),0);
+  assert.equal(await evaluate(`document.querySelector('#historicalProgress').hidden`),false);
   await click('[data-size="10"]');await click('[data-mode="exam"]');await click('#startButton');
   const neutral=async count=>{
     const observed=await evaluate(`({metric:document.querySelector('#scoreMetric').textContent,streak:document.querySelector('#streakMetric').textContent,hidden:getComputedStyle(document.querySelector('#streakMetric')).display==='none',feedback:document.querySelector('#feedbackText').textContent,notes:document.querySelector('#learningNotes').textContent,flags:document.querySelectorAll('#quizView .correct,#quizView .wrong').length,feedbackHidden:document.querySelector('#feedbackPanel').hidden})`);
     assert.deepEqual(observed,{metric:`${count} of 10 answered`,streak:'',hidden:true,feedback:'',notes:'',flags:0,feedbackHidden:true});
-    assert.equal(await evaluate(`localStorage.getItem('underTheHoodStats')`),null,'Exam must not update aggregates before submission');
+    assert.equal(await evaluate(`localStorage.getItem('underTheHoodPhpEngineerV1Stats')`),null,'Exam must not update aggregates before submission');
   };
   for(let i=0;i<10;i++){
     await neutral(i);
-    const rendered=await evaluate(`({prompt:document.querySelector('#questionPrompt').textContent,options:[...document.querySelectorAll('.option-text')].map(e=>e.textContent)})`);
-    const question=QUESTION_BANK.find(q=>q.prompt===rendered.prompt);assert(question);examIds.push(question.id);
+    const rendered=await evaluate(`({id:document.querySelector('#questionPrompt').dataset.questionId,prompt:document.querySelector('#questionPrompt').textContent,options:[...document.querySelectorAll('.option-text')].map(e=>e.textContent)})`);
+    const question=QUESTION_BANK.find(q=>q.id===rendered.id);assert(question);examIds.push(question.id);
     const correct=question.options[question.answer];
     const index=rendered.options.findIndex(option=>i%2===0?option===correct:option!==correct);
     if(i===0)await key(String(index+1),`Digit${index+1}`,49+index);else await click(`.option-button[data-index="${index}"]`);
@@ -98,18 +100,18 @@ try {
   check('10-question exam hides correctness, score, streak and teaching notes until Submit exam (mouse and keyboard)');
   assert.equal(await evaluate(`document.querySelector('#scorePercent').textContent`),'50%');
   assert.equal(await evaluate(`document.querySelector('#resultCount').textContent`),'5 / 10 correct');
-  const expectedStats={answered:47,correct:24,sessions:3,best:80};
-  assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodStats'))`),expectedStats);
+  const expectedStats={answered:10,correct:5,sessions:1,best:50};
+  assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodPhpEngineerV1Stats'))`),expectedStats);
   assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('laravelQuizStats'))`),legacy);
   await key('Enter','Enter',13);
-  assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodStats'))`),expectedStats);
+  assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodPhpEngineerV1Stats'))`),expectedStats);
   await click('.missed-item summary');
   assert(await evaluate(`document.querySelector('.missed-item').textContent.includes('Your answer:') && document.querySelectorAll('.missed-item pre').length>0`));
   await shot('browser-results');
   check('shuffled keys grade 5/10; submission updates stats once; missed review retains code and selected answer');
   await click('#retryMissed');
-  const learned=await evaluate(`({prompt:document.querySelector('#questionPrompt').textContent,options:[...document.querySelectorAll('.option-text')].map(e=>e.textContent)})`);
-  const learnedQuestion=QUESTION_BANK.find(q=>q.prompt===learned.prompt);
+  const learned=await evaluate(`({id:document.querySelector('#questionPrompt').dataset.questionId,prompt:document.querySelector('#questionPrompt').textContent,options:[...document.querySelectorAll('.option-text')].map(e=>e.textContent)})`);
+  const learnedQuestion=QUESTION_BANK.find(q=>q.id===learned.id);
   const correctIndex=learned.options.indexOf(learnedQuestion.options[learnedQuestion.answer]);
   await click(`.option-button[data-index="${correctIndex}"]`);await click('#questionAction');
   assert.equal(await evaluate(`document.querySelector('#feedbackTitle').textContent`),'Sound reasoning');
@@ -123,8 +125,8 @@ try {
   assert(await evaluate(`document.querySelector('#feedbackPanel').hidden && document.querySelector('#feedbackText').textContent==='' && document.querySelector('#learningNotes').textContent==='' && document.querySelectorAll('#quizView .correct,#quizView .wrong').length===0 && document.querySelector('#scoreMetric').textContent==='0 of 10 answered' && document.querySelector('#streakMetric').hidden`));
   check('switching from revealed Learn feedback to Exam clears all previous correctness indicators');
   // Reload an unfinished review: saved aggregates must survive and not count it.
-  await call('Page.reload');await until(`document.querySelector('#lifetimeCount')?.textContent==='47 answered'`);
-  assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodStats'))`),expectedStats);
+  await call('Page.reload');await until(`document.querySelector('#lifetimeCount')?.textContent==='10 PHP answers'`);
+  assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('underTheHoodPhpEngineerV1Stats'))`),expectedStats);
   check('current local progress survives reload; unfinished review adds no aggregate counts');
   await click('[data-view="bank"]');
   const search=async id=>{
@@ -136,20 +138,20 @@ try {
     assert.equal(await evaluate(`document.querySelector('.bank-id').textContent`),id);
     await click('.bank-question summary');await until(`document.querySelector('.bank-answer').dataset.enriched==='true'`);
   };
-  for(const id of [...PILOT_IDS,'PQ-033']){
+  for(const id of [...PILOT_IDS,'PHP-E26-0355']){
     await search(id);
     const question=QUESTION_BANK.find(q=>q.id===id);
     const rendered=await evaluate(`({code:[...document.querySelectorAll('.bank-answer > .code-lesson pre code')].map(e=>e.textContent),text:document.querySelector('.bank-answer').textContent,reasons:[...document.querySelectorAll('.bank-answer .choice-analysis p:not(.choice-example)')].map(e=>e.textContent)})`);
-    assert.deepEqual(rendered.code,question.code.files.map(file=>file.snippet));
+    assert.deepEqual(rendered.code,question.code?.files.map(file=>file.snippet)||[]);
     assert(rendered.text.includes(question.coreOptions[question.answer]));
     assert(rendered.text.includes(question.versions.label));
     assert.equal(rendered.reasons.length,3);
     for(let i=0;i<4;i++)if(i!==question.answer)assert(rendered.reasons.includes(question.learning.rationales[i]));
     for(const code of rendered.code)assert((code.match(/<\?php/g)||[]).length<=1);
-    if(id==='PQ-005')await shot('browser-multiple-files');
+    if(id==='PHP-PILOT-003')await shot('browser-multiple-files');
   }
-  check('all 20 pilot IDs and a nonpilot repaired family render the exact code, versions, key and three specific rationales');
-  await search('PQ-005');
+  check('all 20 retained pilot IDs and a corrected expansion record render the exact code, versions, key and three specific rationales');
+  await search('PHP-PILOT-003');
   await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
   await evaluate(`document.querySelector('.bank-question').scrollIntoView({behavior:'instant'});`);
   assert(await evaluate(`document.documentElement.scrollWidth<=window.innerWidth`),'Mobile horizontal overflow');
@@ -158,7 +160,7 @@ try {
   assert.deepEqual(errors,[],'Uncaught browser errors');
   check('no uncaught JavaScript exceptions');
   const browserVersion=await call('Browser.getVersion');
-  await writeFile(join(root,'remediation/browser-results.json'),JSON.stringify({browser:browserVersion.product,siteDirectory:process.env.QUIZ_SITE_DIR || '.',checks,examIds,expectedStats,pilotIds:PILOT_IDS,errors},null,2)+'\n');
+  await writeFile(join(reportDir,'browser-results.json'),JSON.stringify({browser:browserVersion.product,siteDirectory:process.env.QUIZ_SITE_DIR || '.',checks,examIds,expectedStats,pilotIds:PILOT_IDS,errors},null,2)+'\n');
 } finally {
   ws?.close();processChrome.kill('SIGTERM');
   await new Promise(resolve=>server.close(resolve));

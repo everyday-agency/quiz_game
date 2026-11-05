@@ -1,0 +1,16 @@
+Rejected: exact concept overlap with accepted PHP-E26-0208.
+q({id:'PHP-E26-0549',format:'R',level:'F',topic:18,subtopic:'interface-instanceof-versus-exact-runtime-class-name',objective:'Review an interface membership check that incorrectly compares an object’s concrete class name with the interface name.',reason:'Separate capability membership from exact class identity.',prerequisites:['Interfaces','instanceof','get_class'],lessons:[23,27],coverageComplete:true,stem:'Objects implementing Exportable must be accepted. Which review correctly evaluates this predicate?',files:[file(`interface Exportable
+{
+    public function export(): string;
+}
+
+class Report implements Exportable
+{
+    public function export(): string
+    {
+        return 'report';
+    }
+}
+
+$object = new Report();
+echo json_encode(get_class($object) === Exportable::class);`)],options:[o('exact-name-sufficient','Keep the equality: implementing an interface changes get_class to the interface name.','get_class returns Report, the concrete class, not a selected interface.','Treating an interface as the object’s runtime class identity.'),o('membership-check','Use $object instanceof Exportable to check the implemented interface contract.','instanceof recognizes objects whose classes implement the interface.'),o('check-object-type','Use is_object($object) because every object satisfies an interface with one method.','Being an object does not imply implementing this nominal interface.','Confusing general object admission with a declared capability contract.'),o('method-name-only','Use method_exists($object, "export") because a method name proves interface membership.','A same-named method need not implement the nominal interface or its signature.','Substituting a method-name observation for interface conformance.')],key:'membership-check',explanation:'An object retains its concrete class identity while implementing one or more interfaces. instanceof checks that membership directly; class-name equality and method-name existence answer different questions.',trace:'get_class returns Report, so the displayed equality is false. instanceof Exportable is true.',validation:{kind:'contract',stdout:'false',keyEvidence:'The interface membership predicate accepts the Report instance.',counterexamples:{'exact-name-sufficient':'Concrete class name is Report.','check-object-type':'An unrelated stdClass is an object but not Exportable.','method-name-only':'A same-named method can exist without implementing Exportable.'},contrasts:[{name:'interface-membership',marker:'get_class($object) === Exportable::class',replacement:'$object instanceof Exportable',stdout:'true'}]},references:['https://www.php.net/manual/en/language.operators.type.php','https://www.php.net/manual/en/function.get-class.php']}),

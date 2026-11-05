@@ -1,0 +1,19 @@
+{
+  "phase": "complete-local-review-pending",
+  "changed": [
+    "PHP-E26-0300",
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "resolved": [
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "unresolved": [],
+  "independentApproval": "pending",
+  "productionActivation": false,
+  "report": "php-expansion/FOCUSED_CORRECTION_REPORT.md",
+  "next": "Independent review of the four corrections; no release authorized."
+}

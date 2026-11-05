@@ -1,0 +1,152 @@
+1|Nullable return chaining differs from detecting uninitialized typed-property storage; neither remedy substitutes for the other.
+2|SELECT result counting differs from delayed bindParam reference capture; PDO setup accounts for the source overlap.
+3|Result cardinality inspection differs from selecting a SQL identifier through an allowlist.
+4|Caller-versus-definition file strictness differs from an internal callback call boundary; return coercion is central only in 0320.
+5|Chunked encoder state differs from append-mode cursor behavior; shared file setup is incidental.
+6|Reflection property assignment and internal callback argument calls are distinct coercion boundaries with different APIs and value flows.
+7|The archived strict-call example is extended with weak-file return coercion, testing two independently controlled boundaries instead of only caller arguments.
+8|Create-without-truncation and create-only-if-absent require different modes and opposite treatment of existing files.
+9|Scalar-category admission includes booleans and text; strict allowlist membership tests value identity within a specified list.
+10|Superseded capture-mode draft; see the replacement review for 0307.
+11|Generator rewind legality depends on advancement; exception injection delegates control into a different generator.
+12|Nested array copying concerns storage independence; parallel-array sorting concerns coordinated ordering.
+13|Promotion default storage and promotion attribute target validation use different Reflection observations and failure rules.
+14|Readonly promotion causes a forbidden second assignment; a set hook changes the stored value while an assignment expression returns its input.
+15|One SQL placeholder cannot expand a list; prefix comparison uses the wrong length. Similar assertion prompts do not share a defect.
+16|Priority-queue iteration consumes a heap; array foreach leaves the independent internal array pointer unchanged.
+17|PHP scalar admission differs from JSON top-level object admission; the accepted type sets and representations differ.
+18|Flipped-key collisions overwrite earlier entries; ordinary function default arrays are independent across calls.
+19|Coalescing assignment skips its right operand for existing nonnull values; and/assignment precedence determines expression grouping.
+20|Flipping values into keys has collision behavior; prepending renumbers numeric keys without flipping values.
+21|Superseded capture-mode draft; the replacement tests repeated closure-local updates, not foreach assignment.
+22|Closure-local state and octal parsing are unrelated; the old generic JSON-pair wording inflated similarity.
+23|Flipped-key collision rules do not involve boolean assignment precedence.
+24|Recursive replacement resolves existing nested keys; flipping turns values into keys and loses duplicate values.
+25|Magic fallback for an inaccessible method differs from state in an invokable callback object.
+26|A failed string conversion interrupts its enclosing echo; recursive output order follows entry and unwind phases.
+27|Array flipping changes key/value roles; assigning an object retains identity rather than copying it.
+28|The replaced capture draft and object aliasing share no final decision rule; final 0307 concerns per-call scalar locals.
+29|Closure invocation state differs from precondition versus postcondition loop entry.
+30|Variadic unpacked references modify the source array; generator cleanup concerns lifetime and finalization.
+31|strtok owns one shared continuation state; Closure static locals are associated with the particular Closure instance.
+32|Natural sorting compares digit runs; half-even rounding selects a numeric midpoint rule.
+33|A shorthand conditional avoids a repeated side-effecting call; octal syntax determines a literal value.
+34|Slash division’s result type differs from string-to-array-key normalization.
+35|Reference variadics update unpacked source elements; foreach does not advance an array’s internal pointer.
+36|Constructor-free allocation leaves promoted storage uninitialized; explicitly initialized readonly null is already a completed initialization.
+37|Source integer literal syntax and array-key normalization treat leading zeros in different representations and contexts.
+38|The original 0307 was rejected for proximity to this archived capture comparison; the final record tests per-invocation local mutation instead.
+39|The final closure question concerns local updates across calls; a constant’s global visibility is a different scope rule.
+40|Mutating versus rebinding an object parameter differs from a value-captured scalar’s repeated local initialization.
+41|Throwing during conversion interrupts an expression; throwing into a delegated generator can be caught and yield a recovery value.
+42|Method accessibility can trigger __call; interface membership is a nominal type relation.
+43|Cross-file scalar coercion boundaries are unrelated to global constants and local variables.
+44|Cycle collection releases a self-reference; overloaded property access returns either a value copy or an object handle.
+45|Explicit garbage collection and loop condition placement have distinct control mechanisms.
+46|Cycle lifetime and captured scalar local mutation do not share a storage rule; one is object reachability and the other invocation-local state.
+47|Pairing two parallel lists uses array_combine; extracting fields from records uses array_column with an index field.
+48|A callback’s local key variable cannot rename array keys; SensitiveParameter redaction concerns stack arguments rather than explicit messages.
+49|Nested array copy independence does not involve null-coalescing assignment or lazy right operands.
+50|String conversion can throw before echo; match conditions and result expressions have selective evaluation without conversion hooks.
+51|Returning a match result addresses function flow; the archived example tests match’s strict selection rule.
+52|Build-process isolation protects credentials from executable hooks; logging allowlists control which request data is recorded.
+53|Flipped-key collision resolution differs from state retained in a callable object.
+54|Exact division result types are separate from loop entry semantics.
+55|Repeated closure-local updates differ from cascading text replacements.
+56|Closure invocation locals and an array’s internal pointer are separate state mechanisms.
+57|Throwing conversion interrupts an expression; continue 2 jumps to the next outer iteration.
+58|Closure-local increment behavior is unrelated to exponentiation and unary-minus precedence.
+59|Reflection can coerce a typed-property assignment; __set does not intercept writes to an accessible declared property.
+60|HTTP method tokens are case-sensitive while header field names are case-insensitive; the opposed protocol rules require distinct behavior.
+61|Appending during array iteration differs from declaring a generator that yields writable references.
+62|Octal source syntax and pre/postcondition loops have no shared reasoning requirement.
+63|Coalescing assignment conditionally evaluates its right side; keyed destructuring chooses source entries explicitly.
+64|continue 2 targets an enclosing loop; recursion emits output while entering and unwinding calls.
+65|Flipped-key collision behavior is unrelated to destructor timing after object aliases are removed.
+66|Object-cycle collection and exponentiation precedence do not share an execution rule.
+67|Reference-return binding concerns variable aliases; cyclic garbage collection concerns object reachability.
+68|Object collection timing differs from numeric literal parsing.
+69|Boolean output conversion differs from truthiness of a Countable object; neither depends on the other’s hook or interface.
+70|Prefix-length testing and JSON fractional-marker testing select different distinguishing inputs and repairs.
+71|A numeric literal’s base does not involve reference containers shared by copied arrays.
+72|Inaccessible-method magic dispatch differs from forwarding late static binding through parent calls.
+73|Final filename-extension parsing differs from ceiling division for page counts.
+74|Flipping numeric-like values into keys may use key rules, but the tested defect is duplicate-value overwrite rather than key canonicalization.
+75|Array flip collisions are unrelated to interface membership.
+76|Final closure-local scalar updates do not concern array-key canonicalization.
+77|Final closure-local scalar updates do not concern numeric-key renumbering during prepend.
+78|Final closure-local scalar updates do not concern concrete class identity or interface membership.
+79|Implementing an abstract protected method enables inherited behavior; a child same-named method cannot override a private parent helper.
+80|SELECT rowCount portability and Countable object truthiness are different emptiness-check failures with different correct observations.
+81|PDO PARAM_INT coercion is not input validation; the pilot tests distinguishing a valid integer zero from filter failure. The API boundary and failure direction differ.
+82|Decimal grouping separators and JSON list-shape loss are distinct wire-format defects triggered by different boundary inputs.
+83|Octal literals and UTF-8 byte length both involve representations but require unrelated rules.
+84|Flipping an array has no object clone or nested identity behavior.
+85|The final value-capture question uses scalars and repeated calls, unlike shallow cloning with a nested shared object.
+86|Closure-local updates differ from send starting a generator and its separate return value.
+87|Nested array copies and loop condition placement have no shared state transition.
+88|A throwing conversion and runtime resolution of a default constant occur at different evaluation boundaries.
+89|Partial sscanf conversion is unrelated to reference-return assignment.
+90|Rewind’s generator-state restriction differs from jumping between nested loops.
+91|Cycle collection does not use cascading replacement semantics.
+92|Half-even rounding changes a numeric result; preserving JSON zero fractions changes wire type notation without changing the numeric value.
+93|SQL placeholder cardinality and JSON float notation need different tests, even though both ask for a failing assertion.
+94|Array value copying and late static class binding do not share an identity mechanism.
+95|PDO integer conversion and array_walk key-variable mutation are unrelated callback/binding behaviors.
+96|Inclusive range generation with reversed bounds differs from record-to-map field extraction.
+97|Countable object truthiness differs from an arrow callback failing to mutate an outer scalar.
+98|Recursive merge promotes scalar conflicts to arrays; missing-key destructuring assigns null and emits a diagnostic.
+99|A SELECT count API concern is independent of validation being invalidated by a second URL decoding.
+100|Octal parsing does not involve copying versus binding a returned reference.
+101|Coalescing assignment has conditional side effects; parallel-array sorting coordinates row positions.
+102|A thrown static initializer is retried because initialization never completed; coalescing assignment instead checks existing null/missing array entries.
+103|Nested-loop continue and delegated generator exception recovery take different control-flow paths.
+104|Flipping duplicate values overwrites keys; null-callback array_map zips inputs and pads absent positions.
+105|Array flip collisions are unrelated to incompatible typed properties sharing one reference container.
+106|Final closure-local mutation and enum name/value access test separate concepts.
+107|Final closure-local state is independent of and/assignment precedence.
+108|A scalar local imported into a closure is different from indirect mutation through overloaded array access.
+109|Conditional-expression evaluation count is distinct from array-key canonicalization.
+110|A shorthand conditional reuses its evaluated condition; Generator::send has start and suspension behavior.
+111|__debugInfo versus JSON representation concerns different object hooks, not loop entry.
+112|Debug display policy and final closure-local update behavior are unrelated.
+113|Unpacked by-reference parameters bind source array elements; reference-return assignment chooses whether to bind the returned container.
+114|strtok’s shared parser state differs from static storage inherited with one method implementation.
+115|__call reacts to an inaccessible method call; trait aliases create an additional method name with separately chosen visibility.
+116|Generator rewind legality does not involve string conversion or partially evaluated echo arguments.
+117|Self-referential object cycles need collection; ordinary nested arrays in the fixture have no reference containers or object cycles.
+118|Large integer-to-float precision loss is distinct from slash selecting integer or float for exact versus fractional division.
+119|Both use magic hooks, but __wakeup executes before post-deserialization type checking while __toString throws inside expression evaluation.
+120|Discarding strtolower’s return differs from choosing the appropriate HTML text escaping transform.
+121|The match result must be returned from the function; another question traces which conditions and result expressions are evaluated.
+122|empty on an object ignores Countable; replacing coalescing with truthiness loses valid scalar zero. The relevant value types and remedies differ.
+123|A redirect’s method-preservation rule differs from HTTP safety versus idempotence of the original operation.
+124|array_rand yields a key requiring lookup; array_combine creates a map from two parallel lists.
+125|Overlapping substring counts do not concern strict type-preserving deduplication.
+126|Order-insensitive map equality preserves strict values; map difference must compare key/value associations instead of values alone.
+127|Ignoring insertion order for map equality differs from deduplicating a list under strict value identity.
+128|Countable object truthiness is unrelated to require/include missing-file control flow.
+129|Countable conversion does not involve generator by-reference declarations.
+130|Abstract method obligations differ from __set dispatch bypass on a declared public property.
+131|Nullsafe chaining is independent of disagreement between a text scan and JSON duplicate-key decoding.
+132|Map equality under reordered keys differs from an outer failure policy overriding a retryable inner cause.
+133|Repeated conditional calls differ from overloaded property values versus returned object handles.
+134|HTTP method case sensitivity differs from strict scalar deduplication.
+135|HTTP method comparison has no property hook assignment-expression behavior.
+136|Octal parsing and cascading string replacement have separate source rules.
+137|Coalescing assignment skips right operands; an invokable object retains its own state across callback invocations.
+138|array_flip loses duplicate values as keys; array_intersect compares string representations while preserving original entries.
+139|Array key collisions are unrelated to deferred lazy-object initialization.
+140|The same operands can have different source bases or division result types; these are distinct parsing and operator behaviors.
+141|The final closure local resets per invocation; generator cleanup follows object lifetime and suspended execution.
+142|Final value-captured scalar locals differ from reference elements shared across copied arrays.
+143|A coercive by-reference parameter changes caller storage; a value-captured local scalar does not share that storage.
+144|Final closure-local updates are unrelated to forwarding class calls and late static binding.
+145|Shorthand conditional reuse does not involve enum case name/value access.
+146|A variadic reference updates argument storage; an invokable object keeps state in its properties.
+147|Magic dispatch for inaccessible methods differs from recursion entry/unwind output.
+148|Promoted attribute target instantiation is separate from global constant visibility.
+149|Generator rewind state is distinct from ordinary recursive output order.
+150|Cycle collection does not use switch’s loose comparison or match’s strict comparison.
+151|Deserialization hooks run before type gates; recursive output follows explicit calls and returns, with no hidden hook.
+152|SQLite foreign-key enforcement testing and JSON fractional notation testing exercise unrelated runtime contracts.

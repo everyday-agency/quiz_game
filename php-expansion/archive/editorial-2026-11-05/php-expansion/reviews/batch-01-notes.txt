@@ -1,0 +1,100 @@
+0001|Signed quotient truncates toward zero; remainder keeps dividend sign. Both outputs verified.
+0002|Numeric-string key coercion differs for 8 and 08; no variable-name variation used.
+0003|Nullsafe short-circuit suppresses argument evaluation; prompt no longer gives that rule away.
+0004|Null is a present array entry but fails isset; four result pairs distinguish misconceptions.
+0005|Object assignment aliases identity and mutation; simpler than legacy shallow-clone question PQ-197.
+0006|Variable-variable indirection changes the selected variable, not the variable holding its name.
+0007|UTF-8 byte spelling is explicit, avoiding source-encoding uncertainty in strlen.
+0008|Unsetting the last index does not reset the next append index; JSON object form is explained.
+0009|The exceptional false string 0 is contrasted with other nonempty strings, including false.
+0010|Concrete error-class options have intrinsically different lengths; no padding added to equalize names.
+0011|An enum prerequisite is explicit and unmapped; Foundation labels the simple reading task, not prior exposure.
+0012|In-memory SQLite returns false for exhausted fetch and an array for fetchAll; no database service used.
+0013|Numeric renumbering, string-key replacement and insertion order are separately represented in options.
+0014|Catch source order, rather than most-specific type, determines the single executed handler.
+0015|Class-name resolution does not autoload; leading qualification separator is absent in the returned name.
+0016|Named variadic arguments preserve string keys; JSON shape follows the resulting mixed keys.
+0017|The captured object is mutated then the outer variable is rebound; both steps are necessary.
+0018|Replaced a shallow-clone near-duplicate of PQ-197 with last-strong-reference destructor timing.
+0019|Reference callback mutation and ignored callback return are distinguished from array_walk's own return.
+0020|Fixed UTC and +02 offsets avoid timezone database and daylight-saving assumptions.
+0021|Associative decoding converts numeric object keys to integer array keys, changing round-trip JSON shape.
+0022|Trait alias visibility applies to the alias and does not rename or privatize the original method.
+0023|Initialized readonly null combined with coalescing assignment differs from pilot object-mutation and optional-argument questions.
+0024|Generator creation, first iteration, retained reference and finalization are all observed in the trace.
+0025|An embedded reference remains shared across copied arrays even after its external variable is unset.
+0026|A first-position substring is a valid match; strict false comparison repairs the two-state search contract.
+0027|The caller requires in-place array mutation, so a by-reference parameter is justified by an explicit contract.
+0028|Only null should be removed; zero, false and empty-string witnesses prevent a truthiness shortcut.
+0029|The requirement includes no premature output; formatter alternatives differ in argument shape and return channel.
+0030|All sort variants are evaluated against mutation and return behavior; ascending list output is explicit.
+0031|Assignment grouping and strict sentinel comparison are both needed to preserve an intermediate zero.
+0032|Boolean comparator diagnostics count as failure even if its output happens to sort this fixture.
+0033|Private visibility does not redact values deliberately returned by an in-scope serializer.
+0034|The wrong constructor position throws a caught TypeError, not an uncaught process failure; test expectation corrected.
+0035|Deferred execution makes bindParam reference capture observable; parameter-position and null-binding alternatives tested.
+0036|Two separate PHP files preserve namespace and import context; function and class imports remain distinct.
+0037|UTF-8 substitution, omission and partial JSON output have different policies; every alternative executed.
+0038|Lexical, parent, explicit-class and late-static lookups are compared across base and child calls.
+0039|Mixed unpacking order and duplicate argument binding are both visible; error paths are caught in the example.
+0040|Declared property existence differs from initialization; zero prevents an empty-based guard from passing.
+0041|Two delegated yields require draining to completion before accessing the generator return channel.
+0042|Both Fiber requests must be consumed; stale-request and single-resume drivers fail different requirements.
+0043|Subtype attribute filtering and constructor execution are both required; unrelated constructor effects are observed.
+0044|Virtual property reference access is prohibited; read-modify-write through a local invokes the intended hooks.
+0045|The original declaration is intentionally incompatible; each proposed signature is compiled and its result checked.
+0046|Zero is explicitly valid configuration, making null-coalescing and truthiness defaults observably different.
+0047|The included file inherits function variable scope; file and namespace boundaries are not confused.
+0048|Value-only and key-only differences cannot detect changed associations when the value set is unchanged.
+0049|Cloning must precede DateTime mutation; cloning afterward and replacing modify with add remain wrong.
+0050|A valid false result and a storage failure must stay distinguishable; changing only a type declaration cannot do that.
+0051|The helper's transaction-participation contract rules out committing or splitting its caller's atomic unit.
+0052|Regex non-match is separate from engine failure; unlike strpos, the stated policy routes three outcomes differently.
+0053|The reduction needs an array identity both for empty input and its typed first callback invocation.
+0054|Duplicate generator keys require discarding keys before materialization; later array_values cannot recover a lost yield.
+0055|Multiple input arrays change array_map key behavior; callback syntax is not the determining factor.
+0056|Both strict byte equality and the timing-safe API are required; equal-length synthetic values avoid live credentials.
+0057|Cooperative lock assumptions and successful operations are explicit; mode w truncates before any lock is acquired.
+0058|An invalid WeakMap lifetime premise was corrected: external value retention matters; the remaining cycle is collectable.
+0059|Readonly reinitialization during clone is explicitly versioned; nested cloning creates independent child state.
+0060|First-class callable acquisition preserves authorized access; a returned array callable is checked in its later scope.
+0061|Known local serialization fixture demonstrates hook suppression without falsely claiming safe untrusted deserialization.
+0062|Modern serialization hooks suppress legacy hooks on both write and read; required legacy logic is not implicit.
+0063|A cleanup throwable becomes primary while retaining the pending exception as previous; no double catch occurs.
+0064|Four capability combinations witness widening an intersection branch into independent union alternatives.
+0065|Direct strict calls and internal callback invocation differ at argument binding; numeric-string behavior verified.
+0066|A positive explode limit counts pieces, preserving all later delimiters in the final value.
+0067|Distinct ids and complete row fields are stated so array_column has one unambiguous value/index mapping.
+0068|Masks 0, READ, WRITE and combined permissions distinguish equality, boolean and bitwise tests.
+0069|Array input, leading zeros, signs, exponents and a trailing newline distinguish lexical token validators.
+0070|Object decoding preserves empty-object versus empty-array shape; syntax validity alone is insufficient.
+0071|Exclusive creation is tested against both missing and existing paths; warnings are explicitly converted to exceptions.
+0072|Deterministic short-write quotas make cumulative byte accounting reproducible without external streams.
+0073|Deferred callbacks distinguish value capture, reference capture, global lookup and callback parameters.
+0074|Recursive delegation forwards values then resumes siblings; returning or yielding the Generator object differs.
+0075|The public callable contract accepts a string while the property requires Closure; conversion and binding are distinct.
+0076|PSR-4 prefix stripping and case rules checked against PHP-FIG; no Composer command or dependency install executed.
+0077|Memo maps original identity to the clone under construction before recursion; incorrect recursion is depth-bounded.
+0078|Replaced an overly short distractor with realistic JSON substitution; invalid-byte witnesses prove information loss.
+0079|Outbox question states duplicate delivery and deduplication; it does not claim exactly-once broker publication.
+0080|Fiber exception injection differs from passing an exception object or throwing on the caller's stack.
+0081|Only a leading removal creates the relevant list-key gap among the four selected fixtures.
+0082|Reversed equal-score names expose the missing tie-breaker; already sorted ties hide it.
+0083|Repeated null lookup tests collaborator call counts; different misses do not test negative-cache reuse.
+0084|Two code points exceeding two bytes distinguish slicing; single multibyte input alone does not expose the defect.
+0085|The path question explicitly assumes canonical paths and does not claim the string check solves symlink races.
+0086|Reuse after reset reveals a stale count; fresh-object arithmetic does not exercise the failed state transition.
+0087|HEAD length describes the corresponding GET representation; RFC 9110 supports the explicitly supplied contract.
+0088|Rejected the unsupported stat-cache hypothesis; replacement tests a failed empty-stream read processed as a line.
+0089|Only reuse of one aggregate exposes the one-shot Generator; separate instances are not an equivalent test.
+0090|The custom handler is called under suppression; severity-mask membership, not zero/nonzero mask, controls recording.
+0091|Resource ownership after clone is exercised by destroying one owner while retaining the other; no external files.
+0092|Both-NaN comparator equality is an explicit policy; a one-NaN case does not test reflexivity.
+0093|Interleaved Fibers make shared current-user state unsafe; immutable context stays in the individual call state.
+0094|PSR-7 returned instances must cross the PSR-15 boundary; cloned originals do not become mutable.
+0095|The caller requires the same exception object, making wrapping and boolean fallback specifically incorrect.
+0096|Application, committed lock, excluded dev dependencies and real platform checks are all explicit premises.
+0097|File-handler lock lifetime is stated; closing after copying read-only session data shortens the critical section.
+0098|Each four-field cache key differs by one meaningful authorization dimension; no artificial answer-length padding.
+0099|Ambiguous commit is a premise; recovery resolves authoritative outcome and retains the same unique operation identity.
+0100|The streaming protocol explicitly supports terminal frames; low latency and bounded memory rule out full buffering.

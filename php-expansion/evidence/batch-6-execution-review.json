@@ -1,0 +1,6 @@
+{
+  "sourceHash": "02b3d59f5cec39c65481c0450aee0a8911bce6b314db328d806130a94035e84d",
+  "review": "author inspected; isolated fixtures only",
+  "records": 100,
+  "focusedCorrection": "User-authorized correction; new shutdown callback fixture inspected, including intentional nonzero exit statuses; isolated child processes only."
+}

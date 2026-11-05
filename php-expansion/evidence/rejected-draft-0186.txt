@@ -1,0 +1,21 @@
+Rejected during cross-pilot semantic review: reasoning repeated PHP-PILOT-009. Replaced under the same never-activated new ID with revision 2.
+
+q({id:'PHP-E26-0186',format:'T',level:'M',topic:20,subtopic:'throwable-boundary-test',objective:'Choose a failure that tests the Error branch of Throwable.',reason:'Distinguish an exception-only boundary from a boundary covering both throwable hierarchies.',prerequisites:['Exception','Error','Throwable','Callback invocation'],lessons:[8,21,22],coverageComplete:true,stem:'boundary must return caught for any Throwable from its callback. observe adds an outer test harness so escapes can be asserted. Which assertion fails?',files:[file(`function boundary(callable $work): string
+{
+    try {
+        $work();
+
+        return 'ok';
+    } catch (Exception $error) {
+        return 'caught';
+    }
+}
+
+function observe(callable $work): string
+{
+    try {
+        return boundary($work);
+    } catch (Throwable $error) {
+        return 'escaped';
+    }
+}`)],options:[o('runtime',"observe(fn () => throw new RuntimeException()) === 'caught'",'RuntimeException extends Exception and is already caught.','Assuming a runtime-named exception tests the Error hierarchy.'),o('type',"observe(fn () => throw new TypeError()) === 'caught'",'TypeError extends Error, so it escapes the Exception-only catch.'),o('logic',"observe(fn () => throw new LogicException()) === 'caught'",'LogicException also belongs to the Exception hierarchy.','Treating logic failures as a separate Throwable branch.'),o('success',"observe(fn () => 42) === 'ok'",'No throwable is produced, so this does not test catch coverage.','Using the success path to validate a failure boundary.')],key:'type',explanation:'Throwable has both Exception and Error implementations. Catching Exception does not include TypeError; catching Throwable covers the stated boundary.',trace:'The TypeError passes through boundary and reaches observe’s outer handler. Replacing the inner catch type changes its result from escaped to caught.',validation:{kind:'tests',marker:'catch (Exception $error)',repair:'catch (Throwable $error)',cases:[{option:'runtime',probe:"echo observe(fn () => throw new RuntimeException());",expected:'caught'},{option:'type',probe:"echo observe(fn () => throw new TypeError());",expected:'caught'},{option:'logic',probe:"echo observe(fn () => throw new LogicException());",expected:'caught'},{option:'success',probe:"echo observe(fn () => 42);",expected:'ok'}]},references:['https://www.php.net/manual/en/class.throwable.php']}),

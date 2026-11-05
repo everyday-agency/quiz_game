@@ -1,0 +1,243 @@
+{
+  "reason": "Second candidates also overlap earlier content: manual review found 0481/0210 outside heuristic candidates; checker found 0487/0276. Replace before acceptance.",
+  "records": [
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0481",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "Functions & arguments",
+      "subtopic": "noncascading-literal-substitution-test",
+      "objective": {
+        "id": "noncascading-literal-substitution-test",
+        "text": "Select a test that detects rewriting text newly produced by an earlier replacement rule."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Distinguish one-pass token substitution from sequential application of replacement pairs."
+      },
+      "prerequisites": [
+        "str_replace array order",
+        "strtr mapping mode",
+        "Generated output versus original input"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs.",
+          "The one-character tokens a and b must map to b and c respectively in one pass over the original text. Newly generated b characters must not be processed again. Other characters remain unchanged. All input is ASCII."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nfunction translateTokens(string $text): string\n{\n    $map = ['a' => 'b', 'b' => 'c'];\n\n    return str_replace(array_keys($map), array_values($map), $text);\n}\n"
+          }
+        ]
+      },
+      "stem": "Which input/output case exposes the implementation’s cascading replacement?",
+      "options": [
+        {
+          "id": "second-token",
+          "text": "b → c",
+          "rationale": "Only the second replacement acts, so sequential and one-pass semantics agree.",
+          "misconception": "Testing a rule whose output is not another rule’s input."
+        },
+        {
+          "id": "first-token",
+          "text": "a → b",
+          "rationale": "The first replacement makes b and the second rewrites it to c, violating the required one-pass result.",
+          "misconception": null
+        },
+        {
+          "id": "unmapped-token",
+          "text": "c → c",
+          "rationale": "Neither replacement changes c, so this does not exercise generated text.",
+          "misconception": "Using an unchanged character to test replacement ordering."
+        },
+        {
+          "id": "empty-input",
+          "text": "An empty string → an empty string",
+          "rationale": "Both implementations preserve empty input; no rule runs.",
+          "misconception": "Treating an empty edge case as coverage of a nonempty interaction."
+        }
+      ],
+      "correctOptionId": "first-token",
+      "explanation": {
+        "summary": "str_replace applies array search/replacement pairs in sequence, so later pairs can rewrite earlier output. strtr with a mapping does not search the newly inserted replacement text again.",
+        "trace": "For a, the defective helper performs a → b → c. The required operation performs only the original a → b substitution."
+      },
+      "validation": {
+        "kind": "tests",
+        "marker": "str_replace(array_keys($map), array_values($map), $text)",
+        "repair": "strtr($text, $map)",
+        "cases": [
+          {
+            "option": "second-token",
+            "probe": "echo translateTokens('b');",
+            "expected": "c"
+          },
+          {
+            "option": "first-token",
+            "probe": "echo translateTokens('a');",
+            "expected": "b"
+          },
+          {
+            "option": "unmapped-token",
+            "probe": "echo translateTokens('c');",
+            "expected": "c"
+          },
+          {
+            "option": "empty-input",
+            "probe": "echo translateTokens('');",
+            "expected": ""
+          }
+        ],
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-07",
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://www.php.net/manual/en/function.str-replace.php",
+        "https://www.php.net/manual/en/function.strtr.php"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0487",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "Functions & arguments",
+      "subtopic": "regex-literal-quoting-selected-delimiter-test",
+      "objective": {
+        "id": "regex-literal-quoting-selected-delimiter-test",
+        "text": "Test that literal regex construction escapes the chosen pattern delimiter as well as regex metacharacters."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Select a fixture that separates regex-body quoting from protection of its surrounding PHP pattern delimiter."
+      },
+      "prerequisites": [
+        "PCRE delimiters",
+        "preg_quote delimiter argument",
+        "preg_match error result"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs.",
+          "Every needle must be interpreted literally inside a ~ delimited pattern. The handler captures pattern-construction warnings so the fixture can inspect preg_match’s false result; it does not turn an invalid pattern into a valid non-match. Inputs are ASCII."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nset_error_handler(static function (int $severity, string $message): bool {\n    return true;\n});\n\nfunction literalMatch(string $needle, string $text): int|false\n{\n    $pattern = '~' . preg_quote($needle) . '~';\n\n    return preg_match($pattern, $text);\n}\n"
+          }
+        ]
+      },
+      "stem": "Which needle/text pair should match but exposes the missing delimiter argument to preg_quote?",
+      "options": [
+        {
+          "id": "dot",
+          "text": "needle a.b in text a.b → 1",
+          "rationale": "preg_quote already escapes the dot metacharacter without needing the delimiter argument.",
+          "misconception": "Testing regex syntax escaping without testing the surrounding delimiter."
+        },
+        {
+          "id": "slash",
+          "text": "needle x/y in text x/y → 1",
+          "rationale": "The slash is not this pattern’s delimiter, and it needs no delimiter escaping here.",
+          "misconception": "Assuming the conventional slash delimiter is used despite the displayed ~."
+        },
+        {
+          "id": "tilde",
+          "text": "needle ~ in text x~x → 1",
+          "rationale": "The unescaped ~ terminates the pattern prematurely, producing a pattern error instead of the required match.",
+          "misconception": null
+        },
+        {
+          "id": "brackets",
+          "text": "needle [x] in text [x] → 1",
+          "rationale": "The brackets are ordinary regex metacharacters that preg_quote already handles.",
+          "misconception": "Choosing another metacharacter covered by the existing default quoting."
+        }
+      ],
+      "correctOptionId": "tilde",
+      "explanation": {
+        "summary": "preg_quote can escape both regex-special characters and an explicitly supplied delimiter. Because this helper surrounds the result with ~, it must pass ~ as that second argument.",
+        "trace": "The defective tilde needle constructs ~~~, which is not the intended literal-tilde pattern. Quoting with the ~ delimiter produces a valid pattern matching the original tilde character."
+      },
+      "validation": {
+        "kind": "tests",
+        "marker": "preg_quote($needle)",
+        "repair": "preg_quote($needle, '~')",
+        "cases": [
+          {
+            "option": "dot",
+            "probe": "echo json_encode(literalMatch('a.b', 'a.b'));",
+            "expected": "1"
+          },
+          {
+            "option": "slash",
+            "probe": "echo json_encode(literalMatch('x/y', 'x/y'));",
+            "expected": "1"
+          },
+          {
+            "option": "tilde",
+            "probe": "echo json_encode(literalMatch('~', 'x~x'));",
+            "expected": "1"
+          },
+          {
+            "option": "brackets",
+            "probe": "echo json_encode(literalMatch('[x]', '[x]'));",
+            "expected": "1"
+          }
+        ],
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-07",
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://www.php.net/manual/en/function.preg-quote.php",
+        "https://www.php.net/manual/en/regexp.reference.delimiters.php"
+      ]
+    }
+  ]
+}

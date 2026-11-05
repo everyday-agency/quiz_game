@@ -1,0 +1,257 @@
+{
+  "scope": "Local validation and integration preparation only",
+  "newQuestions": 600,
+  "retainedPilot": 20,
+  "reviewCount": 620,
+  "normalBank": 2500,
+  "normalPhp": 300,
+  "nonPhp": 2200,
+  "independentNewApprovals": 0,
+  "releaseAuthorized": false,
+  "automated": {
+    "result": "passed",
+    "log": "php-expansion/evidence/final-automated-tests.txt",
+    "newShuffleMappings": 2480
+  },
+  "php": [
+    {
+      "batch": 1,
+      "php": "8.5.2",
+      "executions": 288,
+      "linted": 293,
+      "result": "passed"
+    },
+    {
+      "batch": 1,
+      "php": "8.4.17",
+      "executions": 288,
+      "linted": 293,
+      "result": "passed"
+    },
+    {
+      "batch": 2,
+      "php": "8.5.2",
+      "executions": 287,
+      "linted": 301,
+      "result": "passed"
+    },
+    {
+      "batch": 2,
+      "php": "8.4.17",
+      "executions": 287,
+      "linted": 301,
+      "result": "passed"
+    },
+    {
+      "batch": 3,
+      "php": "8.5.2",
+      "executions": 272,
+      "linted": 276,
+      "result": "passed"
+    },
+    {
+      "batch": 3,
+      "php": "8.4.17",
+      "executions": 272,
+      "linted": 276,
+      "result": "passed"
+    },
+    {
+      "batch": 4,
+      "php": "8.5.2",
+      "executions": 268,
+      "linted": 275,
+      "result": "passed"
+    },
+    {
+      "batch": 4,
+      "php": "8.4.17",
+      "executions": 268,
+      "linted": 275,
+      "result": "passed"
+    },
+    {
+      "batch": 5,
+      "php": "8.5.2",
+      "executions": 197,
+      "linted": 199,
+      "result": "passed"
+    },
+    {
+      "batch": 5,
+      "php": "8.4.17",
+      "executions": 197,
+      "linted": 199,
+      "result": "passed"
+    },
+    {
+      "batch": 6,
+      "php": "8.5.2",
+      "executions": 226,
+      "linted": 228,
+      "result": "passed"
+    },
+    {
+      "batch": 6,
+      "php": "8.4.17",
+      "executions": 226,
+      "linted": 228,
+      "result": "passed"
+    }
+  ],
+  "browsers": {
+    "existing": {
+      "browser": "Chrome/156.0.8078.80",
+      "checkGroups": 9,
+      "result": "passed",
+      "report": "php-expansion/evidence/browser-existing/browser-results.json"
+    },
+    "pilot": {
+      "browser": "Chrome/156.0.8078.80",
+      "checkGroups": 7,
+      "result": "passed",
+      "report": "php-expansion/evidence/browser-pilot/browser-results.json"
+    },
+    "viewer": {
+      "browser": "Chrome/156.0.8078.80",
+      "checkGroups": 8,
+      "result": "passed",
+      "report": "php-expansion/evidence/browser-viewer/browser-results.json"
+    },
+    "review": {
+      "browser": "Chrome/156.0.8078.80",
+      "checkGroups": 6,
+      "result": "passed",
+      "report": "php-expansion/evidence/browser-review/browser-results.json",
+      "rendered": 620,
+      "distractorExplanations": 1860,
+      "loadMs": 40,
+      "reviewStats": {
+        "answered": 640,
+        "correct": 541,
+        "sessions": 2,
+        "best": 86
+      }
+    }
+  },
+  "staticArtifact": {
+    "files": [
+      {
+        "path": "_site/index.html",
+        "sha256": "9b3f7d5e62bab15766a6242ed0de641abe3f8ed71659fcab210e327b056eff7d"
+      },
+      {
+        "path": "_site/js/app.js",
+        "sha256": "edc589cdec29108e372f10517dcec2d12c496afcc897a1ba3386ba7f3fce70cc"
+      },
+      {
+        "path": "_site/js/bank/assemble.mjs",
+        "sha256": "34d161c7aaba846c482facfaeb206e9990b52eacaf846a0517cbf783ff0d2ea3"
+      },
+      {
+        "path": "_site/js/bank/laravel-companions.mjs",
+        "sha256": "ee4f9a56f56062d018fce557c4d319a62b9f27969d38d6e055389e593cff25e2"
+      },
+      {
+        "path": "_site/js/bank/laravel-corrections.mjs",
+        "sha256": "08792d01f98154ac503e381644a46ab16837544b26a6ffd544b0fa31509a0f52"
+      },
+      {
+        "path": "_site/js/bank/legacy-v1.mjs",
+        "sha256": "e76ab7576e4ed720dd111811e47787c410f7cbc5db1edef8e2554b0fb144b209"
+      },
+      {
+        "path": "_site/js/bank/php-repairs.mjs",
+        "sha256": "1fe3d317ea05f44632e6bb940f39cdd71c40e9615309bbd13a4c07b1d392e9c3"
+      },
+      {
+        "path": "_site/js/bank/pilot.mjs",
+        "sha256": "5ae74419dd6477f4dd15b5caf6878feeef7410f66843055bcfe9f0b1fd715450"
+      },
+      {
+        "path": "_site/js/bank/revisions.mjs",
+        "sha256": "4bbd71c2c154fe4360856b94062482c0e9cc71436a635e42305168c1f8760562"
+      },
+      {
+        "path": "_site/js/code-highlighting.mjs",
+        "sha256": "38557e5087fa15156d7cf3e392beddb62018024eecd43ddca6e75cdfefe82f72"
+      },
+      {
+        "path": "_site/js/code-viewer.mjs",
+        "sha256": "a89a44fde8f661cca2c2e2cbf6b458dff422668064c689e5bc47db67071572e2"
+      },
+      {
+        "path": "_site/js/exam.mjs",
+        "sha256": "1e5b660f8dfc6977ac2f360251a82a19be656b27fe2505a79fb4c9fdb94e7b45"
+      },
+      {
+        "path": "_site/js/learning-notes.mjs",
+        "sha256": "2a958712bf3fed0cf88a012c04a13d94a0463b3d49ffa2e45baff3ecbade8583"
+      },
+      {
+        "path": "_site/js/php-expansion/filters.mjs",
+        "sha256": "39c650d8cb6bb607a597750475d7dba7decc1905100dcb111be5e8913c3eb2ad"
+      },
+      {
+        "path": "_site/js/php-expansion/lesson-mappings.mjs",
+        "sha256": "a9c28bfcc35cc9dc734a1c55fb37a2b8e988813f1d4a75d070afa57007160cad"
+      },
+      {
+        "path": "_site/js/php-expansion/lessons.mjs",
+        "sha256": "b57d4e0c5d9de88e10992d9a8802ea3058f1dedf2e01d84c0bfa42c40e1ca05c"
+      },
+      {
+        "path": "_site/js/php-expansion/pilot-mappings.mjs",
+        "sha256": "1a00bb26fc7de041a813ba0e81018158bc864e1f29e2f26b4a4fe684ac2a6689"
+      },
+      {
+        "path": "_site/js/php-expansion/review-data.mjs",
+        "sha256": "95d12d9ab4641536c56d0fb36a403789314d21d18094d27b542e91a605a96bca"
+      },
+      {
+        "path": "_site/js/php-expansion/review.mjs",
+        "sha256": "7075f63ef18fb7bbefa202f1ade8dcf8fbaaca962bddae1a3f678ab4ab3aac3a"
+      },
+      {
+        "path": "_site/js/php-pilot/questions.mjs",
+        "sha256": "4093d40a45eda11764e44b26dc23cce44ef58c959bcc23db919906bb52e80d15"
+      },
+      {
+        "path": "_site/js/php-pilot/schema.mjs",
+        "sha256": "ae6c1c315c61e044e57892a3b4b7b52c71e776819fa6f9606411da9b343858b5"
+      },
+      {
+        "path": "_site/js/questions.mjs",
+        "sha256": "9db3cdfd958ad01809c094a0972349da2ff5078cb0a14effbdd75801b79aa4a3"
+      },
+      {
+        "path": "_site/js/vendor/highlightjs/LICENSE",
+        "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490"
+      },
+      {
+        "path": "_site/js/vendor/highlightjs/core.min.mjs",
+        "sha256": "67a339aa68880a40c9803def9c8cebb2225dec76230382db86e349370dee70e9"
+      },
+      {
+        "path": "_site/js/vendor/highlightjs/php.min.mjs",
+        "sha256": "d47d3e20ee16dd1a34bdc8bfa8a605801de7dac8bb33ee40e85cd28f2a6a7bf9"
+      },
+      {
+        "path": "_site/styles.css",
+        "sha256": "410f13f36b04d4f1a972d43f7b3fce9d6206bcccd846d80843139031e9f91c7c"
+      }
+    ],
+    "productionUploaded": false
+  },
+  "manualVisualReview": [
+    "PHP-E26-0512-desktop",
+    "PHP-E26-0562-mobile",
+    "PHP-E26-0599-mobile"
+  ],
+  "reports": {
+    "coverage": "php-expansion/COVERAGE.json",
+    "manifest": "php-expansion/MANIFEST.json",
+    "review20": "php-expansion/EDITORIAL_REVIEW_20.txt",
+    "releasePlan": "php-expansion/RELEASE_PLAN.txt"
+  }
+}

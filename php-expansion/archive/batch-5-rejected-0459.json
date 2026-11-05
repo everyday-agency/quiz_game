@@ -1,0 +1,109 @@
+{
+  "reason": "Draft expected execute([]) to clear SQLite native binding. Actual PHP 8.5 observation was [42,42], contradicting the proposed explanation. Replaced before acceptance with an explicit parameter-type case.",
+  "question": {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-engineer-2026",
+    "id": "PHP-E26-0459",
+    "revision": 1,
+    "status": "draft",
+    "responseType": "single-choice",
+    "format": "code-review",
+    "topic": "PDO & database access",
+    "subtopic": "pdo-execute-empty-parameters-clear-existing-bindings",
+    "objective": {
+      "id": "pdo-execute-empty-parameters-clear-existing-bindings",
+      "text": "Review replacing an omitted execute argument with an empty parameter array on a previously bound statement."
+    },
+    "difficulty": {
+      "level": "Intermediate",
+      "audience": "intermediate",
+      "rationale": "Distinguish reusing bound values from supplying a new parameter set, including an empty one."
+    },
+    "prerequisites": [
+      "PDO bindValue",
+      "PDOStatement::execute arguments",
+      "SQLite parameters",
+      "Statement reuse"
+    ],
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI unless the stated context specifies otherwise",
+      "extensions": [
+        "PDO",
+        "pdo_sqlite"
+      ],
+      "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+    },
+    "context": {
+      "assumptions": [
+        "Run in a fresh PHP process using only the displayed files and inputs.",
+        "This exact fixture uses PDO SQLite. Other drivers may report missing parameters differently; the question asks about the displayed SQLite result."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n\n$pdo = new PDO('sqlite::memory:');\n$statement = $pdo->prepare('SELECT :value AS value');\n$statement->bindValue('value', 42, PDO::PARAM_INT);\n\n$statement->execute();\n$first = $statement->fetchColumn();\n$statement->closeCursor();\n\n$statement->execute([]);\n$second = $statement->fetchColumn();\n\necho json_encode([$first, $second]);\n"
+        }
+      ]
+    },
+    "stem": "A wrapper always passes an array to execute, even when the caller supplies no new parameters. Which assessment matches these two executions?",
+    "options": [
+      {
+        "id": "empty-means-reuse",
+        "text": "Both values are 42; an empty parameter array is equivalent to omitting the argument.",
+        "rationale": "Supplying an array replaces the existing bindings, even when the array is empty.",
+        "misconception": "Treating an explicitly empty parameter set as a request to retain previous bindings."
+      },
+      {
+        "id": "clear-to-null",
+        "text": "The first value is 42 and the second is null; execute([]) clears the previous binding, leaving this SQLite parameter unbound.",
+        "rationale": "The argument distinguishes reuse from replacement; SQLite evaluates the now-unbound parameter as NULL.",
+        "misconception": null
+      },
+      {
+        "id": "integer-default",
+        "text": "The first value is 42 and the second is 0 because PARAM_INT supplies a zero after its value is cleared.",
+        "rationale": "The previous binding and its type do not become a default-valued integer parameter.",
+        "misconception": "Treating a binding type as a persistent default-value declaration."
+      },
+      {
+        "id": "empty-array-invalid",
+        "text": "The second call throws solely because execute forbids an empty parameter array.",
+        "rationale": "An empty array is a valid API argument; the displayed SQLite statement executes with an unbound parameter.",
+        "misconception": "Confusing a driver’s possible missing-value behavior with an invalid PHP argument shape."
+      }
+    ],
+    "correctOptionId": "clear-to-null",
+    "explanation": {
+      "summary": "Omitting execute’s parameter argument preserves existing bindings. Passing a parameter array creates a new binding set. In this SQLite fixture, the empty set leaves the selected parameter as SQL NULL.",
+      "trace": "The bound execution reads 42. After the cursor is closed, execute([]) replaces the bindings and the next fetch reads null."
+    },
+    "validation": {
+      "kind": "contract",
+      "stdout": "[42,null]",
+      "keyEvidence": "The SQLite observations distinguish omitted parameters from an explicitly empty parameter array.",
+      "counterexamples": {
+        "empty-means-reuse": "The second value is null, not the old integer.",
+        "integer-default": "No integer zero is supplied.",
+        "empty-array-invalid": "The second execution completes successfully."
+      },
+      "status": "draft",
+      "independentEditorialReview": "pending"
+    },
+    "curriculum": {
+      "repositoryTopic": "repo-topic-15",
+      "lessonIds": null,
+      "lessonMappingStatus": "unmapped",
+      "coverageComplete": false
+    },
+    "references": [
+      "https://www.php.net/manual/en/pdostatement.execute.php",
+      "https://www.sqlite.org/lang_expr.html#parameters"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "sourceBranch": "remediation/question-quality-pilot",
+  "sourceCommit": "c56a92c",
+  "activeCount": 2500,
+  "counts": {
+    "Laravel": 600,
+    "PHP": 300,
+    "TypeScript": 600,
+    "React": 300,
+    "MySQL": 400,
+    "Google Analytics": 300
+  },
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "9b3f7d5e62bab15766a6242ed0de641abe3f8ed71659fcab210e327b056eff7d"
+    },
+    {
+      "path": "styles.css",
+      "sha256": "f1f8bb4baf39a4c1a67ed572a171120d5e4fabae97ad141d58b8523de71498f2"
+    },
+    {
+      "path": "js/app.js",
+      "sha256": "ee0cd3093d1d586d176783c2729871cf1c53b1162b0b84e1630908b5db32d9ea"
+    },
+    {
+      "path": "js/questions.mjs",
+      "sha256": "9db3cdfd958ad01809c094a0972349da2ff5078cb0a14effbdd75801b79aa4a3"
+    },
+    {
+      "path": "js/learning-notes.mjs",
+      "sha256": "2a958712bf3fed0cf88a012c04a13d94a0463b3d49ffa2e45baff3ecbade8583"
+    },
+    {
+      "path": "js/exam.mjs",
+      "sha256": "1e5b660f8dfc6977ac2f360251a82a19be656b27fe2505a79fb4c9fdb94e7b45"
+    },
+    {
+      "path": "js/bank/assemble.mjs",
+      "sha256": "34d161c7aaba846c482facfaeb206e9990b52eacaf846a0517cbf783ff0d2ea3"
+    },
+    {
+      "path": "js/bank/laravel-companions.mjs",
+      "sha256": "ee4f9a56f56062d018fce557c4d319a62b9f27969d38d6e055389e593cff25e2"
+    },
+    {
+      "path": "js/bank/laravel-corrections.mjs",
+      "sha256": "08792d01f98154ac503e381644a46ab16837544b26a6ffd544b0fa31509a0f52"
+    },
+    {
+      "path": "js/bank/legacy-v1.mjs",
+      "sha256": "e76ab7576e4ed720dd111811e47787c410f7cbc5db1edef8e2554b0fb144b209"
+    },
+    {
+      "path": "js/bank/php-repairs.mjs",
+      "sha256": "1fe3d317ea05f44632e6bb940f39cdd71c40e9615309bbd13a4c07b1d392e9c3"
+    },
+    {
+      "path": "js/bank/pilot.mjs",
+      "sha256": "5ae74419dd6477f4dd15b5caf6878feeef7410f66843055bcfe9f0b1fd715450"
+    },
+    {
+      "path": "js/bank/revisions.mjs",
+      "sha256": "4bbd71c2c154fe4360856b94062482c0e9cc71436a635e42305168c1f8760562"
+    },
+    {
+      "path": "questions-and-metadata.json",
+      "sha256": "dd6d6546d0651c15388d45569161568b1dfccf25c4a8d5aef5ec5466b34ada19"
+    }
+  ],
+  "bankSha256": "0b013644e95423f1560a0f816997803ba5a2cd0c0240816e011d8c05e2bdafad"
+}

@@ -1,0 +1,271 @@
+{
+  "scope": 600,
+  "reviewMethod": "600 baseline student views read before revealing each answer key, followed by all four rationales; author remediation, not independent blind certification.",
+  "dispositions": {
+    "retain": 390,
+    "revise": 207,
+    "unresolved": 3
+  },
+  "revised": 207,
+  "unresolved": [
+    {
+      "id": "PHP-E26-0355",
+      "blindAnswer": "B",
+      "decision": "unresolved",
+      "note": "Redirect method semantics, not the mere presence of 303 in metadata, distinguish all four status interpretations; no real redirect execution is claimed. Stored objective says preserve the original POST method/body, contradicting the scenario, key and explanations requiring retrieval via 303. Changing the objective or reversing the scenario requires an editorial intent decision; preserve this record and surface it for independent review.",
+      "stage": "awaiting-independent-decision",
+      "explanationsReviewed": true,
+      "independentApproval": "pending",
+      "categories": [
+        "learning-objective"
+      ],
+      "severity": "high",
+      "revision": 1
+    },
+    {
+      "id": "PHP-E26-0549",
+      "blindAnswer": "C",
+      "decision": "unresolved",
+      "categories": [
+        "duplicate-reasoning"
+      ],
+      "severity": "medium",
+      "note": "Strong reasoning duplicate of 0226: nullable aggregate helper calls min/max on empty input and must guard before invocation. 0226 already covers the empty rule plus zero/negative preservation. Changing min to max or switching execution to review adds insufficient new reasoning; preserve both IDs/objectives and request independent retain/retarget decision rather than silently replace 0549.",
+      "stage": "awaiting-independent-decision",
+      "explanationsReviewed": true,
+      "independentApproval": "pending",
+      "revision": 1
+    },
+    {
+      "id": "PHP-E26-0557",
+      "blindAnswer": "D",
+      "decision": "unresolved",
+      "categories": [
+        "duplicate-reasoning"
+      ],
+      "severity": "medium",
+      "note": "Strong duplicate of 0431: session_write_close followed by local SESSION mutation and reopen loses that mutation; same required repair before-close or reopen-before-write, with only labels and format changed. Preserve objective and IDs; independent review must decide whether to retain both or authorize retargeting.",
+      "stage": "awaiting-independent-decision",
+      "explanationsReviewed": true,
+      "independentApproval": "pending",
+      "revision": 1
+    }
+  ],
+  "categories": {
+    "weak-distractor": 17,
+    "difficulty": 103,
+    "wording-cue": 6,
+    "answer-leakage": 111,
+    "ambiguity": 1,
+    "answer-length-cue": 1,
+    "explanation-quality": 2,
+    "learning-objective": 1,
+    "insufficient-context": 1,
+    "duplicate-reasoning": 3
+  },
+  "severity": {
+    "medium": 166,
+    "high": 25,
+    "low": 19
+  },
+  "before": {
+    "difficulty": {
+      "Foundation": 150,
+      "Intermediate": 300,
+      "Advanced": 150
+    },
+    "length": {
+      "uniqueLongestChoices": 504,
+      "uniqueLongestCorrect": 180,
+      "longestAccuracyWhereUnique": 0.35714285714285715,
+      "uniqueShortestCorrect": 43,
+      "keyLongerThan1_45TimesEveryDistractor": [
+        "PHP-E26-0010",
+        "PHP-E26-0486",
+        "PHP-E26-0515"
+      ]
+    },
+    "authoredKeyPositions": {
+      "B": 157,
+      "C": 172,
+      "D": 148,
+      "A": 123
+    }
+  },
+  "after": {
+    "difficulty": {
+      "Foundation": 160,
+      "Intermediate": 380,
+      "Advanced": 60
+    },
+    "length": {
+      "uniqueLongestChoices": 504,
+      "uniqueLongestCorrect": 176,
+      "longestAccuracyWhereUnique": 0.3492063492063492,
+      "uniqueShortestCorrect": 44,
+      "keyLongerThan1_45TimesEveryDistractor": [
+        "PHP-E26-0010",
+        "PHP-E26-0486",
+        "PHP-E26-0515"
+      ]
+    },
+    "authoredKeyPositions": {
+      "B": 157,
+      "C": 172,
+      "D": 148,
+      "A": 123
+    }
+  },
+  "wording": {
+    "confirmedAnswerLeakage": 111,
+    "confirmedProfessionalOrLengthCueRecords": 6,
+    "remainingConfirmedLeakageRepairs": 0,
+    "baselineApiScreen": {
+      "candidates": 77,
+      "pointingAtKey": 30
+    },
+    "comparableApiTokenScreenBefore": {
+      "candidates": 66,
+      "pointingAtKey": 28
+    },
+    "baselineApiScreenAfter": {
+      "candidatesStillMatching": 44,
+      "pointingAtKey": 6,
+      "ids": [
+        "PHP-E26-0051",
+        "PHP-E26-0058",
+        "PHP-E26-0060",
+        "PHP-E26-0099",
+        "PHP-E26-0100",
+        "PHP-E26-0228",
+        "PHP-E26-0247",
+        "PHP-E26-0252",
+        "PHP-E26-0253",
+        "PHP-E26-0255",
+        "PHP-E26-0268",
+        "PHP-E26-0274",
+        "PHP-E26-0295",
+        "PHP-E26-0300",
+        "PHP-E26-0328",
+        "PHP-E26-0331",
+        "PHP-E26-0346",
+        "PHP-E26-0372",
+        "PHP-E26-0395",
+        "PHP-E26-0431",
+        "PHP-E26-0432",
+        "PHP-E26-0439",
+        "PHP-E26-0440",
+        "PHP-E26-0446",
+        "PHP-E26-0447",
+        "PHP-E26-0457",
+        "PHP-E26-0459",
+        "PHP-E26-0462",
+        "PHP-E26-0478",
+        "PHP-E26-0482",
+        "PHP-E26-0483",
+        "PHP-E26-0484",
+        "PHP-E26-0491",
+        "PHP-E26-0523",
+        "PHP-E26-0525",
+        "PHP-E26-0532",
+        "PHP-E26-0539",
+        "PHP-E26-0545",
+        "PHP-E26-0555",
+        "PHP-E26-0559",
+        "PHP-E26-0565",
+        "PHP-E26-0576",
+        "PHP-E26-0577",
+        "PHP-E26-0590"
+      ]
+    },
+    "limitations": "API screen includes false positives and measures only survival of the original candidate tokens, not all possible new wording cues. No absence-of-leakage guarantee or measured student discrimination is claimed."
+  },
+  "runtime": [
+    {
+      "batch": 1,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 294,
+      "executions": 289
+    },
+    {
+      "batch": 1,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 294,
+      "executions": 289
+    },
+    {
+      "batch": 2,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 300,
+      "executions": 286
+    },
+    {
+      "batch": 2,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 300,
+      "executions": 286
+    },
+    {
+      "batch": 3,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 276,
+      "executions": 272
+    },
+    {
+      "batch": 3,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 276,
+      "executions": 272
+    },
+    {
+      "batch": 4,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 275,
+      "executions": 268
+    },
+    {
+      "batch": 4,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 275,
+      "executions": 268
+    },
+    {
+      "batch": 5,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 202,
+      "executions": 200
+    },
+    {
+      "batch": 5,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 202,
+      "executions": 200
+    },
+    {
+      "batch": 6,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 229,
+      "executions": 227
+    },
+    {
+      "batch": 6,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 229,
+      "executions": 227
+    }
+  ],
+  "independentApproval": "pending",
+  "productionActivation": false
+}

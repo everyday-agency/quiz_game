@@ -5,7 +5,7 @@ import { join, delimiter } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync, execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { QUESTION_BANK } from '../js/questions.mjs';
+import { QUESTION_BANK } from '../release/archive/pre-php-only/js/questions.mjs';
 import { PILOT_IDS } from '../js/bank/pilot.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));

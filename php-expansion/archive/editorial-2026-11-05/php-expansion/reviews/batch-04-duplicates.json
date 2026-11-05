@@ -1,0 +1,801 @@
+{
+  "sourceHash": "8f65a30edec1559d15642c40cceac48c09021dd21b3d0dab2cf06e06ab000a0f",
+  "reviewer": "authoring assistant; not independent",
+  "independentApproval": "pending",
+  "method": "Lexical/source candidate review plus objective comparison with the pilot and earlier batches. Similarity is only a review aid, not proof of semantic uniqueness.",
+  "records": [
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0040",
+      "decision": "distinct objectives; retain",
+      "reason": "Nullable return chaining differs from detecting uninitialized typed-property storage; neither remedy substitutes for the other."
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0035",
+      "decision": "distinct objectives; retain",
+      "reason": "SELECT result counting differs from delayed bindParam reference capture; PDO setup accounts for the source overlap."
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0177",
+      "decision": "distinct objectives; retain",
+      "reason": "Result cardinality inspection differs from selecting a SQL identifier through an allowlist."
+    },
+    {
+      "a": "PHP-E26-0320",
+      "b": "PHP-E26-0065",
+      "decision": "distinct objectives; retain",
+      "reason": "Caller-versus-definition file strictness differs from an internal callback call boundary; return coercion is central only in 0320."
+    },
+    {
+      "a": "PHP-E26-0341",
+      "b": "PHP-E26-0184",
+      "decision": "distinct objectives; retain",
+      "reason": "Chunked encoder state differs from append-mode cursor behavior; shared file setup is incidental."
+    },
+    {
+      "a": "PHP-E26-0362",
+      "b": "PHP-E26-0065",
+      "decision": "distinct objectives; retain",
+      "reason": "Reflection property assignment and internal callback argument calls are distinct coercion boundaries with different APIs and value flows."
+    },
+    {
+      "a": "PHP-E26-0320",
+      "b": "PQ-005",
+      "decision": "distinct objectives; retain",
+      "reason": "The archived strict-call example is extended with weak-file return coercion, testing two independently controlled boundaries instead of only caller arguments."
+    },
+    {
+      "a": "PHP-E26-0336",
+      "b": "PHP-E26-0071",
+      "decision": "distinct objectives; retain",
+      "reason": "Create-without-truncation and create-only-if-absent require different modes and opposite treatment of existing files."
+    },
+    {
+      "a": "PHP-E26-0368",
+      "b": "PHP-E26-0227",
+      "decision": "distinct objectives; retain",
+      "reason": "Scalar-category admission includes booleans and text; strict allowlist membership tests value identity within a specified list."
+    },
+    {
+      "a": "PHP-E26-0321",
+      "b": "PHP-E26-0220",
+      "decision": "distinct objectives; retain",
+      "reason": "Generator rewind legality depends on advancement; exception injection delegates control into a different generator."
+    },
+    {
+      "a": "PHP-E26-0308",
+      "b": "PHP-E26-0212",
+      "decision": "distinct objectives; retain",
+      "reason": "Nested array copying concerns storage independence; parallel-array sorting concerns coordinated ordering."
+    },
+    {
+      "a": "PHP-E26-0324",
+      "b": "PHP-E26-0319",
+      "decision": "distinct objectives; retain",
+      "reason": "Promotion default storage and promotion attribute target validation use different Reflection observations and failure rules."
+    },
+    {
+      "a": "PHP-E26-0386",
+      "b": "PHP-E26-0191",
+      "decision": "distinct objectives; retain",
+      "reason": "Readonly promotion causes a forbidden second assignment; a set hook changes the stored value while an assignment expression returns its input."
+    },
+    {
+      "a": "PHP-E26-0389",
+      "b": "PHP-E26-0381",
+      "decision": "distinct objectives; retain",
+      "reason": "One SQL placeholder cannot expand a list; prefix comparison uses the wrong length. Similar assertion prompts do not share a defect."
+    },
+    {
+      "a": "PHP-E26-0317",
+      "b": "PHP-E26-0211",
+      "decision": "distinct objectives; retain",
+      "reason": "Priority-queue iteration consumes a heap; array foreach leaves the independent internal array pointer unchanged."
+    },
+    {
+      "a": "PHP-E26-0368",
+      "b": "PHP-E26-0070",
+      "decision": "distinct objectives; retain",
+      "reason": "PHP scalar admission differs from JSON top-level object admission; the accepted type sets and representations differ."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0106",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipped-key collisions overwrite earlier entries; ordinary function default arrays are independent across calls."
+    },
+    {
+      "a": "PHP-E26-0302",
+      "b": "PHP-E26-0101",
+      "decision": "distinct objectives; retain",
+      "reason": "Coalescing assignment skips its right operand for existing nonnull values; and/assignment precedence determines expression grouping."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0206",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipping values into keys has collision behavior; prepending renumbers numeric keys without flipping values."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0101",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipped-key collision rules do not involve boolean assignment precedence."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0112",
+      "decision": "distinct objectives; retain",
+      "reason": "Recursive replacement resolves existing nested keys; flipping turns values into keys and loses duplicate values."
+    },
+    {
+      "a": "PHP-E26-0318",
+      "b": "PHP-E26-0216",
+      "decision": "distinct objectives; retain",
+      "reason": "Magic fallback for an inaccessible method differs from state in an invokable callback object."
+    },
+    {
+      "a": "PHP-E26-0312",
+      "b": "PHP-E26-0209",
+      "decision": "distinct objectives; retain",
+      "reason": "A failed string conversion interrupts its enclosing echo; recursive output order follows entry and unwind phases."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0005",
+      "decision": "distinct objectives; retain",
+      "reason": "Array flipping changes key/value roles; assigning an object retains identity rather than copying it."
+    },
+    {
+      "a": "PHP-E26-0313",
+      "b": "PHP-E26-0024",
+      "decision": "distinct objectives; retain",
+      "reason": "Variadic unpacked references modify the source array; generator cleanup concerns lifetime and finalization."
+    },
+    {
+      "a": "PHP-E26-0314",
+      "b": "PHP-E26-0111",
+      "decision": "distinct objectives; retain",
+      "reason": "strtok owns one shared continuation state; Closure static locals are associated with the particular Closure instance."
+    },
+    {
+      "a": "PHP-E26-0387",
+      "b": "PHP-E26-0384",
+      "decision": "distinct objectives; retain",
+      "reason": "Natural sorting compares digit runs; half-even rounding selects a numeric midpoint rule."
+    },
+    {
+      "a": "PHP-E26-0310",
+      "b": "PHP-E26-0301",
+      "decision": "distinct objectives; retain",
+      "reason": "A shorthand conditional avoids a repeated side-effecting call; octal syntax determines a literal value."
+    },
+    {
+      "a": "PHP-E26-0305",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Slash division’s result type differs from string-to-array-key normalization."
+    },
+    {
+      "a": "PHP-E26-0313",
+      "b": "PHP-E26-0211",
+      "decision": "distinct objectives; retain",
+      "reason": "Reference variadics update unpacked source elements; foreach does not advance an array’s internal pointer."
+    },
+    {
+      "a": "PHP-E26-0324",
+      "b": "PHP-E26-0023",
+      "decision": "distinct objectives; retain",
+      "reason": "Constructor-free allocation leaves promoted storage uninitialized; explicitly initialized readonly null is already a completed initialization."
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Source integer literal syntax and array-key normalization treat leading zeros in different representations and contexts."
+    },
+    {
+      "a": "PHP-E26-0312",
+      "b": "PHP-E26-0220",
+      "decision": "distinct objectives; retain",
+      "reason": "Throwing during conversion interrupts an expression; throwing into a delegated generator can be caught and yield a recovery value."
+    },
+    {
+      "a": "PHP-E26-0318",
+      "b": "PHP-E26-0208",
+      "decision": "distinct objectives; retain",
+      "reason": "Method accessibility can trigger __call; interface membership is a nominal type relation."
+    },
+    {
+      "a": "PHP-E26-0320",
+      "b": "PHP-E26-0108",
+      "decision": "distinct objectives; retain",
+      "reason": "Cross-file scalar coercion boundaries are unrelated to global constants and local variables."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0122",
+      "decision": "distinct objectives; retain",
+      "reason": "Cycle collection releases a self-reference; overloaded property access returns either a value copy or an object handle."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "Explicit garbage collection and loop condition placement have distinct control mechanisms."
+    },
+    {
+      "a": "PHP-E26-0367",
+      "b": "PHP-E26-0067",
+      "decision": "distinct objectives; retain",
+      "reason": "Pairing two parallel lists uses array_combine; extracting fields from records uses array_column with an index field."
+    },
+    {
+      "a": "PHP-E26-0307",
+      "b": "PQ-021",
+      "decision": "distinct objectives; retain",
+      "reason": "The archive combines capture timing with a static function counter. The new record isolates local mutation of a value-captured scalar across invocations: unlike a static counter, the local increment is not retained."
+    },
+    {
+      "a": "PHP-E26-0353",
+      "b": "PHP-E26-0163",
+      "decision": "distinct objectives; retain",
+      "reason": "A callback’s local key variable cannot rename array keys; SensitiveParameter redaction concerns stack arguments rather than explicit messages."
+    },
+    {
+      "a": "PHP-E26-0307",
+      "b": "PHP-E26-0106",
+      "decision": "distinct objectives; retain",
+      "reason": "An ordinary array default and a captured scalar both provide starting values, but the new question addresses the misconception that a Closure object automatically retains local scalar mutations. It has no default parameter."
+    },
+    {
+      "a": "PHP-E26-0308",
+      "b": "PHP-E26-0302",
+      "decision": "distinct objectives; retain",
+      "reason": "Nested array copy independence does not involve null-coalescing assignment or lazy right operands."
+    },
+    {
+      "a": "PHP-E26-0312",
+      "b": "PHP-E26-0215",
+      "decision": "distinct objectives; retain",
+      "reason": "String conversion can throw before echo; match conditions and result expressions have selective evaluation without conversion hooks."
+    },
+    {
+      "a": "PHP-E26-0330",
+      "b": "PQ-061",
+      "decision": "distinct objectives; retain",
+      "reason": "Returning a match result addresses function flow; the archived example tests match’s strict selection rule."
+    },
+    {
+      "a": "PHP-E26-0400",
+      "b": "PHP-E26-0296",
+      "decision": "distinct objectives; retain",
+      "reason": "Build-process isolation protects credentials from executable hooks; logging allowlists control which request data is recorded."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0216",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipped-key collision resolution differs from state retained in a callable object."
+    },
+    {
+      "a": "PHP-E26-0305",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "Exact division result types are separate from loop entry semantics."
+    },
+    {
+      "a": "PHP-E26-0312",
+      "b": "PHP-E26-0303",
+      "decision": "distinct objectives; retain",
+      "reason": "Throwing conversion interrupts an expression; continue 2 jumps to the next outer iteration."
+    },
+    {
+      "a": "PHP-E26-0362",
+      "b": "PHP-E26-0258",
+      "decision": "distinct objectives; retain",
+      "reason": "Reflection can coerce a typed-property assignment; __set does not intercept writes to an accessible declared property."
+    },
+    {
+      "a": "PHP-E26-0385",
+      "b": "PHP-E26-0287",
+      "decision": "distinct objectives; retain",
+      "reason": "HTTP method tokens are case-sensitive while header field names are case-insensitive; the opposed protocol rules require distinct behavior."
+    },
+    {
+      "a": "PHP-E26-0347",
+      "b": "PHP-E26-0265",
+      "decision": "distinct objectives; retain",
+      "reason": "Appending during array iteration differs from declaring a generator that yields writable references."
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "Octal source syntax and pre/postcondition loops have no shared reasoning requirement."
+    },
+    {
+      "a": "PHP-E26-0302",
+      "b": "PHP-E26-0105",
+      "decision": "distinct objectives; retain",
+      "reason": "Coalescing assignment conditionally evaluates its right side; keyed destructuring chooses source entries explicitly."
+    },
+    {
+      "a": "PHP-E26-0303",
+      "b": "PHP-E26-0209",
+      "decision": "distinct objectives; retain",
+      "reason": "continue 2 targets an enclosing loop; recursion emits output while entering and unwinding calls."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0018",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipped-key collision behavior is unrelated to destructor timing after object aliases are removed."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0102",
+      "decision": "distinct objectives; retain",
+      "reason": "Object-cycle collection and exponentiation precedence do not share an execution rule."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0110",
+      "decision": "distinct objectives; retain",
+      "reason": "Reference-return binding concerns variable aliases; cyclic garbage collection concerns object reachability."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0301",
+      "decision": "distinct objectives; retain",
+      "reason": "Object collection timing differs from numeric literal parsing."
+    },
+    {
+      "a": "PHP-E26-0349",
+      "b": "PHP-E26-0346",
+      "decision": "distinct objectives; retain",
+      "reason": "Boolean output conversion differs from truthiness of a Countable object; neither depends on the other’s hook or interface."
+    },
+    {
+      "a": "PHP-E26-0381",
+      "b": "PHP-E26-0284",
+      "decision": "distinct objectives; retain",
+      "reason": "Prefix-length testing and JSON fractional-marker testing select different distinguishing inputs and repairs."
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0025",
+      "decision": "distinct objectives; retain",
+      "reason": "A numeric literal’s base does not involve reference containers shared by copied arrays."
+    },
+    {
+      "a": "PHP-E26-0318",
+      "b": "PHP-E26-0123",
+      "decision": "distinct objectives; retain",
+      "reason": "Inaccessible-method magic dispatch differs from forwarding late static binding through parent calls."
+    },
+    {
+      "a": "PHP-E26-0328",
+      "b": "PHP-E26-0167",
+      "decision": "distinct objectives; retain",
+      "reason": "Final filename-extension parsing differs from ceiling division for page counts."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipping numeric-like values into keys may use key rules, but the tested defect is duplicate-value overwrite rather than key canonicalization."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0208",
+      "decision": "distinct objectives; retain",
+      "reason": "Array flip collisions are unrelated to interface membership."
+    },
+    {
+      "a": "PHP-E26-0350",
+      "b": "PHP-E26-0165",
+      "decision": "distinct objectives; retain",
+      "reason": "Implementing an abstract protected method enables inherited behavior; a child same-named method cannot override a private parent helper."
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0346",
+      "decision": "distinct objectives; retain",
+      "reason": "SELECT rowCount portability and Countable object truthiness are different emptiness-check failures with different correct observations."
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-PILOT-005",
+      "decision": "distinct objectives; retain",
+      "reason": "PDO PARAM_INT coercion is not input validation; the pilot tests distinguishing a valid integer zero from filter failure. The API boundary and failure direction differ."
+    },
+    {
+      "a": "PHP-E26-0390",
+      "b": "PHP-E26-0081",
+      "decision": "distinct objectives; retain",
+      "reason": "Decimal grouping separators and JSON list-shape loss are distinct wire-format defects triggered by different boundary inputs."
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0007",
+      "decision": "distinct objectives; retain",
+      "reason": "Octal literals and UTF-8 byte length both involve representations but require unrelated rules."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipping an array has no object clone or nested identity behavior."
+    },
+    {
+      "a": "PHP-E26-0308",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "Nested array copies and loop condition placement have no shared state transition."
+    },
+    {
+      "a": "PHP-E26-0312",
+      "b": "PHP-E26-0214",
+      "decision": "distinct objectives; retain",
+      "reason": "A throwing conversion and runtime resolution of a default constant occur at different evaluation boundaries."
+    },
+    {
+      "a": "PHP-E26-0315",
+      "b": "PHP-E26-0110",
+      "decision": "distinct objectives; retain",
+      "reason": "Partial sscanf conversion is unrelated to reference-return assignment."
+    },
+    {
+      "a": "PHP-E26-0321",
+      "b": "PHP-E26-0303",
+      "decision": "distinct objectives; retain",
+      "reason": "Rewind’s generator-state restriction differs from jumping between nested loops."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0210",
+      "decision": "distinct objectives; retain",
+      "reason": "Cycle collection does not use cascading replacement semantics."
+    },
+    {
+      "a": "PHP-E26-0384",
+      "b": "PHP-E26-0284",
+      "decision": "distinct objectives; retain",
+      "reason": "Half-even rounding changes a numeric result; preserving JSON zero fractions changes wire type notation without changing the numeric value."
+    },
+    {
+      "a": "PHP-E26-0389",
+      "b": "PHP-E26-0284",
+      "decision": "distinct objectives; retain",
+      "reason": "SQL placeholder cardinality and JSON float notation need different tests, even though both ask for a failing assertion."
+    },
+    {
+      "a": "PHP-E26-0308",
+      "b": "PHP-E26-0123",
+      "decision": "distinct objectives; retain",
+      "reason": "Array value copying and late static class binding do not share an identity mechanism."
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-E26-0353",
+      "decision": "distinct objectives; retain",
+      "reason": "PDO integer conversion and array_walk key-variable mutation are unrelated callback/binding behaviors."
+    },
+    {
+      "a": "PHP-E26-0371",
+      "b": "PHP-E26-0067",
+      "decision": "distinct objectives; retain",
+      "reason": "Inclusive range generation with reversed bounds differs from record-to-map field extraction."
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0148",
+      "decision": "distinct objectives; retain",
+      "reason": "Countable object truthiness differs from an arrow callback failing to mutate an outer scalar."
+    },
+    {
+      "a": "PHP-E26-0352",
+      "b": "PHP-E26-0250",
+      "decision": "distinct objectives; retain",
+      "reason": "Recursive merge promotes scalar conflicts to arrays; missing-key destructuring assigns null and emits a diagnostic."
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0264",
+      "decision": "distinct objectives; retain",
+      "reason": "A SELECT count API concern is independent of validation being invalidated by a second URL decoding."
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0110",
+      "decision": "distinct objectives; retain",
+      "reason": "Octal parsing does not involve copying versus binding a returned reference."
+    },
+    {
+      "a": "PHP-E26-0302",
+      "b": "PHP-E26-0212",
+      "decision": "distinct objectives; retain",
+      "reason": "Coalescing assignment has conditional side effects; parallel-array sorting coordinates row positions."
+    },
+    {
+      "a": "PHP-E26-0302",
+      "b": "PHP-E26-0225",
+      "decision": "distinct objectives; retain",
+      "reason": "A thrown static initializer is retried because initialization never completed; coalescing assignment instead checks existing null/missing array entries."
+    },
+    {
+      "a": "PHP-E26-0303",
+      "b": "PHP-E26-0220",
+      "decision": "distinct objectives; retain",
+      "reason": "Nested-loop continue and delegated generator exception recovery take different control-flow paths."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0114",
+      "decision": "distinct objectives; retain",
+      "reason": "Flipping duplicate values overwrites keys; null-callback array_map zips inputs and pads absent positions."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0119",
+      "decision": "distinct objectives; retain",
+      "reason": "Array flip collisions are unrelated to incompatible typed properties sharing one reference container."
+    },
+    {
+      "a": "PHP-E26-0310",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Conditional-expression evaluation count is distinct from array-key canonicalization."
+    },
+    {
+      "a": "PHP-E26-0310",
+      "b": "PHP-E26-0219",
+      "decision": "distinct objectives; retain",
+      "reason": "A shorthand conditional reuses its evaluated condition; Generator::send has start and suspension behavior."
+    },
+    {
+      "a": "PHP-E26-0311",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "__debugInfo versus JSON representation concerns different object hooks, not loop entry."
+    },
+    {
+      "a": "PHP-E26-0313",
+      "b": "PHP-E26-0110",
+      "decision": "distinct objectives; retain",
+      "reason": "Unpacked by-reference parameters bind source array elements; reference-return assignment chooses whether to bind the returned container."
+    },
+    {
+      "a": "PHP-E26-0314",
+      "b": "PHP-E26-0222",
+      "decision": "distinct objectives; retain",
+      "reason": "strtok’s shared parser state differs from static storage inherited with one method implementation."
+    },
+    {
+      "a": "PHP-E26-0318",
+      "b": "PHP-E26-0022",
+      "decision": "distinct objectives; retain",
+      "reason": "__call reacts to an inaccessible method call; trait aliases create an additional method name with separately chosen visibility."
+    },
+    {
+      "a": "PHP-E26-0321",
+      "b": "PHP-E26-0312",
+      "decision": "distinct objectives; retain",
+      "reason": "Generator rewind legality does not involve string conversion or partially evaluated echo arguments."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0308",
+      "decision": "distinct objectives; retain",
+      "reason": "Self-referential object cycles need collection; ordinary nested arrays in the fixture have no reference containers or object cycles."
+    },
+    {
+      "a": "PHP-E26-0323",
+      "b": "PHP-E26-0305",
+      "decision": "distinct objectives; retain",
+      "reason": "Large integer-to-float precision loss is distinct from slash selecting integer or float for exact versus fractional division."
+    },
+    {
+      "a": "PHP-E26-0325",
+      "b": "PHP-E26-0312",
+      "decision": "distinct objectives; retain",
+      "reason": "Both use magic hooks, but __wakeup executes before post-deserialization type checking while __toString throws inside expression evaluation."
+    },
+    {
+      "a": "PHP-E26-0326",
+      "b": "PHP-E26-0150",
+      "decision": "distinct objectives; retain",
+      "reason": "Discarding strtolower’s return differs from choosing the appropriate HTML text escaping transform."
+    },
+    {
+      "a": "PHP-E26-0330",
+      "b": "PHP-E26-0215",
+      "decision": "distinct objectives; retain",
+      "reason": "The match result must be returned from the function; another question traces which conditions and result expressions are evaluated."
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0046",
+      "decision": "distinct objectives; retain",
+      "reason": "empty on an object ignores Countable; replacing coalescing with truthiness loses valid scalar zero. The relevant value types and remedies differ."
+    },
+    {
+      "a": "PHP-E26-0372",
+      "b": "PHP-E26-0367",
+      "decision": "distinct objectives; retain",
+      "reason": "array_rand yields a key requiring lookup; array_combine creates a map from two parallel lists."
+    },
+    {
+      "a": "PHP-E26-0382",
+      "b": "PHP-E26-0187",
+      "decision": "distinct objectives; retain",
+      "reason": "Overlapping substring counts do not concern strict type-preserving deduplication."
+    },
+    {
+      "a": "PHP-E26-0383",
+      "b": "PHP-E26-0048",
+      "decision": "distinct objectives; retain",
+      "reason": "Order-insensitive map equality preserves strict values; map difference must compare key/value associations instead of values alone."
+    },
+    {
+      "a": "PHP-E26-0383",
+      "b": "PHP-E26-0187",
+      "decision": "distinct objectives; retain",
+      "reason": "Ignoring insertion order for map equality differs from deduplicating a list under strict value identity."
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0247",
+      "decision": "distinct objectives; retain",
+      "reason": "Countable object truthiness is unrelated to require/include missing-file control flow."
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0265",
+      "decision": "distinct objectives; retain",
+      "reason": "Countable conversion does not involve generator by-reference declarations."
+    },
+    {
+      "a": "PHP-E26-0350",
+      "b": "PHP-E26-0258",
+      "decision": "distinct objectives; retain",
+      "reason": "Abstract method obligations differ from __set dispatch bypass on a declared public property."
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0262",
+      "decision": "distinct objectives; retain",
+      "reason": "Nullsafe chaining is independent of disagreement between a text scan and JSON duplicate-key decoding."
+    },
+    {
+      "a": "PHP-E26-0383",
+      "b": "PHP-E26-0192",
+      "decision": "distinct objectives; retain",
+      "reason": "Map equality under reordered keys differs from an outer failure policy overriding a retryable inner cause."
+    },
+    {
+      "a": "PHP-E26-0310",
+      "b": "PHP-E26-0122",
+      "decision": "distinct objectives; retain",
+      "reason": "Repeated conditional calls differ from overloaded property values versus returned object handles."
+    },
+    {
+      "a": "PHP-E26-0385",
+      "b": "PHP-E26-0187",
+      "decision": "distinct objectives; retain",
+      "reason": "HTTP method case sensitivity differs from strict scalar deduplication."
+    },
+    {
+      "a": "PHP-E26-0385",
+      "b": "PHP-E26-0191",
+      "decision": "distinct objectives; retain",
+      "reason": "HTTP method comparison has no property hook assignment-expression behavior."
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0210",
+      "decision": "distinct objectives; retain",
+      "reason": "Octal parsing and cascading string replacement have separate source rules."
+    },
+    {
+      "a": "PHP-E26-0302",
+      "b": "PHP-E26-0216",
+      "decision": "distinct objectives; retain",
+      "reason": "Coalescing assignment skips right operands; an invokable object retains its own state across callback invocations."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0113",
+      "decision": "distinct objectives; retain",
+      "reason": "array_flip loses duplicate values as keys; array_intersect compares string representations while preserving original entries."
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0124",
+      "decision": "distinct objectives; retain",
+      "reason": "Array key collisions are unrelated to deferred lazy-object initialization."
+    },
+    {
+      "a": "PHP-E26-0305",
+      "b": "PHP-E26-0301",
+      "decision": "distinct objectives; retain",
+      "reason": "The same operands can have different source bases or division result types; these are distinct parsing and operator behaviors."
+    },
+    {
+      "a": "PHP-E26-0310",
+      "b": "PHP-E26-0011",
+      "decision": "distinct objectives; retain",
+      "reason": "Shorthand conditional reuse does not involve enum case name/value access."
+    },
+    {
+      "a": "PHP-E26-0313",
+      "b": "PHP-E26-0216",
+      "decision": "distinct objectives; retain",
+      "reason": "A variadic reference updates argument storage; an invokable object keeps state in its properties."
+    },
+    {
+      "a": "PHP-E26-0318",
+      "b": "PHP-E26-0209",
+      "decision": "distinct objectives; retain",
+      "reason": "Magic dispatch for inaccessible methods differs from recursion entry/unwind output."
+    },
+    {
+      "a": "PHP-E26-0319",
+      "b": "PHP-E26-0108",
+      "decision": "distinct objectives; retain",
+      "reason": "Promoted attribute target instantiation is separate from global constant visibility."
+    },
+    {
+      "a": "PHP-E26-0321",
+      "b": "PHP-E26-0209",
+      "decision": "distinct objectives; retain",
+      "reason": "Generator rewind state is distinct from ordinary recursive output order."
+    },
+    {
+      "a": "PHP-E26-0322",
+      "b": "PHP-E26-0103",
+      "decision": "distinct objectives; retain",
+      "reason": "Cycle collection does not use switch’s loose comparison or match’s strict comparison."
+    },
+    {
+      "a": "PHP-E26-0325",
+      "b": "PHP-E26-0209",
+      "decision": "distinct objectives; retain",
+      "reason": "Deserialization hooks run before type gates; recursive output follows explicit calls and returns, with no hidden hook."
+    },
+    {
+      "a": "PHP-E26-0388",
+      "b": "PHP-E26-0284",
+      "decision": "distinct objectives; retain",
+      "reason": "SQLite foreign-key enforcement testing and JSON fractional notation testing exercise unrelated runtime contracts."
+    },
+    {
+      "a": "PHP-E26-0307",
+      "b": "PHP-E26-0111",
+      "decision": "distinct objectives; retain",
+      "reason": "Static local counters belong to Closure instances; a value-captured scalar locally incremented on each invocation does not become such a counter. The observations test the opposed storage mechanisms explicitly."
+    },
+    {
+      "a": "PHP-E26-0391",
+      "b": "PHP-E26-0077",
+      "decision": "distinct objectives; retain",
+      "reason": "The earlier deep-copy test requires termination on cycles. This acyclic graph test requires preserving sharing between two edges; a copier can terminate and copy every value yet violate that identity relation."
+    },
+    {
+      "a": "PHP-E26-0394",
+      "b": "PHP-PILOT-004",
+      "decision": "distinct objectives; retain",
+      "reason": "The pilot tests an omitted function argument versus an explicit null value. This partial-update design carries field presence through validation and DTO boundaries while preserving an explicit empty string as a third operation."
+    },
+    {
+      "a": "PHP-E26-0399",
+      "b": "PHP-E26-0099",
+      "decision": "distinct objectives; retain",
+      "reason": "A confirmed aborted serialization attempt permits a full fresh transaction retry. The earlier uncertain-commit case requires determining durable outcome rather than blindly replaying a potentially committed operation."
+    }
+  ],
+  "lengthReview": {}
+}

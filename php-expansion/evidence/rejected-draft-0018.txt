@@ -1,0 +1,12 @@
+Rejected before acceptance: shallow-clone copied-value/shared-child execution was too close to the remediated legacy PQ-197 objective. Replaced by a distinct destructor-lifetime question at this unreleased ID.
+
+q({id:'PHP-E26-0018',format:'E',level:'M',topic:17,subtopic:'shallow-clone-object-and-array-properties',objective:'Distinguish a cloned object’s copied array property from a shared nested object.',reason:'Trace two property mutations across a shallow clone using different value types.',prerequisites:['clone','Objects','Array value semantics'],lessons:[4,23],coverageComplete:true,stem:'What JSON describes the original object after the clone is modified? No __clone method is defined.',files:[file(`$original = (object) [
+    'child' => (object) ['value' => 1],
+    'tags' => ['old'],
+];
+$copy = clone $original;
+
+$copy->child->value = 2;
+$copy->tags[] = 'new';
+
+echo json_encode([$original->child->value, $original->tags]);`)],options:[o('deep-copy','[1,["old"]]','The nested child object is not cloned automatically.','Assuming clone recursively duplicates referenced objects.'),o('fully-shared','[2,["old","new"]]','The array property has value semantics and separates when the copy is modified.','Treating all property values as shared object references.'),o('inverse','[1,["old","new"]]','The child is shared while the ordinary array property is copied, not the reverse.','Reversing object and array assignment semantics.'),o('shallow','[2,["old"]]','The shared child changes; appending to the copied array does not change the original array.')],key:'shallow',explanation:'The outer object is cloned shallowly. Its child property still identifies the same nested object; its array property uses ordinary value semantics.',trace:'Changing child->value is visible through original. Appending a tag changes only copy->tags, so original keeps ["old"].',validation:{kind:'output',stdout:'[2,["old"]]'},references:['https://www.php.net/manual/en/language.oop5.cloning.php']}),

@@ -1,0 +1,584 @@
+{
+  "existingRecordsPreserved": 2500,
+  "existingPhpPreserved": 300,
+  "newPhpItems": 20,
+  "permutationsPerItem": 24,
+  "formats": {
+    "execution": 7,
+    "debugging": 4,
+    "code-review": 3,
+    "implementation": 3,
+    "testing": 2,
+    "architecture": 1
+  },
+  "difficulty": {
+    "Foundation": 5,
+    "Applied": 15,
+    "Advanced": 0
+  },
+  "keysBySourcePosition": [
+    4,
+    7,
+    5,
+    4
+  ],
+  "cueComparison": [
+    {
+      "collection": "existingPhp",
+      "count": 300,
+      "genericOptionCue": 123,
+      "paddedItems": 189,
+      "uniqueLongestKey": 122
+    },
+    {
+      "collection": "newPilot",
+      "count": 20,
+      "genericOptionCue": 0,
+      "paddedItems": 0,
+      "uniqueLongestKey": 1
+    }
+  ],
+  "similarityReviewCandidates": [
+    {
+      "id": "PHP-PILOT-001",
+      "nearestExisting": [
+        {
+          "id": "PQ-085",
+          "codeTokenSimilarity": 0.38461538461538464
+        },
+        {
+          "id": "PQ-086",
+          "codeTokenSimilarity": 0.38461538461538464
+        },
+        {
+          "id": "PQ-087",
+          "codeTokenSimilarity": 0.38461538461538464
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-002",
+          "codeTokenSimilarity": 0.4166666666666667
+        },
+        {
+          "id": "PHP-PILOT-009",
+          "codeTokenSimilarity": 0.2857142857142857
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-002",
+      "nearestExisting": [
+        {
+          "id": "PQ-065",
+          "codeTokenSimilarity": 0.45454545454545453
+        },
+        {
+          "id": "PQ-066",
+          "codeTokenSimilarity": 0.45454545454545453
+        },
+        {
+          "id": "PQ-067",
+          "codeTokenSimilarity": 0.45454545454545453
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-001",
+          "codeTokenSimilarity": 0.4166666666666667
+        },
+        {
+          "id": "PHP-PILOT-009",
+          "codeTokenSimilarity": 0.3684210526315789
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-003",
+      "nearestExisting": [
+        {
+          "id": "PQ-005",
+          "codeTokenSimilarity": 0.43478260869565216
+        },
+        {
+          "id": "PQ-009",
+          "codeTokenSimilarity": 0.34782608695652173
+        },
+        {
+          "id": "PQ-010",
+          "codeTokenSimilarity": 0.34782608695652173
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-017",
+          "codeTokenSimilarity": 0.35
+        },
+        {
+          "id": "PHP-PILOT-011",
+          "codeTokenSimilarity": 0.34615384615384615
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-004",
+      "nearestExisting": [
+        {
+          "id": "PQ-017",
+          "codeTokenSimilarity": 0.3333333333333333
+        },
+        {
+          "id": "PQ-018",
+          "codeTokenSimilarity": 0.3333333333333333
+        },
+        {
+          "id": "PQ-019",
+          "codeTokenSimilarity": 0.3333333333333333
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-017",
+          "codeTokenSimilarity": 0.3684210526315789
+        },
+        {
+          "id": "PHP-PILOT-007",
+          "codeTokenSimilarity": 0.2777777777777778
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-005",
+      "nearestExisting": [
+        {
+          "id": "PQ-121",
+          "codeTokenSimilarity": 0.3548387096774194
+        },
+        {
+          "id": "PQ-122",
+          "codeTokenSimilarity": 0.3548387096774194
+        },
+        {
+          "id": "PQ-123",
+          "codeTokenSimilarity": 0.3548387096774194
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-006",
+          "codeTokenSimilarity": 0.3333333333333333
+        },
+        {
+          "id": "PHP-PILOT-001",
+          "codeTokenSimilarity": 0.25
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-006",
+      "nearestExisting": [
+        {
+          "id": "PQ-053",
+          "codeTokenSimilarity": 0.36
+        },
+        {
+          "id": "PQ-054",
+          "codeTokenSimilarity": 0.32
+        },
+        {
+          "id": "PQ-055",
+          "codeTokenSimilarity": 0.32
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-005",
+          "codeTokenSimilarity": 0.3333333333333333
+        },
+        {
+          "id": "PHP-PILOT-001",
+          "codeTokenSimilarity": 0.2727272727272727
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-007",
+      "nearestExisting": [
+        {
+          "id": "PQ-073",
+          "codeTokenSimilarity": 0.4
+        },
+        {
+          "id": "PQ-074",
+          "codeTokenSimilarity": 0.4
+        },
+        {
+          "id": "PQ-075",
+          "codeTokenSimilarity": 0.4
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-018",
+          "codeTokenSimilarity": 0.3076923076923077
+        },
+        {
+          "id": "PHP-PILOT-004",
+          "codeTokenSimilarity": 0.2777777777777778
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-008",
+      "nearestExisting": [
+        {
+          "id": "PQ-113",
+          "codeTokenSimilarity": 0.47058823529411764
+        },
+        {
+          "id": "PQ-114",
+          "codeTokenSimilarity": 0.2727272727272727
+        },
+        {
+          "id": "PQ-115",
+          "codeTokenSimilarity": 0.2727272727272727
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-020",
+          "codeTokenSimilarity": 0.34782608695652173
+        },
+        {
+          "id": "PHP-PILOT-002",
+          "codeTokenSimilarity": 0.25
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-009",
+      "nearestExisting": [
+        {
+          "id": "PQ-229",
+          "codeTokenSimilarity": 0.35714285714285715
+        },
+        {
+          "id": "PQ-230",
+          "codeTokenSimilarity": 0.35714285714285715
+        },
+        {
+          "id": "PQ-231",
+          "codeTokenSimilarity": 0.35714285714285715
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-019",
+          "codeTokenSimilarity": 0.4090909090909091
+        },
+        {
+          "id": "PHP-PILOT-002",
+          "codeTokenSimilarity": 0.3684210526315789
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-010",
+      "nearestExisting": [
+        {
+          "id": "PQ-005",
+          "codeTokenSimilarity": 0.2962962962962963
+        },
+        {
+          "id": "PQ-137",
+          "codeTokenSimilarity": 0.2857142857142857
+        },
+        {
+          "id": "PQ-257",
+          "codeTokenSimilarity": 0.25
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-019",
+          "codeTokenSimilarity": 0.42857142857142855
+        },
+        {
+          "id": "PHP-PILOT-009",
+          "codeTokenSimilarity": 0.2962962962962963
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-011",
+      "nearestExisting": [
+        {
+          "id": "PQ-198",
+          "codeTokenSimilarity": 0.4230769230769231
+        },
+        {
+          "id": "PQ-199",
+          "codeTokenSimilarity": 0.4230769230769231
+        },
+        {
+          "id": "PQ-200",
+          "codeTokenSimilarity": 0.4230769230769231
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-016",
+          "codeTokenSimilarity": 0.4444444444444444
+        },
+        {
+          "id": "PHP-PILOT-012",
+          "codeTokenSimilarity": 0.36666666666666664
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-012",
+      "nearestExisting": [
+        {
+          "id": "PQ-245",
+          "codeTokenSimilarity": 0.38235294117647056
+        },
+        {
+          "id": "PQ-246",
+          "codeTokenSimilarity": 0.38235294117647056
+        },
+        {
+          "id": "PQ-247",
+          "codeTokenSimilarity": 0.38235294117647056
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-014",
+          "codeTokenSimilarity": 0.4
+        },
+        {
+          "id": "PHP-PILOT-013",
+          "codeTokenSimilarity": 0.3939393939393939
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-013",
+      "nearestExisting": [
+        {
+          "id": "PQ-053",
+          "codeTokenSimilarity": 0.3793103448275862
+        },
+        {
+          "id": "PQ-197",
+          "codeTokenSimilarity": 0.37142857142857144
+        },
+        {
+          "id": "PQ-198",
+          "codeTokenSimilarity": 0.3548387096774194
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-012",
+          "codeTokenSimilarity": 0.3939393939393939
+        },
+        {
+          "id": "PHP-PILOT-011",
+          "codeTokenSimilarity": 0.36363636363636365
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-014",
+      "nearestExisting": [
+        {
+          "id": "PQ-089",
+          "codeTokenSimilarity": 0.27586206896551724
+        },
+        {
+          "id": "PQ-090",
+          "codeTokenSimilarity": 0.27586206896551724
+        },
+        {
+          "id": "PQ-091",
+          "codeTokenSimilarity": 0.27586206896551724
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-012",
+          "codeTokenSimilarity": 0.4
+        },
+        {
+          "id": "PHP-PILOT-015",
+          "codeTokenSimilarity": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-015",
+      "nearestExisting": [
+        {
+          "id": "PQ-205",
+          "codeTokenSimilarity": 0.25
+        },
+        {
+          "id": "PQ-206",
+          "codeTokenSimilarity": 0.25
+        },
+        {
+          "id": "PQ-207",
+          "codeTokenSimilarity": 0.25
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-014",
+          "codeTokenSimilarity": 0.3333333333333333
+        },
+        {
+          "id": "PHP-PILOT-012",
+          "codeTokenSimilarity": 0.2413793103448276
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-016",
+      "nearestExisting": [
+        {
+          "id": "PQ-198",
+          "codeTokenSimilarity": 0.44
+        },
+        {
+          "id": "PQ-199",
+          "codeTokenSimilarity": 0.44
+        },
+        {
+          "id": "PQ-200",
+          "codeTokenSimilarity": 0.44
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-011",
+          "codeTokenSimilarity": 0.4444444444444444
+        },
+        {
+          "id": "PHP-PILOT-012",
+          "codeTokenSimilarity": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-017",
+      "nearestExisting": [
+        {
+          "id": "PQ-017",
+          "codeTokenSimilarity": 0.375
+        },
+        {
+          "id": "PQ-018",
+          "codeTokenSimilarity": 0.375
+        },
+        {
+          "id": "PQ-019",
+          "codeTokenSimilarity": 0.375
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-004",
+          "codeTokenSimilarity": 0.3684210526315789
+        },
+        {
+          "id": "PHP-PILOT-003",
+          "codeTokenSimilarity": 0.35
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-018",
+      "nearestExisting": [
+        {
+          "id": "PQ-017",
+          "codeTokenSimilarity": 0.38461538461538464
+        },
+        {
+          "id": "PQ-018",
+          "codeTokenSimilarity": 0.38461538461538464
+        },
+        {
+          "id": "PQ-019",
+          "codeTokenSimilarity": 0.38461538461538464
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-017",
+          "codeTokenSimilarity": 0.3333333333333333
+        },
+        {
+          "id": "PHP-PILOT-007",
+          "codeTokenSimilarity": 0.3076923076923077
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-019",
+      "nearestExisting": [
+        {
+          "id": "PQ-181",
+          "codeTokenSimilarity": 0.2857142857142857
+        },
+        {
+          "id": "PQ-182",
+          "codeTokenSimilarity": 0.2857142857142857
+        },
+        {
+          "id": "PQ-183",
+          "codeTokenSimilarity": 0.2857142857142857
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-010",
+          "codeTokenSimilarity": 0.42857142857142855
+        },
+        {
+          "id": "PHP-PILOT-009",
+          "codeTokenSimilarity": 0.4090909090909091
+        }
+      ]
+    },
+    {
+      "id": "PHP-PILOT-020",
+      "nearestExisting": [
+        {
+          "id": "PQ-113",
+          "codeTokenSimilarity": 0.391304347826087
+        },
+        {
+          "id": "PQ-253",
+          "codeTokenSimilarity": 0.3125
+        },
+        {
+          "id": "PQ-254",
+          "codeTokenSimilarity": 0.3125
+        }
+      ],
+      "nearestPilot": [
+        {
+          "id": "PHP-PILOT-008",
+          "codeTokenSimilarity": 0.34782608695652173
+        },
+        {
+          "id": "PHP-PILOT-010",
+          "codeTokenSimilarity": 0.2857142857142857
+        }
+      ]
+    }
+  ],
+  "limits": "Token similarity and wording screens are review aids. They do not establish originality, plausible distractors, or calibrated difficulty by themselves."
+}

@@ -1,0 +1,378 @@
+[
+  {
+    "id": "PHP-PILOT-001",
+    "correctOptionId": "left-precedence",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "3374fe12ce63211c0b7a3bf56a4e2f18cefd997b76f488a22d2e7a18e7794f61",
+        "newSha256": "407778ee416f7f2cb7e87358b2a219d8f524573875cdff9cdcaf18ad6263d941",
+        "beforeLines": 4,
+        "afterLines": 6
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-002",
+    "correctOptionId": "unset-reference",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "1776cde3af051235a93ad0572ff684f71c02ce087781368fae8b99e3c8b2099e",
+        "newSha256": "820e71c54c631f74aca9c17852a519ba8be71fa9354250f03010f439932062b4",
+        "beforeLines": 6,
+        "afterLines": 15
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-003",
+    "correctOptionId": "named-breaks",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "library.php",
+        "kind": "complete-file",
+        "oldSha256": "8c46fcd624974af787e84277536feca626e4c9e788f1a7814ddeda045d5c0e5c",
+        "newSha256": "1e96b3abbf4bd3d78f7f2e79861021b17ed15f50dd69c37ee997e11cee84c8b1",
+        "beforeLines": 2,
+        "afterLines": 6
+      },
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "fe074a9d7f5deaf3edfeeb0810ac3b77b4d6687c63f7aa9f729a7cd48b8083fe",
+        "newSha256": "dcf7734b7bf13b117e3c4e62ab6a8092e148e155b112224664b53ed0aa33904f",
+        "beforeLines": 8,
+        "afterLines": 11
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-004",
+    "correctOptionId": "distinct",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "f3fe73fc2bd396434ceaf01514cd989e88d3f8502d2a5b7e3e64d234da83355f",
+        "newSha256": "fb18ce5a160235aa7d4b8d65ba837ceffcd0143da3fa4a4f3ea00002a4bce6f7",
+        "beforeLines": 5,
+        "afterLines": 8
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-005",
+    "correctOptionId": "false-sentinel",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "fa26454eb3fecd2f2677073445b216582798445057437a0c7a1c838e967208ad",
+        "newSha256": "ea944e021c3c5650c9e72dea97da25ba113967a7a40495f00da7be11d4ebd681",
+        "beforeLines": 8,
+        "afterLines": 18
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-006",
+    "correctOptionId": "type-only",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "77f246c58203fe642382391fa80412db051d476a2b5ed239418e834c31c3c801",
+        "newSha256": "8539bde4d74a82959f7b2bdcad509776dbbc07f26a0dee7a3cd4440ec228473d",
+        "beforeLines": 7,
+        "afterLines": 15
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-007",
+    "correctOptionId": "zero-line",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "a717bd8b5214a1e186d9c0d34eaaf33808d5013a23a3bd0730ff0ae6b78c2129",
+        "newSha256": "03917d564c3674b071e175111f1d897fa47e936166f59d7e56885e83fc76092d",
+        "beforeLines": 6,
+        "afterLines": 12
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-008",
+    "correctOptionId": "overwrite",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "5f3420d9f9f4e0848149152ecf28b3209b8eb61c76bc3871b3d59c4d8ba77355",
+        "newSha256": "33db57ed6acd17642fbe5b5109785d1a57a7a5c8713cdcb6bc89e6768586c145",
+        "beforeLines": 9,
+        "afterLines": 13
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-009",
+    "correctOptionId": "throwable",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "fb088aa2ada69bd1624999b7cc5f182a9f0e862c115efd1ddc2126b668645022",
+        "newSha256": "42330bbd9b929044f5e3d0e23aed897dae383b8d92f19bd4803a49dcf91c1f8b",
+        "beforeLines": 13,
+        "afterLines": 17
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-010",
+    "correctOptionId": "closed",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "edb07e8ec8925ba786569ed186a9a7b6348bd555e12bd32ccc02ff25974a72e3",
+        "newSha256": "90ca062efece344c50f4634a8b3cd27ae45e5c688e2185ce77d5c192716f8c2b",
+        "beforeLines": 7,
+        "afterLines": 16
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-011",
+    "correctOptionId": "reference-readonly",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "c7bf61cc6eb94c6bf9ea28a16c6832a646d721a577ca0057a4d51c94fe9c71aa",
+        "newSha256": "68909590b9a69bbb4d93d4f501d6485f7802823f8f7975d308698b3966ed2440",
+        "beforeLines": 10,
+        "afterLines": 24
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-012",
+    "correctOptionId": "parent-init",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "6a2f4f57533eab7b37e915f69195165b40e538997c114fe66338ff8e7429e7bc",
+        "newSha256": "d11034fbf85a8c54c0aaeacc3ce9d2d604af635056ace91803a596697af16023",
+        "beforeLines": 12,
+        "afterLines": 25
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-013",
+    "correctOptionId": "read-clock",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "c33b6a609931725d95bae72fac53f6db585cb83b702fd985ea8dbb49e03f4b55",
+        "newSha256": "75421b70689114daa7b0175b421a384b9f68f0997bb1cf87f257c5bddee6e30d",
+        "beforeLines": 17,
+        "afterLines": 28
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-014",
+    "correctOptionId": "trait-own",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "9742a129c6e7af51b76c60a3d2fce4cab71e9611cf12b89ae27038e624a6c274",
+        "newSha256": "fc3c85bd4b2428d6a84f6766f3878c1af02fd1da490ea2b69b5761d6eda15d64",
+        "beforeLines": 9,
+        "afterLines": 34
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-015",
+    "correctOptionId": "instance",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "PrefixMessage.php",
+        "kind": "complete-file",
+        "oldSha256": "b4a4c19241b7fb7356c4189345cb46e322d3c3a7e31ac8ccdc0b9188c51ba9a6",
+        "newSha256": "07b5aa3393c1546dc501bf2718777c2d9fa2e10f9dc4c24a3db0cb86c25d49c0",
+        "beforeLines": 5,
+        "afterLines": 11
+      },
+      {
+        "path": "sender-members.php",
+        "kind": "fragment",
+        "oldSha256": "d857efcc919934d1f135463a820031fef950a8f95732e58a788fd5f08cabd29f",
+        "newSha256": "00af4edbbccd004b94af8fadd04b3853d3f916c2e7dd4ffa54dbdaf9d7ea39d7",
+        "beforeLines": 2,
+        "afterLines": 3
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 4
+  },
+  {
+    "id": "PHP-PILOT-016",
+    "correctOptionId": "separate",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "9a6e383d61c682a0b15d038a1844f172a09a7932d440ef66c9c062631a56a53f",
+        "newSha256": "94a166b3a1d22b1ceb13815c548f884bcc98f553bfc6146e8b9e2a6db9d312d8",
+        "beforeLines": 10,
+        "afterLines": 22
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-017",
+    "correctOptionId": "local-global",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "41e0e0f228ec04986e29c049d119eefa9180081ee234fb80a35c953f59ce6abd",
+        "newSha256": "edf2850e7ed583144630fcfd6e07ac90e7c1b2f2b0ea6c5baa1eeb7a6337a037",
+        "beforeLines": 4,
+        "afterLines": 10
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-018",
+    "correctOptionId": "equal",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "876f0acd263a12cd4a7e409ee5d50162171a508a667ed3e755cb7c0ab8fe4fe7",
+        "newSha256": "85cf310f595d17014f0854495055a6ae4df5b7dcc41c9e0f2f4eb4e8358aca06",
+        "beforeLines": 4,
+        "afterLines": 6
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-019",
+    "correctOptionId": "lookup-error",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "98d9b059c31436c86d0c90cf2996579533af714ee2be03dd34e4c8f405837eb2",
+        "newSha256": "3ed986f3bfb77eb93398ed7aaff30d59dd1040165efe96b106862b2a0abe702d",
+        "beforeLines": 4,
+        "afterLines": 9
+      }
+    ],
+    "review": "Whitespace-only source formatting. No PHP operators, names, literals, references, typing mode or execution order changed.",
+    "formattedMethodChoices": 0
+  },
+  {
+    "id": "PHP-PILOT-020",
+    "correctOptionId": "detach-local",
+    "stableOptionIdsPreserved": true,
+    "revision": 1,
+    "files": [
+      {
+        "path": "main.php",
+        "kind": "complete-file",
+        "oldSha256": "7ab8cfab34f4a9fe8fbb35b2411f3a0e72365df4f788c451e6da269494dbc2d0",
+        "newSha256": "a49aef1ef3182aca14f9cf9eb3fce3e58a6f10089c2b16c32105c7bd56c5e25c",
+        "beforeLines": 12,
+        "afterLines": 21
+      }
+    ],
+    "review": "Reviewed exception: remove the fclose adjacent to CLEANUP and explicitly replace the comment alone. The caller still closes its own handle. All four completed candidates retain the original token stream and observed behavior.",
+    "formattedMethodChoices": 0
+  }
+]

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A 2,500-question code-first quiz for Laravel, PHP, TypeScript, React, MySQL, and Google Analytics.">
-  <title>Under the Hood — Engineering Thinking Quiz</title>
+  <meta name="description" content="620 PHP questions covering code execution, debugging and engineering reasoning.">
+  <title>Under the Hood — PHP Engineer Quiz</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,7 +23,7 @@
     <nav class="top-nav" aria-label="Primary navigation">
       <button class="nav-button active" data-view="home" type="button">Practice</button>
       <button class="nav-button" data-view="bank" type="button">Question bank</button>
-      <div class="lifetime-score" title="Lifetime questions answered">
+      <div class="lifetime-score" title="Completed answers in this PHP collection">
         <span class="pulse-dot" aria-hidden="true"></span>
         <span id="lifetimeCount">0 answered</span>
       </div>
@@ -34,11 +34,11 @@
     <section id="homeView" class="view active" aria-labelledby="heroTitle">
       <div class="home-shell">
         <div class="hero-copy">
-          <p class="eyebrow"><span>2,500 scenarios</span><span>6 learning tracks</span><span>4 choices</span></p>
+          <p class="eyebrow"><span>620 PHP questions</span><span>PHP 8.4 / 8.5</span><span>4 choices</span></p>
           <h1 id="heroTitle">Learn to reason<br><em>under the hood.</em></h1>
-          <p class="hero-lede">Trace real code through Laravel, PHP, TypeScript, React, and MySQL, then connect it to Google Analytics measurement. Every answer teaches the reasoning behind the strongest choice.</p>
+          <p class="hero-lede">Trace PHP execution, debug realistic failures, and reason about implementation choices. Every answer explains the behavior and the tempting alternatives.</p>
           <div class="concept-ribbon" aria-label="Covered concepts">
-            <span>Request flow</span><span>PHP runtime</span><span>Type safety</span><span>React state</span><span>Data integrity</span><span>Measurement</span>
+            <span>Execution</span><span>Debugging</span><span>Code review</span><span>Implementation</span><span>Testing</span><span>Architecture</span>
           </div>
         </div>
 
@@ -48,13 +48,8 @@
               <p class="card-kicker">New session</p>
               <h2 id="setupTitle">Build your practice set</h2>
             </div>
-            <span class="question-total" id="availableCount">2,500 available</span>
+            <span class="question-total" id="availableCount">Loading questions…</span>
           </div>
-
-          <fieldset class="control-group">
-            <legend>Learning tracks</legend>
-            <div class="track-grid" id="trackControl"></div>
-          </fieldset>
 
           <fieldset class="control-group">
             <legend>Session size</legend>
@@ -85,8 +80,8 @@
             <legend>Difficulty</legend>
             <div class="check-row" id="difficultyControl">
               <label><input type="checkbox" value="Foundation" checked><span>Foundation</span></label>
-              <label><input type="checkbox" value="Applied" checked><span>Applied</span></label>
-              <label><input type="checkbox" value="Advanced" checked><span>Advanced</span></label>
+              <label><input type="checkbox" value="Intermediate" checked><span>Intermediate</span></label>
+              <label><input type="checkbox" value="Advanced"><span>Advanced</span></label>
             </div>
           </fieldset>
 
@@ -96,9 +91,10 @@
           </div>
           <div class="topic-grid" id="topicControl" aria-label="Quiz domains"></div>
 
-          <button id="startButton" class="primary-button" type="button">
+          <button id="startButton" class="primary-button" type="button" disabled>
             <span>Start thinking</span><span aria-hidden="true">→</span>
           </button>
+          <p id="historicalProgress" class="keyboard-hint" hidden>Progress shown here is for this PHP collection. Earlier quiz totals remain saved separately in this browser.</p>
           <p class="keyboard-hint">Tip: use keys <kbd>1</kbd>–<kbd>4</kbd> to choose and <kbd>Enter</kbd> to continue.</p>
         </aside>
       </div>
@@ -129,6 +125,7 @@
           <p class="scenario-label">Consider the situation</p>
           <h2 id="questionPrompt"></h2>
           <p id="questionContext" class="question-context" hidden></p>
+          <p id="questionMeta" class="question-detail"></p>
           <div id="questionCode" class="question-code"></div>
           <div id="optionList" class="option-list" role="radiogroup" aria-labelledby="questionPrompt"></div>
 
@@ -177,26 +174,17 @@
       <div class="bank-shell">
         <div class="bank-intro">
           <p class="eyebrow"><span>Complete curriculum</span></p>
-          <h1 id="bankTitle">The 2,500-question bank</h1>
-          <p>Browse every Laravel, PHP, TypeScript, React, MySQL, and Google Analytics scenario. Answers stay folded until you deliberately reveal them.</p>
+          <h1 id="bankTitle">The 620-question PHP bank</h1>
+          <p>Browse PHP execution, debugging, testing and engineering scenarios. Answers stay folded until you deliberately reveal them.</p>
         </div>
         <div class="bank-toolbar">
           <label class="search-box">
             <span aria-hidden="true">⌕</span>
             <input id="bankSearch" type="search" placeholder="Search scenarios and concepts…">
           </label>
-          <select id="bankTrack" aria-label="Filter by learning track">
-            <option value="all">All tracks</option>
-            <option>Laravel</option>
-            <option>PHP</option>
-            <option>TypeScript</option>
-            <option>React</option>
-            <option>MySQL</option>
-            <option>Google Analytics</option>
-          </select>
           <select id="bankTopic" aria-label="Filter by domain"><option value="all">All domains</option></select>
           <select id="bankDifficulty" aria-label="Filter by difficulty">
-            <option value="all">All difficulties</option><option>Foundation</option><option>Applied</option><option>Advanced</option>
+            <option value="all">All difficulties</option><option>Foundation</option><option>Intermediate</option><option>Advanced</option>
           </select>
         </div>
         <p id="bankCount" class="bank-count"></p>

@@ -1,0 +1,153 @@
+{
+  "date": "2026-11-04",
+  "collection": "php-pilot-v1",
+  "baselineCommit": "4e1fae0",
+  "originalCount": 2500,
+  "originalPhpCount": 300,
+  "originalBankHash": "0b013644e95423f1560a0f816997803ba5a2cd0c0240816e011d8c05e2bdafad",
+  "newCount": 20,
+  "questions": [
+    {
+      "id": "PHP-PILOT-001",
+      "revision": 1,
+      "sha256": "0e6ef9e51ed1a12faf5a041ec8e165585d160311f1c0460839e7972375ca1501",
+      "objective": "array-union-precedence",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-002",
+      "revision": 1,
+      "sha256": "360d010ec4fba7ca6a04ef8fa58bb0c7844bc4b02b8b8abf0183a7c623e4b486",
+      "objective": "foreach-reference-lifetime",
+      "format": "debugging"
+    },
+    {
+      "id": "PHP-PILOT-003",
+      "revision": 1,
+      "sha256": "9a7bc533c0afc11a89c49351aff84cf13e487839f02f653dab1c7f3c1d8633c1",
+      "objective": "named-parameter-rename",
+      "format": "code-review"
+    },
+    {
+      "id": "PHP-PILOT-004",
+      "revision": 1,
+      "sha256": "4a4484984170f7766333362b3b67fb44e4c18dd470c9e1c4b567c7019d8da7fe",
+      "objective": "omitted-versus-null",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-005",
+      "revision": 1,
+      "sha256": "1a23250dfce8f6825a46eddae733b44913c96d4f4ddb51f1c944a16c2ecc8e3f",
+      "objective": "filter-integer-zero",
+      "format": "implementation"
+    },
+    {
+      "id": "PHP-PILOT-006",
+      "revision": 1,
+      "sha256": "4dfb4ae9d9d009c554f4a4499a65edd2f90b571bf579df57ae82b18abed170c9",
+      "objective": "media-type-boundary",
+      "format": "implementation"
+    },
+    {
+      "id": "PHP-PILOT-007",
+      "revision": 1,
+      "sha256": "f9a301b6e6104e726d805188bc96089b3bda5224522fa54e595bac39e2e42cf0",
+      "objective": "fgets-false-versus-zero",
+      "format": "testing"
+    },
+    {
+      "id": "PHP-PILOT-008",
+      "revision": 1,
+      "sha256": "fa46750dbc088c4b801ee96bfd87e43ecc870abc1228daa06760ac7c58495cc4",
+      "objective": "stream-write-position",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-009",
+      "revision": 1,
+      "sha256": "16726f3db173e36d32092a2423287bf3fa3e0140b5a5219b38372df2a561b797",
+      "objective": "throwable-hierarchy",
+      "format": "debugging"
+    },
+    {
+      "id": "PHP-PILOT-010",
+      "revision": 1,
+      "sha256": "849c31b239abf3137f2aba805ec22bc9a0c6656d284a496f0f82b5bb3b87bf79",
+      "objective": "finally-return-replaces-throw",
+      "format": "code-review"
+    },
+    {
+      "id": "PHP-PILOT-011",
+      "revision": 1,
+      "sha256": "8d87fe617651bd6f6dd408566a27aea04f22ad05efdb7b0a77daed632fac22bc",
+      "objective": "readonly-reference-boundary",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-012",
+      "revision": 1,
+      "sha256": "869a61dd07b83bc0c94273fb96a2b1537a2a654c5274437924904d752c402284",
+      "objective": "parent-constructor-initialization",
+      "format": "debugging"
+    },
+    {
+      "id": "PHP-PILOT-013",
+      "revision": 1,
+      "sha256": "dcb08d9069dc3a6f51a05eed80e0a11d7f046cad97a055908d6b4b8bde536f12",
+      "objective": "clock-dependency-lifetime",
+      "format": "architecture"
+    },
+    {
+      "id": "PHP-PILOT-014",
+      "revision": 1,
+      "sha256": "9490834f0422c2851e4ace05bfc82c85310282678869af3606f9ea8cc8db5945",
+      "objective": "trait-method-precedence",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-015",
+      "revision": 1,
+      "sha256": "b64ce2005afb9613448ae496ef518364989aa228698f3c2f3c5dcad31e692f93",
+      "objective": "trait-abstract-method-contract",
+      "format": "implementation"
+    },
+    {
+      "id": "PHP-PILOT-016",
+      "revision": 1,
+      "sha256": "e31a8086270782c4a89e09dce3e97cc56cbf7e2907c10654fd8c0e918d148d99",
+      "objective": "class-versus-instance-state",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-017",
+      "revision": 1,
+      "sha256": "57e324bb4c046716926cb1dddd5cdfbc3ac2255098b9948f71c90d63211260bb",
+      "objective": "qualified-function-resolution",
+      "format": "execution"
+    },
+    {
+      "id": "PHP-PILOT-018",
+      "revision": 1,
+      "sha256": "bd8d9ad5ddb298b9a04416fc269487ad4bc5373aea6d29dcfb9d16943f063cfd",
+      "objective": "inclusive-boundary-regression",
+      "format": "testing"
+    },
+    {
+      "id": "PHP-PILOT-019",
+      "revision": 1,
+      "sha256": "2e35423013877c61f3736479a0f4ef7f4c7386488ce869c2fe9788b2cbfd3db3",
+      "objective": "class-name-no-global-fallback",
+      "format": "debugging"
+    },
+    {
+      "id": "PHP-PILOT-020",
+      "revision": 1,
+      "sha256": "d04e813b9f6e15c25ff9845d33f06247bfd7be7df2ccbecf3ac19497550509c8",
+      "objective": "borrowed-stream-ownership",
+      "format": "code-review"
+    }
+  ],
+  "runtimeResultsSha256": "528992ac8194d71bb0fcc6a6b516607e7e0d337582ef07921983b790e6d1cbb9",
+  "qualityResultsSha256": "5f2cbc6185a77fa739510c25f7ee4940aa34295133fd4c3dcd0fe3118674d82d"
+}

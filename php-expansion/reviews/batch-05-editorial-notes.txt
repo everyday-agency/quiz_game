@@ -1,0 +1,100 @@
+0401|Nested destructuring keeps the original row intact; choices distinguish skipped positions from deletion and preserve the nested target structure.
+0402|The update-phase print makes continue's for-loop behavior observable without relying only on the final counter.
+0403|Both comparison operands are strings; numeric and nonnumeric pairs deliberately require different comparison rules.
+0404|Negative offsets are measured from the string end, and ASCII avoids an unstated Unicode-character interpretation.
+0405|The calls distinguish absence from an explicit null while showing that both may produce the same parameter value.
+0406|The padding sign controls the side and its magnitude is a target size; the untouched input makes mutation assumptions visible.
+0407|Whole-string repetition, a zero count and byte length test the count contract directly at Foundation level.
+0408|Sparse source keys and a two-entry chunk size distinguish inner key retention from outer list numbering.
+0409|The CSV fixture includes both an embedded comma and a doubled enclosure; the explicit empty escape avoids version-default warnings.
+0410|Consecutive delimiters produce both empty fields and captured separator tokens, so the two flags do not redundantly test the same effect.
+0411|The callback receives value then key, and the output retains the selected numeric key rather than reindexing it.
+0412|Equal comparator results retain input tie order in PHP 8; no unstated alphabetical secondary criterion is supplied.
+0413|Constructor and clone counters separate allocation paths while a copied scalar mutation distinguishes the original from the clone.
+0414|Numbered placeholders reuse arguments independently of appearance order; width and zero padding affect representation, not the numeric value.
+0415|The class-scope and external enumerations use the same object, making visibility and uninitialized-property omission independently observable.
+0416|A supplied offset is absolute and advances the cursor; subsequent reading confirms the operation is not a nonmutating peek.
+0417|An exception thrown in a catch belongs to the outer propagation path, and finally's output verifies its execution before the outer handler.
+0418|The disabled-autoload lookup, first loading lookup and later registry lookup are distinct phases in a complete two-file fixture.
+0419|SQLite is named explicitly; the foreign-key cascade makes REPLACE's delete/insert semantics matter beyond the final parent value.
+0420|The first allowed property write remains after the second fails; the question does not invent transactional rollback for object mutations.
+0421|The two ghosts differ only in the explicit serialization policy flag; initialization counters and lazy-state inspection expose both effects.
+0422|The Fiber is terminated by an exception rather than a return, so termination alone cannot justify retrieving a return value.
+0423|The premise separates PHP runtime behavior from static analysis of the interface contract; the concrete widened method accepts the string.
+0424|Suppression, a custom handled warning and the retained last-error record are distinguished; the later clear operation is explicit.
+0425|The loop's key variable is a real strong reference; removing the original owners alone does not prove the final WeakMap entry is unreachable.
+0426|The label's internal repeated spaces make whole-string replacement and token-based reconstruction fail the preservation requirement.
+0427|Named keys and distinct values expose the reversed foreach targets without assuming positional keys.
+0428|All incorrect guard placements still reach division by zero; the valid candidate prevents the operation before it executes.
+0429|Two span lengths distinguish an exclusive end position from a substring length; the contract is expressly half-open.
+0430|The request/response boundary is stated, so a successful response-cookie API call is not mistaken for rewriting the current request snapshot.
+0431|The owned session fixture checks the persisted value after reopening; local post-close mutation is not accepted as persistence evidence.
+0432|Empty root data and a nested list distinguish root-only object conversion from recursive JSON_FORCE_OBJECT.
+0433|The pound-sign fixture catches byte-mask corruption, while an interior NBSP catches overly broad replacement.
+0434|Literal plus and an encoded percent sequence require one URI-path decode, not form decoding or repeated decoding.
+0435|The interval is produced by diff, and the elapsed-day requirement selects days rather than the residual d component.
+0436|The public HMAC vector distinguishes raw digest bytes from hexadecimal text before base64 encoding; no secret or service is used.
+0437|The raw query context is separate from HTML source; encoded data delimiters and literal parameter separators are both checked.
+0438|The trusted direct-server HTTPS field and explicit on/off values remove proxy and port assumptions from the answer.
+0439|Duplicate grouping values make FETCH_UNIQUE lose data; the correct grouped representation retains every row.
+0440|Symlink descent is the identified recursion source; changing dot-name filtering or traversal order cannot prevent that ancestor cycle.
+0441|The claim is already atomic; the new objective is rejecting a reused key with a different canonical payload before response replay.
+0442|The stale-owner schedule requires an atomic ownership comparison and deletion, not merely an atomic unconditional command group.
+0443|The DNF predicate preserves ALL within intersections and ANY within unions; the reserved ReadOnly class name was corrected before acceptance.
+0444|The UTF-8 fixture separates character count from byte count, while the candidate encodings distinguish width and endianness.
+0445|The private repository is declared only transitively; the resolver's root-only repository policy is the actual missing configuration.
+0446|The constant's stored integer and define's boolean return are independent outputs; no PHP naming-rule distraction is required.
+0447|Nullable permits an explicit null result but does not supply an implicit return at function fallthrough; the controlled variant verifies the repair.
+0448|ASCII-only lowercasing is observed with both ASCII and non-ASCII letters; the question does not claim the API is Unicode case folding.
+0449|Strict types do not turn the arithmetic plus operator into concatenation; the operands are valid numeric strings, avoiding warning-dependent behavior.
+0450|Removing promotion changes whether a property exists; the question is not just asking for a cosmetic visibility change.
+0451|The throwing pure callback leaves the old array on failed RHS assignment, whereas in-place iteration exposes prior writes; the regex escapes use String.raw.
+0452|A callback return is literal replacement text, unlike a preg_replace template; the same dollar notation therefore has different roles.
+0453|The response contract explicitly requires JSON content after a completed update; 204's no-content semantics rule out its use for that contract.
+0454|The fixture owns its serialized session file and loads the class too late; the corrected sess_ filename was retested before acceptance.
+0455|The raw cookie value is encoded twice across the shown API composition, and next-request decoding removes only the outer layer.
+0456|The raw overflow result is observed as float before the typed return fails; weak coercion does not provide integer saturation.
+0457|The false predicate precedes a throwing input, exposing short-circuit versus eager evaluation rather than only comparing boolean results.
+0458|An Expires comma rules out splitting joined cookie fields, and header's replacement argument matters independently of PSR-7 value retrieval.
+0459|The original empty-execute assumption failed runtime validation and was archived. The replacement tests explicit PARAM_INT versus execute-array default typing through SQLite typeof.
+0460|Equal match counts do not preserve fixed nested-index meaning when result orientation changes; both representations use the same pattern and input.
+0461|The method token and POSTFIELDS state are separately configured; no HTTP transfer is executed or claimed as evidence.
+0462|The MySQL emulation and exception-mode premises make execute the server validation boundary; the scenario does not claim every prepare failure is deferred.
+0463|Unequal iterator lengths make NEED_ANY's null filler visible; the NEED_ALL contrast terminates at the shortest input.
+0464|Break leaves the iterator at its current item; disabling rewind does not itself advance it between traversals.
+0465|Object destruction occurs after the factory returned, so the caller's live catch boundary matters rather than the factory's completed try region.
+0466|Both boolean inputs are exercised; bitwise negation, null comparison and identity each reflect a distinct mistaken operation.
+0467|ASCII is explicit, and the final short chunk is retained; the substring alternative also violates the declared array return contract.
+0468|The desired numeric keys and identical zero values distinguish start/count/value arguments from a range of values.
+0469|An inherited method separates declaring method identity from the late-bound called class and the bare function name.
+0470|The binary NUL prefix must survive decoding. The single-byte distractor now masks to 0xff, avoiding PHP 8.5's unrelated out-of-range chr deprecation.
+0471|The contract is arrays plus Traversable, not every object that foreach could inspect; a Countable-only object distinguishes the interface predicates.
+0472|Lookalike interior and initial suffix strings test exact end position; this is a label-suffix contract, not file-content validation.
+0473|Canonical composition must retain compatibility distinctions and case; the three Unicode fixtures expose each incorrect normalization choice.
+0474|The explicit default scale is zero and the large decimal exceeds safe float precision, so formatting cannot conceal lost arithmetic precision.
+0475|Byte budget, code-point count and display width are separate measures; hexadecimal observations reveal incomplete UTF-8 cuts.
+0476|The token's state-space arithmetic is reviewed explicitly; no sample-based randomness test is presented as proof of 128-bit entropy.
+0477|ASCII inputs make parse-offset versus strlen comparison well-defined; strict false checking preserves zero and position checking rejects the suffix.
+0478|The same-inode, same-length rewrite isolates byte snapshotting from path replacement; both libzip builds confirmed the string-source candidate uniquely.
+0479|The trusted expected tenant is independent of the copied envelope claim; public fixed cryptographic inputs are clearly test-only fixtures.
+0480|File-content and post-rename directory durability are separate barriers under an explicit Linux contract; no portable PHP directory-sync or power-failure test is claimed.
+0481|Both earlier candidates were archived as repeats of 0254 and 0210. The final fixture compares compressed and expanded IPv6 address bytes; case-only and identical-address tests deliberately miss the defect.
+0482|Buffer depth is measured before harness cleanup, so the assertion observes the helper leak without deleting the caller's state as part of the claimed implementation.
+0483|Identical exception classes and messages can arise during arrangement; moving the expectation after arrangement narrows the tested operation.
+0484|The eventual exception is already correct; only the zero-call observation detects the prohibited earlier quota-consuming dependency interaction.
+0485|January 31 exposes the intermediate month overflow; the other month-end examples show why merely testing any month boundary is inadequate.
+0486|The actual single-quote attribute delimiter determines the distinguishing fixture; ampersands, double quotes and angle brackets already pass ENT_COMPAT.
+0487|Earlier LIKE and regex-delimiter drafts repeated 0273 and 0276. The final combining-mark fixture distinguishes a grapheme cluster from a code point, preserving original bytes rather than normalizing.
+0488|The test runs a child process and checks stdout plus status; the finally block is skipped and no catchable exit exception is invented.
+0489|The first valid yield delays the failing element until next, so creating or merely identifying the generator cannot satisfy a negative-row assertion.
+0490|Per-test reset matches the static state's required fixture lifetime; new instances and fixed execution order cannot establish independence.
+0491|The barrier is after both reads, and sessions are genuinely distinct; the documented schedule exposes constant-write lost updates without claiming a live PostgreSQL test.
+0492|The reader interface narrows ordinary analyzed calls; the question expressly avoids presenting a PHP interface as a hostile-code security sandbox.
+0493|Repeated identical uploads must remain distinct records, so content deduplication is also incorrect; atomic unused-key allocation supplies the required storage identity.
+0494|A separate unknown result preserves raw protocol text without inventing a known enum action or aborting the rest of the input stream.
+0495|The premise concerns new-response storage by compliant caches; no-store is distinguished from freshness, validation and private-only storage without claiming universal erasure.
+0496|The library's development lock and a consumer's root resolution have different scopes; lower/current test jobs validate the promised range rather than one convenient version.
+0497|PHP version and native-library capability are separate deployment facts; missing protection rejects activation rather than silently substituting a weaker option.
+0498|Marker and effect share one transaction under explicit unique-claim semantics; the wrong orders each expose a concrete crash window.
+0499|Routine rotation is separate from compromise response; old-read capability is retained until required ciphertext dependencies are verifiably removed.
+0500|The nonseekable source and 1 MiB acceptance bound require a bounded replay stream; forwarding the immutable replacement is as necessary as rewinding the copy.

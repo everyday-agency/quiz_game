@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import './build-php-review.mjs';
+import {REVIEW_BANK} from '../js/php-expansion/review.mjs';
+const manifest=JSON.parse(readFileSync(new URL('../release/manifest.json',import.meta.url)));
+const sha=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+assert.equal(REVIEW_BANK.length,620);
+assert.equal(sha(REVIEW_BANK),manifest.bankSha256,'Release content changed: explicit revision review required');
+assert(REVIEW_BANK.every(q=>q.track==='PHP'&&q.learning.rationales.length===4));
+writeFileSync(new URL('../js/php-bank.mjs',import.meta.url),'// Controlled PHP-only release: technical/internal validation complete; independent editorial approval pending.\nexport default '+JSON.stringify(REVIEW_BANK)+';\n');
+console.log('Prepared the authorized 620-question PHP runtime; no validation fixtures included.');

@@ -1,0 +1,83 @@
+0255|0131|Rehash-before-verification authenticates the wrong secret; comparing fresh salted hashes rejects a correct secret. Different failure direction and repair ordering.
+0266|0170|Named optional argument omission versus initializing a nullable property; shared JSON and null syntax has no shared decision rule.
+0266|0065|Skipping default parameters by name versus strict callback-call boundaries; parameter syntax is incidental overlap.
+0273|0177|LIKE pattern metacharacters remain interpreted inside a bound value; SQL identifier selection is a different boundary outside value binding.
+0234|PQ-113|Blank-row identity versus an omitted escape-argument deprecation. The new fixture explicitly supplies escape and preserves empty and zero fields.
+0262|0021|Duplicate-key parser disagreement affects authorization; numeric-key object/array round trips concern representation shape without duplicate members.
+0263|0035|Overlapping Fibers share one connection transaction; repeated bindParam executions observe a referenced variable. Neither repair addresses the other defect.
+0244|PQ-197|The clone repair must rebind a Closure's private this scope; the old clone question only tracks scalar copies and a shared nested object.
+0222|0111|Inherited method declarations share a static slot; separate Closure instances own separate static slots. Different ownership units must be identified.
+0206|0101|Array key reindexing versus assignment/logical precedence; compact JSON output causes lexical overlap only.
+0223|0011|Restoring graph cycles and enum identity through serialization versus reading enum name/value fields.
+0268|0169|Tail slicing with preserved keys and unchanged source versus allowed-field selection by key membership.
+0217|PHP-PILOT-004|Stringable conversion under strict calls versus omitted nullable default arguments. Both use type declarations but fail at different boundaries.
+0208|0120|Interface membership versus concrete class name; anonymous declaration identity and shared static state require different reasoning.
+0219|0211|Generator send performs implicit startup and resumes a yield; foreach uses a cursor independent of an array's internal pointer.
+0221|PQ-197|Lazy proxy forwarding shares a backing object's state while retaining proxy identity; shallow clone copying has no lazy initialization or forwarding.
+0222|0123|Static local storage ownership across inherited method bodies versus late static binding of class identity through forwarding calls.
+0206|0119|Prepending mixed array keys versus typed-property reference incompatibility; common scalar/JSON syntax is not semantic duplication.
+0215|0209|Match evaluates selected conditions/results; recursion prints during call-stack unwinding. The output-order skill is shared but the control mechanism differs.
+0206|0008|array_unshift actively renumbers existing keys; append after unset preserves the array's next-index state.
+0206|0106|Prepending key renumbering versus fresh default-array values per function call.
+0211|0104|Internal pointer independence versus assignment to a by-value foreach variable; a pointer read is essential only in the new question.
+0282|PHP-PILOT-007|A bounded fgets truncates a long record; the pilot discards a valid zero string through truthiness. Different fixtures and fixes.
+0216|0018|An invokable object's cumulative callback state versus destructor timing after aliases are unset.
+0223|PQ-197|Serialized graph reconstruction preserves cycles and resolves enum singletons; cloning does not reconstruct a graph through serialization.
+0202|0108|Pre/postcondition loop execution versus global constant visibility; only small-output boilerplate overlaps.
+0206|0002|Integer-key renumbering after insertion versus automatic conversion of canonical numeric-string keys during array construction.
+0208|0002|Interface type membership versus numeric-string key normalization; unrelated semantic rules.
+0211|PQ-197|Array internal pointer state versus shallow object cloning; shared diagnostic output syntax is incidental.
+0216|PQ-197|A retained callable accumulates state across invocations; cloning copies outer state but shares a nested object. No clone exists in the new fixture.
+0225|0111|Failed dynamic initialization is retried; separate Closure objects retain independently initialized static locals. Exception timing is essential only in 0225.
+0221|0124|Lazy proxy forwards to an already existing object; a lazy ghost excludes one property from initialization. Identity forwarding and initialization exclusion differ.
+0205|0109|Object-handle mutation plus local rebinding versus a scalar reference parameter coercing the caller's storage.
+0207|0202|String containment with an empty needle versus loop entry conditions; boolean JSON output is common scaffolding.
+0208|PQ-197|Interface satisfaction and concrete class lookup versus clone identity and nested-object sharing.
+0210|0202|Cascading text substitution versus pre/postcondition loops; output pairs do not imply duplicate behavior.
+0213|0002|Boolean text validation with null-on-failure versus numeric-string array-key conversion.
+0216|0005|Invokable callback reuse accumulates state across array_map and direct calls; simple object assignment tests aliasing without callable behavior.
+0223|PQ-241|Graph serialization and enum singleton identity versus converting a posted scalar to an allowed enum case.
+0202|0102|Loop entry timing versus unary-minus/exponentiation grouping.
+0206|0112|Prepending mixed keys renumbers integers; recursive replacement retains positions and can overwrite with null.
+0206|0114|Prepending to one map versus zipping unequal arrays through null-callback array_map.
+0208|0011|Interface membership/concrete class identity versus enum name/backing scalar.
+0223|0221|Serialization builds a new cyclic graph; proxy initialization forwards to an existing graph object. Identity is tested through different mechanisms.
+0272|0038|Selecting the parent method body versus late-bound lookup of an overridden class constant in a factory.
+0216|0124|Callable invocation retains an accumulator; ghost initialization separates raw non-lazy writes from lazy state.
+0208|0122|Interface type tests versus indirect mutation of overloaded array and object values.
+0208|0202|Type membership and class naming versus loop entry; JSON pairs create incidental overlap.
+0217|0022|Stringable coercion versus trait alias visibility; the access/type failures have different triggers and repairs.
+0257|0153|Returning from a redirect helper resumes its caller; finally mutates an object already selected for return. No cleanup mutation occurs in 0257.
+0212|0106|Parallel-column sort ordering versus function default-array freshness.
+0221|0211|Proxy-backed state versus independent array cursors; no common control or data transformation.
+0221|0216|Property forwarding to a backing object versus state accumulated through __invoke callbacks.
+0202|0002|Loop conditions versus integer-string key normalization.
+0206|0005|Array numeric-key renumbering versus object assignment aliasing.
+0208|0005|Interface satisfaction versus shared object handles after assignment; no mutation/alias trace is needed in 0208.
+0208|0010|Interface membership versus unmatched match throwing; unrelated type/control rules.
+0237|0113|Value sorting while preserving keys versus set intersection using string representations. Both retain keys but require different comparison operations.
+0205|0104|An object parameter's property mutation survives local rebinding; a by-value scalar foreach assignment leaves the source array unchanged.
+0208|0121|Interface membership versus resolving same-named private fields under a bound Closure scope.
+0208|0123|Concrete class identity versus late-static forwarding across method calls.
+0208|0124|Interface contract checks versus lazy initialization bypass for one property.
+0211|0008|Array cursor independence versus automatic next append index after removal.
+0211|0110|foreach's internal cursor versus an explicit reference-returning function storage binding.
+0225|0216|A failed static initializer retries before persistence; an invokable object's state changes on every callback invocation.
+0264|0260|A second decode invalidates a representation check; a request-derived Host was never trusted provenance. Canonicalization and source trust are different boundaries.
+0202|0120|Loop-entry condition timing versus anonymous-class declaration identity.
+0203|0103|Fallthrough after a case is selected versus loose switch selection compared with strict match. Different phase of switch evaluation.
+0208|PHP-PILOT-011|Interface membership versus shallow readonly restrictions on a referenced object.
+0208|PHP-PILOT-016|Concrete type lookup versus static state shared across object instances.
+0215|0011|Match side-effect evaluation order versus enum name/value access.
+0216|0211|Callable object accumulator state versus array cursor state; neither behavior is an alias for the other.
+0219|0110|Generator yield/send/return channels versus copying or binding a returned reference.
+0221|0208|Lazy proxy identity remains distinct from its backing object; interface membership does not involve proxy initialization.
+0223|0208|Serialized graph cycles and enum identity versus type membership and class naming.
+0257|0247|A helper's return is local to that function; include/require differ in missing-file diagnostics and exception control flow.
+0288|0192|Rethrowing must preserve exact exception identity; retry classification searches exception causes with an outer permanent barrier.
+0247|0146|Missing-file include/require flow versus case sensitivity of function and variable names.
+0290|0189|Multiset removal preserves remaining duplicate values; exact CRLF removal preserves payload bytes. Different data models and operations despite the word remove.
+0290|0191|Removing one list occurrence versus a property hook's stored value differing from an assignment expression.
+0202|0123|Pre/postcondition loops versus late-static forwarding class scope.
+0205|PQ-197|A local object parameter is rebound after mutating the caller's object; cloning copies scalar state and shares a nested object without parameter rebinding.
+0208|0125|Interface membership versus deliberately exported references bypassing later restricted-write checks.

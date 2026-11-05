@@ -1,0 +1,587 @@
+# PHP Engineer Examination Bank — Generate 600 New Questions
+
+## Project Context
+
+We are developing a lightweight, static JavaScript examination application hosted on GitHub Pages.
+
+The application supports multiple technology tracks, including PHP, Laravel, SQL/MySQL, TypeScript, React and Git/GitHub.
+
+We recently completed a PHP-only pilot with 20 new questions, an improved question structure, professional code formatting, syntax highlighting, and validated examination behavior.
+
+The PHP pilot has been visually approved.
+
+We are now ready to expand the PHP question bank.
+
+**This task applies exclusively to PHP. Do not modify any other learning track.**
+
+---
+
+# 1. Main Objective
+
+Generate exactly **600 NEW, high-quality PHP examination questions**.
+
+These questions must use the improved structure, editorial standards, and code presentation established in the PHP pilot.
+
+Our previous PHP bank contains 300 questions. However, the audit identified substantial weaknesses, including:
+
+- Predictable correct-answer wording.
+- Generic and unrealistic distractors.
+- Repetitive question templates.
+- Ambiguous or incomplete scenarios.
+- Incorrect explanations and answer keys.
+- Code snippets that were sometimes invalid or poorly formatted.
+- Questions that could be answered without understanding PHP.
+
+We do not want to repeat those problems.
+
+**The objective is to create 600 genuinely useful PHP questions, not 600 variations of the same templates.**
+
+Difficulty should come from understanding PHP, not from unnecessarily complicated language.
+
+---
+
+# 2. Replace the Existing 300 PHP Questions
+
+The original 300 PHP questions are no longer required in the active examination bank.
+
+However, they must not be permanently deleted without preserving an archive.
+
+Follow this process:
+
+1. Archive all 300 original PHP questions in a clearly identified, version-controlled location.
+2. Preserve their original IDs, prompts, options, correct answers, explanations and metadata.
+3. Keep their existing IDs permanently reserved.
+4. Do not reuse old question IDs.
+5. Preserve compatibility with existing browser progress data.
+6. Keep the original questions available for reference or rollback.
+7. Do not include them in normal PHP examinations after the replacement bank is approved.
+
+**Important:** Keep the existing 300 questions active until the replacement bank has passed all validation gates. The application must never be left with an incomplete PHP question bank.
+
+The existing 20 PHP pilot questions should remain in the new active collection if they pass final quality validation.
+
+### Target PHP inventory
+
+| Collection | Count | Status |
+|---|---:|---|
+| Original PHP bank | 300 | Archived after replacement approval |
+| PHP pilot | 20 | Retained if approved |
+| New PHP questions | 600 | Generated and validated |
+| **Target active PHP bank** | **620** | **After final approval** |
+
+The target is 620 active PHP questions, not 920.
+
+---
+
+# 3. Preserve the Application Architecture
+
+The existing examination application must remain:
+
+- Fully static.
+- Lightweight and fast.
+- Compatible with GitHub Pages.
+- Usable on desktop and mobile.
+- Independent of a backend or database server.
+
+Do not introduce Laravel, database migrations, Eloquent, server-side authentication, or unnecessary infrastructure.
+
+Preserve all existing functionality:
+
+- Learn mode.
+- Exam mode.
+- Question randomization.
+- Scoring.
+- Topic and difficulty filtering.
+- Browser progress tracking.
+- Stable question IDs.
+- Existing browser storage compatibility.
+- Responsive layouts.
+- The new professional code viewer.
+
+All existing non-PHP questions, IDs, explanations, and examination behavior must remain unchanged.
+
+---
+
+# 4. Generate Six Validated Batches
+
+Generate the 600 questions in **six batches of exactly 100**.
+
+Each batch must independently pass validation before being accepted.
+
+Do not blindly generate all 600 questions and validate them only at the end.
+
+If a batch contains weak, ambiguous or incorrect questions, revise or replace those questions before accepting that batch.
+
+Use new stable identifiers that cannot collide with existing IDs.
+
+Store the batches in a maintainable structure compatible with the existing application.
+
+Do not use automatic templates that repeatedly generate several near-identical questions from one source snippet merely to increase the total count.
+
+---
+
+# 5. Examination Question Formats
+
+Use a variety of question formats.
+
+| Question format | Target |
+|---|---:|
+| Code execution and output prediction | 150 |
+| Debugging and error identification | 120 |
+| Code reviews and refactoring | 120 |
+| Implementation choices | 90 |
+| Testing and behavior verification | 70 |
+| Architecture and engineering decisions | 50 |
+| **Total** | **600** |
+
+These categories represent the skills tested, not necessarily different UI components.
+
+The existing multiple-choice interface can support these formats.
+
+Questions must have one objectively correct answer, except when explicitly using a supported multiple-answer question type.
+
+Do not force a question into a category if doing so produces unnatural or misleading content.
+
+---
+
+# 6. PHP Curriculum Coverage
+
+The bank must prepare developers for a comprehensive PHP Engineer examination covering approximately 100 lessons.
+
+Use the actual PHP roadmap and available lesson specifications as the authoritative basis for lesson alignment.
+
+Do not invent lesson mappings when the relevant curriculum information is unavailable.
+
+Cover fundamentals, intermediate PHP and advanced engineering concepts.
+
+## PHP fundamentals
+
+- Types and type declarations.
+- `strict_types`.
+- Variables and constants.
+- Operators and comparisons.
+- Arrays and iteration.
+- Control structures.
+- `match` expressions.
+- Functions and return values.
+- Scope.
+- Closures and arrow functions.
+- References.
+- Recursion.
+
+## HTTP and web development
+
+- HTTP methods.
+- Superglobals.
+- Form handling.
+- Input validation.
+- Sessions and cookies.
+- File uploads.
+- Headers and responses.
+- JSON handling.
+- Authentication concepts.
+
+## Files and error handling
+
+- File streams.
+- Reading and writing.
+- File modes.
+- Resource ownership.
+- Logging.
+- Exceptions.
+- `Throwable`.
+- `try`, `catch`, `finally`.
+- Error propagation.
+- Cleanup and failure scenarios.
+
+## Object-oriented PHP
+
+- Classes and objects.
+- Constructors and property promotion.
+- Encapsulation and visibility.
+- Inheritance.
+- Interfaces.
+- Abstract classes and methods.
+- Traits.
+- Method conflicts and aliases.
+- Static properties and methods.
+- `self::`, `static::` and `parent::`.
+- Cloning and object identity.
+- Readonly properties and immutability.
+- Composition and dependency injection.
+- Polymorphism.
+- Namespaces and autoloading.
+
+## Advanced PHP
+
+- Composer and PSR-4.
+- Enums and backed enums.
+- Attributes.
+- Reflection.
+- Generators and iterators.
+- Modern PHP language features.
+- Type-system behavior.
+- Memory and resource handling.
+- PHP application structure.
+
+## Practical engineering
+
+- PDO and database access.
+- Transactions.
+- Error handling strategies.
+- Security.
+- Validation.
+- Authentication and authorization fundamentals.
+- Automated testing.
+- Debugging.
+- Code review.
+- Refactoring.
+- Maintainability.
+- Application architecture.
+
+Do not turn PHP questions into Laravel-specific framework questions. Laravel has its own examination track.
+
+---
+
+# 7. Difficulty Distribution
+
+Use the following initial distribution:
+
+| Difficulty | Questions |
+|---|---:|
+| Foundation | 150 |
+| Intermediate | 300 |
+| Advanced | 150 |
+| **Total** | **600** |
+
+Difficulty must reflect genuine cognitive complexity.
+
+Foundation questions should test correct understanding of core language behavior.
+
+Intermediate questions should require tracing code, evaluating implementation choices, or identifying realistic errors.
+
+Advanced questions may involve multiple interacting mechanisms, deeper runtime behavior, architecture, security or subtle failure scenarios.
+
+**Advanced does not mean longer wording.**
+
+Avoid making questions artificially difficult through missing information or obscure terminology.
+
+---
+
+# 8. Strict Question Quality Standards
+
+Every question must satisfy the following requirements.
+
+### A. Clear learning objective
+
+Each question must evaluate a specific PHP concept or engineering capability.
+
+The tested concept must be identifiable in its metadata.
+
+### B. Plausible answer options
+
+All incorrect alternatives must represent realistic technical misunderstandings.
+
+Avoid generic options such as:
+
+- "Suppress every failure."
+- "Replace the code with a comment."
+- "Assume everything works automatically."
+- "Check an unrelated component."
+- "Remove the implementation because it is unnecessary."
+
+Do not create answers that are obviously wrong without reading the code.
+
+### C. No answer leakage
+
+A candidate must not be able to identify the correct answer reliably through:
+
+- Repeated introductory wording.
+- Answer length.
+- Grammatical differences.
+- Unusual certainty.
+- Repeated answer templates.
+- A distinctive explanation style.
+- Correct-answer position.
+
+All answer options should be comparable in specificity and technical plausibility.
+
+### D. Self-contained questions
+
+Provide all information required to determine the correct answer.
+
+This may include:
+
+- PHP version.
+- Initial variable values.
+- Relevant class definitions.
+- File contents.
+- Runtime conditions.
+- Database assumptions.
+- Configuration.
+- Expected requirements.
+- Relevant error-handling behavior.
+
+Do not require unavailable code or hidden assumptions.
+
+### E. Accurate explanations
+
+Every question must include:
+
+1. The correct answer.
+2. An explanation grounded in PHP behavior.
+3. The relevant execution flow or technical rule.
+4. A specific explanation of why each incorrect option is wrong.
+5. Important edge cases or version distinctions where relevant.
+
+Avoid generic explanations such as "The correct implementation preserves the intended guarantee."
+
+### F. Genuine variety
+
+Reject near-duplicates.
+
+Changing class names, variable names, values, or filenames is not enough to create a genuinely different question.
+
+Questions may revisit important concepts, but they must test distinct scenarios, reasoning paths or failure conditions.
+
+---
+
+# 9. Code Presentation Standards
+
+The new PHP code viewer has already been improved and approved.
+
+Preserve its existing visual design.
+
+All source examples should use professional, readable formatting.
+
+Requirements:
+
+- Four-space indentation.
+- Conventional multiline functions, methods and control structures.
+- Clear nested blocks.
+- Readable spacing.
+- PSR-12/PER conventions where appropriate.
+- Syntax highlighting.
+- Proper preservation of whitespace.
+- Horizontal scrolling for long lines.
+- No text justification or unwanted wrapping.
+- No unnecessary compression of code.
+
+Example:
+
+```php
+class PaymentService
+{
+    public function process(Order $order): void
+    {
+        try {
+            $this->charge($order);
+        } catch (PaymentException $exception) {
+            $this->logger->error(
+                $exception->getMessage()
+            );
+
+            throw $exception;
+        }
+    }
+}
+```
+
+Avoid writing entire classes, conditionals or exception-handling structures on one line.
+
+Code formatting must never change PHP semantics.
+
+Distinguish complete executable PHP files, isolated fragments, and multi-file examples.
+
+Do not concatenate multiple PHP opening tags into an invalid single-file snippet.
+
+---
+
+# 10. Technical Validation
+
+Every batch must pass automated and editorial validation.
+
+## PHP checks
+
+Where applicable:
+
+- Syntax validation using PHP 8.4 and 8.5.
+- Execution in isolated environments.
+- Verification of expected output.
+- Verification of thrown exceptions and errors.
+- Validation of type behavior.
+- Validation of state changes.
+- Verification of relevant language-version assumptions.
+
+Never execute arbitrary question code against production data, external services or unrestricted filesystem resources.
+
+## Question checks
+
+Verify:
+
+- Schema correctness.
+- Unique stable IDs.
+- Exactly one valid answer for single-answer questions.
+- Correct multiple-answer sets where supported.
+- Explanation accuracy.
+- Distinct and technically plausible distractors.
+- No missing premises.
+- No answer-position bias.
+- No predictable wording patterns.
+- No semantic near-duplicates.
+- Appropriate difficulty classification.
+- Correct learning-objective metadata.
+
+Use official PHP documentation when verification is necessary.
+
+### Validation status
+
+Every generated question should have an explicit validation status.
+
+Suggested values:
+
+- Draft
+- Technically validated
+- Editorially reviewed
+- Approved
+- Rejected
+
+Do not present a question as independently editorially approved merely because automated scripts passed.
+
+Any question that fails validation must be revised, replaced, or excluded from the accepted batch.
+
+---
+
+# 11. Application Integration
+
+Integrate accepted new questions into the existing PHP collection.
+
+The application should support filtering by:
+
+- Topic.
+- Learning objective.
+- Difficulty.
+- Question format.
+- Lesson coverage, where known.
+
+Advanced questions should not automatically appear in examinations restricted to previously studied lessons.
+
+Preserve all stable identities and existing browser progress.
+
+The original 300 PHP questions must remain archived and recoverable.
+
+The 20 approved pilot questions must remain available.
+
+Normal PHP examinations should use only approved questions after the final replacement is authorized.
+
+Ensure that application performance remains good with the expanded question bank.
+
+Do not modify other technology tracks.
+
+---
+
+# 12. Examination Behavior
+
+Preserve the distinction between Learn mode and Exam mode.
+
+## Learn mode
+
+- Provide useful explanations.
+- Allow focused topic practice.
+- Support review of missed questions.
+
+## Exam mode
+
+- Do not reveal correctness before submission.
+- Do not reveal score or streak during the examination.
+- Show neutral progress.
+- Provide explanations after completion.
+- Maintain correct scoring when answers are shuffled.
+
+The goal is to test genuine understanding rather than enable answer-pattern recognition.
+
+---
+
+# 13. Required Testing
+
+Run all existing tests and add suitable regression tests.
+
+Verify:
+
+1. Existing question IDs remain unchanged.
+2. New IDs are unique and stable.
+3. The existing non-PHP banks remain identical.
+4. The 20 pilot questions remain intact.
+5. Existing browser progress remains compatible.
+6. Questions display correctly in Learn and Exam modes.
+7. Answer shuffling preserves correctness.
+8. Scoring is accurate.
+9. Explanations correspond to the selected answers.
+10. Long PHP examples render correctly.
+11. Desktop and mobile layouts work.
+12. Exam mode does not leak answers.
+13. The application remains fully static.
+14. GitHub Pages compatibility is preserved.
+
+Perform actual browser workflow tests in Chrome, not only source-code checks.
+
+---
+
+# 14. Final Deliverables
+
+Provide the following:
+
+1. Exactly 600 new PHP question records organized into six validated batches.
+2. A coverage report by PHP topic.
+3. Distribution by question format and difficulty.
+4. A complete manifest of new question IDs.
+5. Validation results for each batch.
+6. PHP 8.4/8.5 test results.
+7. Duplicate and near-duplicate analysis.
+8. Answer-leakage and distractor-quality analysis.
+9. Application regression-test results.
+10. Browser-test results.
+11. A list of unresolved or excluded questions.
+12. A record of any application changes.
+13. A preservation report confirming that all non-PHP tracks and historical IDs remain intact.
+14. A recommendation for the final release and replacement of the original 300 PHP questions.
+
+Also provide at least 20 representative new questions for independent editorial review.
+
+---
+
+# 15. Release Restrictions
+
+Do not push, merge or deploy automatically.
+
+Do not permanently delete the original PHP question bank.
+
+Do not modify other learning tracks.
+
+Do not activate the replacement bank for normal examinations until the 600 new questions have passed validation and we have reviewed the results.
+
+If complete generation and validation cannot be achieved, report the exact number of accepted questions and the remaining work. Do not claim that an incomplete or unverified batch has passed.
+
+**Stop after local generation, validation, and integration preparation.**
+
+---
+
+# Final Goal
+
+We want to build a trustworthy PHP Engineer examination bank that can eventually grow to approximately 2,000 high-quality PHP questions.
+
+The questions must evaluate:
+
+- PHP syntax and language behavior.
+- Execution flow.
+- Debugging.
+- Error handling.
+- Code comprehension.
+- Testing and verification.
+- Refactoring decisions.
+- Security and correctness.
+- Practical software engineering judgment.
+
+The system must remain lightweight, maintainable, and reusable for future technology tracks.
+
+**Prioritize correctness, educational value, and realistic alternatives over quantity or artificial difficulty.**

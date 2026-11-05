@@ -1,0 +1,50 @@
+{
+  "scope": [
+    "PHP-E26-0300",
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "findings": {
+    "PHP-E26-0300": "Focused follow-up: removed the permanent-file premise. All four protocols now describe lock acquisition, publication and cleanup. Old-data handles, early unlock and unlinking a shared sidecar each have a specific failing schedule; retaining the sidecar through publication remains correct. Objective and Advanced difficulty retained; documentation-backed, not a live multi-process test.",
+    "PHP-E26-0355": "User-authorized correction: the objective now describes HTTP 303 for receipt retrieval after POST versus 307 replay. Only objective text and revision changed; valid scenario, key and all explanations are identical.",
+    "PHP-E26-0549": "User-authorized retarget: exit inside a shutdown callback stops later cleanup. The original and exit(0) contrast omit cleanup; returning from the callback preserves registration order and exit status 1 from the main script. Intermediate for process versus callback control flow and two exit phases. Distinct from empty aggregate guards.",
+    "PHP-E26-0557": "User-authorized retarget: strict session-ID validation with the built-in files handler. The unknown ID is replaced, while a persisted ID created with strict mode off resumes under strict mode on. Fresh files-handler fixture and permissive contrast pass PHP 8.4/8.5. This tests ID adoption, not post-close mutation or rotation."
+  },
+  "similarityPairs": [
+    {
+      "a": "PHP-E26-0300",
+      "b": "PHP-E26-0097",
+      "kind": "manual-focused-review",
+      "decision": "retain for independent review",
+      "reason": "0300 coordinates replaceable file publications through a shared lock object; 0097 releases the session lock before independent long work. Critical-section lifetime is applied to different invariants.",
+      "focusedCorrection": true
+    },
+    {
+      "a": "PHP-E26-0226",
+      "b": "PHP-E26-0549",
+      "kind": "manual-focused-review",
+      "decision": "retain for independent review",
+      "reason": "Resolved by authorized retarget: 0226 guards max on an empty array; 0549 now reviews termination inside a shutdown callback and preservation of later cleanup. No empty aggregate or nullable sentinel remains.",
+      "focusedCorrection": true
+    },
+    {
+      "a": "PHP-E26-0333",
+      "b": "PHP-E26-0557",
+      "kind": "manual-focused-review",
+      "decision": "retain for independent review",
+      "reason": "0333 deliberately rotates an ID while retaining data and deleting an old record; 0557 distinguishes strict validation of supplied IDs from unconditional rotation.",
+      "focusedCorrection": true
+    },
+    {
+      "a": "PHP-E26-0431",
+      "b": "PHP-E26-0557",
+      "kind": "manual-focused-review",
+      "decision": "retain for independent review",
+      "reason": "Resolved by authorized retarget: 0431 tests session writes before close; 0557 tests ID adoption based on an existing session record. Its seed uses a successful close only as fixture setup.",
+      "focusedCorrection": true
+    }
+  ],
+  "method": "Focused review of four records and their directly relevant shutdown/session/locking neighbors. Automated all-bank similarity screening rerun; no second full editorial audit.",
+  "independentApproval": "pending"
+}

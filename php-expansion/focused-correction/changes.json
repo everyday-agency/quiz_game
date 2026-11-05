@@ -1,0 +1,103 @@
+{
+  "scope": [
+    "PHP-E26-0300",
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "archive": "php-expansion/archive/focused-2026-11-05/",
+  "authorization": "User explicitly authorized correcting 0355 objective, retargeting 0549 and 0557, and revising 0300 if worthwhile; no other question edits.",
+  "objectiveChangeIds": [
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "retargetedIds": [
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "changes": [
+    {
+      "id": "PHP-E26-0300",
+      "from": 2,
+      "to": 3,
+      "beforeSha256": "aed5dfd460fe4d0f22615d73d60c6213a96d3b2221d2350e8e828b34523c5bbf",
+      "afterSha256": "fdbdae3038bc8fc770b22ccf3cc9f8b8d645dbbb95628499ff1e3867af8557c1",
+      "fields": [
+        "revision",
+        "prerequisites",
+        "context",
+        "stem",
+        "options",
+        "explanation",
+        "validation",
+        "references"
+      ],
+      "objectiveChanged": false,
+      "keyChanged": false
+    },
+    {
+      "id": "PHP-E26-0355",
+      "from": 1,
+      "to": 2,
+      "beforeSha256": "2b7ea9776dd3763c57686e8d1e5008711897e98d54b6e98d7c8e094f7db6e8eb",
+      "afterSha256": "dcfde956f90b323d4c3b8a1eef4513fd70bf596d88e3bacde8288fb708182cc9",
+      "fields": [
+        "revision",
+        "objective"
+      ],
+      "objectiveChanged": true,
+      "keyChanged": false
+    },
+    {
+      "id": "PHP-E26-0549",
+      "from": 1,
+      "to": 2,
+      "beforeSha256": "ce67a685cdf43c48fa32894b168332300848f388822881f0b3e4bb206fe412ca",
+      "afterSha256": "009dc24474609c97568b07d755d28d3240c836afb499b3990fed681cef759948",
+      "fields": [
+        "revision",
+        "topic",
+        "subtopic",
+        "objective",
+        "difficulty",
+        "prerequisites",
+        "context",
+        "stem",
+        "options",
+        "correctOptionId",
+        "explanation",
+        "validation",
+        "curriculum",
+        "references"
+      ],
+      "objectiveChanged": true,
+      "keyChanged": true
+    },
+    {
+      "id": "PHP-E26-0557",
+      "from": 1,
+      "to": 2,
+      "beforeSha256": "3b5b962e7dfcf289c02d102fea6cc1eb2c2427c2d54362d47ae1889edfbededa",
+      "afterSha256": "66235a8413a980b788b4a8336f907b8e6d71642bdd9c1e023a006d01e892b818",
+      "fields": [
+        "revision",
+        "subtopic",
+        "objective",
+        "difficulty",
+        "prerequisites",
+        "context",
+        "stem",
+        "options",
+        "correctOptionId",
+        "explanation",
+        "validation",
+        "references"
+      ],
+      "objectiveChanged": true,
+      "keyChanged": true
+    }
+  ],
+  "independentApproval": "pending",
+  "productionActivation": false
+}

@@ -1,0 +1,3495 @@
+[
+  {
+    "id": "PHP-E26-0022",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "hellohello implies two invocations although only one call exists. Replace with a plausible trait-alias declaration error misconception.",
+    "beforeSha256": "0d3e4ca90422a078e0863140a19148cd19332d24f6d91844217e2238c03d303f",
+    "afterSha256": "74d3a9350921c8048ffdda4ffbd8048076d199c3e03406930ec5ca10854f1a8f"
+  },
+  {
+    "id": "PHP-E26-0041",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Once the generator is started, the task is selecting a standard exhaustion loop before getReturn. Intermediate fits the two-step driver trace; Advanced relies on API unfamiliarity.",
+    "beforeSha256": "321bd9649a34b7bb82247a77fbb6f23f7684f0f9fca71b94df60723ac819f5dd",
+    "afterSha256": "577e1e9e6909ed081bd244daa184a8b446380755dfbb885942f357b769c39704"
+  },
+  {
+    "id": "PHP-E26-0047",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Namespaced variable alternative has no namespace in either file. Replace it with a concrete include-return versus function-return misconception.",
+    "beforeSha256": "c4e98430527e09399b816383cf32ee7a7089491ee8199a3202168a40d74f5b29",
+    "afterSha256": "18379dbc1c255132a6c9c33148473cf54ad33b987af717b40f6b30523978b6ad"
+  },
+  {
+    "id": "PHP-E26-0050",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context",
+      "stem",
+      "options",
+      "explanation",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor",
+      "wording-cue"
+    ],
+    "severity": "medium",
+    "reason": "Distinct runtime types for two false values and casting an already boolean result are weak alternatives. Use realistic logging/retry/error-sentinel proposals with an explicit active/inactive/error outcome contract.",
+    "beforeSha256": "577ff479470d4dc4127ea6fdaff16b30bc1148fc0bc0d0f911036dbdfb18e359",
+    "afterSha256": "5bf47f7f6b5a0065264c51d504355ab2948ebc296b87ae22455721c04ee01c59"
+  },
+  {
+    "id": "PHP-E26-0056",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Strict equality and strcmp fix content comparison but fail the separate timing-safe requirement. Cross-cutting review: hash_equals uniquely names the correct option in prerequisites; replace with neutral comparison and token concepts.",
+    "beforeSha256": "da8b478a362965cfabc9c09988a0f84f6521736906930ff22843ca5eec8164a7",
+    "afterSha256": "0200faff5904b59b954d70f6d009a5e251ce75d60961214b3c5c6c0811bd48e8"
+  },
+  {
+    "id": "PHP-E26-0059",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "answer-leakage",
+      "weak-distractor"
+    ],
+    "severity": "high",
+    "reason": "Visible prerequisite names the precise readonly clone reinitialization exception. Remove that solution-bearing label; replace the implausible silently ignored assignment alternative.",
+    "beforeSha256": "74b9c2ad2eefa6a7fbbd265666c665195d26d9d6b6eaf2e4fddb986c82bac7ae",
+    "afterSha256": "e9073d756f16e80c1fb7c904af17a889a15dfef2381572e0e9d4860c3ab11a6e"
+  },
+  {
+    "id": "PHP-E26-0061",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "One allowed_classes policy and resulting object type are traced; Intermediate rather than Advanced based on unfamiliar serialization terminology.",
+    "beforeSha256": "cd9db0853fa77df1c6b79be237dfcfe112e0977f6a202dd619e19a367196acc3",
+    "afterSha256": "9c5dbcbb5ef839f650400acac327489acc098bfab6329990215938e4947cda00"
+  },
+  {
+    "id": "PHP-E26-0062",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Direct precedence of two serialization hook pairs is an Intermediate compatibility review, not a multi-stage advanced design problem.",
+    "beforeSha256": "8736f421e96e9abde6c673e10dbeb00c3fd2a17e54cef85f7ceaa788827bd332",
+    "afterSha256": "8c78bfb6f81838a10b293babce3eebee6095728a9b7069a1b542742c7949e906"
+  },
+  {
+    "id": "PHP-E26-0063",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "A short finally/previous-exception propagation trace fits Intermediate; no interacting lifetime or concurrency requirement.",
+    "beforeSha256": "aef845bbb6e8d10f73760a6d061833574593ca032c10a4ff27dcf6b22db53c15",
+    "afterSha256": "db87d51f1f5a9592d94a82004b28411736ecff6ececc384bfb9c157e2ac8f7c5"
+  },
+  {
+    "id": "PHP-E26-0064",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Comparing one intersection-or-union predicate against four declared types is Intermediate set/contract reasoning; DNF vocabulary alone does not justify Advanced.",
+    "beforeSha256": "68665bfbd2cdff9f93a46d9863052e0586da23744c4808709d79badade032e2b",
+    "afterSha256": "588ded33e63ee293081c63ebbd89eda86c44883ba999442b749bb74123c8bbd3"
+  },
+  {
+    "id": "PHP-E26-0069",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Second-pass prerequisite review: ctype_digit appears only in the correct choice, providing a keyword-only shortcut. Replace it with neutral lexical-string validation prerequisites; retain all tested inputs.",
+    "beforeSha256": "66409af099fe4e6c70b855150043c9937ea441b7aa34965f45c0e77389bbcc2f",
+    "afterSha256": "540eb9685569fa459cfa31a266f3d82ac8e208a7d55477cd1cd56385103f6bb8"
+  },
+  {
+    "id": "PHP-E26-0070",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Object-only policy differs from truthiness, syntax validity and associative-array decoding. Cross-cutting review: stdClass and instanceof in prerequisites spell the sole correct shape test; retain neutral JSON runtime-type concepts.",
+    "beforeSha256": "948bcfe3dd5eac49409c9e4b6703b0271627ab13f3af71e47b10c61e4afbddc4",
+    "afterSha256": "32c2b035924f8fd0bd5cb540b76460015267c2a78c3055d949bb160c3a9884cc"
+  },
+  {
+    "id": "PHP-E26-0076",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "One explicit PSR-4 prefix mapping and case-sensitive filename rule fit Foundation; no interacting dependency-resolution behavior.",
+    "beforeSha256": "52145e6727125b8f4179951601df18ea6e4c9fed6cc73c81d53dfd6f04dcc0f8",
+    "afterSha256": "483741fc481c9808fac4a144161127414ce481f6e91e423df13df8a63d4836ce"
+  },
+  {
+    "id": "PHP-E26-0078",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Arbitrary bytes, delimiter ambiguity, order and malformed UTF-8 defeat plausible encodings; longest key expression necessary, not filler. Cross-cutting review: pack and strlen in prerequisites identify the only correct framing recipe; retain byte boundaries, field ordering and binary encoding concepts.",
+    "beforeSha256": "18893d121a2690f66cd17e9ff5b0914aac666c721da0d862015916669dd89d08",
+    "afterSha256": "cd28e301ca28f48abb167ab48796f3d6884000928de46b9039eef96552ae1950"
+  },
+  {
+    "id": "PHP-E26-0079",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites",
+      "context",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage",
+      "ambiguity"
+    ],
+    "severity": "high",
+    "reason": "Visible prerequisite and assumptions already name outbox and describe its atomic write plus retry worker. State neutral database/broker capabilities and crash/recovery requirements instead. The original publish-before-commit option also satisfied the one-way post-commit liveness requirement; add the missing prohibition on notifying rolled-back orders.",
+    "beforeSha256": "30c4292033b3d3c190572af2b625b7056e368cab4c147ef77d5dd32efdcca56f",
+    "afterSha256": "2e841bfee6d8c393f559218b6a4df56d58669d2ab426c61c3ffb216f14ece21d"
+  },
+  {
+    "id": "PHP-E26-0081",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "All tests have valid expectations; only leading-element removal changes JSON shape. Cross-cutting testing-stem review: the phrase \"and specifically exposes the missing reindexing\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "899d6a823c4af887163a0d1f4c64ac3c9787b99ff727ffeae8686aa6d7371718",
+    "afterSha256": "c0230adc614097c51cd80b150227fa21214f091794a15574b68d428bf4d5d5f6"
+  },
+  {
+    "id": "PHP-E26-0082",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Equal-score reversed-name case alone distinguishes stable retention from required secondary ordering. Cross-cutting testing-stem review: the phrase \"exposes the missing name tie-breaker\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "b111b7c574c5525345ef616ad83d19862353c57f31d87aa8124e4791567c3f21",
+    "afterSha256": "5b56e86bad6813cb3e2b16592c0aedc0b4a767e26d0d18d95c9b09a14eeb2d54"
+  },
+  {
+    "id": "PHP-E26-0084",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Two-code-point target plus multibyte first character distinguishes bytes from characters; combining marks explicitly excluded. Cross-cutting testing-stem review: the phrase \"exposes the byte-counting defect\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "ba1167cc096068232fec32d8d49d4f95e69c70224085febca991dee93c8c43a3",
+    "afterSha256": "c01813f2fdf8c2fac18fb841d05cad6f7df73b2627cf4d221efe4ea03d120502"
+  },
+  {
+    "id": "PHP-E26-0085",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Canonical path assumptions isolate separator boundary rather than claiming complete filesystem security. Cross-cutting testing-stem review: the phrase \"exposes the missing directory-separator boundary\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "c1e32f34a6b3ac0feb739473152fef4d405cebeb75be8eb7881cb457b8fbfb0b",
+    "afterSha256": "96f5af0bb9ab7f72181f71760710c826fa69b58a99a0f5d3abfd7624ac7d8c3e"
+  },
+  {
+    "id": "PHP-E26-0088",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Empty stream isolates pre-read EOF semantics; non-newline inputs avoid an unintended second failing alternative. Cross-cutting testing-stem review: the phrase \"exposes the flaw in using a pre-read feof check here\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "0784141ff21a35b5ec200838d44de2701ee76244d1c399214ab58114b5e61090",
+    "afterSha256": "dcbe11e32f00d817b4a391fb2635aad356529bd96212d14b1e516cea57dec019"
+  },
+  {
+    "id": "PHP-E26-0089",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Same-instance second traversal differs from two independent instances; lifecycle defect requires stateful test. Cross-cutting testing-stem review: the phrase \"exposes that it currently reuses a closed Generator\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "d74e9157f5261e396f7e9b6f8fe6bcbb9940fa9b365a07365a659e7dffdded88",
+    "afterSha256": "b8b3b373538b4b94170723ea6b681f4bdd4736b20132a5fa971b14234fd8bdd5"
+  },
+  {
+    "id": "PHP-E26-0090",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "stem"
+    ],
+    "categories": [
+      "difficulty",
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Selecting the suppressed diagnostic test exercises handler versus severity-mask behavior, but no subtle PHP8 nonzero mask computation is required; Intermediate. Cross-cutting testing-stem review: the phrase \"exposes the missing mask check\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "b70bdf2bbba1982f14f46a4dddf9533e9fe575f35a99d7097c5db39268c14ba9",
+    "afterSha256": "e4fae0f83c544273f1fe2351d4fd989de75ebfa4f1d0a86b40cfcc7e8ec44029"
+  },
+  {
+    "id": "PHP-E26-0092",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Policy explicitly specifies equal NaNs and the first if directly violates it. Foundation branch/test reasoning; unfamiliar NaN terminology does not make it Advanced.",
+    "beforeSha256": "ee7d5d93bb2fae60494848e36d9a13a2909848fa00c69bf645dfd906db8c1598",
+    "afterSha256": "d6a5398f05541e7b5fa1fbcc060cdf220acbbc36466753bfb49193f15f550a3b"
+  },
+  {
+    "id": "PHP-E26-0098",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "high",
+    "reason": "Assumptions enumerate the exact four components later repeated verbatim by the key. Replace with behavior/race constraints from which dependencies must be derived; classify Intermediate.",
+    "beforeSha256": "b7feceb823d0888336a02a05023bc79c6f805198650d57cf6accccd0969f44f4",
+    "afterSha256": "b581768ae94fb9b23dacdf06553a5855088787f0fcefde1d995a8c7087506756"
+  },
+  {
+    "id": "PHP-E26-0115",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stem teaches that offset is insertion position rather than array key, directly eliminating an offered misconception. Remove this API-rule hint; retain code and output question.",
+    "beforeSha256": "93b880aad0a9350ab1973d9126f45e49dfe44af1e6ef15f60545430948477f74",
+    "afterSha256": "48ca851fa00d7541e404ee7c7485c2aa76a0337b51582f7ccfd1625a3f490775"
+  },
+  {
+    "id": "PHP-E26-0120",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Two instances of one anonymous class share a static counter. Intermediate identity/class-state reasoning rather than Advanced due to anonymous syntax.",
+    "beforeSha256": "1d079016c82e62e430a1f522f619d4735669774b513371f048ae627d3c68f7a2",
+    "afterSha256": "8a2cf7118a1b615163feb98aaed2613634b228db4408cb38931da2462df1a254"
+  },
+  {
+    "id": "PHP-E26-0133",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Visible prerequisite Round-trip validation names the technique unique to the keyed option. Replace with neutral parsing/formatting prerequisites.",
+    "beforeSha256": "f708ea8393397ba475e84ae09be95232bb7f70e0fc3582b5bce438972cce261f",
+    "afterSha256": "7679a57e5054cf6cfd190b6d25a870d543d328577f0f7ea3ec529677f403a7f7"
+  },
+  {
+    "id": "PHP-E26-0140",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Visible prerequisite names JSON_BIGINT_AS_STRING, which appears only in the correct choice. Remove solution flag name from student-visible prerequisites.",
+    "beforeSha256": "a42ea273c2b65025c73ae4c556adcc5d729875cfc8bd46deeb1f1c198464b505",
+    "afterSha256": "737936f1cf857ffa88b7250e1d105b7e0c4276a3cec5250f02bb352bb478fd8d"
+  },
+  {
+    "id": "PHP-E26-0142",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Stable enum class/case key versus backing value or process-local object ID is Intermediate identity reasoning; Advanced label overstates it.",
+    "beforeSha256": "ea8adf12e0c99b26e6d343ae8052c83af11ea23ff21bbc62c2f6d6fb7547849c",
+    "afterSha256": "4d233eedbf22b6d5fb8b675fa0b0a11732df3804b6f28bac2c033a1817780907"
+  },
+  {
+    "id": "PHP-E26-0144",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Assumptions explicitly propose the per-job writer solution before the alternatives. Remove that sentence; keep interleaving/output requirements.",
+    "beforeSha256": "2fb5aecf9fa8674a67a500ab52076616c7e024b4f66a871d96c8f31e09fe348c",
+    "afterSha256": "30f9c40d9c1473922c33fae676b249f43e89dc01c7174a00fddf4b7e07e951cb"
+  },
+  {
+    "id": "PHP-E26-0145",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor",
+      "wording-cue"
+    ],
+    "severity": "medium",
+    "reason": "Only the key contains both required words final and sealed. Use plausible complete adaptations that all attempt both requirements, including original/alias confusion and adaptation grammar errors.",
+    "beforeSha256": "d363f5adc9313139ce426926843509e3e4aaa8961ac979a8d779cd45d923af34",
+    "afterSha256": "8631bd9c17290ae708eb9e99f7171a55e48451f156edccd72e2779f03a10c4b8"
+  },
+  {
+    "id": "PHP-E26-0147",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Claiming echo body produces unrelated extra text is internally implausible. Replace with closing-tag-versus-literal-output confusion.",
+    "beforeSha256": "24e87f9e8de72ca8412a51205c42bd235c0c36f819c81695f0a2e04ede7a675d",
+    "afterSha256": "fae3c2e1a9e5c7fa6dc6584afd7c5bcf1322df35f09d61371160c9869637c37b"
+  },
+  {
+    "id": "PHP-E26-0154",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite new self versus new static introduces the exact replacement expression unique to the key. Use neutral factory/inheritance prerequisites.",
+    "beforeSha256": "e2520f4fb9e114c3b142f97493cb9141963145e4296bf1c6ed588e53ba36b065",
+    "afterSha256": "bb20a0ce238616991b2b85aec19c41a13bd9f8855b16cb613fa9c9b5a8f7a09f"
+  },
+  {
+    "id": "PHP-E26-0156",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "json_encode is named in visible prerequisites and appears only in the correct replacement. Keep context/JavaScript-string prerequisites without the solution API.",
+    "beforeSha256": "8013f379192a0d5396d0f9c5ae1ff4e12137541683295c8fcd09e3f5603b591a",
+    "afterSha256": "cdd9aaa24dd521611d9a79f43fd646ade2ae618cb5bd789277654ceffa154ba8"
+  },
+  {
+    "id": "PHP-E26-0158",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Requirement literally prescribes server temporary-file bytes, then key repeats it. State accepted actual PNG-content goal and untrusted metadata rather than the detection method.",
+    "beforeSha256": "d183db628898e8f006b2601d587c7d238442c968b918619ea955088cda0fcf49",
+    "afterSha256": "02f7d583759821b301bffb2d3510bda6959363756b28a2e3b041bd7647416a8e"
+  },
+  {
+    "id": "PHP-E26-0160",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "SplObjectStorage is a prerequisite and appears only in the correct replacement; remove this solution collection name while retaining identity/reachability prerequisites.",
+    "beforeSha256": "3defc0404e65e54881789d26be39393801ced3b99ba8b3a6c976c52d67d56d7d",
+    "afterSha256": "ba972db89d3fef782401b47082c7e72b70015d4d78ee033649614ffbade92734"
+  },
+  {
+    "id": "PHP-E26-0162",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Constructor inheritance exceptions labels the special rule that refutes the review claim. Neutral constructor/inheritance prerequisites preserve context without teaching the exception.",
+    "beforeSha256": "806759f3b81542f45e8f76dd7c06e07fd4c3d400fecbeef49ab7271bbbd6304f",
+    "afterSha256": "bc220d487878005e533d2df2d4e40a819193b15bdf1c15393d125e30385fceb4"
+  },
+  {
+    "id": "PHP-E26-0163",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Attribute trace wrapping versus explicit message concatenation is Intermediate inspection of one protection boundary; Advanced relied mainly on attribute unfamiliarity.",
+    "beforeSha256": "d6c1686dde5bd970a3114cc87d9f9e091aa05fbaeae394950d4d4e352404ffd0",
+    "afterSha256": "13c5081f6b0cb5106dd3f3095fb3c7dcef24979fe067171a951b4af12de69222"
+  },
+  {
+    "id": "PHP-E26-0167",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Visible ceil prerequisite names the function unique to the key; use neutral division/rounding prerequisites.",
+    "beforeSha256": "4fa4d9927670ef255775592cc4cd546881098c0dcbbf780ff45ab070ca20fc7b",
+    "afterSha256": "73c526af9490b0cf3eb2393b4e54313a2a416fcf83565ba2b6ca58dc9e8ca6e4"
+  },
+  {
+    "id": "PHP-E26-0169",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite pair array_intersect_key and array_flip uniquely spells the correct recipe. Replace with key-set/mapping concepts.",
+    "beforeSha256": "444ea9a108182507f97a11d4d1a9775d7318381ae4254513c4c39b8edc9e2786",
+    "afterSha256": "0eec4e6c77656a5034dca99ed6b0078ffc16ea238bcf939adddade9a88b6eda2"
+  },
+  {
+    "id": "PHP-E26-0172",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "in_array prerequisite appears only in the keyed option, giving a keyword shortcut around the boolean-expression defect.",
+    "beforeSha256": "8719731f70e321ea29d5b539ebbb5ce3a79dd7e1cdcf38da0452e612d1304874",
+    "afterSha256": "c1c22a4dc4f295aacdaf4948566593c8b22346d9ddf786044d29beeb881fef5a"
+  },
+  {
+    "id": "PHP-E26-0179",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Evaluate instantiability and required arity against explicit class examples; Intermediate rather than Advanced based mainly on Reflection APIs.",
+    "beforeSha256": "7865481112bf33d996b63c7799d0ce0204848f5ca9c120c0d7d8f4c64307b3ab",
+    "afterSha256": "fc6b969dad890c07fdfc15d5cbd724ba7c4b0d6dd4abe17fb10e785383c821ab"
+  },
+  {
+    "id": "PHP-E26-0180",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "One atomic version predicate prevents a second stale update. Intermediate optimistic-concurrency application, with no multi-resource transaction uncertainty.",
+    "beforeSha256": "ddd724d9c4adefd5727709e51b9f16601848b1a85c5e2a8ba16a2562a31d5dcb",
+    "afterSha256": "94ef87bdefa472a66b76cdc3d6c2439ea4ebec2bda14c54f1f40924c1bd609ec"
+  },
+  {
+    "id": "PHP-E26-0184",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Append mode ignores seek position for writing; nonempty original plus nonempty prefix uniquely exposes it. Cross-cutting testing-stem review: the phrase \"reveals the incorrect mode\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "d242b43c20af685d029c2a2320572ec7a15fbaa847316da8c6fb5feb46644e91",
+    "afterSha256": "d3157ef42b86f35c7bb7c6b77b5a08c2b963e937308a7b3e3a8464223f0ad436"
+  },
+  {
+    "id": "PHP-E26-0186",
+    "from": 2,
+    "to": 3,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite PREG_UNMATCHED_AS_NULL supplies the repair for the optional-capture boundary. Retain regex capture/null-coalescing concepts without naming the solution flag.",
+    "beforeSha256": "bb8cf496957bbe738ceea597b56644e8995f57a25edf952b8cb83a20e17511bb",
+    "afterSha256": "357801d6560959e1a5c0a66a525e4aab42ad6fd2f7d60be4ea189123fcca2d8f"
+  },
+  {
+    "id": "PHP-E26-0191",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Assignment expression returns input despite setter normalization; a short two-value trace fits Intermediate rather than Advanced due to new hook syntax.",
+    "beforeSha256": "8f9b5eb8c5f44accc3c710b9a73f76b784edb300b933a3911d718e6125a9e35c",
+    "afterSha256": "544483550a1d7e68e1594aa4301f9d2f1f13da8e82740622b77f096c95f88ae2"
+  },
+  {
+    "id": "PHP-E26-0192",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "stem"
+    ],
+    "categories": [
+      "difficulty",
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Explicit outer-to-inner classification policy and one missing permanent guard require Intermediate chain traversal; no distributed retry protocol is evaluated. Cross-cutting testing-stem review: the phrase \"The implementation examines causes but misses one policy boundary. Which assertion exposes that defect?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "c5574451254bf03290238d729d2095bc6eec7f238883a1644593b38395c4976e",
+    "afterSha256": "e21b52b96a74a9969d66ba05de89c691d0be85e5ef31cd758b7f3d4529490c80"
+  },
+  {
+    "id": "PHP-E26-0193",
+    "from": 2,
+    "to": 3,
+    "fields": [
+      "revision",
+      "prerequisites",
+      "runtime",
+      "context",
+      "explanation",
+      "validation"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Externally flagged: supplied enum/adapters implement the exact proposed answer. Remove solution witness from student content and use a requirement-only scenario; original objective preserved.",
+    "beforeSha256": "18c14672c3fd5b2c474e802393111af72324004f3474a40f7b9782d60ab0948a",
+    "afterSha256": "e1cf62cd2a910ecd565c9e5d283d1aaac68b8e0ef66542ec1a011bdf60d78028"
+  },
+  {
+    "id": "PHP-E26-0196",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites",
+      "options",
+      "explanation"
+    ],
+    "categories": [
+      "answer-leakage",
+      "wording-cue"
+    ],
+    "severity": "high",
+    "reason": "Double-check after waiting prerequisite names the key. Key alone adds finally even though exception handling is not tested. Remove the recipe label and incidental professional wording.",
+    "beforeSha256": "4f728eb172f851b5104e20df63b2260a682c2e619c0dc161274b70b4923fb3ac",
+    "afterSha256": "b1e193b9945228b8bf29c6d2528beeabadced2194287d98c10f109e589e1cba2"
+  },
+  {
+    "id": "PHP-E26-0197",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Constructor injection prerequisite uniquely names the correct design. Use neutral service-configuration/lifetime prerequisites so the early-validation and per-instance requirements decide.",
+    "beforeSha256": "2255216079d6f9d7f3779e92075c0f07a83fd09de0185efddda150c17176a4c7",
+    "afterSha256": "66b5f62b621c265349b51c06bc60bae306d4893b878a2d0d94193aa3a5e00b71"
+  },
+  {
+    "id": "PHP-E26-0198",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Premise describes comparing each token to the largest accepted token, and prerequisite names fencing. State atomic conditional-write capability without prescribing that algorithm.",
+    "beforeSha256": "1a75c671d4bd607bbf4f410f83edef1b21c7011054bb3dcf1e17b80c6e7c4526",
+    "afterSha256": "bacaa5bb89192bf1f20ce819016c81bce974655a2a73704d706b740acfa1db4e"
+  },
+  {
+    "id": "PHP-E26-0199",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options"
+    ],
+    "categories": [
+      "wording-cue",
+      "answer-length-cue"
+    ],
+    "severity": "medium",
+    "reason": "Only the key specifies a complete apply/acknowledge/recovery policy. Make all alternatives realistic complete consumer policies while preserving their ordering/gap mistakes; no filler quota.",
+    "beforeSha256": "b7d5a3474ca0c73ebbe1ee0e0b678207509bc41c8660ea9a788385803ed2b796",
+    "afterSha256": "848090bee7beeffe336e49939b3311dc2e1a79e0cd2d2c61b18b3b6ffbfe9559"
+  },
+  {
+    "id": "PHP-E26-0200",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "SET LOCAL prerequisite names the unique correct transaction-scoped operation. Retain PostgreSQL transaction/session setting concepts without the solution command.",
+    "beforeSha256": "09a6ddb0a1876a194094279ef8b70137549ab71c94ce733e433532e5a9a58063",
+    "afterSha256": "bd2025ec3dc45e99e3380e2e8c45a7ee0b79442b99559eee33fd79a2bead9ce7"
+  },
+  {
+    "id": "PHP-E26-0205",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Destroyed-object Error distractor imports dangling-pointer behavior absent from this PHP program. Replace it with a mistaken prohibition on rebinding a by-value object parameter; retain mutation/rebinding objective.",
+    "beforeSha256": "4146276ed10ec7e62e3f9d011f1bc34ed2b0909a2f15803a0f6dd8babd13916d",
+    "afterSha256": "4192002b732af1163504c2e8f67f5868f421f525b5b20ebb8cfdee5ab40f3445"
+  },
+  {
+    "id": "PHP-E26-0219",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: send on an unstarted one-yield generator and its final return require a short API lifecycle trace, not advanced coroutine composition.",
+    "beforeSha256": "79a6ecdd0e4d361aa63003715b77818c21983c44a915d8e214e04a9a37029756",
+    "afterSha256": "99a536b36e06a44252a6c48194140b9968eb0daaaafd8ceaddda39ff7b4c1c96"
+  },
+  {
+    "id": "PHP-E26-0221",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: the factory and initialization point are explicit; the task is one backing-object identity/aliasing distinction rather than complex lazy lifecycle reasoning.",
+    "beforeSha256": "21c12ef7f765bf6eeaef12046458532195d20e35f41cb5b6b71ff05e3d67b3c0",
+    "afterSha256": "9ac1ae41ed8bb124ee657c196005d4f9eff21e1aa516f8977338da3e8322cffe"
+  },
+  {
+    "id": "PHP-E26-0222",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: track one inherited method-local counter and one overridden body; the version-specific rule does not alone justify Advanced.",
+    "beforeSha256": "6f9f0993aebe14c040204c3c1bf2fcc2222838aa39f41df6c28476955e7afb08",
+    "afterSha256": "97ce8f52f108703fd5dad305d5998c660d020b0f8905595759f850c367ee9a53"
+  },
+  {
+    "id": "PHP-E26-0224",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: explicit raw-write and raw-read APIs bypass hooks in a short three-value trace; unfamiliar API names do not make the reasoning advanced.",
+    "beforeSha256": "861d840efc1c0418bae7d0ea2dd5ebf364911ba63a5083e4c1dba296c331bcdc",
+    "afterSha256": "e81f1d56987042c073336112d0569f0baff81c4ae888fdd77782e94cc2314c35"
+  },
+  {
+    "id": "PHP-E26-0237",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "uasort prerequisite uniquely names the repair API absent from the flawed source. Replace with neutral value sorting and key preservation prerequisites.",
+    "beforeSha256": "fb902cbf3e9f32a122b6f68aab8e936b3b988299a5bc02e209fdac07227754fb",
+    "afterSha256": "4c52225476762c4227b13c23c6ac2839bcf960b679288ccd80dfbb8e521ece2f"
+  },
+  {
+    "id": "PHP-E26-0241",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: one Composer authoritative-map versus fallback configuration rule explains the fully specified fresh-worker failure.",
+    "beforeSha256": "9d4daaef05bc63f9e93c997f2156c373cea2d704a963b4eb8e2ca7bc6013c347",
+    "afterSha256": "ef2b9f0ae6b4ffa48808d67a36ca576ac24b0913e961f334751d01c6ae216357"
+  },
+  {
+    "id": "PHP-E26-0242",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: choose scalar backing value over self-referential enum object and name; custom serialization terminology is not advanced reasoning.",
+    "beforeSha256": "99e36af9e4d7c144d8137a2e1650c838ced73b24ca0271c1b8ce42dd103b5734",
+    "afterSha256": "39df3dc0671bb34c14ed8f06fc0c198c0382210cc66806dfd8341f06915b4e33"
+  },
+  {
+    "id": "PHP-E26-0243",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: transaction failure state and explicit rollback after deferred constraint failure form a short error-recovery decision, with all DB semantics fixed.",
+    "beforeSha256": "caa5ba6f44ff5315cf112c9ccbdba0658baf80f2130a923bc230d915347f4de7",
+    "afterSha256": "242228aff5be1b960f9edc0941402c8e56fb034c301c7b9c3724901fef0815ec"
+  },
+  {
+    "id": "PHP-E26-0244",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Remove uniquely corrective Closure::bindTo from prerequisites. Change Advanced to Intermediate: one stored closure binding must be updated after shallow clone; no nested closure lifecycle or competing scope policy.",
+    "beforeSha256": "8f86d3eaa2fd2747b85ea2a5282b92660382bdca80f7ef3a5c29d7f7bbb3e715",
+    "afterSha256": "49b24c3af5b844882f802069e167a01c23b9aaaacb1cb3db5e2a924acb0aecc6"
+  },
+  {
+    "id": "PHP-E26-0245",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "high",
+    "reason": "Prerequisite PDO::FETCH_PROPS_LATE names the only correct flag. Use neutral hydration-order prerequisites and Intermediate for a single constructor-versus-property assignment timing distinction.",
+    "beforeSha256": "9e25c08537df75431c20ace4e0fdb957e26aa0e41833261b4e884b9c4cbc58cd",
+    "afterSha256": "7f55b6e39a5855a2aef793634f7a0687b5120fe0b524f6d74a7541f90e607f87"
+  },
+  {
+    "id": "PHP-E26-0247",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Foundation to Intermediate: requires separating suppressed warnings, require Error and catch-driven function control flow, rather than one basic syntax rule.",
+    "beforeSha256": "ad7ad52a455c1a34f08d21d39d2b9b4430710cac59afb306c17059cda27591ec",
+    "afterSha256": "35e1ea673af2812b5cb51ec2a6d099825b95192a5fe66e55d1687d4765e3d390"
+  },
+  {
+    "id": "PHP-E26-0256",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "random_bytes prerequisite names the sole corrective generator absent from the reviewed implementation. Replace with entropy sources and encoding; preserve cryptographic reasoning.",
+    "beforeSha256": "aa65aaecd2c4c5cfc1b5f4fafb88406d1c2389bd96bc3335360622b428dc752e",
+    "afterSha256": "1f338226cc4fdd28c17fa487d33952219a3d4f31bd2b177e1adc6216f6293bbe"
+  },
+  {
+    "id": "PHP-E26-0259",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "filter_var is uniquely named in the correct corrective assessment and prerequisite list. Use neutral SAPI snapshot/current array validation context; retain original-input behavior question.",
+    "beforeSha256": "3eade7251ba69750e386a3c35a6065194361132f3a3d79d556928e8c6051325f",
+    "afterSha256": "eebf783fd9f52b908e2442a62479a53256515557e7824883afd4b4a882f8808b"
+  },
+  {
+    "id": "PHP-E26-0262",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: trace first regex match and last duplicate JSON key; the security consequence does not add advanced control flow to the fixed payload.",
+    "beforeSha256": "679bed10d45cb504368cc77398c24a72268134df20e8b0a5ac6d36787c9db45c",
+    "afterSha256": "68603c8666de49acfea302fd7f2c2700f2396d5110ff92c3e0bac0521dc3084c"
+  },
+  {
+    "id": "PHP-E26-0263",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: the explicit three-step schedule and one shared PDO connection require transaction ownership reasoning, not complex concurrent lifecycle design.",
+    "beforeSha256": "1252bdff3cc81f80d69b7a4616b26d4d32c411711e5eb2c576c382eec1e73681",
+    "afterSha256": "89c4c009bed3cad04b485dc7bb5d09b9d51ebed25e00e54c1abf3ff310511cb0"
+  },
+  {
+    "id": "PHP-E26-0264",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: two displayed decoding steps and a visible check make this a direct representation trace, not an advanced filesystem authorization design.",
+    "beforeSha256": "1fe3e4b4e855f8a1601f2e0a152d1bc9814f38b9c5e9708813153e7efc9d6a5f",
+    "afterSha256": "b019017cf92e4cb9a3baa964a641894dc15611f1597e6675cf16daa4e1add611"
+  },
+  {
+    "id": "PHP-E26-0267",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "array_key_first prerequisite gives the unique corrective API before the learner compares pointer, value and empty-input behavior. Remove that specific solution name.",
+    "beforeSha256": "865597c5ce8128c2901a32dfcaa278672be72fefb0c6a86721cba5a998afe042",
+    "afterSha256": "6ee3117220e3c0dc44cc45e99bdbc2128cccad33df161bc03ef1f348d02876bd"
+  },
+  {
+    "id": "PHP-E26-0275",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Assumption explicitly teaches SameSite=None requires Secure, eliminating one of the intended misconceptions. State supported standard SameSite handling and third-party-cookie permission without revealing that rule.",
+    "beforeSha256": "f51b258e5da0a3c220131d9ba01c8123e9073fc7242902cb08f202082c0df4bc",
+    "afterSha256": "7eb35b6657abe03866bc3000ed9ad2c703f7cd3e23f051b72a10cc825cd6a066"
+  },
+  {
+    "id": "PHP-E26-0278",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Stem spells out first untrusted peer immediately before trusted suffix, effectively narrating the correct right-to-left algorithm. Ask for trustworthy client attribution without giving the selection procedure; retain appended-peer assumptions.",
+    "beforeSha256": "329b185b1d188ae6123489ce231aab232ce3545509be84600df5c9e3ff9699f0",
+    "afterSha256": "643befb4ac37adc0782f23bd1485ea3446e58a1375ac5356f0365b6fdfc082be"
+  },
+  {
+    "id": "PHP-E26-0279",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: atomic claim/effect transaction is already implemented; only successful-statement versus inserted-row evidence remains to choose.",
+    "beforeSha256": "ef7983abed5d804d46d1b5f254aa525db29e38e037a394e2cfe9ef00b945e57f",
+    "afterSha256": "bee63e049f217c688c3e7ce0cafcab1ce355a38ea5e2b2a6123cfb97c6c86f62"
+  },
+  {
+    "id": "PHP-E26-0280",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: call-site scalar coercion plus validation of original input is a bounded two-file API boundary, with no advanced variance or coercion ambiguity.",
+    "beforeSha256": "897c94608bf5d381e7963af3a2c49997c0fbe0048a4495cdc49ca52eb15936f7",
+    "afterSha256": "39844251f17483a7565f3e93d1e34ccd1eb0a9f52dce2b420966be5068efa2ea"
+  },
+  {
+    "id": "PHP-E26-0282",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: one fgets length-minus-one boundary on a guaranteed single record is a straightforward API trace.",
+    "beforeSha256": "d66d59a64b984bcaf5da864ba1d763716fb3918bf3b55d7b2d36900e762bc936",
+    "afterSha256": "c24ceca6e58b65c01d58736485fc2f832b863eb9850020d54edcd790eb82acf1"
+  },
+  {
+    "id": "PHP-E26-0283",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: direct base instance versus strict subclass membership is one basic inheritance distinction.",
+    "beforeSha256": "9c62e5ddd34237a6d5bfbc816bf4d63a3aabc2a9de9eb54a41467d7655f550ae",
+    "afterSha256": "21c98b6cdfa27d6fdee0fa8c62ebc964fd2eb290e39d8fb59585311c89713125"
+  },
+  {
+    "id": "PHP-E26-0284",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Exact JSON numeric representation is explicitly a protocol contract; integral float versus integer is a meaningful serialization boundary. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the serializer’s missing flag?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "68addace8a10e27be87105bac8f3fd01b727bc5bb93993f60266f9866ce45a2b",
+    "afterSha256": "56f091111d714eb46450a3b57abbb08d4e8090c425de7df5330c8ae5243e2123"
+  },
+  {
+    "id": "PHP-E26-0285",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Forward/backward UTC dates isolate direction metadata from absolute day count; leap-year control remains valid without timezone ambiguity. Cross-cutting testing-stem review: the phrase \"Which assertion reveals the missing direction handling?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "96f6b0bab0f9d337584700b0de87e03c8401b403b25ac06991cc1df387065467",
+    "afterSha256": "dfbe34966de77962035e4d77e3567792b042cece32ca2be14deb969fb4467ff5"
+  },
+  {
+    "id": "PHP-E26-0287",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: one exact associative-key lookup fails a differently cased field; no merge/collision normalization policy must be designed.",
+    "beforeSha256": "50c6da04c4a2984dff32fc64c00904b87b49a84a444a5785d5fe54a5d0d8ad7b",
+    "afterSha256": "424f7335348caeed1a054f9736ac1dbdac32eff48f08130a12707c10e705e882"
+  },
+  {
+    "id": "PHP-E26-0288",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: new creates another exception object despite copied message; single identity distinction with straightforward observations.",
+    "beforeSha256": "df8beff77810d981bd3ae17d427daeaba3fdfca7a310c5f0ccb202ed0edf6da8",
+    "afterSha256": "e47583dae5c97ef107b3f0f15243f9171472e3670f6641e01c07085863d0c99a"
+  },
+  {
+    "id": "PHP-E26-0289",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem",
+      "explanation"
+    ],
+    "categories": [
+      "explanation-quality",
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Temporal mutation after cache fill, rather than value-only checks, is a useful regression-test design objective. Explanation trace incorrectly says tests do not rely on assert configuration even though displayed options use assert and assumptions enable it; remove this validation-harness aside from the student explanation. Cross-cutting testing-stem review: the phrase \"exposes the missing invalidation\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "1c82aac51ed3add44b1e0957a58427830790416164280bf844c3c6529a42ee92",
+    "afterSha256": "08064882c1d4f1087b658eef94a984f4560c0b8a2b30b45fd0316ccb07894919"
+  },
+  {
+    "id": "PHP-E26-0290",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "stem"
+    ],
+    "categories": [
+      "difficulty",
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: repeated matching element is the single boundary exposing remove-all versus remove-first, with integer-only values. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the mismatch between set-style exclusion and the stated contract?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "617122d2048ca170b9151dab70ac4d0d1d669742f6fe66e97db948f31aec8775",
+    "afterSha256": "5d523bfa2bac4c6640c2d999e8c77a369b6ec22d95045e535b20809c7c9ff69f"
+  },
+  {
+    "id": "PHP-E26-0291",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "stem"
+    ],
+    "categories": [
+      "difficulty",
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: conflicting JSON flags and one unsupported float require one error-policy precedence rule rather than advanced serialization design. Cross-cutting testing-stem review: the phrase \"Which assertion reveals that this serializer can silently substitute data despite its exception handler?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "f97a5cf0807c7af6fc413623f4da8bd57b7434832584ab1a6600d3cba374f930",
+    "afterSha256": "9d098d80763610d5b8074d0898b074b5581109f1bbbb7283d769f871770f3370"
+  },
+  {
+    "id": "PHP-E26-0292",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "stem"
+    ],
+    "categories": [
+      "difficulty",
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: distinguish named and union reflection result shapes under an explicitly limited contract; nullable named type is a useful but bounded contrast. Cross-cutting testing-stem review: the phrase \"Which assertion exposes a false negative caused by this reflection helper’s fallback?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "6c3985895d63e2e362d935b7abfaccff8d511a4c9142657aca20fdaa0790811a",
+    "afterSha256": "d024121e82d2cd80ea40732961c886d20c18b076442ea6ee604ddef8bd386b94"
+  },
+  {
+    "id": "PHP-E26-0299",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Graceful process replacement prerequisite names the correct rollout strategy. Remove it and change Advanced to Intermediate for the distinction between loaded class lifetime, instances and cached source.",
+    "beforeSha256": "36334c696f0fa5745bd59a64b4ce8d44fa04bdc5063339ffe7b0a179d4b65224",
+    "afterSha256": "c567ce3523a8f6f3af65a9217c754390ce620f2c21e22921d534f933e83ab76b"
+  },
+  {
+    "id": "PHP-E26-0300",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Assumptions teach file-object locking and nontransfer on rename, and advertise a permanent lock identity. Retain POSIX/atomic-rename/cooperating-writer capabilities but remove the explanation of lock identity behavior so learners must derive the stable-lock protocol.",
+    "beforeSha256": "a1633d3a7e4f21f4c274f8bffc1a086f368e6e53c21c9bd9e7b3be6c567ecde5",
+    "afterSha256": "aed5dfd460fe4d0f22615d73d60c6213a96d3b2221d2350e8e828b34523c5bbf"
+  },
+  {
+    "id": "PHP-E26-0307",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Stem describes the outer count as unchanged before the learner evaluates capture semantics. Remove that unnecessary partial-answer adjective; preserve per-invocation captured-local behavior.",
+    "beforeSha256": "8bfa9fd5704134025ef28daee933997e635d17594c3007f047c81d235d665f6e",
+    "afterSha256": "5e1ac7777617ac43b54c3d60c5e01f916632f2772d92b72246ca76ad7a792efa"
+  },
+  {
+    "id": "PHP-E26-0314",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Stem directly states that continuation uses the most recently initialized strtok sequence, the central rule being tested. Remove that explanation while retaining the complete four-call trace.",
+    "beforeSha256": "2bfca7a937a0185545c8a244a01fd53061a07fbfdf28b03837276fb692d46b72",
+    "afterSha256": "613a1b1aa35e3cdc7fb2d7c9fe3c7b67c66f53ef17887f5b36aaed1462a39362"
+  },
+  {
+    "id": "PHP-E26-0315",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite Null conversion results announces the representation of the failed second conversion. Replace with partial format matching, leaving the outcome to be determined.",
+    "beforeSha256": "8e3c6ebd32666773b5f0f9062d933a340ff29b1facb639a10a57b7de000e80f4",
+    "afterSha256": "2d6a3dfcec4e0814d2c810ce584841b952d8818e6c6bf4b2e6efb0c42fc6d667"
+  },
+  {
+    "id": "PHP-E26-0320",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: two clearly separated files test caller-controlled argument coercion and callee-controlled return coercion; no advanced type composition.",
+    "beforeSha256": "40a75de3871eb20cac24b87daaa423d79acbf9090c9a93d2ebcd7757e413f621",
+    "afterSha256": "352ee8c4df86b43ac713876f339039253b560f7d7a544e8b0f408c3745762dfa"
+  },
+  {
+    "id": "PHP-E26-0321",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: one generator advances past its first yield and cannot rewind; the short lifecycle trace has no delegation or injected exception complexity.",
+    "beforeSha256": "547eda8cea405868fbaf5430bace9bbd06a97904f443e86c1e6bd2591c17a348",
+    "afterSha256": "14ec33b640714ec934d878f40105c8433fadba8d5479017163810a01da3c0634"
+  },
+  {
+    "id": "PHP-E26-0323",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Assumptions provide the exact representable gap for the displayed integers, teaching their float collision. Retain 64-bit/binary64 and rounding mode, remove the solved spacing calculation.",
+    "beforeSha256": "3818f63b2fa4bd35f40cb0618d4b63db37c4c69e65cc2cdcb0c29bc6ddcb6eed",
+    "afterSha256": "b9eb2a0c54ca349df513a5536dfefa8f7bc680a06d86d5363717b8333649ec9f"
+  },
+  {
+    "id": "PHP-E26-0324",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: promoted parameter default versus actual property initialization under a bypassed constructor is a bounded declaration/initialization distinction.",
+    "beforeSha256": "1278cd49ebf928fd62aac3194e2d51428af4af4ba7cf80b8b87e048ea83e6e7e",
+    "afterSha256": "169a79edbe2de3cc2712ba8f0cf66cf4d8ec74452a8140bed8d499734ab7d516"
+  },
+  {
+    "id": "PHP-E26-0325",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: magic wakeup executes inside unserialize before the following instanceof check; no exploitation or complex object graph reasoning required.",
+    "beforeSha256": "384452fca100dc905fcfe7c3be10974d753694737c718ce6c4b0273005dc38e8",
+    "afterSha256": "910b282ea7506f7f266b30e333956e17474cc4c90f7d0c68a4aad01453c9d58f"
+  },
+  {
+    "id": "PHP-E26-0327",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite array_pop uniquely names the corrective operation absent from the source. Use neutral array removal, iteration order and sparse keys.",
+    "beforeSha256": "74c57e080cc055ea5aae4137732590fdeb6bb7b1dd295fc5871b2f80fb2aa37e",
+    "afterSha256": "cf08f83914b1dfbc25f9d6f609fbff54d3053840b67764a287373fc40000eeb4"
+  },
+  {
+    "id": "PHP-E26-0330",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "explanation"
+    ],
+    "categories": [
+      "explanation-quality"
+    ],
+    "severity": "medium",
+    "reason": "Expression value, function return and output side effect differ; explicit return type exposes discarded-result and print-result mistakes. Explanation trace wrongly groups print with return-type failure: weak typing can coerce print's integer 1 to string. Repair the trace to distinguish discarded return, unwanted output and wrong returned value.",
+    "beforeSha256": "fc789efda993138a5e7596712e45d9e01a590b06619c4861cb92de3dfa88ad8c",
+    "afterSha256": "258dbd06ea17d15bb861c00198fe9732abbd51e9b5b2821c46a09b39abf980fb"
+  },
+  {
+    "id": "PHP-E26-0332",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Treat empty FILES as a successful zero-byte upload is not a credible diagnosis given the confirmed oversized body. Replace D with the realistic mistake of diagnosing only a per-file limit through upload_max_filesize.",
+    "beforeSha256": "828986195572ed4cece0fa6098b42f58c313803de9521c63cf93a99457397233",
+    "afterSha256": "820d7fba118ecc069181e22345a2452ce9da667674104efcc4d40df7247c31df"
+  },
+  {
+    "id": "PHP-E26-0336",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Prerequisite fopen mode c+ names the correct mode before students compare truncation, creation and append behavior. Replace with general file-opening modes.",
+    "beforeSha256": "b328f09b552a88796b39ac3be4dff316e302f32bd06e317e48a8f8c8d51add25",
+    "afterSha256": "126b0adfe2978e403e6b5d03c8ce0a090f9832769a5bd87b732fef2b3e7da63f"
+  },
+  {
+    "id": "PHP-E26-0339",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite MySQL DDL implicit commits gives the causal rule being tested. Replace with MySQL schema operations and transaction boundaries; keep exact database version.",
+    "beforeSha256": "8bfefdc4fdb6dbb6a9157e3e4f56223539c39f4ba74d4c20b153b763c80a6f8d",
+    "afterSha256": "96aae547b78237f6cbe5a5d03e92661273d1b9c0521a2c0aba9c3feb3e1d685d"
+  },
+  {
+    "id": "PHP-E26-0342",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: normalization and preflight are provided; choose uniqueness on complete normalized paths, with filesystem/race concerns explicitly removed.",
+    "beforeSha256": "6bfc9cba70484cf8bc36e18769942fa3be5346746e9f56245b2c77877e403907",
+    "afterSha256": "92469827559ab11aefc33a4e9aeae5105f6b759c479ecb7735c33073c90d1f0a"
+  },
+  {
+    "id": "PHP-E26-0343",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "high",
+    "reason": "Source computes the sender MAC directly from $raw, demonstrating the byte selection being asked. Replace it with the corresponding fixed fixture MAC and preserve protocol context. Change Advanced to Intermediate for raw-byte versus parsed-value authentication.",
+    "beforeSha256": "9e6caf98d98d4c8f7b7e44156e72953bd099f883bd6ff0e1d7b7448a34f7387a",
+    "afterSha256": "09cb27e4d00549817836c1c3b2b791035e86a33aac400b0dc469892e04b27013"
+  },
+  {
+    "id": "PHP-E26-0344",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Assumption teaches which measurement ignores wall-clock adjustment. Remove that explanatory sentence while keeping units and clock APIs; change Advanced to Intermediate for clock-source and nanosecond conversion reasoning.",
+    "beforeSha256": "e6860eb710961376cc5dbe2278d778ed60a09a8071aff31f730394d5bff260d4",
+    "afterSha256": "d312f9d0413881bbac88c1e5b7605d79d8cd7e4d97fd8bb2ab1aac495ed00a0c"
+  },
+  {
+    "id": "PHP-E26-0345",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: the key distinction is byte offsets despite Unicode pattern mode; no grapheme, normalization or malformed-input policy is required.",
+    "beforeSha256": "8e9f5bbe072fbcad655c5cb76af075a2100b16a5f55189b30b73d0d77fd504cd",
+    "afterSha256": "9664844d65444049f830e87eac79bdbf6ed9c791c361ffbc75428169e7522041"
+  },
+  {
+    "id": "PHP-E26-0346",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Claim that all objects have at least one property slot does not credibly explain Countable count. Replace D with a plausible TypeError claim that empty accepts only arrays/strings, and explain empty accepts objects but uses truthiness.",
+    "beforeSha256": "4d5f3936151e675f0bb019f93484f1f3efb12895c47d1a55b85325fd61d28fec",
+    "afterSha256": "d712148d8642dc1c50ac66fc0d1866f694f1dada225080df261b53be03c50e0e"
+  },
+  {
+    "id": "PHP-E26-0347",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Foundation to Intermediate: iteration over a changing array differs between value and reference traversals, a nontrivial mutation/lifetime distinction beyond basic foreach syntax.",
+    "beforeSha256": "6127f3885e7019a3122492311b161d49ca9b802438453d60c72e05b3d032855c",
+    "afterSha256": "106b531883d95fc267733cf059ed3fcffcf9d41b91cccc787a9982fe3a55e250"
+  },
+  {
+    "id": "PHP-E26-0351",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Auto-creating Item from a nullable return declaration is implausible. Replace D with the realistic syntax misconception that ordinary and nullsafe calls cannot be mixed; preserve null receiver dispatch objective.",
+    "beforeSha256": "a6667fa2dbacfda96670840f1117b8aed1a2ee32474be13890ab25f1aab3bc83",
+    "afterSha256": "466c5fcf4811ada66586fc01787577511fb1572c80fe76c8a229967f09e7c683"
+  },
+  {
+    "id": "PHP-E26-0357",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Assumption explicitly says not to assume SELECT rowCount is portable, pre-answer teaching the review verdict. Retain SQLite fixture and multiple-driver support, remove that verdict sentence.",
+    "beforeSha256": "1efee7d210348ad54fca07fd6bac942a9520eef0b511d2c2e7373347fbdabc86",
+    "afterSha256": "c316ec58c6c59ccafd8fdb5b7ad835fb2d99df07698b7b2c9e3ec4c278e60632"
+  },
+  {
+    "id": "PHP-E26-0359",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "CLI-cannot-create-file option is implausible; size-repair option asks for the already correct byte count. Replace them with specific provenance mistakes: treating assigned UPLOAD_ERR_OK as authentication and equating is_uploaded_file with regular-file existence.",
+    "beforeSha256": "2d5eeaa27f9fe9d74dde66c4d50cbf7a75dac203be952e159225abd48ecf6d3a",
+    "afterSha256": "b3a2bcd45530cd8d63b4fcb889bdc9e147470e6c11c8754a62bbc6ca10ff4e4a"
+  },
+  {
+    "id": "PHP-E26-0362",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: compare strict userland assignment with one internal reflected coercion boundary; no complex hydration graph or hook behavior.",
+    "beforeSha256": "e250ce4dbfe5c8d7b555b8e73c15ce28f9f30f0439507748deb4f0dc82244753",
+    "afterSha256": "7041445e3e89195577bf0881f6e6cb752133a486d4d28d8e98323ca0f512cabe"
+  },
+  {
+    "id": "PHP-E26-0363",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: a single explicitly permitted cross-origin redirect invalidates initial-only validation; DNS/rebinding and network policy composition are excluded.",
+    "beforeSha256": "219067537c68681272b23ed52f30c1950eb275cae5a0b1e3011df17a4320ab3c",
+    "afterSha256": "135d6a281875e6462f38058aee8bb87890950f9236bbcbe00414ecb3db045937"
+  },
+  {
+    "id": "PHP-E26-0364",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: both candidates differ only after bcrypt's byte limit; knowing this API boundary is sufficient without advanced cryptographic analysis.",
+    "beforeSha256": "74b3d0182c2624043a4d6d287389e3bd8cd753bf6de6ed2ffde0ba19424a5621",
+    "afterSha256": "aa20eb8ea1b4e1e0efd4ef18f1aa6141ecc53d498561addc4edc40b83577f269"
+  },
+  {
+    "id": "PHP-E26-0365",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Remove assumption announcing the helpers intentionally use a different alphabet and prerequisite Independent test oracles that names the answer technique. Keep the external protocol alphabet/vector. Change Advanced to Intermediate for inverse-helper consistency versus protocol conformance.",
+    "beforeSha256": "5efe16ebcf434319a89b6785d7eab03eb69e62118bd4cb314774e6a439f14e01",
+    "afterSha256": "d48be95e19138ef8a954fdb22bd4d604b9596f7a5b2589674d70f3b6b6c7b179"
+  },
+  {
+    "id": "PHP-E26-0367",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "array_combine prerequisite names the only correct mapping API absent from the source. Use parallel lists and associative mapping prerequisites.",
+    "beforeSha256": "beee99dd9c3de576ceebb468f96c860dce5002949be28c53b826be3f63a9aa14",
+    "afterSha256": "482528bb27f3e34cc4c2b1539495f310018424dcaf0c76195f1e6a492f6ee22c"
+  },
+  {
+    "id": "PHP-E26-0368",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "is_scalar prerequisite uniquely names the solution predicate. Retain scalar-type categories and input-type predicates without naming that sole correct call.",
+    "beforeSha256": "16f3d51a32b3fcec822e14a7130a38a91dd6e37f1513e3cc6e5328c505150473",
+    "afterSha256": "37ca04b7c033097512c1f8fd14e2385205d7cb120d9c06dd31f062efe20c9a64"
+  },
+  {
+    "id": "PHP-E26-0369",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Prerequisites explicitly decode month m, minute i, hour H and offset P, effectively solving all option differences. Use neutral date formatting components and timezone offsets.",
+    "beforeSha256": "ceeb69b3e6ef8c1730a9afe58bdbfa6ba6eff6a2ce20e287f5e87f662f943da1",
+    "afterSha256": "5c6704427da461f1c38ad5e10775051836d7a764038a5dfe981569f1092b55e6"
+  },
+  {
+    "id": "PHP-E26-0378",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: string-keyed reflected arguments become named, so positional normalization is one parameter-binding repair; reference and ordering uncertainty are excluded.",
+    "beforeSha256": "2d6dc7778b7175d5d4ae362d5e9c4be3f0f8f2cf476ec54349338288bdcfffb3",
+    "afterSha256": "6c77ca831470e6b522b6b24177c158e1023ca3fed6173d6016ef0790f5733372"
+  },
+  {
+    "id": "PHP-E26-0379",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: decoding is excluded and writes are complete; only cumulative pre-write accounting and an inclusive budget boundary must be checked.",
+    "beforeSha256": "36bd8334cd995a5288be335cca16fc074e24471aef2c0d090552b17f6e59e3ac",
+    "afterSha256": "a504ff456664ef2086f1ef0643987ab049eadbd1a70705302f138d9d70fbea1c"
+  },
+  {
+    "id": "PHP-E26-0380",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: select the Composer real-platform verification command versus schema validation/autoload generation/ignored requirements; no complex release diagnosis.",
+    "beforeSha256": "cc9161ee7432e7568b6b0e448cc544487045af42c4982bc96c9d3bf6edeadae7",
+    "afterSha256": "a69a4dd06d5407b92a0026b8b5608a2e51b90d239f52dce5e20b65c9ec9efd62"
+  },
+  {
+    "id": "PHP-E26-0381",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "A prefix longer than the value tests whether a partial comparison falsely accepts; same-length and differing-content cases are genuine controls. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the incorrect comparison length?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "08a7492b614170d1624199c133d7a569e1932ce7b15dbcc34de90f3b88283cea",
+    "afterSha256": "877726806ceecf2e4b56ba978ce476c0d9f2be09e3ba16d5b050ec618c571303"
+  },
+  {
+    "id": "PHP-E26-0382",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Overlapping versus disjoint occurrences is a clear contract/API mismatch; all controls cover normal absent/single/repeated cases. Cross-cutting testing-stem review: the phrase \"Which assertion reveals that the implementation counts a different kind of occurrence?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "a57c6cfefd29a5ea07d9d5c2c3a87c74db6ea0748954a8063f92a641dd4120b4",
+    "afterSha256": "84d45a2d2773aef74edf6e188efff607befe2a8679fd8a7b9e3128b9ae6f8a9f"
+  },
+  {
+    "id": "PHP-E26-0383",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stem announces the implementation's extra order requirement, allowing the sole reordered-map option without knowing strict array comparison. Ask simply which assertion fails.",
+    "beforeSha256": "6d2257b4236761c6a8e3b52fe967ebb24d0f84006b4bba179a1e3f15510bdb09",
+    "afterSha256": "35bf05b90fce51d44440ecbe23e6b4977947b9efaec29b4b4e131a04fd2a85d1"
+  },
+  {
+    "id": "PHP-E26-0384",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Explicit application tie policy is necessary context; learner must distinguish default halfway behavior from the other tie/non-tie controls. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the missing rounding mode?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "53757dd301453eeb4589fa63c2a27a8ed89ac8c81bd5db00bdbb6b3beea201de",
+    "afterSha256": "ea4460301df415d79850950557d9526a6f56d817be3e9b99c4c7ebccf3289eed"
+  },
+  {
+    "id": "PHP-E26-0385",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Remove diagnostic phrase inappropriate normalization from the test-selection stem. Change Intermediate to Foundation: one uppercase transformation versus exact token contract is a direct string trace.",
+    "beforeSha256": "3c8611dad07941ff5bea78c7822e2c5e1a6c767214929152674b410dd0de6371",
+    "afterSha256": "8fb97ed609b270df4728500f5ee03bd8eef3f73c2390bc9588d89b0eee28b1bb"
+  },
+  {
+    "id": "PHP-E26-0386",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Readonly promotion initializes before constructor body; padded input reaches the second write while already-normalized controls do not. Cross-cutting testing-stem review: the phrase \"Which assertion reveals the initialization-order defect?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "79a55f366133fa96117ecf10dc9cc1134932a0f5e2fd083c2a5d5b05e796692f",
+    "afterSha256": "a9874123cc42c2e56ee467ec66acf7411d52e3e3b77927787d3f4d308f5c839b"
+  },
+  {
+    "id": "PHP-E26-0387",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Natural digit-run order versus lexicographic ordering must be evaluated from code; the generic wrong-mode stem does not identify which test crosses the boundary. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the wrong sorting mode?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "e5b1d3a464380c7b42b44e79c5560e523aa60d886fb267ac51c62fc9ebff2a33",
+    "afterSha256": "defcdab9443ac8983afbc8ac47281d088b683416768c8efcb5fb4b32937b117a"
+  },
+  {
+    "id": "PHP-E26-0388",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Explicit SQLite connection state is necessary for portable evidence; nonnull missing parent tests enforcement separately from valid and nullable references. Cross-cutting testing-stem review: the phrase \"Which assertion detects the missing per-connection enforcement setting?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "af555aa3fe5fff70bbedb409c71dc37a923784e45344becdcaea9306f947f61d",
+    "afterSha256": "24d1bea1487105e385c52600f3361693f240edf9b6d6f7529a1237be8ba2776e"
+  },
+  {
+    "id": "PHP-E26-0389",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "A scalar placeholder does not become a SQL list; single-element controls can pass, so the two-element case tests a substantive binding boundary. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the incorrect list binding?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "fcb13a47f289c2719200008798c7e0d4eddaa48d127901f7ba435f7d31f01347",
+    "afterSha256": "c3dfafb7752df2f6c36309753952576eb1deb88b7eb3beab517c027eb0e112f3"
+  },
+  {
+    "id": "PHP-E26-0390",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Stem explicitly names default grouping behavior, giving the only thousands-boundary answer. Ask which assertion fails; change Intermediate to Foundation for one formatting-default distinction.",
+    "beforeSha256": "189277f2bf4f79fbbde5bd15bf4af8ca5de464793551e101de8535e86ba3dee6",
+    "afterSha256": "c2169f80c4cc4355f746bd15654862f899338c6bf2d454ed56e17455fc497e64"
+  },
+  {
+    "id": "PHP-E26-0391",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "stem"
+    ],
+    "categories": [
+      "difficulty",
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: the graph is an explicit two-edge DAG and only shared identity must be observed; cycle handling and implementing memoized traversal are outside this question. Cross-cutting testing-stem review: the phrase \"Which assertion exposes the copy’s broken identity relationship?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "54e78a47a472c8bc4ad215906d406bca8616b4a0e72afdc875c9527160e35831",
+    "afterSha256": "91ec113acf25e7147e15b5c7dfaffb96cfad18f891d38a3af77c957fcac55fae"
+  },
+  {
+    "id": "PHP-E26-0392",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: one explicit suspension separates one check from its mutation; testing the elementary interleaving does not require an advanced scheduler design.",
+    "beforeSha256": "f16d7e2ced4ae514613c13ae5290e5b280a2f83ecba25c93d9d551a6bfbf0447",
+    "afterSha256": "61c1973b2b13e9e65dec03f2b83519e83766dd519af76964f71ed24cf9520ca5"
+  },
+  {
+    "id": "PHP-E26-0398",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: explicit 100-slot/20-reserve requirement leads to bounded admission; timeout/circuit delay versus immediate capacity is a direct resource-policy distinction.",
+    "beforeSha256": "3e9b0d3b1de83eb603beaf8ad8737ccced7bc7a8b6f6b7b7592671726acd4d64",
+    "afterSha256": "2138b283bcca0f40b11ad2a3d8beb6b0ae1467efcc52eccab4a29e8502b2afd3"
+  },
+  {
+    "id": "PHP-E26-0400",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "wording-cue",
+      "weak-distractor",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Correct option alone is a complete policy-compliant builder lifecycle while all others stay on the explicitly prohibited deployment host. Give realistic competing builder configurations involving hook enablement, read-only credential exposure and production access; retain one fully isolated choice. Change Advanced to Intermediate for applying the explicit build trust boundary.",
+    "beforeSha256": "58afd2034d544c4ad5df5c4770ec9ce68b4e02e9c17e3306a5a0b4d73154754c",
+    "afterSha256": "6dc4b1faa9074b766ca9c30ef407c5dc550ce3d03adb3ed317b37bba5a1d3416"
+  },
+  {
+    "id": "PHP-E26-0401",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Stem says source is unchanged, eliminating the destructive-destructuring distractor before evaluation. Ask for assigned variables and source without supplying its state.",
+    "beforeSha256": "e650513d7ac60b58810fafcfc1bd8b0398c22d8d6ac9ebabb804dd76f900a7bb",
+    "afterSha256": "893e99f0acdb3d86987c90736d2ea19d7c482d46358ec4dd650afa31807680bb"
+  },
+  {
+    "id": "PHP-E26-0412",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stable sorting in PHP 8 prerequisite teaches the tie rule that distinguishes the two ascending answers. Use PHP sorting and comparator equivalence as neutral prerequisites.",
+    "beforeSha256": "55e4d23663fd94d390955f074023db121b1f76f5f49820c3d1f5df028db858b1",
+    "afterSha256": "f1cb12350b7df9f0385843349da95c33a0c45627e384c4916a438b066c6a274a"
+  },
+  {
+    "id": "PHP-E26-0419",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: SQLite REPLACE's delete/insert behavior interacts with one explicit cascade; fixed setup leaves a short statement-effects trace.",
+    "beforeSha256": "92ebb41c6873dd1d3f41d6e4e506318aeaee9c03b2f406572c42c077e9108573",
+    "afterSha256": "5f178897ed8f96dbccb07bf67da035a11b5f54d63d58d247b74949c0d206cc18"
+  },
+  {
+    "id": "PHP-E26-0420",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: child access succeeds for protected(set) then fails for private(set); a novel syntax feature does not make this two-write scope trace advanced.",
+    "beforeSha256": "8a5172a5b6c38f565730cd234b166760ed99fc96aeb9deb5f9c397cf5c2c5600",
+    "afterSha256": "87d74646afef06866dcf27bb4d5a2180a0111b4db5846a621e0479f519118a01"
+  },
+  {
+    "id": "PHP-E26-0421",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: contrast default serialization initialization with a single explicit skip flag, without rollback or recursive lazy-object interactions.",
+    "beforeSha256": "19f37c2b246f240ba18b400985e6d9700fc3cf3e6e5a882e28a6f5182d3a4e17",
+    "afterSha256": "f63b21dace0038e979353a9fc080e68bd151762d1cf74ecf685eed4deaced5ff"
+  },
+  {
+    "id": "PHP-E26-0422",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: one resumed Fiber throws and terminates without a return; no cross-Fiber scheduling or delegated unwinding complexity.",
+    "beforeSha256": "00027bc39b54a435201619c6e001dcacf72dee1c4cfd4c322eb3b00a5f54ce72",
+    "afterSha256": "c76d03089281e7d5c65575cc682883f531a8f325062e25df475254c3f79964aa"
+  },
+  {
+    "id": "PHP-E26-0424",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: handled warnings versus last built-in diagnostic state is a short two-channel trace analogous to other intermediate legacy error-state questions.",
+    "beforeSha256": "0d1424639c7c2176bf7d2546f051c301e1fbe5b315dad59d9b60c92abb060726",
+    "afterSha256": "16e2aa55bf9ce8d47dbb90d6fa0846fddf8d01d3775b8c680ddcd959082426e0"
+  },
+  {
+    "id": "PHP-E26-0425",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: the remaining foreach key is one ordinary strong reference; cycles, destructors and hidden references are explicitly excluded.",
+    "beforeSha256": "f010a5adfb5ed514c006bf21c3ddc5a68884285c93de452e7563962ccfce572f",
+    "afterSha256": "76e62c53314d8409d89184e47257039caeff12d10167034b96803c29915e584c"
+  },
+  {
+    "id": "PHP-E26-0426",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "trim prerequisite uniquely names the correct repair while original source uses replacement. Use neutral leading/trailing whitespace and string operations.",
+    "beforeSha256": "aa1319fe31e7092c10c6ffcf953fd8932af043956d16573d191bebd4425380ae",
+    "afterSha256": "9e9b99a6f8969e4fc3dcc897462e6894f6fbb841f4e45d77e8b8f9a3f51e8b22"
+  },
+  {
+    "id": "PHP-E26-0430",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Invented deprecated $_COOKIE view and update-through-$_REQUEST is implausible. Replace B with the realistic mistaken claim that an existing cookie must be deleted in a separate response before it can be overwritten.",
+    "beforeSha256": "77cb77118f84613d6325eae9fbde73e1f8674af90cdf7f45f478e4f9f9759b58",
+    "afterSha256": "71d557d9eeba41c30d33fa373334e01ab627770d77a43f00e6b2bba2d781e245"
+  },
+  {
+    "id": "PHP-E26-0432",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "insufficient-context"
+    ],
+    "severity": "medium",
+    "reason": "Stem refers to both required response shapes without printing them or explicitly requiring an empty top-level object. Add the exact expected output [{},{\"items\":[1,2]}] so plain json_encode cannot be defended from an inferred map convention.",
+    "beforeSha256": "7610563e267df05a431185b246f873b29afe74d8ce97b6406e14d6a8c8112413",
+    "afterSha256": "5f392733a2ef71dc7e88e96d56abc0bdfad06f2da39bc34c8f490bc6021f01aa"
+  },
+  {
+    "id": "PHP-E26-0438",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Remove assumption sentence teaching that a port number alone does not prove TLS. Retain explicit deployment HTTPS values and lack of a trusted proxy; fixtures then test the port misconception.",
+    "beforeSha256": "a53076b5f335515ef74d52afd25e067746b0fd928e847d0c20e0f4c16028199e",
+    "afterSha256": "cb12cb4f8561293effc838667d922c7658916dc964f13d03df3a6d3f525cdff5"
+  },
+  {
+    "id": "PHP-E26-0441",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: canonicalization, actor scope and atomic lookup are already supplied; only mismatched payload fingerprint rejection remains.",
+    "beforeSha256": "0c34dc7273a9635801a589538971c042cf6ada7672586c1245bb1163c56bbc4a",
+    "afterSha256": "3df16587b2a6d520a89c4030e42775b2d10aa8bcedb057369e950faf49112e23"
+  },
+  {
+    "id": "PHP-E26-0444",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: one pack format combines width/endian selection with byte length; complete frame contract avoids advanced protocol-design uncertainty.",
+    "beforeSha256": "621f5f022f0100e434e4ff78c295ae4982aee7a4981091464212196512f62972",
+    "afterSha256": "3ae556fd496a14a3429cd390ab951999161ba58708c518413ffe47d9b87ff37a"
+  },
+  {
+    "id": "PHP-E26-0445",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: Composer root-only repository discovery versus autoload/install preference/stability is a single package-resolution boundary.",
+    "beforeSha256": "36db3f66750458676a53799fe033c4dc5551ddf60e6b3ca4470b05e7c5d62b5e",
+    "afterSha256": "f35f7f5d9b0fbe4122fe3361aa8214cc8e4199f434ef2be09138014bdbe2db98"
+  },
+  {
+    "id": "PHP-E26-0447",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Nullable return types not allowed is an implausible PHP 8 option. Replace it with the real misconception that a bare return is equivalent to explicit return null for a nullable typed function, and validate the compile-time distinction.",
+    "beforeSha256": "5562737546116b8899e713aab482a76e14fbd86ed7d94aa34b4f319af9f97292",
+    "afterSha256": "e0dc1f8172758b9e97bfe5e952b5bebc44be1a41e2a39c2f17fef0ac6327b6f1"
+  },
+  {
+    "id": "PHP-E26-0452",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Claim that a callback return containing a dollar sign throws is implausible. Replace D with the realistic mistaken repair of double-quoting the callback string to regain capture expansion; explain callback output is literal regardless of that quote change.",
+    "beforeSha256": "29bb7749072dd20716a5d1bfe6491ee03c51e284bdb24d0dd92ed5ab297a19d0",
+    "afterSha256": "ab5e92f9c3ef210e35e1d3837564cd2f86d0edb1a75aa544e56e34b2211e90f5"
+  },
+  {
+    "id": "PHP-E26-0461",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: a custom method token does not clear configured POSTFIELDS; the state transition is fully specified and requires one cURL configuration distinction.",
+    "beforeSha256": "c2e8c6fcfb3e9f9f775b5743bf32624b2b02c38a29cae65ff9dec5d6a6663574",
+    "afterSha256": "0e668fa25ba634cd9916a38a8aff55f146fdfc90edbda5f1e5cfcaac6af9a957"
+  },
+  {
+    "id": "PHP-E26-0462",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: emulated preparation defers server validation to execute; one catch boundary is misplaced, without transaction or driver race complexity.",
+    "beforeSha256": "b546caa58bb50f12e36b5749ecbc0156014e744de98b828174162905c4515104",
+    "afterSha256": "f76d61a87f82f9fa32291d2157411065bc143213b428dd3ce62e9cb710314473"
+  },
+  {
+    "id": "PHP-E26-0463",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: NEED_ANY across two fixed unequal sequences produces one missing value; unfamiliar SPL terminology is not advanced reasoning.",
+    "beforeSha256": "e3ffcfead9f68650adb6ca78b236c408db716821082482169f31d9c3af9d6b66",
+    "afterSha256": "c43d9297bd92b5289665b28f15102ceb459884967194867b2a512426279612aa"
+  },
+  {
+    "id": "PHP-E26-0464",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: break prevents next and the wrapper prevents rewind, so one retained cursor is read twice; bounded iterator control-flow trace.",
+    "beforeSha256": "a45a17bfc3b3d33bc470250f0e6205b34080ed2a8b1d46b0e33cf0fa3c98850c",
+    "afterSha256": "75e47cad50514bd4a8c00b75aad6ee17472480ae0143fb5b9892e2bf6ad870ec"
+  },
+  {
+    "id": "PHP-E26-0465",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: explicit last-reference unset triggers destruction in the caller's live try; shutdown, cycles and resurrection are excluded.",
+    "beforeSha256": "47976c2806a18d3f502d33b6743c29b817c7349ddec667f936c972b3159f9179",
+    "afterSha256": "c859842c580df969621e479aca38cf8629217c3de57b1c2237aa6f12fb0d3f36"
+  },
+  {
+    "id": "PHP-E26-0470",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "hex2bin prerequisite names the sole decoding solution absent from source. Keep hexadecimal byte pairs, binary strings and representation boundaries without revealing that call.",
+    "beforeSha256": "6b8b1e28ddc4490722916ae89ed906c98fabef0efa7a412092b3cb01e42a5041",
+    "afterSha256": "14a5cdd292f643fb1da347edb542579bba2341b840d5d594f835205e579c921f"
+  },
+  {
+    "id": "PHP-E26-0471",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "is_iterable prerequisite uniquely names the correct predicate. Retain arrays, Traversable and Countable as neutral categories students must distinguish.",
+    "beforeSha256": "a0c4af1db1746efa7d032a543c467e66e362f443c3dd7deafa5abbf103d2d3ff",
+    "afterSha256": "e309e9cac6a32652ea4dfc9ef4967d8c7169f10d9b03e894403579dd45741112"
+  },
+  {
+    "id": "PHP-E26-0485",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stem teaches that adding a month can skip the intended month, giving the key calendar failure mechanism. Ask which input/output pair fails for the displayed implementation without narrating the bug.",
+    "beforeSha256": "577ec3a3b99491c198ef0c0c1c89b1d7d51277125d0b8d4cb108a4efb81e0e2d",
+    "afterSha256": "c49d9bd538d1432746ff8aeb5c578c0917c91cb0159c8450b995534bfba85e34"
+  },
+  {
+    "id": "PHP-E26-0486",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Assumptions name the exact correct flag combination and identify the mistaken flag; stem announces missing quote coverage. State the character/entity contract and single-quoted context instead, then ask which assertion fails.",
+    "beforeSha256": "b74db89a12b8b50166752f5fc0e5754710e5c611cff63b4ab7084d86c7240c62",
+    "afterSha256": "38da6113c2bcb92cbdca18be35bae19e27e5d671355c5712b12f540eb2f299fc"
+  },
+  {
+    "id": "PHP-E26-0487",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Keep grapheme definition needed for self-containment, but remove stem's diagnosis code-point slicing defect. Students should determine mb_substr's unit from source rather than receive it in the question.",
+    "beforeSha256": "2e6f9d8b3d6e3eddd90afff502d1374220f4e4169dc76ffa97f3b48c64f6bfb4",
+    "afterSha256": "b809b1bfd382c8d98735e52c6462db5a09f1a5085f40633b2b56301367a63255"
+  },
+  {
+    "id": "PHP-E26-0489",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context",
+      "explanation",
+      "validation"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "Displayed code already reads current and catches next, exactly demonstrating the correct test strategy. Replace observation harness with a flawed creation-only catch; retain generator and objective, update runtime witness and explanatory trace.",
+    "beforeSha256": "0d370709b6dba218eecddece5246a87a0806f7dee41002cc8da19ec96e1e12f7",
+    "afterSha256": "cdd8d46d78ea062c9bce032be568b81fd1fec9a8a13c8d3d26e877005b483db6"
+  },
+  {
+    "id": "PHP-E26-0492",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Interface segregation prerequisite names the unique reader/writer split solution. Replace with public method contracts and dependency types; keep static-analysis scope explicit.",
+    "beforeSha256": "f5ca83760857eb5deae4a2923746b79beb53859f648c2753f3ad8d3b910ce0a0",
+    "afterSha256": "08cac2e1f0aab778e33fe9f88bbbec62a61310cf22c802c790dec9ae0c67b8ae"
+  },
+  {
+    "id": "PHP-E26-0497",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: all capability/version requirements and fallback policy are supplied; startup capability checking rather than PHP-version-only checking is the remaining decision.",
+    "beforeSha256": "eac5346c4b4deccaba1876e798433f8674b4b5503355ef69a3e00c2aaca639f3",
+    "afterSha256": "3e420973b5ed5ab2f9a8500568f73ce37b40dfa9ac1babea052e3f09fc884e52"
+  },
+  {
+    "id": "PHP-E26-0499",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: routine versioned key rollout with secure retained keys and no compromise or remote key sourcing is a bounded migration sequence.",
+    "beforeSha256": "32e44daf5c0e94b1dd35230514293a9aa339d99368ef2e2cfdd1605999229d86",
+    "afterSha256": "514ae5ea11da5fef2936987613e98b25959aa975a2e15d00ac5da0c33b37b3e2"
+  },
+  {
+    "id": "PHP-E26-0500",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: a trusted bounded-copy helper removes the resource-limit algorithm; the task is stream cursor restoration plus retaining the immutable withBody result.",
+    "beforeSha256": "24dd3765124c73f6064e77d2fc50faae68c174b1aacf4390ea302b7df1653493",
+    "afterSha256": "58d6da773abad46fe8ca7222fdb71924fcc9736680a4132f0b58926fe2ef20c8"
+  },
+  {
+    "id": "PHP-E26-0511",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stem calls the middle invocation temporarily rebound, revealing that the third call uses the original binding. Describe the three calls without announcing binding lifetime.",
+    "beforeSha256": "d2561c1d90afc3dc45e73d5777e9eb65778ca8e81a04956ee770b7382800fb5a",
+    "afterSha256": "32179d63b804048420e3b5eceb3783f5b5e083cdc96c69960af8b6d3dd5409b2"
+  },
+  {
+    "id": "PHP-E26-0514",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Stem identifies the three format tokens' meanings in their exact order; keep ISO calendar context but ask what source prints without mapping Y/o/W for the learner.",
+    "beforeSha256": "0a7db3b997e9da23b4403684017cacf564100b7df0619a8c9c96a2c2f796d1d3",
+    "afterSha256": "cc50684b75c51b2a3bf70ba1520598a24cd083cae8d928b784aed696b8dbdf25"
+  },
+  {
+    "id": "PHP-E26-0519",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite explicitly supplies PHP 8.4 readonly protected(set) default, eliminating the inherited-initialization issue. Replace with neutral inherited readonly initialization; change Advanced to Intermediate for initialization versus prohibited second write.",
+    "beforeSha256": "91f01e2d0a749bfa9ab7f398e9f3d2de08c26f236e3ae463ad2bc2a4d3432234",
+    "afterSha256": "0124a28bd2109408e9da614fc516d89bfe83b6719ff9b1264a83489013c62fb6"
+  },
+  {
+    "id": "PHP-E26-0520",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: two ordinary reads and a set-hook transformation require a short backed-property self-access trace, not advanced hook composition.",
+    "beforeSha256": "ae1eba629ae2cc7cf6e89e73f6152ab42f77507028d8f603b55aafd44dcc1acc",
+    "afterSha256": "7c6d944731f55c2eabb18a9f9c2b8a672f6831dbfd80f52f47b6c89adc3419a1"
+  },
+  {
+    "id": "PHP-E26-0521",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: child class metadata versus the original inherited method declaration is a bounded reflection/inheritance distinction.",
+    "beforeSha256": "9d694f2f898f528b9d0d8ad14f2e8f3f61aa073348dc650511aba28e79574abd",
+    "afterSha256": "0d804b5f9e416eda965727dd780439fae82e42a3748bab667f2d3c1e53af4340"
+  },
+  {
+    "id": "PHP-E26-0522",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "high",
+    "reason": "PDORow reuse prerequisite reveals the key shared-row behavior. Use PDORow access/cursor semantics; change Advanced to Intermediate for one reused view versus one copied scalar.",
+    "beforeSha256": "f868897c73fc99874217f698ee7315afd5bbf021ab82b5b48397a3c9a5677639",
+    "afterSha256": "f0292bd7f9e58c9714285deb57c81d09774b8a9a61af600d880b0d47fff1d7d1"
+  },
+  {
+    "id": "PHP-E26-0523",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Covariant constant types prerequisite announces that narrowing is valid. Use constant typing across inheritance; change Advanced to Intermediate for a single read-only constant narrowing relationship.",
+    "beforeSha256": "8a85d2bb72064932dd1665326cfad25d1b7fcd70397036bbc373d84b11f43847",
+    "afterSha256": "3635c2cc6d0e444e869a4dd1dfc9bf5762ae61c6f64563df8f0cc032da428ec1"
+  },
+  {
+    "id": "PHP-E26-0524",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Contravariant input types prerequisite announces the accepted wider setter input. Use neutral separate read/write types; change Advanced to Intermediate for the explicit input conversion and scalar getter result.",
+    "beforeSha256": "c71b4be5266ae8c7746a671f03f45b2bc0a507084db1443e9597c7c41e942112",
+    "afterSha256": "8a2c7256590a0f78bfa877b7d117b7bfa85d126066a28fda55af5a86589b8b61"
+  },
+  {
+    "id": "PHP-E26-0525",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Assumption states that a declaration failure results before the learner decides validity. Remove that verdict; keep intentional spelling and separate files. Change Advanced to Intermediate for Override validation at required-file class loading.",
+    "beforeSha256": "efaacc16f34e42e8a90f5381032076d27f22552bcdbf9f39038ba894483a6921",
+    "afterSha256": "d52a43c00a1baaa31a2915b3795df42f5fff4589d4b56a4d9eb5ce6fb7e1d614"
+  },
+  {
+    "id": "PHP-E26-0533",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Prerequisites identify file_exists as target behavior and is_link as entry behavior, partially teaching the key dangling-link distinction. Use neutral filesystem metadata queries and link types.",
+    "beforeSha256": "bfc43443a209657e1516780330e6a7f9937ec9765ada860f0d1f3290c650e1e0",
+    "afterSha256": "0d8c03f519a134f8f840fb380b41b6037b5c477959f4878d4a25be9280b12fc4"
+  },
+  {
+    "id": "PHP-E26-0537",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "low",
+    "reason": "Prerequisite defines ! as the reset character before the learner compares parser formats. Replace with format control characters; keep current-date assumption and target timestamp.",
+    "beforeSha256": "6ca09109549fab62c23c1387a76264d6b1af981ae0d05429aabd04019a8c4743",
+    "afterSha256": "e81bf0e120ebeee08dec7ac86d511039f77e0489021fa5b5e0a8da66d04a72d9"
+  },
+  {
+    "id": "PHP-E26-0541",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: a valid 404 response differs from PSR-18 transport/request failure; one status translation boundary is required.",
+    "beforeSha256": "d7c2750e06d8adfe2e11d5650a0980136d4ee67cd38d61d95465686a49fc5a0d",
+    "afterSha256": "4ccb41bf29d5b4c9c251cd6135e104445a2e981cd4a37277acead85519f8138a"
+  },
+  {
+    "id": "PHP-E26-0542",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: the explicit interface constructor contract and public invocation determine a single compatible declaration despite the unrelated parent constructor.",
+    "beforeSha256": "52192cd0dbae6886e14d27466d3ee8848c6870078cdcda7c8cbeafe9af782b2e",
+    "afterSha256": "e50c2938e4ce7996322d57ac0d1a237542e02d279523a5c40a1dd95ad4ed01f6"
+  },
+  {
+    "id": "PHP-E26-0544",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: start/resume suspension result versus completed callback return is a two-step Fiber lifecycle rule with no scheduler interaction.",
+    "beforeSha256": "95f96e1020954ba04c5e80a31242bd48e4e8023275e47cc7242819ef842e2376",
+    "afterSha256": "1457272dd4228bd0dc2d14e58857a32aa01befe3b10ccfc3b0eb79d7c23215d8"
+  },
+  {
+    "id": "PHP-E26-0545",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "closeCursor prerequisite names the sole release API. Remove that name and change Advanced to Intermediate for a single unconsumed result cursor versus schema-lock lifetime.",
+    "beforeSha256": "9363a584b218f9bf0d2aa14223ab4869d965f6844c4648033379f25653718c35",
+    "afterSha256": "322b4b6076df69789247e5132e791e1cd56def25873d9337a7804613e6754c93"
+  },
+  {
+    "id": "PHP-E26-0547",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "options",
+      "validation"
+    ],
+    "categories": [
+      "weak-distractor"
+    ],
+    "severity": "medium",
+    "reason": "Renaming a loop variable to match the source to enable writeback is implausible. Replace D with appending transformed values to the source array instead of replacing indexed entries, a realistic mutation mistake.",
+    "beforeSha256": "0b9af81efd0d27713c15643c6679c825f4f7af3ee4f1d85ed14338f28bd9aa8a",
+    "afterSha256": "053eb31cb388e7391169b9f3de1e4be0019313b9260760fe1c96e1004e3a9543"
+  },
+  {
+    "id": "PHP-E26-0554",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "context"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Final assumption announces that navigation meets Lax safe top-level conditions, revealing cookie eligibility. Retain explicit Lax/Secure, HTTPS and cross-site top-level GET facts without giving their evaluated result.",
+    "beforeSha256": "bb7bc7f1898c0deaa3bb38eaac51f2de1c411bc29a0acc4a5103e9da5a4bb9f4",
+    "afterSha256": "ac398a8884f9a8b22ec33090f879fe400985bf42f585868ac84e842087c0ba9a"
+  },
+  {
+    "id": "PHP-E26-0561",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Prerequisite calls never the bottom type, revealing its subtype role in the only correct option. Use never/void return contracts; change Advanced to Intermediate for one always-throwing compatible return override.",
+    "beforeSha256": "469ee907840845f551f45c174fbd7d7e1e40cb4d0ad3b57a40c9e7a3ae96f7bf",
+    "afterSha256": "fb82340581bf68726273815e6ccfe971457de23b24247d7dfdd8890a90398e89"
+  },
+  {
+    "id": "PHP-E26-0562",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: one trait constant value mismatch versus class-method precedence; no inheritance, visibility or typed-constant interaction.",
+    "beforeSha256": "b593f3f73c8caaed54682467ed4316b3da3853bb0d43183b15f1023f2b77a34d",
+    "afterSha256": "81d2f7e54d0bc413141b19fae4f42f256618b89e6ab12f99242530bfb13c8d5b"
+  },
+  {
+    "id": "PHP-E26-0563",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: adding an exact string union member changes two coercions into identity preservation; one input-type boundary in a refactor.",
+    "beforeSha256": "c5d72031f8d9b3a19801aff38424381fe4a18135a27ad3ec957f4d647e2be5da",
+    "afterSha256": "401d211df02c916c5c71e3160f737e2126e161a0139a1c87e59ffa182d571191"
+  },
+  {
+    "id": "PHP-E26-0564",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: two private slots with the same spelling require hierarchy-aware reflection identity; no complex dynamic properties/hooks or serialization algorithm.",
+    "beforeSha256": "c52fa3304e57b9dc7818470b0069f1ac8dd52fbef4a1042bcb2c50f666062175",
+    "afterSha256": "62c06303c3facf14f82e56900b9ceb807982fe586d90a8fd1bfe4357ba73692b"
+  },
+  {
+    "id": "PHP-E26-0565",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Global error-handler stack prerequisite answers the task-local versus shared question before the trace. Use custom error handlers; change Advanced to Intermediate for the explicit two-Fiber installation order.",
+    "beforeSha256": "b1d2233814b353b12c833167fd72ba43bb096945385e08cbcc87e855bdcfcc19",
+    "afterSha256": "591071288df7bbd1ffea756e16c05be5d0103a4d21aeb557eb831168de4fc28d"
+  },
+  {
+    "id": "PHP-E26-0566",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "is_finite prerequisite uniquely names the solution predicate absent from source. Keep finite/nonfinite float categories and classification without prescribing the API.",
+    "beforeSha256": "25ff32bef3c6bad7235318bdb850a42ac01e3e034103df0df5ed4177b48c3c85",
+    "afterSha256": "fb1b5fb8692dbafab26b209a06c117b4ecbca1c9d864f6b87855356cc3ca985b"
+  },
+  {
+    "id": "PHP-E26-0567",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "fmod prerequisite uniquely names the correct floating remainder API. Use numeric remainder and operand-type prerequisites instead.",
+    "beforeSha256": "010ac4dea8910b8e47401e9a5e37fb9a48de0e00020f52660136e36484d8d005",
+    "afterSha256": "5f203864af97084fe370150b5021a6ff4ac82f2139d00c4a34ca9d7b8ad9c79d"
+  },
+  {
+    "id": "PHP-E26-0568",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "strspn prerequisite supplies the sole correct scanner call. Keep initial-run scanning, character sets and ASCII string concepts.",
+    "beforeSha256": "a0f8bbaacd5e5db3567f5a12f3b12c875572193be1e4fd661b8b3a97219973bd",
+    "afterSha256": "c055154b80cf5d041257950d51c7fb7bfce0727b34b213a3815b23b77551a37d"
+  },
+  {
+    "id": "PHP-E26-0569",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "array_count_values prerequisite uniquely identifies the required histogram API. Use array values and frequency maps as neutral metadata.",
+    "beforeSha256": "2a0010a6cd8fb4bd778e604f0f7cb54d0ecb7caf95f8b0c62c1f1f6b90575216",
+    "afterSha256": "2e00bd92d4e16613dfd1b1f36b22e52d8009f6aeacd7c94ce9c0761b193a43ea"
+  },
+  {
+    "id": "PHP-E26-0570",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "str_getcsv prerequisite names the only grammar-aware parser among options. Keep CSV enclosures and record boundaries without the answer call name.",
+    "beforeSha256": "fdcbc6a67ba3293cd41c55fb5bad1a19d37989285c74c787d4161d696796553a",
+    "afterSha256": "6b5700b6ae03a13b0d102cf518562728e516a8f873b081e61639d6e23983da7f"
+  },
+  {
+    "id": "PHP-E26-0575",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: an explicit 1500 ms delay, integer-seconds form and upward rounding require a single basic unit/boundary calculation.",
+    "beforeSha256": "589f80a85866f10016c6815e6fd286d94b8992eed9b807e8ad5d23a05c61d254",
+    "afterSha256": "a9a7001c0779f703d01286d8b9d20b5001ca209ac3006ff43c6ee5a584624c26"
+  },
+  {
+    "id": "PHP-E26-0576",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: exact comparison of two excluded directory names is a basic filter; no recursive traversal, races or permissions must be reasoned about.",
+    "beforeSha256": "c0dca15bb83d13e2ac55b85200b9851baad3d71da0a064581eb43b327f70c6de",
+    "afterSha256": "40d964a40bab44a8b6dce97024d836111a842d5257b63582a31cca15ffbb5db2"
+  },
+  {
+    "id": "PHP-E26-0578",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: dependency autoload-dev is not consumer runtime autoload; one package metadata boundary, distinct from require-dev package installation in 0294.",
+    "beforeSha256": "fada902e27ecc66ec2ebc5b8f0106c6e899832bdbd22d2cd5e8fd7e1f4a4d98a",
+    "afterSha256": "5b6edf01a04cdde06dc90c6544b48fe61a6721e0c2bba914a1d742122d202f9b"
+  },
+  {
+    "id": "PHP-E26-0580",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: immutable ordering tuple plus one tied timestamp determines a lexicographic cursor; no snapshot or mutable-order concurrency guarantee is attempted.",
+    "beforeSha256": "3a75781d98c5ba27bfe2778ebc30d60d54db4a53886382966ac0e6b0d9a7e674",
+    "afterSha256": "9c42233dacc9beb391238cb4aa79d077b2d3659bfb902a5612cf2d7d79a44d67"
+  },
+  {
+    "id": "PHP-E26-0581",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "low",
+    "reason": "Change Intermediate to Foundation: the complete calendar rule is supplied, leaving a simple modulus predicate and century boundary test.",
+    "beforeSha256": "7683d6c1d4340110944aecc8b6e5cdd62277d9fbb37984b76f5b0521f3611b43",
+    "afterSha256": "226a77837eb95cbd5674ecc3014137b3a458cc153d1b449b08a45320de76cbbc"
+  },
+  {
+    "id": "PHP-E26-0582",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stem announces missing default-port normalization, directly naming the only omitted/explicit-port test. Ask which test fails; keep HTTPS port 443 as domain context.",
+    "beforeSha256": "612e5b6506a6b57094b0631a699dcffb946780390870bfc35ec8513718f6ed78",
+    "afterSha256": "ddba6f31d6c7455db35b52a09ae63603b23976c04a3ecde0039acb15f3ddb5a7"
+  },
+  {
+    "id": "PHP-E26-0584",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "get_class prerequisite uniquely names the correct exact-class assertion. Replace with exception concrete-class identity and PHPUnit subtype matching concepts without announcing the winning expression.",
+    "beforeSha256": "fcd1a157b28262bf60158f4019c1846538a0258387de5d76df2cb810c7f8a4ad",
+    "afterSha256": "c77efc5abd02ab33c010819b7dd6e12bdb364245609ebba2eddef147a8eb6418"
+  },
+  {
+    "id": "PHP-E26-0586",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Insufficient scale in the stem supplies the diagnosed failure. Use a neutral failing-assertion question so learners must apply bccomp's scale behavior to the four-digit contract.",
+    "beforeSha256": "b815f9cad238c0fd394551b46421d42eba723b56e85e36f66783f71a72c14e71",
+    "afterSha256": "8e723c4e8a5eec4f2ac886643383736a4a510296b60716968ed87a7d6c6cc8f2"
+  },
+  {
+    "id": "PHP-E26-0587",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "Stem names the result-column collision as the defect, selecting the only distinct-ID case without resolving FETCH_ASSOC behavior. Ask which test fails under the displayed implementation.",
+    "beforeSha256": "c8aa5aed0085b8357915edf2232a3c4691097dfcfb3b9da103c0cc922c7f963d",
+    "afterSha256": "04de1c8570435d7133998740e679211e737e858a8d9c68b49b45b5820def2cba"
+  },
+  {
+    "id": "PHP-E26-0589",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "medium",
+    "reason": "A two-request same-URL changed-language schedule is required to expose shared cache key omission; fresh-cache and different-URL controls isolate the integration defect. Cross-cutting testing-stem review: the phrase \"Which integration test reveals the missing Vary: Accept-Language?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+    "beforeSha256": "c44297ba2a6f4bdef9eec850a0b3f1c49b7305f069edaa3b73f9be9078bd485c",
+    "afterSha256": "d2ac2fc4b087bb44fcb23a5ef529f14f3369aaf83f0942ee8f34b003f5074ffc"
+  },
+  {
+    "id": "PHP-E26-0591",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "prerequisites",
+      "context",
+      "stem"
+    ],
+    "categories": [
+      "answer-leakage"
+    ],
+    "severity": "high",
+    "reason": "External finding confirmed: assumptions decode both exact candidates and explain unused pad bits; prerequisites also name decode/re-encode validation. Remove those solutions, retain canonical protocol contract, and recheck strict decoder behavior on both runtimes. Draft revision 2 already prepared.",
+    "beforeSha256": "7379f5b2aea673c6913d1efdd2d8522e7c9e40c92b797b0d293c6cb9a7b64df7",
+    "afterSha256": "6ded5104f7a0072a0d6fb2d131fabe63a4ff9ff0ab05575184e4e4ee90fa7f52"
+  },
+  {
+    "id": "PHP-E26-0597",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "answer-leakage",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "fstat versus stat prerequisite introduces the unique correct metadata API before the choice. Use neutral descriptor/path metadata; change Advanced to Intermediate because immutability and descriptor retention are supplied and only matching metadata to the opened version remains.",
+    "beforeSha256": "b4dd418aaeffc81fb6329a52cabcaafad86d298bad1f04b595eb6099796f4c72",
+    "afterSha256": "9db5baf686e2b3868bd9f0a033ee005163aeb4b3f5e6cd8e3162938a6689f8e9"
+  },
+  {
+    "id": "PHP-E26-0598",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites"
+    ],
+    "categories": [
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Change Advanced to Intermediate: canonical identity plus an atomic unique constraint closes an ordinary concurrent registration race; only ASCII and one database are involved.",
+    "beforeSha256": "a9aabe3f486e3d93c5b44b77210e18a8ab2a092a9268b60bb8d9265576ca8ae9",
+    "afterSha256": "d5510c8e3f0cbe4919481c385174a0cb5975b5585664e0d94e7c5d5433553810"
+  },
+  {
+    "id": "PHP-E26-0599",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "context",
+      "stem",
+      "options",
+      "explanation",
+      "validation",
+      "references"
+    ],
+    "categories": [
+      "weak-distractor",
+      "wording-cue",
+      "difficulty"
+    ],
+    "severity": "high",
+    "reason": "External finding confirmed: only key mentions durable queue and FPM-independent recovery, while other options cannot survive termination. Draft revision 2 uses four real queue handoff sequences, publisher-confirmation versus socket flush/timeout/early HTTP response, and Intermediate difficulty.",
+    "beforeSha256": "77991d547a8e4d9e0c8e10ab36347ce95cb6e2b2e925d7229c403fad7e81f9af",
+    "afterSha256": "d62eb867a67e445a05c3b5a1b6298af7145c82df1b639cb5e9a644ccb00d5be1"
+  },
+  {
+    "id": "PHP-E26-0600",
+    "from": 1,
+    "to": 2,
+    "fields": [
+      "revision",
+      "difficulty",
+      "prerequisites",
+      "options",
+      "explanation",
+      "validation"
+    ],
+    "categories": [
+      "duplicate-reasoning",
+      "difficulty"
+    ],
+    "severity": "medium",
+    "reason": "Current alternatives largely repeat 0343's raw bytes versus transformed JSON distinction. Preserve pipeline objective but replace D with parsing/dispatching before verifying the retained raw bytes, testing the explicit pre-dispatch authorization boundary as well. Change Advanced to Intermediate because bounded reads and safe MAC verification are supplied helpers.",
+    "beforeSha256": "60b10c830ce0d0c9dd1df6c97476a71878eedb1ea10163aea43e5400b115197e",
+    "afterSha256": "f700fb8a66780f7d6bb48ecb8c4462f8cf544966ace0d43c41b7829ab252b759"
+  }
+]

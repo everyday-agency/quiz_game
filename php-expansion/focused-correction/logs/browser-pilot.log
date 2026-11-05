@@ -1,0 +1,7 @@
+✓ PHP pilot browser: separate PHP-only collection opens from the existing bank with independent progress
+✓ PHP pilot browser: all 20 questions render exact files/premises and fit mobile options; shuffled Learn answers and all 60 distractor rationales map correctly
+✓ PHP pilot browser: cancelling a collection switch preserves the in-progress exam
+✓ PHP pilot browser: 20-item exam stays neutral before submission, clears Learn feedback, grades 10/20, and counts completion once
+✓ PHP pilot browser: real browser option shuffling moves keyed answers while preserving grading
+✓ PHP pilot browser: pilot progress survives reload; multi-file bank review works at a 390px mobile viewport
+✓ PHP pilot browser: returning to the original collection preserves both legacy/current totals and raises no JavaScript errors

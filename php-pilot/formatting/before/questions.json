@@ -1,0 +1,1737 @@
+[
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-001",
+    "format": "execution",
+    "topic": "Arrays and values",
+    "objective": {
+      "id": "array-union-precedence",
+      "text": "Resolve duplicate string keys when applying array union to configuration defaults."
+    },
+    "difficulty": {
+      "level": "Foundation",
+      "audience": "junior",
+      "rationale": "One array operator determines precedence and retained keys."
+    },
+    "prerequisites": [
+      "Associative arrays",
+      "Array keys"
+    ],
+    "stem": "What JSON does this configuration expression print?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n$defaults = ['timeout' => 10, 'retries' => 2];\n$overrides = ['timeout' => 0];\necho json_encode($overrides + $defaults);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "defaults-win",
+        "text": "{\"timeout\":10,\"retries\":2}",
+        "misconception": "Treating array union as right-hand overwrite.",
+        "rationale": "Union keeps the left-hand value when both arrays contain the same key."
+      },
+      {
+        "id": "override-only",
+        "text": "{\"timeout\":0}",
+        "misconception": "Treating union as replacement of the whole defaults array.",
+        "rationale": "The retries key is absent on the left, so union adds it from the right."
+      },
+      {
+        "id": "left-precedence",
+        "text": "{\"timeout\":0,\"retries\":2}",
+        "misconception": null,
+        "rationale": "timeout is retained from overrides, including its zero value; retries is added from defaults."
+      },
+      {
+        "id": "accumulate",
+        "text": "{\"timeout\":[0,10],\"retries\":2}",
+        "misconception": "Confusing union with recursive merging of duplicate keys.",
+        "rationale": "The + operator keeps one value per key; it does not collect the two timeout values."
+      }
+    ],
+    "correctOptionId": "left-precedence",
+    "explanation": {
+      "summary": "Array union gives existing keys on the left precedence. Zero is a value, not an instruction to use a default.",
+      "trace": "Start with timeout=0. The duplicate timeout from defaults is ignored; retries=2 is added. JSON preserves this insertion order."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.operators.array.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-001",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-002",
+    "format": "debugging",
+    "topic": "References and iteration",
+    "objective": {
+      "id": "foreach-reference-lifetime",
+      "text": "Break the lingering loop-variable reference before reusing that variable by value."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Tracks a reference surviving one loop into assignments performed by another."
+    },
+    "prerequisites": [
+      "foreach",
+      "References",
+      "Array mutation"
+    ],
+    "stem": "The second loop must leave the doubled array unchanged. Which statement inserted at FIX makes the final JSON [2,4,6]?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "The two loops and their variable names must remain as shown."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n$numbers = [1, 2, 3];\nforeach ($numbers as &$value) { $value *= 2; }\n/* FIX */\nforeach ($numbers as $value) { /* read each value */ }\necho json_encode($numbers);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "assign-null",
+        "text": "$value = null;",
+        "misconception": "Assuming assignment clears a reference instead of writing through it.",
+        "rationale": "The assignment writes null into the final element and keeps the reference alive."
+      },
+      {
+        "id": "unset-reference",
+        "text": "unset($value);",
+        "misconception": null,
+        "rationale": "unset detaches the loop variable from the last array element before the next foreach assigns to it."
+      },
+      {
+        "id": "reset-pointer",
+        "text": "reset($numbers);",
+        "misconception": "Confusing an internal array pointer with a reference binding.",
+        "rationale": "Resetting iteration position does not detach value from the final element."
+      },
+      {
+        "id": "reindex",
+        "text": "$numbers = array_values($numbers);",
+        "misconception": "Assuming reindexing removes references held by array elements.",
+        "rationale": "Reindexing keeps the referenced element; the reused loop variable still writes through that reference."
+      }
+    ],
+    "correctOptionId": "unset-reference",
+    "explanation": {
+      "summary": "A foreach reference remains bound after the loop. Unset the loop variable before using it as a by-value target.",
+      "trace": "After doubling, value aliases the last element (6). Without detaching it, the next loop writes 2 and then 4 into that element, ending at [2,4,4]."
+    },
+    "references": [
+      "https://www.php.net/manual/en/control-structures.foreach.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-002",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-003",
+    "format": "code-review",
+    "topic": "Function contracts",
+    "objective": {
+      "id": "named-parameter-rename",
+      "text": "Assess a parameter rename against positional and named callers of a PHP API."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Separates positional compatibility from name-based argument binding."
+    },
+    "prerequisites": [
+      "Function parameters",
+      "Named arguments",
+      "Error handling"
+    ],
+    "stem": "A library renamed its parameter from limit to count without changing its type or behavior. Which compatibility assessment matches the two calls in this existing caller?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "Both files are in the same directory. Execute main.php. No compatibility wrapper is installed."
+      ],
+      "files": [
+        {
+          "path": "library.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction pageSize(int $count): int { return $count; }"
+        },
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nrequire __DIR__ . '/library.php';\necho pageSize(3), '|';\ntry {\n    echo pageSize(limit: 3);\n} catch (Error $error) {\n    echo 'Error';\n}"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "both-work",
+        "text": "Both calls return 3; the unchanged type preserves both call styles.",
+        "misconception": "Assuming parameter names are irrelevant to all callers.",
+        "rationale": "The named caller still requests limit, which is no longer a parameter."
+      },
+      {
+        "id": "named-breaks",
+        "text": "The positional call returns 3; the named call raises Error before entering pageSize.",
+        "misconception": null,
+        "rationale": "The positional call prints 3; the old named call raises Error and the catch prints Error."
+      },
+      {
+        "id": "both-break",
+        "text": "Both calls raise Error before entering pageSize; the rename changes both bindings.",
+        "misconception": "Assuming the rename invalidates positional calls too.",
+        "rationale": "The first call binds its integer by position and succeeds."
+      },
+      {
+        "id": "reversed-contract",
+        "text": "The positional call raises Error; the named call returns 3 using the unchanged type.",
+        "misconception": "Treating named arguments as type-bound while assuming positional calls depend on parameter spelling.",
+        "rationale": "Position selects count for the first call. The second call instead requires a parameter actually named limit."
+      }
+    ],
+    "correctOptionId": "named-breaks",
+    "explanation": {
+      "summary": "Parameter names are part of the callable contract for named callers. This rename preserves positional calls but breaks the shown named call.",
+      "trace": "The first argument occupies count regardless of its old name. limit: 3 cannot bind to count, so PHP raises Error before entering pageSize for the second call."
+    },
+    "references": [
+      "https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-003",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-004",
+    "format": "execution",
+    "topic": "Function defaults",
+    "objective": {
+      "id": "omitted-versus-null",
+      "text": "Distinguish an omitted nullable argument from an explicitly supplied null."
+    },
+    "difficulty": {
+      "level": "Foundation",
+      "audience": "junior",
+      "rationale": "Applies the parameter default and then one null-coalescing expression."
+    },
+    "prerequisites": [
+      "Default arguments",
+      "Nullable types",
+      "Null coalescing"
+    ],
+    "stem": "What text is printed by the omitted-argument call and the explicit-null call?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction displayName(?string $name = 'guest'): string {\n    return $name ?? 'missing';\n}\necho displayName(), '|', displayName(null);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "both-default",
+        "text": "guest|guest",
+        "misconception": "Assuming null requests the default parameter value.",
+        "rationale": "A supplied null is an argument; only omission selects the default."
+      },
+      {
+        "id": "distinct",
+        "text": "guest|missing",
+        "misconception": null,
+        "rationale": "Omission supplies guest. Explicit null reaches the function and the ?? expression supplies missing."
+      },
+      {
+        "id": "both-null",
+        "text": "missing|missing",
+        "misconception": "Assuming omitted arguments enter the function as null.",
+        "rationale": "The declared default is guest, so the omitted call is not null."
+      },
+      {
+        "id": "type-error",
+        "text": "guest followed by an uncaught TypeError",
+        "misconception": "Overlooking that ?string explicitly permits null.",
+        "rationale": "The second call is type-valid and returns missing."
+      }
+    ],
+    "correctOptionId": "distinct",
+    "explanation": {
+      "summary": "A default argument applies when the caller omits that argument. Explicit null remains null when the parameter permits it.",
+      "trace": "displayName() receives guest. displayName(null) receives null, so only the second call evaluates the right-hand side of ?? ."
+    },
+    "references": [
+      "https://www.php.net/manual/en/functions.arguments.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-004",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI model of query validation",
+      "extensions": [
+        "filter"
+      ],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-005",
+    "format": "implementation",
+    "topic": "HTTP input validation",
+    "objective": {
+      "id": "filter-integer-zero",
+      "text": "Reject failed integer validation without rejecting a valid zero-valued query parameter."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "junior",
+      "rationale": "Distinguishes the false failure sentinel from integer zero and checks a range."
+    },
+    "prerequisites": [
+      "Scalar query input",
+      "Strict comparison",
+      "filter_var"
+    ],
+    "stem": "An HTTP endpoint accepts quantities from 0 through 9 and rejects every invalid value. Which condition should replace REJECT in this validation helper?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "raw is a scalar string already extracted from the query. The helper returns a decision string; it does not send an HTTP response. No FILTER_NULL_ON_FAILURE flag is used."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction decide(string $raw): string {\n    $quantity = filter_var($raw, FILTER_VALIDATE_INT,\n        ['options' => ['min_range' => 0, 'max_range' => 9]]);\n    if (/* REJECT */ false) { return 'reject'; }\n    return 'accept:' . $quantity;\n}\necho json_encode(array_map('decide', ['0', '7', 'no', '10']));"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "truthiness",
+        "text": "!$quantity",
+        "misconception": "Conflating validation failure with a valid falsy integer.",
+        "rationale": "This rejects zero even though the endpoint explicitly accepts it."
+      },
+      {
+        "id": "null-sentinel",
+        "text": "$quantity === null",
+        "misconception": "Expecting null without FILTER_NULL_ON_FAILURE.",
+        "rationale": "The default failure sentinel is false, so invalid values would be accepted."
+      },
+      {
+        "id": "false-sentinel",
+        "text": "$quantity === false",
+        "misconception": null,
+        "rationale": "It rejects the failure sentinel while allowing integer 0 and the other in-range integers."
+      },
+      {
+        "id": "not-set",
+        "text": "!isset($quantity)",
+        "misconception": "Treating failed validation as an unset variable.",
+        "rationale": "The variable is set to false on failure; isset is still true for false."
+      }
+    ],
+    "correctOptionId": "false-sentinel",
+    "explanation": {
+      "summary": "Use identity with false to detect failed FILTER_VALIDATE_INT validation under these flags.",
+      "trace": "The four validation results are integer 0, integer 7, false and false. The required decisions are accept:0, accept:7, reject and reject."
+    },
+    "references": [
+      "https://www.php.net/manual/en/function.filter-var.php",
+      "https://www.php.net/manual/en/filter.constants.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-005",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-006",
+    "format": "implementation",
+    "topic": "HTTP media types",
+    "objective": {
+      "id": "media-type-boundary",
+      "text": "Compare an HTTP media type independently of parameters without accepting prefix lookalikes."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Combines case normalization, delimiter boundaries and exact matching."
+    },
+    "prerequisites": [
+      "String functions",
+      "HTTP Content-Type"
+    ],
+    "stem": "Accept only application/json, case-insensitively, with optional semicolon parameters. Reject application/jsonp and application/problem+json. Which expression belongs at ACCEPT?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "header is a single syntactically valid Content-Type field value. This policy check does not parse the body or support structured-suffix media types."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction accepts(string $header): bool {\n    return /* ACCEPT */ false;\n}\n$headers = ['application/json', 'Application/JSON; charset=utf-8',\n    'application/jsonp', 'application/problem+json'];\necho json_encode(array_map('accepts', $headers));"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "case-sensitive",
+        "text": "trim(explode(';', $header, 2)[0]) === 'application/json'",
+        "misconception": "Parsing parameters correctly but comparing the media type case-sensitively.",
+        "rationale": "Application/JSON is a permitted case variation, but this comparison rejects it."
+      },
+      {
+        "id": "prefix",
+        "text": "str_starts_with(strtolower(trim(explode(';', $header, 2)[0])), 'application/json')",
+        "misconception": "Treating a matching string prefix as a media-type boundary.",
+        "rationale": "application/jsonp shares that prefix and would be incorrectly accepted."
+      },
+      {
+        "id": "contains",
+        "text": "str_contains(strtolower(trim(explode(';', $header, 2)[0])), 'json')",
+        "misconception": "Treating any JSON-like media type as the exact permitted type.",
+        "rationale": "Both excluded lookalikes contain json and would pass this check."
+      },
+      {
+        "id": "type-only",
+        "text": "strtolower(trim(explode(';', $header, 2)[0])) === 'application/json'",
+        "misconception": null,
+        "rationale": "It isolates the media type, normalizes case/outer whitespace, and compares the complete type."
+      }
+    ],
+    "correctOptionId": "type-only",
+    "explanation": {
+      "summary": "The permitted token is the part before the first semicolon. Exact matching of that token avoids accidentally broadening the endpoint policy.",
+      "trace": "The normalized tokens are application/json, application/json, application/jsonp and application/problem+json. Only the first two satisfy the stated policy."
+    },
+    "references": [
+      "https://www.php.net/manual/en/function.explode.php",
+      "https://www.rfc-editor.org/rfc/rfc9110.html#section-8.3"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-006",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-007",
+    "format": "testing",
+    "topic": "File reading",
+    "objective": {
+      "id": "fgets-false-versus-zero",
+      "text": "Choose a file fixture that exposes a truthiness-based read loop dropping a valid line."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "junior",
+      "rationale": "Connects fgets return values to PHP string truthiness at an EOF boundary."
+    },
+    "prerequisites": [
+      "fgets",
+      "Boolean conversion",
+      "EOF"
+    ],
+    "stem": "readLines must retain every line, including a final line without a newline. Which single-file test exposes a defect in this implementation?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "The stream opens successfully and reads have no I/O errors. The function returns raw lines, including any newline bytes."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction readLines($handle): array {\n    $lines = [];\n    while ($line = fgets($handle)) { $lines[] = $line; }\n    return $lines;\n}"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "empty-file",
+        "text": "Empty contents; expect [].",
+        "misconception": "Assuming the ordinary EOF sentinel alone triggers the defect.",
+        "rationale": "The loop correctly stops at false for an empty stream and returns the expected empty array."
+      },
+      {
+        "id": "newline",
+        "text": "Contents \"0\\n\"; expect [\"0\\n\"].",
+        "misconception": "Assuming any string beginning with zero is falsy.",
+        "rationale": "\"0\\n\" is not the special falsy string \"0\"; the line is retained."
+      },
+      {
+        "id": "zero-line",
+        "text": "Contents \"0\" (no newline); expect [\"0\"].",
+        "misconception": null,
+        "rationale": "fgets returns the valid string \"0\", which is falsy and never enters this loop."
+      },
+      {
+        "id": "ordinary",
+        "text": "Contents \"A\" (no newline); expect [\"A\"].",
+        "misconception": "Assuming every unterminated final line is dropped.",
+        "rationale": "The nonempty string \"A\" is truthy, so this example passes."
+      }
+    ],
+    "correctOptionId": "zero-line",
+    "explanation": {
+      "summary": "Test a valid final line equal to the string \"0\". The loop must compare fgets with false using !== rather than use the returned line as a boolean.",
+      "trace": "For contents \"0\", fgets succeeds but the condition becomes false and lines stays empty. Changing the condition to ($line = fgets($handle)) !== false retains that line."
+    },
+    "references": [
+      "https://www.php.net/manual/en/function.fgets.php",
+      "https://www.php.net/manual/en/language.types.boolean.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-007",
+      "kind": "test-cases"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-008",
+    "format": "execution",
+    "topic": "Stream positions",
+    "objective": {
+      "id": "stream-write-position",
+      "text": "Track reads and an overwrite at the current position of a seekable stream."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "junior",
+      "rationale": "Tracks the cursor through a read, write and rewind without confusing overwrite with append."
+    },
+    "prerequisites": [
+      "Stream handles",
+      "fread",
+      "fwrite",
+      "rewind"
+    ],
+    "stem": "What is printed after reading two bytes, writing X and then reading the stream from the start?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "The memory stream is seekable and all reads/writes succeed. Every displayed character occupies one byte."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n$h = fopen('php://memory', 'w+');\nfwrite($h, 'abcd');\nrewind($h);\nfread($h, 2);\nfwrite($h, 'X');\nrewind($h);\necho stream_get_contents($h);\nfclose($h);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "append",
+        "text": "abcdX",
+        "misconception": "Treating w+ writes as unconditional appends.",
+        "rationale": "w+ permits reading/writing at the current position; it is not append mode."
+      },
+      {
+        "id": "overwrite",
+        "text": "abXd",
+        "misconception": null,
+        "rationale": "The read advances to byte offset 2; X overwrites c, while d remains."
+      },
+      {
+        "id": "insert",
+        "text": "abXcd",
+        "misconception": "Assuming writing inserts a byte and shifts existing content.",
+        "rationale": "A stream write overwrites bytes at that position instead of inserting into the middle."
+      },
+      {
+        "id": "truncate",
+        "text": "abX",
+        "misconception": "Assuming a later write truncates everything after its new endpoint.",
+        "rationale": "Opening w+ initially truncates; this later write does not truncate the remaining d."
+      }
+    ],
+    "correctOptionId": "overwrite",
+    "explanation": {
+      "summary": "After fread consumes a and b, the stream position is 2. Writing one byte replaces c with X.",
+      "trace": "The initial write leaves abcd. Rewind sets position 0, the read moves it to 2, the write produces abXd, and the final rewind makes the whole content readable."
+    },
+    "references": [
+      "https://www.php.net/manual/en/function.fopen.php",
+      "https://www.php.net/manual/en/function.fwrite.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-008",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-009",
+    "format": "debugging",
+    "topic": "Exceptions and errors",
+    "objective": {
+      "id": "throwable-hierarchy",
+      "text": "Choose a catch type that handles both a domain exception and an engine type error at a task boundary."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Uses the shared Throwable contract without conflating Error and Exception."
+    },
+    "prerequisites": [
+      "try/catch",
+      "TypeError",
+      "Exception hierarchy"
+    ],
+    "stem": "This worker boundary must record and continue after either demonstrated failure, preserving each failure class in the output. Which type replaces Exception in its catch?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "This boundary intentionally handles both failure categories; it does not turn them into successful task results. No process termination or non-throwable failure is involved."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n$tasks = [\n    fn () => throw new RuntimeException('domain'),\n    fn () => strlen([]),\n];\n$failures = [];\nforeach ($tasks as $task) {\n    try { $task(); }\n    catch (/* CATCH */ Exception $error) {\n        $failures[] = get_class($error);\n    }\n}\necho json_encode($failures);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "exception",
+        "text": "Exception",
+        "misconception": "Assuming all throwable engine failures extend Exception.",
+        "rationale": "TypeError extends Error, so it escapes this catch."
+      },
+      {
+        "id": "error",
+        "text": "Error",
+        "misconception": "Assuming Error is the root of both exception branches.",
+        "rationale": "RuntimeException extends Exception and is not an Error."
+      },
+      {
+        "id": "throwable",
+        "text": "Throwable",
+        "misconception": null,
+        "rationale": "Both RuntimeException and TypeError implement Throwable, allowing both task outcomes to be recorded."
+      },
+      {
+        "id": "runtime",
+        "text": "RuntimeException",
+        "misconception": "Assuming runtime-generated type failures are RuntimeException subclasses.",
+        "rationale": "The first failure is caught, but TypeError belongs to the Error branch."
+      }
+    ],
+    "correctOptionId": "throwable",
+    "explanation": {
+      "summary": "Throwable is the shared interface for Error and Exception. Catching it here records the two intended task failures without misreporting success.",
+      "trace": "The first task throws RuntimeException. The second supplies an array to strlen and throws TypeError. Throwable catches both; neither Exception nor Error alone does."
+    },
+    "references": [
+      "https://www.php.net/manual/en/class.throwable.php",
+      "https://www.php.net/manual/en/class.typeerror.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-009",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-010",
+    "format": "code-review",
+    "topic": "Exception control flow",
+    "objective": {
+      "id": "finally-return-replaces-throw",
+      "text": "Identify how returning from finally changes propagation of a pending exception."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Tracks a pending throw through finally and the caller’s catch."
+    },
+    "prerequisites": [
+      "try/catch/finally",
+      "Function return"
+    ],
+    "stem": "The reviewer wants the caller to observe failed loads. What does this implementation actually print?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "There is no other cleanup or exception in finally."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction loadValue(): string {\n    try { throw new RuntimeException('load failed'); }\n    finally { return 'closed'; }\n}\ntry { echo loadValue(); }\ncatch (RuntimeException $error) { echo 'caught'; }"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "caught",
+        "text": "caught",
+        "misconception": "Assuming a pending exception always survives a finally return.",
+        "rationale": "The return in finally replaces the pending exception, so the caller’s catch is not entered."
+      },
+      {
+        "id": "closed",
+        "text": "closed",
+        "misconception": null,
+        "rationale": "The finally block returns closed instead of letting the pending exception propagate."
+      },
+      {
+        "id": "both",
+        "text": "closedcaught",
+        "misconception": "Assuming return completes and the same exception then also reaches the caller.",
+        "rationale": "The function has one completed outcome here: its returned string."
+      },
+      {
+        "id": "return-forbidden",
+        "text": "An uncaught Error because return is forbidden in finally",
+        "misconception": "Confusing discouraged control flow with syntax prohibited by PHP.",
+        "rationale": "PHP permits the return; its effect on the pending exception is the defect."
+      }
+    ],
+    "correctOptionId": "closed",
+    "explanation": {
+      "summary": "Returning from finally discards the pending exception in this example. The caller sees the returned string and does not catch a failure.",
+      "trace": "The throw starts exception propagation. finally runs before the function leaves, and its return replaces that outcome. Keep cleanup in finally but remove its return to preserve the original failure."
+    },
+    "references": [
+      "https://www.php.net/manual/en/control-structures.finally.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-010",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-011",
+    "format": "execution",
+    "topic": "Object state",
+    "objective": {
+      "id": "readonly-reference-boundary",
+      "text": "Distinguish a readonly object property from immutability of the object it references."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Separates mutation of referenced state from replacement of the property."
+    },
+    "prerequisites": [
+      "Object properties",
+      "readonly",
+      "Error handling"
+    ],
+    "stem": "What text is printed when code mutates the settings object and then tries to replace it?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "Settings has no magic methods or property hooks."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfinal class Settings { public int $attempts = 1; }\nfinal class Client {\n    public function __construct(public readonly Settings $settings) {}\n}\n$client = new Client(new Settings());\n$client->settings->attempts = 4;\necho $client->settings->attempts, '|';\ntry { $client->settings = new Settings(); }\ncatch (Error $error) { echo 'Error'; }"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "deep-readonly",
+        "text": "An uncaught Error before anything is printed",
+        "misconception": "Treating readonly as a recursive object-freezing mechanism.",
+        "rationale": "The nested attempts property is mutable; changing it does not reassign settings."
+      },
+      {
+        "id": "copy-on-read",
+        "text": "1|Error",
+        "misconception": "Assuming reading a readonly object property yields a detached copy.",
+        "rationale": "The read yields the same Settings object, whose attempts value becomes 4."
+      },
+      {
+        "id": "same-type-replace",
+        "text": "4|",
+        "misconception": "Assuming a readonly property can be replaced by another object of the same class.",
+        "rationale": "The replacement is a second assignment, which is forbidden regardless of matching type."
+      },
+      {
+        "id": "reference-readonly",
+        "text": "4|Error",
+        "misconception": null,
+        "rationale": "The nested value changes, but replacing the initialized readonly settings property raises Error."
+      }
+    ],
+    "correctOptionId": "reference-readonly",
+    "explanation": {
+      "summary": "readonly restricts reassignment of the property, not mutation of an ordinary object stored in it.",
+      "trace": "Client initializes settings once. attempts belongs to the referenced mutable Settings instance and becomes 4. Assigning a new Settings to the same readonly property then fails."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.oop5.properties.php#language.oop5.properties.readonly-properties"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-011",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-012",
+    "format": "debugging",
+    "topic": "Constructors and inheritance",
+    "objective": {
+      "id": "parent-constructor-initialization",
+      "text": "Diagnose an uninitialized inherited property when a child defines its own constructor."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "junior",
+      "rationale": "Follows constructor dispatch and an inherited typed property’s initialization."
+    },
+    "prerequisites": [
+      "Inheritance",
+      "Constructors",
+      "Typed properties"
+    ],
+    "stem": "new Admin(\"Ada\") must retain the supplied name and label itself \"Ada:admin\". Which constructor statement belongs at INITIALIZE?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "The constructor signatures and label method must remain unchanged."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nclass Person {\n    public function __construct(public string $name) {}\n}\nfinal class Admin extends Person {\n    private string $role = 'admin';\n    public function __construct(string $name) {\n        /* INITIALIZE */\n    }\n    public function label(): string { return $this->name . ':' . $this->role; }\n}\necho (new Admin('Ada'))->label();"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "parent-init",
+        "text": "parent::__construct($name);",
+        "misconception": null,
+        "rationale": "The parent constructor initializes the promoted name property with the argument supplied to Admin."
+      },
+      {
+        "id": "local-copy",
+        "text": "$name = (string) $name;",
+        "misconception": "Confusing the child’s local parameter with the inherited property.",
+        "rationale": "This only assigns the local variable; the inherited property remains uninitialized."
+      },
+      {
+        "id": "parent-default",
+        "text": "parent::__construct('guest');",
+        "misconception": "Using a fallback despite having a valid caller-supplied value.",
+        "rationale": "It initializes the property but discards Ada, producing guest:admin."
+      },
+      {
+        "id": "new-parent",
+        "text": "new Person($name);",
+        "misconception": "Assuming constructing a parent instance initializes the existing child instance.",
+        "rationale": "That initializes a different object, leaving this Admin’s name uninitialized."
+      }
+    ],
+    "correctOptionId": "parent-init",
+    "explanation": {
+      "summary": "Defining a child constructor does not automatically run the parent constructor. The child must initialize the inherited state deliberately.",
+      "trace": "Person’s promoted name is initialized in Person::__construct. Calling that method on the current object with Ada supplies the value label needs; constructing a separate Person does not."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.oop5.decon.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-012",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-013",
+    "format": "architecture",
+    "topic": "Dependency lifetime",
+    "objective": {
+      "id": "clock-dependency-lifetime",
+      "text": "Use a controllable clock at each decision rather than caching time when constructing a long-lived object."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Connects dependency injection with the lifetime of an observed value."
+    },
+    "prerequisites": [
+      "Closure invocation",
+      "Object lifetime",
+      "Dependency injection"
+    ],
+    "stem": "A lease must be checked repeatedly using its injected clock, and expire when that clock reaches its deadline. Which return expression satisfies this contract on the same Lease object?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "The injected clock returns integer seconds and may advance between calls. Tests must control time without sleeping or changing the system clock."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfinal class Lease {\n    private int $createdAt;\n    private ?int $firstCheck = null;\n    public function __construct(private Closure $clock, private int $deadline) {\n        $this->createdAt = ($clock)();\n    }\n    public function expired(): bool {\n        return /* EXPIRED */ false;\n    }\n}\n$tick = 9;\n$clock = function () use (&$tick): int { return $tick; };\n$lease = new Lease($clock, 10);\n$before = $lease->expired();\n$tick = 10;\necho json_encode([$before, $lease->expired()]);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "read-clock",
+        "text": "($this->clock)() >= $this->deadline",
+        "misconception": null,
+        "rationale": "Each decision reads the injected clock; the demonstrated timeline produces false and then true."
+      },
+      {
+        "id": "snapshot",
+        "text": "$this->createdAt >= $this->deadline",
+        "misconception": "Assuming an injected time value stays current for the object’s lifetime.",
+        "rationale": "createdAt stays 9, so expiry never reflects the clock advancing to 10."
+      },
+      {
+        "id": "system-clock",
+        "text": "time() >= $this->deadline",
+        "misconception": "Keeping a hidden system-clock dependency despite accepting a controllable clock.",
+        "rationale": "This bypasses the injected clock and makes the supplied test timeline irrelevant."
+      },
+      {
+        "id": "cached-first",
+        "text": "($this->firstCheck ??= ($this->clock)()) >= $this->deadline",
+        "misconception": "Assuming memoization preserves correctness for a changing dependency.",
+        "rationale": "It caches 9 on the first check and reuses it after the injected clock advances."
+      }
+    ],
+    "correctOptionId": "read-clock",
+    "explanation": {
+      "summary": "Injecting a clock is useful only if decisions read it at the required time. A cached timestamp models a past observation, not the current clock.",
+      "trace": "The constructor and first check occur at 9. A later check on the same object must observe 10. Calling the injected closure each time produces [false,true]."
+    },
+    "references": [
+      "https://www.php.net/manual/en/class.closure.php",
+      "https://www.php.net/manual/en/function.time.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-013",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-014",
+    "format": "execution",
+    "topic": "Traits and method selection",
+    "objective": {
+      "id": "trait-method-precedence",
+      "text": "Resolve trait methods against inherited methods and methods declared directly in the consuming class."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Applies two method-precedence rules to separate classes."
+    },
+    "prerequisites": [
+      "Traits",
+      "Inheritance",
+      "Method overriding"
+    ],
+    "stem": "Which pair of labels is printed by these two classes?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "There is no second trait and no alias adaptation."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nclass BaseLabel { public function label(): string { return 'base'; } }\ntrait TagLabel { public function label(): string { return 'trait'; } }\nclass Tagged extends BaseLabel { use TagLabel; }\nclass Custom extends BaseLabel {\n    use TagLabel;\n    public function label(): string { return 'own'; }\n}\necho (new Tagged())->label(), '|', (new Custom())->label();"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "base-own",
+        "text": "base|own",
+        "misconception": "Assuming an inherited class method outranks a trait method.",
+        "rationale": "Tagged’s trait method overrides the inherited BaseLabel method."
+      },
+      {
+        "id": "trait-trait",
+        "text": "trait|trait",
+        "misconception": "Assuming trait methods outrank methods written in the consuming class.",
+        "rationale": "Custom’s own label method takes precedence over the trait."
+      },
+      {
+        "id": "collision",
+        "text": "A fatal method-collision error before output",
+        "misconception": "Treating inheritance or a class override as a conflict between two traits.",
+        "rationale": "These are defined precedence cases; no conflicting pair of imported trait methods exists."
+      },
+      {
+        "id": "trait-own",
+        "text": "trait|own",
+        "misconception": null,
+        "rationale": "The trait beats the inherited method in Tagged, while Custom’s own method beats the trait."
+      }
+    ],
+    "correctOptionId": "trait-own",
+    "explanation": {
+      "summary": "A method declared in the consuming class takes precedence over a trait method, and a trait method takes precedence over an inherited method.",
+      "trace": "Tagged supplies no own method, so TagLabel wins over BaseLabel. Custom supplies its own method, so it prints own."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.oop5.traits.php#language.oop5.traits.precedence"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-014",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-015",
+    "format": "implementation",
+    "topic": "Trait requirements",
+    "objective": {
+      "id": "trait-abstract-method-contract",
+      "text": "Implement a trait’s abstract instance-method contract with a compatible signature."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Checks staticness, required arguments and the return type against an abstract contract."
+    },
+    "prerequisites": [
+      "Traits",
+      "Abstract methods",
+      "Method signatures"
+    ],
+    "stem": "Sender must be concrete and (new Sender())->message() must return \"mail:ready\". Which method can be added after use PrefixMessage in the class-body fragment?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "Load PrefixMessage.php, then place the second fragment inside class Sender { ... }. There are no other methods or parent classes."
+      ],
+      "files": [
+        {
+          "path": "PrefixMessage.php",
+          "kind": "complete-file",
+          "source": "<?php\ntrait PrefixMessage {\n    abstract protected function prefix(): string;\n    public function message(): string { return $this->prefix() . ':ready'; }\n}"
+        },
+        {
+          "path": "sender-members.php",
+          "kind": "fragment",
+          "scope": "Class-body fragment inside a concrete Sender class; PrefixMessage is loaded first.",
+          "source": "use PrefixMessage;\n/* METHOD */"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "instance",
+        "text": "protected function prefix(): string { return 'mail'; }",
+        "misconception": null,
+        "rationale": "It implements the required instance method with no arguments and the required string result."
+      },
+      {
+        "id": "static",
+        "text": "protected static function prefix(): string { return 'mail'; }",
+        "misconception": "Assuming a static method can implement an instance-method requirement.",
+        "rationale": "Staticness is part of compatibility; this cannot implement the trait’s non-static method."
+      },
+      {
+        "id": "required-argument",
+        "text": "protected function prefix(string $kind): string { return $kind; }",
+        "misconception": "Assuming the consuming class can add a required argument to the trait contract.",
+        "rationale": "The trait calls prefix with no argument; adding a required parameter violates the contract."
+      },
+      {
+        "id": "return-int",
+        "text": "protected function prefix(): int { return 1; }",
+        "misconception": "Assuming concatenation permits changing the method’s declared return contract.",
+        "rationale": "The required return type is string; int is not a compatible implementation."
+      }
+    ],
+    "correctOptionId": "instance",
+    "explanation": {
+      "summary": "The concrete class must provide a compatible implementation of the trait’s abstract method. Only the instance method with no required arguments and a string result qualifies.",
+      "trace": "message invokes prefix on this instance with no arguments. The compatible method returns mail, which is concatenated with :ready. The other declarations fail compatibility checks."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.oop5.traits.php#language.oop5.traits.abstract"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-015",
+      "kind": "candidate-patches"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-016",
+    "format": "execution",
+    "topic": "Static and instance members",
+    "objective": {
+      "id": "class-versus-instance-state",
+      "text": "Distinguish shared class state from each instance’s own counter."
+    },
+    "difficulty": {
+      "level": "Foundation",
+      "audience": "junior",
+      "rationale": "Counts three calls across two objects while tracking two kinds of property."
+    },
+    "prerequisites": [
+      "Static properties",
+      "Instance properties"
+    ],
+    "stem": "What are the total, the first object’s own count, and the second object’s own count?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "Only these two objects and three hit calls exist."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfinal class Visits {\n    public static int $total = 0;\n    public int $own = 0;\n    public function hit(): void { self::$total++; $this->own++; }\n}\n$a = new Visits();\n$b = new Visits();\n$a->hit(); $a->hit(); $b->hit();\necho Visits::$total, '|', $a->own, '|', $b->own;"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "all-shared",
+        "text": "3|3|3",
+        "misconception": "Treating instance properties as shared just like a static property.",
+        "rationale": "own belongs separately to a and b; neither own counter records all three calls."
+      },
+      {
+        "id": "separate",
+        "text": "3|2|1",
+        "misconception": null,
+        "rationale": "total records all three calls, a records two, and b records one."
+      },
+      {
+        "id": "last-instance",
+        "text": "1|2|1",
+        "misconception": "Treating the static value as the latest instance’s counter.",
+        "rationale": "Constructing b does not replace the class’s static storage; each hit increments the same total."
+      },
+      {
+        "id": "first-instance",
+        "text": "2|2|1",
+        "misconception": "Assuming a class-level access selects the first created instance’s state.",
+        "rationale": "Visits::$total is class storage and includes b’s hit too."
+      }
+    ],
+    "correctOptionId": "separate",
+    "explanation": {
+      "summary": "The static total has one value for this class; each object has its own own property.",
+      "trace": "The two calls on a take total to 2 and a->own to 2. The call on b takes total to 3 and b->own to 1."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.oop5.static.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-016",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-017",
+    "format": "execution",
+    "topic": "Namespace function resolution",
+    "objective": {
+      "id": "qualified-function-resolution",
+      "text": "Distinguish an unqualified namespaced function call from an explicitly global call."
+    },
+    "difficulty": {
+      "level": "Foundation",
+      "audience": "junior",
+      "rationale": "Resolves two function names with the relevant namespace supplied."
+    },
+    "prerequisites": [
+      "Namespaces",
+      "Fully qualified names"
+    ],
+    "stem": "Which output is produced by the unqualified call followed by the explicitly global call?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "No use function imports or additional definitions are present."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nnamespace Metrics;\nfunction strlen(string $value): int { return 99; }\necho strlen('abc'), '|', \\strlen('abc');"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "always-global",
+        "text": "3|3",
+        "misconception": "Assuming a built-in function always takes precedence over a namespaced function.",
+        "rationale": "The unqualified call finds Metrics\\strlen first."
+      },
+      {
+        "id": "always-local",
+        "text": "99|99",
+        "misconception": "Ignoring the leading backslash on the second call.",
+        "rationale": "The backslash explicitly selects the global function, which counts three bytes."
+      },
+      {
+        "id": "local-global",
+        "text": "99|3",
+        "misconception": null,
+        "rationale": "The first call selects Metrics\\strlen and the second selects the built-in global strlen."
+      },
+      {
+        "id": "redeclaration",
+        "text": "A fatal redeclaration error before output",
+        "misconception": "Treating function names in different namespaces as the same symbol.",
+        "rationale": "Metrics\\strlen is distinct from global strlen, so this definition is allowed."
+      }
+    ],
+    "correctOptionId": "local-global",
+    "explanation": {
+      "summary": "An unqualified function call can resolve to a function in the current namespace. A leading backslash explicitly chooses the global namespace.",
+      "trace": "Metrics\\strlen returns the constant 99. Global strlen receives the three-byte string abc and returns 3."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.namespaces.fallback.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-017",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-018",
+    "format": "testing",
+    "topic": "Boundary tests",
+    "objective": {
+      "id": "inclusive-boundary-regression",
+      "text": "Select a test that distinguishes an inclusive balance limit from an exclusive one."
+    },
+    "difficulty": {
+      "level": "Foundation",
+      "audience": "junior",
+      "rationale": "Identifies the single boundary at which the implementation differs from the requirement."
+    },
+    "prerequisites": [
+      "Comparison operators",
+      "Boolean assertions"
+    ],
+    "stem": "A customer may spend their entire available balance. Both arguments are positive integer cents. Which test fails against the current function and demonstrates that requirement?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "No fees, credit, floating-point amounts or other constraints apply. Each option states an expected boolean result."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction canSpend(int $balance, int $amount): bool {\n    return $amount < $balance;\n}"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "below",
+        "text": "canSpend(100, 99) should be true",
+        "misconception": "Testing just below the boundary while expecting it to distinguish < from <=.",
+        "rationale": "Both comparisons accept 99, so this assertion passes the buggy implementation."
+      },
+      {
+        "id": "above",
+        "text": "canSpend(100, 101) should be false",
+        "misconception": "Testing just above the boundary while expecting it to distinguish < from <=.",
+        "rationale": "Both comparisons reject 101, so this assertion does not expose the defect."
+      },
+      {
+        "id": "well-below",
+        "text": "canSpend(100, 1) should be true",
+        "misconception": "Using an ordinary valid amount instead of the changed boundary.",
+        "rationale": "This passes with either operator and does not establish whether the whole balance may be spent."
+      },
+      {
+        "id": "equal",
+        "text": "canSpend(100, 100) should be true",
+        "misconception": null,
+        "rationale": "The implementation returns false for equality, which contradicts the stated full-balance requirement."
+      }
+    ],
+    "correctOptionId": "equal",
+    "explanation": {
+      "summary": "The equality case is the difference between the current < test and the required <= test.",
+      "trace": "At balance=100 and amount=100, 100 < 100 is false. Changing the operator to <= makes that regression assertion pass while preserving the other three shown outcomes."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.operators.comparison.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-018",
+      "kind": "test-cases"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-019",
+    "format": "debugging",
+    "topic": "Namespace class resolution",
+    "objective": {
+      "id": "class-name-no-global-fallback",
+      "text": "Diagnose an unqualified class name in a namespace when the intended class is global."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Distinguishes class resolution from exception construction and the outer catch."
+    },
+    "prerequisites": [
+      "Namespaces",
+      "Class names",
+      "Throwable"
+    ],
+    "stem": "The intention is to throw the built-in RuntimeException. Which class name is actually printed by the catch?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "There is no Jobs\\RuntimeException, no class alias, no use import and no autoloader. The leading backslashes in the catch and get_class call are intentional."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nnamespace Jobs;\ntry { throw new RuntimeException('failed'); }\ncatch (\\Throwable $error) { echo \\get_class($error); }"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "lookup-error",
+        "text": "Error",
+        "misconception": null,
+        "rationale": "PHP tries to construct Jobs\\RuntimeException; the missing class raises Error, which Throwable catches."
+      },
+      {
+        "id": "global-exception",
+        "text": "RuntimeException",
+        "misconception": "Assuming unqualified class names fall back to global classes.",
+        "rationale": "Classes do not use the global fallback that unqualified function calls can use."
+      },
+      {
+        "id": "namespaced-exception",
+        "text": "Jobs\\RuntimeException",
+        "misconception": "Assuming naming an unknown class creates a new namespaced exception type.",
+        "rationale": "No such class exists, so construction fails before that exception could be thrown."
+      },
+      {
+        "id": "catch-type",
+        "text": "Throwable",
+        "misconception": "Assuming get_class reports the declared catch type.",
+        "rationale": "Throwable is the interface matched by catch; get_class reports the concrete Error instance."
+      }
+    ],
+    "correctOptionId": "lookup-error",
+    "explanation": {
+      "summary": "The unqualified class name resolves within Jobs. With no matching class or import, PHP raises Error before constructing the intended exception.",
+      "trace": "Use new \\RuntimeException(...) or import RuntimeException to throw the global class. The catch already names global Throwable, so it catches the lookup Error and prints its concrete class."
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.namespaces.rules.php",
+      "https://www.php.net/manual/en/language.namespaces.fallback.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-019",
+      "kind": "observed-output"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-pilot-v1",
+    "revision": 1,
+    "status": "pilot",
+    "responseType": "single-choice",
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom error handler."
+    },
+    "id": "PHP-PILOT-020",
+    "format": "code-review",
+    "topic": "Stream ownership",
+    "objective": {
+      "id": "borrowed-stream-ownership",
+      "text": "Preserve a borrowed stream and its position so the caller can continue reading."
+    },
+    "difficulty": {
+      "level": "Applied",
+      "audience": "intermediate",
+      "rationale": "Combines ownership of a resource with its cursor state at an API boundary."
+    },
+    "prerequisites": [
+      "Resource handles",
+      "fgets",
+      "finally"
+    ],
+    "stem": "readFirst borrows the caller’s handle. After it returns, the caller must read the next line from that same handle. Which cleanup statement should replace CLEANUP?",
+    "context": {
+      "assumptions": [
+        "Run once in a fresh PHP process; only the shown definitions and inputs exist.",
+        "The caller owns and closes the successfully opened stream. Both lines exist and reads succeed. The function must consume exactly its first line and leave the handle usable."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\nfunction readFirst($handle): string {\n    try { return fgets($handle); }\n    finally { /* CLEANUP */ fclose($handle); }\n}\n$h = fopen('php://memory', 'w+');\nfwrite($h, \"alpha\\nbeta\\n\");\nrewind($h);\n$first = readFirst($h);\n$second = fgets($h);\necho json_encode([$first, $second]);\nfclose($h);"
+        }
+      ]
+    },
+    "options": [
+      {
+        "id": "close",
+        "text": "fclose($handle);",
+        "misconception": "Assuming every function using a handle should close it.",
+        "rationale": "Closing a borrowed handle makes the caller’s next fgets fail instead of reading beta."
+      },
+      {
+        "id": "detach-local",
+        "text": "unset($handle);",
+        "misconception": null,
+        "rationale": "This drops the local variable only; the caller still owns the resource at its current position after alpha."
+      },
+      {
+        "id": "rewind",
+        "text": "rewind($handle);",
+        "misconception": "Assuming leaving a borrowed resource at the beginning preserves the caller’s intended continuation.",
+        "rationale": "The handle stays open but the caller reads alpha again instead of beta."
+      },
+      {
+        "id": "seek-end",
+        "text": "fseek($handle, 0, SEEK_END);",
+        "misconception": "Assuming a reader should leave a shared stream positioned for a later append.",
+        "rationale": "The next read starts at EOF and returns false, violating the next-line contract."
+      }
+    ],
+    "correctOptionId": "detach-local",
+    "explanation": {
+      "summary": "The caller owns the handle and needs its advanced cursor. Unsetting the callee’s local variable preserves both the caller’s reference and that position.",
+      "trace": "fgets consumes alpha plus its newline. The finally block unsets only the local parameter. The caller’s h still refers to the open stream positioned before beta; the caller closes it afterward. A simpler refactor could omit this finally block entirely."
+    },
+    "references": [
+      "https://www.php.net/manual/en/function.fclose.php",
+      "https://www.php.net/manual/en/function.unset.php",
+      "https://www.php.net/manual/en/language.types.resource.php"
+    ],
+    "validation": {
+      "fixtureId": "PHP-PILOT-020",
+      "kind": "candidate-patches"
+    }
+  }
+]

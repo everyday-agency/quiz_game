@@ -1,0 +1,959 @@
+{
+  "batch": 2,
+  "count": 100,
+  "sourceHash": "b43113612babe17768203a2663b8d2096060e55641143c0032bf911a78c63792",
+  "formats": {
+    "execution": 25,
+    "debugging": 20,
+    "code-review": 20,
+    "implementation": 15,
+    "testing": 12,
+    "architecture": 8
+  },
+  "difficulty": {
+    "Foundation": 25,
+    "Intermediate": 50,
+    "Advanced": 25
+  },
+  "topics": {
+    "Operators & expressions": 3,
+    "Control flow & pattern matching": 1,
+    "Arrays & destructuring": 10,
+    "Functions & arguments": 9,
+    "Variables, scope & constants": 3,
+    "Closures, callbacks & callables": 4,
+    "HTTP & superglobals": 8,
+    "Types, casting & comparisons": 4,
+    "Classes & object lifecycle": 7,
+    "Inheritance, interfaces & traits": 6,
+    "Enums, attributes & reflection": 4,
+    "Validation & web security": 8,
+    "Files & structured data": 7,
+    "Forms & file uploads": 2,
+    "Namespaces, Composer & packages": 2,
+    "Includes, autoloading & paths": 2,
+    "Transactions, migrations & ORM": 2,
+    "Performance, processes & servers": 3,
+    "Syntax & execution model": 1,
+    "Cookies & sessions": 1,
+    "Errors & exceptions": 4,
+    "PDO & database access": 2,
+    "Iterators, generators & fibers": 1,
+    "Testing, style & static analysis": 3,
+    "APIs, integrations & PSRs": 3
+  },
+  "knownLessonMappings": 67,
+  "unmapped": 33,
+  "studiedCoverageEligible": 39,
+  "authoredKeyPositions": {
+    "1": 23,
+    "2": 27,
+    "3": 26,
+    "4": 24
+  },
+  "wordingSignals": {
+    "uniqueLongestCorrect": 32,
+    "uniqueShortestCorrect": 9,
+    "lengthOutliers": [],
+    "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+  },
+  "duplicateCandidates": [
+    {
+      "a": "PHP-E26-0177",
+      "b": "PHP-E26-0035",
+      "kind": "new",
+      "textSimilarity": 0.068,
+      "codeSimilarity": 0.643
+    },
+    {
+      "a": "PHP-E26-0178",
+      "b": "PHP-E26-0074",
+      "kind": "new",
+      "textSimilarity": 0.125,
+      "codeSimilarity": 0.583
+    },
+    {
+      "a": "PHP-E26-0176",
+      "b": "PHP-E26-0020",
+      "kind": "new",
+      "textSimilarity": 0.029,
+      "codeSimilarity": 0.5
+    },
+    {
+      "a": "PHP-E26-0184",
+      "b": "PHP-E26-0057",
+      "kind": "new",
+      "textSimilarity": 0.019,
+      "codeSimilarity": 0.5
+    },
+    {
+      "a": "PHP-E26-0113",
+      "b": "PHP-E26-0002",
+      "kind": "new",
+      "textSimilarity": 0.286,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0106",
+      "b": "PHP-E26-0101",
+      "kind": "new",
+      "textSimilarity": 0.278,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0118",
+      "b": "PHP-E26-0112",
+      "kind": "new",
+      "textSimilarity": 0.263,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0114",
+      "b": "PHP-E26-0112",
+      "kind": "new",
+      "textSimilarity": 0.25,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0118",
+      "b": "PHP-PILOT-004",
+      "kind": "pilot",
+      "textSimilarity": 0.25,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0155",
+      "b": "PHP-E26-0039",
+      "kind": "new",
+      "textSimilarity": 0.163,
+      "codeSimilarity": 0.231
+    },
+    {
+      "a": "PHP-E26-0172",
+      "b": "PHP-E26-0166",
+      "kind": "new",
+      "textSimilarity": 0.231,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0104",
+      "kind": "new",
+      "textSimilarity": 0.227,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0169",
+      "b": "PHP-E26-0066",
+      "kind": "new",
+      "textSimilarity": 0.219,
+      "codeSimilarity": 0.133
+    },
+    {
+      "a": "PHP-E26-0122",
+      "b": "PHP-E26-0019",
+      "kind": "new",
+      "textSimilarity": 0.217,
+      "codeSimilarity": 0.111
+    },
+    {
+      "a": "PHP-E26-0107",
+      "b": "PHP-E26-0016",
+      "kind": "new",
+      "textSimilarity": 0.211,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0112",
+      "b": "PHP-E26-0106",
+      "kind": "new",
+      "textSimilarity": 0.211,
+      "codeSimilarity": 0.2
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PQ-197",
+      "kind": "legacy",
+      "textSimilarity": 0.208,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0121",
+      "b": "PHP-E26-0006",
+      "kind": "new",
+      "textSimilarity": 0.208,
+      "codeSimilarity": 0.071
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0019",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0120",
+      "b": "PHP-E26-0108",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0.154
+    },
+    {
+      "a": "PHP-E26-0122",
+      "b": "PHP-E26-0110",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0.105
+    },
+    {
+      "a": "PHP-E26-0124",
+      "b": "PHP-E26-0024",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0.074
+    },
+    {
+      "a": "PHP-E26-0166",
+      "b": "PHP-E26-0066",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0106",
+      "b": "PHP-E26-0025",
+      "kind": "new",
+      "textSimilarity": 0.192,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0025",
+      "kind": "new",
+      "textSimilarity": 0.192,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0101",
+      "b": "PHP-E26-0018",
+      "kind": "new",
+      "textSimilarity": 0.19,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0103",
+      "b": "PHP-E26-0002",
+      "kind": "new",
+      "textSimilarity": 0.19,
+      "codeSimilarity": 0.143
+    },
+    {
+      "a": "PHP-E26-0104",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.19,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0109",
+      "b": "PQ-002",
+      "kind": "legacy",
+      "textSimilarity": 0.188,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0163",
+      "b": "PHP-E26-0151",
+      "kind": "new",
+      "textSimilarity": 0.188,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0104",
+      "b": "PHP-PILOT-002",
+      "kind": "pilot",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PQ-014",
+      "kind": "legacy",
+      "textSimilarity": 0.182,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0112",
+      "b": "PHP-E26-0101",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0.182
+    },
+    {
+      "a": "PHP-E26-0117",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.182
+    },
+    {
+      "a": "PHP-E26-0121",
+      "b": "PHP-E26-0018",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.15
+    },
+    {
+      "a": "PHP-E26-0123",
+      "b": "PHP-PILOT-014",
+      "kind": "pilot",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.1
+    },
+    {
+      "a": "PHP-E26-0125",
+      "b": "PHP-E26-0022",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.045
+    },
+    {
+      "a": "PHP-E26-0125",
+      "b": "PHP-E26-0110",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.118
+    },
+    {
+      "a": "PHP-E26-0168",
+      "b": "PHP-E26-0127",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0169",
+      "b": "PHP-E26-0166",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.111
+    },
+    {
+      "a": "PHP-E26-0114",
+      "b": "PHP-E26-0101",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0192",
+      "b": "PHP-E26-0034",
+      "kind": "new",
+      "textSimilarity": 0.175,
+      "codeSimilarity": 0.125
+    },
+    {
+      "a": "PHP-E26-0119",
+      "b": "PHP-E26-0101",
+      "kind": "new",
+      "textSimilarity": 0.174,
+      "codeSimilarity": 0.133
+    },
+    {
+      "a": "PHP-E26-0113",
+      "b": "PHP-E26-0103",
+      "kind": "new",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0101",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0101",
+      "b": "PHP-E26-0025",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0105",
+      "b": "PHP-E26-0101",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0106",
+      "b": "PHP-E26-0018",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0109",
+      "b": "PQ-005",
+      "kind": "legacy",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0111",
+      "b": "PHP-E26-0019",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0112",
+      "b": "PHP-PILOT-004",
+      "kind": "pilot",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.167
+    },
+    {
+      "a": "PHP-E26-0114",
+      "b": "PHP-E26-0019",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0122",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.167
+    },
+    {
+      "a": "PHP-E26-0137",
+      "b": "PHP-E26-0038",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.045
+    },
+    {
+      "a": "PHP-E26-0186",
+      "b": "PHP-E26-0181",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0111",
+      "b": "PQ-021",
+      "kind": "legacy",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0109",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0
+    },
+    {
+      "a": "PHP-E26-0124",
+      "b": "PHP-E26-0005",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0.133
+    }
+  ],
+  "sources": [
+    {
+      "id": "PHP-E26-0101",
+      "path": "main.php",
+      "sha256": "8656563b455d58e66bca948a02359b73ea94e9c3b5f3f812fee21c07cadb5aa5"
+    },
+    {
+      "id": "PHP-E26-0102",
+      "path": "main.php",
+      "sha256": "cd7055b67a145ed1d285021f3f92fab9c9c5f1ee85a83a727872df7091b3a3f5"
+    },
+    {
+      "id": "PHP-E26-0103",
+      "path": "main.php",
+      "sha256": "7caed309dd2bc5fbc7ec170563940ebfc14933393a3833eaf8f97e2c7c3b7bd9"
+    },
+    {
+      "id": "PHP-E26-0104",
+      "path": "main.php",
+      "sha256": "d139ffe3da0d791e27bd04ecd718811e7b3833cb9fccd63fcf4e90f2022669d8"
+    },
+    {
+      "id": "PHP-E26-0105",
+      "path": "main.php",
+      "sha256": "a302827cf51697e08040ce472005382f74f424527dea514eea5d744912fbb0b0"
+    },
+    {
+      "id": "PHP-E26-0106",
+      "path": "main.php",
+      "sha256": "5365b034ab8abffbaf2d11e156ee89cf38e81b260a77fccb73c8c5d9b4ad313f"
+    },
+    {
+      "id": "PHP-E26-0107",
+      "path": "main.php",
+      "sha256": "b4cebf84a0f05bef44293f634616fe90cd252da6aba72363cdd0aef181977788"
+    },
+    {
+      "id": "PHP-E26-0108",
+      "path": "main.php",
+      "sha256": "850247c9af1d0f9f910503992ec647516eccaed19a966515d1a35b1ec8525031"
+    },
+    {
+      "id": "PHP-E26-0109",
+      "path": "main.php",
+      "sha256": "15d2aba5f8905507b60f1c35139601d3ff3b8c5e6bf6b19395910c117880f351"
+    },
+    {
+      "id": "PHP-E26-0110",
+      "path": "main.php",
+      "sha256": "cff1c1bc3f5733f8d4cc1203dcd2236f63565d319c565c85ca258fe803acf689"
+    },
+    {
+      "id": "PHP-E26-0111",
+      "path": "main.php",
+      "sha256": "75fdc98e5251c17b112d4eda1d5c28ac57aa56766e5fc4add04bc6b7bf4614e2"
+    },
+    {
+      "id": "PHP-E26-0112",
+      "path": "main.php",
+      "sha256": "0ed4964f85095f85994dfb6494883a74965e86b00bf98d12a9331ea279e0de63"
+    },
+    {
+      "id": "PHP-E26-0113",
+      "path": "main.php",
+      "sha256": "b52709d77eaef4510cc734d9ad015a584707f29aedbf04416468f0f7fd6644cb"
+    },
+    {
+      "id": "PHP-E26-0114",
+      "path": "main.php",
+      "sha256": "ce4ed040836b1826abca7590d56dc2e6f0effe589d1494b6289e6eabd0cf80d9"
+    },
+    {
+      "id": "PHP-E26-0115",
+      "path": "main.php",
+      "sha256": "549ee79f03861469a439ae5b1d68c43e009865cd0d194cb42beb3a9b27db8d93"
+    },
+    {
+      "id": "PHP-E26-0116",
+      "path": "main.php",
+      "sha256": "4a739208ee39b88e9cbfe802ae4b18b1953c4557979591fb30bb860fbee8abfa"
+    },
+    {
+      "id": "PHP-E26-0117",
+      "path": "main.php",
+      "sha256": "389f5e3e6b35e5f2a46746d5e6155ac62590b525e918a686d083fd7d4544e9f0"
+    },
+    {
+      "id": "PHP-E26-0118",
+      "path": "main.php",
+      "sha256": "e91823cadb3fe0dfe0078c6d08966580d217b108e067c897fb141e13ac356f1c"
+    },
+    {
+      "id": "PHP-E26-0119",
+      "path": "main.php",
+      "sha256": "e94d8f1c4806f8dc75f930fef86c229665cde3ae7f172e0f1e957d79a8585c1b"
+    },
+    {
+      "id": "PHP-E26-0120",
+      "path": "main.php",
+      "sha256": "28b6c56c2a9aa9bc0ca9a3d93a8b8d912880d3bae87abd793fdd31ff98413ad7"
+    },
+    {
+      "id": "PHP-E26-0121",
+      "path": "main.php",
+      "sha256": "8b64b639be71fa23cdd3d35e58c3cb042bd535cad5f5fd27ae775bfff7ee1a28"
+    },
+    {
+      "id": "PHP-E26-0122",
+      "path": "main.php",
+      "sha256": "8f351d72f748b9a5345336792b23da561bfbf28ec84675f9782f3f146f2dfdfe"
+    },
+    {
+      "id": "PHP-E26-0123",
+      "path": "main.php",
+      "sha256": "1915526d02b9152b6f339d6131f16f5555fd263bb58371fa178b8dc737f9f6b0"
+    },
+    {
+      "id": "PHP-E26-0124",
+      "path": "main.php",
+      "sha256": "5ac6a58c54853647e18fecdd330a19e7c041dc74111d1e5ba63e997f74e28e3d"
+    },
+    {
+      "id": "PHP-E26-0125",
+      "path": "main.php",
+      "sha256": "3debc1f4b10e37b8258b04165f78dc051eac17328266ac4b9f81e61bea8eb70f"
+    },
+    {
+      "id": "PHP-E26-0126",
+      "path": "main.php",
+      "sha256": "de3db4240cc3df4c8823fba429b7f51a4b2972161f08a404e00850e4f64ec066"
+    },
+    {
+      "id": "PHP-E26-0127",
+      "path": "main.php",
+      "sha256": "e080006a441110108d4ecd47f72166ddaa1cfa8b4320cbc9f7d03252a9c3323c"
+    },
+    {
+      "id": "PHP-E26-0128",
+      "path": "main.php",
+      "sha256": "950fe68a19814444e2ce737c1785484eda44e280b8c3b832baae13caa2d215cb"
+    },
+    {
+      "id": "PHP-E26-0129",
+      "path": "main.php",
+      "sha256": "668ad2d2f94a04b114f6ef46dfd1281c90ebd4e85b10d83bdac25b5abc7f2e19"
+    },
+    {
+      "id": "PHP-E26-0130",
+      "path": "main.php",
+      "sha256": "06ae7f74d895daed8b33f3758d41b21eff3b776ad169fe3410aa8638dc805138"
+    },
+    {
+      "id": "PHP-E26-0131",
+      "path": "main.php",
+      "sha256": "4320678d9150761c47a0672032529a01b7474de81496f2a516622592fe14a8d2"
+    },
+    {
+      "id": "PHP-E26-0132",
+      "path": "main.php",
+      "sha256": "f8eb89fb841f2311f3cde2389a6216ece17b498ceb9834c68a1e6faa683f0692"
+    },
+    {
+      "id": "PHP-E26-0133",
+      "path": "main.php",
+      "sha256": "0d97df0cf96662a55b7553c1c9a65137b80471f17367f68d4ccbd2f7a30deeb4"
+    },
+    {
+      "id": "PHP-E26-0134",
+      "path": "main.php",
+      "sha256": "c16d31c524c4955aa8ac0702e4813ec39dddbc709da490da3b2f13cff7410c55"
+    },
+    {
+      "id": "PHP-E26-0135",
+      "path": "main.php",
+      "sha256": "5cfba03f16703ff1779498d68c03e09d11c4a572f1e061e9de72b35447908893"
+    },
+    {
+      "id": "PHP-E26-0136",
+      "path": "main.php",
+      "sha256": "8810695b6507815be1d02425ac87ced124d2b17eeb37baee21005019a768ae7b"
+    },
+    {
+      "id": "PHP-E26-0137",
+      "path": "main.php",
+      "sha256": "0f67c2792bc816a9df01b9e5016ef1bb64f0623431f1c8ce866f905e6d571626"
+    },
+    {
+      "id": "PHP-E26-0138",
+      "path": "first.php",
+      "sha256": "37db355216f28c8d82641cf3aa01ad5c23728d14a6d9a6e3c2942a30b88f61d5"
+    },
+    {
+      "id": "PHP-E26-0138",
+      "path": "second.php",
+      "sha256": "a401c6ef04db5a04d9cba8329190167246be51621a73e19b6071a3c9f81a4921"
+    },
+    {
+      "id": "PHP-E26-0138",
+      "path": "main.php",
+      "sha256": "95ebf059f4498fb166ee24141f7fba4c9bf43e8fe88f9365f08aeb0fbaf2595e"
+    },
+    {
+      "id": "PHP-E26-0139",
+      "path": "config.php",
+      "sha256": "edb118c8f2eb0e665dd53e5688e533ff55b614b65128ebb3fa90be2a3f6de6fc"
+    },
+    {
+      "id": "PHP-E26-0139",
+      "path": "main.php",
+      "sha256": "6d22b86f8eb594446882472ecf3fac1ecc0c4cd81dd14f2cb6600af8a9179833"
+    },
+    {
+      "id": "PHP-E26-0140",
+      "path": "main.php",
+      "sha256": "2bdef4d58ff5c8bf960e7c13ed96b27e8253002a604eae70d8c26667e8182869"
+    },
+    {
+      "id": "PHP-E26-0141",
+      "path": "main.php",
+      "sha256": "b5d27ef42f326c38f5311c0afd8a0d63bf108dba90ce74f9549e397553169a49"
+    },
+    {
+      "id": "PHP-E26-0142",
+      "path": "main.php",
+      "sha256": "76667c8ac84da54ce0de72770421c7487af6e0feb2a8309fe2c03e5e1f892321"
+    },
+    {
+      "id": "PHP-E26-0143",
+      "path": "main.php",
+      "sha256": "85c4a0802789bf8bf2ee540d47b6ea0646d1142ae267c09c65f50ea344240395"
+    },
+    {
+      "id": "PHP-E26-0144",
+      "path": "main.php",
+      "sha256": "34a9d229ab0bd3a34dc77fc7bc467c5f81ff2ed2324048ad0efb21c299cb25c2"
+    },
+    {
+      "id": "PHP-E26-0145",
+      "path": "main.php",
+      "sha256": "767b3fb1cf5cb5a18a8d7c387574377c370a0775f0c9370a5b981e1b1d3d511c"
+    },
+    {
+      "id": "PHP-E26-0146",
+      "path": "main.php",
+      "sha256": "d0b350b250dbc56388ac0411926cc40bb7d7263f28a64e3242beeded61360e21"
+    },
+    {
+      "id": "PHP-E26-0147",
+      "path": "helper.php",
+      "sha256": "e69dfeb576954177c61c0ca32657d4d8827d42af8c4b867d70f53627ce651bc8"
+    },
+    {
+      "id": "PHP-E26-0147",
+      "path": "main.php",
+      "sha256": "787da850027ec24fac4104c7d595c039311ada8df8ab225f7f3afb59d580d842"
+    },
+    {
+      "id": "PHP-E26-0148",
+      "path": "main.php",
+      "sha256": "9e022d5f96044d90b4b898e6c38ae8ace7d0a8dc1c2c39ed6884ee22b4a24f72"
+    },
+    {
+      "id": "PHP-E26-0149",
+      "path": "main.php",
+      "sha256": "0f9f805a2d2e1d3c134d9d2bdebb9105b0ce2dfff3f11ba316ef45c25474a908"
+    },
+    {
+      "id": "PHP-E26-0150",
+      "path": "main.php",
+      "sha256": "8bbcd11ca89a23e462be72530d7c724d8bcb43569b7c91ac94ac69034039f559"
+    },
+    {
+      "id": "PHP-E26-0152",
+      "path": "broken.php",
+      "sha256": "a91479a8c975bbefda4cf4e717fead8ee6958ad925d79c9002a947b15bc59573"
+    },
+    {
+      "id": "PHP-E26-0152",
+      "path": "main.php",
+      "sha256": "255112626e263dfc3435618dd896800d502019b38d460348ad38426e50f08c5a"
+    },
+    {
+      "id": "PHP-E26-0153",
+      "path": "main.php",
+      "sha256": "83d183544ac608ff20ec06779cfb19c0206d1f1e1f7f7aa1cfdf5ff3a6260c23"
+    },
+    {
+      "id": "PHP-E26-0154",
+      "path": "main.php",
+      "sha256": "f3b7dd537e83392ad1efb05c76e9c4ab9e43ef0eb58220d0e4482abc35611c11"
+    },
+    {
+      "id": "PHP-E26-0155",
+      "path": "main.php",
+      "sha256": "a5819ae8b7d48d03eafd472dfbbc3e2fa98d610a9f3b49d01105385cd3f57fcc"
+    },
+    {
+      "id": "PHP-E26-0156",
+      "path": "main.php",
+      "sha256": "42702d13e85a7744e2de89750f918c9c05c0e29ea9ad67980d48d061515908fd"
+    },
+    {
+      "id": "PHP-E26-0157",
+      "path": "main.php",
+      "sha256": "33cb9f83fa356c69f6b4573cf22f954a997f854ca9aa5c0cec6d613a4ad51989"
+    },
+    {
+      "id": "PHP-E26-0159",
+      "path": "main.php",
+      "sha256": "24ea901478815854eeb63c469b5f6222cd47582429a914af8f3012c86c3d3da8"
+    },
+    {
+      "id": "PHP-E26-0160",
+      "path": "main.php",
+      "sha256": "929d00145a36369148f5909941b5e6154abe68e0ae6ee9dddb06f49e411492d4"
+    },
+    {
+      "id": "PHP-E26-0161",
+      "path": "main.php",
+      "sha256": "ab251b4d76f92774c5c6103aba65e76a20e9acfa919be6647269203747ec2d52"
+    },
+    {
+      "id": "PHP-E26-0162",
+      "path": "main.php",
+      "sha256": "16a13d8716e9a1fe9169fe83831e0e23f94aa49116cbe16ee146c26fdec43b17"
+    },
+    {
+      "id": "PHP-E26-0163",
+      "path": "main.php",
+      "sha256": "eb748e7c17facb7c889ebe8638ec2ef9dabbf4bf52570f3bc15524a3564d83e6"
+    },
+    {
+      "id": "PHP-E26-0164",
+      "path": "main.php",
+      "sha256": "55f95cb2086e50cbbf16e5e2d27fe7c4ccd451cedb74b0cb4d31b8c69cbe19dc"
+    },
+    {
+      "id": "PHP-E26-0165",
+      "path": "main.php",
+      "sha256": "f68ea2b2ce6badca4df0eee1b4008d5afce8b22477876c354ae30b4f3758ab46"
+    },
+    {
+      "id": "PHP-E26-0166",
+      "path": "main.php",
+      "sha256": "bf6605bdd4a5aa86367edf96a7fc9f65817429b0db979ba8695b64c55e4d94e9"
+    },
+    {
+      "id": "PHP-E26-0167",
+      "path": "main.php",
+      "sha256": "064c15d0415278bce73a3dd9316138099ce28a69fef5721f6d01e5b302b6fca1"
+    },
+    {
+      "id": "PHP-E26-0168",
+      "path": "main.php",
+      "sha256": "340d58a79000d3110c7ba3eb881cd88a9a66bdb5294b552a7c157552c074d1e9"
+    },
+    {
+      "id": "PHP-E26-0169",
+      "path": "main.php",
+      "sha256": "cc49951c6eef8150e2ac4fc07ae6f939898c3474622ba92695e33d65adb94a80"
+    },
+    {
+      "id": "PHP-E26-0170",
+      "path": "main.php",
+      "sha256": "d1c05645e09e60150988d3670a7a1a09b1cc39e3022139268c1601af7d327512"
+    },
+    {
+      "id": "PHP-E26-0171",
+      "path": "main.php",
+      "sha256": "a170af1ab6dbe2d374720c51f3fad1275fdb7d1fa581768c9ea8f9b0cba32d2b"
+    },
+    {
+      "id": "PHP-E26-0172",
+      "path": "main.php",
+      "sha256": "ecd4002b798ba4fa0659582c5c4506cac432a946fd0e241523f0d3dc931be0a7"
+    },
+    {
+      "id": "PHP-E26-0173",
+      "path": "main.php",
+      "sha256": "30656ad853f9d9a241411327a380e980fc636801851362b1ce806b2d768ad8eb"
+    },
+    {
+      "id": "PHP-E26-0174",
+      "path": "main.php",
+      "sha256": "9b68b5c4e1a1c3a9d7a7e7685f403a2e783129823ff4599e324c28b117bcd61d"
+    },
+    {
+      "id": "PHP-E26-0175",
+      "path": "main.php",
+      "sha256": "921e1dcc70f9762d66b4f6cde9698c6a8e0e4d527e31b7fddae7063008f40dc0"
+    },
+    {
+      "id": "PHP-E26-0176",
+      "path": "main.php",
+      "sha256": "670d9ddc6d13fd2980fdf229751a6d7c54775fe8eeb52c701dd2e0fb1bebe21e"
+    },
+    {
+      "id": "PHP-E26-0177",
+      "path": "main.php",
+      "sha256": "37aaabe058b6bfdba96cda81e783d26ad3681de78f671c8d03066f18b77de440"
+    },
+    {
+      "id": "PHP-E26-0178",
+      "path": "main.php",
+      "sha256": "1a2d3a9f3aba4b7d2aeb96c0c8e9758bf504269c1584664f14c85e5f8d5b43e1"
+    },
+    {
+      "id": "PHP-E26-0179",
+      "path": "main.php",
+      "sha256": "623e129ac2e6cf471078eb7983e3f177befa04b05321d28e59ddbce8acdd5867"
+    },
+    {
+      "id": "PHP-E26-0180",
+      "path": "main.php",
+      "sha256": "3311c75c12ded15e0a42181b5cde86ab0c3db91a01b87ffcf45b236f9c6f1ac9"
+    },
+    {
+      "id": "PHP-E26-0181",
+      "path": "main.php",
+      "sha256": "40712748ff70453fcb33e15ac986e99ac2ba4e3a7245515bff5eb830eba94f61"
+    },
+    {
+      "id": "PHP-E26-0182",
+      "path": "main.php",
+      "sha256": "8633dc132a766729e3b256e2ebf59fccf3b7f1ac394112fe5a9731b40d031f18"
+    },
+    {
+      "id": "PHP-E26-0183",
+      "path": "main.php",
+      "sha256": "49b86cf55a9e1aa235028ff63b509b66646553e653f950a569bcc63902bd1795"
+    },
+    {
+      "id": "PHP-E26-0184",
+      "path": "main.php",
+      "sha256": "d993303fa657a89a19830b8af2073e81d6004314e79ca75a989f52b013b37445"
+    },
+    {
+      "id": "PHP-E26-0185",
+      "path": "main.php",
+      "sha256": "9874591ee45f86788e6bb2e5a2484d4c464f97865a23728f63b5a4bea8f79929"
+    },
+    {
+      "id": "PHP-E26-0186",
+      "path": "main.php",
+      "sha256": "7b64f5956fa159f783e4cbd8ffb2ff3aa51f3d314941866f65e0fd8f73e8ce5e"
+    },
+    {
+      "id": "PHP-E26-0187",
+      "path": "main.php",
+      "sha256": "03a753c4177b7e41e9ecde0f5d0d644e15c9dd91dc4fe239d8fcff5f4bea3594"
+    },
+    {
+      "id": "PHP-E26-0188",
+      "path": "main.php",
+      "sha256": "b3d98feeddd728c279e9b67604ef8226d6009270556fd61b1719cdbb72b7972e"
+    },
+    {
+      "id": "PHP-E26-0189",
+      "path": "main.php",
+      "sha256": "b94e23a1341872b999b764282aa50ca4a892f15180eaa7f9ffbecc002fa3b379"
+    },
+    {
+      "id": "PHP-E26-0190",
+      "path": "main.php",
+      "sha256": "a52875e7281c1a9058b6200e6913bf641eed8c9265342381f66f3b38a6f9eba6"
+    },
+    {
+      "id": "PHP-E26-0191",
+      "path": "main.php",
+      "sha256": "5130e8c45f65fbf9a43bb38d538128e18345eb93f54f72e8f24df19975844636"
+    },
+    {
+      "id": "PHP-E26-0192",
+      "path": "main.php",
+      "sha256": "7d4f026a55a1f2ad2a87e52b7cc80dbd02864ea38b983d796e60c0b51116b17f"
+    },
+    {
+      "id": "PHP-E26-0193",
+      "path": "main.php",
+      "sha256": "bb6e18c73d981096adede2b0660dcdb73771d668cf5094b3164acd708bcfa4fc"
+    }
+  ],
+  "preservation": "2500 active records, 2200 non-PHP records and all 20 pilot records match archived hashes",
+  "independentApproval": "pending"
+}

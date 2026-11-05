@@ -1,0 +1,64 @@
+{
+  "batch": 1,
+  "count": 100,
+  "sourceHash": "37a0152fb3534d182a222dc11e2c998b12029f01ce993e362a8373e14d4e67e0",
+  "formats": {
+    "execution": 25,
+    "debugging": 20,
+    "code-review": 20,
+    "implementation": 15,
+    "testing": 12,
+    "architecture": 8
+  },
+  "difficulty": {
+    "Foundation": 27,
+    "Intermediate": 56,
+    "Advanced": 17
+  },
+  "topics": {
+    "Operators & expressions": 5,
+    "Arrays & destructuring": 10,
+    "Classes & object lifecycle": 12,
+    "Variables, scope & constants": 1,
+    "Types, casting & comparisons": 5,
+    "Control flow & pattern matching": 1,
+    "Enums, attributes & reflection": 2,
+    "PDO & database access": 2,
+    "Errors & exceptions": 6,
+    "Namespaces, Composer & packages": 4,
+    "Functions & arguments": 5,
+    "Closures, callbacks & callables": 7,
+    "Files & structured data": 8,
+    "Inheritance, interfaces & traits": 3,
+    "Iterators, generators & fibers": 7,
+    "Includes, autoloading & paths": 1,
+    "Transactions, migrations & ORM": 3,
+    "Testing, style & static analysis": 6,
+    "Validation & web security": 5,
+    "Performance, processes & servers": 2,
+    "HTTP & superglobals": 2,
+    "APIs, integrations & PSRs": 2,
+    "Cookies & sessions": 1
+  },
+  "knownLessonMappings": 69,
+  "unmapped": 31,
+  "studiedCoverageEligible": 46,
+  "authoredKeyPositions": {
+    "1": 22,
+    "2": 27,
+    "3": 27,
+    "4": 24
+  },
+  "wordingSignals": {
+    "uniqueLongestCorrect": 22,
+    "uniqueShortestCorrect": 7,
+    "lengthOutliers": [
+      "PHP-E26-0010"
+    ],
+    "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+  },
+  "duplicateCandidates": 69,
+  "sources": 92,
+  "preservation": "2500 active records, 2200 non-PHP records and all 20 pilot records match archived hashes",
+  "independentApproval": "pending"
+}

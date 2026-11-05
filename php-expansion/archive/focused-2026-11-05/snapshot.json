@@ -1,0 +1,290 @@
+{
+  "purpose": "Immutable accepted state immediately before the user-authorized four-ID focused correction",
+  "date": "2026-11-05",
+  "files": [
+    {
+      "path": "php-expansion/WORK_STATE.json",
+      "sha256": "fa241701b117563457fe4cc56250a1b86691f9cd4da3d4640997b977db7ba04a"
+    },
+    {
+      "path": "php-expansion/EDITORIAL_AUDIT_REPORT.md",
+      "sha256": "411785cad91bb7fb9bd3378fec49660ad72987b97e74ae08785415c989d6aa37"
+    },
+    {
+      "path": "php-expansion/EDITORIAL_REVIEW_30.md",
+      "sha256": "7736de46bd87723cd165fe3d6dfb263323d86ada0972843766adbc4a9f2fec11"
+    },
+    {
+      "path": "php-expansion/COVERAGE.json",
+      "sha256": "55cd1a3a89ac8fbbc615f3b460bc3c41c82db49e3618b87a684532316669444c"
+    },
+    {
+      "path": "php-expansion/MANIFEST.json",
+      "sha256": "45bc5852cbe69983aadd6d2b323c78174ac0690837c5f6813fb926e27b463c40"
+    },
+    {
+      "path": "js/php-expansion/lesson-mappings.mjs",
+      "sha256": "27722f8a34843ee8d4b3ea68aa0a0235d4b49f9d3645e8726e83fb112c9dfc5f"
+    },
+    {
+      "path": "js/php-expansion/review-data.mjs",
+      "sha256": "17d6bd277ad2b047012d5ccc6859f412012248df97e35d960e4827b44397e8c5"
+    },
+    {
+      "path": "tools/php-editorial-report.mjs",
+      "sha256": "da75e5d29bfe42dcd2b37f7b41afdd38890136fa230af895f45163b155b52fe9"
+    },
+    {
+      "path": "tests/php-expansion/editorial.mjs",
+      "sha256": "94eb23865f5bb916d9d739ca6de34d33662c80158b749778ada28601462c7862"
+    },
+    {
+      "path": "php-expansion/editorial-audit/STATE.json",
+      "sha256": "6edfa48268143c90f84c2028c1ab7da9cd25842fa1361f55628e0cb271f25aa4"
+    },
+    {
+      "path": "php-expansion/editorial-audit/changes.json",
+      "sha256": "2463d79729f5be07920f102e762ea00cb4c4cc5e4375e9a398875130f7e9f43a"
+    },
+    {
+      "path": "php-expansion/editorial-audit/prerequisite-candidates-before.json",
+      "sha256": "ecbf548a35c43c6da342b97022f415b31e6aadb6c31f4867b90caff02cfd0e82"
+    },
+    {
+      "path": "php-expansion/editorial-audit/records.json",
+      "sha256": "b97e54c527b58272e25b653bedf45a7ef3520905489495f4ed911c5a6fc97b16"
+    },
+    {
+      "path": "php-expansion/editorial-audit/review-30.json",
+      "sha256": "8c2226ad9510148d77dfa912b864d15cf3b97e048667b9a7b41dd592ee6fce45"
+    },
+    {
+      "path": "php-expansion/editorial-audit/similarity-review.json",
+      "sha256": "2c5a807b6b4931baffc5ded1b591e87f786909b478aaa17494dabdc3a195c65e"
+    },
+    {
+      "path": "php-expansion/editorial-audit/statistics.json",
+      "sha256": "62db9e03e129a7fac887ceb06eaf1fb7fd600574765f8715e26baa72200b521e"
+    },
+    {
+      "path": "php-expansion/editorial-audit/test-results.json",
+      "sha256": "3afb0a61ccd1be5a534802dc026e4f95124d26a9d48006321299e7ece7892f3a"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-01.mjs",
+      "sha256": "a58413355b78615887c2dab325815cb439b223d6afe832aa7b5c60440edce85a"
+    },
+    {
+      "path": "php-expansion/authoring/batch-01.mjs",
+      "sha256": "fb2ed03eb0b14694f5f801fa526c20f7479ff5bc149ea44b4b393e5d6de45099"
+    },
+    {
+      "path": "php-expansion/reviews/batch-01-editorial.json",
+      "sha256": "ef0092c436fc7349d5f5cbfd4c7b12bf1c13f4ce5c10a051936fd9ec423b138c"
+    },
+    {
+      "path": "php-expansion/reviews/batch-01-duplicates.json",
+      "sha256": "90eacb42dea3ae760c9fc311191e3b0e00d7df88b3be26041effc70253241a53"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-acceptance.json",
+      "sha256": "def8dfd48010efb5c1b5ffb9c9259b3394827d40e3ade13abba623f17e6d0b1b"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-runtime.json",
+      "sha256": "ac37f1f81821e1235e978df7fb4abd8a543f2e8608a61a24dde120afade12935"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-checks.json",
+      "sha256": "a5c0d5150a7f3792e07a17cddc7ed989aed92e3864574d8cb4b54cfaa3417ca2"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-revision.json",
+      "sha256": "834610658441f1b0e5ee5c81cd7c06048c8fba5869edee74bac3351637cfb7a4"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-execution-review.json",
+      "sha256": "735010c9237db391dc3fe0cd366809bbbb74690802fd1e47cc16e636ffc66b0c"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-02.mjs",
+      "sha256": "34168ec4e5b0107b4bc40220651db75a3dfea92d597f4e7f2abc0b6df1884958"
+    },
+    {
+      "path": "php-expansion/authoring/batch-02.mjs",
+      "sha256": "5b3561df2655bfddc62b4be4d7e6d5c0e80aecdd39b5b8b648b11e42f9aba214"
+    },
+    {
+      "path": "php-expansion/reviews/batch-02-editorial.json",
+      "sha256": "c35e568d2804dabea7ced8d2348b234fc84cf1709599091179fe1c3cf3c03339"
+    },
+    {
+      "path": "php-expansion/reviews/batch-02-duplicates.json",
+      "sha256": "a4f8cf370324f17fdbe2058b1e9032565990baf12b118502b019814fd976c8ba"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-acceptance.json",
+      "sha256": "26ffc76d69961615cf47f43a082c27b5502836ed0d0e2f738659cfd0c02d56b8"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-runtime.json",
+      "sha256": "ff6a8d38d40a0bd62d427493fe2a77b66444d481b20967afef2ef07f403299c9"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-checks.json",
+      "sha256": "d5b967a31b764e639467bf9f3d08304ac5dc4949cd8047021ae753a5b27d1ffd"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-revision.json",
+      "sha256": "35df65b52b88303f0a10c9270198452324fe568f25f1d7bc86e0d260c9fe3809"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-execution-review.json",
+      "sha256": "71b7bd69b7f8f019df3769cf6f68e6c52f718e12d0a0ba7fa44221e0cf1c4a29"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-03.mjs",
+      "sha256": "412edcee3bd67c9d8b3942d1ff89db1632a7586cc9b718f7d4853b1d28f72051"
+    },
+    {
+      "path": "php-expansion/authoring/batch-03.mjs",
+      "sha256": "853f12ebe4526a5c5434547fb840976004c57e275611c068eb290adc7ae19fc7"
+    },
+    {
+      "path": "php-expansion/reviews/batch-03-editorial.json",
+      "sha256": "4fdf72b57a7aeae2f1c3db109c06ac617d02608df92647c9a676714f44a326d4"
+    },
+    {
+      "path": "php-expansion/reviews/batch-03-duplicates.json",
+      "sha256": "bf4a31357524f5febef600dc251b3695297c8c3835c0feb8b2b3b8f2027e4d9c"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-acceptance.json",
+      "sha256": "58219e415ddfdfac84becf1a54ab1a44e5ad8a6555415e3e3f968f05b3de78fa"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-runtime.json",
+      "sha256": "360c1dec9a8c9ec729e1b02f05072cdce0d575bc67932b2538672ada22479184"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-checks.json",
+      "sha256": "809ba55e198a616a6f86ebc324c8148e1fd962f955922f2c26846e24385fbfc0"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-revision.json",
+      "sha256": "06799cef41790e5d2da4643bfbf5b759cdb2affceb2cbd6fa5cc3388c7127d4e"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-execution-review.json",
+      "sha256": "08ec6778e401f4bfe823a383438d9135cb151fe27260961f15de600f793d5486"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-04.mjs",
+      "sha256": "d2b5d2e6bfd5ad40ca895daab22de06461d5984a84cbbfcd053f4d7fd866f5a5"
+    },
+    {
+      "path": "php-expansion/authoring/batch-04.mjs",
+      "sha256": "3e11e585db31ef4cd0b5d044e2b1c9210cb54e8ed088411dc430aea02b265795"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-editorial.json",
+      "sha256": "ddfd9d644c3a626a94e825a8c27e749250ead442238889472385b03c5c16c499"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-duplicates.json",
+      "sha256": "0197efff2a635579bdabbac5374cd7a0ecf04f782c1dbbe279d4b81691a9fe7c"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-acceptance.json",
+      "sha256": "33d4d4b5ef2ad28055132a008d22ae3f76465e018ff2d50bac6995fc7b216464"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-runtime.json",
+      "sha256": "a0967c52de65f063ae3574fe6807e686df7bf45bcdeb2f3ba7b7ae5e35d6e431"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-checks.json",
+      "sha256": "d010a6163844f7cabe8bd7b362d618116edd42f20510fd790442ffd44a7c784c"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-revision.json",
+      "sha256": "2b5ed25864b17f9030bb3138e50fd73317218dcd2a4cf7dffcddcee60521f94d"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-execution-review.json",
+      "sha256": "f893962717ed86669ef2952de0bd499f30be41506dfea6fb939d5395fbb2f783"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-05.mjs",
+      "sha256": "eef7b3aa75529101a5415e0c528e6241e58b380927890d1f83d4b17047871404"
+    },
+    {
+      "path": "php-expansion/authoring/batch-05.mjs",
+      "sha256": "3d0e8319d824a3812cc59c755a034854482f08758ef6013232410525d32e8311"
+    },
+    {
+      "path": "php-expansion/reviews/batch-05-editorial.json",
+      "sha256": "cb953def2a3efe80e64cbf11b1fcfadf6294b754571da1927885f050b79bdac8"
+    },
+    {
+      "path": "php-expansion/reviews/batch-05-duplicates.json",
+      "sha256": "c2b71f687b6916227f525432c1958a6bdcee35a9fef5cb8e41e0219a93e9a639"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-acceptance.json",
+      "sha256": "f40f0d5ce7d9a86694cf0349d5c3b1e2f235df13a98314bb36b2fa7730795f39"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-runtime.json",
+      "sha256": "f9951b481d455d70f518ec9c6b745b973a010df1b709c4345d519a3bbeae568b"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-checks.json",
+      "sha256": "006b30988f9255675e623debedbe8bd879dc1fb255e09a5271fa6765f03df2b7"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-revision.json",
+      "sha256": "60c7ea133145bd6ef5f1750555035ff613562c678283458ee95652a5e0b08260"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-execution-review.json",
+      "sha256": "a9a0759cbfa100b3a8ba8be3f3998e6960cf08e1e9a6db7393fbf8ad9d6fecf4"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-06.mjs",
+      "sha256": "f6238f772297018e32de1156c7a157e1eebf751bdda126206a358d1857bff55b"
+    },
+    {
+      "path": "php-expansion/authoring/batch-06.mjs",
+      "sha256": "dc55e31582fbe50145447a67c39de72806858636425eb49f12ea2d77f6f1d8e0"
+    },
+    {
+      "path": "php-expansion/reviews/batch-06-editorial.json",
+      "sha256": "536cd61d2171dd6affda502db9ca84759ded5380c15d004592bb7ddab7db87a6"
+    },
+    {
+      "path": "php-expansion/reviews/batch-06-duplicates.json",
+      "sha256": "d97dd6916b08e25372fe36caa0379364c5b9077fa1850f61796884af80a3049a"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-acceptance.json",
+      "sha256": "04f0da6f31e632f8262000294481c1ec456717501391e8fac57430bdc19af9ae"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-runtime.json",
+      "sha256": "f45efc3d1122c93687850e57c44f830a6b75a0e77c7ecfbd32ef2bdd4f994cc7"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-checks.json",
+      "sha256": "92b6b92134e152ed357e285c3c2548693dee4b51088a1e3a07db3039e82f0be4"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-revision.json",
+      "sha256": "744f1db6e6d00d99fb97e9f33657baa7574c85120ee5f3ec3d91daf42fc66388"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-execution-review.json",
+      "sha256": "7022e20df881a937ff6808dc9edc2789476fdb73d14d9cd73aab4ebca87be255"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "browser": "Chrome/156.0.8078.80",
+  "phase": "after",
+  "siteDirectory": "_site",
+  "checks": [
+    "matched desktop and mobile screenshots for PHP-PILOT-003, 013 and 020; exact source text retained",
+    "all 20 pilot questions: file labels, exact source/indentation, hidden line numbers, token spans and exact clipboard copies for all 22 files/fragments",
+    "390px Chrome touch scrolling reveals long PHP lines without wrapping/page overflow; gutter stays fixed and mobile copying is exact",
+    "long-file fixture scrolls on both axes; tabs, CRLF, trailing newline and entity text survive; malicious source/filenames/context stay inert text",
+    "clipboard denial gives accessible manual-copy guidance while leaving source readable",
+    "mouse, Enter and Space copying do not submit a selected Exam answer or reveal correctness; normal navigation still records neutral progress",
+    "existing question without source still renders its prompt and explanation without an empty code panel",
+    "viewer and library load locally under a /quiz/ GitHub Pages-style subpath; no external network requests"
+  ],
+  "errors": []
+}

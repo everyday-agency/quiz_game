@@ -1,0 +1,168 @@
+{
+  "reason": "Explicit pre-release editorial revision; independent approval pending",
+  "changed": [
+    {
+      "id": "PHP-E26-0401",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0412",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0419",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0420",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0421",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0422",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0424",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0425",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0426",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0430",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0432",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0438",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0441",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0444",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0445",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0447",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0452",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0461",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0462",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0463",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0464",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0465",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0470",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0471",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0485",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0486",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0487",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0489",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0492",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0497",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0499",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0500",
+      "from": 1,
+      "to": 2
+    }
+  ],
+  "previousSha256": "36123e6a7291d869fd7cb2e319bd8ccbf73233a8dc04a847d8a62eb12f9e8fb7",
+  "archive": "/Users/gabriel/Documents/Codex/2026-07-15/gene/outputs/laravel-architect-quiz/php-expansion/archive/pre-release/batch-05-36123e6a7291.mjs",
+  "productionActivation": false
+}

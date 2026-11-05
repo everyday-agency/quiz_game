@@ -1,0 +1,246 @@
+{
+  "reason": "Semantic near-duplicates of 0254 and 0273 found before batch acceptance; replacements preserve draft IDs.",
+  "records": [
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0481",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "Functions & arguments",
+      "subtopic": "calendar-day-versus-twenty-four-hours-dst-test",
+      "objective": {
+        "id": "calendar-day-versus-twenty-four-hours-dst-test",
+        "text": "Choose a daylight-saving transition fixture that distinguishes a calendar-day increment from 24 elapsed hours."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Select an observation that separates local civil-time requirements from fixed-duration arithmetic."
+      },
+      "prerequisites": [
+        "DateTimeImmutable",
+        "DateInterval day and hour components",
+        "Daylight-saving transitions"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs.",
+          "The requirement is the same local clock time on the next calendar date in Europe/Zurich. In 2026, clocks advance from 02:00 to 03:00 on March 29. Inputs are noon, so no requested local time is ambiguous or nonexistent."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nfunction tomorrowAtSameTime(string $start): string\n{\n    $date = new DateTimeImmutable($start, new DateTimeZone('Europe/Zurich'));\n\n    return $date->add(new DateInterval('PT24H'))->format('Y-m-d H:i');\n}\n"
+          }
+        ]
+      },
+      "stem": "Which start-and-expected-result test exposes the implementation’s fixed-duration mistake?",
+      "options": [
+        {
+          "id": "ordinary-winter",
+          "text": "2026-02-10 12:00 → 2026-02-11 12:00",
+          "rationale": "No offset transition occurs, so both operations agree.",
+          "misconception": "Testing only a fixed-offset winter interval."
+        },
+        {
+          "id": "spring-transition",
+          "text": "2026-03-28 12:00 → 2026-03-29 12:00",
+          "rationale": "The next local noon is only 23 elapsed hours away; adding 24 hours instead reaches 13:00.",
+          "misconception": null
+        },
+        {
+          "id": "ordinary-summer",
+          "text": "2026-07-10 12:00 → 2026-07-11 12:00",
+          "rationale": "The offset is unchanged across this interval, so the defect is not exercised.",
+          "misconception": "Assuming any date during daylight-saving time exposes a transition defect."
+        },
+        {
+          "id": "year-boundary",
+          "text": "2026-12-31 12:00 → 2027-01-01 12:00",
+          "rationale": "Crossing the year boundary does not change the local offset here.",
+          "misconception": "Confusing a calendar rollover with an elapsed-time offset change."
+        }
+      ],
+      "correctOptionId": "spring-transition",
+      "explanation": {
+        "summary": "A calendar day and 24 elapsed hours differ across a clock change. The spring fixture requires retaining noon even though the UTC offset advances by one hour.",
+        "trace": "The implementation returns March 29 at 13:00 for the spring fixture. Replacing PT24H with P1D preserves noon on all four dates."
+      },
+      "validation": {
+        "kind": "tests",
+        "marker": "new DateInterval('PT24H')",
+        "repair": "new DateInterval('P1D')",
+        "cases": [
+          {
+            "option": "ordinary-winter",
+            "probe": "echo tomorrowAtSameTime('2026-02-10 12:00');",
+            "expected": "2026-02-11 12:00"
+          },
+          {
+            "option": "spring-transition",
+            "probe": "echo tomorrowAtSameTime('2026-03-28 12:00');",
+            "expected": "2026-03-29 12:00"
+          },
+          {
+            "option": "ordinary-summer",
+            "probe": "echo tomorrowAtSameTime('2026-07-10 12:00');",
+            "expected": "2026-07-11 12:00"
+          },
+          {
+            "option": "year-boundary",
+            "probe": "echo tomorrowAtSameTime('2026-12-31 12:00');",
+            "expected": "2027-01-01 12:00"
+          }
+        ],
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-07",
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://www.php.net/manual/en/datetime.examples-arithmetic.php"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0487",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "PDO & database access",
+      "subtopic": "bound-like-pattern-literal-wildcard-test",
+      "objective": {
+        "id": "bound-like-pattern-literal-wildcard-test",
+        "text": "Test literal substring semantics separately from safe SQL parameter binding."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Recognize that a bound LIKE value still contains pattern operators unless the application escapes them."
+      },
+      "prerequisites": [
+        "PDO prepared statements",
+        "SQL LIKE wildcards",
+        "ESCAPE clauses",
+        "Literal search requirements"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [
+          "PDO",
+          "pdo_sqlite"
+        ],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs.",
+          "The SQLite fixture contains exactly abc, a_c and zzz. Search must treat every input character literally, including % and _. Results are sorted by name. The exclamation mark is the declared LIKE escape character."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\n$pdo = new PDO('sqlite::memory:');\n$pdo->exec('CREATE TABLE names (name TEXT NOT NULL)');\n$pdo->exec(\"INSERT INTO names VALUES ('abc'), ('a_c'), ('zzz')\");\n\nfunction searchNames(PDO $pdo, string $needle): array\n{\n    $escaped = $needle;\n    $statement = $pdo->prepare(\"SELECT name FROM names WHERE name LIKE :pattern ESCAPE '!' ORDER BY name\");\n    $statement->execute(['pattern' => '%' . $escaped . '%']);\n\n    return $statement->fetchAll(PDO::FETCH_COLUMN);\n}\n"
+          }
+        ]
+      },
+      "stem": "Which needle and expected result exposes the search defect?",
+      "options": [
+        {
+          "id": "ordinary-match",
+          "text": "abc → [\"abc\"]",
+          "rationale": "The plain letters need no pattern escaping, so both implementations agree.",
+          "misconception": "Assuming an ordinary successful search covers literal metacharacters."
+        },
+        {
+          "id": "underscore",
+          "text": "_ → [\"a_c\"]",
+          "rationale": "An unescaped underscore matches any single character, so the defective query returns all three nonempty names.",
+          "misconception": null
+        },
+        {
+          "id": "another-name",
+          "text": "zzz → [\"zzz\"]",
+          "rationale": "This needle has no wildcard and does not expose the defect.",
+          "misconception": "Testing a second ordinary term instead of the pattern boundary."
+        },
+        {
+          "id": "no-match",
+          "text": "q → []",
+          "rationale": "Both implementations correctly find no q; the false-positive behavior needs a wildcard-bearing input.",
+          "misconception": "Assuming a no-result test proves every literal query remains literal."
+        }
+      ],
+      "correctOptionId": "underscore",
+      "explanation": {
+        "summary": "Binding keeps the value out of SQL syntax, but LIKE interprets % and _ inside that value as pattern operators. A literal-search adapter must escape the escape character and both wildcard characters.",
+        "trace": "The defective pattern %_% matches every nonempty fixture name. Escaping the underscore creates %!_%, which matches only a_c."
+      },
+      "validation": {
+        "kind": "tests",
+        "marker": "$escaped = $needle;",
+        "repair": "$escaped = strtr($needle, ['!' => '!!', '%' => '!%', '_' => '!_']);",
+        "cases": [
+          {
+            "option": "ordinary-match",
+            "probe": "echo json_encode(searchNames($pdo, 'abc'));",
+            "expected": "[\"abc\"]"
+          },
+          {
+            "option": "underscore",
+            "probe": "echo json_encode(searchNames($pdo, '_'));",
+            "expected": "[\"a_c\"]"
+          },
+          {
+            "option": "another-name",
+            "probe": "echo json_encode(searchNames($pdo, 'zzz'));",
+            "expected": "[\"zzz\"]"
+          },
+          {
+            "option": "no-match",
+            "probe": "echo json_encode(searchNames($pdo, 'q'));",
+            "expected": "[]"
+          }
+        ],
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-15",
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://www.sqlite.org/lang_expr.html#the_like_glob_regexp_match_and_extract_operators",
+        "https://www.php.net/manual/en/pdo.prepare.php"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "php": "8.5.2",
+    "observations": [
+      {
+        "option": "php-integer",
+        "payload": {
+          "id": 9007199254740992
+        },
+        "clientId": "9007199254740992"
+      },
+      {
+        "option": "float-number",
+        "payload": {
+          "id": 9007199254740992
+        },
+        "clientId": "9007199254740992"
+      },
+      {
+        "option": "scalar-string",
+        "payload": "9007199254740993",
+        "clientId": null
+      },
+      {
+        "option": "member-string",
+        "payload": {
+          "id": "9007199254740993"
+        },
+        "clientId": "9007199254740993"
+      }
+    ]
+  },
+  {
+    "php": "8.4.17",
+    "observations": [
+      {
+        "option": "php-integer",
+        "payload": {
+          "id": 9007199254740992
+        },
+        "clientId": "9007199254740992"
+      },
+      {
+        "option": "float-number",
+        "payload": {
+          "id": 9007199254740992
+        },
+        "clientId": "9007199254740992"
+      },
+      {
+        "option": "scalar-string",
+        "payload": "9007199254740993",
+        "clientId": null
+      },
+      {
+        "option": "member-string",
+        "payload": {
+          "id": "9007199254740993"
+        },
+        "clientId": "9007199254740993"
+      }
+    ]
+  }
+]

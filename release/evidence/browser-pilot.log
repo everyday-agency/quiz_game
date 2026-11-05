@@ -1,0 +1,7 @@
+✓ PHP pilot browser: all 20 retained pilot questions are selectable through normal PHP domain controls with separate release progress
+✓ PHP pilot browser: all 20 questions render exact files/premises and fit mobile options; shuffled Learn answers and all 60 distractor rationales map correctly
+✓ PHP pilot browser: cancelling navigation preserves the in-progress exam
+✓ PHP pilot browser: 20-item exam stays neutral before submission, clears Learn feedback, grades 10/20, and counts completion once
+✓ PHP pilot browser: real browser option shuffling moves keyed answers while preserving grading
+✓ PHP pilot browser: pilot progress survives reload; multi-file bank review works at a 390px mobile viewport
+✓ PHP pilot browser: retired pilot bookmarks open the PHP release and preserve historical/current totals and raises no JavaScript errors

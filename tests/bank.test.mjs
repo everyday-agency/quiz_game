@@ -6,8 +6,8 @@ import { LEGACY_QUESTIONS } from '../js/bank/legacy-v1.mjs';
 import { assembleQuestionBank } from '../js/bank/assemble.mjs';
 import { QUESTION_REVISIONS } from '../js/bank/revisions.mjs';
 import { PILOT_IDS } from '../js/bank/pilot.mjs';
-import { QUESTION_BANK, DIFFICULTIES } from '../js/questions.mjs';
-import { buildLearningNotes } from '../js/learning-notes.mjs';
+import { QUESTION_BANK, DIFFICULTIES } from '../release/archive/pre-php-only/js/questions.mjs';
+import { buildLearningNotes } from '../release/archive/pre-php-only/js/learning-notes.mjs';
 import { gradeSession } from '../js/exam.mjs';
 
 const hash = value => createHash('sha256').update(value).digest('hex');

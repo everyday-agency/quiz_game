@@ -1,0 +1,5 @@
+{
+  "sourceHash": "b43113612babe17768203a2663b8d2096060e55641143c0032bf911a78c63792",
+  "review": "author inspected; isolated fixtures only",
+  "note": "New 0186 uses a fixed regex and literals. New 0193 runs pure enum-to-int mappings, never HTTP output or exit. Other fixtures remain previously reviewed."
+}

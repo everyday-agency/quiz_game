@@ -1,0 +1,516 @@
+{
+  "sourceHash": "351f96c335567ba9aa4fbb39f75106998a8a30cd75538a10d072fff24a218655",
+  "reviewer": "authoring assistant; not independent",
+  "rubric": [
+    "Specific learning objective",
+    "Self-contained premises and PHP versions",
+    "One answer with four plausible alternatives",
+    "Observed runtime or explicit document-backed contract",
+    "Specific explanation for every alternative",
+    "Distinct reasoning, professional formatting and appropriate prerequisites"
+  ],
+  "independentApproval": "pending",
+  "records": [
+    {
+      "id": "PHP-E26-0201",
+      "finding": "Current PHP precedence is explicit; the choices contrast concatenation, arithmetic and obsolete grouping. The output retains its label.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0202",
+      "finding": "False initial conditions separate precondition and postcondition loops; the body counts make the difference observable without side effects elsewhere.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0203",
+      "finding": "Fallthrough is intentional and stops at the displayed break; distractors represent early stopping, overshooting and skipping the selected case.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0204",
+      "finding": "Replaced an earlier array-union draft overlapping pilot 001. This version tests ordered list keys, including the effect of ksort, rather than defaults.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0205",
+      "finding": "The caller retains the original object after local parameter rebinding; mutation and rebinding must be traced separately. No reference parameter is declared.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0206",
+      "finding": "The mixed-key fixture makes both numeric reindexing and string-key retention visible; output choices preserve realistic array encodings.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0207",
+      "finding": "The two booleans independently test an empty needle and case sensitivity; no strpos integer/false confusion is reused.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0208",
+      "finding": "Interface membership and concrete class identity are separate observations. The interface is defined, so no hidden autoloader behavior is required.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0209",
+      "finding": "Output before recursion and during unwinding is balanced around an explicit base case; wrong orders correspond to plausible stack-tracing errors.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0210",
+      "finding": "Replacement order is explicit and introduced text can match a later search term. The comparison concerns cascading replacement, not escaping policy.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0211",
+      "finding": "end positions the internal pointer, while foreach has independent iteration state. The final current observation distinguishes the two cursors.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0212",
+      "finding": "Parallel columns and their tie-break order are visible. Both arrays are reordered together; no unspecified equal-row ordering affects the answer.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0213",
+      "finding": "FILTER_NULL_ON_FAILURE separates invalid text from valid false; the prompt distinguishes parsing from a boolean cast.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0214",
+      "finding": "The constant is defined before the call but after declaration; default evaluation timing, rather than namespace lookup, determines the result.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0215",
+      "finding": "Only tested match conditions and the selected result emit labels. Distractors model eager result evaluation or omission of earlier failed conditions.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0216",
+      "finding": "One invokable object is reused by array_map and the later call, so its running state persists; no clone is implied by callback dispatch.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0217",
+      "finding": "Explicit casting remains permitted under strict_types, while an uncast Stringable object fails a strict string argument. The partial output is part of the answer.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0218",
+      "finding": "The instrumented ArrayAccess object reports false from offsetExists; the trace proves offsetGet is skipped by coalescing.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0219",
+      "finding": "send starts an unstarted generator and supplies its first yield; the returned value channel is distinguished from the final generator return.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0220",
+      "finding": "The exception is injected through yield from, caught by the inner generator, and cleanup waits for resumption after its recovery yield.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0221",
+      "finding": "A lazy proxy forwards state to a distinct backing object; this is not a renamed shallow-clone example or the non-lazy property bypass in 0124.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0222",
+      "finding": "The inherited method shares its static local while a distinct override owns another slot. The stated PHP versions avoid older-version ambiguity.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0223",
+      "finding": "Serialization restores a self-referential graph with a new ordinary object while preserving enum singleton identity. All serialized input is local.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0224",
+      "finding": "Raw reflection writes bypass a backed property hook; ordinary reads still invoke the getter. Negative storage makes the bypass observable.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0225",
+      "finding": "A throwing dynamic static initializer is retried until successful; subsequent calls reuse the initialized local. Failure and reuse are both observed.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0226",
+      "finding": "The fixtures include empty, negative-only and zero maxima. All four candidates are executed, including the expected max-empty failure.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0227",
+      "finding": "The original mixed input reaches strict in_array unchanged; coercion, loose membership and key membership each fail a distinct supplied case.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0228",
+      "finding": "All four options use comparable guarded expressions. Literal prefix slicing is distinguished from global removal, character trimming and a contains-only guard.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0229",
+      "finding": "The PHP 8 implode signature is separator then array. The fixed required output distinguishes reversed arguments and alternative representations.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0230",
+      "finding": "The global-binding requirement is explicit. Copying GLOBALS, a static local and local reinitialization do not mutate the displayed global counter.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0231",
+      "finding": "Cookie path identity is supplied; other attributes cannot target a same-name cookie at a different path. This is protocol review, not a claimed browser execution.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0232",
+      "finding": "The fixture destroys an isolated session before clearing current variables. The timing explains why session_unset is not the chosen post-destruction operation.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0233",
+      "finding": "Skipped upload indices reveal the parallel-array mapping; count of accepted names and error codes are not original file indices.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0234",
+      "finding": "Blank CSV rows, quoted empty fields and string zero are separate fixtures. Explicit escape handling avoids unrelated PHP 8.4 deprecation.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0235",
+      "finding": "EOF and errors are explicitly excluded and an event-loop deadline already exists; preserving the buffer and waiting avoids busy looping and data loss.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0236",
+      "finding": "Braces disambiguate replacement backreference 1 followed by digit 0. Concatenating PHP strings does not change the resulting replacement grammar.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0237",
+      "finding": "Integer keys are business IDs, so reindexing is a functional defect. Key sorting and reverse-value sorting remain plausible but wrong alternatives.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0238",
+      "finding": "Resolving a two-trait conflict and exposing the excluded method under an alias are separate required operations; this differs from class/trait/parent precedence.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0239",
+      "finding": "Imported names resolve lexically through ::class, not within arbitrary strings. Both namespaces are displayed and error catches are fully qualified.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0240",
+      "finding": "Both a known and an unknown backing value are tested; from throwing cannot be repaired by null coalescing, while tryFrom supplies the nullable boundary.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0241",
+      "finding": "Generation occurs after the build-time scan in a fresh worker. Optimized fallback and authoritative classmaps therefore have different guarantees.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0242",
+      "finding": "The required JSON uses the backing value, and returning the same JsonSerializable enum would recurse. Each alternative is executed.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0243",
+      "finding": "Replaced a weak clear-error distractor with an inverted transaction-state guard. The failure leaves SQLite's transaction active; cleanup must end it and remove pending rows.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0244",
+      "finding": "Cloning preserves the stored closure's original binding unless explicitly rebound. The candidate must remain a Closure, excluding call's immediate result.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0245",
+      "finding": "Fresh object identity and constructor-before-hydration are both required. FETCH_INTO and ordinary FETCH_CLASS satisfy only parts of the contract.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0246",
+      "finding": "A loop break preserves accumulated state and permits the footer; returning and continuing have different scopes and observable output.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0247",
+      "finding": "A shown handler handles warnings without converting them. Missing require additionally raises Error while include can proceed, so the catch is not equivalent.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0248",
+      "finding": "The route's deliberate archival effect is idempotent but unsafe under HTTP semantics. Authentication and query placement do not change that distinction.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0249",
+      "finding": "Append and lock are independent flags. The local fixture checks append behavior; the lock request is verified from the selected flag expression, not claimed concurrency proof.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0250",
+      "finding": "The warning handler records an undefined-key diagnostic while destructuring supplies null. The answer accounts for both state and diagnostics.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0251",
+      "finding": "An explicitly unset typed property enables this lazy __get path; removing unset is executed as a contrast and raises the expected access Error.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0252",
+      "finding": "A successful throwing-mode decode leaves the prior legacy JSON error state unchanged. The earlier invalid decode is intentional and its provenance is visible.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0253",
+      "finding": "Reinstalling a handler pushes another restoration level. The final caller restoration distinguishes stack balance from merely activating the right handler once.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0254",
+      "finding": "The named timezone transition and offsets are explicit; calendar-day and elapsed-hour arithmetic produce different local clocks without relying on the current date.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0255",
+      "finding": "The dummy password fixture verifies a real authentication bypass when rehash precedes verification. A corrected-order contrast rejects the wrong password.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0256",
+      "finding": "Uniqueness and cryptographic unpredictability are distinct requirements; replacing the digest algorithm alone cannot supply missing random entropy.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0257",
+      "finding": "The CLI witness tests PHP control flow only, not actual browser redirection. A helper return resumes the caller despite its Location header.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0258",
+      "finding": "A public typed property bypasses __set for ordinary assignment; a private-property contrast invokes the range guard. Integer typing alone admits negatives.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0259",
+      "finding": "The SAPI snapshot behavior is documented rather than simulated by CLI superglobal assignment. The premise explicitly distinguishes original input from modified userland data.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0260",
+      "finding": "HTTP_HOST is request-derived despite being in SERVER. The required reset origin must come from trusted configuration, not syntax validation alone.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0261",
+      "finding": "The controlled GCM vector proves a shortened matching tag can be accepted. The protocol's fixed 16-byte requirement is supplied and must be enforced by the caller.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0262",
+      "finding": "A regex first-match gate and PHP's decoded last duplicate disagree. Throw-on-error is not a duplicate-member rejection policy.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0263",
+      "finding": "Both Fibers share one PDO connection and its transaction. The exact schedule proves B's write is rolled back with A's, without external concurrency.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0264",
+      "finding": "Only strings are decoded; no path is opened. JSON slash formatting is explicit, and the second decode creates the traversal representation after validation.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0265",
+      "finding": "A by-reference generator declaration is required by this consumer. Removing the declaration ampersand is executed and verified as an exception, not silent copying.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0266",
+      "finding": "A named later optional argument preserves earlier defaults. Wrong positional calls either bind a different parameter or change an explicitly required default.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0267",
+      "finding": "The return type is mixed so incorrect candidates expose their actual API results. Empty and moved-pointer fixtures distinguish first-key lookup from pointer/value operations.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0268",
+      "finding": "Both source preservation and numeric-key preservation are observed; slice direction, splice mutation and default reindexing each violate a stated requirement.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0269",
+      "finding": "The absent-bit fixture separates idempotent clearing from XOR toggling. OR and AND with the uncomplemented mask have different effects.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0270",
+      "finding": "Range predicates return booleans, so match(true) is deliberate. Age zero separates true from casting the input to boolean.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0271",
+      "finding": "The ellipsis is explicitly literal syntax. Returning a Closure is required, so a callable string or an invoked function result does not qualify.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0272",
+      "finding": "The child deliberately selects its parent's body; self, static and instance dispatch all select the shown override in this fixture.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0273",
+      "finding": "Parameter binding does not quote LIKE wildcard syntax. The three prefix fixtures exercise percent, underscore and the chosen escape character without SQL concatenation of input.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0274",
+      "finding": "A quoted newline spans physical lines within one CSV record. Both records are read, and all candidates are run against the same memory stream.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0275",
+      "finding": "Cross-site subresource delivery, HTTPS, HttpOnly and permission for third-party cookies are explicit. The answer is a documented policy configuration, not a universal browser guarantee.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0276",
+      "finding": "The needle includes both a regex metacharacter and the chosen delimiter. All candidates are checked against exact and lookalike strings and diagnostics.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0277",
+      "finding": "WeakReference observes owner retention after unset; the correct static arrow captures only the scalar prefix. Other callable forms retain the owner or illegally use this.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0278",
+      "finding": "The append-only trusted proxy contract and full chain are supplied. A corrected right-to-left contrast ignores the spoofed prefix and returns the intended boundary address.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0279",
+      "finding": "SQLite DO NOTHING may succeed without insertion. rowCount distinguishes the claim, and the effect shares its transaction; replay payload and successful commits are explicit assumptions.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0280",
+      "finding": "Separate strict callee and weak caller files expose coercion before body entry. mixed preserves original types so the explicit guard can enforce the required exception contract.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0281",
+      "finding": "The terminal newline distinguishes $ from absolute end; ordinary wrong length and lowercase inputs are already rejected. Every test is run against original and repaired patterns.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0282",
+      "finding": "The five-byte record exceeds fgets length minus one. This tests truncation, distinct from pilot 007's truthiness loss of a zero-valued line.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0283",
+      "finding": "A direct base-class object separates is_a from is_subclass_of; descendants and an unrelated object provide passing controls.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0284",
+      "finding": "The unusual exact-wire fractional-marker requirement is stated, without asserting that JSON has separate integer and float types. Integral floats expose the missing flag.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0285",
+      "finding": "UTC midnight dates eliminate timezone ambiguity. Backward direction requires invert, while leap-day magnitude is already handled correctly by diff.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0286",
+      "finding": "No magic dispatcher exists; an external scope cannot call the private method even though method_exists finds it. Public, inherited and absent methods are controls.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0287",
+      "finding": "The parsed map forbids duplicate spellings and limits names to ASCII. Lowercasing keys leaves the mixed-case field value unchanged.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0288",
+      "finding": "The pass-through identity requirement is explicit. New exceptions preserve this fixture's message, class and default code but fail strict object identity.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0289",
+      "finding": "The decisive sequence reads, mutates and reads again. Added explicit enabled-assertion assumptions; isolated validation compares values directly and checks the cache repair.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0290",
+      "finding": "Integer-only list inputs avoid array_diff's string-comparison issue. A repeated target distinguishes one-occurrence removal from exclusion of every match.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0291",
+      "finding": "Partial-output flag precedence defeats the throwing policy for INF. Supported values remain controls; the repair removes only the substitution policy.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0292",
+      "finding": "The tool's supported type forms are explicit. A union lacks getName while nullable string remains a named type; the repair iterates union members.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0293",
+      "finding": "Private storage is defined as unreachable by every serving path. Random names, extensions and signature checks cannot satisfy mandatory scanner-before-publication ordering.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0294",
+      "finding": "No transitive dependency can accidentally satisfy the runtime requirement. require-dev, suggest and autoload each address a different Composer concern.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0295",
+      "finding": "Unbuffered input and a nonretaining synchronous sink are explicit. The remaining memory distinction is whether intermediate stages collect all data.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0296",
+      "finding": "Only three known nonsensitive metadata fields are required. A constructed allowlist excludes future secrets by default; logging on errors and hashing all values do not.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0297",
+      "finding": "Append-only immutable IDs make the cursor guarantee precise. Strict descending continuation excludes both the previous cursor row and later higher inserts.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0298",
+      "finding": "The issuer permits only RS256 with a pinned RSA key. Header-controlled algorithm choice and key-ID matching cannot expand that trusted policy.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0299",
+      "finding": "The process has already loaded the class and no patching extension exists. Draining workers separates in-flight release code from newly started processes.",
+      "decision": "retain for independent review"
+    },
+    {
+      "id": "PHP-E26-0300",
+      "finding": "File-lock identity and atomic-rename semantics are explicit premises. A permanent coordination file keeps all writers on the same lock across data replacements.",
+      "decision": "retain for independent review"
+    }
+  ],
+  "revisionNote": "Replace 0186 and 0193 after cross-pilot semantic review; preserve ID and archive previously accepted local revision. No production use or independent approval."
+}

@@ -1,0 +1,5 @@
+{
+  "sourceHash": "10f3d83b20982e2f123f6afcbe01f50f799a0a276210f4b5830ee96142a6aa38",
+  "review": "author inspected; isolated fixtures only",
+  "note": "Reviewed temporary fixtures, explicit expected diagnostics, and whitespace-only option edits; no external services."
+}

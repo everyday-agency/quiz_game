@@ -1,0 +1,50 @@
+PHP-E26-0201 | execution | Foundation | concatenation-arithmetic-precedence-php8 | Apply PHP 8 precedence between arithmetic addition and string concatenation.
+PHP-E26-0202 | execution | Foundation | do-while-first-iteration | Distinguish postcondition loops from precondition loops.
+PHP-E26-0203 | execution | Foundation | switch-fallthrough-after-selected-case | Trace switch fallthrough until a break statement.
+PHP-E26-0204 | execution | Foundation | array-list-requires-key-iteration-order | Determine whether integer keys form a list in iteration order rather than merely as a set.
+PHP-E26-0205 | execution | Foundation | object-parameter-local-rebinding | Distinguish mutating an object parameter from rebinding the local parameter variable.
+PHP-E26-0206 | execution | Foundation | unshift-renumbers-integer-keys | Predict integer-key renumbering and string-key preservation when prepending.
+PHP-E26-0207 | execution | Foundation | contains-empty-needle-case-sensitive | Apply str_contains semantics for an empty needle and case-sensitive text.
+PHP-E26-0208 | execution | Foundation | interface-instanceof-versus-exact-class | Distinguish interface membership from an object’s concrete class name.
+PHP-E26-0209 | execution | Intermediate | recursive-unwind-output-order | Trace output before a recursive call separately from output during unwinding.
+PHP-E26-0210 | execution | Intermediate | sequential-replacement-versus-translation | Distinguish cascading str_replace passes from strtr’s nonrecursive replacement.
+PHP-E26-0211 | execution | Intermediate | foreach-independent-internal-array-pointer | Distinguish foreach iteration state from an array’s internal pointer.
+PHP-E26-0212 | execution | Intermediate | multisort-secondary-array-order | Trace primary and secondary sort criteria across parallel arrays.
+PHP-E26-0213 | execution | Intermediate | boolean-filter-failure-null-distinction | Distinguish parsed false values from invalid boolean text using FILTER_NULL_ON_FAILURE.
+PHP-E26-0214 | execution | Intermediate | default-constant-evaluated-at-call | Determine when a constant used as a default argument must be defined.
+PHP-E26-0215 | execution | Intermediate | match-condition-and-result-laziness | Trace evaluated match conditions separately from selected result expressions.
+PHP-E26-0216 | execution | Intermediate | invokable-object-state-across-callbacks | Trace state retained by an invokable object passed as a callable.
+PHP-E26-0217 | execution | Intermediate | strict-string-parameter-versus-explicit-cast | Distinguish explicit Stringable conversion from a strict string parameter requirement.
+PHP-E26-0218 | execution | Intermediate | arrayaccess-coalescing-dispatch-trace | Trace ArrayAccess existence and read hooks used by null coalescing.
+PHP-E26-0219 | execution | Advanced | generator-send-implicit-start-and-return-channel | Trace send on an unstarted generator and distinguish yielded values from its return value.
+PHP-E26-0220 | execution | Advanced | yield-from-exception-delegation-and-recovery | Trace an exception injected through yield from into an inner generator that recovers by yielding.
+PHP-E26-0221 | execution | Advanced | lazy-proxy-distinct-identity-shared-backing-state | Distinguish a lazy proxy’s identity from the backing object whose state it forwards.
+PHP-E26-0222 | execution | Advanced | inherited-method-static-local-shared-storage | Track method-local static storage across inherited calls and a distinct overriding method.
+PHP-E26-0223 | execution | Advanced | serialization-cycle-and-enum-singleton-identity | Distinguish reconstructed object-graph identity from enum case identity after serialization.
+PHP-E26-0224 | execution | Advanced | reflection-raw-property-hook-bypass | Trace raw reflection writes that bypass set hooks while ordinary reads still invoke get hooks.
+PHP-E26-0225 | execution | Advanced | dynamic-static-initializer-failure-retry | Trace a dynamic static initializer that throws before successfully initializing persistent local state.
+PHP-E26-0226 | debugging | Foundation | empty-max-input-contract | Handle an empty numeric collection before invoking max.
+PHP-E26-0227 | debugging | Foundation | strict-value-whitelist-membership | Reject a numeric-looking string when an allowlist admits only listed integer values.
+PHP-E26-0228 | debugging | Foundation | literal-prefix-removal-not-character-mask | Remove exactly one leading prefix without trimming a set of characters.
+PHP-E26-0229 | debugging | Foundation | implode-separator-argument-order | Use implode’s current signature to join text labels with the required separator.
+PHP-E26-0230 | debugging | Foundation | global-variable-explicit-function-binding | Bind a function’s local name to an existing global counter when that is the stated contract.
+PHP-E26-0231 | debugging | Intermediate | cookie-deletion-path-identity | Repair an expired deletion cookie so it targets the original cookie’s path.
+PHP-E26-0232 | debugging | Intermediate | session-destroy-current-memory-clear | Clear current-request session variables after destroying their persisted session data.
+PHP-E26-0233 | debugging | Intermediate | multiple-upload-parallel-array-indexing | Select successful upload names using matching indices across PHP’s parallel upload metadata arrays.
+PHP-E26-0234 | debugging | Intermediate | csv-blank-line-versus-empty-field | Skip a physical blank CSV line while retaining an explicitly quoted empty field.
+PHP-E26-0235 | debugging | Intermediate | nonblocking-empty-read-not-eof | Repair premature termination when a nonblocking stream has no data available yet.
+PHP-E26-0236 | debugging | Intermediate | regex-replacement-backreference-followed-digit | Disambiguate a capture backreference followed by a literal digit in preg_replace.
+PHP-E26-0237 | debugging | Intermediate | value-sort-preserve-business-identifiers | Sort values ascending while preserving their original integer identifiers.
+PHP-E26-0238 | debugging | Intermediate | trait-conflict-resolution-and-secondary-alias | Resolve a trait method collision while retaining the excluded implementation under an alias.
+PHP-E26-0239 | debugging | Intermediate | import-alias-class-string-resolution | Construct a class-name string using a lexical import alias rather than assuming runtime string rewriting.
+PHP-E26-0240 | debugging | Intermediate | backed-enum-invalid-input-fallback | Use tryFrom’s nullable result to apply a fallback for an unknown backing value.
+PHP-E26-0241 | debugging | Advanced | authoritative-classmap-runtime-generated-class | Restore PSR-4 discovery for classes generated after Composer’s optimized class map is built.
+PHP-E26-0242 | debugging | Advanced | enum-jsonserializable-recursive-self-reference | Repair recursive JSON serialization of a backed enum that overrides its default representation.
+PHP-E26-0243 | debugging | Advanced | deferred-constraint-failed-commit-rollback | Restore a PDO SQLite connection to a clean transaction state after a deferred constraint rejects commit.
+PHP-E26-0244 | debugging | Advanced | cloned-object-bound-closure-rebinding | Rebind a stored closure when cloning an object so the clone reads its own private state.
+PHP-E26-0245 | debugging | Advanced | pdo-class-constructor-before-hydration | Select PDO class hydration that constructs each row object before assigning database columns.
+PHP-E26-0246 | code-review | Foundation | early-loop-stop-retain-function-footer | Refactor a function-level early return into a loop-level stop while retaining accumulated work.
+PHP-E26-0247 | code-review | Foundation | require-versus-include-missing-file-flow | Review how changing require to include changes missing-file control flow.
+PHP-E26-0248 | code-review | Foundation | http-safe-method-versus-idempotent-mutation | Distinguish a safe GET operation from an idempotent state-changing action.
+PHP-E26-0249 | code-review | Foundation | append-and-lock-independent-write-flags | Combine append behavior with an exclusive lock when reviewing file_put_contents flags.
+PHP-E26-0250 | code-review | Foundation | missing-key-destructuring-warning-and-null | Review the diagnostic and assigned value when keyed destructuring requests a missing entry.

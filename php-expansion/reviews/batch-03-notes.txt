@@ -1,0 +1,100 @@
+0201|Current PHP precedence is explicit; the choices contrast concatenation, arithmetic and obsolete grouping. The output retains its label.
+0202|False initial conditions separate precondition and postcondition loops; the body counts make the difference observable without side effects elsewhere.
+0203|Fallthrough is intentional and stops at the displayed break; distractors represent early stopping, overshooting and skipping the selected case.
+0204|Replaced an earlier array-union draft overlapping pilot 001. This version tests ordered list keys, including the effect of ksort, rather than defaults.
+0205|The caller retains the original object after local parameter rebinding; mutation and rebinding must be traced separately. No reference parameter is declared.
+0206|The mixed-key fixture makes both numeric reindexing and string-key retention visible; output choices preserve realistic array encodings.
+0207|The two booleans independently test an empty needle and case sensitivity; no strpos integer/false confusion is reused.
+0208|Interface membership and concrete class identity are separate observations. The interface is defined, so no hidden autoloader behavior is required.
+0209|Output before recursion and during unwinding is balanced around an explicit base case; wrong orders correspond to plausible stack-tracing errors.
+0210|Replacement order is explicit and introduced text can match a later search term. The comparison concerns cascading replacement, not escaping policy.
+0211|end positions the internal pointer, while foreach has independent iteration state. The final current observation distinguishes the two cursors.
+0212|Parallel columns and their tie-break order are visible. Both arrays are reordered together; no unspecified equal-row ordering affects the answer.
+0213|FILTER_NULL_ON_FAILURE separates invalid text from valid false; the prompt distinguishes parsing from a boolean cast.
+0214|The constant is defined before the call but after declaration; default evaluation timing, rather than namespace lookup, determines the result.
+0215|Only tested match conditions and the selected result emit labels. Distractors model eager result evaluation or omission of earlier failed conditions.
+0216|One invokable object is reused by array_map and the later call, so its running state persists; no clone is implied by callback dispatch.
+0217|Explicit casting remains permitted under strict_types, while an uncast Stringable object fails a strict string argument. The partial output is part of the answer.
+0218|The instrumented ArrayAccess object reports false from offsetExists; the trace proves offsetGet is skipped by coalescing.
+0219|send starts an unstarted generator and supplies its first yield; the returned value channel is distinguished from the final generator return.
+0220|The exception is injected through yield from, caught by the inner generator, and cleanup waits for resumption after its recovery yield.
+0221|A lazy proxy forwards state to a distinct backing object; this is not a renamed shallow-clone example or the non-lazy property bypass in 0124.
+0222|The inherited method shares its static local while a distinct override owns another slot. The stated PHP versions avoid older-version ambiguity.
+0223|Serialization restores a self-referential graph with a new ordinary object while preserving enum singleton identity. All serialized input is local.
+0224|Raw reflection writes bypass a backed property hook; ordinary reads still invoke the getter. Negative storage makes the bypass observable.
+0225|A throwing dynamic static initializer is retried until successful; subsequent calls reuse the initialized local. Failure and reuse are both observed.
+0226|The fixtures include empty, negative-only and zero maxima. All four candidates are executed, including the expected max-empty failure.
+0227|The original mixed input reaches strict in_array unchanged; coercion, loose membership and key membership each fail a distinct supplied case.
+0228|All four options use comparable guarded expressions. Literal prefix slicing is distinguished from global removal, character trimming and a contains-only guard.
+0229|The PHP 8 implode signature is separator then array. The fixed required output distinguishes reversed arguments and alternative representations.
+0230|The global-binding requirement is explicit. Copying GLOBALS, a static local and local reinitialization do not mutate the displayed global counter.
+0231|Cookie path identity is supplied; other attributes cannot target a same-name cookie at a different path. This is protocol review, not a claimed browser execution.
+0232|The fixture destroys an isolated session before clearing current variables. The timing explains why session_unset is not the chosen post-destruction operation.
+0233|Skipped upload indices reveal the parallel-array mapping; count of accepted names and error codes are not original file indices.
+0234|Blank CSV rows, quoted empty fields and string zero are separate fixtures. Explicit escape handling avoids unrelated PHP 8.4 deprecation.
+0235|EOF and errors are explicitly excluded and an event-loop deadline already exists; preserving the buffer and waiting avoids busy looping and data loss.
+0236|Braces disambiguate replacement backreference 1 followed by digit 0. Concatenating PHP strings does not change the resulting replacement grammar.
+0237|Integer keys are business IDs, so reindexing is a functional defect. Key sorting and reverse-value sorting remain plausible but wrong alternatives.
+0238|Resolving a two-trait conflict and exposing the excluded method under an alias are separate required operations; this differs from class/trait/parent precedence.
+0239|Imported names resolve lexically through ::class, not within arbitrary strings. Both namespaces are displayed and error catches are fully qualified.
+0240|Both a known and an unknown backing value are tested; from throwing cannot be repaired by null coalescing, while tryFrom supplies the nullable boundary.
+0241|Generation occurs after the build-time scan in a fresh worker. Optimized fallback and authoritative classmaps therefore have different guarantees.
+0242|The required JSON uses the backing value, and returning the same JsonSerializable enum would recurse. Each alternative is executed.
+0243|Replaced a weak clear-error distractor with an inverted transaction-state guard. The failure leaves SQLite's transaction active; cleanup must end it and remove pending rows.
+0244|Cloning preserves the stored closure's original binding unless explicitly rebound. The candidate must remain a Closure, excluding call's immediate result.
+0245|Fresh object identity and constructor-before-hydration are both required. FETCH_INTO and ordinary FETCH_CLASS satisfy only parts of the contract.
+0246|A loop break preserves accumulated state and permits the footer; returning and continuing have different scopes and observable output.
+0247|A shown handler handles warnings without converting them. Missing require additionally raises Error while include can proceed, so the catch is not equivalent.
+0248|The route's deliberate archival effect is idempotent but unsafe under HTTP semantics. Authentication and query placement do not change that distinction.
+0249|Append and lock are independent flags. The local fixture checks append behavior; the lock request is verified from the selected flag expression, not claimed concurrency proof.
+0250|The warning handler records an undefined-key diagnostic while destructuring supplies null. The answer accounts for both state and diagnostics.
+0251|An explicitly unset typed property enables this lazy __get path; removing unset is executed as a contrast and raises the expected access Error.
+0252|A successful throwing-mode decode leaves the prior legacy JSON error state unchanged. The earlier invalid decode is intentional and its provenance is visible.
+0253|Reinstalling a handler pushes another restoration level. The final caller restoration distinguishes stack balance from merely activating the right handler once.
+0254|The named timezone transition and offsets are explicit; calendar-day and elapsed-hour arithmetic produce different local clocks without relying on the current date.
+0255|The dummy password fixture verifies a real authentication bypass when rehash precedes verification. A corrected-order contrast rejects the wrong password.
+0256|Uniqueness and cryptographic unpredictability are distinct requirements; replacing the digest algorithm alone cannot supply missing random entropy.
+0257|The CLI witness tests PHP control flow only, not actual browser redirection. A helper return resumes the caller despite its Location header.
+0258|A public typed property bypasses __set for ordinary assignment; a private-property contrast invokes the range guard. Integer typing alone admits negatives.
+0259|The SAPI snapshot behavior is documented rather than simulated by CLI superglobal assignment. The premise explicitly distinguishes original input from modified userland data.
+0260|HTTP_HOST is request-derived despite being in SERVER. The required reset origin must come from trusted configuration, not syntax validation alone.
+0261|The controlled GCM vector proves a shortened matching tag can be accepted. The protocol's fixed 16-byte requirement is supplied and must be enforced by the caller.
+0262|A regex first-match gate and PHP's decoded last duplicate disagree. Throw-on-error is not a duplicate-member rejection policy.
+0263|Both Fibers share one PDO connection and its transaction. The exact schedule proves B's write is rolled back with A's, without external concurrency.
+0264|Only strings are decoded; no path is opened. JSON slash formatting is explicit, and the second decode creates the traversal representation after validation.
+0265|A by-reference generator declaration is required by this consumer. Removing the declaration ampersand is executed and verified as an exception, not silent copying.
+0266|A named later optional argument preserves earlier defaults. Wrong positional calls either bind a different parameter or change an explicitly required default.
+0267|The return type is mixed so incorrect candidates expose their actual API results. Empty and moved-pointer fixtures distinguish first-key lookup from pointer/value operations.
+0268|Both source preservation and numeric-key preservation are observed; slice direction, splice mutation and default reindexing each violate a stated requirement.
+0269|The absent-bit fixture separates idempotent clearing from XOR toggling. OR and AND with the uncomplemented mask have different effects.
+0270|Range predicates return booleans, so match(true) is deliberate. Age zero separates true from casting the input to boolean.
+0271|The ellipsis is explicitly literal syntax. Returning a Closure is required, so a callable string or an invoked function result does not qualify.
+0272|The child deliberately selects its parent's body; self, static and instance dispatch all select the shown override in this fixture.
+0273|Parameter binding does not quote LIKE wildcard syntax. The three prefix fixtures exercise percent, underscore and the chosen escape character without SQL concatenation of input.
+0274|A quoted newline spans physical lines within one CSV record. Both records are read, and all candidates are run against the same memory stream.
+0275|Cross-site subresource delivery, HTTPS, HttpOnly and permission for third-party cookies are explicit. The answer is a documented policy configuration, not a universal browser guarantee.
+0276|The needle includes both a regex metacharacter and the chosen delimiter. All candidates are checked against exact and lookalike strings and diagnostics.
+0277|WeakReference observes owner retention after unset; the correct static arrow captures only the scalar prefix. Other callable forms retain the owner or illegally use this.
+0278|The append-only trusted proxy contract and full chain are supplied. A corrected right-to-left contrast ignores the spoofed prefix and returns the intended boundary address.
+0279|SQLite DO NOTHING may succeed without insertion. rowCount distinguishes the claim, and the effect shares its transaction; replay payload and successful commits are explicit assumptions.
+0280|Separate strict callee and weak caller files expose coercion before body entry. mixed preserves original types so the explicit guard can enforce the required exception contract.
+0281|The terminal newline distinguishes $ from absolute end; ordinary wrong length and lowercase inputs are already rejected. Every test is run against original and repaired patterns.
+0282|The five-byte record exceeds fgets length minus one. This tests truncation, distinct from pilot 007's truthiness loss of a zero-valued line.
+0283|A direct base-class object separates is_a from is_subclass_of; descendants and an unrelated object provide passing controls.
+0284|The unusual exact-wire fractional-marker requirement is stated, without asserting that JSON has separate integer and float types. Integral floats expose the missing flag.
+0285|UTC midnight dates eliminate timezone ambiguity. Backward direction requires invert, while leap-day magnitude is already handled correctly by diff.
+0286|No magic dispatcher exists; an external scope cannot call the private method even though method_exists finds it. Public, inherited and absent methods are controls.
+0287|The parsed map forbids duplicate spellings and limits names to ASCII. Lowercasing keys leaves the mixed-case field value unchanged.
+0288|The pass-through identity requirement is explicit. New exceptions preserve this fixture's message, class and default code but fail strict object identity.
+0289|The decisive sequence reads, mutates and reads again. Added explicit enabled-assertion assumptions; isolated validation compares values directly and checks the cache repair.
+0290|Integer-only list inputs avoid array_diff's string-comparison issue. A repeated target distinguishes one-occurrence removal from exclusion of every match.
+0291|Partial-output flag precedence defeats the throwing policy for INF. Supported values remain controls; the repair removes only the substitution policy.
+0292|The tool's supported type forms are explicit. A union lacks getName while nullable string remains a named type; the repair iterates union members.
+0293|Private storage is defined as unreachable by every serving path. Random names, extensions and signature checks cannot satisfy mandatory scanner-before-publication ordering.
+0294|No transitive dependency can accidentally satisfy the runtime requirement. require-dev, suggest and autoload each address a different Composer concern.
+0295|Unbuffered input and a nonretaining synchronous sink are explicit. The remaining memory distinction is whether intermediate stages collect all data.
+0296|Only three known nonsensitive metadata fields are required. A constructed allowlist excludes future secrets by default; logging on errors and hashing all values do not.
+0297|Append-only immutable IDs make the cursor guarantee precise. Strict descending continuation excludes both the previous cursor row and later higher inserts.
+0298|The issuer permits only RS256 with a pinned RSA key. Header-controlled algorithm choice and key-ID matching cannot expand that trusted policy.
+0299|The process has already loaded the class and no patching extension exists. Draining workers separates in-flight release code from newly started processes.
+0300|File-lock identity and atomic-rename semantics are explicit premises. A permanent coordination file keeps all writers on the same lock across data replacements.

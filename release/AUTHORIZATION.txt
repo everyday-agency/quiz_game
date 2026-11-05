@@ -1,0 +1,141 @@
+# PHP Engineer Quiz — Production Release and Question Bank Cleanup
+
+The PHP Engineer question bank has completed generation, technical validation, editorial remediation and focused corrections.
+
+I authorize the next step: **publish the new PHP question bank to our existing GitHub Pages application and remove the old question banks from the active application.**
+
+## 1. Replace the PHP Question Bank
+
+Activate the following questions as the application's main PHP question bank:
+
+- 600 new PHP Engineer questions (PHP-E26-0001 through PHP-E26-0600).
+- 20 previously approved PHP pilot questions.
+
+**Expected result: exactly 620 active PHP questions.**
+
+Remove the original 300 PHP questions from the active bank. Preserve their existing archive.
+
+Ensure that all 620 questions retain their correct answers, explanations, code formatting, learning objectives, difficulty classifications and stable IDs.
+
+Do not represent the 600 new questions as independently editorially approved. Their technical and internal editorial validation is complete, and I am authorizing this controlled release.
+
+## 2. Remove Other Programming Subjects
+
+Remove all existing non-PHP question banks from the active application, including:
+
+- Laravel
+- SQL/MySQL
+- React
+- TypeScript
+- Git/GitHub
+- Any other non-PHP question category currently present
+
+These existing question banks will be rebuilt from scratch in separate future projects.
+
+Before removal, archive the original content and its metadata for recovery.
+
+Remove obsolete subject selectors, navigation entries, filters and question counts associated with the removed subjects.
+
+**The publicly deployed quiz application should currently offer PHP only.**
+
+Do not create replacement questions for other subjects.
+
+## 3. Preserve Application Functionality
+
+Keep the existing static JavaScript architecture.
+
+Do not introduce Laravel, a database, an API backend or additional infrastructure.
+
+Preserve:
+
+- Learn mode
+- Exam mode
+- Randomized answer positions
+- Accurate scoring
+- Code syntax highlighting
+- Complete code examples
+- Explanations for incorrect answers
+- Mobile and desktop layouts
+- Progress tracking
+- Review of incorrectly answered questions
+
+Update the question-bank loader and application controls so the 620 PHP questions are the normal/default collection.
+
+Remove obsolete review-only interfaces and duplicate navigation paths where they are no longer useful.
+
+Preserve any necessary internal review evidence outside the deployed application.
+
+## 4. Handle Existing Progress Safely
+
+Existing users may have saved progress associated with the old question bank.
+
+Do not reinterpret historical results as performance on the new 620-question collection.
+
+Preserve historical progress safely, but separate it from the new PHP examination statistics.
+
+Ensure obsolete question IDs cannot corrupt grading, progress, missed-question reviews or exam generation.
+
+Do not reset unrelated browser storage unnecessarily.
+
+## 5. Production Validation
+
+Before pushing:
+
+1. Verify exactly 620 active questions.
+2. Verify there are no active non-PHP questions.
+3. Verify every question has one valid correct answer.
+4. Verify all distractor explanations remain correctly associated with their answer options.
+5. Verify Learn and Exam modes.
+6. Verify question randomization, grading and progress.
+7. Verify normal PHP questions load without needing the old review URL.
+8. Test desktop and mobile layouts.
+9. Run existing automated tests and both supported PHP runtime validations.
+10. Run all relevant Chrome browser regression suites.
+11. Confirm that no PHP fixtures, internal reports, private files or credentials are unintentionally shipped in the public static build.
+
+Update obsolete tests that assume the old 2,500-question active bank. Do not simply disable failing tests.
+
+## 6. Publish to GitHub Pages
+
+Use the existing repository, configured remote, branch strategy and GitHub Pages deployment workflow.
+
+Do not create another GitHub repository.
+
+After all local validations pass:
+
+- Commit the release changes.
+- Push the appropriate branch to GitHub.
+- Trigger the existing GitHub Pages deployment.
+- Verify that deployment completes successfully.
+- Open or test the actual public application.
+- Confirm the production application contains only the 620 PHP questions.
+- Check that the public application loads correctly on desktop and mobile.
+
+Do not modify unrelated repositories, account settings or repository visibility.
+
+If deployment is blocked by authentication, permissions or an unexpected repository configuration, stop that step and explain the blocker rather than attempting an unsafe workaround.
+
+## 7. Final Report
+
+Create a concise release report containing:
+
+- Repository and branch
+- Commit hash
+- Public application URL
+- Deployment status
+- Active PHP question count
+- Removed subject counts
+- Archive locations
+- Test results
+- Progress-preservation results
+- Any remaining limitations
+
+**Do not report success until the live GitHub Pages application has actually been verified.**
+
+## Final Objective
+
+Deliver a clean, working, publicly accessible, PHP-only examination application with 620 high-quality questions.
+
+The other programming subjects will be rebuilt later using the same rigorous question-authoring and validation process.
+
+Proceed with implementation, testing, committing, pushing and deployment.

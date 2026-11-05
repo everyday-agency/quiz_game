@@ -1,0 +1,2 @@
+✓ New PHP pilot 8.5.2: 20 keyed answers; 63 sources/variants linted; 61 isolated executions
+✓ New PHP pilot 8.4.17: 20 keyed answers; 63 sources/variants linted; 61 isolated executions

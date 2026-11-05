@@ -1,0 +1,425 @@
+{
+  "note": "Early author review aid only; not an acceptance gate. Legacy corpus remains in final checker.",
+  "candidates": [
+    {
+      "a": "PHP-E26-0502",
+      "b": "PHP-E26-0403",
+      "text": 0.2,
+      "code": 0,
+      "objectives": [
+        "Interpret the spaceship operator as a signed three-way comparison rather than a boolean or arithmetic difference.",
+        "Distinguish numeric comparison of two numeric strings from lexical comparison of nonnumeric strings."
+      ]
+    },
+    {
+      "a": "PHP-E26-0504",
+      "b": "PHP-E26-0301",
+      "text": 0.179,
+      "code": 0,
+      "objectives": [
+        "Interpret an underscore inside an integer source literal as a digit separator, not data or a parse boundary.",
+        "Distinguish an octal source literal from a decimal numeric string in arithmetic."
+      ]
+    },
+    {
+      "a": "PHP-E26-0505",
+      "b": "PHP-E26-0002",
+      "text": 0.19,
+      "code": 0,
+      "objectives": [
+        "Distinguish directional rounding from truncation toward zero for a negative fractional value.",
+        "Distinguish canonical integer-string keys from strings with a leading zero."
+      ]
+    },
+    {
+      "a": "PHP-E26-0508",
+      "b": "PHP-E26-0108",
+      "text": 0.167,
+      "code": 0,
+      "objectives": [
+        "Apply case-sensitive lookup to a user-defined constant name.",
+        "Distinguish a globally declared constant from a same-purpose local variable."
+      ]
+    },
+    {
+      "a": "PHP-E26-0508",
+      "b": "PHP-E26-0207",
+      "text": 0.261,
+      "code": 0,
+      "objectives": [
+        "Apply case-sensitive lookup to a user-defined constant name.",
+        "Apply str_contains semantics for an empty needle and case-sensitive text."
+      ]
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0178",
+      "text": 0.083,
+      "code": 0.5,
+      "objectives": [
+        "Trace the value of a yield-from expression separately from the values it forwards and the outer generator’s return.",
+        "Stop a limited generator traversal before advancing the source to an unnecessary next item."
+      ]
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0219",
+      "text": 0.25,
+      "code": 0.357,
+      "objectives": [
+        "Trace the value of a yield-from expression separately from the values it forwards and the outer generator’s return.",
+        "Trace send on an unstarted generator and distinguish yielded values from its return value."
+      ]
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0401",
+      "text": 0.167,
+      "code": 0.182,
+      "objectives": [
+        "Trace the value of a yield-from expression separately from the values it forwards and the outer generator’s return.",
+        "Trace skipped positions and nested targets in positional array destructuring."
+      ]
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0506",
+      "text": 0.161,
+      "code": 0.154,
+      "objectives": [
+        "Trace the value of a yield-from expression separately from the values it forwards and the outer generator’s return.",
+        "Trace fresh object construction for omitted new-expression defaults separately from reuse of an explicitly supplied object."
+      ]
+    },
+    {
+      "a": "PHP-E26-0512",
+      "b": "PHP-E26-0005",
+      "text": 0.174,
+      "code": 0.167,
+      "objectives": [
+        "Separate local variable scope inherited by an included file from the scope of a named function it declares.",
+        "Recognize that assigning an object variable does not clone the object."
+      ]
+    },
+    {
+      "a": "PHP-E26-0512",
+      "b": "PHP-E26-0047",
+      "text": 0.172,
+      "code": 0.214,
+      "objectives": [
+        "Separate local variable scope inherited by an included file from the scope of a named function it declares.",
+        "Review the variable scope of an included configuration file inside a function."
+      ]
+    },
+    {
+      "a": "PHP-E26-0512",
+      "b": "PHP-E26-0108",
+      "text": 0.167,
+      "code": 0.154,
+      "objectives": [
+        "Separate local variable scope inherited by an included file from the scope of a named function it declares.",
+        "Distinguish a globally declared constant from a same-purpose local variable."
+      ]
+    },
+    {
+      "a": "PHP-E26-0512",
+      "b": "PHP-E26-0222",
+      "text": 0.214,
+      "code": 0.118,
+      "objectives": [
+        "Separate local variable scope inherited by an included file from the scope of a named function it declares.",
+        "Track method-local static storage across inherited calls and a distinct overriding method."
+      ]
+    },
+    {
+      "a": "PHP-E26-0513",
+      "b": "PHP-E26-0125",
+      "text": 0.219,
+      "code": 0.136,
+      "objectives": [
+        "Distinguish a virtual property’s direct read from its existence check when only __get is implemented.",
+        "Distinguish restricted property writes from mutations through a reference deliberately exported by an authorized method."
+      ]
+    },
+    {
+      "a": "PHP-E26-0513",
+      "b": "PHP-E26-0208",
+      "text": 0.167,
+      "code": 0.188,
+      "objectives": [
+        "Distinguish a virtual property’s direct read from its existence check when only __get is implemented.",
+        "Distinguish interface membership from an object’s concrete class name."
+      ]
+    },
+    {
+      "a": "PHP-E26-0515",
+      "b": "PHP-E26-0005",
+      "text": 0.217,
+      "code": 0.154,
+      "objectives": [
+        "Recognize that a pure enum case has no default JSON value representation.",
+        "Recognize that assigning an object variable does not clone the object."
+      ]
+    },
+    {
+      "a": "PHP-E26-0515",
+      "b": "PHP-E26-0011",
+      "text": 0.238,
+      "code": 0.2,
+      "objectives": [
+        "Recognize that a pure enum case has no default JSON value representation.",
+        "Distinguish a backed enum case’s name from its scalar value."
+      ]
+    },
+    {
+      "a": "PHP-E26-0515",
+      "b": "PHP-E26-0122",
+      "text": 0.172,
+      "code": 0.071,
+      "objectives": [
+        "Recognize that a pure enum case has no default JSON value representation.",
+        "Distinguish indirect mutation of a by-value overloaded array from mutation of a returned object."
+      ]
+    },
+    {
+      "a": "PHP-E26-0515",
+      "b": "PHP-E26-0324",
+      "text": 0.161,
+      "code": 0.083,
+      "objectives": [
+        "Recognize that a pure enum case has no default JSON value representation.",
+        "Distinguish a promoted parameter default from a declared property default during constructor-free allocation."
+      ]
+    },
+    {
+      "a": "PHP-E26-0516",
+      "b": "PHP-E26-0016",
+      "text": 0.2,
+      "code": 0.143,
+      "objectives": [
+        "Trace named arguments delivered to __call when no concrete target method declares a parameter order.",
+        "Track positional and named values collected by an untyped variadic parameter."
+      ]
+    },
+    {
+      "a": "PHP-E26-0516",
+      "b": "PHP-E26-0107",
+      "text": 0.192,
+      "code": 0.308,
+      "objectives": [
+        "Trace named arguments delivered to __call when no concrete target method declares a parameter order.",
+        "Identify the order exposed by func_get_args after named argument binding."
+      ]
+    },
+    {
+      "a": "PHP-E26-0516",
+      "b": "PHP-E26-0313",
+      "text": 0.172,
+      "code": 0.143,
+      "objectives": [
+        "Trace named arguments delivered to __call when no concrete target method declares a parameter order.",
+        "Trace by-reference variadic parameters when arguments come from array unpacking."
+      ]
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0035",
+      "text": 0,
+      "code": 0.536,
+      "objectives": [
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns.",
+        "Repair delayed executions that all observe a loop variable’s final value."
+      ]
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0177",
+      "text": 0,
+      "code": 0.577,
+      "objectives": [
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns.",
+        "Implement a requested SQL sort identifier without treating a bound value as SQL syntax."
+      ]
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0263",
+      "text": 0.026,
+      "code": 0.533,
+      "objectives": [
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns.",
+        "Review transaction isolation assumptions when two Fibers reuse the same PDO connection."
+      ]
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0307",
+      "text": 0.161,
+      "code": 0.1,
+      "objectives": [
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns.",
+        "Predict local updates to a value-captured scalar across repeated closure calls."
+      ]
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0357",
+      "text": 0.027,
+      "code": 0.536,
+      "objectives": [
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns.",
+        "Review a SELECT emptiness check based on PDOStatement::rowCount."
+      ]
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0439",
+      "text": 0.022,
+      "code": 0.533,
+      "objectives": [
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns.",
+        "Group every fetched row under a nonunique first-column value without overwriting earlier rows."
+      ]
+    },
+    {
+      "a": "PHP-E26-0518",
+      "b": "PHP-E26-0417",
+      "text": 0.2,
+      "code": 0.176,
+      "objectives": [
+        "Trace termination after the global uncaught-exception handler returns.",
+        "Trace a new exception thrown inside a catch through finally to an outer handler."
+      ]
+    },
+    {
+      "a": "PHP-E26-0519",
+      "b": "PHP-E26-0420",
+      "text": 0.189,
+      "code": 0.385,
+      "objectives": [
+        "Trace inherited readonly initialization under PHP 8.4’s default protected setter scope while retaining the one-assignment rule.",
+        "Trace a child method’s writes through protected(set) and private(set) properties without assuming rollback on Error."
+      ]
+    },
+    {
+      "a": "PHP-E26-0520",
+      "b": "PHP-E26-0224",
+      "text": 0.171,
+      "code": 0.278,
+      "objectives": [
+        "Trace a backed property hook’s direct access to its own storage without recursively invoking the same hook.",
+        "Trace raw reflection writes that bypass set hooks while ordinary reads still invoke get hooks."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0025",
+      "text": 0.189,
+      "code": 0.105,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Track a referenced element shared by value-copied arrays after an external alias is unset."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0035",
+      "text": 0.039,
+      "code": 0.556,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Repair delayed executions that all observe a loop variable’s final value."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0177",
+      "text": 0.02,
+      "code": 0.538,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Implement a requested SQL sort identifier without treating a bound value as SQL syntax."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0357",
+      "text": 0.022,
+      "code": 0.556,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Review a SELECT emptiness check based on PDOStatement::rowCount."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0411",
+      "text": 0.182,
+      "code": 0.091,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Trace value and key arguments in an ARRAY_FILTER_USE_BOTH predicate while retaining source keys."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0413",
+      "text": 0.212,
+      "code": 0.074,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Trace constructor and clone-hook calls while separating the original and copied scalar state."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0439",
+      "text": 0.102,
+      "code": 0.5,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Group every fetched row under a nonunique first-column value without overwriting earlier rows."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0517",
+      "text": 0.1,
+      "code": 0.762,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Trace row-cursor advancement across repeated fetchColumn calls that select different columns."
+      ]
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0519",
+      "text": 0.163,
+      "code": 0.065,
+      "objectives": [
+        "Trace a reused PDORow view across later fetches while retaining a previously copied scalar value.",
+        "Trace inherited readonly initialization under PHP 8.4’s default protected setter scope while retaining the one-assignment rule."
+      ]
+    },
+    {
+      "a": "PHP-E26-0524",
+      "b": "PHP-E26-0101",
+      "text": 0.167,
+      "code": 0.143,
+      "objectives": [
+        "Distinguish a widened set-hook parameter contract from the property’s narrower read type under strict typing.",
+        "Predict how assignment groups with and versus &&."
+      ]
+    },
+    {
+      "a": "PHP-E26-0524",
+      "b": "PHP-E26-0513",
+      "text": 0.194,
+      "code": 0.167,
+      "objectives": [
+        "Distinguish a widened set-hook parameter contract from the property’s narrower read type under strict typing.",
+        "Distinguish a virtual property’s direct read from its existence check when only __get is implemented."
+      ]
+    }
+  ]
+}

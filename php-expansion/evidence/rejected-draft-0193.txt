@@ -1,0 +1,29 @@
+Rejected during cross-pilot semantic review: reasoning repeated PHP-PILOT-013. Replaced under the same never-activated new ID with revision 2.
+
+q({id:'PHP-E26-0193',format:'A',level:'M',topic:24,subtopic:'clock-dependency-boundary',objective:'Place a time dependency so a domain expiry rule can be tested deterministically.',reason:'Choose a dependency boundary that preserves production behavior while controlling test time.',prerequisites:['Dependency injection','DateTimeImmutable','Interfaces'],lessons:[23,27],coverageComplete:false,stem:'An expiry policy is used by HTTP handlers and command-line jobs. Tests must check the exact expiry boundary without changing global time or waiting. Which design gives each policy instance a controllable notion of now while keeping the comparison in the policy?',files:[file(`interface Clock
+{
+    public function now(): DateTimeImmutable;
+}
+
+class ExpiryPolicy
+{
+    public function __construct(private Clock $clock)
+    {
+    }
+
+    public function expired(DateTimeImmutable $deadline): bool
+    {
+        return $this->clock->now() >= $deadline;
+    }
+}
+
+$fixed = new class implements Clock {
+    public function now(): DateTimeImmutable
+    {
+        return new DateTimeImmutable('2025-01-01T12:00:00Z');
+    }
+};
+
+$policy = new ExpiryPolicy($fixed);
+
+echo json_encode($policy->expired(new DateTimeImmutable('2025-01-01T12:00:00Z')));`)],options:[o('handler-only','Compute the expired flag in each HTTP handler and pass it into a passive policy.','This moves the rule out of the policy and leaves CLI callers to reproduce it.','Moving both the dependency and the domain decision into transport code.'),o('static-clock','Store a replaceable Clock in a process-wide static policy property.','Parallel or interleaved tests can affect each other; instances do not own their clock choice.','Equating replaceable global state with per-instance control.'),o('injected-clock','Give the policy a Clock constructor dependency; wire a real clock in production and a fixed clock in tests.','Each instance receives its own time source while retaining the expiry comparison.'),o('cached-now','Capture system time in the policy constructor and reuse it for every later call.','Time stops advancing for a long-lived policy, changing production expiry behavior.','Treating a deterministic snapshot as a live time source.')],key:'injected-clock',explanation:'The clock is an external input to the expiry rule. Constructor injection keeps that input replaceable per instance while the policy owns the comparison.',trace:'The fixed clock returns exactly the deadline, so >= evaluates true. A production implementation can return current time on each call without changing the policy.',validation:{kind:'contract',stdout:'true',keyEvidence:'The witness uses the same policy with a fixed Clock and exercises equality at the deadline.',counterexamples:{'handler-only':'A CLI caller has no HTTP handler from which to obtain the decision.','static-clock':'Two policy instances requiring different test times share the same mutable static source.','cached-now':'A policy created before expiry remains unexpired after real time passes the deadline.'}},references:[ref.classes,ref.testing]}),

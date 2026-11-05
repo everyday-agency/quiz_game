@@ -1,0 +1,37 @@
+Rejected before acceptance: duplicates existing PHP-E26-0506.
+
+q({id:"PHP-E26-0549",revision:2,format:"R",level:"M",topic:7,subtopic:"new-default-argument-construction-and-explicit-reuse",objective:"Review the lifetime and constructor execution of an object created by a default argument versus an explicitly reused object argument.",reason:"Track default-expression evaluation, constructor side effects and identity across omitted and explicit arguments.",prerequisites:["Default arguments","Object construction","Object identity","Constructor side effects"],lessons:[5,23,24],coverageComplete:true,assumptions:["Only the displayed calls construct or pass Options objects. The new expression in a parameter default is supported on the stated PHP versions."],stem:"A review claims the two omitted-argument calls reuse one default Options object. Which assessment matches the identities, constructor count and stored tags?",files:[{path:"main.php",kind:"complete-file",source:`<?php
+
+class Options
+{
+    public static int $constructed = 0;
+    public array $tags = [];
+
+    public function __construct()
+    {
+        self::$constructed++;
+    }
+}
+
+function tag(string $name, Options $options = new Options()): Options
+{
+    $options->tags[] = $name;
+
+    return $options;
+}
+
+$a = tag('a');
+$b = tag('b');
+$shared = new Options();
+$c = tag('c', $shared);
+$d = tag('d', $shared);
+
+echo json_encode([
+    $a === $b,
+    Options::$constructed,
+    $a->tags,
+    $b->tags,
+    $c === $d,
+    $shared->tags,
+]);
+`}],options:[{"id":"shared-default","text":"The omitted calls share one default instance; a and b are identical and both contain tags a and b.","rationale":"The default new expression is evaluated separately for each omitted argument, so a and b refer to different objects with separate tags.","misconception":"Applying a definition-time shared mutable default model to PHP’s default new expression."},{"id":"cloned-prototype","text":"The omitted calls clone a stored prototype; a and b differ, but only two constructors run including the explicit new.","rationale":"Each omitted call executes new and invokes the constructor; there is no stored prototype cloned in place of those constructions. The total is three.","misconception":"Assuming PHP creates one default prototype and clones it without rerunning the constructor."},{"id":"evaluate-default","text":"Each omitted call constructs its own object; three constructors run, while c and d both refer to shared with tags c and d.","rationale":"The two default expressions create a and b; the explicit new creates shared. Passing shared twice does not clone it.","misconception":null},{"id":"copy-all-objects","text":"Every object parameter is copied into an independent object; c and d differ and shared keeps an empty tag list.","rationale":"Passing an object by value copies its handle, not the object. Both explicit calls mutate the same shared instance.","misconception":"Confusing a copied parameter variable with a cloned argument object."}],key:"evaluate-default",explanation:"A new expression used as a parameter default is evaluated when a call omits that argument. It therefore constructs a fresh object on each such call. Supplying an object bypasses the default and passes that existing object handle.",trace:"The first two calls each construct and tag a new object, giving a=[a] and b=[b]. The explicit new is the third construction; c and d both reference it and append c and d to its tags.",validation:{"kind":"contract","stdout":"[false,3,[\"a\"],[\"b\"],true,[\"c\",\"d\"]]","keyEvidence":"The two defaults have different identities and constructor side effects, while explicit calls retain one object identity and shared mutations.","counterexamples":{"shared-default":"a and b differ and each has one tag, rather than a shared pair.","cloned-prototype":"The constructor counter is 3, not the 2 implied by one prototype plus explicit construction.","copy-all-objects":"c and d are identical and the caller’s shared object contains both appended tags."},"contrasts":[{"name":"explicitly-reuse-first-object","marker":"$b = tag('b');","replacement":"$b = tag('b', $a);","stdout":"[true,2,[\"a\",\"b\"],[\"a\",\"b\"],true,[\"c\",\"d\"]]"}]},references:["https://www.php.net/manual/en/functions.arguments.php#functions.arguments.default","https://wiki.php.net/rfc/new_in_initializers","https://www.php.net/manual/en/language.oop5.references.php"]}),

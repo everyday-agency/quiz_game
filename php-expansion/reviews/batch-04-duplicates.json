@@ -1,0 +1,755 @@
+{
+  "sourceHash": "2b3d404d3c4f41d4efefba9d5ad907ba0ce51131c86eee44fc4b919ec82cdc99",
+  "reviewer": "Author remediation pass; independent review pending",
+  "method": "All current drafts versus all other five batches, within-batch predecessors, 20 pilot and archived 300. Generic question boilerplate excluded from token scoring. Existing objective-specific pair notes retained where applicable; new and manually detected overlaps separately adjudicated. Lexical thresholds do not certify semantic originality.",
+  "records": [
+    {
+      "a": "PHP-E26-0330",
+      "b": "PHP-E26-0447",
+      "kind": "new",
+      "textSimilarity": 0.063,
+      "codeSimilarity": 0.818,
+      "decision": "retain for independent review",
+      "reason": "Nullable fallthrough tests whether null is supplied implicitly; 0330 tests a discarded match result. The expected repairs and the misconception about nullable contracts differ.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0580",
+      "kind": "new",
+      "textSimilarity": 0.088,
+      "codeSimilarity": 0.655,
+      "decision": "retain for independent review",
+      "reason": "Composite continuation predicates are unrelated to using SELECT rowCount as an emptiness check; shared SQLite setup creates source overlap.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0040",
+      "kind": "new",
+      "textSimilarity": 0.027,
+      "codeSimilarity": 0.615,
+      "decision": "retain for independent review",
+      "reason": "Nullable return chaining differs from detecting uninitialized typed-property storage; neither remedy substitutes for the other.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0545",
+      "kind": "new",
+      "textSimilarity": 0.028,
+      "codeSimilarity": 0.607,
+      "decision": "retain for independent review",
+      "reason": "rowCount is a wrong cleanup operation here, not an emptiness predicate. The tested guarantee is release of an active SQLite schema lock.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0439",
+      "kind": "new",
+      "textSimilarity": 0.022,
+      "codeSimilarity": 0.563,
+      "decision": "retain for independent review",
+      "reason": "Grouped fetching must retain duplicate first-column values; SELECT rowCount portability concerns result existence rather than representation or key collision.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0517",
+      "kind": "new",
+      "textSimilarity": 0.029,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "The new trace observes rows consumed by fetchColumn, not a SELECT rowCount estimate.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0522",
+      "kind": "new",
+      "textSimilarity": 0.023,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "FETCH_LAZY aliasing is unrelated to SELECT rowCount portability; no row count is used in the new question.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0177",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.552,
+      "decision": "retain for independent review",
+      "reason": "Result cardinality inspection differs from selecting a SQL identifier through an allowlist.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0035",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.548,
+      "decision": "retain for independent review",
+      "reason": "SELECT result counting differs from delayed bindParam reference capture; PDO setup accounts for the source overlap.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-E26-0419",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.535,
+      "decision": "retain for independent review",
+      "reason": "SQLite replacement cascades a deletion into dependent rows; 0358 examines invalid text coerced through an integer binding. Shared PDO setup does not supply the same answer.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0320",
+      "b": "PHP-E26-0065",
+      "kind": "new",
+      "textSimilarity": 0.027,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "Caller-versus-definition file strictness differs from an internal callback call boundary; return coercion is central only in 0320.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0341",
+      "b": "PHP-E26-0184",
+      "kind": "new",
+      "textSimilarity": 0.022,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "Chunked encoder state differs from append-mode cursor behavior; shared file setup is incidental.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0362",
+      "b": "PHP-E26-0065",
+      "kind": "new",
+      "textSimilarity": 0.021,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "Reflection property assignment and internal callback argument calls are distinct coercion boundaries with different APIs and value flows.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0389",
+      "b": "PHP-E26-0358",
+      "kind": "new",
+      "textSimilarity": 0.13,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "PDO integer binding is not validation; a single IN placeholder cannot expand into a list of parameters. Shared query setup is incidental.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0320",
+      "b": "PQ-005",
+      "kind": "legacy",
+      "textSimilarity": 0.192,
+      "codeSimilarity": 0.471,
+      "decision": "retain for independent review",
+      "reason": "The archived strict-call example is extended with weak-file return coercion, testing two independently controlled boundaries instead of only caller arguments.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0336",
+      "b": "PHP-E26-0071",
+      "kind": "new",
+      "textSimilarity": 0.235,
+      "codeSimilarity": 0.448,
+      "decision": "retain for independent review",
+      "reason": "Create-without-truncation and create-only-if-absent require different modes and opposite treatment of existing files.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0368",
+      "b": "PHP-E26-0227",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0.364,
+      "decision": "retain for independent review",
+      "reason": "Scalar-category admission includes booleans and text; strict allowlist membership tests value identity within a specified list.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-E26-0459",
+      "kind": "new",
+      "textSimilarity": 0.219,
+      "codeSimilarity": 0.324,
+      "decision": "retain for independent review",
+      "reason": "The final 0459 exposes replacement parameter typing with SQLite typeof; 0358 distinguishes parameter coercion from validation of original text. The new input is already a valid integer.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0368",
+      "b": "PHP-E26-0070",
+      "kind": "new",
+      "textSimilarity": 0.186,
+      "codeSimilarity": 0.286,
+      "decision": "retain for independent review",
+      "reason": "PHP scalar admission differs from JSON top-level object admission; the accepted type sets and representations differ.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0368",
+      "b": "PHP-E26-0471",
+      "kind": "new",
+      "textSimilarity": 0.212,
+      "codeSimilarity": 0.278,
+      "decision": "retain for independent review",
+      "reason": "Iterable admission tests arrays and Traversable versus Countable-only objects; scalar admission tests primitive PHP type categories. The interface boundary is essential only in 0471.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0456",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0.267,
+      "decision": "retain for independent review",
+      "reason": "Null receiver dispatch causes Error; integer overflow followed by a declared int return concerns float conversion and TypeError.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0307",
+      "b": "PQ-021",
+      "kind": "legacy",
+      "textSimilarity": 0.231,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "The archive combines capture timing with a static function counter. The new record isolates local mutation of a value-captured scalar across invocations: unlike a static counter, the local increment is not retained.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0308",
+      "b": "PHP-E26-0212",
+      "kind": "new",
+      "textSimilarity": 0.231,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Nested array copying concerns storage independence; parallel-array sorting concerns coordinated ordering.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0305",
+      "b": "PHP-E26-0403",
+      "kind": "new",
+      "textSimilarity": 0.222,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Numeric-string comparison uses numeric or lexical ordering, whereas slash division chooses an integer or float result type. Shared numeric vocabulary is incidental.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0330",
+      "b": "PHP-E26-0215",
+      "kind": "new",
+      "textSimilarity": 0.217,
+      "codeSimilarity": 0.167,
+      "decision": "retain for independent review",
+      "reason": "The match result must be returned from the function; another question traces which conditions and result expressions are evaluated.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0373",
+      "b": "PHP-E26-0466",
+      "kind": "new",
+      "textSimilarity": 0.212,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Boolean negation toggles one value; comparing two value objects by exact identifier text involves identity and numeric-string equality instead.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0330",
+      "b": "PQ-061",
+      "kind": "legacy",
+      "textSimilarity": 0.208,
+      "codeSimilarity": 0.133,
+      "decision": "retain for independent review",
+      "reason": "Returning a match result addresses function flow; the archived example tests match’s strict selection rule.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0367",
+      "b": "PHP-E26-0067",
+      "kind": "new",
+      "textSimilarity": 0.208,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Pairing two parallel lists uses array_combine; extracting fields from records uses array_column with an index field.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0546",
+      "kind": "new",
+      "textSimilarity": 0.207,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Postfix return expression values are independent of empty() on Countable objects.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0349",
+      "b": "PHP-E26-0346",
+      "kind": "new",
+      "textSimilarity": 0.207,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Boolean output conversion differs from truthiness of a Countable object; neither depends on the other’s hook or interface.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0320",
+      "b": "PQ-002",
+      "kind": "legacy",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0.2,
+      "decision": "retain for independent review",
+      "reason": "The legacy already-int argument never tests coercion. 0320 separates caller-controlled argument coercion from callee-controlled return coercion across files.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0548",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.2,
+      "decision": "retain for independent review",
+      "reason": "Final does not freeze object state; nullsafe chains must protect each nullable hop. The tested modifiers and failure conditions differ.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0359",
+      "b": "PHP-E26-0548",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0.105,
+      "decision": "retain for independent review",
+      "reason": "Final class inheritance restrictions are unrelated to upload provenance in a CLI fixture; low lexical overlap is incidental review phrasing.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0353",
+      "b": "PHP-E26-0163",
+      "kind": "new",
+      "textSimilarity": 0.194,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "A callback’s local key variable cannot rename array keys; SensitiveParameter redaction concerns stack arguments rather than explicit messages.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0400",
+      "b": "PHP-E26-0296",
+      "kind": "new",
+      "textSimilarity": 0.192,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Build-process isolation protects credentials from executable hooks; logging allowlists control which request data is recorded.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0350",
+      "b": "PHP-E26-0165",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0.188,
+      "decision": "retain for independent review",
+      "reason": "Implementing an abstract protected method enables inherited behavior; a child same-named method cannot override a private parent helper.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-PILOT-005",
+      "kind": "pilot",
+      "textSimilarity": 0.188,
+      "codeSimilarity": 0.049,
+      "decision": "retain for independent review",
+      "reason": "PDO PARAM_INT coercion is not input validation; the pilot tests distinguishing a valid integer zero from filter failure. The API boundary and failure direction differ.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0378",
+      "b": "PHP-E26-0367",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0.188,
+      "decision": "retain for independent review",
+      "reason": "Parallel-list mapping deliberately creates named keys; reflected invocation must instead remove unrelated labels for positional calls.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0349",
+      "b": "PHP-E26-0546",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Postfix result semantics differ from direct Boolean output failing a JSON Boolean contract.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0353",
+      "b": "PHP-E26-0548",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final class restrictions differ from array_walk changing a local key without renaming the source key. The word-level flag is generic review phrasing, with no source similarity.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0362",
+      "b": "PHP-E26-0258",
+      "kind": "new",
+      "textSimilarity": 0.175,
+      "codeSimilarity": 0.185,
+      "decision": "retain for independent review",
+      "reason": "Reflection can coerce a typed-property assignment; __set does not intercept writes to an accessible declared property.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0370",
+      "b": "PHP-E26-0501",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Nowdoc preserves variable-looking text and excludes its delimiter boundary newline; the earlier implementation chooses an LF escape literal. Different literal syntax and required byte sequences.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0347",
+      "b": "PHP-E26-0265",
+      "kind": "new",
+      "textSimilarity": 0.184,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Appending during array iteration differs from declaring a generator that yields writable references.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0346",
+      "kind": "new",
+      "textSimilarity": 0.182,
+      "codeSimilarity": 0.067,
+      "decision": "retain for independent review",
+      "reason": "SELECT rowCount portability and Countable object truthiness are different emptiness-check failures with different correct observations.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0353",
+      "b": "PHP-E26-0452",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Callback key assignment cannot rename source array keys; a regex callback's returned text is inserted literally. Neither fix addresses the other's contract.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-E26-0353",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.054,
+      "decision": "retain for independent review",
+      "reason": "PDO integer conversion and array_walk key-variable mutation are unrelated callback/binding behaviors.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0372",
+      "b": "PHP-E26-0367",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "array_rand yields a key requiring lookup; array_combine creates a map from two parallel lists.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0304",
+      "b": "PHP-E26-0106",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Flipped-key collisions overwrite earlier entries; ordinary function default arrays are independent across calls.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0352",
+      "b": "PHP-E26-0250",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Recursive merge promotes scalar conflicts to arrays; missing-key destructuring assigns null and emits a diagnostic.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0307",
+      "b": "PHP-E26-0106",
+      "kind": "new",
+      "textSimilarity": 0.174,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "An ordinary array default and a captured scalar both provide starting values, but the new question addresses the misconception that a Closure object automatically retains local scalar mutations. It has no default parameter.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0358",
+      "b": "PHP-E26-0456",
+      "kind": "new",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0.054,
+      "decision": "retain for independent review",
+      "reason": "Arithmetic overflow creates an out-of-range float before an int return fails; parameter binding can coerce external text. Range failure is not input-text validation.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0371",
+      "b": "PHP-E26-0067",
+      "kind": "new",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Inclusive range generation with reversed bounds differs from record-to-map field extraction.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0046",
+      "kind": "new",
+      "textSimilarity": 0.171,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "empty on an object ignores Countable; replacing coalescing with truthiness loses valid scalar zero. The relevant value types and remedies differ.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0262",
+      "kind": "new",
+      "textSimilarity": 0.171,
+      "codeSimilarity": 0.111,
+      "decision": "retain for independent review",
+      "reason": "Nullsafe chaining is independent of disagreement between a text scan and JSON duplicate-key decoding.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0357",
+      "b": "PHP-E26-0264",
+      "kind": "new",
+      "textSimilarity": 0.171,
+      "codeSimilarity": 0.067,
+      "decision": "retain for independent review",
+      "reason": "A SELECT count API concern is independent of validation being invalidated by a second URL decoding.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0362",
+      "b": "PHP-E26-0349",
+      "kind": "new",
+      "textSimilarity": 0.171,
+      "codeSimilarity": 0.118,
+      "decision": "retain for independent review",
+      "reason": "Boolean-to-JSON output is representation; reflected typed-property assignment is an internal coercion boundary.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0301",
+      "b": "PHP-E26-0504",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Underscores separate digits in a source literal; octal leading-zero literals differ from decimal numeric strings. Different syntax and runtime comparison inputs.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0302",
+      "b": "PHP-E26-0101",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Coalescing assignment skips its right operand for existing nonnull values; and/assignment precedence determines expression grouping.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0303",
+      "b": "PHP-E26-0401",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Nested loop continuation changes which statements run; nested destructuring selects array positions without deleting them.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0247",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Countable object truthiness is unrelated to require/include missing-file control flow.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0346",
+      "b": "PHP-E26-0265",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Countable conversion does not involve generator by-reference declarations.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0350",
+      "b": "PHP-E26-0258",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.08,
+      "decision": "retain for independent review",
+      "reason": "Abstract method obligations differ from __set dispatch bypass on a declared public property.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0350",
+      "b": "PHP-E26-0548",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.143,
+      "decision": "retain for independent review",
+      "reason": "The replaced draft was too close to abstract-class instantiation. The final question now tests final versus immutability, including valid mutation and cloning, without an abstract class.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0368",
+      "b": "PHP-E26-0280",
+      "kind": "new",
+      "textSimilarity": 0.163,
+      "codeSimilarity": 0.065,
+      "decision": "retain for independent review",
+      "reason": "A scalar admission predicate inspects actual values; weak call-site coercion changes what reaches a typed callee before it can validate.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0362",
+      "b": "PHP-E26-0448",
+      "kind": "new",
+      "textSimilarity": 0.162,
+      "codeSimilarity": 0.125,
+      "decision": "retain for independent review",
+      "reason": "ASCII case conversion and reflected property coercion involve unrelated API contracts despite common type vocabulary.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0326",
+      "b": "PHP-E26-0032",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "A three-way comparator must return ordering, whereas string transformation requires retaining a returned new string.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0347",
+      "b": "PHP-E26-0446",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Appending during foreach changes traversal; define returns success rather than a constant value. No shared decision rule.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0257",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "A nullable second method receiver and continued execution after a helper returns are different control-flow mechanisms.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0351",
+      "b": "PHP-E26-0448",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0.154,
+      "decision": "retain for independent review",
+      "reason": "String case conversion does not exercise nullable method dispatch.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0353",
+      "b": "PHP-E26-0146",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Case rules for function/variable names differ from whether array_walk can rename a source key.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0370",
+      "b": "PHP-E26-0127",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Choosing a literal newline encoding is unrelated to computing a final byte index.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0313",
+      "b": "PHP-E26-0024",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Variadic unpacked references modify the source array; generator cleanup concerns lifetime and finalization.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0328",
+      "b": "PHP-E26-0167",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final filename-extension parsing differs from ceiling division for page counts.",
+      "carriedFromPreviousReview": true
+    },
+    {
+      "a": "PHP-E26-0343",
+      "b": "PHP-E26-0600",
+      "kind": "manual-reasoning-review",
+      "decision": "revised; retain for independent review",
+      "reason": "0343 selects exact bytes before HMAC computation. Revised 0600 adds a candidate using the correct original bytes but dispatching before verification, requiring pre-effect authorization ordering. Both intentionally cover the webhook family; external review should assess sufficiency of this distinction."
+    },
+    {
+      "a": "PHP-E26-0333",
+      "b": "PHP-E26-0557",
+      "kind": "manual-focused-review",
+      "decision": "retain for independent review",
+      "reason": "0333 deliberately rotates an ID while retaining data and deleting an old record; 0557 distinguishes strict validation of supplied IDs from unconditional rotation.",
+      "focusedCorrection": true
+    }
+  ],
+  "lengthReview": {},
+  "independentApproval": "pending",
+  "focusedUpdate": "Only four authorized records reconsidered; other pair dispositions carried forward, not re-audited."
+}

@@ -1,0 +1,1088 @@
+[
+  {
+    "php": "8.5.2",
+    "questionCount": 20,
+    "distinctLintedSources": 63,
+    "executions": 61,
+    "results": [
+      {
+        "id": "PHP-PILOT-001",
+        "supportedOption": "left-precedence",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "{\"timeout\":0,\"retries\":2}",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-002",
+        "supportedOption": "unset-reference",
+        "observations": [
+          {
+            "option": "assign-null",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[2,4,4]",
+            "expectedError": null
+          },
+          {
+            "option": "unset-reference",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[2,4,6]",
+            "expectedError": null
+          },
+          {
+            "option": "reset-pointer",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[2,4,4]",
+            "expectedError": null
+          },
+          {
+            "option": "reindex",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[2,4,4]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-003",
+        "supportedOption": "named-breaks",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "3|Error",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-004",
+        "supportedOption": "distinct",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "guest|missing",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-005",
+        "supportedOption": "false-sentinel",
+        "observations": [
+          {
+            "option": "truthiness",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"reject\",\"accept:7\",\"reject\",\"reject\"]",
+            "expectedError": null
+          },
+          {
+            "option": "null-sentinel",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"accept:0\",\"accept:7\",\"accept:\",\"accept:\"]",
+            "expectedError": null
+          },
+          {
+            "option": "false-sentinel",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[\"accept:0\",\"accept:7\",\"reject\",\"reject\"]",
+            "expectedError": null
+          },
+          {
+            "option": "not-set",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"accept:0\",\"accept:7\",\"accept:\",\"accept:\"]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-006",
+        "supportedOption": "type-only",
+        "observations": [
+          {
+            "option": "case-sensitive",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,false,false,false]",
+            "expectedError": null
+          },
+          {
+            "option": "prefix",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,true,true,false]",
+            "expectedError": null
+          },
+          {
+            "option": "contains",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,true,true,true]",
+            "expectedError": null
+          },
+          {
+            "option": "type-only",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[true,true,false,false]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-007",
+        "supportedOption": "zero-line",
+        "observations": [
+          {
+            "option": "zero-line",
+            "exposesDefect": true,
+            "expected": "[\"0\"]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[\"0\"]",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "empty-file",
+            "exposesDefect": false,
+            "expected": "[]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[]",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "newline",
+            "exposesDefect": false,
+            "expected": "[\"0\\n\"]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[\"0\\n\"]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[\"0\\n\"]",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "ordinary",
+            "exposesDefect": false,
+            "expected": "[\"A\"]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[\"A\"]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[\"A\"]",
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-008",
+        "supportedOption": "overwrite",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "abXd",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-009",
+        "supportedOption": "throwable",
+        "observations": [
+          {
+            "option": "exception",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "TypeError"
+          },
+          {
+            "option": "error",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "RuntimeException"
+          },
+          {
+            "option": "throwable",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[\"RuntimeException\",\"TypeError\"]",
+            "expectedError": null
+          },
+          {
+            "option": "runtime",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "TypeError"
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-010",
+        "supportedOption": "closed",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "closed",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-011",
+        "supportedOption": "reference-readonly",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "4|Error",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-012",
+        "supportedOption": "parent-init",
+        "observations": [
+          {
+            "option": "parent-init",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "Ada:admin",
+            "expectedError": null
+          },
+          {
+            "option": "local-copy",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must not be accessed before initialization"
+          },
+          {
+            "option": "parent-default",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "guest:admin",
+            "expectedError": null
+          },
+          {
+            "option": "new-parent",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must not be accessed before initialization"
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-013",
+        "supportedOption": "read-clock",
+        "observations": [
+          {
+            "option": "read-clock",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[false,true]",
+            "expectedError": null
+          },
+          {
+            "option": "snapshot",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[false,false]",
+            "expectedError": null
+          },
+          {
+            "option": "system-clock",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,true]",
+            "expectedError": null
+          },
+          {
+            "option": "cached-first",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[false,false]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-014",
+        "supportedOption": "trait-own",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "trait|own",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-015",
+        "supportedOption": "instance",
+        "observations": [
+          {
+            "option": "instance",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "mail:ready",
+            "expectedError": null
+          },
+          {
+            "option": "static",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "Cannot make non static method"
+          },
+          {
+            "option": "required-argument",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must be compatible"
+          },
+          {
+            "option": "return-int",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must be compatible"
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-016",
+        "supportedOption": "separate",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "3|2|1",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-017",
+        "supportedOption": "local-global",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "99|3",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-018",
+        "supportedOption": "equal",
+        "observations": [
+          {
+            "option": "below",
+            "exposesDefect": false,
+            "expected": "true",
+            "original": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "above",
+            "exposesDefect": false,
+            "expected": "false",
+            "original": {
+              "exitCode": 0,
+              "stdout": "false",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "false",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "well-below",
+            "exposesDefect": false,
+            "expected": "true",
+            "original": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "equal",
+            "exposesDefect": true,
+            "expected": "true",
+            "original": {
+              "exitCode": 0,
+              "stdout": "false",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-019",
+        "supportedOption": "lookup-error",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "Error",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-020",
+        "supportedOption": "detach-local",
+        "observations": [
+          {
+            "option": "close",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "TypeError"
+          },
+          {
+            "option": "detach-local",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[\"alpha\\n\",\"beta\\n\"]",
+            "expectedError": null
+          },
+          {
+            "option": "rewind",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"alpha\\n\",\"alpha\\n\"]",
+            "expectedError": null
+          },
+          {
+            "option": "seek-end",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"alpha\\n\",false]",
+            "expectedError": null
+          }
+        ]
+      }
+    ],
+    "repairChecks": [
+      {
+        "id": "PHP-PILOT-003",
+        "exitCode": 0,
+        "stdout": "3|3",
+        "expectedError": null
+      },
+      {
+        "id": "PHP-PILOT-010",
+        "exitCode": 0,
+        "stdout": "caught",
+        "expectedError": null
+      },
+      {
+        "id": "PHP-PILOT-019",
+        "exitCode": 0,
+        "stdout": "RuntimeException",
+        "expectedError": null
+      }
+    ],
+    "preFormattingBehaviorPreserved": true
+  },
+  {
+    "php": "8.4.17",
+    "questionCount": 20,
+    "distinctLintedSources": 63,
+    "executions": 61,
+    "results": [
+      {
+        "id": "PHP-PILOT-001",
+        "supportedOption": "left-precedence",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "{\"timeout\":0,\"retries\":2}",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-002",
+        "supportedOption": "unset-reference",
+        "observations": [
+          {
+            "option": "assign-null",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[2,4,4]",
+            "expectedError": null
+          },
+          {
+            "option": "unset-reference",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[2,4,6]",
+            "expectedError": null
+          },
+          {
+            "option": "reset-pointer",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[2,4,4]",
+            "expectedError": null
+          },
+          {
+            "option": "reindex",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[2,4,4]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-003",
+        "supportedOption": "named-breaks",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "3|Error",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-004",
+        "supportedOption": "distinct",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "guest|missing",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-005",
+        "supportedOption": "false-sentinel",
+        "observations": [
+          {
+            "option": "truthiness",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"reject\",\"accept:7\",\"reject\",\"reject\"]",
+            "expectedError": null
+          },
+          {
+            "option": "null-sentinel",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"accept:0\",\"accept:7\",\"accept:\",\"accept:\"]",
+            "expectedError": null
+          },
+          {
+            "option": "false-sentinel",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[\"accept:0\",\"accept:7\",\"reject\",\"reject\"]",
+            "expectedError": null
+          },
+          {
+            "option": "not-set",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"accept:0\",\"accept:7\",\"accept:\",\"accept:\"]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-006",
+        "supportedOption": "type-only",
+        "observations": [
+          {
+            "option": "case-sensitive",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,false,false,false]",
+            "expectedError": null
+          },
+          {
+            "option": "prefix",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,true,true,false]",
+            "expectedError": null
+          },
+          {
+            "option": "contains",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,true,true,true]",
+            "expectedError": null
+          },
+          {
+            "option": "type-only",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[true,true,false,false]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-007",
+        "supportedOption": "zero-line",
+        "observations": [
+          {
+            "option": "zero-line",
+            "exposesDefect": true,
+            "expected": "[\"0\"]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[\"0\"]",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "empty-file",
+            "exposesDefect": false,
+            "expected": "[]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[]",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "newline",
+            "exposesDefect": false,
+            "expected": "[\"0\\n\"]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[\"0\\n\"]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[\"0\\n\"]",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "ordinary",
+            "exposesDefect": false,
+            "expected": "[\"A\"]",
+            "original": {
+              "exitCode": 0,
+              "stdout": "[\"A\"]",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "[\"A\"]",
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-008",
+        "supportedOption": "overwrite",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "abXd",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-009",
+        "supportedOption": "throwable",
+        "observations": [
+          {
+            "option": "exception",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "TypeError"
+          },
+          {
+            "option": "error",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "RuntimeException"
+          },
+          {
+            "option": "throwable",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[\"RuntimeException\",\"TypeError\"]",
+            "expectedError": null
+          },
+          {
+            "option": "runtime",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "TypeError"
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-010",
+        "supportedOption": "closed",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "closed",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-011",
+        "supportedOption": "reference-readonly",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "4|Error",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-012",
+        "supportedOption": "parent-init",
+        "observations": [
+          {
+            "option": "parent-init",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "Ada:admin",
+            "expectedError": null
+          },
+          {
+            "option": "local-copy",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must not be accessed before initialization"
+          },
+          {
+            "option": "parent-default",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "guest:admin",
+            "expectedError": null
+          },
+          {
+            "option": "new-parent",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must not be accessed before initialization"
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-013",
+        "supportedOption": "read-clock",
+        "observations": [
+          {
+            "option": "read-clock",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[false,true]",
+            "expectedError": null
+          },
+          {
+            "option": "snapshot",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[false,false]",
+            "expectedError": null
+          },
+          {
+            "option": "system-clock",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[true,true]",
+            "expectedError": null
+          },
+          {
+            "option": "cached-first",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[false,false]",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-014",
+        "supportedOption": "trait-own",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "trait|own",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-015",
+        "supportedOption": "instance",
+        "observations": [
+          {
+            "option": "instance",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "mail:ready",
+            "expectedError": null
+          },
+          {
+            "option": "static",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "Cannot make non static method"
+          },
+          {
+            "option": "required-argument",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must be compatible"
+          },
+          {
+            "option": "return-int",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "must be compatible"
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-016",
+        "supportedOption": "separate",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "3|2|1",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-017",
+        "supportedOption": "local-global",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "99|3",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-018",
+        "supportedOption": "equal",
+        "observations": [
+          {
+            "option": "below",
+            "exposesDefect": false,
+            "expected": "true",
+            "original": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "above",
+            "exposesDefect": false,
+            "expected": "false",
+            "original": {
+              "exitCode": 0,
+              "stdout": "false",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "false",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "well-below",
+            "exposesDefect": false,
+            "expected": "true",
+            "original": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            }
+          },
+          {
+            "option": "equal",
+            "exposesDefect": true,
+            "expected": "true",
+            "original": {
+              "exitCode": 0,
+              "stdout": "false",
+              "expectedError": null
+            },
+            "fixed": {
+              "exitCode": 0,
+              "stdout": "true",
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-019",
+        "supportedOption": "lookup-error",
+        "observations": [
+          {
+            "exitCode": 0,
+            "stdout": "Error",
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-PILOT-020",
+        "supportedOption": "detach-local",
+        "observations": [
+          {
+            "option": "close",
+            "meetsRequirement": false,
+            "exitCode": 255,
+            "stdout": "",
+            "expectedError": "TypeError"
+          },
+          {
+            "option": "detach-local",
+            "meetsRequirement": true,
+            "exitCode": 0,
+            "stdout": "[\"alpha\\n\",\"beta\\n\"]",
+            "expectedError": null
+          },
+          {
+            "option": "rewind",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"alpha\\n\",\"alpha\\n\"]",
+            "expectedError": null
+          },
+          {
+            "option": "seek-end",
+            "meetsRequirement": false,
+            "exitCode": 0,
+            "stdout": "[\"alpha\\n\",false]",
+            "expectedError": null
+          }
+        ]
+      }
+    ],
+    "repairChecks": [
+      {
+        "id": "PHP-PILOT-003",
+        "exitCode": 0,
+        "stdout": "3|3",
+        "expectedError": null
+      },
+      {
+        "id": "PHP-PILOT-010",
+        "exitCode": 0,
+        "stdout": "caught",
+        "expectedError": null
+      },
+      {
+        "id": "PHP-PILOT-019",
+        "exitCode": 0,
+        "stdout": "RuntimeException",
+        "expectedError": null
+      }
+    ],
+    "preFormattingBehaviorPreserved": true
+  }
+]

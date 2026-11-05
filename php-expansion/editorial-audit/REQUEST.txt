@@ -1,0 +1,146 @@
+# PHP Engineer Examination Bank — Independent Editorial Remediation
+
+## Context
+
+We have completed 600 new PHP examination questions in six batches, plus 20 previously approved pilot questions.
+
+All 600 new questions passed local technical validation, but independent editorial approval is still pending.
+
+An external review of 20 representative questions identified 17 editorially acceptable questions and 3 requiring revision.
+
+Your task is to address these findings, audit the entire new question bank for similar problems, and prepare it for a subsequent independent review.
+
+**Do not deploy, merge, push, or activate the replacement bank.**
+
+## Phase 1 — Correct the Three Flagged Questions
+
+### PHP-E26-0591 — Canonical Base64
+
+Problem: The question's assumptions reveal the precise distinction the learner is supposed to discover.
+
+Requirements:
+- Remove answer-revealing explanations from the student-visible assumptions.
+- Preserve sufficient technical context for an unambiguous answer.
+- Keep the question focused on canonical Base64 validation.
+- Verify the correct answer using PHP 8.4 and 8.5.
+- Check all four alternatives for plausibility.
+
+### PHP-E26-0193 — Domain and Transport Separation
+
+Problem: The supplied code already demonstrates the architectural solution the student is supposed to select.
+
+Requirements:
+- Replace the example with a flawed implementation or a requirement-only scenario.
+- Require genuine reasoning about separating business outcomes from HTTP/CLI representations.
+- Ensure the correct answer cannot be identified merely by repeating the example.
+- Preserve the original learning objective.
+- Validate the revised question's architectural assumptions.
+
+### PHP-E26-0599 — Durable Background Execution
+
+Problem: The correct answer is too easily recognizable, and the question's Advanced difficulty is insufficiently justified.
+
+Requirements:
+- Introduce multiple realistic approaches involving a durable queue.
+- Distinguish acknowledgement before versus after confirmed persistence.
+- Include a meaningful failure window or process-termination scenario.
+- Require reasoning about reliable handoff rather than recognizing terminology.
+- Verify the correct answer against documented queue and PHP-FPM behavior.
+
+## Phase 2 — Audit All 600 New Questions
+
+Perform a systematic editorial quality audit of every new question.
+
+Check for:
+
+1. **Answer leakage:** Premises, assumptions, example code, hints or explanations visible before answering that reveal the correct choice.
+2. **Answer-length cues:** Correct answers disproportionately identifiable by being longer or more detailed.
+3. **Wording cues:** Correct choices that sound uniquely professional, precise or technically complete.
+4. **Weak distractors:** Incorrect options that are implausible, absurd, repetitive, or unrelated to the actual misconception.
+5. **Duplicate reasoning:** Different questions testing essentially the same understanding without a meaningful variation.
+6. **Difficulty calibration:** Foundation, Intermediate and Advanced labels should reflect the reasoning required, not merely obscure terminology.
+7. **Ambiguity:** More than one defensible answer under the stated assumptions.
+8. **Insufficient context:** Questions requiring undocumented assumptions to select the correct answer.
+9. **Curriculum relevance:** Questions should contribute to realistic PHP engineering competence.
+10. **Explanation quality:** Every distractor explanation must accurately explain why that particular option is wrong.
+
+Evaluate the student-visible question independently of its stored answer key wherever practical.
+
+**Do not introduce arbitrary wording-length quotas or superficial filler to balance options.**
+
+## Phase 3 — Remediate Confirmed Problems
+
+For every confirmed defect:
+
+- Preserve the stable question ID.
+- Increment its revision.
+- Preserve its earlier accepted version and evidence.
+- Correct the smallest necessary part of the question.
+- Update the evidence and editorial review record.
+- Revalidate the correct answer and every distractor.
+- Recheck similarity against the pilot, archived bank, and all new questions.
+
+Do not rewrite already satisfactory questions merely for stylistic consistency.
+
+If a question cannot be repaired without changing its learning objective, record the problem for independent review instead of silently replacing it.
+
+## Phase 4 — Technical Verification
+
+After remediation:
+
+- Run the existing validation suites against PHP 8.4 and PHP 8.5.
+- Verify all 600 records remain present and their stable IDs are unchanged.
+- Verify all 20 pilot records remain preserved.
+- Run duplicate and schema checks.
+- Run existing application regression tests.
+- Run all four Chrome browser suites.
+- Check desktop and mobile rendering.
+- Check grading, option shuffling, answer explanations, filters and review progress.
+- Confirm that the original PHP bank remains active.
+- Confirm that non-PHP questions and all historical progress remain unchanged.
+
+Do not claim that document-backed scenarios were executed against external services unless they actually were.
+
+## Phase 5 — Deliver an Editorial Audit Report
+
+Create:
+
+**php-expansion/EDITORIAL_AUDIT_REPORT.md**
+
+Include:
+
+- Total questions reviewed.
+- Number requiring revision.
+- Number successfully revised.
+- Remaining unresolved issues.
+- Breakdown of defects by category and severity.
+- Question IDs affected.
+- Before/after examples for significant improvements.
+- Answer-length and wording-cue statistics before and after.
+- Difficulty distribution before and after.
+- Validation results for PHP 8.4 and 8.5.
+- Browser and regression-test results.
+- Remaining limitations and independent-review requirements.
+
+Additionally, export **30 representative questions** for another external editorial review.
+
+The sample should include revised questions, randomly selected questions, all difficulty levels, and all six formats. Include complete student-visible content, answer keys, distractor explanations, and validation evidence.
+
+## Critical Preservation Rules
+
+- Keep all 600 new question IDs stable.
+- Preserve the 20 pilot questions.
+- Preserve the original 300 PHP questions and their archive.
+- Do not modify the 2,200 non-PHP questions.
+- Do not overwrite historical learning progress.
+- Do not change the application into Laravel or introduce a backend.
+- Do not deploy, push, merge, or activate anything.
+- Keep independent editorial approval marked as pending.
+
+## Completion Criteria
+
+Finish only when the editorial audit, confirmed repairs, technical checks, and report are complete.
+
+If resource limits prevent full completion, save an accurate checkpoint and report exactly which questions remain unaudited.
+
+**The objective is not to maximize the number of changes. It is to ensure that the final question bank tests genuine PHP understanding rather than recognition of answer patterns.**

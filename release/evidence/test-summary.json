@@ -1,0 +1,43 @@
+{
+  "automated": "passed",
+  "runtime": {
+    "8.5.2": {
+      "records": 600,
+      "lints": 1578,
+      "executions": 1544
+    },
+    "8.4.17": {
+      "records": 600,
+      "lints": 1578,
+      "executions": 1544
+    }
+  },
+  "browsers": {
+    "core": {
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 9,
+      "errors": 0
+    },
+    "pilot": {
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 7,
+      "errors": 0
+    },
+    "viewer": {
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 8,
+      "errors": 0
+    },
+    "bank": {
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 7,
+      "errors": 0
+    }
+  },
+  "artifact": {
+    "files": 14,
+    "activePhp": 620,
+    "nonPhp": 0
+  },
+  "independentEditorialApproval": "pending"
+}

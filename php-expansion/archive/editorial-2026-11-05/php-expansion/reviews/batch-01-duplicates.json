@@ -1,0 +1,173 @@
+{
+  "sourceHash": "10f3d83b20982e2f123f6afcbe01f50f799a0a276210f4b5830ee96142a6aa38",
+  "method": "Normalized text/key-concept Jaccard >= 0.16 or normalized source-token Jaccard >= 0.50, followed by author review. Additional manual family comparison rejected the original 0018 draft. Heuristics are not a semantic completeness guarantee.",
+  "records": [
+    {
+      "a": "PHP-E26-0023",
+      "b": "PHP-PILOT-011",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Shared readonly topic, different mechanism: initialized null cannot be reassigned by ??=; the pilot mutates a referenced child without reassigning the property."
+    },
+    {
+      "a": "PHP-E26-0088",
+      "b": "PHP-PILOT-007",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Different read-loop defects and distinguishing fixtures: failed empty-stream read becomes a line versus valid zero line rejected by truthiness. The new zero fixture explicitly passes."
+    },
+    {
+      "a": "PHP-E26-0023",
+      "b": "PHP-PILOT-004",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Nullable argument arity is unrelated to an initialized readonly property's reassignment restriction."
+    },
+    {
+      "a": "PHP-E26-0005",
+      "b": "PQ-197",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Assignment aliases a single object; the archived question clones an object and contrasts copied scalar state with shared child state. The closer new clone draft 0018 was replaced."
+    },
+    {
+      "a": "PHP-E26-0032",
+      "b": "PHP-E26-0030",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Comparator contract and numeric ordering differ from overwriting an array with sort's boolean return."
+    },
+    {
+      "a": "PHP-E26-0022",
+      "b": "PHP-PILOT-004",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Trait alias visibility and optional nullable arguments share only superficial wording."
+    },
+    {
+      "a": "PHP-E26-0073",
+      "b": "PHP-E26-0035",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Related deferred-value principle, distinct failure paths: closure capture versus PDO parameter binding and deferred statement execution. Both require their API-specific semantics."
+    },
+    {
+      "a": "PHP-E26-0060",
+      "b": "PQ-090",
+      "decision": "retain; distinct reasoning task",
+      "reason": "The old question creates a public callable; the new question compares private callable acquisition scope with outside array-callable visibility."
+    },
+    {
+      "a": "PHP-E26-0025",
+      "b": "PHP-E26-0008",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Embedded reference aliasing across copied arrays differs from append-index bookkeeping after unset."
+    },
+    {
+      "a": "PHP-E26-0010",
+      "b": "PHP-PILOT-019",
+      "decision": "retain; distinct reasoning task",
+      "reason": "UnhandledMatchError for an unmatched expression differs from namespace resolution of an absent class."
+    },
+    {
+      "a": "PHP-E26-0013",
+      "b": "PHP-PILOT-001",
+      "decision": "retain; distinct reasoning task",
+      "reason": "array_merge numeric renumbering and later string replacement differ from left-biased array union of defaults."
+    },
+    {
+      "a": "PHP-E26-0084",
+      "b": "PHP-PILOT-007",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Unicode byte/code-point slicing differs from a truthiness defect in file-line reading."
+    },
+    {
+      "a": "PHP-E26-0012",
+      "b": "PHP-E26-0002",
+      "decision": "retain; distinct reasoning task",
+      "reason": "PDO empty-result contracts differ from numeric-string key coercion; common array/output wording is incidental."
+    },
+    {
+      "a": "PHP-E26-0023",
+      "b": "PHP-E26-0011",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Readonly initialized-null assignment and enum case metadata are separate mechanisms."
+    },
+    {
+      "a": "PHP-E26-0081",
+      "b": "PQ-038",
+      "decision": "retain; distinct reasoning task",
+      "reason": "The new test selects a leading-removal fixture to expose JSON object shape. The old generic review merely endorses an already reindexed transform. Shared array_filter rule, distinct verification task and failure contract."
+    },
+    {
+      "a": "PHP-E26-0035",
+      "b": "PHP-PILOT-002",
+      "decision": "retain; distinct reasoning task",
+      "reason": "PDO deferred parameter references differ from a lingering by-reference foreach variable corrupting a later by-value loop."
+    },
+    {
+      "a": "PHP-E26-0093",
+      "b": "PQ-289",
+      "decision": "retain; distinct reasoning task",
+      "reason": "The old worker is sequential and resets state after jobs. The new scenario has interleaved Fibers, where resetting shared state cannot provide job isolation."
+    },
+    {
+      "a": "PHP-E26-0007",
+      "b": "PHP-E26-0002",
+      "decision": "retain; distinct reasoning task",
+      "reason": "UTF-8 byte length and array key normalization share no substantive execution path."
+    },
+    {
+      "a": "PHP-E26-0011",
+      "b": "PHP-PILOT-004",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Enum name/value metadata and nullable argument omission have separate objectives."
+    },
+    {
+      "a": "PHP-E26-0011",
+      "b": "PHP-E26-0006",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Enum properties differ from variable-variable indirection despite common value/name terminology."
+    },
+    {
+      "a": "PHP-E26-0039",
+      "b": "PHP-E26-0016",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Variadic collection preserves named keys; unpacking into fixed parameters additionally imposes positional order and duplicate-binding constraints. Distinct calls and outcomes."
+    },
+    {
+      "a": "PHP-E26-0052",
+      "b": "PQ-062",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Regex's three-state result and error routing differ from strict match arm selection."
+    },
+    {
+      "a": "PHP-E26-0092",
+      "b": "PHP-E26-0081",
+      "decision": "retain; distinct reasoning task",
+      "reason": "NaN comparator reflexivity and filtered JSON list shape share only testing language."
+    },
+    {
+      "a": "PHP-E26-0093",
+      "b": "PQ-291",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Sequential worker cleanup test guidance does not address concurrent per-job identity isolation; the new scenario requires reasoning about suspension interleaving."
+    },
+    {
+      "a": "PHP-E26-0019",
+      "b": "PHP-PILOT-002",
+      "decision": "retain; distinct reasoning task",
+      "reason": "array_walk callback return versus reference mutation differs from post-foreach reference leakage."
+    },
+    {
+      "a": "PHP-E26-0024",
+      "b": "PHP-E26-0005",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Generator lazy start and finally finalization differ from direct object alias mutation."
+    },
+    {
+      "a": "PHP-E26-0025",
+      "b": "PHP-E26-0005",
+      "decision": "retain; distinct reasoning task",
+      "reason": "Arrays normally have value semantics but can contain shared reference containers; object assignment uses object identity directly. The reference-unset step is essential to the new array scenario."
+    }
+  ],
+  "lengthReview": {
+    "PHP-E26-0010": "The actual PHP error-class name is intrinsically longer than the other concrete error classes. Padding type names would harm accuracy. Retained with one unmatched-match objective and shuffled display positions."
+  },
+  "independentApproval": "pending",
+  "revisionNote": "PHP-E26-0043 and PHP-E26-0073 revision 2: standalone option indentation only. Non-whitespace PHP tokens identical; full runtime suite rerun."
+}

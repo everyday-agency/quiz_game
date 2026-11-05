@@ -1,0 +1,58 @@
+[
+  {
+    "php": "8.5.2",
+    "formattedFiles": 22,
+    "tokenEquivalentPairs": 89,
+    "questionIds": [
+      "PHP-PILOT-001",
+      "PHP-PILOT-002",
+      "PHP-PILOT-003",
+      "PHP-PILOT-004",
+      "PHP-PILOT-005",
+      "PHP-PILOT-006",
+      "PHP-PILOT-007",
+      "PHP-PILOT-008",
+      "PHP-PILOT-009",
+      "PHP-PILOT-010",
+      "PHP-PILOT-011",
+      "PHP-PILOT-012",
+      "PHP-PILOT-013",
+      "PHP-PILOT-014",
+      "PHP-PILOT-015",
+      "PHP-PILOT-016",
+      "PHP-PILOT-017",
+      "PHP-PILOT-018",
+      "PHP-PILOT-019",
+      "PHP-PILOT-020"
+    ],
+    "cleanupReview": "Only the standalone unfilled template changed behavior. Every completed answer candidate has the same PHP token stream as before. The stem now instructs replacement of the comment alone."
+  },
+  {
+    "php": "8.4.17",
+    "formattedFiles": 22,
+    "tokenEquivalentPairs": 89,
+    "questionIds": [
+      "PHP-PILOT-001",
+      "PHP-PILOT-002",
+      "PHP-PILOT-003",
+      "PHP-PILOT-004",
+      "PHP-PILOT-005",
+      "PHP-PILOT-006",
+      "PHP-PILOT-007",
+      "PHP-PILOT-008",
+      "PHP-PILOT-009",
+      "PHP-PILOT-010",
+      "PHP-PILOT-011",
+      "PHP-PILOT-012",
+      "PHP-PILOT-013",
+      "PHP-PILOT-014",
+      "PHP-PILOT-015",
+      "PHP-PILOT-016",
+      "PHP-PILOT-017",
+      "PHP-PILOT-018",
+      "PHP-PILOT-019",
+      "PHP-PILOT-020"
+    ],
+    "cleanupReview": "Only the standalone unfilled template changed behavior. Every completed answer candidate has the same PHP token stream as before. The stem now instructs replacement of the comment alone."
+  }
+]

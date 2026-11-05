@@ -1,0 +1,90 @@
+0447|0330|Nullable fallthrough tests whether null is supplied implicitly; 0330 tests a discarded match result. The expected repairs and the misconception about nullable contracts differ.
+0416|PHP-PILOT-008|The new example tests an absolute read offset and subsequent cursor position; the pilot tests overwrite versus insertion at a write cursor. No content mutation occurs in 0416.
+0481|0254|Rejected initial 0481: the DST fixture repeated 0254's calendar-day versus elapsed-hours reasoning. Archived and replaced with noncascading token substitution.
+0487|0273|Rejected initial 0487: its LIKE wildcard fixture repeated the existing literal-pattern escaping task. Archived and replaced with selected-regex-delimiter coverage.
+0419|0358|SQLite replacement cascades a deletion into dependent rows; 0358 examines invalid text coerced through an integer binding. Shared PDO setup does not supply the same answer.
+0439|0357|Grouped fetching must retain duplicate first-column values; SELECT rowCount portability concerns result existence rather than representation or key collision.
+0487|0177|The initial SQL fixture shared parameter binding with identifier selection, but was replaced for its separate overlap with 0273. The final regex-delimiter question has no SQL.
+0419|0243|Replacement deletes an already referenced row and cascades; deferred commit failure requires transaction cleanup. They exercise different statements, failure conditions and connection states.
+0413|0059|Constructor-versus-clone hook invocation is distinct from readonly-property reinitialization needed to deep-clone a nested object.
+0413|0244|The new clone changes copied scalar state and counts hooks; the earlier clone must repair a closure that remains bound to the original object.
+0447|0170|Nullable return fallthrough concerns a function boundary; explicitly initialized nullable property storage concerns an object's initial state.
+0447|0266|Missing function return and selecting a later named optional argument have different boundaries and no shared failing operation.
+0485|0049|Month-end overflow occurs on an immutable date and skips an intended month; 0049 concerns mutating a retained DateTime alias through fluent calls.
+0421|0124|Serialization policy determines whether a ghost initializes at all; non-lazy property writes concern which storage survives later initialization. Different triggers and guarantees.
+0417|0014|A new exception thrown inside a catch bypasses sibling catches; 0014 chooses the first matching catch for the original try failure. Catch ordering alone cannot solve 0417.
+0487|0389|The original LIKE fixture was replaced; the final delimiter-quoting regression has no parameter-list representation or database query.
+0459|0358|The final 0459 exposes replacement parameter typing with SQLite typeof; 0358 distinguishes parameter coercion from validation of original text. The new input is already a valid integer.
+0417|0220|Catch-region propagation differs from injecting an exception through delegated generators and resuming a recovered yield.
+0417|0312|The throwing catch is already handling a prior exception; a throwing string conversion interrupts an echo expression without that handler-to-handler propagation.
+0421|0413|Lazy initialization on serialization is separate from clone lifecycle hooks; neither example clones a lazy ghost or shares the same triggering operation.
+0471|0368|Iterable admission tests arrays and Traversable versus Countable-only objects; scalar admission tests primitive PHP type categories. The interface boundary is essential only in 0471.
+0422|0225|A Fiber's terminated state lacks a return after an exception; a failed static initializer can retry initialization later. Their persistent-state rules differ.
+0422|0219|Fiber exceptional termination makes getReturn invalid; the generator task distinguishes yielded send values from a normal completed return. A normal completion is not the new case.
+0403|0305|Numeric-string comparison uses numeric or lexical ordering, whereas slash division chooses an integer or float result type. Shared numeric vocabulary is incidental.
+0413|0411|Clone hooks and constructor counts are unrelated to value/key callback argument order; the common arrays in output do not create a shared learning objective.
+0405|PHP-PILOT-004|The pilot produces different values through a nonnull default and explicit null. 0405 deliberately has equal parameter values and requires func_num_args to recover call arity; default substitution alone cannot answer it.
+0404|0101|Negative string-offset assignment has no boolean and/&& grouping; assignment tokens account for the superficial source resemblance.
+0411|0408|Filtering requires correct callback parameter order and preserves selected keys; chunking partitions entries and separately chooses whether inner keys survive.
+0422|0110|Fiber return availability after failure differs from reference-return alias binding; no reference container is involved in 0422.
+0434|0149|0149 repairs encoding a space for a router. 0434 consumes literal plus and an encoded percent sequence under a one-decode contract. The inverse boundary and repeated-decoding trap require a distinct implementation decision.
+0403|0202|String comparison classification has no precondition/postcondition loop choice; the lexical overlap is generic instructional wording.
+0452|0449|Callback replacement text is not reinterpreted as a backreference template; numeric-string addition versus concatenation concerns an operator's arithmetic meaning.
+0465|0462|Both inspect failure boundaries, but destructor lifetime after a factory returns differs from a driver deferring server validation to execute. Their triggering events and repair locations differ.
+0466|0373|Boolean negation toggles one value; comparing two value objects by exact identifier text involves identity and numeric-string equality instead.
+0500|0094|The new design must preserve a consumed nonseekable body through bounded replay before forwarding an immutable replacement. 0094 only propagates a request attribute and has no stream lifetime or size boundary.
+0460|0452|Match-result orientation changes nested indexes; callback replacement strings bypass backreference expansion. The same regex family does not make these API representations interchangeable.
+0402|0203|A for update clause executes after continue, while switch fallthrough advances through cases until break. Different control phases determine the trace.
+0402|0303|continue 2 selects an outer loop; 0402 uses a single for loop and asks whether its update expression still executes.
+0425|0419|WeakMap iteration retains a live object through a PHP variable; a foreign-key cascade removes database children. Retention versus deletion vocabulary crosses unrelated state models.
+0466|0168|Toggling a boolean neither removes nor returns a queue entry; the common request to replace one expression is only format similarity.
+0402|0312|Loop update output survives continue, whereas a thrown string conversion prevents completing an echo. The output ordering depends on unrelated control mechanisms.
+0403|PQ-061|PQ-061 uses match's strict identity between integer and string. 0403 compares two strings relationally, selecting numeric versus lexical rules; match strictness does not determine these results.
+0452|0148|The earlier arrow refactor loses by-reference capture; the new regex callback returns literal dollar text. Capture semantics are not part of 0452.
+0457|0148|Short-circuit evaluation controls which input reaches a throwing predicate; arrow capture controls whether outer state is mutated. Both callbacks are valid but differ for separate reasons.
+0460|0248|PCRE array orientation and HTTP safe-versus-idempotent methods share only review phrasing, not code or a technical mechanism.
+0422|0215|Fiber termination/getReturn is unrelated to evaluating match conditions and only the chosen result expression.
+0466|0213|Negating a known boolean differs from parsing external boolean text while preserving an invalid sentinel. No input-validation interpretation is needed for 0466.
+0491|0392|0392 schedules a Fiber check-then-mark single-use race; 0491 needs separate database sessions and stale read-compute-write transactions. Shared scheduling vocabulary is retained, but the transaction identity and anomaly differ.
+0404|0102|A negative offset selects a byte from the end of a string; unary-minus/exponent precedence determines a numeric expression. The minus sign has unrelated roles.
+0444|0436|Binary framing chooses integer width, byte order and payload byte count; HMAC output encoding chooses raw digest bytes rather than hexadecimal text before base64.
+0471|0070|An iterable PHP value may be an array or Traversable; validating a JSON object's top-level shape distinguishes source document structures, not iteration interfaces.
+0402|0209|For-loop update execution after continue differs from output during recursive descent and unwinding. There is no recursive call in 0402.
+0403|0301|Relational comparison classifies two runtime strings; octal source-literal parsing occurs before arithmetic with a decimal string. The contexts have different conversion rules.
+0404|0302|Writing one indexed byte has no lazy right-hand evaluation of ??=; the two assignment forms test different behavior.
+0417|0303|Outer exception propagation is distinct from the explicit numeric level on continue; neither control instruction substitutes for the other.
+0449|0247|Numeric-string arithmetic does not involve include/require failure severity; the comparison arises from generic refactor vocabulary.
+0452|0451|Failed mapping preserves the old assignment target because the RHS never completes; regex callback text semantics can be observed with successful pure calls and no failure.
+0402|0302|The for update phase runs after continue; a coalescing assignment evaluates its RHS only for missing/null storage. They have different triggering conditions.
+0402|0313|Loop update sequencing does not depend on by-reference variadic unpacking; shared variables and increment syntax are incidental.
+0403|0002|String relational comparison and array-key canonicalization apply different rules to numeric-looking strings. 0403 has no array-key insertion.
+0404|0206|Negative string offsets operate on byte positions, whereas array_unshift renumbers numeric keys while retaining string keys. The indexed containers obey different rules.
+0404|0308|A direct string-byte write does not exercise nested-array copy-on-write isolation; source assignment tokens are not enough to establish a duplicate.
+0425|0018|0018 tracks two explicit owners until a destructor runs. 0425 reveals the hidden strong reference left in a WeakMap foreach key variable; removing the obvious owners is deliberately insufficient.
+0446|0352|define returns a success flag distinct from its stored constant; recursive merge can turn colliding scalars into an array. Different return and representation contracts.
+0449|0201|0201 groups a mixed addition-and-concatenation expression by PHP 8 precedence. 0449 uses only plus, so the error is choosing arithmetic for an identifier, not expression grouping.
+0452|0353|Callback key assignment cannot rename source array keys; a regex callback's returned text is inserted literally. Neither fix addresses the other's contract.
+0460|0247|Nested PCRE result dimensions have no missing-file include/require boundary; only generic review language overlaps.
+0454|0264|Session class loading determines restored object type; repeated URL decoding invalidates a checked path representation. Their shared before/after wording is incidental.
+0464|0264|NoRewindIterator preserves a cursor without advancing it; double URI decoding changes a path value after validation. No decoding occurs in the iterator task.
+0446|0250|define's success result is documented normal behavior; missing keyed destructuring emits a diagnostic and assigns null. Both discuss assigned values but expose different APIs.
+0448|0358|ASCII-only lowercasing and PDO integer coercion have different character and validation requirements; neither is a variation of the other's code.
+0456|0358|Arithmetic overflow creates an out-of-range float before an int return fails; parameter binding can coerce external text. Range failure is not input-text validation.
+0467|0066|Fixed byte-count chunks and splitting at the first delimiter use different partition rules; 0467 has no delimiter and retains a shorter final chunk.
+0417|0209|A catch-thrown exception runs finally before an outer handler; recursion prints during stack unwinding without exceptions. The similar trace structure is incidental.
+0422|0315|A terminated Fiber without a normal return differs from partial sscanf conversion results; no parser state or string fields occur in 0422.
+0475|0007|0007 compares byte length and character count. 0475 must construct the longest valid prefix within a byte budget, rejecting both partial encodings and display-width choices; measuring length alone does not supply that cut.
+0486|0284|The attribute quote delimiter determines an escaping test; JSON_PRESERVE_ZERO_FRACTION determines float wire spelling. Both exact-output tests target different encoding contracts.
+0481|0210|Manual review rejected the second 0481 even though the lexical threshold missed this pair: cascading replacement repeated 0210. Final 0481 instead tests alternate IPv6 spellings through binary address parsing.
+0487|0276|Rejected the second 0487 because delimiter quoting repeated 0276. Final 0487 tests grapheme clusters versus code points with a combining mark.
+0486|0481|The final 0481 compares IPv6 address representations; HTML attribute escaping concerns the output delimiter and has no network-address canonicalization.
+0481|0381|IPv6 equivalent spellings need binary address comparison; prefix validation needs the full required prefix length. The earlier temporary substitution draft was also unrelated to prefix length but has been removed.
+0487|0084|0084 separates UTF-8 bytes from code points. The final 0487 assumes valid code-point slicing and exposes its inability to retain a multi-code-point grapheme cluster; the old repair mb_substr is precisely the new defective implementation.
+0487|0473|Canonical normalization changes representations to composed form; grapheme extraction must preserve the original decomposed bytes. Their required operations cannot substitute for each other.
+0487|0475|A byte-budget prefix may intentionally stop before a multi-byte character; the grapheme task chooses a user-visible cluster with no byte budget and must keep its combining code point.
+0498|0279|0279 takes the shared transaction as a premise and tests whether a successful DO NOTHING statement inserted a claim. 0498 takes a correct atomic claim as a premise and tests crash windows created by separating commits. The faulty condition and faulty transaction boundary differ.
+0494|0240|0240 requires a known fallback for an unknown backed value. 0494 expressly forbids assigning any known action and requires retaining the original unknown string in a separate representation; the earlier fallback would violate this contract.
+0477|0315|Partial sscanf output contains an unassigned conversion slot. The localized-number validator must reject an unconsumed suffix even after successful numeric parsing and retain valid zero, using an explicit offset rather than conversion count.
+0443|0064|0064 compares PHP DNF type declarations after flattening. 0443 implements a recursive ReflectionType admission predicate, requiring dispatch on intersection versus union nodes; it does not change the language declaration.
+0425|0058|The earlier WeakMap value externally retains its own key. The new map loses its final key because foreach leaves a strong key variable alive; the retention path and required release action differ.
+0500|PHP-PILOT-020|The pilot must leave a borrowed seekable handle advanced for the next line. The new middleware consumes a nonseekable body and must supply a bounded complete replay through an immutable replacement; preserving the original cursor is impossible and not the contract.

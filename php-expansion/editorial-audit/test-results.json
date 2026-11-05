@@ -1,0 +1,135 @@
+{
+  "status": "passed",
+  "runtime": [
+    {
+      "batch": 1,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 294,
+      "executions": 289
+    },
+    {
+      "batch": 1,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 294,
+      "executions": 289
+    },
+    {
+      "batch": 2,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 300,
+      "executions": 286
+    },
+    {
+      "batch": 2,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 300,
+      "executions": 286
+    },
+    {
+      "batch": 3,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 276,
+      "executions": 272
+    },
+    {
+      "batch": 3,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 276,
+      "executions": 272
+    },
+    {
+      "batch": 4,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 275,
+      "executions": 268
+    },
+    {
+      "batch": 4,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 275,
+      "executions": 268
+    },
+    {
+      "batch": 5,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 202,
+      "executions": 200
+    },
+    {
+      "batch": 5,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 202,
+      "executions": 200
+    },
+    {
+      "batch": 6,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 229,
+      "executions": 227
+    },
+    {
+      "batch": 6,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 229,
+      "executions": 227
+    }
+  ],
+  "regression": {
+    "command": "node tests.mjs",
+    "exitCode": 0,
+    "log": "editorial-audit/logs/regression.log"
+  },
+  "browsers": [
+    {
+      "name": "existing",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 9,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/editorial-audit/browser-existing/browser-results.json",
+      "exitCode": 0
+    },
+    {
+      "name": "pilot",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 7,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/editorial-audit/browser-pilot/browser-results.json",
+      "exitCode": 0
+    },
+    {
+      "name": "viewer",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 8,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/editorial-audit/browser-viewer/browser-results.json",
+      "exitCode": 0
+    },
+    {
+      "name": "review",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 6,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/editorial-audit/browser-review/browser-results.json",
+      "exitCode": 0
+    }
+  ],
+  "staticBuild": {
+    "command": "node tools/build-site.mjs",
+    "runtimeFiles": 26,
+    "deployed": false
+  },
+  "gitDiffCheck": "passed",
+  "independentApproval": "pending"
+}

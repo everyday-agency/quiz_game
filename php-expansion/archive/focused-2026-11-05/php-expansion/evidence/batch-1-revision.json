@@ -1,0 +1,128 @@
+{
+  "reason": "Explicit pre-release editorial revision; independent approval pending",
+  "changed": [
+    {
+      "id": "PHP-E26-0022",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0041",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0047",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0050",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0056",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0059",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0061",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0062",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0063",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0064",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0069",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0070",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0076",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0078",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0079",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0081",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0082",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0084",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0085",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0088",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0089",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0090",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0092",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0098",
+      "from": 1,
+      "to": 2
+    }
+  ],
+  "previousSha256": "1827f51f2d7eae53a43e5e1a4357e7ca521fea7373b8bb6a9d427bf877d9aacd",
+  "archive": "/Users/gabriel/Documents/Codex/2026-07-15/gene/outputs/laravel-architect-quiz/php-expansion/archive/pre-release/batch-01-1827f51f2d7e.mjs",
+  "productionActivation": false
+}

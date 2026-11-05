@@ -1,0 +1,60 @@
+{
+  "reason": "Manual standalone-fragment indentation correction before independent approval. Only whitespace changed in the listed options; IDs, keys and meaning retained.",
+  "changes": [
+    {
+      "id": "PHP-E26-0043",
+      "option": "exact",
+      "before": "foreach ($reflection->getAttributes(Rule::class) as $attribute) {\n            $attribute->newInstance();\n        }",
+      "after": "foreach ($reflection->getAttributes(Rule::class) as $attribute) {\n    $attribute->newInstance();\n}"
+    },
+    {
+      "id": "PHP-E26-0043",
+      "option": "arguments",
+      "before": "foreach ($reflection->getAttributes(Rule::class, ReflectionAttribute::IS_INSTANCEOF) as $attribute) {\n            $attribute->getArguments();\n        }",
+      "after": "foreach ($reflection->getAttributes(Rule::class, ReflectionAttribute::IS_INSTANCEOF) as $attribute) {\n    $attribute->getArguments();\n}"
+    },
+    {
+      "id": "PHP-E26-0043",
+      "option": "all",
+      "before": "foreach ($reflection->getAttributes() as $attribute) {\n            $attribute->newInstance();\n        }",
+      "after": "foreach ($reflection->getAttributes() as $attribute) {\n    $attribute->newInstance();\n}"
+    },
+    {
+      "id": "PHP-E26-0043",
+      "option": "filtered-instance",
+      "before": "foreach ($reflection->getAttributes(Rule::class, ReflectionAttribute::IS_INSTANCEOF) as $attribute) {\n            $attribute->newInstance();\n        }",
+      "after": "foreach ($reflection->getAttributes(Rule::class, ReflectionAttribute::IS_INSTANCEOF) as $attribute) {\n    $attribute->newInstance();\n}"
+    },
+    {
+      "id": "PHP-E26-0073",
+      "option": "reference",
+      "before": "static function () use (&$id) {\n        return $id;\n    }",
+      "after": "static function () use (&$id) {\n    return $id;\n}"
+    },
+    {
+      "id": "PHP-E26-0138",
+      "option": "unregister",
+      "before": "spl_autoload_unregister(__FUNCTION__);\n        return;",
+      "after": "spl_autoload_unregister(__FUNCTION__);\nreturn;"
+    },
+    {
+      "id": "PHP-E26-0138",
+      "option": "eager-first",
+      "before": "require __DIR__ . '/first.php';\n        return;",
+      "after": "require __DIR__ . '/first.php';\nreturn;"
+    },
+    {
+      "id": "PHP-E26-0143",
+      "option": "rollback-inner",
+      "before": "$pdo->exec('ROLLBACK TO SAVEPOINT inner');\n    $pdo->exec('RELEASE SAVEPOINT inner');",
+      "after": "$pdo->exec('ROLLBACK TO SAVEPOINT inner');\n$pdo->exec('RELEASE SAVEPOINT inner');"
+    },
+    {
+      "id": "PHP-E26-0143",
+      "option": "rollback-then-all",
+      "before": "$pdo->exec('ROLLBACK TO SAVEPOINT inner');\n    $pdo->rollBack();",
+      "after": "$pdo->exec('ROLLBACK TO SAVEPOINT inner');\n$pdo->rollBack();"
+    }
+  ],
+  "tokenEquivalence": "PASS on PHP 8.4.17 and 8.5.2: every non-whitespace token unchanged"
+}

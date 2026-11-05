@@ -1,0 +1,540 @@
+{
+  "source": "js/questions-php.mjs",
+  "sha256": "1b209ce714b7e0ee630398f0596c3d9182df498f4ef60f7aa7b8606339b7cc3a",
+  "scope": "Primary: 25 repository topic/concept specifications. Supplemental: user-supplied working outline for Lessons 1–31; not a finalized curriculum. No lesson numbers beyond 31 are assigned.",
+  "topics": [
+    {
+      "key": "repo-topic-01",
+      "topic": "Syntax & execution model",
+      "concepts": [
+        "PHP tags",
+        "statements",
+        "expressions",
+        "strict types",
+        "CLI execution"
+      ],
+      "examples": [
+        "Expression evaluation with strict scalar calls",
+        "Included files keep their own call-site rules"
+      ]
+    },
+    {
+      "key": "repo-topic-02",
+      "topic": "Variables, scope & constants",
+      "concepts": [
+        "variables",
+        "constants",
+        "local scope",
+        "global scope",
+        "static variables"
+      ],
+      "examples": [
+        "Capturing by value versus by reference",
+        "Static locals preserve request-local state"
+      ]
+    },
+    {
+      "key": "repo-topic-03",
+      "topic": "Types, casting & comparisons",
+      "concepts": [
+        "scalar types",
+        "type juggling",
+        "casting",
+        "strict comparison",
+        "null coalescing"
+      ],
+      "examples": [
+        "Strict comparison avoids numeric-string surprises",
+        "Null coalescing preserves present falsy values"
+      ]
+    },
+    {
+      "key": "repo-topic-04",
+      "topic": "Arrays & destructuring",
+      "concepts": [
+        "indexed arrays",
+        "associative arrays",
+        "spread",
+        "destructuring",
+        "array functions"
+      ],
+      "examples": [
+        "Filtering then reindexing a list",
+        "Associative destructuring with defaults"
+      ]
+    },
+    {
+      "key": "repo-topic-05",
+      "topic": "Operators & expressions",
+      "concepts": [
+        "arithmetic operators",
+        "assignment operators",
+        "increment",
+        "precedence",
+        "short circuiting"
+      ],
+      "examples": [
+        "Prefix and postfix increment produce different expressions",
+        "Short circuiting controls side effects"
+      ]
+    },
+    {
+      "key": "repo-topic-06",
+      "topic": "Control flow & pattern matching",
+      "concepts": [
+        "if and else",
+        "loops",
+        "switch",
+        "match",
+        "break and continue"
+      ],
+      "examples": [
+        "Match expressions are strict and non-fallthrough",
+        "Continue targets the requested loop level"
+      ]
+    },
+    {
+      "key": "repo-topic-07",
+      "topic": "Functions & arguments",
+      "concepts": [
+        "parameter types",
+        "return types",
+        "named arguments",
+        "variadics",
+        "references"
+      ],
+      "examples": [
+        "Named arguments document an otherwise ambiguous call",
+        "Typed variadics validate every collected argument"
+      ]
+    },
+    {
+      "key": "repo-topic-08",
+      "topic": "Closures, callbacks & callables",
+      "concepts": [
+        "anonymous functions",
+        "arrow functions",
+        "callables",
+        "first-class callables",
+        "callback APIs"
+      ],
+      "examples": [
+        "Arrow function capture and callback transformation",
+        "First-class callable defers invocation"
+      ]
+    },
+    {
+      "key": "repo-topic-09",
+      "topic": "Includes, autoloading & paths",
+      "concepts": [
+        "include",
+        "require",
+        "include_once",
+        "require_once",
+        "autoloading"
+      ],
+      "examples": [
+        "Reliable paths use the current file directory",
+        "Optional extension loading can be handled explicitly"
+      ]
+    },
+    {
+      "key": "repo-topic-10",
+      "topic": "Files & structured data",
+      "concepts": [
+        "file operations",
+        "streams",
+        "JSON",
+        "CSV",
+        "XML"
+      ],
+      "examples": [
+        "Decoding JSON with explicit failure handling",
+        "Reading CSV through a stream handle"
+      ]
+    },
+    {
+      "key": "repo-topic-11",
+      "topic": "HTTP & superglobals",
+      "concepts": [
+        "HTTP requests",
+        "GET and POST",
+        "superglobals",
+        "headers",
+        "response status"
+      ],
+      "examples": [
+        "Reading and validating query input",
+        "Returning a JSON response before output starts"
+      ]
+    },
+    {
+      "key": "repo-topic-12",
+      "topic": "Forms & file uploads",
+      "concepts": [
+        "form handling",
+        "multipart forms",
+        "file uploads",
+        "upload errors",
+        "safe filenames"
+      ],
+      "examples": [
+        "Validating an uploaded image before storage",
+        "Generating a server-controlled destination name"
+      ]
+    },
+    {
+      "key": "repo-topic-13",
+      "topic": "Cookies & sessions",
+      "concepts": [
+        "cookies",
+        "sessions",
+        "cookie flags",
+        "session fixation",
+        "session storage"
+      ],
+      "examples": [
+        "Issuing a hardened preference cookie",
+        "Rotating a session after successful login"
+      ]
+    },
+    {
+      "key": "repo-topic-14",
+      "topic": "Validation & web security",
+      "concepts": [
+        "input validation",
+        "output escaping",
+        "CSRF",
+        "XSS",
+        "password hashing"
+      ],
+      "examples": [
+        "Escaping HTML at the output boundary",
+        "Verifying a session-backed CSRF token"
+      ]
+    },
+    {
+      "key": "repo-topic-15",
+      "topic": "PDO & database access",
+      "concepts": [
+        "PDO",
+        "MySQLi",
+        "prepared statements",
+        "fetch modes",
+        "SQL injection prevention"
+      ],
+      "examples": [
+        "Binding values in a PDO query",
+        "Whitelisting SQL identifiers separately"
+      ]
+    },
+    {
+      "key": "repo-topic-16",
+      "topic": "Transactions, migrations & ORM",
+      "concepts": [
+        "transactions",
+        "ACID",
+        "migrations",
+        "ORM",
+        "schema evolution"
+      ],
+      "examples": [
+        "Rolling back a two-step transfer on failure",
+        "Expressing a reversible migration"
+      ]
+    },
+    {
+      "key": "repo-topic-17",
+      "topic": "Classes & object lifecycle",
+      "concepts": [
+        "classes",
+        "constructors",
+        "properties",
+        "readonly",
+        "object identity"
+      ],
+      "examples": [
+        "Constructor promotion creates validated state",
+        "Clone creates a distinct object identity"
+      ]
+    },
+    {
+      "key": "repo-topic-18",
+      "topic": "Inheritance, interfaces & traits",
+      "concepts": [
+        "inheritance",
+        "interfaces",
+        "traits",
+        "polymorphism",
+        "method visibility"
+      ],
+      "examples": [
+        "Programming against an interface contract",
+        "Resolving conflicting trait methods explicitly"
+      ]
+    },
+    {
+      "key": "repo-topic-19",
+      "topic": "Namespaces, Composer & packages",
+      "concepts": [
+        "namespaces",
+        "use imports",
+        "Composer",
+        "PSR-4",
+        "semantic versions"
+      ],
+      "examples": [
+        "Importing two namespaced classes with aliases",
+        "Composer autoloading replaces manual class includes"
+      ]
+    },
+    {
+      "key": "repo-topic-20",
+      "topic": "Errors & exceptions",
+      "concepts": [
+        "error levels",
+        "exceptions",
+        "Throwable",
+        "custom exceptions",
+        "finally"
+      ],
+      "examples": [
+        "Catching domain failures without hiding programmer errors",
+        "Finally releases a lock after either outcome"
+      ]
+    },
+    {
+      "key": "repo-topic-21",
+      "topic": "Enums, attributes & reflection",
+      "concepts": [
+        "enums",
+        "backed enums",
+        "attributes",
+        "reflection",
+        "metadata"
+      ],
+      "examples": [
+        "Converting external data into a backed enum safely",
+        "Reading an attribute without running the method"
+      ]
+    },
+    {
+      "key": "repo-topic-22",
+      "topic": "Iterators, generators & fibers",
+      "concepts": [
+        "iterators",
+        "generators",
+        "yield",
+        "lazy processing",
+        "fibers"
+      ],
+      "examples": [
+        "Streaming a large file with a generator",
+        "Fiber suspension requires an external resume"
+      ]
+    },
+    {
+      "key": "repo-topic-23",
+      "topic": "Testing, style & static analysis",
+      "concepts": [
+        "PHPUnit",
+        "test doubles",
+        "PSR-12",
+        "PHPStan",
+        "Psalm"
+      ],
+      "examples": [
+        "Testing a collaborator through its public contract",
+        "A generic docblock exposes a type mismatch to analysis"
+      ]
+    },
+    {
+      "key": "repo-topic-24",
+      "topic": "APIs, integrations & PSRs",
+      "concepts": [
+        "REST APIs",
+        "cURL",
+        "Guzzle",
+        "PSR-7",
+        "PSR-15"
+      ],
+      "examples": [
+        "Checking both cURL transport and HTTP status",
+        "PSR-7 methods return a changed copy"
+      ]
+    },
+    {
+      "key": "repo-topic-25",
+      "topic": "Performance, processes & servers",
+      "concepts": [
+        "OPcache",
+        "profiling",
+        "processes",
+        "environment variables",
+        "PHP-FPM",
+        "Apache and Nginx"
+      ],
+      "examples": [
+        "Resetting per-job state in a long-running worker",
+        "Separating environment configuration from code"
+      ]
+    }
+  ],
+  "workingLessons": [
+    {
+      "id": 1,
+      "title": "Types, type declarations and strict_types",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 2,
+      "title": "Variables, constants and operators",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 3,
+      "title": "Control flow",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 4,
+      "title": "Arrays and iteration",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 5,
+      "title": "Functions, parameters and return values",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 6,
+      "title": "Variable scope",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 7,
+      "title": "Anonymous functions and closures",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 8,
+      "title": "Callbacks and callable",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 9,
+      "title": "Arrow functions",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 10,
+      "title": "Recursion",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 11,
+      "title": "Variadic functions",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 12,
+      "title": "HTTP methods",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 13,
+      "title": "$_GET",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 14,
+      "title": "$_POST",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 15,
+      "title": "$_REQUEST",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 16,
+      "title": "$_SERVER",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 17,
+      "title": "$_FILES",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 18,
+      "title": "Cookies",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 19,
+      "title": "Sessions",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 20,
+      "title": "File handling",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 21,
+      "title": "Error handling and logging",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 22,
+      "title": "Exceptions",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 23,
+      "title": "Classes and objects",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 24,
+      "title": "Constructors, property promotion and readonly",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 25,
+      "title": "Encapsulation and visibility",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 26,
+      "title": "Inheritance",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 27,
+      "title": "Interfaces",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 28,
+      "title": "Abstract classes and methods",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 29,
+      "title": "Traits",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 30,
+      "title": "Static methods and properties",
+      "status": "working-user-outline"
+    },
+    {
+      "id": 31,
+      "title": "Namespaces",
+      "status": "working-user-outline"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+PHP-E26-0301|execution|Foundation|octal-literal-decimal-numeric-string|Distinguish an octal source literal from a decimal numeric string in arithmetic.
+PHP-E26-0302|execution|Foundation|coalescing-assignment-once-side-effect|Trace conditional assignment and whether its right-hand expression runs.
+PHP-E26-0303|execution|Foundation|continue-outer-loop-level|Trace continue 2 across nested foreach loops.
+PHP-E26-0304|execution|Foundation|array-flip-duplicate-value-collision|Predict collision handling when array values become keys.
+PHP-E26-0305|execution|Foundation|division-result-type-exactness|Distinguish exact integer division results from fractional division results under the slash operator.
+PHP-E26-0306|execution|Foundation|logical-short-circuit-side-effects|Trace which operands of boolean operators are evaluated.
+PHP-E26-0307|execution|Foundation|value-capture-local-update-per-call|Predict local updates to a value-captured scalar across repeated closure calls.
+PHP-E26-0308|execution|Foundation|nested-array-value-copy|Trace ordinary nested-array assignment without explicit references or objects.
+PHP-E26-0309|execution|Intermediate|heredoc-nowdoc-indentation-interpolation|Trace interpolation and indentation stripping in flexible heredoc and nowdoc strings.
+PHP-E26-0310|execution|Intermediate|short-ternary-evaluation-count|Distinguish the shorthand ternary’s reused condition value from an explicit second function call.
+PHP-E26-0311|execution|Intermediate|debug-info-versus-json-representation|Distinguish a diagnostic display hook from JSON serialization policy.
+PHP-E26-0312|execution|Intermediate|stringification-throw-expression-output|Trace a throwing string conversion before an echo expression is completed.
+PHP-E26-0313|execution|Intermediate|variadic-reference-unpacked-array-mutation|Trace by-reference variadic parameters when arguments come from array unpacking.
+PHP-E26-0314|execution|Intermediate|strtok-shared-parser-state|Track the shared continuation state of interleaved strtok calls.
+PHP-E26-0315|execution|Intermediate|sscanf-partial-conversion-results|Distinguish partial formatted scanning from validation of an entire input record.
+PHP-E26-0316|execution|Intermediate|date-period-explicit-boundaries|Apply DatePeriod start and end inclusion flags to a daily iteration.
+PHP-E26-0317|execution|Intermediate|priority-queue-destructive-iteration|Trace maximum-priority extraction and the consuming nature of SplPriorityQueue iteration.
+PHP-E26-0318|execution|Intermediate|magic-call-inaccessible-method-scope|Trace magic dispatch for an inaccessible method separately from an in-class call.
+PHP-E26-0319|execution|Advanced|promoted-attribute-target-instantiation|Trace attribute propagation on promoted parameters and deferred target validation.
+PHP-E26-0320|execution|Advanced|strict-argument-return-file-boundaries|Distinguish the file controlling argument coercion from the file controlling return coercion.
+PHP-E26-0321|execution|Advanced|generator-rewind-first-yield-boundary|Trace the state-dependent limit of Generator::rewind.
+PHP-E26-0322|execution|Advanced|unreachable-cycle-explicit-collection|Distinguish reference-count retention of a cycle from its eventual cyclic collection.
+PHP-E26-0323|execution|Advanced|integer-identifier-float-collapse|Detect distinct 64-bit integer identifiers collapsing through binary64 conversion.
+PHP-E26-0324|execution|Advanced|promoted-default-parameter-versus-storage|Distinguish a promoted parameter default from a declared property default during constructor-free allocation.
+PHP-E26-0325|execution|Advanced|deserialization-hook-before-type-gate|Trace deserialization hooks before a caller’s post-deserialization type check.
+PHP-E26-0326|debugging|Foundation|string-transform-return-value|Repair code that discards the result of a nonmutating string transformation.
+PHP-E26-0327|debugging|Foundation|pop-last-entry-sparse-keys|Remove and return the last array entry without deriving its key from count.
+PHP-E26-0328|debugging|Foundation|final-filename-extension-component|Extract the final extension instead of assuming a filename has only one dot.
+PHP-E26-0329|debugging|Foundation|reference-alias-clear-versus-unset|Clear a shared array value rather than merely removing one variable name.
+PHP-E26-0330|debugging|Foundation|return-match-expression-value|Return a match expression’s value from a declared string-returning function.
+PHP-E26-0331|debugging|Intermediate|include-path-current-directory-independent|Resolve an application-owned include relative to its defining file instead of mutable working-directory state.
+PHP-E26-0332|debugging|Intermediate|post-body-limit-empty-upload-arrays|Diagnose an oversized multipart body that prevents PHP from populating either form or upload arrays.
+PHP-E26-0333|debugging|Intermediate|session-id-rotation-old-storage-removal|Rotate a session identifier while preserving current data and deleting the old persisted record.
+PHP-E26-0334|debugging|Intermediate|native-pdo-distinct-placeholder-occurrences|Repair repeated named parameter occurrences under native PDO MySQL prepares.
+PHP-E26-0335|debugging|Intermediate|recursive-argument-postdecrement-state|Repair a recursive argument without mutating the current frame’s multiplier.
+PHP-E26-0336|debugging|Intermediate|create-without-truncation-file-mode|Choose a file mode that creates missing files while retaining existing content and honoring positioned writes.
+PHP-E26-0337|debugging|Intermediate|truncate-does-not-rewind-cursor|Repair a rewrite that truncates a file but leaves its write cursor beyond the new end.
+PHP-E26-0338|debugging|Intermediate|file-precheck-time-of-use-failure|Handle a file-open result even after a successful earlier readability check.
+PHP-E26-0339|debugging|Intermediate|pdo-mysql-ddl-implicit-commit|Remove implicit-commit DDL from a PHP business transaction that promises rollback of its writes.
+PHP-E26-0340|debugging|Intermediate|error-handler-default-propagation-return|Mark a user warning as handled without throwing or invoking PHP’s default diagnostic handler.
+PHP-E26-0341|debugging|Advanced|base64-stream-filter-chunk-state|Preserve base64 encoder state across arbitrary input chunks when writing an encoded file.
+PHP-E26-0342|debugging|Advanced|archive-canonical-destination-collision|Detect archive entries that map to the same destination despite distinct original names.
+PHP-E26-0343|debugging|Advanced|webhook-mac-exact-body-representation|Repair signature verification that changes a request body before authenticating its bytes.
+PHP-E26-0344|debugging|Advanced|monotonic-budget-clock-and-unit|Compute a remaining elapsed-time budget from monotonic nanoseconds rather than adjustable wall-clock time.
+PHP-E26-0345|debugging|Advanced|pcre-offset-byte-character-boundary|Use a regex capture offset with an API that interprets the same byte units.
+PHP-E26-0346|code-review|Foundation|countable-object-empty-semantics|Review an object emptiness check that is incorrectly assumed to call Countable::count.
+PHP-E26-0347|code-review|Foundation|foreach-append-value-versus-reference|Review a foreach reference change that alters whether newly appended entries are visited.
+PHP-E26-0348|code-review|Foundation|class-constant-versus-instance-property|Review an operator change that confuses a class constant with an instance property.
+PHP-E26-0349|code-review|Foundation|boolean-output-json-contract|Review direct boolean output at an endpoint that promises a JSON boolean.
+PHP-E26-0350|code-review|Foundation|concrete-child-abstract-template-method|Review whether a concrete child satisfies an abstract method while inheriting concrete behavior.
+PHP-E26-0351|code-review|Intermediate|nullsafe-each-nullable-hop|Review null safety when a nonnull receiver’s method returns null.
+PHP-E26-0352|code-review|Intermediate|recursive-merge-scalar-collision-shape|Review a recursive merge that changes a scalar configuration field into an array.
+PHP-E26-0353|code-review|Intermediate|array-walk-key-rename-assumption|Review a callback that changes its local key parameter without renaming source array keys.
+PHP-E26-0354|code-review|Intermediate|namespace-imports-local-to-file|Review an imported alias incorrectly assumed to be shared by files declaring the same namespace.
+PHP-E26-0355|code-review|Intermediate|redirect-method-preservation-review|Review a redirect status against a requirement to preserve the original POST method and body.
+PHP-E26-0356|code-review|Intermediate|recursive-walk-does-not-visit-containers|Review validation that assumes array_walk_recursive invokes its callback on array containers.
+PHP-E26-0357|code-review|Intermediate|pdo-select-rowcount-not-result-count|Review a SELECT emptiness check based on PDOStatement::rowCount.
+PHP-E26-0358|code-review|Intermediate|pdo-integer-binding-not-input-validation|Review integer parameter binding that is mistaken for validation of the original submitted text.
+PHP-E26-0359|code-review|Intermediate|upload-registry-not-superglobal-fixture|Review a CLI upload fixture that supplies metadata without establishing HTTP upload provenance.
+PHP-E26-0360|code-review|Intermediate|json-numeric-check-identifier-loss|Review numeric-string conversion applied to identifiers that must retain their original representation.
+PHP-E26-0361|code-review|Advanced|get-only-interface-property-covariance|Review covariance when implementing a PHP 8.4 get-only interface property.
+PHP-E26-0362|code-review|Advanced|reflection-property-write-coercive-boundary|Review whether strict_types guarantees identical coercion policy for direct and reflection property writes.
+PHP-E26-0363|code-review|Advanced|ssrf-redirect-destination-policy|Review an outbound destination allowlist that validates only the first URL in a redirect chain.
+PHP-E26-0364|code-review|Advanced|bcrypt-password-suffix-truncation-boundary|Review a password policy that assumes bcrypt distinguishes bytes beyond its input limit.
+PHP-E26-0365|code-review|Advanced|roundtrip-test-independent-protocol-oracle|Review a round-trip test whose encoder and decoder share the same nonstandard alphabet.
+PHP-E26-0366|implementation|Foundation|left-pad-text-minimum-width|Pad a textual label to a minimum width without numeric conversion or truncation.
+PHP-E26-0367|implementation|Foundation|parallel-lists-to-key-value-map|Build an associative map by pairing a supplied key list with a supplied value list.
+PHP-E26-0368|implementation|Foundation|scalar-type-admission-predicate|Accept PHP scalar types without confusing scalar, numeric and merely nonnull values.
+PHP-E26-0369|implementation|Foundation|datetime-format-month-minute-offset|Format a timestamp with distinct month and minute tokens and a colonized UTC offset.
+PHP-E26-0370|implementation|Foundation|lf-record-delimiter-string-literal|Represent a single LF byte in PHP rather than a literal escape-looking string or another line ending.
+PHP-E26-0371|implementation|Foundation|inclusive-ascending-range-empty-reversal|Build an inclusive ascending integer sequence while rejecting reversed bounds as empty.
+PHP-E26-0372|implementation|Foundation|random-array-key-to-value-selection|Select a random value from an associative array using an API that returns a key.
+PHP-E26-0373|implementation|Intermediate|identifier-value-equality-not-object-identity|Compare value objects by exact identifier text rather than object identity or loose numeric-string equivalence.
+PHP-E26-0374|implementation|Intermediate|curl-connect-total-timeout-budgets|Configure separate connection and overall cURL budgets using the correct units and scope.
+PHP-E26-0375|implementation|Intermediate|local-recovery-versus-global-exception-handler|Recover a failed operation inside its call boundary while preserving a successful return value.
+PHP-E26-0376|implementation|Intermediate|ini-raw-scanner-literal-values|Parse INI values as literal strings when reserved words and leading zeros are meaningful data.
+PHP-E26-0377|implementation|Intermediate|psr3-original-exception-context|Preserve the original caught Throwable in the conventional PSR-3 exception context entry.
+PHP-E26-0378|implementation|Advanced|reflection-positional-values-from-labeled-map|Adapt an ordered argument-value map to positional ReflectionMethod invocation on PHP 8.
+PHP-E26-0379|implementation|Advanced|expanded-stream-cumulative-output-limit|Enforce an expanded-output budget before writing the chunk that would cross it.
+PHP-E26-0380|implementation|Advanced|composer-real-platform-release-gate|Verify the target PHP runtime against installed production requirements despite Composer platform emulation.
+PHP-E26-0381|testing|Intermediate|prefix-comparison-length-regression|Select a test that detects comparing only the candidate’s length when checking a required prefix.
+PHP-E26-0382|testing|Intermediate|overlapping-substring-count-test|Test overlapping occurrences rather than only nonoverlapping substring matches.
+PHP-E26-0383|testing|Intermediate|unordered-map-strict-value-test|Test map equality that ignores insertion order while preserving strict value equality.
+PHP-E26-0384|testing|Intermediate|half-even-rounding-midpoint-test|Select a midpoint case that distinguishes half-to-even rounding from PHP’s default halfway rule.
+PHP-E26-0385|testing|Intermediate|http-method-case-sensitive-test|Test that HTTP method names are compared case-sensitively rather than normalized as header field names.
+PHP-E26-0386|testing|Intermediate|readonly-promotion-normalization-test|Test normalization that attempts a second assignment to an already promoted readonly property.
+PHP-E26-0387|testing|Intermediate|natural-digit-run-sort-test|Select a label set that distinguishes lexical ordering from natural numeric-run ordering.
+PHP-E26-0388|testing|Intermediate|sqlite-foreign-key-enforcement-test|Select a fixture that verifies foreign-key enforcement on a newly configured PDO SQLite connection.
+PHP-E26-0389|testing|Intermediate|pdo-in-list-single-placeholder-test|Select a query test that detects binding a comma-separated list as one scalar parameter.
+PHP-E26-0390|testing|Intermediate|decimal-wire-thousands-separator-test|Choose a numeric formatting test that exposes unwanted grouping separators in a wire format.
+PHP-E26-0391|testing|Advanced|deep-copy-shared-node-identity-test|Test preservation of alias relationships within a deep-copied object graph.
+PHP-E26-0392|testing|Advanced|fiber-interleaving-single-use-claim-test|Select a deterministic overlapping schedule that exposes a check-then-mark race in a single-use gate.
+PHP-E26-0393|architecture|Intermediate|read-after-write-replica-routing|Preserve read-after-write behavior when a PHP service routes reads to asynchronous replicas.
+PHP-E26-0394|architecture|Intermediate|partial-update-presence-value-separation|Preserve field presence independently of a nullable value in a partial-update boundary.
+PHP-E26-0395|architecture|Intermediate|queued-action-current-authorization|Authorize a delayed action using the actor’s permissions at execution time when revocation must take effect.
+PHP-E26-0396|architecture|Intermediate|rolling-release-cache-schema-namespace|Separate incompatible cache representations while two application versions run concurrently.
+PHP-E26-0397|architecture|Intermediate|plugin-contract-with-existing-inheritance|Choose a nominal plugin contract without replacing existing parent classes.
+PHP-E26-0398|architecture|Advanced|provider-concurrency-capacity-isolation|Reserve execution capacity for one integration when another can occupy all shared workers.
+PHP-E26-0399|architecture|Advanced|serialization-retry-recomputes-transaction|Choose the correct retry boundary after a confirmed PostgreSQL serialization failure.
+PHP-E26-0400|architecture|Advanced|composer-build-code-trust-boundary|Place necessary Composer build hooks behind an isolation boundary that excludes deployment credentials.

@@ -1,0 +1,59 @@
+0177|0035|SQL identifier selection differs from delayed bindParam reference lifetime; shared PDO setup is incidental.
+0178|0074|Bounded traversal must avoid pulling an extra item; recursive delegation must flatten children and continue siblings.
+0176|0020|Timestamp construction ignores the timezone argument; the earlier question tests immutability and a date boundary after setTimezone.
+0184|0057|Append-mode writes ignore the seek position; the earlier failure truncates before acquiring a cooperative lock.
+0113|0002|array_intersect compares value string representations; numeric-string array-key conversion is a separate insertion rule.
+0106|0101|Per-call default arrays and assignment/operator precedence share only generic output-prediction wording.
+0118|0112|Query serialization omits null and encodes booleans; recursive array replacement preserves an explicit null.
+0114|0112|Null-callback array_map zips and pads; recursive replacement overwrites indexed entries without zipping.
+0118|PHP-PILOT-004|HTTP encoding of null values differs from omission versus explicit null at a function call.
+0155|0039|Parameter declaration order and named API compatibility differ from positional-after-named argument unpacking.
+0172|0166|A truthy bare method literal in a predicate differs from quoting a literal dollar label; expression wording is incidental.
+0110|0104|Reference-return reception needs =&; by-value foreach uses an ordinary local scalar without a reference-returning function.
+0169|0066|Key allowlisting and first-delimiter string splitting solve unrelated input boundaries.
+0122|0019|Magic getter indirect modification differs from an explicitly by-reference array_walk callback and its return value.
+0107|0016|func_get_args reports bound declared-parameter order; named variadic extras retain names in the variadic array.
+0112|0106|Recursive replacement is an array transformation; default arrays test independent function calls.
+0110|PQ-197|Reference-return binding aliases scalar storage; shallow object cloning concerns nested object handles and copied scalars.
+0121|0006|Bound closure class scope selects a private property slot; variable variables select a local variable by its name string.
+0110|0005|Explicit scalar reference assignment differs from object-handle assignment, which aliases an object without =&.
+0110|0019|Reference-return binding and a callback receiving an element by reference use different call boundaries and return rules.
+0120|0108|Anonymous-class expression identity controls static storage; constant visibility across function scope is unrelated.
+0122|0110|Overloaded by-value array access cannot be indirectly modified; reference-returning functions explicitly offer aliasable storage.
+0124|0024|A lazy ghost initializes properties on access; a generator suspends execution and delays finally until completion or destruction.
+0166|0066|Quoting and interpolation differ from limiting delimiter splitting, despite a common replacement-expression stem.
+0106|0025|Default arrays have no embedded references; copied arrays in 0025 intentionally share one referenced element.
+0110|0025|Receiving a reference return differs from copying arrays that already contain a reference set and unsetting an external alias.
+0101|0018|Boolean operator precedence and last-reference destructor timing have unrelated mechanisms.
+0103|0002|switch versus match controls comparison at selection time; array-key normalization happens at insertion time.
+0104|0005|Assigning a by-value scalar loop variable does not mutate array entries; assigning object handles preserves shared object identity.
+0109|PQ-002|By-reference coercion changes the caller’s scalar type; the old exact-type call has no coercion even when strictness changes.
+0163|0151|SensitiveParameter wraps trace arguments while HttpOnly restricts script access to cookies; neither question reuses the other’s technical mechanism.
+0104|PHP-PILOT-002|The new single by-value loop has no lingering reference; the pilot requires unsetting a prior by-reference loop binding.
+0110|PQ-014|Reference-return reception differs from lexical capture by an arrow or anonymous closure.
+0112|0101|Recursive array replacement and boolean assignment precedence share only common output wording.
+0117|0005|EXTR_SKIP controls local variable import and count; object assignment shares a handle rather than importing symbols.
+0121|0018|Private scope resolution through bound closures differs from destruction at the final strong reference.
+0123|PHP-PILOT-014|Late-static forwarding tracks the called class through calls; trait precedence selects which method body exists.
+0125|0022|Asymmetric property writes plus an exported reference differ from creating a private trait method alias.
+0125|0110|The advanced question adds asymmetric visibility and an authorized reference escape; 0110 only distinguishes value reception from reference reception.
+0168|0127|Queue removal changes array contents; a final-byte offset reads a string without mutation.
+0169|0166|Field-name intersection is independent of literal dollar quoting and interpolation.
+0114|0101|Null-callback zip/padding has no assignment-precedence issue.
+0119|0101|Typed-property reference constraints are independent of and/&& assignment grouping.
+0113|0103|array_intersect uses string representations, unlike switch loose equality or match strict identity; distinct comparison rules must not be conflated.
+0101|0005|Boolean grouping and object aliasing share assignment syntax but not the reasoning needed to determine the result.
+0101|0025|Operator precedence does not involve embedded array reference sets or copy behavior.
+0105|0101|Explicit destructuring key selection differs from operator precedence; generic printed-JSON stems triggered the heuristic.
+0106|0018|Default argument independence and destructor lifetime do not share mutable objects or reference-count transitions.
+0109|PQ-005|Coercion writes a changed type back through a reference; the old multi-file case determines which call site sets strictness.
+0111|0019|Per-closure static local lifetime differs from callback return values and explicit array_walk element mutation.
+0112|PHP-PILOT-004|Recursive array replacement uses null as a stored replacement; the pilot distinguishes an omitted function argument from explicit null.
+0114|0019|array_map with a null callback performs a built-in zip; array_walk invokes a by-reference callback and returns its own boolean.
+0122|0005|The magic getter question adds by-value overloaded-array indirect mutation and an observable diagnostic, rather than ordinary object assignment alone.
+0137|0038|Dynamic constant strings require explicit namespace qualification; an inherited class constant requires late-static rather than self lookup.
+0111|PQ-021|The old sequence function has one static local; the new case distinguishes separate closure instances from aliases to the same closure instance.
+0109|0005|Scalar reference coercion can replace a variable’s type; object aliasing shares an object without scalar coercion.
+0124|0005|A non-lazy raw property write postpones ghost initialization; ordinary aliasing has no initializer or per-property lazy state.
+0192|0034|0034 repairs preservation of the diagnostic previous exception; 0192 assumes the chain is already intact and tests an explicit outer permanent-policy override during retry classification.
+0186|0181|An unmatched optional regex capture is represented as empty string unless a flag changes it; CSRF validation instead rejects two genuinely missing token inputs even though equality succeeds.

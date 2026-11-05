@@ -1,0 +1,56 @@
+{
+  "browser": "Chrome/156.0.8078.80",
+  "siteDirectory": "_site",
+  "checks": [
+    "legacy local progress loads without migration loss",
+    "10-question exam hides correctness, score, streak and teaching notes until Submit exam (mouse and keyboard)",
+    "shuffled keys grade 5/10; submission updates stats once; missed review retains code and selected answer",
+    "Review missed uses Learn mode with immediate feedback and three mapped distractor explanations",
+    "switching from revealed Learn feedback to Exam clears all previous correctness indicators",
+    "current local progress survives reload; unfinished review adds no aggregate counts",
+    "all 20 pilot IDs and a nonpilot repaired family render the exact code, versions, key and three specific rationales",
+    "mobile question details render at 390px without document overflow",
+    "no uncaught JavaScript exceptions"
+  ],
+  "examIds": [
+    "PQ-281",
+    "PQ-079",
+    "PQ-035",
+    "PQ-156",
+    "PQ-197",
+    "PQ-153",
+    "PQ-269",
+    "PQ-253",
+    "PQ-289",
+    "PQ-184"
+  ],
+  "expectedStats": {
+    "answered": 47,
+    "correct": 24,
+    "sessions": 3,
+    "best": 80
+  },
+  "pilotIds": [
+    "PQ-002",
+    "PQ-004",
+    "PQ-005",
+    "PQ-014",
+    "PQ-021",
+    "PQ-041",
+    "PQ-053",
+    "PQ-061",
+    "PQ-113",
+    "PQ-137",
+    "PQ-197",
+    "PQ-281",
+    "LQ-046",
+    "LQ-314",
+    "LQ-413",
+    "LQ-453",
+    "LQ-142",
+    "LQ-489",
+    "LQ-545",
+    "LQ-546"
+  ],
+  "errors": []
+}

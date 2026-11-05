@@ -1,0 +1,12 @@
+Batch 1, PHP 8.5.2: 100 drafts checked, 293 lints, 288 isolated executions. Batch acceptance remains separate.
+Batch 2, PHP 8.5.2: 100 drafts checked, 301 lints, 287 isolated executions. Batch acceptance remains separate.
+Batch 1, PHP 8.4.17: 100 drafts checked, 293 lints, 288 isolated executions. Batch acceptance remains separate.
+Batch 2, PHP 8.4.17: 100 drafts checked, 301 lints, 287 isolated executions. Batch acceptance remains separate.
+Batch 4, PHP 8.5.2: 100 drafts checked, 275 lints, 268 isolated executions. Batch acceptance remains separate.
+Batch 3, PHP 8.5.2: 100 drafts checked, 276 lints, 272 isolated executions. Batch acceptance remains separate.
+Batch 4, PHP 8.4.17: 100 drafts checked, 275 lints, 268 isolated executions. Batch acceptance remains separate.
+Batch 3, PHP 8.4.17: 100 drafts checked, 276 lints, 272 isolated executions. Batch acceptance remains separate.
+Batch 5, PHP 8.5.2: 100 drafts checked, 199 lints, 197 isolated executions. Batch acceptance remains separate.
+Batch 6, PHP 8.5.2: 100 drafts checked, 228 lints, 226 isolated executions. Batch acceptance remains separate.
+Batch 5, PHP 8.4.17: 100 drafts checked, 199 lints, 197 isolated executions. Batch acceptance remains separate.
+Batch 6, PHP 8.4.17: 100 drafts checked, 228 lints, 226 isolated executions. Batch acceptance remains separate.

@@ -1,0 +1,643 @@
+{
+  "scope": [
+    "PHP-E26-0300",
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "independentApproval": "pending",
+  "productionActivation": false,
+  "records": [
+    {
+      "question": {
+        "schemaVersion": 1,
+        "technology": "php",
+        "collectionId": "php-engineer-2026",
+        "id": "PHP-E26-0300",
+        "revision": 3,
+        "status": "editorially-reviewed",
+        "responseType": "single-choice",
+        "format": "architecture",
+        "topic": "Files & structured data",
+        "subtopic": "rename-stable-lock-identity",
+        "objective": {
+          "id": "rename-stable-lock-identity",
+          "text": "Choose a lock identity that remains shared when data files are atomically replaced."
+        },
+        "difficulty": {
+          "level": "Advanced",
+          "audience": "advanced",
+          "rationale": "Trace coordination across pathname replacement and already-open file handles."
+        },
+        "prerequisites": [
+          "flock advisory locking (advanced)",
+          "Atomic rename",
+          "Open file handles",
+          "Read-modify-write critical sections"
+        ],
+        "runtime": {
+          "php": [
+            "8.4",
+            "8.5"
+          ],
+          "sapi": "Requirements scenario; no executable PHP source",
+          "extensions": [],
+          "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+        },
+        "context": {
+          "assumptions": [
+            "The writers run as separate PHP processes on one local POSIX filesystem with flock support. Same-directory rename atomically replaces a pathname. All writers cooperate and may create auxiliary files in the application-owned directory; no other process changes those files. All I/O succeeds, and crash durability is outside scope. Each update must read the latest committed state and serialize its entire read-modify-replace operation."
+          ],
+          "files": []
+        },
+        "stem": "Writers publish state.json by renaming a temporary file over it. Waiting writers may already have opened their chosen lock target. Which protocol keeps updates serialized across repeated publications?",
+        "options": [
+          {
+            "id": "data-lock",
+            "text": "Lock the opened state.json before reading it; write a temporary replacement, rename it over state.json, then unlock.",
+            "rationale": "A waiter can retain an open handle to the old data file while another writer opens the replacement. Those handles no longer coordinate access to one lock target.",
+            "misconception": "Assuming an acquired lock follows the data pathname when that pathname is replaced."
+          },
+          {
+            "id": "release-before-publish",
+            "text": "Open state.lock with c+, lock it, read and compute the next state, then unlock before writing and renaming the replacement.",
+            "rationale": "The second writer can read the same committed state after unlock but before publication, so both updates can overwrite one another.",
+            "misconception": "Protecting the read and computation while leaving publication outside the critical section."
+          },
+          {
+            "id": "unlink-after-unlock",
+            "text": "Open state.lock with c+, lock it through reading and replacement, then unlock and unlink state.lock after each update.",
+            "rationale": "A waiting writer may acquire the old open lock file while a later writer creates and locks a new file at the same pathname. Cleanup splits coordination into two file objects.",
+            "misconception": "Treating an unlocked lock file as safe to delete even when another writer already has it open."
+          },
+          {
+            "id": "stable-lock",
+            "text": "Open state.lock with c+, lock it before reading state.json, keep the lock through replacement, then unlock without unlinking state.lock.",
+            "rationale": "Every writer contends on the same retained file, and the entire read-modify-replace operation occurs while that lock is held.",
+            "misconception": null
+          }
+        ],
+        "correctOptionId": "stable-lock",
+        "explanation": {
+          "summary": "The lock target must remain shared across publications and across waiting writers. Keeping a separate lock file in place and holding its lock through publication satisfies both requirements; deleting that file can recreate the identity problem.",
+          "trace": "With the retained sidecar, B waits until A publishes, then reads A’s committed state. If the sidecar is unlinked, B may already hold the old file open while C creates a new sidecar and acquires an independent lock. Locking the replaceable data file has the same identity risk."
+        },
+        "validation": {
+          "kind": "document-review",
+          "rule": "On the stated local POSIX flock filesystem, locks refer to open files; rename/unlink can separate old open objects from later opens of the same pathname. Publication must remain within one shared critical section.",
+          "optionAudit": {
+            "data-lock": "A waiter on the old data object and a new opener of the replacement can acquire different locks.",
+            "release-before-publish": "Schedule B’s read between A’s unlock and rename: B computes from stale state.",
+            "unlink-after-unlock": "B opens the old sidecar before A unlocks/unlinks; C creates a new sidecar, permitting independent locks.",
+            "stable-lock": "A and B share one retained sidecar and each publishes before releasing it."
+          },
+          "status": "editorially-reviewed",
+          "independentEditorialReview": "pending",
+          "evidenceBatch": 3
+        },
+        "curriculum": {
+          "repositoryTopic": "repo-topic-10"
+        },
+        "references": [
+          "https://www.php.net/manual/en/ref.filesystem.php",
+          "https://www.php.net/manual/en/function.flock.php",
+          "https://man7.org/linux/man-pages/man2/flock.2.html",
+          "https://www.php.net/manual/en/function.rename.php"
+        ]
+      },
+      "evidence": [
+        {
+          "php": "8.5.2",
+          "sourceHash": "b7fe8425582010ddb6f536960c764608143e5de00366fc15ab14f422ce909f5a",
+          "result": {
+            "id": "PHP-E26-0300",
+            "kind": "document-review",
+            "key": "stable-lock",
+            "observations": [
+              {
+                "execution": "not-applicable",
+                "rule": "On the stated local POSIX flock filesystem, locks refer to open files; rename/unlink can separate old open objects from later opens of the same pathname. Publication must remain within one shared critical section.",
+                "optionAudit": {
+                  "data-lock": "A waiter on the old data object and a new opener of the replacement can acquire different locks.",
+                  "release-before-publish": "Schedule B’s read between A’s unlock and rename: B computes from stale state.",
+                  "unlink-after-unlock": "B opens the old sidecar before A unlocks/unlinks; C creates a new sidecar, permitting independent locks.",
+                  "stable-lock": "A and B share one retained sidecar and each publishes before releasing it."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "php": "8.4.17",
+          "sourceHash": "b7fe8425582010ddb6f536960c764608143e5de00366fc15ab14f422ce909f5a",
+          "result": {
+            "id": "PHP-E26-0300",
+            "kind": "document-review",
+            "key": "stable-lock",
+            "observations": [
+              {
+                "execution": "not-applicable",
+                "rule": "On the stated local POSIX flock filesystem, locks refer to open files; rename/unlink can separate old open objects from later opens of the same pathname. Publication must remain within one shared critical section.",
+                "optionAudit": {
+                  "data-lock": "A waiter on the old data object and a new opener of the replacement can acquire different locks.",
+                  "release-before-publish": "Schedule B’s read between A’s unlock and rename: B computes from stale state.",
+                  "unlink-after-unlock": "B opens the old sidecar before A unlocks/unlinks; C creates a new sidecar, permitting independent locks.",
+                  "stable-lock": "A and B share one retained sidecar and each publishes before releasing it."
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "question": {
+        "schemaVersion": 1,
+        "technology": "php",
+        "collectionId": "php-engineer-2026",
+        "id": "PHP-E26-0355",
+        "revision": 2,
+        "status": "editorially-reviewed",
+        "responseType": "single-choice",
+        "format": "code-review",
+        "topic": "HTTP & superglobals",
+        "subtopic": "redirect-method-preservation-review",
+        "objective": {
+          "id": "redirect-method-preservation-review",
+          "text": "Review the choice of HTTP 303 rather than 307 for retrieving a receipt after a successful POST without replaying the POST body."
+        },
+        "difficulty": {
+          "level": "Intermediate",
+          "audience": "intermediate",
+          "rationale": "Distinguish preserving a request’s method and body from redirecting to retrieval of a result resource."
+        },
+        "prerequisites": [
+          "HTTP 303 and 307",
+          "Location header",
+          "POST/Redirect/GET"
+        ],
+        "runtime": {
+          "php": [
+            "8.4",
+            "8.5"
+          ],
+          "sapi": "Requirements scenario; no executable PHP source",
+          "extensions": [],
+          "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+        },
+        "context": {
+          "assumptions": [
+            "A PHP endpoint has successfully processed a POST. It sends Location: /receipt with status 307. The browser follows redirects normally. The intended follow-up is retrieval of the receipt, not repeating the POST and its body at /receipt. No HTTP response is sent during question validation."
+          ],
+          "files": []
+        },
+        "stem": "A review calls 307 a safe implementation of the intended redirect flow. Which assessment follows the status-code semantics?",
+        "options": [
+          {
+            "id": "always-get",
+            "text": "307 converts POST to GET, so the receipt receives a retrieval request.",
+            "rationale": "307 preserves the request method and body on automatic redirection.",
+            "misconception": "Treating every redirect as a method-changing redirect."
+          },
+          {
+            "id": "see-other",
+            "text": "307 preserves POST; use 303 See Other for the intended retrieval of the receipt.",
+            "rationale": "303 directs the client to retrieve another resource instead of replaying the original POST.",
+            "misconception": null
+          },
+          {
+            "id": "drop-body",
+            "text": "307 keeps the POST method but removes its body, which is equivalent to GET for this flow.",
+            "rationale": "307 does not define that body-dropping conversion, and POST without a body is still POST.",
+            "misconception": "Equating an empty body with safe-method semantics."
+          },
+          {
+            "id": "permanent",
+            "text": "Changing 307 to 308 would convert the follow-up to GET while preserving the same target.",
+            "rationale": "308 also preserves the method; its permanent status does not supply the desired method change.",
+            "misconception": "Confusing permanence with request-method conversion."
+          }
+        ],
+        "correctOptionId": "see-other",
+        "explanation": {
+          "summary": "307 is a method-preserving redirect. A successful POST that should lead to viewing a separate receipt uses the retrieval semantics of 303 See Other.",
+          "trace": "With 307, the follow-up remains POST /receipt with its body. With the intended 303 flow, the browser retrieves /receipt instead."
+        },
+        "validation": {
+          "kind": "document-review",
+          "rule": "RFC 9110 defines 307 method preservation and 303 retrieval of another resource following the original request.",
+          "optionAudit": {
+            "always-get": "Contradicts 307 method preservation.",
+            "see-other": "Selects the retrieval redirect semantics required by the scenario.",
+            "drop-body": "Invents a body-dropping POST conversion.",
+            "permanent": "308 does not change POST into GET."
+          },
+          "status": "editorially-reviewed",
+          "independentEditorialReview": "pending",
+          "evidenceBatch": 4
+        },
+        "curriculum": {
+          "repositoryTopic": "repo-topic-11"
+        },
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc9110.html#section-15.4.4",
+          "https://www.rfc-editor.org/rfc/rfc9110.html#section-15.4.8"
+        ]
+      },
+      "evidence": [
+        {
+          "php": "8.5.2",
+          "sourceHash": "2b3d404d3c4f41d4efefba9d5ad907ba0ce51131c86eee44fc4b919ec82cdc99",
+          "result": {
+            "id": "PHP-E26-0355",
+            "kind": "document-review",
+            "key": "see-other",
+            "observations": [
+              {
+                "execution": "not-applicable",
+                "rule": "RFC 9110 defines 307 method preservation and 303 retrieval of another resource following the original request.",
+                "optionAudit": {
+                  "always-get": "Contradicts 307 method preservation.",
+                  "see-other": "Selects the retrieval redirect semantics required by the scenario.",
+                  "drop-body": "Invents a body-dropping POST conversion.",
+                  "permanent": "308 does not change POST into GET."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "php": "8.4.17",
+          "sourceHash": "2b3d404d3c4f41d4efefba9d5ad907ba0ce51131c86eee44fc4b919ec82cdc99",
+          "result": {
+            "id": "PHP-E26-0355",
+            "kind": "document-review",
+            "key": "see-other",
+            "observations": [
+              {
+                "execution": "not-applicable",
+                "rule": "RFC 9110 defines 307 method preservation and 303 retrieval of another resource following the original request.",
+                "optionAudit": {
+                  "always-get": "Contradicts 307 method preservation.",
+                  "see-other": "Selects the retrieval redirect semantics required by the scenario.",
+                  "drop-body": "Invents a body-dropping POST conversion.",
+                  "permanent": "308 does not change POST into GET."
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "question": {
+        "schemaVersion": 1,
+        "technology": "php",
+        "collectionId": "php-engineer-2026",
+        "id": "PHP-E26-0549",
+        "revision": 2,
+        "status": "editorially-reviewed",
+        "responseType": "single-choice",
+        "format": "code-review",
+        "topic": "Control flow & pattern matching",
+        "subtopic": "exit-in-shutdown-callback-skips-later-cleanup",
+        "objective": {
+          "id": "exit-in-shutdown-callback-skips-later-cleanup",
+          "text": "Review termination inside a shutdown callback while preserving later cleanup and the main script’s failure exit status."
+        },
+        "difficulty": {
+          "level": "Intermediate",
+          "audience": "intermediate",
+          "rationale": "Separate returning from a callback from terminating shutdown processing, while tracking callback registration order and exit status."
+        },
+        "prerequisites": [
+          "Process termination",
+          "Shutdown callbacks",
+          "Function returns"
+        ],
+        "runtime": {
+          "php": [
+            "8.4",
+            "8.5"
+          ],
+          "sapi": "CLI unless the stated context specifies otherwise",
+          "extensions": [],
+          "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+        },
+        "context": {
+          "assumptions": [
+            "Run in a fresh PHP process using only the displayed files and inputs.",
+            "Run as one CLI process. These are the only registered shutdown callbacks. The requirement is to emit main|flush|cleanup| in that order and terminate with exit status 1. All three output operations succeed."
+          ],
+          "files": [
+            {
+              "path": "main.php",
+              "kind": "complete-file",
+              "source": "<?php\n\nregister_shutdown_function(static function (): void {\n    echo 'flush|';\n    exit(1);\n});\n\nregister_shutdown_function(static function (): void {\n    echo 'cleanup|';\n});\n\necho 'main|';\nexit(1);\n"
+            }
+          ]
+        },
+        "stem": "Which review identifies the control-flow defect and a change that meets both the output-order and exit-status requirements?",
+        "options": [
+          {
+            "id": "reverse-order",
+            "text": "The callbacks run in reverse registration order, so cleanup already runs before the first callback terminates.",
+            "rationale": "PHP invokes shutdown callbacks in registration order. The first callback exits before the second is reached.",
+            "misconception": "Applying a last-in-first-out cleanup-stack model to PHP shutdown callback registration."
+          },
+          {
+            "id": "callback-local-exit",
+            "text": "exit(1) ends only the current callback; the later callback still runs, so the code already meets the contract.",
+            "rationale": "exit ends shutdown processing here; it is not a function-local return to the callback dispatcher.",
+            "misconception": "Confusing process termination with returning from a registered function."
+          },
+          {
+            "id": "return-to-dispatcher",
+            "text": "Replace the first callback’s exit(1) with return; later cleanup then runs and the main script’s exit(1) supplies the status.",
+            "rationale": "Returning lets the shutdown dispatcher invoke the next callback without replacing the failure status selected by the main script.",
+            "misconception": null
+          },
+          {
+            "id": "successful-exit",
+            "text": "Replace the first callback’s exit(1) with exit(0); successful termination lets the remaining callback finish cleanup.",
+            "rationale": "An exit call inside that callback still prevents later shutdown callbacks, and status 0 also violates the required failure status.",
+            "misconception": "Assuming successful and failing exit statuses choose different continuation behavior for shutdown callbacks."
+          }
+        ],
+        "correctOptionId": "return-to-dispatcher",
+        "explanation": {
+          "summary": "Shutdown callbacks run in registration order. Calling exit from one prevents later callbacks from running, regardless of the numeric exit status. Returning from the callback allows the dispatcher to continue, preserving the exit status already chosen by the main script.",
+          "trace": "The main script prints main| and enters shutdown through exit(1). The first callback prints flush| and exits, so cleanup is absent. Returning from that callback instead produces main|flush|cleanup| with exit status 1."
+        },
+        "validation": {
+          "kind": "contract",
+          "stdout": "main|flush|",
+          "error": {
+            "message": "",
+            "exitCode": 1
+          },
+          "keyEvidence": "The callback-return contrast includes cleanup and retains exit status 1; changing only the callback exit status still omits cleanup.",
+          "counterexamples": {
+            "reverse-order": "The witness starts main|flush| and never emits cleanup; the return contrast follows registration order.",
+            "callback-local-exit": "The second callback is absent after exit inside the first.",
+            "successful-exit": "The exit(0) contrast still omits cleanup and terminates with status 0."
+          },
+          "contrasts": [
+            {
+              "name": "return-allows-cleanup",
+              "marker": "echo 'flush|';\n    exit(1);",
+              "replacement": "echo 'flush|';\n    return;",
+              "stdout": "main|flush|cleanup|",
+              "error": {
+                "message": "",
+                "exitCode": 1
+              }
+            },
+            {
+              "name": "exit-zero-still-stops-cleanup",
+              "marker": "echo 'flush|';\n    exit(1);",
+              "replacement": "echo 'flush|';\n    exit(0);",
+              "stdout": "main|flush|"
+            }
+          ],
+          "status": "editorially-reviewed",
+          "independentEditorialReview": "pending",
+          "evidenceBatch": 6
+        },
+        "curriculum": {
+          "repositoryTopic": "repo-topic-06"
+        },
+        "references": [
+          "https://www.php.net/manual/en/function.register-shutdown-function.php",
+          "https://www.php.net/manual/en/function.exit.php"
+        ]
+      },
+      "evidence": [
+        {
+          "php": "8.5.2",
+          "sourceHash": "02b3d59f5cec39c65481c0450aee0a8911bce6b314db328d806130a94035e84d",
+          "result": {
+            "id": "PHP-E26-0549",
+            "kind": "contract",
+            "key": "return-to-dispatcher",
+            "observations": [
+              {
+                "stdout": "main|flush|",
+                "exitCode": 1,
+                "expectedError": {
+                  "message": "",
+                  "exitCode": 1
+                }
+              },
+              {
+                "contrast": "return-allows-cleanup",
+                "stdout": "main|flush|cleanup|",
+                "exitCode": 1,
+                "expectedError": {
+                  "message": "",
+                  "exitCode": 1
+                }
+              },
+              {
+                "contrast": "exit-zero-still-stops-cleanup",
+                "stdout": "main|flush|",
+                "exitCode": 0,
+                "expectedError": null
+              }
+            ]
+          }
+        },
+        {
+          "php": "8.4.17",
+          "sourceHash": "02b3d59f5cec39c65481c0450aee0a8911bce6b314db328d806130a94035e84d",
+          "result": {
+            "id": "PHP-E26-0549",
+            "kind": "contract",
+            "key": "return-to-dispatcher",
+            "observations": [
+              {
+                "stdout": "main|flush|",
+                "exitCode": 1,
+                "expectedError": {
+                  "message": "",
+                  "exitCode": 1
+                }
+              },
+              {
+                "contrast": "return-allows-cleanup",
+                "stdout": "main|flush|cleanup|",
+                "exitCode": 1,
+                "expectedError": {
+                  "message": "",
+                  "exitCode": 1
+                }
+              },
+              {
+                "contrast": "exit-zero-still-stops-cleanup",
+                "stdout": "main|flush|",
+                "exitCode": 0,
+                "expectedError": null
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "question": {
+        "schemaVersion": 1,
+        "technology": "php",
+        "collectionId": "php-engineer-2026",
+        "id": "PHP-E26-0557",
+        "revision": 2,
+        "status": "editorially-reviewed",
+        "responseType": "single-choice",
+        "format": "code-review",
+        "topic": "Cookies & sessions",
+        "subtopic": "strict-session-mode-existing-versus-uninitialized-id",
+        "objective": {
+          "id": "strict-session-mode-existing-versus-uninitialized-id",
+          "text": "Review strict session-ID validation without confusing rejection of an uninitialized ID with rotation or rejection of an existing session."
+        },
+        "difficulty": {
+          "level": "Intermediate",
+          "audience": "intermediate",
+          "rationale": "Distinguish identifier syntax, persisted session existence and the setting used when a record was originally created."
+        },
+        "prerequisites": [
+          "Session identifiers",
+          "Files session handler",
+          "Session configuration"
+        ],
+        "runtime": {
+          "php": [
+            "8.4",
+            "8.5"
+          ],
+          "sapi": "CLI unless the stated context specifies otherwise",
+          "extensions": [],
+          "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+        },
+        "context": {
+          "assumptions": [
+            "Run in a fresh PHP process using only the displayed files and inputs.",
+            "This CLI fixture uses PHP’s built-in files session handler in a fresh empty directory. All operations succeed; no other process accesses the records. Cookies and cache-limiter headers are disabled. The first block creates the known session for the test; the next two starts model supplied identifiers. Only identifier acceptance is tested, not a complete login or session-rotation policy."
+          ],
+          "files": [
+            {
+              "path": "main.php",
+              "kind": "complete-file",
+              "source": "<?php\n\n$options = [\n    'save_handler' => 'files',\n    'save_path' => __DIR__,\n    'use_cookies' => 0,\n    'cache_limiter' => '',\n    'gc_probability' => 0,\n];\n\nsession_id('known557');\nsession_start($options + ['use_strict_mode' => 0]);\n$_SESSION['user'] = 'seed';\nsession_write_close();\n\nsession_id('unissued557');\nsession_start($options + ['use_strict_mode' => 1]);\n$acceptedUnknown = session_id() === 'unissued557';\nsession_destroy();\n\nsession_id('known557');\nsession_start($options + ['use_strict_mode' => 1]);\n$resumedKnown = session_id() === 'known557' && $_SESSION['user'] === 'seed';\nsession_destroy();\n\necho json_encode([$acceptedUnknown, $resumedKnown]);\n"
+            }
+          ]
+        },
+        "stem": "A review proposes disabling strict mode so returning users can resume their existing sessions. Which assessment matches both later starts in this fixture?",
+        "options": [
+          {
+            "id": "always-rotate",
+            "text": "Keep strict mode, but expect a new identifier on every start, even when the supplied ID has an existing session record.",
+            "rationale": "The existing known557 record resumes under its supplied ID; strict validation does not rotate every valid session.",
+            "misconception": "Confusing session-ID validation with unconditional session-ID regeneration."
+          },
+          {
+            "id": "creation-policy",
+            "text": "Disable strict mode: an existing record created with strict mode off cannot later be accepted with strict mode on.",
+            "rationale": "The built-in files handler checks for the existing record, not the strict-mode setting that created it. The known record resumes successfully.",
+            "misconception": "Assuming persisted sessions carry a strict-mode provenance requirement."
+          },
+          {
+            "id": "syntax-only",
+            "text": "Either setting accepts both identifiers because their characters are valid; strict mode only checks identifier syntax.",
+            "rationale": "The unissued identifier is syntactically valid but has no initialized record, so strict mode replaces it.",
+            "misconception": "Reducing strict session validation to a check of permitted ID characters."
+          },
+          {
+            "id": "validate-existing-id",
+            "text": "Keep strict mode: the uninitialized supplied ID is replaced, while the existing stored session can resume under its ID.",
+            "rationale": "The fixture prints [false,true]: the unissued ID is not adopted, and the known record and its user value are retained.",
+            "misconception": null
+          }
+        ],
+        "correctOptionId": "validate-existing-id",
+        "explanation": {
+          "summary": "With the built-in files handler, strict mode rejects adoption of an uninitialized session ID and generates a new one instead. It still accepts an ID backed by an existing session record. This is distinct from explicitly rotating an authenticated session ID.",
+          "trace": "The fixture first persists known557. Starting with unissued557 in strict mode selects a different ID. Starting with known557 restores user=seed even though that record was created with strict mode disabled."
+        },
+        "validation": {
+          "kind": "contract",
+          "stdout": "[false,true]",
+          "keyEvidence": "The strict-mode fixture distinguishes an uninitialized supplied ID from a persisted ID; the permissive contrast accepts both.",
+          "counterexamples": {
+            "always-rotate": "The known record resumes with the identical known557 ID.",
+            "creation-policy": "A record seeded with strict mode off resumes when strict mode is on.",
+            "syntax-only": "The valid-character but uninitialized ID is replaced only in the strict-mode witness."
+          },
+          "contrasts": [
+            {
+              "name": "permissive-unknown-id",
+              "marker": "session_id('unissued557');\nsession_start($options + ['use_strict_mode' => 1]);",
+              "replacement": "session_id('unissued557');\nsession_start($options + ['use_strict_mode' => 0]);",
+              "stdout": "[true,true]"
+            }
+          ],
+          "status": "editorially-reviewed",
+          "independentEditorialReview": "pending",
+          "evidenceBatch": 6
+        },
+        "curriculum": {
+          "repositoryTopic": "repo-topic-13"
+        },
+        "references": [
+          "https://www.php.net/manual/en/session.configuration.php#ini.session.use-strict-mode",
+          "https://www.php.net/manual/en/function.session-start.php"
+        ]
+      },
+      "evidence": [
+        {
+          "php": "8.5.2",
+          "sourceHash": "02b3d59f5cec39c65481c0450aee0a8911bce6b314db328d806130a94035e84d",
+          "result": {
+            "id": "PHP-E26-0557",
+            "kind": "contract",
+            "key": "validate-existing-id",
+            "observations": [
+              {
+                "stdout": "[false,true]",
+                "exitCode": 0,
+                "expectedError": null
+              },
+              {
+                "contrast": "permissive-unknown-id",
+                "stdout": "[true,true]",
+                "exitCode": 0,
+                "expectedError": null
+              }
+            ]
+          }
+        },
+        {
+          "php": "8.4.17",
+          "sourceHash": "02b3d59f5cec39c65481c0450aee0a8911bce6b314db328d806130a94035e84d",
+          "result": {
+            "id": "PHP-E26-0557",
+            "kind": "contract",
+            "key": "validate-existing-id",
+            "observations": [
+              {
+                "stdout": "[false,true]",
+                "exitCode": 0,
+                "expectedError": null
+              },
+              {
+                "contrast": "permissive-unknown-id",
+                "stdout": "[true,true]",
+                "exitCode": 0,
+                "expectedError": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

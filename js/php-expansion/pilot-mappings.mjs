@@ -1,0 +1,23 @@
+// Separate mapping overlay; the approved 20 pilot records remain byte-identical.
+export default {
+  'PHP-PILOT-001':{lessonIds:[4],coverageComplete:true},
+  'PHP-PILOT-002':{lessonIds:[4],coverageComplete:false},
+  'PHP-PILOT-003':{lessonIds:[5],coverageComplete:true},
+  'PHP-PILOT-004':{lessonIds:[1,5],coverageComplete:true},
+  'PHP-PILOT-005':{lessonIds:[1,13],coverageComplete:false},
+  'PHP-PILOT-006':{lessonIds:null,coverageComplete:false},
+  'PHP-PILOT-007':{lessonIds:[1,20],coverageComplete:true},
+  'PHP-PILOT-008':{lessonIds:[20],coverageComplete:true},
+  'PHP-PILOT-009':{lessonIds:[21,22],coverageComplete:true},
+  'PHP-PILOT-010':{lessonIds:[5,22],coverageComplete:true},
+  'PHP-PILOT-011':{lessonIds:[23,24],coverageComplete:true},
+  'PHP-PILOT-012':{lessonIds:[23,24,26],coverageComplete:true},
+  'PHP-PILOT-013':{lessonIds:[7,23],coverageComplete:false},
+  'PHP-PILOT-014':{lessonIds:[26,29],coverageComplete:true},
+  'PHP-PILOT-015':{lessonIds:[1,28,29],coverageComplete:true},
+  'PHP-PILOT-016':{lessonIds:[23,30],coverageComplete:true},
+  'PHP-PILOT-017':{lessonIds:[31],coverageComplete:true},
+  'PHP-PILOT-018':{lessonIds:[2],coverageComplete:false},
+  'PHP-PILOT-019':{lessonIds:[22,31],coverageComplete:true},
+  'PHP-PILOT-020':{lessonIds:[20,22],coverageComplete:false},
+};

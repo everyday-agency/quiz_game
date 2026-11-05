@@ -1,0 +1,18 @@
+{
+  "reason": "Explicit pre-release editorial revision; independent approval pending",
+  "changed": [
+    {
+      "id": "PHP-E26-0549",
+      "from": 1,
+      "to": 2
+    },
+    {
+      "id": "PHP-E26-0557",
+      "from": 1,
+      "to": 2
+    }
+  ],
+  "previousSha256": "49bd016c949315af8b9c55df5ec6aecf4aff095e39ae4c54a50a7113ca0e61f8",
+  "archive": "/Users/gabriel/Documents/Codex/2026-07-15/gene/outputs/laravel-architect-quiz/php-expansion/archive/pre-release/batch-06-49bd016c9493.mjs",
+  "productionActivation": false
+}

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "PHP-PILOT-001",
+    "related": [
+      "PQ-029",
+      "PQ-037"
+    ],
+    "distinction": "Array union precedence and retaining zero differ from null-coalescing defaults and filter/reindex operations. The four outputs model overwrite, replacement and recursive-merge misunderstandings.",
+    "wording": "No positivity or generic action cue; solving requires the union rule.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-002",
+    "related": [
+      "PQ-013",
+      "PQ-021"
+    ],
+    "distinction": "A foreach reference escaping its loop is different from closure capture or static-local retention. Every candidate is an actual PHP operation, and all four are executed.",
+    "wording": "The short key is an operation that detaches a variable; shorter wording alone is not a reliable collection-wide cue.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-003",
+    "related": [
+      "PQ-073",
+      "PQ-005"
+    ],
+    "distinction": "An API parameter rename breaks a named caller while preserving a positional caller. This differs from reordered named arguments and strict scalar calls across files.",
+    "wording": "Compatibility alternatives separate both-working, both-breaking and the two possible mixed outcomes.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-004",
+    "related": [
+      "PQ-029"
+    ],
+    "distinction": "Omitted versus explicit-null function arguments are distinct from an absent array key or a falsy stored value.",
+    "wording": "The four outcomes diagnose default selection, nullable acceptance and null coalescing.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-005",
+    "related": [
+      "PQ-121"
+    ],
+    "distinction": "A valid zero quantity changes the contract from an existing positive-page check; the task is choosing the failure predicate rather than repeating that input is untrusted.",
+    "wording": "All choices are common PHP validation idioms. The long-key screen flags this short expression; no padding is added.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-006",
+    "related": [
+      "PQ-125"
+    ],
+    "distinction": "Request media-type token parsing differs from emitting a JSON response header. Both prefix and suffix lookalikes have concrete counterexamples.",
+    "wording": "All four alternatives parse semicolon parameters. The remaining differences require understanding case handling, prefix/substring checks and exact matching; selecting the only delimiter parser is no longer a shortcut.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-007",
+    "related": [
+      "PQ-253",
+      "PQ-113"
+    ],
+    "distinction": "A test exposing a falsy valid line differs from generator cleanup and CSV field parsing. Newline bytes are explicit and all four test fixtures are run.",
+    "wording": "The requirement alone does not establish why the string 0 differs from 0 plus newline; PHP truthiness determines the revealing test.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-008",
+    "related": [
+      "PQ-113"
+    ],
+    "distinction": "The cursor overwrite after a read is a different behavior from CSV parsing and a missing escape argument.",
+    "wording": "All four outputs map to concrete stream models: append, overwrite, insertion and truncation.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-009",
+    "related": [
+      "PQ-229"
+    ],
+    "distinction": "The shared catch type at an intentionally broad worker boundary differs from translating a domain exception into an HTTP response.",
+    "wording": "Every option is a real PHP exception/error type. Each wrong candidate is executed and fails on a particular task.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-010",
+    "related": [
+      "PQ-233"
+    ],
+    "distinction": "Returning from finally replaces a pending throw; the previous lock example teaches cleanup without changing the pending outcome.",
+    "wording": "Options distinguish catch propagation, replacement, dual outcomes and a supposed language prohibition.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-011",
+    "related": [
+      "PQ-193",
+      "PQ-197"
+    ],
+    "distinction": "Readonly reference replacement and mutation of the referenced object differ from scalar Money construction and shallow cloning.",
+    "wording": "The four outcomes require knowing which object/property is written; no generic immutability slogan identifies the key.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-012",
+    "related": [
+      "PQ-193"
+    ],
+    "distinction": "An explicitly declared child constructor skipping parent initialization differs from ordinary constructor promotion in one class.",
+    "wording": "A local assignment, a fallback parent call and a separate parent instance are runnable but violate different parts of the contract.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-013",
+    "related": [
+      "PQ-205"
+    ],
+    "distinction": "Reading an injected clock on every decision differs from merely implementing a Clock interface or producing a timestamp once.",
+    "wording": "Caching is plausible for a long-lived object but wrong for this changing dependency; every alternative is exercised.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-014",
+    "related": [
+      "PQ-209"
+    ],
+    "distinction": "Precedence between a trait, a parent method and an own method differs from resolving two imported traits with insteadof/as.",
+    "wording": "The collision distractor targets confusion with the old two-trait case; the other pairs reverse one precedence rule each.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-015",
+    "related": [
+      "PQ-205",
+      "PQ-209"
+    ],
+    "distinction": "Implementing an abstract trait method differs from interface usage and trait conflict resolution. The fragment wrapper is explicit.",
+    "wording": "All alternatives look like plausible method declarations; only one is compatible. The three rejection diagnostics are observed.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-016",
+    "related": [
+      "PQ-017",
+      "PQ-197"
+    ],
+    "distinction": "Shared static class storage across instances differs from a function static local or a cloned scalar property.",
+    "wording": "The four triples represent separate storage models rather than unrelated errors.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-017",
+    "related": [
+      "PQ-217"
+    ],
+    "distinction": "Function lookup in a namespace differs from class import aliases. The explicit global call makes the lookup boundary observable.",
+    "wording": "The two same-namespace and mixed-output choices require namespace knowledge; the redeclaration alternative reflects global built-in restrictions.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-018",
+    "related": [
+      "PQ-265"
+    ],
+    "distinction": "Selecting the equality regression case differs from a general assertion using a stubbed price collaborator. All four tests have valid expectations under the contract.",
+    "wording": "A learner can select the boundary using requirements and testing knowledge; that is the intended skill, not a wording shortcut.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-019",
+    "related": [
+      "PQ-217",
+      "PHP-PILOT-017"
+    ],
+    "distinction": "Class names lack the global fallback available to functions. Unlike item 017, the decisive event is construction failure caught through Throwable.",
+    "wording": "The choices distinguish the intended class, missing namespaced class, concrete lookup Error and catch interface. Shared namespace vocabulary is intentional, not a renamed scenario.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  },
+  {
+    "id": "PHP-PILOT-020",
+    "related": [
+      "PQ-233",
+      "PQ-253",
+      "PHP-PILOT-008"
+    ],
+    "distinction": "Ownership of a borrowed handle differs from closing a handle acquired by the helper, and from an ordinary overwrite. Both openness and position are requirements.",
+    "wording": "Every alternative is a resource/variable operation. The key preserves the caller’s reference; other operations violate openness or the next-line position.",
+    "review": "Author technical/editorial review; independent blind review and learner calibration pending"
+  }
+]

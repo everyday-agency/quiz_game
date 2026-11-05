@@ -1,0 +1,980 @@
+{
+  "batch": 2,
+  "reviewer": "Author remediation pass with key-hidden baseline evaluation; not independent approval",
+  "sourceHash": "ff536595be770f7b649735390102e456f03bb34a7b766c1c44eea5f9792eef42",
+  "rubric": [
+    "answer leakage",
+    "length and professional-wording cues",
+    "plausible misconceptions",
+    "semantic duplication",
+    "difficulty reasoning",
+    "ambiguity/context",
+    "curriculum objective",
+    "all four explanations"
+  ],
+  "independentApproval": "pending",
+  "records": [
+    {
+      "id": "PHP-E26-0101",
+      "finding": "and versus && crosses assignment precedence, distinct from the earlier loop comparison grouping.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Assignment binds before and; the && expression is grouped differently. Both outputs are booleans, so type formatting does not identify the key."
+    },
+    {
+      "id": "PHP-E26-0102",
+      "finding": "Unary minus and exponentiation precedence isolated by parentheses.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Unary minus and exponentiation use the documented precedence; parentheses change the base. No floating-point approximation is involved."
+    },
+    {
+      "id": "PHP-E26-0103",
+      "finding": "Loose switch chooses false before zero; strict match chooses the string. Breaks exclude fallthrough ambiguity.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "switch loose comparison and match identity are contrasted on the same string input; all branch names are defined."
+    },
+    {
+      "id": "PHP-E26-0104",
+      "finding": "Array by-value iteration and persistent loop variable produce separate observations.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "By-value foreach changes only its local scalar variable; the final loop variable remains defined. No lingering reference is present."
+    },
+    {
+      "id": "PHP-E26-0105",
+      "finding": "Explicit destructuring keys determine selection independently of assignment order.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Explicit destructuring keys make selection independent of source position. All requested keys exist."
+    },
+    {
+      "id": "PHP-E26-0106",
+      "finding": "Mutable-default cross-language misunderstanding tested by two omitted-argument calls.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Array default values are per-call values rather than a persistent mutable default; repeated calls reveal the distinction."
+    },
+    {
+      "id": "PHP-E26-0107",
+      "finding": "Declared parameter order in func_get_args differs from variadic unmatched-name capture in 0016.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "Named arguments bind to declared parameter positions before func_get_args reports the arguments. The call supplies both parameters."
+    },
+    {
+      "id": "PHP-E26-0108",
+      "finding": "Global constant and same-spelling local variable exercise separate symbol/scope rules.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "A constant is available inside a function without a variable import; local variables remain separate. The example contains no undefined variable access."
+    },
+    {
+      "id": "PHP-E26-0109",
+      "finding": "Coercion through a typed reference changes caller type and value; strictness explicitly stated.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "A typed reference parameter can coerce the referenced variable under the stated weak call context. Type and value are both observed."
+    },
+    {
+      "id": "PHP-E26-0110",
+      "finding": "Reference return requires caller reference assignment; ordinary copy remains detached.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Returning by reference and receiving by reference are separate requirements. The example explicitly distinguishes the alias from a copied value."
+    },
+    {
+      "id": "PHP-E26-0111",
+      "finding": "One aliased Closure versus two created Closure instances determines static-local ownership.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Static variables belong to each closure instance; an alias invokes the same instance. Separate factory calls are shown."
+    },
+    {
+      "id": "PHP-E26-0112",
+      "finding": "Recursive replacement preserves unmatched numeric positions and treats explicit null as a replacement.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "Recursive replacement retains indexed keys and replaces with explicit null; it is not recursive concatenation. Iteration order is fixed."
+    },
+    {
+      "id": "PHP-E26-0113",
+      "finding": "String-form intersection equality differs from strict and loose comparison and preserves original values/keys.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "array_intersect compares string representations and retains first-array keys. The choices separate membership from strict identity."
+    },
+    {
+      "id": "PHP-E26-0114",
+      "finding": "Null callback zipping and shorter-array padding distinguish all candidate shapes.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "array_map with null and multiple arrays zips positional values and pads absent entries. Unequal lengths expose the padding rule."
+    },
+    {
+      "id": "PHP-E26-0115",
+      "finding": "Stem teaches that offset is insertion position rather than array key, directly eliminating an offered misconception. Remove this API-rule hint; retain code and output question.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "array_splice offset is positional and renumbers numeric keys. Removed values and remaining values are both checked."
+    },
+    {
+      "id": "PHP-E26-0116",
+      "finding": "Name normalization collision and bracketed list fields are specified in fixed input and require PHP parsing knowledge.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "parse_str normalizes incoming field names, causing the documented name collision. This tests parsing behavior without a request dependency."
+    },
+    {
+      "id": "PHP-E26-0117",
+      "finding": "EXTR_SKIP protects existing binding while import count tracks only the new binding.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "EXTR_SKIP preserves an existing local variable and reports the number actually imported. No security recommendation to extract untrusted data is implied."
+    },
+    {
+      "id": "PHP-E26-0118",
+      "finding": "Explicit RFC mode/separator remove configuration uncertainty; null omission, boolean encoding and nested index remain tested.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "RFC3986 query encoding, boolean conversion and null omission are all specified. The example does not rely on platform INI separator settings."
+    },
+    {
+      "id": "PHP-E26-0119",
+      "finding": "Incompatible typed properties cannot share a reference container despite scalar widening; subsequent mutation proves surviving binding.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "One reference set must satisfy both typed-property constraints; incompatible binding fails. get_debug_type avoids ambiguous JSON float presentation."
+    },
+    {
+      "id": "PHP-E26-0120",
+      "finding": "Two instances of one anonymous class share a static counter. Intermediate identity/class-state reasoning rather than Advanced due to anonymous syntax.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "Repeated evaluation of one anonymous-class expression shares class identity and static state while creating distinct instances."
+    },
+    {
+      "id": "PHP-E26-0121",
+      "finding": "Bound scope selects distinct inherited private slots on one object; Advanced interaction justified.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "Closure binding selects the private property associated with its bound scope. Both parent and child private slots are explicitly initialized."
+    },
+    {
+      "id": "PHP-E26-0122",
+      "finding": "Magic getter array copy versus object handle mutation and diagnostic count create a multi-rule trace.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Indirect mutation of an overloaded array differs from mutation through a returned object handle; the diagnostic handler makes the notice observable and deterministic."
+    },
+    {
+      "id": "PHP-E26-0123",
+      "finding": "Forwarding parent call versus explicit named nonforwarding call changes late-static class context.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "parent:: forwards the called class while an explicit class call resets it. The displayed call chain determines the late-static result."
+    },
+    {
+      "id": "PHP-E26-0124",
+      "finding": "Non-lazy raw property initialization, lazy object state and later initializer overwrite must be traced separately.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Lazy ghost raw initialization of one property does not initialize the object; reading the other property does. PHP 8.4 feature prerequisite is explicit."
+    },
+    {
+      "id": "PHP-E26-0125",
+      "finding": "Reference authority acquired inside scope survives outside mutation while direct private-set write fails.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "A reference exported from the allowed scope can mutate the property even though direct external writes are restricted. The example is marked advanced."
+    },
+    {
+      "id": "PHP-E26-0126",
+      "finding": "Empty-array identity versus singleton wrapping separates null, empty and populated cases.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "count requires a countable value; normalize the nullable array at the boundary. Each distractor is tested against the displayed inputs."
+    },
+    {
+      "id": "PHP-E26-0127",
+      "finding": "Nonempty ASCII premise makes final byte offset unambiguous; simple Foundation indexing.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "Byte offsets are zero-based and the ASCII premise excludes multibyte ambiguity. The repaired index remains in bounds for all stated nonempty inputs."
+    },
+    {
+      "id": "PHP-E26-0128",
+      "finding": "Sparse stored keys versus positions and values determine the traversal expression.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Gapped numeric keys are not consecutive positions; foreach visits actual values. The fixtures include an absent zero key."
+    },
+    {
+      "id": "PHP-E26-0129",
+      "finding": "Percent-format escaping is distinct from PHP, HTML and URL escaping.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "A literal percent sign in sprintf requires %%. The four candidate format strings are executed, not inferred from string matching."
+    },
+    {
+      "id": "PHP-E26-0130",
+      "finding": "Prior range/lexical validation prevents teaching casts as validation; strict integer argument requires the actual int cast.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "The string is validated before an explicit cast crosses a strict int boundary. The answer does not claim strict_types parses numeric input."
+    },
+    {
+      "id": "PHP-E26-0131",
+      "finding": "Salted rehash inequality and verifier argument order distinguish credible password API mistakes; fixture cost labelled.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Password hashes use salts; verification must use password_verify rather than compare a new hash. Fixtures are local and no real credentials are used."
+    },
+    {
+      "id": "PHP-E26-0132",
+      "finding": "Strict invalid-alphabet rejection is distinct from canonical pad-bit validation in 0591; empty input explicitly allowed.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Strict base64 decoding rejects malformed input instead of silently discarding bytes. Binary outputs are compared through a deterministic encoding."
+    },
+    {
+      "id": "PHP-E26-0133",
+      "finding": "Visible prerequisite Round-trip validation names the technique unique to the keyed option. Replace with neutral parsing/formatting prerequisites.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "high",
+      "blindAnswer": "A",
+      "baselineFinding": "Date parsing can normalize an impossible date; a canonical round trip detects that normalization under the specified format and timezone."
+    },
+    {
+      "id": "PHP-E26-0134",
+      "finding": "Single CR/LF in the middle defeats trimming and paired-sequence checks; pure validator boundary explicit.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Header input must reject either CR or LF, including isolated occurrences. The input matrix distinguishes pair-only matching from individual-byte rejection."
+    },
+    {
+      "id": "PHP-E26-0135",
+      "finding": "Upload status codes versus bit flags is a realistic PHP upload mistake; all cases differ meaningfully.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Upload errors are mutually exclusive result codes, not bit flags. UPLOAD_ERR_OK is zero and every supplied alternative is exercised."
+    },
+    {
+      "id": "PHP-E26-0136",
+      "finding": "JSON media type and body availability are necessary premises; array/object decoding still determines correct predicate behavior.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "A JSON request body is not a parsed form field array; the supplied local body is decoded explicitly. No network or superglobal population is simulated as real HTTP."
+    },
+    {
+      "id": "PHP-E26-0137",
+      "finding": "Dynamic constant lookup requires namespace string construction, distinct from lexical ::class resolution.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "A dynamic constant name string needs the intended fully qualified name. Namespace syntax does not rewrite arbitrary string contents."
+    },
+    {
+      "id": "PHP-E26-0138",
+      "finding": "Declining one autoload request must preserve later loaders and this loader for a future supported request.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Unsupported names must return from one autoloader without unregistering it or loading the wrong class. Multi-file trace proves cooperation; standalone option indentation corrected."
+    },
+    {
+      "id": "PHP-E26-0139",
+      "finding": "Repeat configuration return differs from include-once success sentinel; safe reevaluation premise excludes redeclaration concerns.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "require_once returns true on subsequent inclusion rather than replaying a configuration array return value. The repeated-load requirement is explicit."
+    },
+    {
+      "id": "PHP-E26-0140",
+      "finding": "Visible prerequisite names JSON_BIGINT_AS_STRING, which appears only in the correct choice. Remove solution flag name from student-visible prerequisites.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "high",
+      "blindAnswer": "D",
+      "baselineFinding": "JSON_BIGINT_AS_STRING preserves an oversized JSON integer before precision is lost. Casting after float decoding cannot restore the exact digits."
+    },
+    {
+      "id": "PHP-E26-0141",
+      "finding": "Attribute argument evaluation can allocate repeatedly; cache the argument result rather than repeatedly constructing metadata objects.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Reflection attribute argument evaluation can construct fresh objects on each retrieval. Caching one retrieval preserves identity without changing the declared attribute."
+    },
+    {
+      "id": "PHP-E26-0142",
+      "finding": "Stable enum class/case key versus backing value or process-local object ID is Intermediate identity reasoning; Advanced label overstates it.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "A durable enum identity includes enum class and case name; backing values can collide across enums, while process object IDs are not durable."
+    },
+    {
+      "id": "PHP-E26-0143",
+      "finding": "Nested rollback must preserve outer transaction ownership and both outer writes; savepoint release is not undo.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "ROLLBACK TO and RELEASE preserve the outer transaction. Full rollback discards outer work; releasing without rollback retains the failed inner insert. Option formatting corrected."
+    },
+    {
+      "id": "PHP-E26-0144",
+      "finding": "Assumptions explicitly propose the per-job writer solution before the alternatives. Remove that sentence; keep interleaving/output requirements.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "high",
+      "blindAnswer": "C",
+      "baselineFinding": "Output buffers are process-stack state, not Fiber-local state. The explicit suspension schedule makes mixed output deterministic."
+    },
+    {
+      "id": "PHP-E26-0145",
+      "finding": "Only the key contains both required words final and sealed. Use plausible complete adaptations that all attempt both requirements, including original/alias confusion and adaptation grammar errors.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "weak-distractor",
+        "wording-cue"
+      ],
+      "severity": "medium",
+      "blindAnswer": "B",
+      "baselineFinding": "A final alias can coexist with an overridable original trait method. An initially invalid modifier combination was replaced by a valid but incorrect protected alias; expected visibility/finality failures are checked."
+    },
+    {
+      "id": "PHP-E26-0146",
+      "finding": "Function and variable case sensitivity differ; balanced two-axis alternatives.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Function names and variable names have different case rules; all variable references are intentional and defined."
+    },
+    {
+      "id": "PHP-E26-0147",
+      "finding": "Claiming echo body produces unrelated extra text is internally implausible. Replace with closing-tag-versus-literal-output confusion.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "weak-distractor"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "Literal text after a closing PHP tag is output during inclusion. The separate helper file is displayed rather than concatenated into main.php."
+    },
+    {
+      "id": "PHP-E26-0148",
+      "finding": "Scalar arrow mutation breaks outer reference behavior; distinct from captured object mutation and loop snapshots.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Replacing a reference-capturing closure with an arrow function changes the outer scalar update. The review evaluates a concrete observable counter."
+    },
+    {
+      "id": "PHP-E26-0149",
+      "finding": "Explicit router decoding contract distinguishes form encoding from path-segment encoding.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Path-segment encoding differs from application/x-www-form-urlencoded plus encoding. The example specifies the URL component being constructed."
+    },
+    {
+      "id": "PHP-E26-0150",
+      "finding": "HTML context, UTF-8 and escaping flags sufficient; strip-tags/entity-expansion misconceptions plausible.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "htmlspecialchars escapes HTML syntax while preserving UTF-8 non-ASCII text. Encoding and output context are explicit."
+    },
+    {
+      "id": "PHP-E26-0151",
+      "finding": "Same-origin injected script and browser cookie acceptance premises isolate HttpOnly read protection from authenticated requests.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "HttpOnly prevents script reads of the cookie but not authenticated requests. Official cookie documentation supports the limited guarantee; the answer does not claim complete XSS prevention."
+    },
+    {
+      "id": "PHP-E26-0152",
+      "finding": "Separate required-file parse failure is catchable after main starts; intentional invalid source clearly labelled.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "ParseError in an included broken file is catchable by a valid caller. The broken file is intentionally lint-failing and tracked as such, not silently marked syntactically valid."
+    },
+    {
+      "id": "PHP-E26-0153",
+      "finding": "Return evaluation retains object identity until finally completes; not a scalar-return snapshot.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "The return expression selects an object before finally; mutation in finally changes that same object. No second return masks the first."
+    },
+    {
+      "id": "PHP-E26-0154",
+      "finding": "Prerequisite new self versus new static introduces the exact replacement expression unique to the key. Use neutral factory/inheritance prerequisites.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "B",
+      "baselineFinding": "The factory contract now explicitly requires the exact called class for current and future subclasses, stronger than merely satisfying the static return type."
+    },
+    {
+      "id": "PHP-E26-0155",
+      "finding": "Named-only caller premise permits safe parameter reordering while keeping required/optional semantics.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Required-after-optional parameters are reordered while named-call compatibility is retained. The original deprecation and missing-argument failure are verified, and the repaired signature has one required parameter."
+    },
+    {
+      "id": "PHP-E26-0156",
+      "finding": "json_encode is named in visible prerequisites and appears only in the correct replacement. Keep context/JavaScript-string prerequisites without the solution API.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "JSON_HEX_TAG protects an HTML script-text boundary around an already JSON-encoded string. This is not presented as a universal JavaScript or HTML escaping recipe."
+    },
+    {
+      "id": "PHP-E26-0157",
+      "finding": "Validation API appears in several choices; byte-preservation plus original-input rejection determine correct composition.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Validation preserves the original email or rejects it; sanitization can silently rewrite user intent. The stated policy makes that distinction decisive."
+    },
+    {
+      "id": "PHP-E26-0158",
+      "finding": "Requirement literally prescribes server temporary-file bytes, then key repeats it. State accepted actual PNG-content goal and untrusted metadata rather than the detection method.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "high",
+      "blindAnswer": "B",
+      "baselineFinding": "Browser-provided upload MIME metadata is untrusted. PHP manual explicitly says it is not checked by PHP; the question does not execute or upload a real file."
+    },
+    {
+      "id": "PHP-E26-0159",
+      "finding": "Constructor invariant bypass during local unserialize fixture is shown without implying safe untrusted deserialization.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Unserialization can restore state without the constructor invariant. The payload is fixed, local and harmless; no arbitrary user payload is executed."
+    },
+    {
+      "id": "PHP-E26-0160",
+      "finding": "SplObjectStorage is a prerequisite and appears only in the correct replacement; remove this solution collection name while retaining identity/reachability prerequisites.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "Strong object identity storage and weak storage have different lifetime contracts. SplObjectStorage retains keys; WeakMap does not satisfy required retention."
+    },
+    {
+      "id": "PHP-E26-0161",
+      "finding": "Repeated trait composition versus inheritance changes static storage on stated runtimes; requires comparing the removal variant.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "A child reusing a trait receives separate static property storage in modern PHP. Version prerequisites exclude older shared-state behavior."
+    },
+    {
+      "id": "PHP-E26-0162",
+      "finding": "Constructor inheritance exceptions labels the special rule that refutes the review claim. Neutral constructor/inheritance prerequisites preserve context without teaching the exception.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "Constructors may have different signatures in subclasses; new static with fixed arguments can fail. The strict scalar argument failure is observed."
+    },
+    {
+      "id": "PHP-E26-0163",
+      "finding": "Attribute trace wrapping versus explicit message concatenation is Intermediate inspection of one protection boundary; Advanced relied mainly on attribute unfamiliarity.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "SensitiveParameter changes trace argument representation, not text already copied into an exception message. zend.exception_ignore_args=0 is explicitly set for this fixture."
+    },
+    {
+      "id": "PHP-E26-0164",
+      "finding": "Compile-time assertion elimination versus assertion exception policy is a significant configuration boundary; external sample accepted and no confirmed defect.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Disabled assertions do not evaluate their expression; validation side effects cannot depend on assert. zend.assertions=-1 is part of the question runtime assumptions."
+    },
+    {
+      "id": "PHP-E26-0165",
+      "finding": "Private parent method dispatch, independent child signature and final wrapper interact; Advanced remains justified.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "A parent private helper is resolved in the parent scope and is not overridden by a child same-named method. The signature difference is therefore legal."
+    },
+    {
+      "id": "PHP-E26-0166",
+      "finding": "Single versus double quoting and unnecessary backslash separate label bytes from variable interpolation.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "Literal dollar text and interpolated values require distinct quoting choices. All four candidates are executed on the same input."
+    },
+    {
+      "id": "PHP-E26-0167",
+      "finding": "Visible ceil prerequisite names the function unique to the key; use neutral division/rounding prerequisites.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "Page count requires ceiling division under the stated positive page-size contract. Boundary and partial-page fixtures distinguish the alternatives."
+    },
+    {
+      "id": "PHP-E26-0168",
+      "finding": "Both removal APIs are in prerequisites; result and mutation distinguish shift/pop/pointer movement.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "array_shift removes the first element and reindexes integer keys; moving the internal pointer does not remove anything."
+    },
+    {
+      "id": "PHP-E26-0169",
+      "finding": "Prerequisite pair array_intersect_key and array_flip uniquely spells the correct recipe. Replace with key-set/mapping concepts.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "C",
+      "baselineFinding": "An allowed field list must be converted into keys before intersecting request keys. The fixture includes allowed values that should not themselves become field names."
+    },
+    {
+      "id": "PHP-E26-0170",
+      "finding": "Nullable declaration versus initialized null and strict assignment type are three explicit constraints.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "A nullable typed property still needs initialization for direct reading. Explicit null default meets the contract; strict integer assignment remains enforced."
+    },
+    {
+      "id": "PHP-E26-0171",
+      "finding": "Argument count defeats replacing a variadic list with its numeric total; Foundation unpacking.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Argument unpacking supplies variadic elements rather than one array argument. Count and total together distinguish argument shape from arithmetic alone."
+    },
+    {
+      "id": "PHP-E26-0172",
+      "finding": "in_array prerequisite appears only in the keyed option, giving a keyword shortcut around the boolean-expression defect.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "Both allowed HTTP methods must be compared with the request method. A bare nonempty method string in an OR expression is always truthy."
+    },
+    {
+      "id": "PHP-E26-0173",
+      "finding": "Prefix, userinfo, subdomain and wrong-scheme fixtures distinguish authority parsing; scope explicitly excludes full SSRF defense.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Parsed scheme/host allowlisting rejects suffix and userinfo tricks under an explicit syntactic URL policy. No DNS-based SSRF prevention guarantee is claimed."
+    },
+    {
+      "id": "PHP-E26-0174",
+      "finding": "Matched CSV dialect and quoted/backslash fields require interpreting escape parameter; both reader and writer contracts explicit.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "CSV writer and reader escape conventions must agree. Quote, slash and backslash-containing fields distinguish all candidates; all round trips execute locally."
+    },
+    {
+      "id": "PHP-E26-0175",
+      "finding": "Range/lexical validation permits decimal-string conversion; large witness defeats float rounding repairs.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Validated fixed-decimal text can be converted to cents without floating point. The large fixture stays within 64-bit integer range while exposing lost float precision."
+    },
+    {
+      "id": "PHP-E26-0176",
+      "finding": "Timestamp construction timezone versus later display-zone conversion is distinct from immutable offset rollover.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "Timestamp constructors ignore the supplied timezone; setTimezone changes display after construction. Renamed a draft helper that collided case-insensitively with built-in localtime."
+    },
+    {
+      "id": "PHP-E26-0177",
+      "finding": "Identifier allowlisting differs from value quoting/binding; fixed application-owned choices establish safe interpolation scope.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "PDO parameter markers represent data values, not ORDER BY identifiers. The allowlisted identifier design uses application-owned SQL text and a deterministic tie-breaker."
+    },
+    {
+      "id": "PHP-E26-0178",
+      "finding": "Nested generator advancement can overfetch despite correct output count; side-effect witness makes Advanced interaction meaningful.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "A bounded take generator must stop immediately after the nth yield resumes, before requesting n+1. A source-side fetch counter distinguishes overconsumption."
+    },
+    {
+      "id": "PHP-E26-0179",
+      "finding": "Evaluate instantiability and required arity against explicit class examples; Intermediate rather than Advanced based mainly on Reflection APIs.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "Reflection construction screening requires both instantiability and zero required constructor parameters. Private and abstract classes are included as counterexamples."
+    },
+    {
+      "id": "PHP-E26-0180",
+      "finding": "One atomic version predicate prevents a second stale update. Intermediate optimistic-concurrency application, with no multi-resource transaction uncertainty.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "Expected-version equality belongs in the same conditional update as the write. Sequential stale snapshots reproduce lost-update behavior in in-memory SQLite."
+    },
+    {
+      "id": "PHP-E26-0181",
+      "finding": "Equal empty tokens distinguish equality from required presence; no production token material.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Two absent CSRF strings can compare equal; the regression explicitly tests presence in addition to constant-time equality."
+    },
+    {
+      "id": "PHP-E26-0182",
+      "finding": "A deeper nested list differentiates counting immediate children from recursive leaves; empty containers explicitly defined.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "The recursive leaf-count test contains deeper unequal branching; flat, empty and empty-child cases intentionally do not expose the missing recursive call."
+    },
+    {
+      "id": "PHP-E26-0183",
+      "finding": "Reserved query delimiter fixture tests data versus syntax; all other round trips legitimately pass.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "An ampersand inside a query value becomes syntax unless encoded. Safe letters, digits and hyphens provide realistic passing controls."
+    },
+    {
+      "id": "PHP-E26-0184",
+      "finding": "Append mode ignores seek position for writing; nonempty original plus nonempty prefix uniquely exposes it. Cross-cutting testing-stem review: the phrase \"reveals the incorrect mode\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "A",
+      "baselineFinding": "Append mode ignores seek for writes. A nonempty fixture distinguishes overwrite behavior; empty fixtures and a no-op write do not."
+    },
+    {
+      "id": "PHP-E26-0185",
+      "finding": "Same wall clock with different offsets is a distinct instant; whole-second precision stated.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "Equal wall-clock fields with different UTC offsets represent different instants. Whole-second precision is explicitly scoped to avoid microsecond ambiguity."
+    },
+    {
+      "id": "PHP-E26-0186",
+      "finding": "Prerequisite PREG_UNMATCHED_AS_NULL supplies the repair for the optional-capture boundary. Retain regex capture/null-coalescing concepts without naming the solution flag.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "B",
+      "baselineFinding": "Revision 2 replaces a pilot-overlapping Throwable test. Optional named capture defaults to empty string inside a successful match; PREG_UNMATCHED_AS_NULL makes the explicit fallback work. Four original/repaired probes isolate the absent capture."
+    },
+    {
+      "id": "PHP-E26-0187",
+      "finding": "Strict scalar uniqueness versus array_unique string comparison; type pair needed rather than superficial duplicate value.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Default array_unique string comparison conflates integer 1 with string 1. A strict membership repair preserves both, while leading-zero strings remain a passing control."
+    },
+    {
+      "id": "PHP-E26-0188",
+      "finding": "POSIX basename versus cross-platform display-label grammar explicitly scoped away from filesystem access.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "The display-label contract deliberately accepts both separators on POSIX. It is not a path-security algorithm; backslash normalization is checked with a local string only."
+    },
+    {
+      "id": "PHP-E26-0189",
+      "finding": "Payload newline before framing distinguishes trim-character-set semantics from fixed suffix removal.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "C",
+      "baselineFinding": "rtrim removes a trailing character set, not exactly one CRLF suffix. A payload-ending LF is the unique failing case and repaired byte outputs are checked."
+    },
+    {
+      "id": "PHP-E26-0190",
+      "finding": "Spy validates collaborator payload independently of receipt, call count and scalar shape.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "B",
+      "baselineFinding": "A spy captures the actual dependency argument; correct return value, count and type do not prove the right JSON was sent."
+    },
+    {
+      "id": "PHP-E26-0191",
+      "finding": "Assignment expression returns input despite setter normalization; a short two-value trace fits Intermediate rather than Advanced due to new hook syntax.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "A set hook normalizes stored state without changing the assignment expression’s result. The padded-input test distinguishes reading after assignment from returning the assignment."
+    },
+    {
+      "id": "PHP-E26-0192",
+      "finding": "Explicit outer-to-inner classification policy and one missing permanent guard require Intermediate chain traversal; no distributed retry protocol is evaluated. Cross-cutting testing-stem review: the phrase \"The implementation examines causes but misses one policy boundary. Which assertion exposes that defect?\" diagnoses the defect before the learner traces the source. Replace it with a neutral failing-test question; retain the stated behavior contract.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "difficulty",
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "B",
+      "baselineFinding": "Replaced a redundant readonly-clone draft with exception-chain retry classification. The outer permanent classification overrides a transient cause by explicit policy; cause retention is distinguished from retry authority."
+    },
+    {
+      "id": "PHP-E26-0193",
+      "finding": "Externally flagged: supplied enum/adapters implement the exact proposed answer. Remove solution witness from student content and use a requirement-only scenario; original objective preserved.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "high",
+      "blindAnswer": "C",
+      "baselineFinding": "Revision 2 replaces the pilot-overlapping clock design. A neutral enum outcome is mapped independently to HTTP 422 and CLI exit 2; the domain API explicitly excludes transport concepts. Pure mapping witness executes without HTTP output or process exit."
+    },
+    {
+      "id": "PHP-E26-0194",
+      "finding": "Function loading versus class autoload and root-only dev configuration are genuine package API distinctions.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "A",
+      "baselineFinding": "Composer files autoload makes standalone functions available eagerly; PSR-4 and classmap are class mechanisms, and dependency autoload-dev is root-only."
+    },
+    {
+      "id": "PHP-E26-0195",
+      "finding": "Body provenance, absence and configurable request merge distinguish fallback/precedence from strict source requirements.",
+      "decision": "retain for independent review",
+      "categories": [],
+      "severity": null,
+      "blindAnswer": "D",
+      "baselineFinding": "Body-only provenance requires $_POST under the stated form content type. Merging or fallback admits query-only values even if body precedence is configured."
+    },
+    {
+      "id": "PHP-E26-0196",
+      "finding": "Double-check after waiting prerequisite names the key. Key alone adds finally even though exception handling is not tested. Remove the recipe label and incidental professional wording.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage",
+        "wording-cue"
+      ],
+      "severity": "high",
+      "blindAnswer": "B",
+      "baselineFinding": "A cache miss can become stale while waiting for a mutex; rechecking under the lock coalesces work. Lock and visibility guarantees are explicit premises, not inferred from an external cache implementation."
+    },
+    {
+      "id": "PHP-E26-0197",
+      "finding": "Constructor injection prerequisite uniquely names the correct design. Use neutral service-configuration/lifetime prerequisites so the early-validation and per-instance requirements decide.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "C",
+      "baselineFinding": "Early configuration validation and two simultaneous thresholds require a validated per-instance dependency. Static and constant alternatives fail the stated lifecycle constraints."
+    },
+    {
+      "id": "PHP-E26-0198",
+      "finding": "Premise describes comparing each token to the largest accepted token, and prerequisite names fencing. State atomic conditional-write capability without prescribing that algorithm.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "high",
+      "blindAnswer": "A",
+      "baselineFinding": "Stale lease authority is rejected at the protected storage using a monotonic token; a local check has a pause-to-write race. Chubby paper is a primary source, but the question relies on its explicit simplified storage contract."
+    },
+    {
+      "id": "PHP-E26-0199",
+      "finding": "Only the key specifies a complete apply/acknowledge/recovery policy. Make all alternatives realistic complete consumer policies while preserving their ordering/gap mistakes; no filler quota.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "wording-cue",
+        "answer-length-cue"
+      ],
+      "severity": "medium",
+      "blindAnswer": "D",
+      "baselineFinding": "Deduplication alone cannot order noncommutative transitions. Durable gap handling is necessary so a prematurely delivered version is not permanently discarded."
+    },
+    {
+      "id": "PHP-E26-0200",
+      "finding": "SET LOCAL prerequisite names the unique correct transaction-scoped operation. Retain PostgreSQL transaction/session setting concepts without the solution command.",
+      "decision": "revised; independent review pending",
+      "categories": [
+        "answer-leakage"
+      ],
+      "severity": "medium",
+      "blindAnswer": "B",
+      "baselineFinding": "PostgreSQL 18 SET LOCAL ends with the job transaction. The incorrect session SET alternative now explicitly occurs before BEGIN, so rollback cannot accidentally make that option correct. Initial context and discard-on-rollback-failure are explicit."
+    }
+  ]
+}

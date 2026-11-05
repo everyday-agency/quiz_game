@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 // Historical checks apply only to the immutable v1 archive, not current editorial policy.
 import { LEGACY_QUESTIONS as QUESTION_BANK } from '../js/bank/legacy-v1.mjs';
-import { TRACKS, TRACK_TOPICS, TOPICS, DIFFICULTIES, CURRICULUM } from '../js/questions.mjs';
-import { buildLearningNotes } from '../js/learning-notes.mjs';
+import { TRACKS, TRACK_TOPICS, TOPICS, DIFFICULTIES, CURRICULUM } from '../release/archive/pre-php-only/js/questions.mjs';
+import { buildLearningNotes } from '../release/archive/pre-php-only/js/learning-notes.mjs';
 
 assert.equal(QUESTION_BANK.length, 2500, 'Question bank must contain exactly 2,500 questions');
 assert.deepEqual(TRACKS, ['Laravel', 'PHP', 'TypeScript', 'React', 'MySQL', 'Google Analytics'], 'The six learning tracks must be stable');
@@ -195,8 +195,8 @@ for (const track of TRACKS) {
   }
 }
 
-const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-const app = await readFile(new URL('../js/app.js', import.meta.url), 'utf8');
+const html = await readFile(new URL('../release/archive/pre-php-only/index.html', import.meta.url), 'utf8');
+const app = await readFile(new URL('../release/archive/pre-php-only/js/app.js', import.meta.url), 'utf8');
 assert(html.includes('type="module" src="js/app.js"'), 'index.html must load the app module');
 assert(html.includes('id="trackControl"'), 'index.html must expose the learning-track selector');
 assert(html.includes('id="bankTrack"'), 'question bank must expose the track filter');

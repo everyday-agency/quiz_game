@@ -1,0 +1,5422 @@
+[
+  {
+    "batch": 4,
+    "sourceHash": "2c32877e3dd1df895e0861848166f14be46cfe0472b8fd6bd75614a12c80c3cf",
+    "php": "8.5.2",
+    "recordsChecked": 100,
+    "executions": 268,
+    "linted": 275,
+    "results": [
+      {
+        "id": "PHP-E26-0301",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[8,11]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0302",
+        "kind": "output",
+        "key": "conditional",
+        "observations": [
+          {
+            "stdout": "[{\"ready\":false,\"count\":1},1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0303",
+        "kind": "output",
+        "key": "outer",
+        "observations": [
+          {
+            "stdout": "1a2adone",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0304",
+        "kind": "output",
+        "key": "last",
+        "observations": [
+          {
+            "stdout": "{\"editor\":\"sam\",\"reader\":\"lin\"}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0305",
+        "kind": "output",
+        "key": "mixed",
+        "observations": [
+          {
+            "stdout": "[[\"int\",2],[\"float\",3.5]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0306",
+        "kind": "output",
+        "key": "one",
+        "observations": [
+          {
+            "stdout": "[false,true,1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0307",
+        "kind": "output",
+        "key": "per-call",
+        "observations": [
+          {
+            "stdout": "[2,2,1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0308",
+        "kind": "output",
+        "key": "values",
+        "observations": [
+          {
+            "stdout": "[[1,2],[9,2,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0309",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[\"Hello Ada\",\"Hello $name\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0310",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[1,3,4]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0311",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[false,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0312",
+        "kind": "output",
+        "key": "evaluated",
+        "observations": [
+          {
+            "stdout": "before|convert|caught",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0313",
+        "kind": "output",
+        "key": "referenced",
+        "observations": [
+          {
+            "stdout": "[11,12]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0314",
+        "kind": "output",
+        "key": "shared",
+        "observations": [
+          {
+            "stdout": "[\"red\",\"up\",\"down\",false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0315",
+        "kind": "output",
+        "key": "partial",
+        "observations": [
+          {
+            "stdout": "[12,null]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0316",
+        "kind": "output",
+        "key": "configured",
+        "observations": [
+          {
+            "stdout": "[\"2025-01-02\",\"2025-01-03\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0317",
+        "kind": "output",
+        "key": "max-consuming",
+        "observations": [
+          {
+            "stdout": "[[\"urgent\",\"normal\",\"routine\"],0]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0318",
+        "kind": "output",
+        "key": "scoped",
+        "observations": [
+          {
+            "stdout": "[\"magic:run\",\"real\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0319",
+        "kind": "output",
+        "key": "deferred",
+        "observations": [
+          {
+            "stdout": "[1,1,true,\"Error\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0320",
+        "kind": "output",
+        "key": "split",
+        "observations": [
+          {
+            "stdout": "[\"int\",7,\"TypeError\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0321",
+        "kind": "output",
+        "key": "boundary",
+        "observations": [
+          {
+            "stdout": "boot|A|A|B|Exception",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0322",
+        "kind": "output",
+        "key": "cycle-collected",
+        "observations": [
+          {
+            "stdout": "[true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0323",
+        "kind": "output",
+        "key": "float-collapse",
+        "observations": [
+          {
+            "stdout": "[false,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0324",
+        "kind": "output",
+        "key": "parameter-only",
+        "observations": [
+          {
+            "stdout": "[1,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0325",
+        "kind": "output",
+        "key": "hook-first",
+        "observations": [
+          {
+            "stdout": "hook|rejected",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0326",
+        "kind": "patch",
+        "key": "stored",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"AbC\",\" D \"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "uppercase",
+            "meets": false,
+            "stdout": "[\"ABC\",\" D \"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "stored",
+            "meets": true,
+            "stdout": "[\"abc\",\" d \"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "trimmed",
+            "meets": false,
+            "stdout": "[\"abc\",\"d\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "ignored",
+            "meets": false,
+            "stdout": "[\"AbC\",\" D \"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0327",
+        "kind": "patch",
+        "key": "pop",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"first\",[\"last\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "pop",
+            "meets": true,
+            "stdout": "[\"last\",{\"4\":\"first\"}]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "peek",
+            "meets": false,
+            "stdout": "[\"last\",{\"4\":\"first\",\"9\":\"last\"}]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "shift",
+            "meets": false,
+            "stdout": "[\"first\",[\"last\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "count-key",
+            "meets": false,
+            "stdout": "[null,{\"4\":\"first\",\"9\":\"last\"}]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0328",
+        "kind": "patch",
+        "key": "last-extension",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"csv\",\"tar\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "first-suffix",
+            "meets": false,
+            "stdout": "[\"csv\",\"tar.gz\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "stem",
+            "meets": false,
+            "stdout": "[\"report\",\"backup.tar\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "last-extension",
+            "meets": true,
+            "stdout": "[\"csv\",\"gz\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "whole-name",
+            "meets": false,
+            "stdout": "[\"report.csv\",\"backup.tar.gz\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0329",
+        "kind": "patch",
+        "key": "assign-empty",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[false,true,null,[1,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "unset-both",
+            "meets": false,
+            "stdout": "[false,false,null,null]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "detach-alias",
+            "meets": false,
+            "stdout": "[true,false,[],null]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "local-unset",
+            "meets": false,
+            "stdout": "[false,true,null,[1,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "assign-empty",
+            "meets": true,
+            "stdout": "[true,true,[],[]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0330",
+        "kind": "patch",
+        "key": "return",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "TypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "echo",
+            "meets": false,
+            "stdout": "yesTypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "return",
+            "meets": true,
+            "stdout": "[\"yes\",\"no\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "assign",
+            "meets": false,
+            "stdout": "TypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "print-result",
+            "meets": false,
+            "stdout": "yesno[\"1\",\"1\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0331",
+        "kind": "patch",
+        "key": "source-directory",
+        "observations": [
+          {
+            "option": "file-path",
+            "meets": false,
+            "stdout": "[\"load-failed\",2]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "source-directory",
+            "meets": true,
+            "stdout": "[7,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "working-directory",
+            "meets": false,
+            "stdout": "[\"load-failed\",1]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "relative",
+            "meets": false,
+            "stdout": "[\"load-failed\",1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0332",
+        "kind": "document-review",
+        "key": "body-limit",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PHP documents empty POST and FILES when posted data exceeds post_max_size; the supplied confirmed lengths identify that condition.",
+            "optionAudit": {
+              "file-error": "No per-file entry is available to inspect.",
+              "raise-file": "The binding constraint remains post_max_size.",
+              "body-limit": "Recognizes the whole-body boundary before interpreting empty parsed data.",
+              "success-empty": "The confirmed length fits the file limit but violates the smaller POST limit."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0333",
+        "kind": "patch",
+        "key": "rotate-delete",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[true,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "retain-old",
+            "meets": false,
+            "stdout": "[true,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "destroy",
+            "meets": false,
+            "stdout": "[false,true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reload",
+            "meets": false,
+            "stdout": "[false,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "rotate-delete",
+            "meets": true,
+            "stdout": "[true,true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0334",
+        "kind": "document-review",
+        "key": "separate",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PDO prepare documentation requires a unique parameter marker for each value occurrence unless emulation is enabled; this scenario explicitly retains native MySQL prepares.",
+            "optionAudit": {
+              "separate": "Two distinct markers are each assigned 7.",
+              "bind-twice": "Reassigns one named binding without fixing repeated markers.",
+              "array-value": "A marker represents one scalar value, not an array expansion.",
+              "quote-one": "The quoted marker becomes literal SQL text."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0335",
+        "kind": "patch",
+        "key": "difference",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"budget\",\"budget\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "pre-decrement",
+            "meets": false,
+            "stdout": "[2,6]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "difference",
+            "meets": true,
+            "stdout": "[6,24]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "post-decrement",
+            "meets": false,
+            "stdout": "[\"budget\",\"budget\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "skip-two",
+            "meets": false,
+            "stdout": "[3,8]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0336",
+        "kind": "patch",
+        "key": "create-preserve",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[[\"\",\"X\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "truncate",
+            "meets": false,
+            "stdout": "[[\"\",\"X\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "existing",
+            "meets": false,
+            "stdout": "[[\"abcd\",\"Xbcd\"],[\"open-failed\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "append",
+            "meets": false,
+            "stdout": "[[\"abcd\",\"abcdX\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "create-preserve",
+            "meets": true,
+            "stdout": "[[\"abcd\",\"Xbcd\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0337",
+        "kind": "patch",
+        "key": "rewind",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "rewind",
+            "meets": true,
+            "stdout": "58",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "flush",
+            "meets": false,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "relative-zero",
+            "meets": false,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "truncate-again",
+            "meets": false,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0338",
+        "kind": "document-review",
+        "key": "check-open",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The supplied schedule changes filesystem state between check and open; only the open result determines whether a usable stream exists.",
+            "optionAudit": {
+              "clear-cache": "A fresh precheck still precedes the deletion.",
+              "check-open": "Handles the actual failed operation.",
+              "repeat-check": "Deletion can follow the final check.",
+              "create-mode": "Violates the no-recreation requirement."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0339",
+        "kind": "document-review",
+        "key": "separate-schema",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "MySQL 8.4 ALTER TABLE causes implicit commits; ordinary InnoDB business writes can be rolled back only while their transaction remains uncommitted.",
+            "optionAudit": {
+              "catch-earlier": "Does not reverse the DDL-triggered commit.",
+              "autocommit-off": "Does not disable implicit commits for ALTER TABLE.",
+              "separate-schema": "Removes the committing statement from the business unit of work.",
+              "rollback-twice": "Cannot undo a completed commit."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0340",
+        "kind": "patch",
+        "key": "handled",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": {
+              "message": "fixture warning",
+              "exitCode": 0
+            }
+          },
+          {
+            "option": "handled",
+            "meets": true,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "default",
+            "meets": false,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": {
+              "message": "fixture warning",
+              "exitCode": 0
+            }
+          },
+          {
+            "option": "exception",
+            "meets": false,
+            "stdout": "[\"handled\",\"caught\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wrong-severity",
+            "meets": false,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": {
+              "message": "fixture warning",
+              "exitCode": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0341",
+        "kind": "patch",
+        "key": "continuous-filter",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "QQ==QkM=RA==",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "per-chunk",
+            "meets": false,
+            "stdout": "QQ==QkM=RA==",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reset-filter",
+            "meets": false,
+            "stdout": "QQ==QkM=RA==",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "read-filter",
+            "meets": false,
+            "stdout": "ABCD",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "continuous-filter",
+            "meets": true,
+            "stdout": "QUJDRA==",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0342",
+        "kind": "document-review",
+        "key": "canonical",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The importer’s stated normalization determines destination identity; uniqueness must be checked over those complete normalized paths before extraction.",
+            "optionAudit": {
+              "reject-parent": "Rejects the required valid single-entry case.",
+              "basename": "Rejects two valid different-directory destinations.",
+              "canonical": "Rejects exactly the collision while preserving both valid cases.",
+              "raw-case": "Leaves the internal-parent alias unresolved."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0343",
+        "kind": "patch",
+        "key": "raw",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "trimmed",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "raw",
+            "meets": true,
+            "stdout": "true",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "json",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "serialized",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0344",
+        "kind": "patch",
+        "key": "monotonic",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[5200,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wall",
+            "meets": false,
+            "stdout": "[5200,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wall-cap",
+            "meets": false,
+            "stdout": "[200,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "micro-units",
+            "meets": false,
+            "stdout": "[0,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "monotonic",
+            "meets": true,
+            "stdout": "[125,0]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0345",
+        "kind": "patch",
+        "key": "bytes",
+        "observations": [
+          {
+            "option": "bytes",
+            "meets": true,
+            "stdout": "[\"😀\",\"é😀\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "characters",
+            "meets": false,
+            "stdout": "[\"😀tag\",\"é😀tag!\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "suffix",
+            "meets": false,
+            "stdout": "[\"tag!\",\"tag!\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "match-length",
+            "meets": false,
+            "stdout": "invalid-utf8",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0346",
+        "kind": "contract",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0347",
+        "kind": "contract",
+        "key": "changed",
+        "observations": [
+          {
+            "stdout": "[[1,2],[1,2,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "reference-iteration",
+            "stdout": "[[1,2,3],[1,2,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0348",
+        "kind": "contract",
+        "key": "property-miss",
+        "observations": [
+          {
+            "stdout": "[3,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "arrow-property",
+            "stdout": "[null,1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0349",
+        "kind": "contract",
+        "key": "invalid-empty",
+        "observations": [
+          {
+            "stdout": "[\"\",\"false\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0350",
+        "kind": "contract",
+        "key": "concrete",
+        "observations": [
+          {
+            "stdout": "[Ada]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0351",
+        "kind": "contract",
+        "key": "later-hop",
+        "observations": [
+          {
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "protect-second-hop",
+            "stdout": "null",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0352",
+        "kind": "contract",
+        "key": "combined",
+        "observations": [
+          {
+            "stdout": "{\"network\":{\"timeout\":[10,20],\"retries\":2}}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0353",
+        "kind": "contract",
+        "key": "value-only",
+        "observations": [
+          {
+            "stdout": "{\"ADA\":2,\"LIN\":3}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0354",
+        "kind": "contract",
+        "key": "file-local",
+        "observations": [
+          {
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "helper-import",
+            "stdout": "2025-01-01",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0355",
+        "kind": "document-review",
+        "key": "see-other",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "RFC 9110 defines 307 method preservation and 303 retrieval of another resource following the original request.",
+            "optionAudit": {
+              "always-get": "Contradicts 307 method preservation.",
+              "see-other": "Selects the retrieval redirect semantics required by the scenario.",
+              "drop-body": "Invents a body-dropping POST conversion.",
+              "permanent": "308 does not change POST into GET."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0356",
+        "kind": "contract",
+        "key": "leaves-only",
+        "observations": [
+          {
+            "stdout": "[]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0357",
+        "kind": "contract",
+        "key": "not-portable",
+        "observations": [
+          {
+            "stdout": "[0,[1,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0358",
+        "kind": "contract",
+        "key": "coerced",
+        "observations": [
+          {
+            "stdout": "\"zero-record\"",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0359",
+        "kind": "contract",
+        "key": "registry",
+        "observations": [
+          {
+            "stdout": "[true,true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0360",
+        "kind": "contract",
+        "key": "numbers",
+        "observations": [
+          {
+            "stdout": "{\"phone\":33123456789,\"postal\":123}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0361",
+        "kind": "contract",
+        "key": "covariant",
+        "observations": [
+          {
+            "stdout": "Dog",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0362",
+        "kind": "contract",
+        "key": "coercive",
+        "observations": [
+          {
+            "stdout": "[\"TypeError\",\"int\",12]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0363",
+        "kind": "document-review",
+        "key": "revalidate",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "cURL follows Location targets when configured to do so; the application’s origin allowlist must apply to redirected requests as well.",
+            "optionAudit": {
+              "initial-sufficient": "Allows a remote response to choose an unauthorized origin.",
+              "https-protects": "The premise allows HTTP redirect targets.",
+              "revalidate": "Checks or prevents the additional outbound action.",
+              "same-host-default": "Invents an implicit same-origin restriction."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0364",
+        "kind": "contract",
+        "key": "same-prefix",
+        "observations": [
+          {
+            "stdout": "[true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0365",
+        "kind": "contract",
+        "key": "independent-vector",
+        "observations": [
+          {
+            "stdout": "[\".,8\",true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0366",
+        "kind": "patch",
+        "key": "left",
+        "observations": [
+          {
+            "option": "right",
+            "meets": false,
+            "stdout": "[\"Q70\",\"700\",\"1234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "numeric",
+            "meets": false,
+            "stdout": "[\"000\",\"007\",\"1234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "left",
+            "meets": true,
+            "stdout": "[\"0Q7\",\"007\",\"1234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "truncate",
+            "meets": false,
+            "stdout": "[\"0Q7\",\"007\",\"234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0367",
+        "kind": "patch",
+        "key": "pair",
+        "observations": [
+          {
+            "option": "fill",
+            "meets": false,
+            "stdout": "{\"Ada\":[4,9],\"Lin\":[4,9]}",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "pair",
+            "meets": true,
+            "stdout": "{\"Ada\":4,\"Lin\":9}",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "merge",
+            "meets": false,
+            "stdout": "[\"Ada\",\"Lin\",4,9]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "replace",
+            "meets": false,
+            "stdout": "[4,9]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0368",
+        "kind": "patch",
+        "key": "scalar",
+        "observations": [
+          {
+            "option": "numeric",
+            "meets": false,
+            "stdout": "[false,true,true,false,false,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "present",
+            "meets": false,
+            "stdout": "[true,true,true,true,false,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "string-or-number",
+            "meets": false,
+            "stdout": "[true,true,true,false,false,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "scalar",
+            "meets": true,
+            "stdout": "[true,true,true,true,false,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0369",
+        "kind": "patch",
+        "key": "rfc-shape",
+        "observations": [
+          {
+            "option": "month-for-minute",
+            "meets": false,
+            "stdout": "2025-04-03T16:04:06+02:00",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "twelve-hour",
+            "meets": false,
+            "stdout": "2025-04-03T04:05:06+02:00",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "rfc-shape",
+            "meets": true,
+            "stdout": "2025-04-03T16:05:06+02:00",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "compact-offset",
+            "meets": false,
+            "stdout": "2025-04-03T16:05:06+0200",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0370",
+        "kind": "patch",
+        "key": "lf",
+        "observations": [
+          {
+            "option": "literal",
+            "meets": false,
+            "stdout": "one\\ntwo\\n",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "lf",
+            "meets": true,
+            "stdout": "one\ntwo\n",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "crlf",
+            "meets": false,
+            "stdout": "one\r\ntwo\r\n",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "cr",
+            "meets": false,
+            "stdout": "one\rtwo\r",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0371",
+        "kind": "patch",
+        "key": "closed",
+        "observations": [
+          {
+            "option": "closed",
+            "meets": true,
+            "stdout": "[[2,3,4],[],[3]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "exclude-end",
+            "meets": false,
+            "stdout": "[[2,3],[],[3,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "exclude-start",
+            "meets": false,
+            "stdout": "[[3,4],[],[4,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "repeat-start",
+            "meets": false,
+            "stdout": "[[2,2,2],[],[3]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0372",
+        "kind": "patch",
+        "key": "value",
+        "observations": [
+          {
+            "option": "key",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "position",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "value",
+            "meets": true,
+            "stdout": "true",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reverse-search",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0373",
+        "kind": "patch",
+        "key": "text-strict",
+        "observations": [
+          {
+            "option": "object-loose",
+            "meets": false,
+            "stdout": "[true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "text-strict",
+            "meets": true,
+            "stdout": "[true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "identity",
+            "meets": false,
+            "stdout": "[false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "text-loose",
+            "meets": false,
+            "stdout": "[true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0374",
+        "kind": "document-review",
+        "key": "both-ms",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "libcurl defines CONNECTTIMEOUT_MS in milliseconds and TIMEOUT_MS as the maximum time for the whole transfer, including connection time.",
+            "optionAudit": {
+              "seconds-connect": "Sets the connection option in seconds.",
+              "add-phases": "Extends the total to 1300 ms.",
+              "both-ms": "Sets exactly the two required budgets.",
+              "connection-only": "Removes the overall timeout."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0375",
+        "kind": "patch",
+        "key": "local-catch",
+        "observations": [
+          {
+            "option": "global-handler",
+            "meets": false,
+            "stdout": "[\"ok\",\"escaped\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "finally-value",
+            "meets": false,
+            "stdout": "[\"default\",\"default\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "engine-errors",
+            "meets": false,
+            "stdout": "[\"ok\",\"escaped\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "local-catch",
+            "meets": true,
+            "stdout": "[\"ok\",\"default\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0376",
+        "kind": "patch",
+        "key": "raw",
+        "observations": [
+          {
+            "option": "typed",
+            "meets": false,
+            "stdout": "[false,123,null]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "normal",
+            "meets": false,
+            "stdout": "[\"\",\"00123\",\"\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "raw",
+            "meets": true,
+            "stdout": "[\"off\",\"00123\",\"null\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wrong-slot",
+            "meets": false,
+            "stdout": "[\"\",\"00123\",\"\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0377",
+        "kind": "patch",
+        "key": "original",
+        "observations": [
+          {
+            "option": "original",
+            "meets": true,
+            "stdout": "[\"Import failed\",true,17]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "message",
+            "meets": false,
+            "stdout": "[\"Import failed\",false,17]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "cause",
+            "meets": false,
+            "stdout": "[\"Import failed\",false,17]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "different-key",
+            "meets": false,
+            "stdout": "[\"Import failed\",false,17]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0378",
+        "kind": "patch",
+        "key": "reindex",
+        "observations": [
+          {
+            "option": "labeled",
+            "meets": false,
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "one-array",
+            "meets": false,
+            "stdout": "TypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reindex",
+            "meets": true,
+            "stdout": "Ada Lin",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "spread",
+            "meets": false,
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0379",
+        "kind": "patch",
+        "key": "next-total",
+        "observations": [
+          {
+            "option": "chunk-only",
+            "meets": false,
+            "stdout": "[[true,12],[true,10]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "previous-total",
+            "meets": false,
+            "stdout": "[[true,12],[true,10]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reject-equality",
+            "meets": false,
+            "stdout": "[[false,6],[false,6]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "next-total",
+            "meets": true,
+            "stdout": "[[false,6],[true,10]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0380",
+        "kind": "document-review",
+        "key": "actual-platform",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Composer check-platform-reqs checks the real platform and ignores config.platform; --no-dev restricts the check to production requirements.",
+            "optionAudit": {
+              "actual-platform": "Detects the real missing ext-intl requirement.",
+              "manifest": "Validates metadata, not the requested runtime capability gate.",
+              "autoload": "Builds lookup metadata rather than checking the real platform.",
+              "ignore": "Suppresses the relevant requirement check."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0381",
+        "kind": "tests",
+        "key": "shorter",
+        "observations": [
+          {
+            "option": "equal",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "shorter",
+            "exposes": true,
+            "expected": "false",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "long-different",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0382",
+        "kind": "tests",
+        "key": "overlap",
+        "observations": [
+          {
+            "option": "single",
+            "exposes": false,
+            "expected": "1",
+            "original": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "missing",
+            "exposes": false,
+            "expected": "0",
+            "original": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "separated",
+            "exposes": false,
+            "expected": "2",
+            "original": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "overlap",
+            "exposes": true,
+            "expected": "3",
+            "original": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "3",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0383",
+        "kind": "tests",
+        "key": "reordered",
+        "observations": [
+          {
+            "option": "reordered",
+            "exposes": true,
+            "expected": "true",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "identical",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different-value",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different-type",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0384",
+        "kind": "tests",
+        "key": "even-lower",
+        "observations": [
+          {
+            "option": "odd-lower",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "ordinary",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "even-lower",
+            "exposes": true,
+            "expected": "true",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "negative",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0385",
+        "kind": "tests",
+        "key": "lowercase",
+        "observations": [
+          {
+            "option": "post",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "lowercase",
+            "exposes": true,
+            "expected": "false",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "get",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "head",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0386",
+        "kind": "tests",
+        "key": "spaces",
+        "observations": [
+          {
+            "option": "plain",
+            "exposes": false,
+            "expected": "Ada",
+            "original": {
+              "stdout": "Ada",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "Ada",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "empty",
+            "exposes": false,
+            "expected": "",
+            "original": {
+              "stdout": "",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "other",
+            "exposes": false,
+            "expected": "Lin",
+            "original": {
+              "stdout": "Lin",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "Lin",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "spaces",
+            "exposes": true,
+            "expected": "Ada",
+            "original": {
+              "stdout": "error",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "Ada",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0387",
+        "kind": "tests",
+        "key": "multi-digit",
+        "observations": [
+          {
+            "option": "multi-digit",
+            "exposes": true,
+            "expected": "[\"item2\",\"item10\"]",
+            "original": {
+              "stdout": "[\"item10\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"item2\",\"item10\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "single-digit",
+            "exposes": false,
+            "expected": "[\"item1\",\"item2\"]",
+            "original": {
+              "stdout": "[\"item1\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"item1\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "letters",
+            "exposes": false,
+            "expected": "[\"a\",\"b\"]",
+            "original": {
+              "stdout": "[\"a\",\"b\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"a\",\"b\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "duplicates",
+            "exposes": false,
+            "expected": "[\"item2\",\"item2\"]",
+            "original": {
+              "stdout": "[\"item2\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"item2\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0388",
+        "kind": "tests",
+        "key": "missing-parent",
+        "observations": [
+          {
+            "option": "first-parent",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "null-parent",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "missing-parent",
+            "exposes": true,
+            "expected": "false",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "second-parent",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0389",
+        "kind": "tests",
+        "key": "two-values",
+        "observations": [
+          {
+            "option": "one",
+            "exposes": false,
+            "expected": "1",
+            "original": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "two-values",
+            "exposes": true,
+            "expected": "2",
+            "original": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "other-one",
+            "exposes": false,
+            "expected": "1",
+            "original": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "empty",
+            "exposes": false,
+            "expected": "0",
+            "original": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0390",
+        "kind": "tests",
+        "key": "thousand",
+        "observations": [
+          {
+            "option": "fraction",
+            "exposes": false,
+            "expected": "1.50",
+            "original": {
+              "stdout": "1.50",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1.50",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "zero",
+            "exposes": false,
+            "expected": "0.00",
+            "original": {
+              "stdout": "0.00",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "0.00",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "negative",
+            "exposes": false,
+            "expected": "-2.50",
+            "original": {
+              "stdout": "-2.50",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "-2.50",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "thousand",
+            "exposes": true,
+            "expected": "1000.00",
+            "original": {
+              "stdout": "1,000.00",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1000.00",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0391",
+        "kind": "tests",
+        "key": "alias-preserved",
+        "observations": [
+          {
+            "option": "root-distinct",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "leaf-distinct",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "value-preserved",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "alias-preserved",
+            "exposes": true,
+            "expected": "true",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0392",
+        "kind": "tests",
+        "key": "overlap",
+        "observations": [
+          {
+            "option": "sequential",
+            "exposes": false,
+            "expected": "[true,false]",
+            "original": {
+              "stdout": "[true,false]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[true,false]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different",
+            "exposes": false,
+            "expected": "[true,true]",
+            "original": {
+              "stdout": "[true,true]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[true,true]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "overlap",
+            "exposes": true,
+            "expected": "[true,false]",
+            "original": {
+              "stdout": "[true,true]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[true,false]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "unknown",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0393",
+        "kind": "document-review",
+        "key": "primary-confirmation",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The scenario defines asynchronous replication with unbounded lag and a confirmed available primary; only the primary route guarantees this immediate observation.",
+            "optionAudit": {
+              "primary-confirmation": "Reads from the node with the confirmed committed row.",
+              "fixed-sleep": "No stated lag bound justifies the delay.",
+              "replica-isolation": "Does not advance replication.",
+              "submitted-copy": "Cannot supply required database-generated fields."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0394",
+        "kind": "document-review",
+        "key": "presence-and-value",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The stated API assigns different operations to absent, present-null and present-string inputs; a representation must preserve all three states.",
+            "optionAudit": {
+              "null-to-absent": "Collapses clear into keep.",
+              "defaults-null": "Collapses keep into clear.",
+              "presence-and-value": "Preserves all three operations.",
+              "string-cast": "Collapses meaningful null/empty/absent states."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0395",
+        "kind": "document-review",
+        "key": "current-policy",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Revocations committed before execution must apply; enqueue-time decisions and snapshots are insufficient even when authentic.",
+            "optionAudit": {
+              "signed-decision": "Preserves a stale decision.",
+              "current-policy": "Observes the required current authorization state.",
+              "role-snapshot": "Evaluates stale permissions.",
+              "signature-again": "Checks integrity without freshness of authority."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0396",
+        "kind": "document-review",
+        "key": "versioned-keys",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The scenario permits recomputation but forbids cross-version payload interpretation; key namespaces must separate concurrent incompatible formats.",
+            "optionAudit": {
+              "flush-once": "Old workers repopulate shared keys after the purge.",
+              "short-ttl": "Still permits incompatible reads before expiration.",
+              "writer-timestamp": "Does not supply a compatible representation.",
+              "versioned-keys": "Separates both readers and writers by schema version."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0397",
+        "kind": "document-review",
+        "key": "interface",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PHP supports one parent class and multiple implemented interfaces; traits are not object types for parameter contracts.",
+            "optionAudit": {
+              "interface": "Adds the required method contract without changing class ancestry.",
+              "base-class": "Requires unsupported additional class inheritance.",
+              "trait-type": "Cannot establish the requested nominal type.",
+              "method-names": "Does not make the object parameter enforce the signatures."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0398",
+        "kind": "document-review",
+        "key": "reserved-capacity",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Under the stated 100-slot model, a hard A cap of 80 plus a B reservation prevents A from exhausting B capacity before failure detection.",
+            "optionAudit": {
+              "shorter-timeout": "Allows full occupancy until the shorter timeout.",
+              "failure-breaker": "Requires observations that may not yet exist.",
+              "reserved-capacity": "Enforces the specified concurrent allocation.",
+              "retry-jitter": "Does not limit the initial burst."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0399",
+        "kind": "document-review",
+        "key": "whole-operation",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PostgreSQL documents SQLSTATE 40001 and requires retrying the complete transaction, including logic that chooses statements and values.",
+            "optionAudit": {
+              "whole-operation": "Recreates a coherent transactional attempt from fresh observations.",
+              "failed-statement": "Omits prior work and its decision context.",
+              "same-transaction": "Retains an aborted transaction.",
+              "cached-decisions": "Reuses possibly invalid prior decisions."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0400",
+        "kind": "document-review",
+        "key": "isolated-builder",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Composer documents both plugin and script execution and recommends sandboxing untrusted dependencies; the scenario explicitly requires hooks and separates artifact approval.",
+            "optionAudit": {
+              "lockfile-on-deployer": "Required project scripts cannot run.",
+              "scripts-only-off": "Read-only deployment credentials are still exposed to reads.",
+              "ordinary-user": "Production access remains available despite the explicit prohibition.",
+              "isolated-builder": "Permits hooks within the stated isolation and promotion boundaries."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "batch": 4,
+    "sourceHash": "2c32877e3dd1df895e0861848166f14be46cfe0472b8fd6bd75614a12c80c3cf",
+    "php": "8.4.17",
+    "recordsChecked": 100,
+    "executions": 268,
+    "linted": 275,
+    "results": [
+      {
+        "id": "PHP-E26-0301",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[8,11]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0302",
+        "kind": "output",
+        "key": "conditional",
+        "observations": [
+          {
+            "stdout": "[{\"ready\":false,\"count\":1},1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0303",
+        "kind": "output",
+        "key": "outer",
+        "observations": [
+          {
+            "stdout": "1a2adone",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0304",
+        "kind": "output",
+        "key": "last",
+        "observations": [
+          {
+            "stdout": "{\"editor\":\"sam\",\"reader\":\"lin\"}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0305",
+        "kind": "output",
+        "key": "mixed",
+        "observations": [
+          {
+            "stdout": "[[\"int\",2],[\"float\",3.5]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0306",
+        "kind": "output",
+        "key": "one",
+        "observations": [
+          {
+            "stdout": "[false,true,1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0307",
+        "kind": "output",
+        "key": "per-call",
+        "observations": [
+          {
+            "stdout": "[2,2,1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0308",
+        "kind": "output",
+        "key": "values",
+        "observations": [
+          {
+            "stdout": "[[1,2],[9,2,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0309",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[\"Hello Ada\",\"Hello $name\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0310",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[1,3,4]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0311",
+        "kind": "output",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[false,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0312",
+        "kind": "output",
+        "key": "evaluated",
+        "observations": [
+          {
+            "stdout": "before|convert|caught",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0313",
+        "kind": "output",
+        "key": "referenced",
+        "observations": [
+          {
+            "stdout": "[11,12]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0314",
+        "kind": "output",
+        "key": "shared",
+        "observations": [
+          {
+            "stdout": "[\"red\",\"up\",\"down\",false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0315",
+        "kind": "output",
+        "key": "partial",
+        "observations": [
+          {
+            "stdout": "[12,null]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0316",
+        "kind": "output",
+        "key": "configured",
+        "observations": [
+          {
+            "stdout": "[\"2025-01-02\",\"2025-01-03\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0317",
+        "kind": "output",
+        "key": "max-consuming",
+        "observations": [
+          {
+            "stdout": "[[\"urgent\",\"normal\",\"routine\"],0]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0318",
+        "kind": "output",
+        "key": "scoped",
+        "observations": [
+          {
+            "stdout": "[\"magic:run\",\"real\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0319",
+        "kind": "output",
+        "key": "deferred",
+        "observations": [
+          {
+            "stdout": "[1,1,true,\"Error\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0320",
+        "kind": "output",
+        "key": "split",
+        "observations": [
+          {
+            "stdout": "[\"int\",7,\"TypeError\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0321",
+        "kind": "output",
+        "key": "boundary",
+        "observations": [
+          {
+            "stdout": "boot|A|A|B|Exception",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0322",
+        "kind": "output",
+        "key": "cycle-collected",
+        "observations": [
+          {
+            "stdout": "[true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0323",
+        "kind": "output",
+        "key": "float-collapse",
+        "observations": [
+          {
+            "stdout": "[false,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0324",
+        "kind": "output",
+        "key": "parameter-only",
+        "observations": [
+          {
+            "stdout": "[1,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0325",
+        "kind": "output",
+        "key": "hook-first",
+        "observations": [
+          {
+            "stdout": "hook|rejected",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0326",
+        "kind": "patch",
+        "key": "stored",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"AbC\",\" D \"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "uppercase",
+            "meets": false,
+            "stdout": "[\"ABC\",\" D \"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "stored",
+            "meets": true,
+            "stdout": "[\"abc\",\" d \"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "trimmed",
+            "meets": false,
+            "stdout": "[\"abc\",\"d\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "ignored",
+            "meets": false,
+            "stdout": "[\"AbC\",\" D \"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0327",
+        "kind": "patch",
+        "key": "pop",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"first\",[\"last\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "pop",
+            "meets": true,
+            "stdout": "[\"last\",{\"4\":\"first\"}]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "peek",
+            "meets": false,
+            "stdout": "[\"last\",{\"4\":\"first\",\"9\":\"last\"}]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "shift",
+            "meets": false,
+            "stdout": "[\"first\",[\"last\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "count-key",
+            "meets": false,
+            "stdout": "[null,{\"4\":\"first\",\"9\":\"last\"}]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0328",
+        "kind": "patch",
+        "key": "last-extension",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"csv\",\"tar\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "first-suffix",
+            "meets": false,
+            "stdout": "[\"csv\",\"tar.gz\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "stem",
+            "meets": false,
+            "stdout": "[\"report\",\"backup.tar\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "last-extension",
+            "meets": true,
+            "stdout": "[\"csv\",\"gz\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "whole-name",
+            "meets": false,
+            "stdout": "[\"report.csv\",\"backup.tar.gz\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0329",
+        "kind": "patch",
+        "key": "assign-empty",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[false,true,null,[1,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "unset-both",
+            "meets": false,
+            "stdout": "[false,false,null,null]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "detach-alias",
+            "meets": false,
+            "stdout": "[true,false,[],null]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "local-unset",
+            "meets": false,
+            "stdout": "[false,true,null,[1,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "assign-empty",
+            "meets": true,
+            "stdout": "[true,true,[],[]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0330",
+        "kind": "patch",
+        "key": "return",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "TypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "echo",
+            "meets": false,
+            "stdout": "yesTypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "return",
+            "meets": true,
+            "stdout": "[\"yes\",\"no\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "assign",
+            "meets": false,
+            "stdout": "TypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "print-result",
+            "meets": false,
+            "stdout": "yesno[\"1\",\"1\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0331",
+        "kind": "patch",
+        "key": "source-directory",
+        "observations": [
+          {
+            "option": "file-path",
+            "meets": false,
+            "stdout": "[\"load-failed\",2]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "source-directory",
+            "meets": true,
+            "stdout": "[7,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "working-directory",
+            "meets": false,
+            "stdout": "[\"load-failed\",1]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "relative",
+            "meets": false,
+            "stdout": "[\"load-failed\",1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0332",
+        "kind": "document-review",
+        "key": "body-limit",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PHP documents empty POST and FILES when posted data exceeds post_max_size; the supplied confirmed lengths identify that condition.",
+            "optionAudit": {
+              "file-error": "No per-file entry is available to inspect.",
+              "raise-file": "The binding constraint remains post_max_size.",
+              "body-limit": "Recognizes the whole-body boundary before interpreting empty parsed data.",
+              "success-empty": "The confirmed length fits the file limit but violates the smaller POST limit."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0333",
+        "kind": "patch",
+        "key": "rotate-delete",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[true,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "retain-old",
+            "meets": false,
+            "stdout": "[true,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "destroy",
+            "meets": false,
+            "stdout": "[false,true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reload",
+            "meets": false,
+            "stdout": "[false,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "rotate-delete",
+            "meets": true,
+            "stdout": "[true,true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0334",
+        "kind": "document-review",
+        "key": "separate",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PDO prepare documentation requires a unique parameter marker for each value occurrence unless emulation is enabled; this scenario explicitly retains native MySQL prepares.",
+            "optionAudit": {
+              "separate": "Two distinct markers are each assigned 7.",
+              "bind-twice": "Reassigns one named binding without fixing repeated markers.",
+              "array-value": "A marker represents one scalar value, not an array expansion.",
+              "quote-one": "The quoted marker becomes literal SQL text."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0335",
+        "kind": "patch",
+        "key": "difference",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"budget\",\"budget\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "pre-decrement",
+            "meets": false,
+            "stdout": "[2,6]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "difference",
+            "meets": true,
+            "stdout": "[6,24]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "post-decrement",
+            "meets": false,
+            "stdout": "[\"budget\",\"budget\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "skip-two",
+            "meets": false,
+            "stdout": "[3,8]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0336",
+        "kind": "patch",
+        "key": "create-preserve",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[[\"\",\"X\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "truncate",
+            "meets": false,
+            "stdout": "[[\"\",\"X\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "existing",
+            "meets": false,
+            "stdout": "[[\"abcd\",\"Xbcd\"],[\"open-failed\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "append",
+            "meets": false,
+            "stdout": "[[\"abcd\",\"abcdX\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "create-preserve",
+            "meets": true,
+            "stdout": "[[\"abcd\",\"Xbcd\"],[\"\",\"X\"]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0337",
+        "kind": "patch",
+        "key": "rewind",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "rewind",
+            "meets": true,
+            "stdout": "58",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "flush",
+            "meets": false,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "relative-zero",
+            "meets": false,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "truncate-again",
+            "meets": false,
+            "stdout": "00000058",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0338",
+        "kind": "document-review",
+        "key": "check-open",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The supplied schedule changes filesystem state between check and open; only the open result determines whether a usable stream exists.",
+            "optionAudit": {
+              "clear-cache": "A fresh precheck still precedes the deletion.",
+              "check-open": "Handles the actual failed operation.",
+              "repeat-check": "Deletion can follow the final check.",
+              "create-mode": "Violates the no-recreation requirement."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0339",
+        "kind": "document-review",
+        "key": "separate-schema",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "MySQL 8.4 ALTER TABLE causes implicit commits; ordinary InnoDB business writes can be rolled back only while their transaction remains uncommitted.",
+            "optionAudit": {
+              "catch-earlier": "Does not reverse the DDL-triggered commit.",
+              "autocommit-off": "Does not disable implicit commits for ALTER TABLE.",
+              "separate-schema": "Removes the committing statement from the business unit of work.",
+              "rollback-twice": "Cannot undo a completed commit."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0340",
+        "kind": "patch",
+        "key": "handled",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": {
+              "message": "fixture warning",
+              "exitCode": 0
+            }
+          },
+          {
+            "option": "handled",
+            "meets": true,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "default",
+            "meets": false,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": {
+              "message": "fixture warning",
+              "exitCode": 0
+            }
+          },
+          {
+            "option": "exception",
+            "meets": false,
+            "stdout": "[\"handled\",\"caught\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wrong-severity",
+            "meets": false,
+            "stdout": "[\"handled\",\"after\"]",
+            "exitCode": 0,
+            "expectedError": {
+              "message": "fixture warning",
+              "exitCode": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0341",
+        "kind": "patch",
+        "key": "continuous-filter",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "QQ==QkM=RA==",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "per-chunk",
+            "meets": false,
+            "stdout": "QQ==QkM=RA==",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reset-filter",
+            "meets": false,
+            "stdout": "QQ==QkM=RA==",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "read-filter",
+            "meets": false,
+            "stdout": "ABCD",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "continuous-filter",
+            "meets": true,
+            "stdout": "QUJDRA==",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0342",
+        "kind": "document-review",
+        "key": "canonical",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The importer’s stated normalization determines destination identity; uniqueness must be checked over those complete normalized paths before extraction.",
+            "optionAudit": {
+              "reject-parent": "Rejects the required valid single-entry case.",
+              "basename": "Rejects two valid different-directory destinations.",
+              "canonical": "Rejects exactly the collision while preserving both valid cases.",
+              "raw-case": "Leaves the internal-parent alias unresolved."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0343",
+        "kind": "patch",
+        "key": "raw",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "trimmed",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "raw",
+            "meets": true,
+            "stdout": "true",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "json",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "serialized",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0344",
+        "kind": "patch",
+        "key": "monotonic",
+        "observations": [
+          {
+            "original": true,
+            "stdout": "[5200,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wall",
+            "meets": false,
+            "stdout": "[5200,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wall-cap",
+            "meets": false,
+            "stdout": "[200,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "micro-units",
+            "meets": false,
+            "stdout": "[0,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "monotonic",
+            "meets": true,
+            "stdout": "[125,0]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0345",
+        "kind": "patch",
+        "key": "bytes",
+        "observations": [
+          {
+            "option": "bytes",
+            "meets": true,
+            "stdout": "[\"😀\",\"é😀\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "characters",
+            "meets": false,
+            "stdout": "[\"😀tag\",\"é😀tag!\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "suffix",
+            "meets": false,
+            "stdout": "[\"tag!\",\"tag!\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "match-length",
+            "meets": false,
+            "stdout": "invalid-utf8",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0346",
+        "kind": "contract",
+        "key": "different",
+        "observations": [
+          {
+            "stdout": "[true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0347",
+        "kind": "contract",
+        "key": "changed",
+        "observations": [
+          {
+            "stdout": "[[1,2],[1,2,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "reference-iteration",
+            "stdout": "[[1,2,3],[1,2,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0348",
+        "kind": "contract",
+        "key": "property-miss",
+        "observations": [
+          {
+            "stdout": "[3,0]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "arrow-property",
+            "stdout": "[null,1]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0349",
+        "kind": "contract",
+        "key": "invalid-empty",
+        "observations": [
+          {
+            "stdout": "[\"\",\"false\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0350",
+        "kind": "contract",
+        "key": "concrete",
+        "observations": [
+          {
+            "stdout": "[Ada]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0351",
+        "kind": "contract",
+        "key": "later-hop",
+        "observations": [
+          {
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "protect-second-hop",
+            "stdout": "null",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0352",
+        "kind": "contract",
+        "key": "combined",
+        "observations": [
+          {
+            "stdout": "{\"network\":{\"timeout\":[10,20],\"retries\":2}}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0353",
+        "kind": "contract",
+        "key": "value-only",
+        "observations": [
+          {
+            "stdout": "{\"ADA\":2,\"LIN\":3}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0354",
+        "kind": "contract",
+        "key": "file-local",
+        "observations": [
+          {
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "contrast": "helper-import",
+            "stdout": "2025-01-01",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0355",
+        "kind": "document-review",
+        "key": "see-other",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "RFC 9110 defines 307 method preservation and 303 retrieval of another resource following the original request.",
+            "optionAudit": {
+              "always-get": "Contradicts 307 method preservation.",
+              "see-other": "Selects the retrieval redirect semantics required by the scenario.",
+              "drop-body": "Invents a body-dropping POST conversion.",
+              "permanent": "308 does not change POST into GET."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0356",
+        "kind": "contract",
+        "key": "leaves-only",
+        "observations": [
+          {
+            "stdout": "[]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0357",
+        "kind": "contract",
+        "key": "not-portable",
+        "observations": [
+          {
+            "stdout": "[0,[1,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0358",
+        "kind": "contract",
+        "key": "coerced",
+        "observations": [
+          {
+            "stdout": "\"zero-record\"",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0359",
+        "kind": "contract",
+        "key": "registry",
+        "observations": [
+          {
+            "stdout": "[true,true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0360",
+        "kind": "contract",
+        "key": "numbers",
+        "observations": [
+          {
+            "stdout": "{\"phone\":33123456789,\"postal\":123}",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0361",
+        "kind": "contract",
+        "key": "covariant",
+        "observations": [
+          {
+            "stdout": "Dog",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0362",
+        "kind": "contract",
+        "key": "coercive",
+        "observations": [
+          {
+            "stdout": "[\"TypeError\",\"int\",12]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0363",
+        "kind": "document-review",
+        "key": "revalidate",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "cURL follows Location targets when configured to do so; the application’s origin allowlist must apply to redirected requests as well.",
+            "optionAudit": {
+              "initial-sufficient": "Allows a remote response to choose an unauthorized origin.",
+              "https-protects": "The premise allows HTTP redirect targets.",
+              "revalidate": "Checks or prevents the additional outbound action.",
+              "same-host-default": "Invents an implicit same-origin restriction."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0364",
+        "kind": "contract",
+        "key": "same-prefix",
+        "observations": [
+          {
+            "stdout": "[true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0365",
+        "kind": "contract",
+        "key": "independent-vector",
+        "observations": [
+          {
+            "stdout": "[\".,8\",true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0366",
+        "kind": "patch",
+        "key": "left",
+        "observations": [
+          {
+            "option": "right",
+            "meets": false,
+            "stdout": "[\"Q70\",\"700\",\"1234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "numeric",
+            "meets": false,
+            "stdout": "[\"000\",\"007\",\"1234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "left",
+            "meets": true,
+            "stdout": "[\"0Q7\",\"007\",\"1234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "truncate",
+            "meets": false,
+            "stdout": "[\"0Q7\",\"007\",\"234\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0367",
+        "kind": "patch",
+        "key": "pair",
+        "observations": [
+          {
+            "option": "fill",
+            "meets": false,
+            "stdout": "{\"Ada\":[4,9],\"Lin\":[4,9]}",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "pair",
+            "meets": true,
+            "stdout": "{\"Ada\":4,\"Lin\":9}",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "merge",
+            "meets": false,
+            "stdout": "[\"Ada\",\"Lin\",4,9]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "replace",
+            "meets": false,
+            "stdout": "[4,9]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0368",
+        "kind": "patch",
+        "key": "scalar",
+        "observations": [
+          {
+            "option": "numeric",
+            "meets": false,
+            "stdout": "[false,true,true,false,false,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "present",
+            "meets": false,
+            "stdout": "[true,true,true,true,false,true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "string-or-number",
+            "meets": false,
+            "stdout": "[true,true,true,false,false,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "scalar",
+            "meets": true,
+            "stdout": "[true,true,true,true,false,false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0369",
+        "kind": "patch",
+        "key": "rfc-shape",
+        "observations": [
+          {
+            "option": "month-for-minute",
+            "meets": false,
+            "stdout": "2025-04-03T16:04:06+02:00",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "twelve-hour",
+            "meets": false,
+            "stdout": "2025-04-03T04:05:06+02:00",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "rfc-shape",
+            "meets": true,
+            "stdout": "2025-04-03T16:05:06+02:00",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "compact-offset",
+            "meets": false,
+            "stdout": "2025-04-03T16:05:06+0200",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0370",
+        "kind": "patch",
+        "key": "lf",
+        "observations": [
+          {
+            "option": "literal",
+            "meets": false,
+            "stdout": "one\\ntwo\\n",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "lf",
+            "meets": true,
+            "stdout": "one\ntwo\n",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "crlf",
+            "meets": false,
+            "stdout": "one\r\ntwo\r\n",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "cr",
+            "meets": false,
+            "stdout": "one\rtwo\r",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0371",
+        "kind": "patch",
+        "key": "closed",
+        "observations": [
+          {
+            "option": "closed",
+            "meets": true,
+            "stdout": "[[2,3,4],[],[3]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "exclude-end",
+            "meets": false,
+            "stdout": "[[2,3],[],[3,2]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "exclude-start",
+            "meets": false,
+            "stdout": "[[3,4],[],[4,3]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "repeat-start",
+            "meets": false,
+            "stdout": "[[2,2,2],[],[3]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0372",
+        "kind": "patch",
+        "key": "value",
+        "observations": [
+          {
+            "option": "key",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "position",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "value",
+            "meets": true,
+            "stdout": "true",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reverse-search",
+            "meets": false,
+            "stdout": "false",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0373",
+        "kind": "patch",
+        "key": "text-strict",
+        "observations": [
+          {
+            "option": "object-loose",
+            "meets": false,
+            "stdout": "[true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "text-strict",
+            "meets": true,
+            "stdout": "[true,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "identity",
+            "meets": false,
+            "stdout": "[false,false]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "text-loose",
+            "meets": false,
+            "stdout": "[true,true]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0374",
+        "kind": "document-review",
+        "key": "both-ms",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "libcurl defines CONNECTTIMEOUT_MS in milliseconds and TIMEOUT_MS as the maximum time for the whole transfer, including connection time.",
+            "optionAudit": {
+              "seconds-connect": "Sets the connection option in seconds.",
+              "add-phases": "Extends the total to 1300 ms.",
+              "both-ms": "Sets exactly the two required budgets.",
+              "connection-only": "Removes the overall timeout."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0375",
+        "kind": "patch",
+        "key": "local-catch",
+        "observations": [
+          {
+            "option": "global-handler",
+            "meets": false,
+            "stdout": "[\"ok\",\"escaped\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "finally-value",
+            "meets": false,
+            "stdout": "[\"default\",\"default\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "engine-errors",
+            "meets": false,
+            "stdout": "[\"ok\",\"escaped\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "local-catch",
+            "meets": true,
+            "stdout": "[\"ok\",\"default\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0376",
+        "kind": "patch",
+        "key": "raw",
+        "observations": [
+          {
+            "option": "typed",
+            "meets": false,
+            "stdout": "[false,123,null]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "normal",
+            "meets": false,
+            "stdout": "[\"\",\"00123\",\"\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "raw",
+            "meets": true,
+            "stdout": "[\"off\",\"00123\",\"null\"]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "wrong-slot",
+            "meets": false,
+            "stdout": "[\"\",\"00123\",\"\"]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0377",
+        "kind": "patch",
+        "key": "original",
+        "observations": [
+          {
+            "option": "original",
+            "meets": true,
+            "stdout": "[\"Import failed\",true,17]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "message",
+            "meets": false,
+            "stdout": "[\"Import failed\",false,17]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "cause",
+            "meets": false,
+            "stdout": "[\"Import failed\",false,17]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "different-key",
+            "meets": false,
+            "stdout": "[\"Import failed\",false,17]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0378",
+        "kind": "patch",
+        "key": "reindex",
+        "observations": [
+          {
+            "option": "labeled",
+            "meets": false,
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "one-array",
+            "meets": false,
+            "stdout": "TypeError",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reindex",
+            "meets": true,
+            "stdout": "Ada Lin",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "spread",
+            "meets": false,
+            "stdout": "Error",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0379",
+        "kind": "patch",
+        "key": "next-total",
+        "observations": [
+          {
+            "option": "chunk-only",
+            "meets": false,
+            "stdout": "[[true,12],[true,10]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "previous-total",
+            "meets": false,
+            "stdout": "[[true,12],[true,10]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "reject-equality",
+            "meets": false,
+            "stdout": "[[false,6],[false,6]]",
+            "exitCode": 0,
+            "expectedError": null
+          },
+          {
+            "option": "next-total",
+            "meets": true,
+            "stdout": "[[false,6],[true,10]]",
+            "exitCode": 0,
+            "expectedError": null
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0380",
+        "kind": "document-review",
+        "key": "actual-platform",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Composer check-platform-reqs checks the real platform and ignores config.platform; --no-dev restricts the check to production requirements.",
+            "optionAudit": {
+              "actual-platform": "Detects the real missing ext-intl requirement.",
+              "manifest": "Validates metadata, not the requested runtime capability gate.",
+              "autoload": "Builds lookup metadata rather than checking the real platform.",
+              "ignore": "Suppresses the relevant requirement check."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0381",
+        "kind": "tests",
+        "key": "shorter",
+        "observations": [
+          {
+            "option": "equal",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "shorter",
+            "exposes": true,
+            "expected": "false",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "long-different",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0382",
+        "kind": "tests",
+        "key": "overlap",
+        "observations": [
+          {
+            "option": "single",
+            "exposes": false,
+            "expected": "1",
+            "original": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "missing",
+            "exposes": false,
+            "expected": "0",
+            "original": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "separated",
+            "exposes": false,
+            "expected": "2",
+            "original": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "overlap",
+            "exposes": true,
+            "expected": "3",
+            "original": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "3",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0383",
+        "kind": "tests",
+        "key": "reordered",
+        "observations": [
+          {
+            "option": "reordered",
+            "exposes": true,
+            "expected": "true",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "identical",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different-value",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different-type",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0384",
+        "kind": "tests",
+        "key": "even-lower",
+        "observations": [
+          {
+            "option": "odd-lower",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "ordinary",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "even-lower",
+            "exposes": true,
+            "expected": "true",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "negative",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0385",
+        "kind": "tests",
+        "key": "lowercase",
+        "observations": [
+          {
+            "option": "post",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "lowercase",
+            "exposes": true,
+            "expected": "false",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "get",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "head",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0386",
+        "kind": "tests",
+        "key": "spaces",
+        "observations": [
+          {
+            "option": "plain",
+            "exposes": false,
+            "expected": "Ada",
+            "original": {
+              "stdout": "Ada",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "Ada",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "empty",
+            "exposes": false,
+            "expected": "",
+            "original": {
+              "stdout": "",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "other",
+            "exposes": false,
+            "expected": "Lin",
+            "original": {
+              "stdout": "Lin",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "Lin",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "spaces",
+            "exposes": true,
+            "expected": "Ada",
+            "original": {
+              "stdout": "error",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "Ada",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0387",
+        "kind": "tests",
+        "key": "multi-digit",
+        "observations": [
+          {
+            "option": "multi-digit",
+            "exposes": true,
+            "expected": "[\"item2\",\"item10\"]",
+            "original": {
+              "stdout": "[\"item10\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"item2\",\"item10\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "single-digit",
+            "exposes": false,
+            "expected": "[\"item1\",\"item2\"]",
+            "original": {
+              "stdout": "[\"item1\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"item1\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "letters",
+            "exposes": false,
+            "expected": "[\"a\",\"b\"]",
+            "original": {
+              "stdout": "[\"a\",\"b\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"a\",\"b\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "duplicates",
+            "exposes": false,
+            "expected": "[\"item2\",\"item2\"]",
+            "original": {
+              "stdout": "[\"item2\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[\"item2\",\"item2\"]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0388",
+        "kind": "tests",
+        "key": "missing-parent",
+        "observations": [
+          {
+            "option": "first-parent",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "null-parent",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "missing-parent",
+            "exposes": true,
+            "expected": "false",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "second-parent",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0389",
+        "kind": "tests",
+        "key": "two-values",
+        "observations": [
+          {
+            "option": "one",
+            "exposes": false,
+            "expected": "1",
+            "original": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "two-values",
+            "exposes": true,
+            "expected": "2",
+            "original": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "2",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "other-one",
+            "exposes": false,
+            "expected": "1",
+            "original": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "empty",
+            "exposes": false,
+            "expected": "0",
+            "original": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "0",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0390",
+        "kind": "tests",
+        "key": "thousand",
+        "observations": [
+          {
+            "option": "fraction",
+            "exposes": false,
+            "expected": "1.50",
+            "original": {
+              "stdout": "1.50",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1.50",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "zero",
+            "exposes": false,
+            "expected": "0.00",
+            "original": {
+              "stdout": "0.00",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "0.00",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "negative",
+            "exposes": false,
+            "expected": "-2.50",
+            "original": {
+              "stdout": "-2.50",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "-2.50",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "thousand",
+            "exposes": true,
+            "expected": "1000.00",
+            "original": {
+              "stdout": "1,000.00",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "1000.00",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0391",
+        "kind": "tests",
+        "key": "alias-preserved",
+        "observations": [
+          {
+            "option": "root-distinct",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "leaf-distinct",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "value-preserved",
+            "exposes": false,
+            "expected": "true",
+            "original": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "alias-preserved",
+            "exposes": true,
+            "expected": "true",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "true",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0392",
+        "kind": "tests",
+        "key": "overlap",
+        "observations": [
+          {
+            "option": "sequential",
+            "exposes": false,
+            "expected": "[true,false]",
+            "original": {
+              "stdout": "[true,false]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[true,false]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "different",
+            "exposes": false,
+            "expected": "[true,true]",
+            "original": {
+              "stdout": "[true,true]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[true,true]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "overlap",
+            "exposes": true,
+            "expected": "[true,false]",
+            "original": {
+              "stdout": "[true,true]",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "[true,false]",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          },
+          {
+            "option": "unknown",
+            "exposes": false,
+            "expected": "false",
+            "original": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            },
+            "repaired": {
+              "stdout": "false",
+              "exitCode": 0,
+              "expectedError": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0393",
+        "kind": "document-review",
+        "key": "primary-confirmation",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The scenario defines asynchronous replication with unbounded lag and a confirmed available primary; only the primary route guarantees this immediate observation.",
+            "optionAudit": {
+              "primary-confirmation": "Reads from the node with the confirmed committed row.",
+              "fixed-sleep": "No stated lag bound justifies the delay.",
+              "replica-isolation": "Does not advance replication.",
+              "submitted-copy": "Cannot supply required database-generated fields."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0394",
+        "kind": "document-review",
+        "key": "presence-and-value",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The stated API assigns different operations to absent, present-null and present-string inputs; a representation must preserve all three states.",
+            "optionAudit": {
+              "null-to-absent": "Collapses clear into keep.",
+              "defaults-null": "Collapses keep into clear.",
+              "presence-and-value": "Preserves all three operations.",
+              "string-cast": "Collapses meaningful null/empty/absent states."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0395",
+        "kind": "document-review",
+        "key": "current-policy",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Revocations committed before execution must apply; enqueue-time decisions and snapshots are insufficient even when authentic.",
+            "optionAudit": {
+              "signed-decision": "Preserves a stale decision.",
+              "current-policy": "Observes the required current authorization state.",
+              "role-snapshot": "Evaluates stale permissions.",
+              "signature-again": "Checks integrity without freshness of authority."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0396",
+        "kind": "document-review",
+        "key": "versioned-keys",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "The scenario permits recomputation but forbids cross-version payload interpretation; key namespaces must separate concurrent incompatible formats.",
+            "optionAudit": {
+              "flush-once": "Old workers repopulate shared keys after the purge.",
+              "short-ttl": "Still permits incompatible reads before expiration.",
+              "writer-timestamp": "Does not supply a compatible representation.",
+              "versioned-keys": "Separates both readers and writers by schema version."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0397",
+        "kind": "document-review",
+        "key": "interface",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PHP supports one parent class and multiple implemented interfaces; traits are not object types for parameter contracts.",
+            "optionAudit": {
+              "interface": "Adds the required method contract without changing class ancestry.",
+              "base-class": "Requires unsupported additional class inheritance.",
+              "trait-type": "Cannot establish the requested nominal type.",
+              "method-names": "Does not make the object parameter enforce the signatures."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0398",
+        "kind": "document-review",
+        "key": "reserved-capacity",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Under the stated 100-slot model, a hard A cap of 80 plus a B reservation prevents A from exhausting B capacity before failure detection.",
+            "optionAudit": {
+              "shorter-timeout": "Allows full occupancy until the shorter timeout.",
+              "failure-breaker": "Requires observations that may not yet exist.",
+              "reserved-capacity": "Enforces the specified concurrent allocation.",
+              "retry-jitter": "Does not limit the initial burst."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0399",
+        "kind": "document-review",
+        "key": "whole-operation",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "PostgreSQL documents SQLSTATE 40001 and requires retrying the complete transaction, including logic that chooses statements and values.",
+            "optionAudit": {
+              "whole-operation": "Recreates a coherent transactional attempt from fresh observations.",
+              "failed-statement": "Omits prior work and its decision context.",
+              "same-transaction": "Retains an aborted transaction.",
+              "cached-decisions": "Reuses possibly invalid prior decisions."
+            }
+          }
+        ]
+      },
+      {
+        "id": "PHP-E26-0400",
+        "kind": "document-review",
+        "key": "isolated-builder",
+        "observations": [
+          {
+            "execution": "not-applicable",
+            "rule": "Composer documents both plugin and script execution and recommends sandboxing untrusted dependencies; the scenario explicitly requires hooks and separates artifact approval.",
+            "optionAudit": {
+              "lockfile-on-deployer": "Required project scripts cannot run.",
+              "scripts-only-off": "Read-only deployment credentials are still exposed to reads.",
+              "ordinary-user": "Production access remains available despite the explicit prohibition.",
+              "isolated-builder": "Permits hooks within the stated isolation and promotion boundaries."
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

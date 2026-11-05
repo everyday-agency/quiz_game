@@ -1,0 +1,101 @@
+{
+  "reason": "Runtime contradicted the initial assumption: without __isset, null coalescing does invoke __get while isset does not. Correct the key and all rationales before acceptance.",
+  "record": {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-engineer-2026",
+    "id": "PHP-E26-0513",
+    "revision": 1,
+    "status": "draft",
+    "responseType": "single-choice",
+    "format": "execution",
+    "topic": "Classes & object lifecycle",
+    "subtopic": "magic-get-without-magic-isset",
+    "objective": {
+      "id": "magic-get-without-magic-isset",
+      "text": "Distinguish a virtual property’s direct read from its existence check when only __get is implemented."
+    },
+    "difficulty": {
+      "level": "Intermediate",
+      "audience": "intermediate",
+      "rationale": "Trace which magic hook is available for direct access, isset and null coalescing."
+    },
+    "prerequisites": [
+      "Property overloading",
+      "__get",
+      "__isset",
+      "Null coalescing"
+    ],
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI unless the stated context specifies otherwise",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+    },
+    "context": {
+      "assumptions": [
+        "Run in a fresh PHP process using only the displayed files and inputs."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n\nclass VirtualLabel\n{\n    public function __get(string $name): string\n    {\n        return 'visible';\n    }\n}\n\n$label = new VirtualLabel();\n\necho json_encode([\n    $label->title,\n    isset($label->title),\n    $label->title ?? 'fallback',\n]);\n"
+        }
+      ]
+    },
+    "stem": "What JSON is printed for this undeclared virtual title property? The class implements no __isset method.",
+    "options": [
+      {
+        "id": "read-implies-exists",
+        "text": "[\"visible\",true,\"visible\"]",
+        "rationale": "A direct __get result does not by itself make isset report an undeclared property as present.",
+        "misconception": "Assuming the read hook automatically implements the existence hook."
+      },
+      {
+        "id": "coalesce-reads-anyway",
+        "text": "[\"visible\",false,\"visible\"]",
+        "rationale": "Without __isset establishing presence, null coalescing takes its fallback rather than using this direct-read result.",
+        "misconception": "Assuming ?? performs a direct magic read even after the existence check fails."
+      },
+      {
+        "id": "no-virtual-read",
+        "text": "[null,false,\"fallback\"]",
+        "rationale": "Direct property access does invoke the available __get method, which returns visible.",
+        "misconception": "Treating an undeclared property as unreadable even when a read hook exists."
+      },
+      {
+        "id": "different-hooks",
+        "text": "[\"visible\",false,\"fallback\"]",
+        "rationale": "Direct access invokes __get, while isset and the existence-sensitive coalescing path lack an affirmative __isset result.",
+        "misconception": null
+      }
+    ],
+    "correctOptionId": "different-hooks",
+    "explanation": {
+      "summary": "PHP separates overloaded reads from overloaded existence checks. Implementing __get alone supports the direct read but does not make the undeclared property visible to isset or this null-coalescing expression.",
+      "trace": "The first expression obtains visible. The existence check is false, and the third expression chooses fallback."
+    },
+    "validation": {
+      "kind": "output",
+      "stdout": "[\"visible\",false,\"fallback\"]",
+      "status": "draft",
+      "independentEditorialReview": "pending"
+    },
+    "curriculum": {
+      "repositoryTopic": "repo-topic-17",
+      "lessonIds": [
+        23,
+        25
+      ],
+      "lessonMappingStatus": "working-outline",
+      "coverageComplete": false
+    },
+    "references": [
+      "https://www.php.net/manual/en/language.oop5.overloading.php#object.get"
+    ]
+  }
+}

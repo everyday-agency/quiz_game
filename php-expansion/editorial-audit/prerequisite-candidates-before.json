@@ -1,0 +1,626 @@
+{
+  "method": "Exact API/class/constant name in prerequisites occurring in only one choice; all such tokens must point to that same choice. A screening heuristic, not automatic proof of leakage.",
+  "count": 77,
+  "keyed": 30,
+  "candidates": [
+    {
+      "id": "PHP-E26-0030",
+      "tokens": [
+        "sort"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0045",
+      "tokens": [
+        "Iterator"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0051",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0056",
+      "tokens": [
+        "hash_equals"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0058",
+      "tokens": [
+        "WeakMap"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0060",
+      "tokens": [
+        "Closure"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0069",
+      "tokens": [
+        "ctype_digit"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0070",
+      "tokens": [
+        "stdClass"
+      ],
+      "predictedOption": "B",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0078",
+      "tokens": [
+        "pack",
+        "strlen"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0099",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0100",
+      "tokens": [
+        "header"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0140",
+      "tokens": [
+        "JSON_BIGINT_AS_STRING"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0156",
+      "tokens": [
+        "json_encode"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0160",
+      "tokens": [
+        "SplObjectStorage"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0167",
+      "tokens": [
+        "ceil"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0172",
+      "tokens": [
+        "in_array"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0228",
+      "tokens": [
+        "ltrim"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0245",
+      "tokens": [
+        "PDO::FETCH_PROPS_LATE"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0247",
+      "tokens": [
+        "Error",
+        "error"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0250",
+      "tokens": [
+        "error"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0252",
+      "tokens": [
+        "json_last_error"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0253",
+      "tokens": [
+        "restore_error_handler"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0255",
+      "tokens": [
+        "password_verify"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0258",
+      "tokens": [
+        "Range"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0259",
+      "tokens": [
+        "filter_var"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0267",
+      "tokens": [
+        "array_key_first"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0268",
+      "tokens": [
+        "array_splice"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0274",
+      "tokens": [
+        "str_getcsv"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0279",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0295",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0300",
+      "tokens": [
+        "rename"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0328",
+      "tokens": [
+        "explode"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0331",
+      "tokens": [
+        "getcwd"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0346",
+      "tokens": [
+        "Countable"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0367",
+      "tokens": [
+        "array_combine"
+      ],
+      "predictedOption": "B",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0368",
+      "tokens": [
+        "is_scalar"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0372",
+      "tokens": [
+        "array_search"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0395",
+      "tokens": [
+        "time"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0426",
+      "tokens": [
+        "trim"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0431",
+      "tokens": [
+        "session_abort"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0432",
+      "tokens": [
+        "JSON_FORCE_OBJECT"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0439",
+      "tokens": [
+        "FETCH_UNIQUE"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0440",
+      "tokens": [
+        "RecursiveIteratorIterator"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0446",
+      "tokens": [
+        "define"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0447",
+      "tokens": [
+        "TypeError"
+      ],
+      "predictedOption": "B",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0451",
+      "tokens": [
+        "Exception"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0457",
+      "tokens": [
+        "array_filter"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0459",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0462",
+      "tokens": [
+        "ERRMODE_EXCEPTION"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0470",
+      "tokens": [
+        "hex2bin"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0471",
+      "tokens": [
+        "is_iterable"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0478",
+      "tokens": [
+        "ZipArchive"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0482",
+      "tokens": [
+        "Exception"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0483",
+      "tokens": [
+        "exception",
+        "assert"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0484",
+      "tokens": [
+        "Exception"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0491",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0499",
+      "tokens": [
+        "key"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0523",
+      "tokens": [
+        "constant"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0525",
+      "tokens": [
+        "Override"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0532",
+      "tokens": [
+        "PHP_SELF"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0536",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0539",
+      "tokens": [
+        "spl_autoload_register"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0540",
+      "tokens": [
+        "call_user_func"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0543",
+      "tokens": [
+        "Directory"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0545",
+      "tokens": [
+        "PDO"
+      ],
+      "predictedOption": "D",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0555",
+      "tokens": [
+        "header"
+      ],
+      "predictedOption": "A",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0559",
+      "tokens": [
+        "file"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0565",
+      "tokens": [
+        "error"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0566",
+      "tokens": [
+        "is_finite"
+      ],
+      "predictedOption": "B",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0567",
+      "tokens": [
+        "fmod"
+      ],
+      "predictedOption": "D",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0568",
+      "tokens": [
+        "strspn"
+      ],
+      "predictedOption": "A",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0569",
+      "tokens": [
+        "array_count_values"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0570",
+      "tokens": [
+        "str_getcsv"
+      ],
+      "predictedOption": "B",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0576",
+      "tokens": [
+        "directory"
+      ],
+      "predictedOption": "B",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0577",
+      "tokens": [
+        "hash_init"
+      ],
+      "predictedOption": "C",
+      "correct": false
+    },
+    {
+      "id": "PHP-E26-0584",
+      "tokens": [
+        "get_class"
+      ],
+      "predictedOption": "C",
+      "correct": true
+    },
+    {
+      "id": "PHP-E26-0590",
+      "tokens": [
+        "exit"
+      ],
+      "predictedOption": "B",
+      "correct": true
+    }
+  ]
+}

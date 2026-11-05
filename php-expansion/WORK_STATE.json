@@ -1,0 +1,154 @@
+{
+  "phase": "controlled-release-authorized-validation",
+  "newQuestionsRequired": 600,
+  "batchesRequired": 6,
+  "acceptedForReview": 600,
+  "independentlyApproved": 0,
+  "normalPhpStillActive": 300,
+  "pilotRetained": 20,
+  "releaseAuthorized": false,
+  "coverageBasis": "Repository 25-topic PHP specifications plus user working Lessons 1–31. Unknown mappings remain null; no invented lesson numbers.",
+  "batches": [
+    {
+      "id": 1,
+      "target": 100,
+      "status": "accepted-for-review",
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulties": {
+        "Foundation": 27,
+        "Intermediate": 56,
+        "Advanced": 17
+      },
+      "draftCount": 100
+    },
+    {
+      "id": 2,
+      "target": 100,
+      "status": "accepted-for-review",
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulties": {
+        "Foundation": 25,
+        "Intermediate": 57,
+        "Advanced": 18
+      },
+      "draftCount": 100
+    },
+    {
+      "id": 3,
+      "target": 100,
+      "status": "accepted-for-review",
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulties": {
+        "Foundation": 29,
+        "Intermediate": 63,
+        "Advanced": 8
+      },
+      "draftCount": 100
+    },
+    {
+      "id": 4,
+      "target": 100,
+      "status": "accepted-for-review",
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulties": {
+        "Foundation": 26,
+        "Intermediate": 68,
+        "Advanced": 6
+      },
+      "draftCount": 100
+    },
+    {
+      "id": 5,
+      "target": 100,
+      "status": "accepted-for-review",
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 11,
+        "architecture": 9
+      },
+      "difficulties": {
+        "Foundation": 25,
+        "Intermediate": 67,
+        "Advanced": 8
+      },
+      "draftCount": 100
+    },
+    {
+      "id": 6,
+      "target": 100,
+      "status": "accepted-for-review",
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 11,
+        "architecture": 9
+      },
+      "difficulties": {
+        "Foundation": 27,
+        "Intermediate": 70,
+        "Advanced": 3
+      },
+      "draftCount": 100
+    }
+  ],
+  "curriculum": "25 repository topics + user working Lessons 1–31; advanced/uncovered material remains unmapped.",
+  "next": "Complete local validation, integrate main, deploy and verify live; independent editorial approval pending.",
+  "archiveCommit": "c56a92c",
+  "finalReport": "php-expansion/FOCUSED_CORRECTION_REPORT.md",
+  "reviewUrlQuery": "?collection=php-engineer-review-v1",
+  "independentEditorialApproval": "pending",
+  "editorialRemediation": {
+    "reviewed": 600,
+    "revised": 210,
+    "retained": 390,
+    "unresolved": [],
+    "report": "php-expansion/EDITORIAL_AUDIT_REPORT.md",
+    "reviewExport": "php-expansion/EDITORIAL_REVIEW_30.md",
+    "followupReport": "php-expansion/FOCUSED_CORRECTION_REPORT.md"
+  },
+  "focusedCorrection": {
+    "scope": [
+      "PHP-E26-0300",
+      "PHP-E26-0355",
+      "PHP-E26-0549",
+      "PHP-E26-0557"
+    ],
+    "unresolved": [],
+    "report": "php-expansion/FOCUSED_CORRECTION_REPORT.md"
+  },
+  "currentRelease": "release/manifest.json",
+  "releaseAuthorization": "release/AUTHORIZATION.txt"
+}

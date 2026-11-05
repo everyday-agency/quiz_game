@@ -1,0 +1,344 @@
+PHP QUESTION BANK EXPANSION — LOCAL REVIEW REPORT
+
+Result
+600 new PHP questions are complete in six validated batches of 100. Their IDs
+are PHP-E26-0001 through PHP-E26-0600. The separate local review collection
+contains these 600 plus the 20 retained, visually approved PHP pilot questions.
+All 600 have technical evidence and an authoring-assistant editorial review.
+All 600 still have independentEditorialReview = pending. None is represented
+as independently approved or activated in normal examinations.
+
+The normal bank still contains exactly 2,500 questions, including its existing
+300 PHP questions. The 2,200 non-PHP records, all original IDs, the 20 pilot
+records, and previous remediation are preserved. No push, merge, deployment,
+production write, backend, database or Laravel application was introduced.
+Work remains on remediation/question-quality-pilot.
+
+Review entry points
+- README.md explains how to build and serve the static site locally.
+- Append ?collection=php-engineer-review-v1 to that local site URL.
+- EDITORIAL_REVIEW_20.txt exports 20 representative NEW questions, including
+  their complete sources, options, keys, explanations, prerequisites and evidence.
+- COVERAGE.json gives exact topic, lesson, format, difficulty and batch counts.
+- QUESTION_IDS.txt lists all 600 new IDs; MANIFEST.json adds revisions, hashes,
+  objectives, validation kinds and editable lesson mappings.
+- RELEASE_PLAN.txt describes approval, replacement and rollback. It is a plan,
+  not an activation performed by this task.
+All paths in this report are relative to php-expansion unless stated otherwise.
+
+Inventory and distribution
+                          New records
+Execution/output                 150
+Debugging                        120
+Code review/refactoring          120
+Implementation choices            90
+Testing/behavior verification     70
+Architecture                      50
+TOTAL                            600
+
+Foundation                       150
+Intermediate                     300
+Advanced                         150
+
+Each batch contains 25 Foundation, 50 Intermediate and 25 Advanced records.
+Batches 1–4 each have 25 execution, 20 debugging, 20 code-review, 15 implementation,
+12 testing and 8 architecture records. Batches 5–6 each have 25, 20, 20, 15, 11
+and 9 respectively. There are 600 distinct objective identifiers. An objective
+identifier is not, by itself, proof of a distinct assessment concept.
+
+Coverage uses the repository's 25 PHP topic specifications:
+Syntax & execution model                         6
+Variables, scope & constants                    10
+Types, casting & comparisons                    31
+Arrays & destructuring                          51
+Operators & expressions                         19
+Control flow & pattern matching                 12
+Functions & arguments                           57
+Closures, callbacks & callables                  22
+Classes & object lifecycle                      44
+Inheritance, interfaces & traits                27
+Namespaces, Composer & packages                 17
+Includes, autoloading & paths                     8
+Errors & exceptions                             23
+Files & structured data                         50
+HTTP & superglobals                             31
+Forms & file uploads                             8
+Cookies & sessions                              13
+Validation & web security                       41
+PDO & database access                           23
+Transactions, migrations & ORM                  13
+APIs, integrations & PSRs                       17
+Iterators, generators & fibers                  21
+Enums, attributes & reflection                  22
+Performance, processes & servers                14
+Testing, style & static analysis                20
+
+These are existing taxonomy labels; retaining a label containing ORM does not
+introduce Laravel questions or an ORM/backend into the application. Database
+questions state their driver and transactional assumptions. Composer, attributes,
+enums, Reflection, security, testing and architecture remain in scope regardless
+of the incomplete numbered curriculum.
+
+386 new questions have a clear mapping to one or more working Lessons 1–31;
+214 have null/unmapped lesson IDs. Only 234 have complete coverage by those
+working lessons. Partial mappings do not qualify for studied-only sessions.
+Per-lesson counts overlap and are detailed in COVERAGE.json. No Lessons 32–100
+were invented. Mapping data lives separately in
+../js/php-expansion/lesson-mappings.mjs; changing it does not change question IDs,
+option IDs or content. The retained pilot has a separate mapping overlay.
+Advanced starts deselected. Studied-only mode requires valid listed lessons,
+complete coverage, every required lesson selected, and explicit Advanced
+selection when applicable. An invalid entry such as 32 yields no eligible
+questions. Mapping is a coverage aid, not an assertion that a learner has
+already studied the concepts. Prerequisites are visible before answering.
+
+Structure and authoring
+The pilot's structure is retained: stable ID and revision; technology and
+collection; single-choice response type; topic/subtopic and objective; format;
+difficulty with rationale; explicit prerequisites; PHP versions and runtime
+conditions; assumptions and named source files; four stable option IDs; one
+correctOptionId; a rationale and realistic misconception for each wrong option;
+summary and execution trace; references and validation status/evidence.
+
+Files are authored individually in ../php-expansion/authoring/batch-01.mjs
+through batch-06.mjs. The record helper supplies schema boilerplate only. It
+never expands a snippet into several question templates. Accepted full records
+are in ../js/php-expansion/batches/batch-01.mjs through batch-06.mjs.
+
+There are 502 questions with 517 named complete PHP files, including 14 multi-file
+questions. The other 98 are explicit requirements/document-backed scenarios.
+Replacement expressions and blocks are isolated fragments within a stated host
+file; the harness substitutes them into that host before checking them. The
+retained pilot's existing fragment/file distinctions remain unchanged. Sources
+have four-space indentation, multiline declarations/blocks, and literal
+whitespace preserved. Source-token checks avoid mistaking braces inside strings
+or comments for compressed PHP blocks. Intentional errors are identified by the
+question and checked as expected errors rather than silently repaired.
+
+Per-batch validation
+Counts below are PER runtime, and are the same on PHP 8.4.17 and PHP 8.5.2.
+Batch   IDs           Records    Lint cases    Isolated executions
+1       0001–0100       100           293              288
+2       0101–0200       100           301              287
+3       0201–0300       100           276              272
+4       0301–0400       100           275              268
+5       0401–0500       100           199              197
+6       0501–0600       100           228              226
+TOTAL                  600          1572             1538
+
+Across BOTH runtimes: 3,144 lint cases and 3,076 isolated executions.
+This is not a claim of 600 executable integration tests: 98 scenarios use
+reference-backed contract/editorial validation without executing an external
+system. The remaining validation kinds are 149 output, 194 all-choice patches,
+100 contract/witness checks and 59 original-versus-repaired test probes. Format
+and validation kind are different dimensions; for example, an execution question
+about an expected fatal error can use contract validation.
+
+Each batch was checked and accepted sequentially before the next batch. Drafts
+that failed or overlapped existing concepts were revised or replaced first.
+Acceptance checks require matching authored-record hashes, schema/quotas,
+both PHP versions' evidence, a per-item editorial note, and adjudication of all
+flagged duplicate candidates. Later pre-release changes in batches 1 and 2
+incremented revisions and preserved their prior accepted record snapshots.
+After integration, all six batches were rerun with the final runtime harness.
+Evidence: evidence/batch-N-runtime.json, batch-N-checks.json,
+batch-N-acceptance.json; reviews/batch-NN-editorial.json and duplicates.json;
+evidence/all-batch-runtime-rerun.txt.
+
+Execution uses inspected, hash-allowlisted fixtures in fresh, owned temporary
+directories, PHP -n, an empty environment, open_basedir, memory/time limits and
+disabled process/network functions. Required standard extensions are loaded from
+the selected PHP installation when not compiled in. Tests use owned files and
+in-memory SQLite. PostgreSQL/Redis, Composer resolution, HTTP/browser cookie
+contracts, FPM recovery and other external-service scenarios are not executed
+against real services. No application data or production systems are used.
+
+Editorial and duplicate analysis
+All 600 have an authoring-assistant review against the same rubric: a specific
+objective; sufficient premises; one keyed answer; plausible misconceptions;
+PHP evidence or an explicit documented contract; per-choice explanations;
+appropriate difficulty/prerequisites; readable source; and a distinct reasoning
+path. The reviewer is explicitly identified as NOT independent.
+
+Similarity screening compared new items to earlier accepted batches, the 20
+pilot items and the archived PHP bank. It produced 474 candidate pairs; 499
+pair reviews were documented after additional manual comparisons. Shared PDO
+setup, exception syntax or domain vocabulary can be retained when the actual
+mechanism differs. For example, fetchColumn advancing a whole row is distinct
+from FETCH_LAZY sharing a row-view object. These comparisons and reasons are
+recorded per pair. Similarity thresholds cannot prove semantic originality.
+Manual review caught overlaps that the lexical heuristic missed, including a
+second proposed strtr test; that draft was replaced before acceptance.
+
+No new option contains the screened stock phrases “suppress every failure”,
+“replace ... with a comment”, “keep the relevant mechanism” or “exercise the
+shown path”. No new question uses the artificial “Reasoning check” or “Evidence
+to inspect” padding. The archived current 300 contain those stock phrases in
+123 questions and padding in 189. The previous audit demonstrated that stock
+wording could reveal a key without understanding the source; eliminating those
+phrases addresses that specific defect, not every possible linguistic cue.
+
+Length remains a review signal: 180/600 correct answers are uniquely longest;
+504/600 questions have any uniquely longest choice, so selecting it is correct
+on 180/504 (35.7%) of that subset. This residual association must not be described
+as proof of wording neutrality. Three >1.45x length flags (0010, 0486, 0515) were
+reviewed: each is a literal output consequence, not explanatory padding. Correct
+answers are uniquely shortest in 43 questions. Do not add filler to equalize
+lengths. Independent stem-hidden review should test whether specificity,
+grammar or technical completeness gives away other keys, especially reasoning
+items. Learner calibration has not been performed.
+
+Authored positions 1–4 contain 123/157/172/148 keys. The application shuffles
+options; it does not expose that source ordering as a strategy. In the final
+620-item browser Learn run, displayed positions contained 156/150/151/163 keys,
+with grading and explanations mapped by identity. These are observed counts,
+not an enforced answer-length or position-balancing template.
+
+Concrete improvements over old patterns
+- Old PQ-001 includes choices claiming that runtime “skips the shown branch”
+  and appends generic reasoning padding. New PHP-E26-0001 requires the exact
+  signed quotient and remainder. Its alternatives correspond to floor division,
+  nonnegative remainder and ordinary floating-point division.
+- Old template-based test choices often say to “exercise the shown path”. New
+  PHP-E26-0081 offers four legitimate input/output tests, but only a leading
+  removed array element exposes the JSON list-shape defect.
+- PHP-E26-0341 compares stream-filter lifetimes and read/write directions using
+  the same three byte chunks. Every candidate is checked in the displayed host;
+  choosing the answer requires understanding encoder state across writes.
+- PHP-E26-0591 separates strict Base64 decoding from canonical spelling. Its
+  adversarial input exposes a realistic validation misunderstanding; a test of
+  an already canonical or plainly invalid string would miss the defect.
+These full records and 16 others are in EDITORIAL_REVIEW_20.txt. This sample is
+for independent critique, not a claim that 20 reviews certify all 600 records.
+
+Rejected, revised and unresolved items
+There are no excluded final IDs or known unresolved technical failures among
+the 600 accepted-for-review records. There are zero independently approved new
+records. The 98 document-review scenarios and residual wording/difficulty risks
+remain explicit review boundaries, not fabricated runtime successes.
+
+Material rejected or corrected pre-release drafts include:
+0018 destructor lifetime replaced a pilot-cloning overlap; 0088 replaced a
+stat-cache overlap with stream EOF timing; 0186 and 0193 replaced pilot overlaps;
+0192 replaced a readonly-clone overlap; 0204 replaced array-union duplication;
+0307 replaced a repeated closure-capture question; 0333 strengthened the rotation
+probe to require a nonempty active new session ID; 0459 replaced an incorrect
+assumption about execute([]) with an observed PDO binding-type distinction;
+0481 and 0487 were replaced twice after DST/LIKE and then strtr/preg_quote
+concept overlaps; 0501 replaced legacy strict-float duplication; 0513 corrected
+its __get/null-coalescing key after both runtimes disproved the draft; 0517
+replaced a failed stat-cache premise; 0548 replaced an abstract-class overlap;
+0549 replaced repeated instanceof reasoning; 0560 replaced the repeated CSV
+blank-line/EOF distinction; 0569 changed its witness because the original input
+accidentally made array_flip match the intended frequency counts.
+
+Other fixes recorded in the per-item notes include WeakMap reachability (0058),
+8.5-safe ArrayAccess usage (0077), unambiguous MAC framing (0078), final trait
+alias semantics (0145), called-class construction (0154), required-after-optional
+parameters (0155), builtin-name collision (0176), transaction-scoped SET LOCAL
+premises (0200), qualified Throwable (0239), guard-inversion alternatives (0243),
+JSON fixture flags (0264), assertion configuration (0289), PRG versus method
+preservation (0355), reserved ReadOnly spelling (0443), session fixture filename
+(0454), and avoiding unrelated chr deprecation in a byte case (0470).
+
+Rejected text and earlier revisions remain under archive/ and evidence/
+rejected-draft-*.txt, with evidence/batch-4-draft-corrections.txt and
+0569-fixture-revision.txt. Final keys, source hashes and evidence supersede those
+drafts. They are not shipped in the static artifact.
+
+Application changes
+- ../js/php-expansion/review.mjs adds a query-selected, PHP-only review collection.
+  The normal route and the existing 20-question pilot route remain available.
+- adapter.mjs projects accepted records into the existing grading/viewer shape;
+  review-data.mjs contains display data without PHP execution fixtures.
+- filters.mjs adds format, objective, working lesson and studied-only filtering,
+  combined with the existing topic and difficulty controls.
+- lesson-mappings.mjs and pilot-mappings.mjs keep curriculum changes independent
+  of content and identity. The pilot's Applied label is displayed as Intermediate
+  only in this review overlay; its original records and original route are intact.
+- ../js/app.js lazily imports the review collection, wires scoped controls, and
+  uses underTheHoodPhpEngineerReviewV1Stats. It never migrates or overwrites the
+  main, legacy or pilot progress keys. Learning objectives are shown in the
+  expanded bank review, not as pre-answer hints during examinations.
+- Scoped additions in ../styles.css support the review filters and prevent
+  multiline options/explanations overflowing the mobile grid. The approved dark
+  code viewer, highlighting, whitespace, copy controls and horizontal scroll remain.
+- ../tools/build-php-review.mjs verifies accepted hashes before projecting data;
+  ../tools/build-site.mjs includes an explicit allowlist of 26 runtime files.
+  Raw batches, authoring code, PHP fixtures, reports and archives are excluded.
+- ../tests/php-expansion/ adds structure, PHP runtime and real Chrome coverage;
+  ../tests.mjs includes the new structural regression. The existing CI workflow
+  is configured for both PHP versions and all four browser suites. Remote CI was
+  not run, because nothing was pushed.
+- ../tools/export-php-review.mjs exports the accepted records and current evidence
+  for review. It does not generate question content.
+
+The new 600-item runtime projection is 1,731,300 bytes uncompressed; its measured
+local gzip size is 377,732 bytes. Compression depends on the server. It loads
+only on the review route. Chrome's local review load measurement was 40 ms on
+this machine; that is not a mobile-network or public-hosting benchmark.
+
+Regression and browser results
+PASS: node tests.mjs, including the original archive, 2,500 IDs, notes, prior
+remediation, earlier PHP/runtime contracts, pilot formatting/token-equivalence,
+all pilot option permutations, code-viewer escaping, and expansion structure.
+The earlier suite reports 133 historical remediation revisions; those revisions
+predate this expansion and were preserved, not introduced into other tracks by it.
+PASS: all six fresh PHP batch reruns on both versions, as counted above.
+PASS: static build and git diff --check.
+
+Chrome 156.0.8078.80, isolated profiles, local prepared _site artifact:
+- Existing app: 9 check groups passed; neutral 10-question Exam graded 5/10,
+  legacy/current progress, missed review, prior remediation and mobile rendering.
+- Retained PHP pilot: 7 groups passed; all 20 questions, 60 distractor rationales,
+  exact files, shuffle, mode switch/cancel, 10/20 Exam and independent storage.
+- Existing code viewer: 8 groups passed; all 22 pilot source files/fragments,
+  clipboard behavior and denial, desktop/mobile source fidelity, actual touch
+  scrolling, inert malicious source/filenames, keyboard copy without submission,
+  source-free questions and GitHub Pages-style subpath/local assets.
+- New review collection: 6 groups passed under /quiz-preview/. All 620 were
+  rendered and answered using actual Chrome controls at 1280px desktop and
+  390px mobile widths. Source text and option identities matched; expanded mobile
+  feedback fit; all 1,860 wrong-option explanations matched. Learn scored 531/620.
+  A separate 20-question Exam scored 10/20 only after submission; there were no
+  pre-submission correctness/score/streak/teaching indicators. Total review stats
+  were 640 answered, 541 correct, two completed sessions, best 86. Filters,
+  invalid lesson input, missed retry, multi-file copying, touch horizontal scroll,
+  reload, and return to the original 2,500 bank passed. Main, legacy and pilot
+  counters stayed exactly as seeded. No uncaught browser exceptions occurred.
+
+Browser evidence and screenshots are in evidence/browser-existing/,
+browser-pilot/, browser-viewer/ and browser-review/. Each contains
+browser-results.json and run.txt. Automated output is in
+ evidence/final-automated-tests.txt and all-batch-runtime-rerun.txt.
+Screenshots manually inspected include PHP-E26-0512-desktop (two named files),
+PHP-E26-0562-mobile (multiline trait/class and options), and PHP-E26-0599-mobile
+(source-free architecture question). No unwanted source wrapping, centered code,
+overflowing options or empty code panel was visible in these samples.
+
+Preservation and release recommendation
+archive/original-php-300.json preserves all 300 active-at-start PHP records and
+teaching notes. It and archive/preservation.json are version controlled in local
+commit c56a92c. Old PQ IDs remain permanently reserved; new IDs use PHP-E26.
+The existing v1 baseline/archive also remains intact. Preservation hashes are:
+all 2,500 active records:
+0b013644e95423f1560a0f816997803ba5a2cd0c0240816e011d8c05e2bdafad
+all 2,200 non-PHP records:
+414f8520e92a7f86138c80343abcf91b424f2f2acd38ad6a080adc9fa5e9a740
+The retained pilot's separate hash is checked against preservation.json.
+
+Recommend independent review now, beginning with the 20-record export and the
+flagged wording/scenario cases, then resolving item-specific objections across
+the bank. Do not activate the replacement on the strength of scripts alone.
+When the user authorizes final replacement, normal PHP should contain exactly
+620 approved items; the full normal bank would then be 2,820 (2,200 + 620),
+not 3,120. Existing aggregate totals must remain historical totals and must not
+be reinterpreted as performance on the new collection.
+
+Remaining risks are editorial judgment/learner calibration, residual answer-length
+association, provisional and incomplete lesson coverage, explicitly unexecuted
+external-service contracts, PHP extension/version/platform differences, and
+untested remote CI/hosting. The client still ships answer keys, as expected for
+this static learning application. Rendering never executes the PHP question code.
+No release or deployment was performed; the application remains ready for local
+review and the original bank remains active.

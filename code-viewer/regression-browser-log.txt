@@ -1,0 +1,9 @@
+✓ Browser: legacy local progress loads without migration loss
+✓ Browser: 10-question exam hides correctness, score, streak and teaching notes until Submit exam (mouse and keyboard)
+✓ Browser: shuffled keys grade 5/10; submission updates stats once; missed review retains code and selected answer
+✓ Browser: Review missed uses Learn mode with immediate feedback and three mapped distractor explanations
+✓ Browser: switching from revealed Learn feedback to Exam clears all previous correctness indicators
+✓ Browser: current local progress survives reload; unfinished review adds no aggregate counts
+✓ Browser: all 20 pilot IDs and a nonpilot repaired family render the exact code, versions, key and three specific rationales
+✓ Browser: mobile question details render at 390px without document overflow
+✓ Browser: no uncaught JavaScript exceptions

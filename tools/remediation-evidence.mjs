@@ -1,6 +1,6 @@
 import { writeFileSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { QUESTION_BANK } from '../js/questions.mjs';
+import { QUESTION_BANK } from '../release/archive/pre-php-only/js/questions.mjs';
 import { LEGACY_QUESTIONS } from '../js/bank/legacy-v1.mjs';
 import { QUESTION_REVISIONS } from '../js/bank/revisions.mjs';
 import { PHP_REPAIR_REVISIONS } from '../js/bank/php-repairs.mjs';

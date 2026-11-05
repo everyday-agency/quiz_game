@@ -1,0 +1,100 @@
+0301|The octal literal and decimal numeric string use different parsing rules; the explicit addition removes ambiguity about string concatenation.
+0302|Three coalescing assignments distinguish null, missing and existing zero values; the side-effect counter shows which right operands execute.
+0303|The level on continue is essential: the outer loop advances rather than merely skipping the next inner iteration. Both loops and limits are visible.
+0304|Repeated flipped values overwrite earlier keys; the output choices represent keeping first, keeping both and confusing original keys with values.
+0305|Exact and inexact division are inspected as types as well as values; this avoids treating every slash result as a float.
+0306|The increment counter makes short-circuit evaluation observable; the stated operators and their order determine one result.
+0307|Replaced a capture-mode comparison too close to archived PQ-014. The final question tests nonpersistent local updates to a value-captured scalar across repeated invocations; it is distinct from static local counters.
+0308|The nested arrays contain no objects or explicit references; value-copy semantics therefore apply through the displayed nested update.
+0309|Heredoc and nowdoc use the same indented closing boundary, separating indentation stripping from interpolation. The source is preserved verbatim.
+0310|The shorthand conditional evaluates its condition once; the explicitly repeated call in the full conditional is a distinct side effect.
+0311|The debug representation and JSON public-property representation have different hooks. No claim is made that debug redaction secures serialization.
+0312|The inner output happens before __toString throws; the enclosing echo never receives its completed concatenation. The catch is visible.
+0313|The unpacked array supplies writable elements to the by-reference variadic parameter. The final original array exposes the shared updates.
+0314|The second strtok initialization replaces the internal continuation state; the final token belongs to that second input.
+0315|The partial sscanf result retains the successfully parsed field and null for the unsuccessful conversion; it is not an all-or-nothing parse.
+0316|Both DatePeriod flags are stated, and the dates avoid daylight-saving ambiguity. Exclusion of the start and inclusion of the end must both be applied.
+0317|The priority queue extracts higher priorities first and iteration consumes entries; distinct priorities avoid unspecified tie ordering.
+0318|The same method name resolves differently from an inaccessible external call and an authorized internal call; __call is not a universal interception hook.
+0319|Attribute target validity is checked when instantiated, not merely when reflected. Promoted parameter and property metadata make the two outcomes differ.
+0320|Separate complete files explicitly identify the strict caller and weak defining file. Parameter checking and return coercion have different controlling sites.
+0321|Rewinding at the first yield differs from rewinding after advancement; the catch and observations isolate that generator state rule.
+0322|Automatic collection is disabled explicitly; removing the strong variable leaves a self-cycle until the requested cycle collection runs.
+0323|The IEEE-754 and integer-width premises are explicit. Adjacent large integer IDs lose their distinction when converted to floats; formatting cannot restore it.
+0324|The promoted constructor default supplies an argument, not initialized storage in an object created without the constructor. Reflection observations separate them.
+0325|The fixture is locally authored serialized data. __wakeup runs during unserialize before the later type gate, so that gate cannot undo its side effect.
+0326|The string conversion returns a new value; assigning that return is the required repair. The options distinguish storage from comparison and discarded calls.
+0327|The sparse array prevents count-minus-one from identifying its last key; array_pop returns and removes the last element rather than peeking or shifting.
+0328|The requested result is a filename extension label, not content validation. A multi-dot basename distinguishes final-extension parsing from naive splitting.
+0329|Unsetting a local reference binding differs from writing through it; the requirement is to change the shared value while preserving the other variable.
+0330|Returning the match result satisfies the function contract. Echo, print’s integer return and an unused local value fail for different realistic reasons.
+0331|The caller changes working directory and the included file is shown separately. __DIR__ anchors the path to the loader rather than the process directory.
+0332|The post_max_size premise covers the entire body. Empty POST and FILES are not evidence that the browser omitted an upload or that only a file limit fired.
+0333|The validation predicate was strengthened after a destroy-only candidate appeared to rotate an ID by clearing it. It now requires an active session, a nonempty changed ID, retained data and removal of the old file.
+0334|The PDO MySQL native-prepares condition is explicit; each occurrence needs its own named placeholder. Emulation-specific behavior is not generalized.
+0335|The recursion budget prevents runaway execution in wrong candidates. Post-decrement, pre-decrement and subtraction differ in the child argument and parent multiplier.
+0336|The requested mode must create if absent, retain existing bytes and permit positioned writes. The r, w and a alternatives each miss a different requirement.
+0337|The fixture uses a regular temporary file. Truncation changes length but leaves the cursor, so a rewind is necessary before the next write.
+0338|The race is between a successful check and a later open. Handling the actual open result is required even when a precheck was true.
+0339|MySQL 8.4 DDL implicit commit is a server-specific premise; separating ALTER from the business transaction avoids a false rollback guarantee.
+0340|The custom error handler’s return value and error level are explicit. Returning false requests default handling; throwing changes control flow.
+0341|A write filter retains base64 state across chunks; encoding each chunk independently inserts padding at the wrong boundaries. The small fixture has no external stream.
+0342|Internal parent traversal is permitted only when normalization remains inside the root. The defect is a collision between different raw names resolving to one destination.
+0343|The signature contract is over exact received bytes. Whitespace trimming, serialization and JSON re-encoding produce different byte sequences even when data seems equivalent.
+0344|The elapsed-time calculation uses monotonic nanoseconds and the matching unit conversion; wall-clock timestamps and clamping do not satisfy the same budget rule.
+0345|The offset returned by PCRE remains a byte offset with the Unicode modifier. The multibyte prefix distinguishes byte slicing from character indexing.
+0346|A Countable object with count zero is still truthy as an object. The question contrasts object conversion with the explicit count operation.
+0347|Appending during by-value and by-reference array iteration has different visitation behavior. The controlled contrast runs both without an unbounded append.
+0348|The class constant exists, while the similarly spelled instance property does not. Diagnostics are observed without conflating the two access forms.
+0349|Echoing false and JSON-encoding false yield different text. The explanation ties this to output conversion rather than treating JSON as display formatting.
+0350|The concrete child implements the abstract protected method used by the inherited template method. Visibility and implementation obligations are both visible.
+0351|The provider is nonnull but its lookup returns null. An ordinary second hop fails; each nullable dereference requires its own nullsafe operator.
+0352|Recursive merge preserves conflicting scalar values in an array rather than replacing the scalar. The fixture is a scalar collision, not just nested-key merging.
+0353|array_walk passes a modifiable value but not a renamable array key. Assigning the callback’s key variable does not rebuild the source key map.
+0354|The files share a namespace but not import aliases. The second file needs its own import or qualified class name; require does not transfer lexical imports.
+0355|The HTTP contract calls for preserving a POST method and body. Status 307 supplies that redirect behavior; the scenario avoids treating every redirect identically.
+0356|Recursive array walking visits leaves, including no leaves inside empty branches. The callback cannot infer every container from its leaf invocations.
+0357|The SQLite result demonstrates why SELECT rowCount is not a portable count API. The answer is scoped to the shown driver rather than asserting every driver returns zero.
+0358|PARAM_INT binding converts the supplied text in the fixture; it is not validation that the original input was a valid integer. The observed zero match exposes the difference.
+0359|The CLI fixture creates an ordinary file and matching metadata only. PHP’s upload provenance registry is separate from the shape of FILES entries.
+0360|The values are numeric-looking identifiers whose text matters. JSON_NUMERIC_CHECK destroys their plus sign or leading zeros, so explicit value typing is needed.
+0361|The get-only interface property and readonly narrower implementation use PHP 8.4 property variance. The advanced prerequisites and version assumptions are explicit.
+0362|Reflection assignment uses coercive semantics even though direct assignment in the strict file rejects the same string. Both paths are observed.
+0363|The initial URL allowlist does not constrain later redirect destinations. The scenario requires validating each target or disabling uncontrolled redirects.
+0364|The bcrypt input pair differs only beyond 72 bytes. The fixture verifies both against one hash, exposing truncation without claiming this applies to every password algorithm.
+0365|A mutually compatible encoder and decoder can both violate the external alphabet. The independent FBFF wire vector tests interoperability rather than only round-trip consistency.
+0366|Padding preserves string content and supplies a minimum width. The options contrast left/right padding, numeric conversion and truncation with explicit short and long inputs.
+0367|The requirement pairs keys and corresponding values. Filling, merging and replacing arrays do not establish that relationship.
+0368|The scalar category includes booleans and excludes null and containers. The options test type classification rather than truthiness.
+0369|The explicit wire representation fixes hour format, minutes and colon-bearing offset. Nearby date format letters represent realistic token mistakes.
+0370|The required byte is LF. Literal backslash-n, CR and CRLF remain distinct choices; no platform newline assumption is hidden.
+0371|The reversed-bound rule requires an explicit empty result because range itself descends. Singleton and inclusive endpoints are also verified.
+0372|array_rand returns a key. All keys and values are deliberately disjoint, so membership checks validate the lookup behavior without relying on a particular random draw.
+0373|Separate instances with equal identifier text must compare equal, while 01 and 1 remain distinct. Object identity and numeric equality each violate one requirement.
+0374|The connect and total timeout units and scopes are given. The total includes connection establishment rather than adding another full interval afterward.
+0375|The fallback must be returned locally while successful values remain intact. A global handler does not resume the failed call, and finally-return overrides success.
+0376|INI raw scanning preserves off, null and leading-zero strings. This replaced a contemplated date-error question that overlapped an earlier batch.
+0377|The logger contract uses context.exception for the original outer Throwable. Message-only, inner-only and alternate-key options lose a different required aspect.
+0378|Reflection invokeArgs interprets associative keys as parameter names. The UI field labels differ from the method’s parameter names, so positional normalization is necessary.
+0379|The limit is cumulative expanded bytes checked before writing. Bounded chunks, successful full writes and a fixed decoded fixture keep the test’s guarantee precise.
+0380|Composer’s real platform check must ignore config.platform emulation. The command is reviewed against documentation, not claimed to run against an external install.
+0381|A shorter candidate exposes the wrong comparison length in the prefix check. The repair uses the required prefix length rather than the candidate length.
+0382|Overlapping occurrences require advancing one position after each match. The aaaa/aa case distinguishes that contract from substr_count’s nonoverlapping count.
+0383|The map contract ignores insertion order while preserving strict value equality. Sorting keys fixes order without coercing different values into equality.
+0384|The chosen midpoint distinguishes half-even from default half-away rounding; the control inputs do not. Exact simple binary-representable inputs avoid incidental float ambiguity.
+0385|HTTP method tokens are case-sensitive under the stated contract. This differs from case-insensitive field-name handling in an earlier question.
+0386|Property promotion assigns the readonly property before the constructor body. A padded string reaches the forbidden second write; separate declaration permits one normalized initialization.
+0387|The first multi-digit suffix distinguishes lexical from natural order. Simpler numeric suffixes remain useful controls without exposing the comparator defect.
+0388|SQLite foreign-key enforcement is explicitly disabled on this connection. A missing nonnull parent tests rejection; existing parents and null do not.
+0389|A singleton can match despite the incorrect IN binding. The multi-ID case proves that a bound comma-containing string is not multiple SQL values.
+0390|The thousands boundary exposes the unwanted separator. Smaller positive, negative and zero cases verify padding and sign without exercising grouping.
+0391|The graph is explicitly acyclic; the defect is loss of shared identity among copied children, not nontermination on cycles. Memoization preserves one copy per original node.
+0392|The Fiber test forces two calls past the check before either marks the token. Sequential replay passes, so the overlapping schedule is essential; no distributed atomicity claim is made.
+0393|The replica lag has no bound and the primary commit is confirmed. A fixed delay or isolation setting cannot guarantee immediate replica visibility.
+0394|The partial-update contract assigns separate meanings to absent, null and empty string. The design must carry presence as well as a nullable value through the boundary.
+0395|The policy explicitly honors revocations before execution. Signed enqueue-time decisions prove integrity, not current authorization.
+0396|Both cache writers remain active during rollout. Versioned key namespaces separate incompatible representations, whereas a one-time flush cannot prevent repopulation.
+0397|Existing third-party parents must remain. An interface adds the required nominal method signatures without attempting multiple class inheritance or treating traits as types.
+0398|The guarantee applies before the first timeout. Reserved capacity and an A concurrency cap satisfy it; timeout, breaker and jitter settings alone do not.
+0399|The transaction is confirmed aborted with no external side effects. Fresh reads and decision logic belong inside the bounded retry, unlike an ambiguous-commit recovery scenario.
+0400|The required hooks must run, but deployment credentials must remain inaccessible. Lockfiles and non-root execution do not supply that trust boundary; artifact review remains separate.

@@ -1,0 +1,35 @@
+PHP-ONLY CONTROLLED RELEASE — local validation passed; deployment pending
+
+Repository: everyday-agency/quiz_game
+Implementation branch: remediation/question-quality-pilot; deployment branch: main
+Public URL: https://everyday-agency.github.io/quiz_game/
+Commit: pending release commit
+Deployment/live verification: pending
+
+Active collection: exactly 620 PHP questions (600 expansion + 20 retained pilot).
+Removed from active use: 300 old PHP, 600 Laravel, 600 TypeScript, 300 React,
+400 MySQL, 300 Google Analytics. There was no separate Git/GitHub track.
+No question content, stable IDs, keys, rationales or code formatting changed.
+
+Archives: release/archive/pre-php-only/manifest.json (all outgoing content/metadata),
+php-expansion/archive/original-php-300.json, and
+release/archive/previous-production.json (prior remote main/source tarball).
+
+Progress: a new PHP-release key stores completed aggregate scores. Four historical
+keys and unrelated browser storage remain untouched. Old question IDs are never
+loaded into current sessions. Old pilot/review URLs open the default PHP collection.
+
+Local results: automated tests passed; each runtime (PHP 8.4.17 and 8.5.2)
+checked 600 expansion records with 1,578 lints and 1,544 isolated executions,
+plus the retained pilot/legacy regressions. All four Chrome suites passed
+(31 workflow checks; zero browser exceptions). The full-bank suite exercised
+620 Learn questions, 1,860 distractor rationales, a 20-question Exam, and
+desktop/390px mobile rendering. The static artifact contains 14 allowed files.
+
+Validation evidence: release/evidence/automated.log, php-batch-1.log through
+php-batch-6.log, browser-{core,pilot,viewer,bank}/browser-results.json.
+Final results and live deployment reference will be recorded after verification.
+
+Limitations: independent editorial approval remains pending. Difficulty labels are
+not empirical learner calibration; storage holds aggregate totals, not persistent
+per-question examination history. No new questions or backend were introduced.

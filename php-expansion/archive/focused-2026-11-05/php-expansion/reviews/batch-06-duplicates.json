@@ -1,0 +1,912 @@
+{
+  "sourceHash": "1d9e2733945ce772e69802d77054271ed9b7f9b03b7195ef0942427f087c2e20",
+  "reviewer": "Author remediation pass; independent review pending",
+  "method": "All current drafts versus all other five batches, within-batch predecessors, 20 pilot and archived 300. Generic question boilerplate excluded from token scoring. Existing objective-specific pair notes retained where applicable; new and manually detected overlaps separately adjudicated. Lexical thresholds do not certify semantic originality.",
+  "records": [
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0517",
+      "kind": "new",
+      "textSimilarity": 0.079,
+      "codeSimilarity": 0.8,
+      "decision": "retain for independent review",
+      "reason": "FETCH_LAZY tests reuse of one row-view object; fetchColumn tests advancing rows while choosing a column. One preserves a scalar snapshot and compares object identity, the other makes three fetch calls.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0439",
+      "kind": "new",
+      "textSimilarity": 0.103,
+      "codeSimilarity": 0.667,
+      "decision": "retain for independent review",
+      "reason": "Pagination compares ordering tuples; grouped fetches preserve repeated grouping keys. Neither operation supplies the other's answer.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0357",
+      "kind": "new",
+      "textSimilarity": 0.088,
+      "codeSimilarity": 0.655,
+      "decision": "retain for independent review",
+      "reason": "Composite continuation predicates are unrelated to using SELECT rowCount as an emptiness check; shared SQLite setup creates source overlap.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0536",
+      "b": "PHP-E26-0177",
+      "kind": "new",
+      "textSimilarity": 0.098,
+      "codeSimilarity": 0.64,
+      "decision": "retain for independent review",
+      "reason": "Prequoting a bound data value corrupts apostrophes; identifier allowlisting controls SQL syntax. Both use PDO but require different boundaries and repairs.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0545",
+      "b": "PHP-E26-0517",
+      "kind": "new",
+      "textSimilarity": 0.031,
+      "codeSimilarity": 0.625,
+      "decision": "retain for independent review",
+      "reason": "Closing a cursor releases read resources; selecting a column advances a row. The DROP failure is not derivable from row-position output alone.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0545",
+      "b": "PHP-E26-0357",
+      "kind": "new",
+      "textSimilarity": 0.028,
+      "codeSimilarity": 0.607,
+      "decision": "retain for independent review",
+      "reason": "rowCount is a wrong cleanup operation here, not an emptiness predicate. The tested guarantee is release of an active SQLite schema lock.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0035",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.6,
+      "decision": "retain for independent review",
+      "reason": "A complete ordering tuple determines pagination; bindParam's retained reference determines later input values. SQL setup is incidental overlap.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0536",
+      "b": "PHP-E26-0517",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.583,
+      "decision": "retain for independent review",
+      "reason": "Parameter preprocessing changes stored data; fetchColumn advances an existing result cursor. Common query calls do not share the tested mechanism.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0177",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.56,
+      "decision": "retain for independent review",
+      "reason": "Row-cursor advancement does not concern safe SQL identifier selection. The former uses fixed selected column positions and no dynamic SQL identifier.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0177",
+      "kind": "new",
+      "textSimilarity": 0.021,
+      "codeSimilarity": 0.56,
+      "decision": "retain for independent review",
+      "reason": "A fetched lazy row view is not an SQL identifier placeholder or allowlist problem.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0545",
+      "b": "PHP-E26-0522",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.56,
+      "decision": "retain for independent review",
+      "reason": "Active-cursor resource lifetime controls DROP; a live PDORow view controls retained row data. Object aliasing is not the lock-release operation.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0035",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "Repeated fetchColumn calls move the result cursor; repeated executions with bindParam observe a retained input reference. Read versus input binding state differs.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0357",
+      "kind": "new",
+      "textSimilarity": 0.029,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "The new trace observes rows consumed by fetchColumn, not a SELECT rowCount estimate.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0035",
+      "kind": "new",
+      "textSimilarity": 0.043,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "The lazy row is output-side shared state; bindParam is input-side deferred reference state. The object identity and scalar snapshot trace is a separate mechanism.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0357",
+      "kind": "new",
+      "textSimilarity": 0.023,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "FETCH_LAZY aliasing is unrelated to SELECT rowCount portability; no row count is used in the new question.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0537",
+      "b": "PHP-E26-0514",
+      "kind": "new",
+      "textSimilarity": 0.074,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "Reset format position controls unspecified fields; ISO week-year formatting labels a fully specified date. Different DateTime contracts.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0517",
+      "kind": "new",
+      "textSimilarity": 0.031,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "The pagination query selects rows using a compound ordering predicate; fetchColumn's row consumption is not used to derive the continuation rule.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0522",
+      "kind": "new",
+      "textSimilarity": 0.05,
+      "codeSimilarity": 0.556,
+      "decision": "retain for independent review",
+      "reason": "Composite SQL filtering is independent of FETCH_LAZY object reuse; the pagination result uses ordinary column values.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0177",
+      "kind": "new",
+      "textSimilarity": 0.026,
+      "codeSimilarity": 0.552,
+      "decision": "retain for independent review",
+      "reason": "The four queries are fixed trusted alternatives; the question tests cursor ordering, not parameterizing SQL identifiers.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0536",
+      "b": "PHP-E26-0522",
+      "kind": "new",
+      "textSimilarity": 0.022,
+      "codeSimilarity": 0.52,
+      "decision": "retain for independent review",
+      "reason": "Stored data corruption from prequoting is independent of output row-view aliasing.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0263",
+      "kind": "new",
+      "textSimilarity": 0.029,
+      "codeSimilarity": 0.517,
+      "decision": "retain for independent review",
+      "reason": "No Fiber or transaction sharing occurs in the row-advancement trace. The earlier question is connection ownership across interleaving tasks.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PHP-E26-0439",
+      "kind": "new",
+      "textSimilarity": 0.024,
+      "codeSimilarity": 0.517,
+      "decision": "retain for independent review",
+      "reason": "Column selection across successive fetches differs from grouping all rows under nonunique keys.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0439",
+      "kind": "new",
+      "textSimilarity": 0.109,
+      "codeSimilarity": 0.517,
+      "decision": "retain for independent review",
+      "reason": "One reused PDORow view differs from grouped arrays preserving repeated keys; the former demonstrates identity aliasing, not grouping policy.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0536",
+      "b": "PHP-E26-0035",
+      "kind": "new",
+      "textSimilarity": 0.071,
+      "codeSimilarity": 0.517,
+      "decision": "retain for independent review",
+      "reason": "bindValue data must not be quoted, whereas bindParam retains a variable reference. Apostrophe corruption is independent of deferred reference timing.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0263",
+      "kind": "new",
+      "textSimilarity": 0,
+      "codeSimilarity": 0.515,
+      "decision": "retain for independent review",
+      "reason": "The memory query has no shared transaction or Fiber. Similar PDO boilerplate does not duplicate transaction ownership reasoning.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0178",
+      "kind": "new",
+      "textSimilarity": 0.091,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "Delegated final return is explicitly yielded in the new trace; the earlier limiter must avoid advancing a source one item too far.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0531",
+      "b": "PHP-E26-0456",
+      "kind": "new",
+      "textSimilarity": 0.057,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "Explicit nullable parameter syntax removes a deprecation; integer overflow violates a return contract. Shared typed-function code is incidental.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0537",
+      "b": "PHP-E26-0020",
+      "kind": "new",
+      "textSimilarity": 0.031,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "A parsing reset establishes missing fields; immutable timezone conversion preserves an existing instant. The input and operation contracts differ.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0537",
+      "b": "PHP-E26-0176",
+      "kind": "new",
+      "textSimilarity": 0.029,
+      "codeSimilarity": 0.5,
+      "decision": "retain for independent review",
+      "reason": "Reset-before-parse supplies an epoch baseline; @timestamp construction followed by timezone conversion changes display zone. No timestamp-zone override is tested here.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0519",
+      "b": "PHP-E26-0420",
+      "kind": "new",
+      "textSimilarity": 0.182,
+      "codeSimilarity": 0.4,
+      "decision": "retain for independent review",
+      "reason": "Readonly's default protected setter scope allows one child initialization; asymmetric private(set) rejection concerns an ordinary property's restricted setter and partial writes.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0219",
+      "kind": "new",
+      "textSimilarity": 0.227,
+      "codeSimilarity": 0.357,
+      "decision": "retain for independent review",
+      "reason": "The delegated return becomes an explicit outer yield; the earlier generator question concerns send implicitly starting an unstarted generator and its next suspension.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0041",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0.308,
+      "decision": "retain for independent review",
+      "reason": "0041 asks how a consumer exhausts an already started generator before getReturn; 0510 traces the value of yield from and the parent's transformed return. Related lifecycle, different required operation.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0549",
+      "b": "PHP-E26-0447",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.286,
+      "decision": "retain for independent review",
+      "reason": "Nullable fallthrough requires explicit return null; empty min throws before return coercion and needs an input guard. 0549's stronger overlap is with 0226 instead.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0511",
+      "b": "PHP-E26-0413",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.25,
+      "decision": "retain for independent review",
+      "reason": "A clone hook changes a newly copied object; Closure::call temporarily changes the receiver without cloning it.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0570",
+      "b": "PHP-E26-0274",
+      "kind": "new",
+      "textSimilarity": 0.242,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "The new parser must distinguish a quoted comma within one record; the earlier reader must span a physical newline to assemble a logical record before parsing.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0561",
+      "b": "PHP-E26-0447",
+      "kind": "new",
+      "textSimilarity": 0.241,
+      "codeSimilarity": 0.15,
+      "decision": "retain for independent review",
+      "reason": "never is a covariant bottom return type that cannot return normally; nullable fallthrough is a missing explicit return. Different type and control-flow obligations.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0531",
+      "b": "PHP-E26-0155",
+      "kind": "new",
+      "textSimilarity": 0.184,
+      "codeSimilarity": 0.235,
+      "decision": "retain for independent review",
+      "reason": "Implicit nullable defaults are deprecated in PHP 8.4; required-after-optional ordering changes call requirements. The new declaration has only one optional parameter.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0512",
+      "b": "PHP-E26-0047",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0.231,
+      "decision": "retain for independent review",
+      "reason": "The new include distinguishes global named function declaration from inherited local variable scope; the earlier example only follows a configuration variable assignment.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0508",
+      "b": "PHP-E26-0207",
+      "kind": "new",
+      "textSimilarity": 0.222,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Constant name identity is case-sensitive; str_contains tests string needle matching including an empty needle. Similar wording is not the same API or rule.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0561",
+      "b": "PHP-E26-0546",
+      "kind": "new",
+      "textSimilarity": 0.222,
+      "codeSimilarity": 0.063,
+      "decision": "retain for independent review",
+      "reason": "never governs whether a method returns normally; postfix increment governs the value of a normal return expression.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0525",
+      "b": "PHP-E26-0521",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0.214,
+      "decision": "retain for independent review",
+      "reason": "Reflection retrieves declaration metadata without enforcing an override; the Override attribute validates a method name during class loading.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0528",
+      "b": "PHP-E26-0021",
+      "kind": "new",
+      "textSimilarity": 0.211,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Associative decoding must satisfy an array return type; numeric-key object/list round trips lose JSON shape. The new fixture has ordinary named members and no reindexing.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0546",
+      "b": "PHP-E26-0346",
+      "kind": "new",
+      "textSimilarity": 0.207,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Postfix return expression values are independent of empty() on Countable objects.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0580",
+      "b": "PHP-E26-0297",
+      "kind": "new",
+      "textSimilarity": 0.207,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "The earlier append-only descending unique-ID cursor needs one monotonic key. The new mutable insertion position and timestamp ties require the complete (created,id) tuple; ID-only continuation demonstrably fails.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0515",
+      "b": "PHP-E26-0011",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0.2,
+      "decision": "retain for independent review",
+      "reason": "Pure enum JSON has no default scalar representation; backed enum name versus value is a separate property distinction.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0359",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final class inheritance restrictions are unrelated to upload provenance in a CLI fixture; low lexical overlap is incidental review phrasing.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0561",
+      "b": "PHP-E26-0146",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0.059,
+      "decision": "retain for independent review",
+      "reason": "never covariance and void incompatibility do not concern function-name versus variable-name case sensitivity.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0573",
+      "b": "PHP-E26-0528",
+      "kind": "new",
+      "textSimilarity": 0.2,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Known source encoding must be transcoded before JSON encoding; associative JSON decoding chooses an array representation. Opposite serialization stages and different guarantees.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0561",
+      "b": "PHP-E26-0446",
+      "kind": "new",
+      "textSimilarity": 0.192,
+      "codeSimilarity": 0.05,
+      "decision": "retain for independent review",
+      "reason": "never return covariance is unrelated to define's Boolean success result versus its constant value.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0413",
+      "kind": "new",
+      "textSimilarity": 0.188,
+      "codeSimilarity": 0.074,
+      "decision": "retain for independent review",
+      "reason": "A PDO lazy view is reused by fetch; a clone hook constructs a different object and does not rerun a constructor. Shared words about object state do not share the mechanism.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0546",
+      "b": "PHP-E26-0046",
+      "kind": "new",
+      "textSimilarity": 0.188,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Postfix versus prefix affects expression values; null coalescing versus truthy default affects fallback admission. Distinct operator contracts.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0501",
+      "b": "PHP-E26-0370",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Nowdoc preserves variable-looking text and excludes its delimiter boundary newline; the earlier implementation chooses an LF escape literal. Different literal syntax and required byte sequences.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0517",
+      "b": "PQ-021",
+      "kind": "legacy",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0.048,
+      "decision": "retain for independent review",
+      "reason": "Fetching a result column advances a database row cursor, not a function-local static counter or closure capture.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0546",
+      "b": "PHP-E26-0349",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Postfix result semantics differ from direct Boolean output failing a JSON Boolean contract.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0353",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final class restrictions differ from array_walk changing a local key without renaming the source key. The word-level flag is generic review phrasing, with no source similarity.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0574",
+      "b": "PHP-E26-0569",
+      "kind": "new",
+      "textSimilarity": 0.185,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Unicode case-fold expansion and array label frequency counts share no implementation rule despite common words about values.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0510",
+      "b": "PHP-E26-0220",
+      "kind": "new",
+      "textSimilarity": 0.182,
+      "codeSimilarity": 0.182,
+      "decision": "retain for independent review",
+      "reason": "Delegated exception recovery uses throw and resumed yields; delegated return composition uses normal exhaustion and return values.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0529",
+      "b": "PHP-E26-0234",
+      "kind": "new",
+      "textSimilarity": 0.182,
+      "codeSimilarity": 0.095,
+      "decision": "retain for independent review",
+      "reason": "file flags strip LF while preserving a meaningful empty physical record; the earlier CSV policy skips physical blanks but retains quoted-empty and zero fields. Different parsers, representations and retention contracts.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0547",
+      "b": "PHP-E26-0146",
+      "kind": "new",
+      "textSimilarity": 0.182,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "A foreach value copy needs keyed writeback; case sensitivity of function and variable names does not establish array aliasing.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0513",
+      "b": "PHP-E26-0125",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0.143,
+      "decision": "retain for independent review",
+      "reason": "__get without __isset controls magic reads and presence checks; an exported reference bypasses asymmetric setter visibility. No reference or restricted setter appears in 0513.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0257",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final class semantics do not concern a redirect helper returning to a caller; incidental review-language similarity.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0351",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final does not freeze object state; nullsafe chains must protect each nullable hop. The tested modifiers and failure conditions differ.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0448",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final inheritance restrictions are unrelated to ASCII-only strtolower; neither code nor required rule overlaps.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0456",
+      "kind": "new",
+      "textSimilarity": 0.179,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final class mutation is distinct from integer overflow to float violating a return declaration.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0561",
+      "b": "PHP-E26-0265",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0.05,
+      "decision": "retain for independent review",
+      "reason": "never return substitution concerns normal termination; by-reference generator declarations expose mutable yielded storage. Both declarations use function syntax for different guarantees.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0586",
+      "b": "PHP-E26-0140",
+      "kind": "new",
+      "textSimilarity": 0.176,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "JSON number conversion can lose integer precision before a cast; bccomp deliberately compares decimal strings at a supplied scale.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0596",
+      "b": "PHP-E26-0197",
+      "kind": "new",
+      "textSimilarity": 0.174,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "The new package must allow class discovery without starting network integrations; the earlier domain service must receive parsed deployment configuration. Discovery side effects versus input composition boundaries.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0146",
+      "kind": "new",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final class semantics and name-case lookup are independent language rules.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0549",
+      "b": "PHP-E26-0356",
+      "kind": "new",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0.167,
+      "decision": "retain for independent review",
+      "reason": "min rejects an empty array; array_walk_recursive skips containers. A nullable return guard and a traversal strategy are different repairs.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0573",
+      "b": "PHP-E26-0436",
+      "kind": "new",
+      "textSimilarity": 0.172,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Character transcoding maps known source characters into UTF-8; base64 of a raw HMAC concerns binary versus hexadecimal digest representation.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0522",
+      "b": "PHP-E26-0025",
+      "kind": "new",
+      "textSimilarity": 0.171,
+      "codeSimilarity": 0.105,
+      "decision": "retain for independent review",
+      "reason": "PDORow live-view reuse occurs inside the PDO fetch API; copied arrays sharing an explicitly referenced element use PHP reference containers.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0563",
+      "b": "PHP-E26-0060",
+      "kind": "new",
+      "textSimilarity": 0.171,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Adding a string union member changes weak coercion; exporting a first-class private callable preserves visibility authority. No callable scope is involved in the new refactor.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0502",
+      "b": "PHP-E26-0403",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Spaceship produces normalized ordering signs; numeric-string comparison selects numeric versus lexical semantics. The new operands are integers and do not test string coercion.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0504",
+      "b": "PHP-E26-0301",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Underscores separate digits in a source literal; octal leading-zero literals differ from decimal numeric strings. Different syntax and runtime comparison inputs.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0542",
+      "b": "PHP-E26-0272",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0.143,
+      "decision": "retain for independent review",
+      "reason": "An interface constructor contract restricts declarations; parent:: dispatch explicitly chooses an inherited implementation at runtime.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0163",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Final inheritance restrictions do not sanitize state or traces; SensitiveParameter redaction has an entirely separate exception-trace boundary.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0350",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "The replaced draft was too close to abstract-class instantiation. The final question now tests final versus immutability, including valid mutation and cloning, without an abstract class.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0561",
+      "b": "PHP-E26-0257",
+      "kind": "new",
+      "textSimilarity": 0.167,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "never covariance controls an override declaration; returning from a redirect helper controls only that helper's caller flow.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0536",
+      "b": "PHP-E26-0166",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0.05,
+      "decision": "retain for independent review",
+      "reason": "A PHP dollar-label string and a PDO bound value cross different grammars; PDO prequoting adds data bytes rather than SQL protection.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0546",
+      "b": "PHP-E26-0259",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "SAPI input snapshots and postincrement both retain an old observation but at unrelated boundaries; the required fixes are not interchangeable.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0559",
+      "b": "PHP-E26-0548",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0.118,
+      "decision": "retain for independent review",
+      "reason": "POSIX unlink retains open-handle access; final classes permit object mutation and cloning. Both discuss lifetime restrictions but use independent mechanisms.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0565",
+      "b": "PHP-E26-0548",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0.105,
+      "decision": "retain for independent review",
+      "reason": "A process-shared error-handler stack across Fibers differs from class finality; lexical review wording is incidental.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0579",
+      "b": "PHP-E26-0098",
+      "kind": "new",
+      "textSimilarity": 0.161,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "A durable per-key nonce allocator prevents reuse across crashes; an authorization cache key identifies decision inputs. Different state invariants and failure schedules.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0539",
+      "b": "PHP-E26-0015",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Resolving a class-name string without loading differs from unregistering the exact registered closure object.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0548",
+      "b": "PHP-E26-0446",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "A final class's mutability and define's Boolean success return are independent language rules.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0553",
+      "b": "PHP-E26-0453",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "405 requires Allow for resource method availability; 204 prohibits response content. Separate HTTP status obligations, not a changed status number on the same task.",
+      "baselinePairReview": true
+    },
+    {
+      "a": "PHP-E26-0590",
+      "b": "PHP-E26-0534",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "umask restricts filesystem permission bits; string exit prints text with a success status. No shared failure boundary.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0591",
+      "b": "PHP-E26-0534",
+      "kind": "new",
+      "textSimilarity": 0.16,
+      "codeSimilarity": 0,
+      "decision": "retain for independent review",
+      "reason": "Canonical Base64 pad-bit spelling and process umask involve unrelated representations and validation contracts.",
+      "baselinePairReview": false
+    },
+    {
+      "a": "PHP-E26-0226",
+      "b": "PHP-E26-0549",
+      "kind": "manual-reasoning-review",
+      "decision": "unresolved; independent decision required",
+      "reason": "Both ask for an empty-input guard before min/max in a nullable aggregate helper. Different names, numeric direction and format do not supply a meaningful reasoning distinction. Preserve IDs/objectives pending retain/retarget decision."
+    },
+    {
+      "a": "PHP-E26-0431",
+      "b": "PHP-E26-0557",
+      "kind": "manual-reasoning-review",
+      "decision": "unresolved; independent decision required",
+      "reason": "Both close a session, mutate only local SESSION state, then reopen and lose the change. The same repair and timing rule decide both. Preserve IDs/objectives pending retain/retarget decision."
+    },
+    {
+      "a": "PHP-E26-0343",
+      "b": "PHP-E26-0600",
+      "kind": "manual-reasoning-review",
+      "decision": "revised; retain for independent review",
+      "reason": "0343 selects exact bytes before HMAC computation. Revised 0600 adds a candidate using the correct original bytes but dispatching before verification, requiring pre-effect authorization ordering. Both intentionally cover the webhook family; external review should assess sufficiency of this distinction."
+    }
+  ],
+  "lengthReview": {
+    "PHP-E26-0515": "unsupported is the exact literal printed by the caught pure-enum JSON error. Alternative outputs are naturally shorter JSON representations. Retained factual output without padding; independent review should still assess salience."
+  },
+  "independentApproval": "pending"
+}

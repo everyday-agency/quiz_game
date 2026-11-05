@@ -1,0 +1,316 @@
+{
+  "reason": "Manual duplicate adjudication: 0501 repeats legacy PQ-004; 0548 too close to 0350; 0560 repeats 0234. IDs retained for wholly different pre-acceptance questions.",
+  "questions": [
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0501",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Types, casting & comparisons",
+      "subtopic": "strict-float-parameter-accepts-integer-widening",
+      "objective": {
+        "id": "strict-float-parameter-accepts-integer-widening",
+        "text": "Recognize the integer-to-float admission rule even at a strict scalar call boundary."
+      },
+      "difficulty": {
+        "level": "Foundation",
+        "audience": "junior",
+        "rationale": "Apply the permitted numeric widening exception without treating strict typing as exact get_debug_type identity."
+      },
+      "prerequisites": [
+        "strict_types",
+        "Float parameters",
+        "Integer versus float values"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\ndeclare(strict_types=1);\n\nfunction asFloat(float $value): array\n{\n    return [get_debug_type($value), $value];\n}\n\necho json_encode(asFloat(3), JSON_PRESERVE_ZERO_FRACTION);\n"
+          }
+        ]
+      },
+      "stem": "What JSON does this strict PHP file print? JSON_PRESERVE_ZERO_FRACTION keeps the returned float’s fractional marker visible.",
+      "options": [
+        {
+          "id": "integer-kept",
+          "text": "[\"int\",3]",
+          "rationale": "The accepted argument is represented as a float inside the float-typed parameter.",
+          "misconception": "Assuming the permitted argument keeps its original integer runtime type."
+        },
+        {
+          "id": "float-widened",
+          "text": "[\"float\",3.0]",
+          "rationale": "Strict scalar calls still permit an integer for a float parameter, converting it to a float.",
+          "misconception": null
+        },
+        {
+          "id": "strict-rejection",
+          "text": "An uncaught TypeError with no JSON output",
+          "rationale": "An int argument is the documented exception to exact scalar-type matching for a float parameter.",
+          "misconception": "Assuming strict_types rejects every difference between int and float."
+        },
+        {
+          "id": "text-number",
+          "text": "[\"string\",\"3\"]",
+          "rationale": "No string conversion is involved in satisfying the float parameter.",
+          "misconception": "Confusing numeric widening with formatting a number as text."
+        }
+      ],
+      "correctOptionId": "float-widened",
+      "explanation": {
+        "summary": "Strict typing rejects many scalar coercions, but an integer can satisfy a float parameter. The callee observes a float, and the explicit JSON flag preserves its .0 spelling.",
+        "trace": "The call supplies integer 3. The float parameter contains 3.0, so get_debug_type reports float and the encoded pair retains a numeric float."
+      },
+      "validation": {
+        "kind": "output",
+        "stdout": "[\"float\",3.0]",
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-03",
+        "lessonIds": [
+          1,
+          5
+        ],
+        "lessonMappingStatus": "working-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://www.php.net/manual/en/language.types.declarations.php#language.types.declarations.strict"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0548",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "code-review",
+      "topic": "Inheritance, interfaces & traits",
+      "subtopic": "abstract-class-shared-implementation-needs-concrete-instance",
+      "objective": {
+        "id": "abstract-class-shared-implementation-needs-concrete-instance",
+        "text": "Review an attempt to instantiate an abstract base class merely because it contains a concrete helper."
+      },
+      "difficulty": {
+        "level": "Foundation",
+        "audience": "junior",
+        "rationale": "Distinguish shared concrete methods from a class’s abstract instantiation restriction."
+      },
+      "prerequisites": [
+        "Abstract classes",
+        "Concrete subclasses",
+        "Inherited methods"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nabstract class LabelBase\n{\n    public function label(): string\n    {\n        return 'shared';\n    }\n}\n\nclass ConcreteLabel extends LabelBase\n{\n}\n\ntry {\n    $label = new LabelBase();\n    echo $label->label();\n} catch (Error $error) {\n    echo 'abstract';\n}\n"
+          }
+        ]
+      },
+      "stem": "A reviewer claims new LabelBase is valid because label already has a body. Which assessment is correct?",
+      "options": [
+        {
+          "id": "body-enables-new",
+          "text": "The concrete method body makes the base directly instantiable.",
+          "rationale": "The abstract modifier prohibits direct instantiation even if every method has a body.",
+          "misconception": "Treating abstract as only a marker for missing method bodies."
+        },
+        {
+          "id": "must-copy-method",
+          "text": "The subclass must redeclare label before it can be instantiated.",
+          "rationale": "A concrete subclass inherits the already implemented method without redeclaration.",
+          "misconception": "Assuming inherited implementation cannot satisfy a concrete subclass."
+        },
+        {
+          "id": "no-class-can-use-it",
+          "text": "An abstract base’s concrete methods cannot be called on subclass instances.",
+          "rationale": "Concrete inherited methods are usable on concrete subclass instances.",
+          "misconception": "Confusing abstract class instantiation with inherited method availability."
+        },
+        {
+          "id": "instantiate-concrete",
+          "text": "Instantiate ConcreteLabel; it inherits label while the abstract base cannot be instantiated.",
+          "rationale": "The concrete subclass is instantiable and reuses the base’s implemented method.",
+          "misconception": null
+        }
+      ],
+      "correctOptionId": "instantiate-concrete",
+      "explanation": {
+        "summary": "Abstract is a class-level restriction on direct instantiation. A concrete method can provide shared behavior to concrete subclasses without making the base itself instantiable.",
+        "trace": "The displayed attempt is caught and prints abstract. Constructing ConcreteLabel instead prints shared."
+      },
+      "validation": {
+        "kind": "contract",
+        "stdout": "abstract",
+        "keyEvidence": "The concrete subclass inherits and runs label.",
+        "counterexamples": {
+          "body-enables-new": "The base construction raises Error.",
+          "must-copy-method": "The empty subclass works.",
+          "no-class-can-use-it": "The inherited method returns shared."
+        },
+        "contrasts": [
+          {
+            "name": "concrete-construction",
+            "marker": "new LabelBase()",
+            "replacement": "new ConcreteLabel()",
+            "stdout": "shared"
+          }
+        ],
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-18",
+        "lessonIds": [
+          26,
+          28
+        ],
+        "lessonMappingStatus": "working-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://www.php.net/manual/en/language.oop5.abstract.php"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "php",
+      "collectionId": "php-engineer-2026",
+      "id": "PHP-E26-0560",
+      "revision": 1,
+      "status": "draft",
+      "responseType": "single-choice",
+      "format": "code-review",
+      "topic": "Files & structured data",
+      "subtopic": "csv-blank-line-is-record-not-end-of-stream",
+      "objective": {
+        "id": "csv-blank-line-is-record-not-end-of-stream",
+        "text": "Review a CSV reader that conflates a physical blank line with end-of-stream."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Distinguish fgetcsv’s blank-record representation from its false exhaustion sentinel."
+      },
+      "prerequisites": [
+        "fgetcsv",
+        "CSV record representations",
+        "Strict sentinel checks"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "sapi": "CLI unless the stated context specifies otherwise",
+        "extensions": [],
+        "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+      },
+      "context": {
+        "assumptions": [
+          "Run in a fresh PHP process using only the displayed files and inputs.",
+          "The fixture contains a blank physical line followed by one CSV record. Blank records must be skipped, while later records must still be read. The proprietary escape parameter is explicitly empty."
+        ],
+        "files": [
+          {
+            "path": "main.php",
+            "kind": "complete-file",
+            "source": "<?php\n\n$stream = fopen('php://memory', 'w+');\nfwrite($stream, \"\\nAda,7\\n\");\nrewind($stream);\n\n$first = fgetcsv($stream, 0, ',', '\"', '');\n$second = fgetcsv($stream, 0, ',', '\"', '');\n$third = fgetcsv($stream, 0, ',', '\"', '');\nfclose($stream);\necho json_encode([$first, $second, $third]);\n"
+          }
+        ]
+      },
+      "stem": "A proposed loop stops when a parsed row equals [null]. Which review is correct?",
+      "options": [
+        {
+          "id": "null-means-eof",
+          "text": "[null] means EOF, so stopping there is correct.",
+          "rationale": "A physical blank line produces [null] while later input can still exist.",
+          "misconception": "Equating a blank parsed record with exhausted input."
+        },
+        {
+          "id": "blank-is-error",
+          "text": "[null] indicates malformed CSV that must throw before any later record.",
+          "rationale": "PHP reports a blank line as a valid special record representation, not an exception.",
+          "misconception": "Treating blank physical input as a syntax failure."
+        },
+        {
+          "id": "continue-blank",
+          "text": "Skip [null] and continue; stop only when fgetcsv returns false.",
+          "rationale": "The blank line and EOF have distinct representations, preserving the following Ada record.",
+          "misconception": null
+        },
+        {
+          "id": "false-is-empty-field",
+          "text": "false is a CSV row containing one empty field and must be retained.",
+          "rationale": "false is the failure/exhaustion sentinel, not an array representing a parsed row.",
+          "misconception": "Confusing a sentinel with field data."
+        }
+      ],
+      "correctOptionId": "continue-blank",
+      "explanation": {
+        "summary": "fgetcsv represents a blank physical line as an array containing one null field. It returns false at exhaustion, so a reader must not terminate at the blank record.",
+        "trace": "The three reads return [null], then [Ada,7], then false. Skipping the first still permits processing the second."
+      },
+      "validation": {
+        "kind": "contract",
+        "stdout": "[[null],[\"Ada\",\"7\"],false]",
+        "keyEvidence": "A valid row follows the blank-line result.",
+        "counterexamples": {
+          "null-means-eof": "The next read returns Ada.",
+          "blank-is-error": "No diagnostic is emitted.",
+          "false-is-empty-field": "EOF is not an array record."
+        },
+        "status": "draft",
+        "independentEditorialReview": "pending"
+      },
+      "curriculum": {
+        "repositoryTopic": "repo-topic-10",
+        "lessonIds": [
+          20
+        ],
+        "lessonMappingStatus": "working-outline",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://www.php.net/manual/en/function.fgetcsv.php"
+      ]
+    }
+  ]
+}

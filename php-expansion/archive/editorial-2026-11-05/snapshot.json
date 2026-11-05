@@ -1,0 +1,310 @@
+{
+  "date": "2026-11-05",
+  "purpose": "Immutable accepted baseline and evidence before independent editorial remediation",
+  "files": [
+    {
+      "path": "php-expansion/COVERAGE.json",
+      "sha256": "14c9cdbccf63a33561bc67a111165c2aead94359eb202f987466ecab7d7074d4"
+    },
+    {
+      "path": "php-expansion/MANIFEST.json",
+      "sha256": "7c44b0da4be595fe1cf428078827e11e3dac2b85a4ec26821e559a42129da974"
+    },
+    {
+      "path": "php-expansion/QUESTION_IDS.txt",
+      "sha256": "7310d8ce2b472884d10a1404ab30bed928e660d077d0c2660a71099688e8d60b"
+    },
+    {
+      "path": "php-expansion/EDITORIAL_REVIEW_20.txt",
+      "sha256": "8c8a5e29ea698164842d0beb21f4d810d0815dfb23f65ca5728fbc57166c0240"
+    },
+    {
+      "path": "php-expansion/WORK_STATE.json",
+      "sha256": "961b64aaf7dbd435561fb94e0970eb3c8f02744d9b2c4e6191893cc98d6de3ee"
+    },
+    {
+      "path": "php-expansion/REPORT.txt",
+      "sha256": "09753ab9b62218f8b4655fcbd1a9a1f28eead1f96c7a75141392ac9f26e7e5a6"
+    },
+    {
+      "path": "js/php-expansion/lesson-mappings.mjs",
+      "sha256": "a9c28bfcc35cc9dc734a1c55fb37a2b8e988813f1d4a75d070afa57007160cad"
+    },
+    {
+      "path": "js/php-expansion/review-data.mjs",
+      "sha256": "95d12d9ab4641536c56d0fb36a403789314d21d18094d27b542e91a605a96bca"
+    },
+    {
+      "path": "php-expansion/authoring/batch-01.mjs",
+      "sha256": "39c249b5b3baa6fd92c02cbf9a9664aee59ee73cb9cdc7d0c800ebe096b7637a"
+    },
+    {
+      "path": "php-expansion/authoring/batch-02.mjs",
+      "sha256": "811a354a2e849937f213931aaabc3708bd6d6f41fd4dc9b36e1a5f1944980e75"
+    },
+    {
+      "path": "php-expansion/authoring/batch-03-inventory.txt",
+      "sha256": "9cb7597d39ad978541cb737f3e7a305b5071f9a4912d8d2ebb80fdac1fc316d3"
+    },
+    {
+      "path": "php-expansion/authoring/batch-03.mjs",
+      "sha256": "4d8ea4ec8267ae9a050d9ec8378a58b650442a6a08e225426faa004351d63cd4"
+    },
+    {
+      "path": "php-expansion/authoring/batch-04-inventory.txt",
+      "sha256": "86db860f58f46563f2a431f0aa3d35f33f8d1641b2cd3300d67e4563e483949c"
+    },
+    {
+      "path": "php-expansion/authoring/batch-04.mjs",
+      "sha256": "cb012e6ee3adb319549bd6e4298834627a8af98c6b08faabcc3406b106ecddb1"
+    },
+    {
+      "path": "php-expansion/authoring/batch-05-inventory.txt",
+      "sha256": "d207f308bbc16519e222c8d1ec0bedf37b30e84c6d4850d82f78fe43beec71a8"
+    },
+    {
+      "path": "php-expansion/authoring/batch-05.mjs",
+      "sha256": "bf4e965bcf61139127135a78a12dfdadc33515e0f5450e7b1de04092907cad8a"
+    },
+    {
+      "path": "php-expansion/authoring/batch-06.mjs",
+      "sha256": "3d30be9a814d207127bebccaa872e07ac504c36b91658d0148699a2218063725"
+    },
+    {
+      "path": "php-expansion/authoring/record.mjs",
+      "sha256": "de8bd462f4f1595055a511ba23c8d4ca230cba7e5a917f04d3ac7b216505bf20"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-01.mjs",
+      "sha256": "38d6ad4d0480ed441b42d95d5ce021535fcf09a7b9ed98add6eeab3939474d94"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-02.mjs",
+      "sha256": "abe27e8f723368c2af42479f6e4c90540cd26859a12ec2c9647b4c44abdcd88f"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-03.mjs",
+      "sha256": "e06ef93a8eb3c54e22fcd59c0c19f15d106139259af232b2d9516d38e3288500"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-04.mjs",
+      "sha256": "677d4b6fb2fab7b340afc357b4327facced3e6a71922096dc8fad00687173ec7"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-05.mjs",
+      "sha256": "490868bcf060b0a5cb8e5de09d48af5a04df04cbb3fa030793baabfe6afb42c3"
+    },
+    {
+      "path": "js/php-expansion/batches/batch-06.mjs",
+      "sha256": "37a1022e4dba0b9698fcdb8e213033dfcf6c1934eeb8bb174826a3afed10cb56"
+    },
+    {
+      "path": "php-expansion/reviews/batch-01-duplicates.json",
+      "sha256": "9495116467aff32e2b73418e0c1d3a8e64800a31e0ce9b13cbb7ed7933065780"
+    },
+    {
+      "path": "php-expansion/reviews/batch-01-editorial.json",
+      "sha256": "8f90678abffaf572b4338da78ff6e1e2191859f0f0cc33de345e3b34d0f4947c"
+    },
+    {
+      "path": "php-expansion/reviews/batch-01-notes.txt",
+      "sha256": "765fb1780ccf9e846b3193476fc426ab9857ede9484dd14d3cbc0d43e8882002"
+    },
+    {
+      "path": "php-expansion/reviews/batch-02-duplicates.json",
+      "sha256": "3f4c41075fabafd2c428896cbd5352ffd6a7d94fa7ae264bf472860543c74ee0"
+    },
+    {
+      "path": "php-expansion/reviews/batch-02-editorial.json",
+      "sha256": "3b5ca92978622c8773b6e2d4d6d099bd3ffb2ea16ef1af2442a749ed006c6b8d"
+    },
+    {
+      "path": "php-expansion/reviews/batch-02-notes.txt",
+      "sha256": "b88b2d6a6ca21e29fa2cfaa8b77c505ce64723855b6700c016dc660a53235d4a"
+    },
+    {
+      "path": "php-expansion/reviews/batch-02-pair-notes.txt",
+      "sha256": "31fcc185aecc33ebc51c270f9e6b1edbc077ce3178d3006e8ec38222d4e9fbb6"
+    },
+    {
+      "path": "php-expansion/reviews/batch-03-duplicates.json",
+      "sha256": "7dada26a0f7698697b1260d31024103c9f6f9dba42830dd377c78a9c9eb37c1c"
+    },
+    {
+      "path": "php-expansion/reviews/batch-03-editorial.json",
+      "sha256": "847a26e09bce1086634e6e9cba7b150df9665a34a477eb21903b620b606e9048"
+    },
+    {
+      "path": "php-expansion/reviews/batch-03-notes.txt",
+      "sha256": "cae3a132adaabc5adddd85a16112e5db43853c028fd59304a63f155c05bb7f56"
+    },
+    {
+      "path": "php-expansion/reviews/batch-03-pairs.txt",
+      "sha256": "20c6575968aa4fa36e2f3453503fafda18b370f2b9d455546af6e05bd8d51f2c"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-candidates.txt",
+      "sha256": "a3c6e27c145b5b2077faa123dd35a18b3611cd646071ad676d4103fa486a3c3c"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-duplicates.json",
+      "sha256": "1ca1c3f3e3edddd29b0407df10d1530374e3b53499472d1fa722af41c577e2f6"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-editorial.json",
+      "sha256": "540f68a0faa8ba91a97999e483245aac05a2accf57b734f3299db769fd9c7b52"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-notes.txt",
+      "sha256": "abb5ef60decf0480aeba61db36906639ae10bb6fa6cc9aad87c85dbee6c49b6e"
+    },
+    {
+      "path": "php-expansion/reviews/batch-04-pair-reasons.txt",
+      "sha256": "7d3d76533c6ad5d066d0a087ef2d6ed949badc75b9606c52cbd605419afa17b4"
+    },
+    {
+      "path": "php-expansion/reviews/batch-05-duplicate-notes.txt",
+      "sha256": "f6417a0724867ab027b5589ffdd0d97a5a71d0958943ad4257b6aab4c3c0e564"
+    },
+    {
+      "path": "php-expansion/reviews/batch-05-duplicates.json",
+      "sha256": "67339935b19138168549439c02bc14b2a91bf0381772c77647f2ad898ab06b09"
+    },
+    {
+      "path": "php-expansion/reviews/batch-05-editorial-notes.txt",
+      "sha256": "ab234567b4639036f001891d4a35b2b6f2d22d35762e544a1ed77cd921e34a09"
+    },
+    {
+      "path": "php-expansion/reviews/batch-05-editorial.json",
+      "sha256": "d8078809e82f9bb0d4bbee47324d2ac9e99986b483669c76c3f728dc57d9f919"
+    },
+    {
+      "path": "php-expansion/reviews/batch-06-duplicates.json",
+      "sha256": "a2728c829d368942411d8aecf4825b28b1487386d9e88fa58cac66537e8f01c2"
+    },
+    {
+      "path": "php-expansion/reviews/batch-06-editorial.json",
+      "sha256": "55863e1f9724a740bbea7eb54867d6c5540e73aabfd4a816019efd7477296ef4"
+    },
+    {
+      "path": "php-expansion/reviews/batch-06-notes.txt",
+      "sha256": "a2a590bda5a2ec1c9269733ea1d26c14c09ec16d3db5fce122a161aded859229"
+    },
+    {
+      "path": "php-expansion/reviews/batch-06-pairs.txt",
+      "sha256": "32a9ea3b24f0a7000fe83f6c28e04851b08bc3cca35f93e20c2fe59caff8154e"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-acceptance.json",
+      "sha256": "7c1f30500fc102d8edde4c316d2557e018b98031101ff8f9bdda640673e421f2"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-checks.json",
+      "sha256": "860013bb393071dbf213a96e861b16747ac5a95ececd2f6e3309e1a5dd0738e1"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-execution-review.json",
+      "sha256": "17c22d7f357cb58a91b3d5483c2084ffc1cf334faa8660dec7ef0f3eb8150fc5"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-revision.json",
+      "sha256": "68bed3c81ac04c360ce6f7ecbeedb99b29449a361c5b6405b8b3498c35a247a4"
+    },
+    {
+      "path": "php-expansion/evidence/batch-1-runtime.json",
+      "sha256": "436b6f0a374cd894c6f80de268556498eb7b6b7a6f13f57dac6db8d17f8f4f19"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-acceptance.json",
+      "sha256": "c72dd7759682bd94c83045ffdf36bc668104a4dbfa5b27ec1f474831d4ef4784"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-checks.json",
+      "sha256": "a7748af46f61adcbadfbb7efea09d2e29279deee421624f082d520ce45dd6068"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-execution-review.json",
+      "sha256": "19832df1ba98f900d6c011992e97f2e85ecfb62cde732c12d65d88b02c7e17e7"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-revision.json",
+      "sha256": "ce2c1120c7b064b4cc42f37a80a8ad21d8bef2161b678f109b324256aed7c873"
+    },
+    {
+      "path": "php-expansion/evidence/batch-2-runtime.json",
+      "sha256": "ace6f8bbad812011192ab533c0a8c71c1f6a74d2e407dfc81937f7f2fc7d8bbe"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-acceptance.json",
+      "sha256": "896bb3904fdd09f1f3e87057e114abacddb2c8be152794cadb6c2e815019838a"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-checks.json",
+      "sha256": "69d9f017214f57186568074bbfe7486ae7adc1ef9547f96fe725bb8f073b70d4"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-execution-review.json",
+      "sha256": "631c32f2ef6c23f2565a6352d1f8d6dba8d4eb62ab9a4902bc1b7300d82ff13a"
+    },
+    {
+      "path": "php-expansion/evidence/batch-3-runtime.json",
+      "sha256": "8dce07d6c712f84210a432055764979925343e81d13465904cd0d20eaf8e459a"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-acceptance.json",
+      "sha256": "8b775fec68e9855ae9df6f0e58a9b2844a3286822b24755d26b2b61bf882ced9"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-checks.json",
+      "sha256": "650fea7912b3cf0199feefb818e2a35d7c62f93850c18a5697bd27f0af164cf8"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-execution-review.json",
+      "sha256": "dd08a91323a89cef96f1eae37258c031e7f4b359cfe13382e65514ace7ace27a"
+    },
+    {
+      "path": "php-expansion/evidence/batch-4-runtime.json",
+      "sha256": "965dbb543fa98b57b18e9815016de50c11033d30a97c5a21cf070f083e14ace7"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-acceptance.json",
+      "sha256": "7148018dbafaccb3c483387f147baf65f72dd4c6d65710c1037b4e1d41b9cb9d"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-checks.json",
+      "sha256": "4e80a8fefaa5cf0c1ed2e89542905a2cf846764ac951f37c2d05f925adb2138c"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-execution-review.json",
+      "sha256": "ec68071a7f60ad15e652c786bf1c10975611aeae0c718153965cd7d66fca4c09"
+    },
+    {
+      "path": "php-expansion/evidence/batch-5-runtime.json",
+      "sha256": "38e818910cd7763076e1b2af1b4cb4d32a74f5a2ed60578413aade2384b30255"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-acceptance.json",
+      "sha256": "b075de15627078a99f11b0da0b84b66cac03f79c5939dc15540f9444d92ebad3"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-checks.json",
+      "sha256": "b138afd1c5977bc87b7c0e5ddcda9fdedec1164f81b1b129ea0feebe6c601ed8"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-execution-review.json",
+      "sha256": "d95ae30bdb2e45cd81a48fbd3ce6c0e38d02ffe077c2f17a662ce788068ddcce"
+    },
+    {
+      "path": "php-expansion/evidence/batch-6-runtime.json",
+      "sha256": "0314fd6eed5c82d42d0c89f6ae73dc319954e829008ee936d41bb99864d49934"
+    },
+    {
+      "path": "php-expansion/evidence/FINAL_RESULTS.json",
+      "sha256": "dfdf4171fe0131e8ef3662c269977db3e86ac8cfeef3a2a9abf15e4b0d8eb767"
+    },
+    {
+      "path": "php-expansion/evidence/final-automated-tests.txt",
+      "sha256": "ab224a92ad5d14198b54727e33d6b550baf4a604c962aef6c7e3360c6c4916c5"
+    }
+  ]
+}

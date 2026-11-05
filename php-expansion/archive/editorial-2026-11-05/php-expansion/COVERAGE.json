@@ -1,0 +1,584 @@
+{
+  "scope": "600 new records only; retained pilot 20 and original active PHP 300 are excluded from these distributions",
+  "newQuestions": 600,
+  "retainedPilot": 20,
+  "reviewCollection": 620,
+  "normalPhpStillActive": 300,
+  "independentApproval": "pending for all 600 new records",
+  "productionActivation": false,
+  "byTopic": {
+    "Operators & expressions": 19,
+    "Arrays & destructuring": 51,
+    "Classes & object lifecycle": 44,
+    "Variables, scope & constants": 10,
+    "Types, casting & comparisons": 31,
+    "Control flow & pattern matching": 12,
+    "Enums, attributes & reflection": 22,
+    "PDO & database access": 23,
+    "Errors & exceptions": 23,
+    "Namespaces, Composer & packages": 17,
+    "Functions & arguments": 57,
+    "Closures, callbacks & callables": 22,
+    "Files & structured data": 50,
+    "Inheritance, interfaces & traits": 27,
+    "Iterators, generators & fibers": 21,
+    "Includes, autoloading & paths": 8,
+    "Transactions, migrations & ORM": 13,
+    "Testing, style & static analysis": 20,
+    "Validation & web security": 41,
+    "Performance, processes & servers": 14,
+    "HTTP & superglobals": 31,
+    "APIs, integrations & PSRs": 17,
+    "Cookies & sessions": 13,
+    "Forms & file uploads": 8,
+    "Syntax & execution model": 6
+  },
+  "byFormat": {
+    "execution": 150,
+    "debugging": 120,
+    "code-review": 120,
+    "implementation": 90,
+    "testing": 70,
+    "architecture": 50
+  },
+  "byDifficulty": {
+    "Foundation": 150,
+    "Intermediate": 300,
+    "Advanced": 150
+  },
+  "byValidationKind": {
+    "output": 149,
+    "patch": 194,
+    "contract": 100,
+    "document-review": 98,
+    "tests": 59
+  },
+  "distinctObjectives": 600,
+  "workingLessons": {
+    "knownQuestions": 386,
+    "unmappedQuestions": 214,
+    "completeCoverage": 234,
+    "note": "Multi-lesson counts overlap; mappings are provisional and editable independently of IDs. Partial coverage is excluded in studied-only mode.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Types, type declarations and strict_types",
+        "status": "working-user-outline",
+        "questions": 51
+      },
+      {
+        "id": 2,
+        "title": "Variables, constants and operators",
+        "status": "working-user-outline",
+        "questions": 57
+      },
+      {
+        "id": 3,
+        "title": "Control flow",
+        "status": "working-user-outline",
+        "questions": 20
+      },
+      {
+        "id": 4,
+        "title": "Arrays and iteration",
+        "status": "working-user-outline",
+        "questions": 82
+      },
+      {
+        "id": 5,
+        "title": "Functions, parameters and return values",
+        "status": "working-user-outline",
+        "questions": 69
+      },
+      {
+        "id": 6,
+        "title": "Variable scope",
+        "status": "working-user-outline",
+        "questions": 14
+      },
+      {
+        "id": 7,
+        "title": "Anonymous functions and closures",
+        "status": "working-user-outline",
+        "questions": 11
+      },
+      {
+        "id": 8,
+        "title": "Callbacks and callable",
+        "status": "working-user-outline",
+        "questions": 22
+      },
+      {
+        "id": 9,
+        "title": "Arrow functions",
+        "status": "working-user-outline",
+        "questions": 6
+      },
+      {
+        "id": 10,
+        "title": "Recursion",
+        "status": "working-user-outline",
+        "questions": 6
+      },
+      {
+        "id": 11,
+        "title": "Variadic functions",
+        "status": "working-user-outline",
+        "questions": 3
+      },
+      {
+        "id": 12,
+        "title": "HTTP methods",
+        "status": "working-user-outline",
+        "questions": 12
+      },
+      {
+        "id": 13,
+        "title": "$_GET",
+        "status": "working-user-outline",
+        "questions": 7
+      },
+      {
+        "id": 14,
+        "title": "$_POST",
+        "status": "working-user-outline",
+        "questions": 4
+      },
+      {
+        "id": 15,
+        "title": "$_REQUEST",
+        "status": "working-user-outline",
+        "questions": 1
+      },
+      {
+        "id": 16,
+        "title": "$_SERVER",
+        "status": "working-user-outline",
+        "questions": 6
+      },
+      {
+        "id": 17,
+        "title": "$_FILES",
+        "status": "working-user-outline",
+        "questions": 7
+      },
+      {
+        "id": 18,
+        "title": "Cookies",
+        "status": "working-user-outline",
+        "questions": 7
+      },
+      {
+        "id": 19,
+        "title": "Sessions",
+        "status": "working-user-outline",
+        "questions": 7
+      },
+      {
+        "id": 20,
+        "title": "File handling",
+        "status": "working-user-outline",
+        "questions": 36
+      },
+      {
+        "id": 21,
+        "title": "Error handling and logging",
+        "status": "working-user-outline",
+        "questions": 15
+      },
+      {
+        "id": 22,
+        "title": "Exceptions",
+        "status": "working-user-outline",
+        "questions": 28
+      },
+      {
+        "id": 23,
+        "title": "Classes and objects",
+        "status": "working-user-outline",
+        "questions": 56
+      },
+      {
+        "id": 24,
+        "title": "Constructors, property promotion and readonly",
+        "status": "working-user-outline",
+        "questions": 22
+      },
+      {
+        "id": 25,
+        "title": "Encapsulation and visibility",
+        "status": "working-user-outline",
+        "questions": 26
+      },
+      {
+        "id": 26,
+        "title": "Inheritance",
+        "status": "working-user-outline",
+        "questions": 22
+      },
+      {
+        "id": 27,
+        "title": "Interfaces",
+        "status": "working-user-outline",
+        "questions": 11
+      },
+      {
+        "id": 28,
+        "title": "Abstract classes and methods",
+        "status": "working-user-outline",
+        "questions": 2
+      },
+      {
+        "id": 29,
+        "title": "Traits",
+        "status": "working-user-outline",
+        "questions": 6
+      },
+      {
+        "id": 30,
+        "title": "Static methods and properties",
+        "status": "working-user-outline",
+        "questions": 11
+      },
+      {
+        "id": 31,
+        "title": "Namespaces",
+        "status": "working-user-outline",
+        "questions": 10
+      }
+    ]
+  },
+  "code": {
+    "questionsWithFiles": 502,
+    "scenarioOnly": 98,
+    "sourceFiles": 517,
+    "multiFileQuestions": 14,
+    "kinds": {
+      "complete-file": 517
+    },
+    "note": "Displayed sources are complete named files; candidate replacement fragments are tested inside their stated host file."
+  },
+  "wording": {
+    "questionsWithUniqueLongest": 504,
+    "uniqueLongestCorrect": 180,
+    "uniqueShortestCorrect": 43,
+    "lengthOutliers": [
+      "PHP-E26-0010",
+      "PHP-E26-0486",
+      "PHP-E26-0515"
+    ],
+    "authoredKeyPositions": {
+      "1": 123,
+      "2": 157,
+      "3": 172,
+      "4": 148
+    },
+    "note": "Length and lexical checks are review signals, not proof of no answer leakage. Source positions are shuffled for every session."
+  },
+  "duplicates": {
+    "heuristicCandidatePairs": 474,
+    "documentedPairReviews": 499,
+    "note": "Includes comparisons to the retained pilot and archived PHP bank. Manual reviews can find overlaps missed by token similarity."
+  },
+  "runtimeProjection": {
+    "bytes": 1731300,
+    "gzipBytes": 377732,
+    "note": "Compression estimate, not a promise about HTTP hosting configuration. Projection is lazy loaded only by the review route."
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "count": 100,
+      "ids": [
+        "PHP-E26-0001",
+        "PHP-E26-0100"
+      ],
+      "disposition": "accepted-for-review",
+      "independentApproval": "pending",
+      "sourceHash": "10f3d83b20982e2f123f6afcbe01f50f799a0a276210f4b5830ee96142a6aa38",
+      "recordsHash": "1827f51f2d7eae53a43e5e1a4357e7ca521fea7373b8bb6a9d427bf877d9aacd",
+      "runtime": [
+        {
+          "php": "8.5.2",
+          "executions": 288,
+          "linted": 293
+        },
+        {
+          "php": "8.4.17",
+          "executions": 288,
+          "linted": 293
+        }
+      ],
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulty": {
+        "Foundation": 25,
+        "Intermediate": 50,
+        "Advanced": 25
+      },
+      "knownLessonMappings": 69,
+      "unmapped": 31,
+      "completeWorkingCoverage": 46,
+      "similarityCandidates": 27,
+      "documentedPairReviews": 27,
+      "wording": {
+        "uniqueLongestCorrect": 22,
+        "uniqueShortestCorrect": 6,
+        "lengthOutliers": [
+          "PHP-E26-0010"
+        ],
+        "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+      }
+    },
+    {
+      "batch": 2,
+      "count": 100,
+      "ids": [
+        "PHP-E26-0101",
+        "PHP-E26-0200"
+      ],
+      "disposition": "accepted-for-review",
+      "independentApproval": "pending",
+      "sourceHash": "b43113612babe17768203a2663b8d2096060e55641143c0032bf911a78c63792",
+      "recordsHash": "52c842d63b7172e990a7d4a9e35c23a309b049919d68109c7a7a0ca167050cc1",
+      "runtime": [
+        {
+          "php": "8.5.2",
+          "executions": 287,
+          "linted": 301
+        },
+        {
+          "php": "8.4.17",
+          "executions": 287,
+          "linted": 301
+        }
+      ],
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulty": {
+        "Foundation": 25,
+        "Intermediate": 50,
+        "Advanced": 25
+      },
+      "knownLessonMappings": 67,
+      "unmapped": 33,
+      "completeWorkingCoverage": 39,
+      "similarityCandidates": 59,
+      "documentedPairReviews": 59,
+      "wording": {
+        "uniqueLongestCorrect": 32,
+        "uniqueShortestCorrect": 9,
+        "lengthOutliers": [],
+        "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+      }
+    },
+    {
+      "batch": 3,
+      "count": 100,
+      "ids": [
+        "PHP-E26-0201",
+        "PHP-E26-0300"
+      ],
+      "disposition": "accepted-for-review",
+      "independentApproval": "pending",
+      "sourceHash": "351f96c335567ba9aa4fbb39f75106998a8a30cd75538a10d072fff24a218655",
+      "recordsHash": "1e776bb23b48bea12a60b581ff450c13e99ff81e23dc320a9a7296c4871d54b5",
+      "runtime": [
+        {
+          "php": "8.5.2",
+          "executions": 272,
+          "linted": 276
+        },
+        {
+          "php": "8.4.17",
+          "executions": 272,
+          "linted": 276
+        }
+      ],
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulty": {
+        "Foundation": 25,
+        "Intermediate": 50,
+        "Advanced": 25
+      },
+      "knownLessonMappings": 69,
+      "unmapped": 31,
+      "completeWorkingCoverage": 50,
+      "similarityCandidates": 83,
+      "documentedPairReviews": 83,
+      "wording": {
+        "uniqueLongestCorrect": 27,
+        "uniqueShortestCorrect": 10,
+        "lengthOutliers": [],
+        "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+      }
+    },
+    {
+      "batch": 4,
+      "count": 100,
+      "ids": [
+        "PHP-E26-0301",
+        "PHP-E26-0400"
+      ],
+      "disposition": "accepted-for-review",
+      "independentApproval": "pending",
+      "sourceHash": "8f65a30edec1559d15642c40cceac48c09021dd21b3d0dab2cf06e06ab000a0f",
+      "recordsHash": "83666ce5f56b617725bc80781336fbfa1a31dfc60827498b7c80f87a489e0cd1",
+      "runtime": [
+        {
+          "php": "8.5.2",
+          "executions": 268,
+          "linted": 275
+        },
+        {
+          "php": "8.4.17",
+          "executions": 268,
+          "linted": 275
+        }
+      ],
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 12,
+        "architecture": 8
+      },
+      "difficulty": {
+        "Foundation": 25,
+        "Intermediate": 50,
+        "Advanced": 25
+      },
+      "knownLessonMappings": 66,
+      "unmapped": 34,
+      "completeWorkingCoverage": 45,
+      "similarityCandidates": 128,
+      "documentedPairReviews": 132,
+      "wording": {
+        "uniqueLongestCorrect": 33,
+        "uniqueShortestCorrect": 4,
+        "lengthOutliers": [],
+        "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+      }
+    },
+    {
+      "batch": 5,
+      "count": 100,
+      "ids": [
+        "PHP-E26-0401",
+        "PHP-E26-0500"
+      ],
+      "disposition": "accepted-for-review",
+      "independentApproval": "pending",
+      "sourceHash": "cf2c04d9db608de49449a6f9c67d45a1e055a730f418f463e5b6b19a741191d3",
+      "recordsHash": "36123e6a7291d869fd7cb2e319bd8ccbf73233a8dc04a847d8a62eb12f9e8fb7",
+      "runtime": [
+        {
+          "php": "8.5.2",
+          "executions": 197,
+          "linted": 199
+        },
+        {
+          "php": "8.4.17",
+          "executions": 197,
+          "linted": 199
+        }
+      ],
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 11,
+        "architecture": 9
+      },
+      "difficulty": {
+        "Foundation": 25,
+        "Intermediate": 50,
+        "Advanced": 25
+      },
+      "knownLessonMappings": 59,
+      "unmapped": 41,
+      "completeWorkingCoverage": 31,
+      "similarityCandidates": 74,
+      "documentedPairReviews": 82,
+      "wording": {
+        "uniqueLongestCorrect": 32,
+        "uniqueShortestCorrect": 7,
+        "lengthOutliers": [
+          "PHP-E26-0486"
+        ],
+        "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+      }
+    },
+    {
+      "batch": 6,
+      "count": 100,
+      "ids": [
+        "PHP-E26-0501",
+        "PHP-E26-0600"
+      ],
+      "disposition": "accepted-for-review",
+      "independentApproval": "pending",
+      "sourceHash": "41e61f87fb5fa17f2cca80dd76f7f125eefbb8231e4e9ccecd566d8a64b7a040",
+      "recordsHash": "5388a209096b78686b8a3dbfaedd759589e4a5b09dc82283623f324b0fd8d8c9",
+      "runtime": [
+        {
+          "php": "8.5.2",
+          "executions": 226,
+          "linted": 228
+        },
+        {
+          "php": "8.4.17",
+          "executions": 226,
+          "linted": 228
+        }
+      ],
+      "formats": {
+        "execution": 25,
+        "debugging": 20,
+        "code-review": 20,
+        "implementation": 15,
+        "testing": 11,
+        "architecture": 9
+      },
+      "difficulty": {
+        "Foundation": 25,
+        "Intermediate": 50,
+        "Advanced": 25
+      },
+      "knownLessonMappings": 56,
+      "unmapped": 44,
+      "completeWorkingCoverage": 23,
+      "similarityCandidates": 103,
+      "documentedPairReviews": 116,
+      "wording": {
+        "uniqueLongestCorrect": 34,
+        "uniqueShortestCorrect": 7,
+        "lengthOutliers": [
+          "PHP-E26-0515"
+        ],
+        "interpretation": "Heuristics flag review candidates; they do not establish absence of semantic duplication or answer leakage."
+      }
+    }
+  ]
+}

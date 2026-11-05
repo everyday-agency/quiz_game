@@ -1,0 +1,102 @@
+{
+  "reason": "Actual local PHP file operations yielded fresh size [1,3,3], contradicting the proposed cache trace. Replace the draft rather than teach an unsupported cache-invalidation assumption.",
+  "record": {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-engineer-2026",
+    "id": "PHP-E26-0517",
+    "revision": 1,
+    "status": "draft",
+    "responseType": "single-choice",
+    "format": "execution",
+    "topic": "Files & structured data",
+    "subtopic": "filesize-stat-cache-after-handle-write",
+    "objective": {
+      "id": "filesize-stat-cache-after-handle-write",
+      "text": "Trace cached filesystem metadata separately from the actual file size after a stream-handle append."
+    },
+    "difficulty": {
+      "level": "Intermediate",
+      "audience": "intermediate",
+      "rationale": "Distinguish a prior stat result, a subsequent data write and explicit metadata cache invalidation."
+    },
+    "prerequisites": [
+      "filesize stat cache",
+      "fopen append mode",
+      "fwrite",
+      "clearstatcache"
+    ],
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI unless the stated context specifies otherwise",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+    },
+    "context": {
+      "assumptions": [
+        "Run in a fresh PHP process using only the displayed files and inputs.",
+        "The fixture creates its own regular local file. All I/O succeeds, no other process touches it, and the explicit clearstatcache call occurs only where shown. Each ASCII character is one byte."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n\n$path = __DIR__ . '/size.txt';\nfile_put_contents($path, 'A');\n$first = filesize($path);\n\n$handle = fopen($path, 'a');\nfwrite($handle, 'BC');\nfclose($handle);\n\n$beforeClear = filesize($path);\nclearstatcache(true, $path);\n$afterClear = filesize($path);\n\necho json_encode([$first, $beforeClear, $afterClear]);\n"
+        }
+      ]
+    },
+    "stem": "What JSON records the initial size, the cached query after appending and the query after clearing the stat cache?",
+    "options": [
+      {
+        "id": "always-fresh",
+        "text": "[1,3,3]",
+        "rationale": "The repeated filesize query can reuse the cached metadata established before the handle write.",
+        "misconception": "Assuming every metadata query rereads the filesystem after a stream write."
+      },
+      {
+        "id": "never-refreshes",
+        "text": "[1,1,1]",
+        "rationale": "The explicit stat-cache clear causes the final query to observe the current three-byte file.",
+        "misconception": "Treating the first metadata result as permanently attached to the pathname."
+      },
+      {
+        "id": "append-is-replace",
+        "text": "[1,1,2]",
+        "rationale": "Append mode adds BC after A, so the refreshed file size is three bytes rather than the size of the latest write alone.",
+        "misconception": "Confusing bytes written in one call with the total file length."
+      },
+      {
+        "id": "cache-then-refresh",
+        "text": "[1,1,3]",
+        "rationale": "The initial one-byte stat result is reused until the explicit clear, after which the appended three-byte length is observed.",
+        "misconception": null
+      }
+    ],
+    "correctOptionId": "cache-then-refresh",
+    "explanation": {
+      "summary": "PHP caches results of filesystem status queries. A stream-handle write changes the file, but a cached filesize result can remain until clearstatcache invalidates it.",
+      "trace": "A establishes size 1. Appending BC makes the actual file three bytes long. The second query returns the cached 1, and the cleared query returns 3."
+    },
+    "validation": {
+      "kind": "output",
+      "stdout": "[1,1,3]",
+      "status": "draft",
+      "independentEditorialReview": "pending"
+    },
+    "curriculum": {
+      "repositoryTopic": "repo-topic-10",
+      "lessonIds": [
+        20
+      ],
+      "lessonMappingStatus": "working-outline",
+      "coverageComplete": false
+    },
+    "references": [
+      "https://www.php.net/manual/en/function.clearstatcache.php",
+      "https://www.php.net/manual/en/function.filesize.php"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+✓ v1 archive: 2500 questions across 6 learning tracks
+✓ v1 archive: 25 domains per track across six tracks and 150 track-specific domains
+✓ v1 archive: 600 Laravel, 600 TypeScript, 400 MySQL, and 300 each for PHP, React, and Google Analytics
+✓ v1 archive: exactly 200 direct roadmap questions for Laravel, TypeScript, PHP, and React
+✓ v1 archive: 1,300 code-reading questions across the five programming/database tracks
+✓ v1 archive: four unique options and one valid answer per question
+✓ v1 archive: correct answers occupy each character-length and word-count rank exactly 25% of the time
+✓ v1 archive: correct and wrong answer lengths stay within a 5% average band in every track
+✓ v1 archive: unique IDs and prompts
+✓ v1 archive: all three difficulty levels represented in every domain
+✓ v1 archive: correct examples and explanations for all 7,500 wrong choices
+✓ v1 archive: 300 selective correct-answer code walkthroughs and 15 code-backed wrong-answer explanations
+✓ All 2,500 original records and notes preserved; 2,367 current records unchanged
+✓ Stable IDs survive insertion and reordering; 133 explicit revisions, including 20 pilot items
+✓ All answer identities and shuffled explanations map correctly; pilot metadata and cue checks pass
+✓ PHP 8.5.2: 76 distinct source/fragment lint checks, 12 isolated pilot executions, 22 pinned Laravel contract assertions
+✓ PHP 8.4.17: 76 distinct source/fragment lint checks, 12 isolated pilot executions, 22 pinned Laravel contract assertions
+✓ PHP-only pilot structure: 2,500 existing records/notes preserved; 20 new items; all 24 option orders per item grade and explain correctly
+✓ New PHP pilot 8.5.2: 20 keyed answers; 63 sources/variants linted; 61 isolated executions
+✓ New PHP pilot 8.4.17: 20 keyed answers; 63 sources/variants linted; 61 isolated executions
+✓ Code viewer: 1428 existing/pilot source units retained exactly; PHP token categories, fragments, CRLF/tabs, entities, injection strings and vendor hashes checked

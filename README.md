@@ -1,52 +1,50 @@
-# Under the Hood — Engineering Thinking Quiz
+# Under the Hood — PHP Engineer Quiz
 
-A static, dependency-free browser quiz for GitHub Pages. The bank contains 2,500 existing questions: 600 Laravel, 600 TypeScript, 400 MySQL, and 300 each for PHP, React and Google Analytics. There is no Laravel application, database or server-side grading.
+A static PHP examination app with **620 active questions**: `PHP-E26-0001`–`PHP-E26-0600` and the 20 retained `PHP-PILOT` questions. The default URL opens this collection. Learn mode explains each answer; Exam mode reveals correctness only after submission. Answers and questions are shuffled without changing their stable identities.
 
-The remediation branch preserves all existing IDs and original records, repairs verified defects, and contains a 20-question editorial pilot. The full bank is **not** certified for factual or assessment quality. See [the remediation report](remediation/REPORT.md), [all 20 before/after reviews](remediation/PILOT_REVIEW.md), and [the original audit](audit/REPORT.md).
+This is a user-authorized controlled release. Technical and internal editorial validation are complete; **independent editorial approval remains pending**. Passing tests does not establish learner discrimination or psychometric difficulty calibration.
 
 ## Run locally
 
 ```sh
-python3 -m http.server 8080
+node tools/build-site.mjs
+python3 -m http.server 8080 --directory _site
 ```
 
-Open <http://127.0.0.1:8080>. `start.command` provides the same local workflow on macOS. Running the quiz requires no PHP runtime, package installation or network connection.
+Open <http://127.0.0.1:8080/>. No backend, database, package installation or PHP runtime is needed by the website. The 60 Advanced questions require explicit selection in session setup; all 620 are available in the question bank.
 
-Learn mode reveals the answer and explanations after each check. Exam mode keeps only neutral answered-count progress until the final **Submit exam** action. All answer keys remain public in this static learning application; this is not an authoritative, tamper-resistant assessment service.
+## Progress and archives
 
-Local storage contains aggregate totals only. Both `underTheHoodStats` and the historical `laravelQuizStats` key remain readable. Completed sessions update the current key without rewriting the old key. Unfinished sessions are kept in memory and are lost on refresh. There is no historical per-question attempt data to migrate or regrade.
+New completed sessions use `underTheHoodPhpEngineerV1Stats`. Old main, Laravel, pilot and review storage keys remain untouched and are never added to new totals. Reloading an unfinished session does not save it. Storage holds aggregate results, not persistent question-level history. Retired collection bookmarks open the same new collection and storage key.
 
-## Question identity and editing
+The original 300 PHP questions and all non-PHP subjects are inactive. Recovery sources:
 
-- `js/bank/legacy-v1.mjs` is the immutable original materialized bank, with explicit existing IDs. Do not edit it.
-- `remediation/baseline/manifest.json` records every original record hash; the compressed notes archive preserves the original generated teaching notes.
-- `js/bank/revisions.mjs` selects explicit revisions by ID. The assembler rejects missing IDs, duplicate IDs, duplicate revisions and unknown revision targets. Question identity never depends on array position.
-- Revisions use the existing ID and a separate revision number. Options have IDs scoped to that revision. Grading follows option identity after display shuffling.
-- `php-repairs.mjs`, `laravel-corrections.mjs` and `laravel-companions.mjs` contain correctness repairs. `pilot.mjs` contains exactly 20 editorial revisions, with objectives, version assumptions, difficulty reasoning and per-option explanations.
-- Earlier top-level authoring/generator modules are retained as historical source; `js/questions.mjs` no longer imports them. Editing them does not edit the active bank.
+- [Outgoing 2,500-question archive](release/archive/pre-php-only/manifest.json), including metadata and generated explanations.
+- [Original 300 PHP archive](php-expansion/archive/original-php-300.json).
+- [Previous production source archive](release/archive/previous-production.json), pinned to the remote main commit before this release.
+- [Release manifest](release/manifest.json), fixing all 620 IDs, revisions and content hashes.
 
-For a later approved change, retain the current revision in an archive before replacing it. Do not reuse IDs, rewrite the original baseline hashes, or silently edit a released revision. Add a reviewed change manifest and validation evidence. Existing aggregate scores must remain historical totals.
+Archives, authoring sources, PHP fixtures and reports are excluded from the Pages build. The deployable artifact has 14 explicitly allowed files; its `release.json` identifies the deployed commit and bank hash.
 
-Use named `code.files` for multiple files. `php-file` denotes a complete source file; `php-fragment` and `laravel-fragment` require explicit surrounding assumptions. Revised options are unpadded; do not restore the old answer-length equalizer. The old equal-length checks now apply only to the preserved original archive, not to newly reviewed content.
-
-## Verification
-
-Node 22+, PHP 8.4/8.5 CLI, and Chrome are development/test requirements only.
+## Validation
 
 ```sh
 node tests.mjs
 node tools/build-site.mjs
+node tests/release-artifact.mjs
+for batch in 1 2 3 4 5 6; do BATCH="$batch" node tests/php-expansion/runtime.mjs; done
 QUIZ_SITE_DIR=_site node tests/browser.mjs
+QUIZ_SITE_DIR=_site node tests/php-pilot/browser.mjs
+QUIZ_SITE_DIR=_site node tests/code-viewer/browser.mjs
+QUIZ_SITE_DIR=_site node tests/php-expansion/browser.mjs
 ```
 
-`PHP_BIN` selects a PHP executable; `PHP_BINARIES` accepts a path-delimited runtime list. By default the tests use PATH PHP and, if present, the local MAMP PHP 8.4.17 binary. `CHROME_BIN` overrides Chrome discovery. Set `WRITE_TEST_REPORT=1` when running the automated suite to refresh `remediation/php-results.json`.
+The historical tests target the frozen outgoing bank. Release tests assert the exact active set, every answer permutation and rationale, safe progress isolation, and artifact contents. Browser suites use temporary Chrome profiles. The retained pilot suite selects its 20 ordinary domains through the standard UI. The complete-bank suite exercises all 620 questions on desktop and mobile, then checks Exam submission, copying, missed-question review, old bookmarks and storage preservation.
 
-The automated suite verifies archive hashes, all 2,500 identities, insertion/reordering invariance, shuffled grading and explanations, revision scope and pilot structure. PHP checks lint all current PHP question code and revised Laravel fragments, execute only 12 reviewed hash-allowlisted PHP fixtures, and probe pinned Laravel 13.0.0 methods with controlled doubles. The snippets have no application data or external service access. These contract probes are not a full Laravel integration suite. See [fixture provenance and boundaries](tests/fixtures/README.md).
+PHP validation uses only reviewed, hash-allowlisted fixtures in isolated temporary directories, with no application data or external-service access. `PHP_BINARIES` can select both CLI runtimes; local defaults discover PHP 8.4 and 8.5. These checks are separate from the static app.
 
-The Chrome workflow drives real mouse/keyboard controls in an isolated profile and local origin. It covers exam submission, scoring after shuffle, legacy/current storage, Learn feedback, mode switching, all pilot renderings, named files and a mobile viewport. It writes a result JSON and screenshots under `remediation/`; it does not use or modify the user's normal browser profile.
+## Release and maintenance
 
-## Build and release
+The existing [Pages workflow](.github/workflows/deploy-pages.yml) validates both PHP versions before building and deploying pushes to `main`. See [release authorization](release/AUTHORIZATION.txt), [release report](release/REPORT.txt), and [release/rollback procedure](php-expansion/RELEASE_PLAN.txt).
 
-`node tools/build-site.mjs` prepares `_site/` from the static runtime files only. Audit reports, tests, PHP fixtures, screenshots and development tools are excluded. This command does not publish anything.
-
-The remediation/PR workflow validates PHP 8.4 and 8.5 and runs Chrome against the prepared artifact. The existing Pages workflow is gated on those checks and uploads `_site`, rather than the entire repository. No deployment has been run as part of remediation. Review and approval are required before merging this pilot or expanding the question bank.
+Question text is unchanged by activation. [The focused correction report](php-expansion/FOCUSED_CORRECTION_REPORT.md), [editorial audit](php-expansion/EDITORIAL_AUDIT_REPORT.md) and [30-question review export](php-expansion/EDITORIAL_REVIEW_30.md) remain historical review evidence. Future changes must archive prior revisions, preserve IDs, review fixtures and rerun the affected validation. No additional questions are generated by build or export commands.

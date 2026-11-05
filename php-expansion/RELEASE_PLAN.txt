@@ -1,0 +1,38 @@
+PHP-ONLY CONTROLLED RELEASE
+
+The user's release/AUTHORIZATION.txt supersedes the earlier local-only plan.
+Exactly 600 internally reviewed expansion questions and 20 retained pilot questions
+become the default collection. All 2,500 outgoing records are archived and inactive,
+including the original 300 PHP and 2,200 non-PHP questions. Independent editorial
+approval remains pending; user release authorization is not independent approval.
+
+The release manifest fixes all active IDs, revisions and content hashes. No question
+content changes as part of activation. Historical aggregate storage keys are kept
+unchanged; the release uses underTheHoodPhpEngineerV1Stats. Old collection bookmarks
+open the single default PHP collection. Advanced session questions remain opt-in.
+
+Before push: run tests.mjs, both PHP runtime validations for all six batches,
+release-artifact.mjs, and all four Chrome suites against the static build. The
+artifact contains only 14 explicitly allowed runtime files; no fixtures, archives,
+reports or retired banks. Inspect the staged change and preserve remote changes.
+
+Commit on remediation/question-quality-pilot, integrate current origin/main without
+rewriting history, and publish via the existing main branch / deploy-pages.yml
+workflow. Wait for validation and Pages deployment, then verify release.json and
+all 620 questions at the actual public URL on desktop/mobile. Do not claim success
+before live verification. Authentication/permission/configuration blockers must be
+reported without bypassing controls.
+
+Rollback reference: release/archive/previous-production.json identifies the prior
+remote main commit; previous-production-source.tar.gz preserves that full source.
+release/archive/pre-php-only preserves the outgoing remediated local bank with all
+metadata and explanations. Restore the last known-good source/runtime through a
+normal reviewed commit and the existing Pages workflow; never force-push or delete
+question archives. Leave all progress keys intact. Restoring old content does not
+reinterpret or erase completed PHP-release totals. Keep the new questions and their
+validation evidence for correction.
+
+Future editorial changes require an archived prior revision, stable IDs, reviewed
+fixtures, new affected-runtime evidence and a new release manifest. Lesson mappings
+can change without regenerating content or inventing unavailable lesson numbers.
+No claim of independent approval or empirical difficulty calibration is implied.

@@ -1,0 +1,115 @@
+{
+  "scope": [
+    "PHP-E26-0300",
+    "PHP-E26-0355",
+    "PHP-E26-0549",
+    "PHP-E26-0557"
+  ],
+  "php": [
+    {
+      "batch": 3,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 276,
+      "executions": 272
+    },
+    {
+      "batch": 3,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 276,
+      "executions": 272
+    },
+    {
+      "batch": 4,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 275,
+      "executions": 268
+    },
+    {
+      "batch": 4,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 275,
+      "executions": 268
+    },
+    {
+      "batch": 6,
+      "php": "8.5.2",
+      "recordsChecked": 100,
+      "linted": 231,
+      "executions": 229
+    },
+    {
+      "batch": 6,
+      "php": "8.4.17",
+      "recordsChecked": 100,
+      "linted": 231,
+      "executions": 229
+    }
+  ],
+  "browsers": [
+    {
+      "suite": "existing",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 9,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/focused-correction/browser-existing/browser-results.json",
+      "exitCode": 0
+    },
+    {
+      "suite": "pilot",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 7,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/focused-correction/browser-pilot/browser-results.json",
+      "exitCode": 0
+    },
+    {
+      "suite": "viewer",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 8,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/focused-correction/browser-viewer/browser-results.json",
+      "exitCode": 0
+    },
+    {
+      "suite": "review",
+      "browser": "Chrome/156.0.8078.80",
+      "checks": 6,
+      "uncaughtErrors": 0,
+      "report": "php-expansion/focused-correction/browser-review/browser-results.json",
+      "exitCode": 0
+    }
+  ],
+  "regression": {
+    "command": "node tests.mjs",
+    "exitCode": 0,
+    "log": "focused-correction/logs/regression.log"
+  },
+  "schema": {
+    "batches": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "result": "passed; automated screening only"
+  },
+  "staticBuild": {
+    "runtimeFiles": 26,
+    "deployed": false
+  },
+  "preservation": {
+    "otherNewRecords": 596,
+    "normalBank": 2500,
+    "normalPhp": 300,
+    "nonPhp": 2200,
+    "pilot": 20
+  },
+  "independentApproval": "pending",
+  "productionActivation": false
+}

@@ -1,0 +1,100 @@
+{
+  "reason": "Too close to legacy capture-by-value versus reference example; replaced before acceptance.",
+  "question": {
+    "schemaVersion": 1,
+    "technology": "php",
+    "collectionId": "php-engineer-2026",
+    "id": "PHP-E26-0307",
+    "revision": 1,
+    "status": "draft",
+    "responseType": "single-choice",
+    "format": "execution",
+    "topic": "Closures, callbacks & callables",
+    "subtopic": "closure-capture-binding-after-definition",
+    "objective": {
+      "id": "closure-capture-binding-after-definition",
+      "text": "Distinguish a closure’s captured value from a captured variable binding."
+    },
+    "difficulty": {
+      "level": "Foundation",
+      "audience": "junior",
+      "rationale": "Track a later assignment through explicit use clauses with different capture modes."
+    },
+    "prerequisites": [
+      "Anonymous functions",
+      "use by value",
+      "use by reference"
+    ],
+    "runtime": {
+      "php": [
+        "8.4",
+        "8.5"
+      ],
+      "sapi": "CLI unless the stated context specifies otherwise",
+      "extensions": [],
+      "errorPolicy": "E_ALL; no custom handler unless explicitly shown. 64-bit PHP; UTC; C locale."
+    },
+    "context": {
+      "assumptions": [
+        "Run in a fresh PHP process using only the displayed files and inputs."
+      ],
+      "files": [
+        {
+          "path": "main.php",
+          "kind": "complete-file",
+          "source": "<?php\n\n$rate = 2;\n\n$snapshot = function () use ($rate): int {\n    return $rate;\n};\n\n$live = function () use (&$rate): int {\n    return $rate;\n};\n\n$rate = 5;\n\necho json_encode([$snapshot(), $live()]);\n"
+        }
+      ]
+    },
+    "stem": "What JSON pair is printed after the captured variable is reassigned?",
+    "options": [
+      {
+        "id": "both-live",
+        "text": "[5,5]",
+        "rationale": "The value capture took its snapshot when the closure was created.",
+        "misconception": "Assuming all closures resolve captured names when called."
+      },
+      {
+        "id": "both-snapshot",
+        "text": "[2,2]",
+        "rationale": "The reference capture follows reassignment of the bound variable.",
+        "misconception": "Treating use by reference as an ordinary copy."
+      },
+      {
+        "id": "reversed",
+        "text": "[5,2]",
+        "rationale": "The ampersand marks the live binding, not the snapshot.",
+        "misconception": "Reversing the meanings of the two capture forms."
+      },
+      {
+        "id": "different",
+        "text": "[2,5]",
+        "rationale": "The value-captured rate stays 2 while the reference-captured variable now contains 5.",
+        "misconception": null
+      }
+    ],
+    "correctOptionId": "different",
+    "explanation": {
+      "summary": "A use clause without & captures the variable’s current value. With &, it captures a binding to the variable, so later assignments are visible.",
+      "trace": "snapshot stores 2 at creation. live reads the same variable that is later assigned 5."
+    },
+    "validation": {
+      "kind": "output",
+      "stdout": "[2,5]",
+      "status": "draft",
+      "independentEditorialReview": "pending"
+    },
+    "curriculum": {
+      "repositoryTopic": "repo-topic-08",
+      "lessonIds": [
+        6,
+        7
+      ],
+      "lessonMappingStatus": "working-outline",
+      "coverageComplete": true
+    },
+    "references": [
+      "https://www.php.net/manual/en/functions.anonymous.php"
+    ]
+  }
+}

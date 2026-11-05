@@ -1,4 +1,4 @@
-name: Validate remediation
+name: Validate PHP release
 
 on:
   pull_request:
@@ -26,12 +26,36 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
           tools: none
+          extensions: pdo_sqlite, ctype, mbstring, openssl, intl, bcmath, zip, sodium
       - name: Check archive, identities, grading, PHP and framework contracts
         run: node tests.mjs
       - name: Prepare static artifact
         run: node tools/build-site.mjs
+      - name: Check static release contents
+        run: node tests/release-artifact.mjs
+      - name: Execute each PHP expansion batch in the selected isolated runtime
+        run: |
+          for batch in 1 2 3 4 5 6; do
+            BATCH="$batch" node tests/php-expansion/runtime.mjs
+          done
       - name: Exercise real Chrome against the prepared artifact
         if: matrix.php == '8.5'
         run: node tests/browser.mjs
+        env:
+          QUIZ_SITE_DIR: _site
+          BROWSER_REPORT_DIR: php-pilot/regression
+      - name: Exercise the 20 retained pilot questions in the default PHP collection
+        if: matrix.php == '8.5'
+        run: node tests/php-pilot/browser.mjs
+        env:
+          QUIZ_SITE_DIR: _site
+      - name: Exercise PHP code viewer, copying and responsive scrolling in Chrome
+        if: matrix.php == '8.5'
+        run: node tests/code-viewer/browser.mjs
+        env:
+          QUIZ_SITE_DIR: _site
+      - name: Exercise all 620 default PHP questions in Chrome
+        if: matrix.php == '8.5'
+        run: node tests/php-expansion/browser.mjs
         env:
           QUIZ_SITE_DIR: _site

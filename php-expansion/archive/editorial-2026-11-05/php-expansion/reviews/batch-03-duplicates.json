@@ -1,0 +1,513 @@
+{
+  "sourceHash": "351f96c335567ba9aa4fbb39f75106998a8a30cd75538a10d072fff24a218655",
+  "reviewer": "authoring assistant; not independent",
+  "independentApproval": "pending",
+  "method": "Lexical/source candidate review plus full objective comparison with pilot and earlier batches. Heuristics cannot establish absence of semantic duplication.",
+  "records": [
+    {
+      "a": "PHP-E26-0255",
+      "b": "PHP-E26-0131",
+      "decision": "distinct objectives; retain",
+      "reason": "Rehash-before-verification authenticates the wrong secret; comparing fresh salted hashes rejects a correct secret. Different failure direction and repair ordering."
+    },
+    {
+      "a": "PHP-E26-0266",
+      "b": "PHP-E26-0170",
+      "decision": "distinct objectives; retain",
+      "reason": "Named optional argument omission versus initializing a nullable property; shared JSON and null syntax has no shared decision rule."
+    },
+    {
+      "a": "PHP-E26-0266",
+      "b": "PHP-E26-0065",
+      "decision": "distinct objectives; retain",
+      "reason": "Skipping default parameters by name versus strict callback-call boundaries; parameter syntax is incidental overlap."
+    },
+    {
+      "a": "PHP-E26-0273",
+      "b": "PHP-E26-0177",
+      "decision": "distinct objectives; retain",
+      "reason": "LIKE pattern metacharacters remain interpreted inside a bound value; SQL identifier selection is a different boundary outside value binding."
+    },
+    {
+      "a": "PHP-E26-0234",
+      "b": "PQ-113",
+      "decision": "distinct objectives; retain",
+      "reason": "Blank-row identity versus an omitted escape-argument deprecation. The new fixture explicitly supplies escape and preserves empty and zero fields."
+    },
+    {
+      "a": "PHP-E26-0262",
+      "b": "PHP-E26-0021",
+      "decision": "distinct objectives; retain",
+      "reason": "Duplicate-key parser disagreement affects authorization; numeric-key object/array round trips concern representation shape without duplicate members."
+    },
+    {
+      "a": "PHP-E26-0263",
+      "b": "PHP-E26-0035",
+      "decision": "distinct objectives; retain",
+      "reason": "Overlapping Fibers share one connection transaction; repeated bindParam executions observe a referenced variable. Neither repair addresses the other defect."
+    },
+    {
+      "a": "PHP-E26-0244",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "The clone repair must rebind a Closure's private this scope; the old clone question only tracks scalar copies and a shared nested object."
+    },
+    {
+      "a": "PHP-E26-0222",
+      "b": "PHP-E26-0111",
+      "decision": "distinct objectives; retain",
+      "reason": "Inherited method declarations share a static slot; separate Closure instances own separate static slots. Different ownership units must be identified."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0101",
+      "decision": "distinct objectives; retain",
+      "reason": "Array key reindexing versus assignment/logical precedence; compact JSON output causes lexical overlap only."
+    },
+    {
+      "a": "PHP-E26-0223",
+      "b": "PHP-E26-0011",
+      "decision": "distinct objectives; retain",
+      "reason": "Restoring graph cycles and enum identity through serialization versus reading enum name/value fields."
+    },
+    {
+      "a": "PHP-E26-0268",
+      "b": "PHP-E26-0169",
+      "decision": "distinct objectives; retain",
+      "reason": "Tail slicing with preserved keys and unchanged source versus allowed-field selection by key membership."
+    },
+    {
+      "a": "PHP-E26-0217",
+      "b": "PHP-PILOT-004",
+      "decision": "distinct objectives; retain",
+      "reason": "Stringable conversion under strict calls versus omitted nullable default arguments. Both use type declarations but fail at different boundaries."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0120",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface membership versus concrete class name; anonymous declaration identity and shared static state require different reasoning."
+    },
+    {
+      "a": "PHP-E26-0219",
+      "b": "PHP-E26-0211",
+      "decision": "distinct objectives; retain",
+      "reason": "Generator send performs implicit startup and resumes a yield; foreach uses a cursor independent of an array's internal pointer."
+    },
+    {
+      "a": "PHP-E26-0221",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "Lazy proxy forwarding shares a backing object's state while retaining proxy identity; shallow clone copying has no lazy initialization or forwarding."
+    },
+    {
+      "a": "PHP-E26-0222",
+      "b": "PHP-E26-0123",
+      "decision": "distinct objectives; retain",
+      "reason": "Static local storage ownership across inherited method bodies versus late static binding of class identity through forwarding calls."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0119",
+      "decision": "distinct objectives; retain",
+      "reason": "Prepending mixed array keys versus typed-property reference incompatibility; common scalar/JSON syntax is not semantic duplication."
+    },
+    {
+      "a": "PHP-E26-0215",
+      "b": "PHP-E26-0209",
+      "decision": "distinct objectives; retain",
+      "reason": "Match evaluates selected conditions/results; recursion prints during call-stack unwinding. The output-order skill is shared but the control mechanism differs."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0008",
+      "decision": "distinct objectives; retain",
+      "reason": "array_unshift actively renumbers existing keys; append after unset preserves the array's next-index state."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0106",
+      "decision": "distinct objectives; retain",
+      "reason": "Prepending key renumbering versus fresh default-array values per function call."
+    },
+    {
+      "a": "PHP-E26-0211",
+      "b": "PHP-E26-0104",
+      "decision": "distinct objectives; retain",
+      "reason": "Internal pointer independence versus assignment to a by-value foreach variable; a pointer read is essential only in the new question."
+    },
+    {
+      "a": "PHP-E26-0282",
+      "b": "PHP-PILOT-007",
+      "decision": "distinct objectives; retain",
+      "reason": "A bounded fgets truncates a long record; the pilot discards a valid zero string through truthiness. Different fixtures and fixes."
+    },
+    {
+      "a": "PHP-E26-0216",
+      "b": "PHP-E26-0018",
+      "decision": "distinct objectives; retain",
+      "reason": "An invokable object's cumulative callback state versus destructor timing after aliases are unset."
+    },
+    {
+      "a": "PHP-E26-0223",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "Serialized graph reconstruction preserves cycles and resolves enum singletons; cloning does not reconstruct a graph through serialization."
+    },
+    {
+      "a": "PHP-E26-0202",
+      "b": "PHP-E26-0108",
+      "decision": "distinct objectives; retain",
+      "reason": "Pre/postcondition loop execution versus global constant visibility; only small-output boilerplate overlaps."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Integer-key renumbering after insertion versus automatic conversion of canonical numeric-string keys during array construction."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface type membership versus numeric-string key normalization; unrelated semantic rules."
+    },
+    {
+      "a": "PHP-E26-0211",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "Array internal pointer state versus shallow object cloning; shared diagnostic output syntax is incidental."
+    },
+    {
+      "a": "PHP-E26-0216",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "A retained callable accumulates state across invocations; cloning copies outer state but shares a nested object. No clone exists in the new fixture."
+    },
+    {
+      "a": "PHP-E26-0225",
+      "b": "PHP-E26-0111",
+      "decision": "distinct objectives; retain",
+      "reason": "Failed dynamic initialization is retried; separate Closure objects retain independently initialized static locals. Exception timing is essential only in 0225."
+    },
+    {
+      "a": "PHP-E26-0221",
+      "b": "PHP-E26-0124",
+      "decision": "distinct objectives; retain",
+      "reason": "Lazy proxy forwards to an already existing object; a lazy ghost excludes one property from initialization. Identity forwarding and initialization exclusion differ."
+    },
+    {
+      "a": "PHP-E26-0205",
+      "b": "PHP-E26-0109",
+      "decision": "distinct objectives; retain",
+      "reason": "Object-handle mutation plus local rebinding versus a scalar reference parameter coercing the caller's storage."
+    },
+    {
+      "a": "PHP-E26-0207",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "String containment with an empty needle versus loop entry conditions; boolean JSON output is common scaffolding."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface satisfaction and concrete class lookup versus clone identity and nested-object sharing."
+    },
+    {
+      "a": "PHP-E26-0210",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "Cascading text substitution versus pre/postcondition loops; output pairs do not imply duplicate behavior."
+    },
+    {
+      "a": "PHP-E26-0213",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Boolean text validation with null-on-failure versus numeric-string array-key conversion."
+    },
+    {
+      "a": "PHP-E26-0216",
+      "b": "PHP-E26-0005",
+      "decision": "distinct objectives; retain",
+      "reason": "Invokable callback reuse accumulates state across array_map and direct calls; simple object assignment tests aliasing without callable behavior."
+    },
+    {
+      "a": "PHP-E26-0223",
+      "b": "PQ-241",
+      "decision": "distinct objectives; retain",
+      "reason": "Graph serialization and enum singleton identity versus converting a posted scalar to an allowed enum case."
+    },
+    {
+      "a": "PHP-E26-0202",
+      "b": "PHP-E26-0102",
+      "decision": "distinct objectives; retain",
+      "reason": "Loop entry timing versus unary-minus/exponentiation grouping."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0112",
+      "decision": "distinct objectives; retain",
+      "reason": "Prepending mixed keys renumbers integers; recursive replacement retains positions and can overwrite with null."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0114",
+      "decision": "distinct objectives; retain",
+      "reason": "Prepending to one map versus zipping unequal arrays through null-callback array_map."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0011",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface membership/concrete class identity versus enum name/backing scalar."
+    },
+    {
+      "a": "PHP-E26-0223",
+      "b": "PHP-E26-0221",
+      "decision": "distinct objectives; retain",
+      "reason": "Serialization builds a new cyclic graph; proxy initialization forwards to an existing graph object. Identity is tested through different mechanisms."
+    },
+    {
+      "a": "PHP-E26-0272",
+      "b": "PHP-E26-0038",
+      "decision": "distinct objectives; retain",
+      "reason": "Selecting the parent method body versus late-bound lookup of an overridden class constant in a factory."
+    },
+    {
+      "a": "PHP-E26-0216",
+      "b": "PHP-E26-0124",
+      "decision": "distinct objectives; retain",
+      "reason": "Callable invocation retains an accumulator; ghost initialization separates raw non-lazy writes from lazy state."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0122",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface type tests versus indirect mutation of overloaded array and object values."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0202",
+      "decision": "distinct objectives; retain",
+      "reason": "Type membership and class naming versus loop entry; JSON pairs create incidental overlap."
+    },
+    {
+      "a": "PHP-E26-0217",
+      "b": "PHP-E26-0022",
+      "decision": "distinct objectives; retain",
+      "reason": "Stringable coercion versus trait alias visibility; the access/type failures have different triggers and repairs."
+    },
+    {
+      "a": "PHP-E26-0257",
+      "b": "PHP-E26-0153",
+      "decision": "distinct objectives; retain",
+      "reason": "Returning from a redirect helper resumes its caller; finally mutates an object already selected for return. No cleanup mutation occurs in 0257."
+    },
+    {
+      "a": "PHP-E26-0212",
+      "b": "PHP-E26-0106",
+      "decision": "distinct objectives; retain",
+      "reason": "Parallel-column sort ordering versus function default-array freshness."
+    },
+    {
+      "a": "PHP-E26-0221",
+      "b": "PHP-E26-0211",
+      "decision": "distinct objectives; retain",
+      "reason": "Proxy-backed state versus independent array cursors; no common control or data transformation."
+    },
+    {
+      "a": "PHP-E26-0221",
+      "b": "PHP-E26-0216",
+      "decision": "distinct objectives; retain",
+      "reason": "Property forwarding to a backing object versus state accumulated through __invoke callbacks."
+    },
+    {
+      "a": "PHP-E26-0202",
+      "b": "PHP-E26-0002",
+      "decision": "distinct objectives; retain",
+      "reason": "Loop conditions versus integer-string key normalization."
+    },
+    {
+      "a": "PHP-E26-0206",
+      "b": "PHP-E26-0005",
+      "decision": "distinct objectives; retain",
+      "reason": "Array numeric-key renumbering versus object assignment aliasing."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0005",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface satisfaction versus shared object handles after assignment; no mutation/alias trace is needed in 0208."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0010",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface membership versus unmatched match throwing; unrelated type/control rules."
+    },
+    {
+      "a": "PHP-E26-0237",
+      "b": "PHP-E26-0113",
+      "decision": "distinct objectives; retain",
+      "reason": "Value sorting while preserving keys versus set intersection using string representations. Both retain keys but require different comparison operations."
+    },
+    {
+      "a": "PHP-E26-0205",
+      "b": "PHP-E26-0104",
+      "decision": "distinct objectives; retain",
+      "reason": "An object parameter's property mutation survives local rebinding; a by-value scalar foreach assignment leaves the source array unchanged."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0121",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface membership versus resolving same-named private fields under a bound Closure scope."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0123",
+      "decision": "distinct objectives; retain",
+      "reason": "Concrete class identity versus late-static forwarding across method calls."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0124",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface contract checks versus lazy initialization bypass for one property."
+    },
+    {
+      "a": "PHP-E26-0211",
+      "b": "PHP-E26-0008",
+      "decision": "distinct objectives; retain",
+      "reason": "Array cursor independence versus automatic next append index after removal."
+    },
+    {
+      "a": "PHP-E26-0211",
+      "b": "PHP-E26-0110",
+      "decision": "distinct objectives; retain",
+      "reason": "foreach's internal cursor versus an explicit reference-returning function storage binding."
+    },
+    {
+      "a": "PHP-E26-0225",
+      "b": "PHP-E26-0216",
+      "decision": "distinct objectives; retain",
+      "reason": "A failed static initializer retries before persistence; an invokable object's state changes on every callback invocation."
+    },
+    {
+      "a": "PHP-E26-0264",
+      "b": "PHP-E26-0260",
+      "decision": "distinct objectives; retain",
+      "reason": "A second decode invalidates a representation check; a request-derived Host was never trusted provenance. Canonicalization and source trust are different boundaries."
+    },
+    {
+      "a": "PHP-E26-0202",
+      "b": "PHP-E26-0120",
+      "decision": "distinct objectives; retain",
+      "reason": "Loop-entry condition timing versus anonymous-class declaration identity."
+    },
+    {
+      "a": "PHP-E26-0203",
+      "b": "PHP-E26-0103",
+      "decision": "distinct objectives; retain",
+      "reason": "Fallthrough after a case is selected versus loose switch selection compared with strict match. Different phase of switch evaluation."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-PILOT-011",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface membership versus shallow readonly restrictions on a referenced object."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-PILOT-016",
+      "decision": "distinct objectives; retain",
+      "reason": "Concrete type lookup versus static state shared across object instances."
+    },
+    {
+      "a": "PHP-E26-0215",
+      "b": "PHP-E26-0011",
+      "decision": "distinct objectives; retain",
+      "reason": "Match side-effect evaluation order versus enum name/value access."
+    },
+    {
+      "a": "PHP-E26-0216",
+      "b": "PHP-E26-0211",
+      "decision": "distinct objectives; retain",
+      "reason": "Callable object accumulator state versus array cursor state; neither behavior is an alias for the other."
+    },
+    {
+      "a": "PHP-E26-0219",
+      "b": "PHP-E26-0110",
+      "decision": "distinct objectives; retain",
+      "reason": "Generator yield/send/return channels versus copying or binding a returned reference."
+    },
+    {
+      "a": "PHP-E26-0221",
+      "b": "PHP-E26-0208",
+      "decision": "distinct objectives; retain",
+      "reason": "Lazy proxy identity remains distinct from its backing object; interface membership does not involve proxy initialization."
+    },
+    {
+      "a": "PHP-E26-0223",
+      "b": "PHP-E26-0208",
+      "decision": "distinct objectives; retain",
+      "reason": "Serialized graph cycles and enum identity versus type membership and class naming."
+    },
+    {
+      "a": "PHP-E26-0257",
+      "b": "PHP-E26-0247",
+      "decision": "distinct objectives; retain",
+      "reason": "A helper's return is local to that function; include/require differ in missing-file diagnostics and exception control flow."
+    },
+    {
+      "a": "PHP-E26-0288",
+      "b": "PHP-E26-0192",
+      "decision": "distinct objectives; retain",
+      "reason": "Rethrowing must preserve exact exception identity; retry classification searches exception causes with an outer permanent barrier."
+    },
+    {
+      "a": "PHP-E26-0247",
+      "b": "PHP-E26-0146",
+      "decision": "distinct objectives; retain",
+      "reason": "Missing-file include/require flow versus case sensitivity of function and variable names."
+    },
+    {
+      "a": "PHP-E26-0290",
+      "b": "PHP-E26-0189",
+      "decision": "distinct objectives; retain",
+      "reason": "Multiset removal preserves remaining duplicate values; exact CRLF removal preserves payload bytes. Different data models and operations despite the word remove."
+    },
+    {
+      "a": "PHP-E26-0290",
+      "b": "PHP-E26-0191",
+      "decision": "distinct objectives; retain",
+      "reason": "Removing one list occurrence versus a property hook's stored value differing from an assignment expression."
+    },
+    {
+      "a": "PHP-E26-0202",
+      "b": "PHP-E26-0123",
+      "decision": "distinct objectives; retain",
+      "reason": "Pre/postcondition loops versus late-static forwarding class scope."
+    },
+    {
+      "a": "PHP-E26-0205",
+      "b": "PQ-197",
+      "decision": "distinct objectives; retain",
+      "reason": "A local object parameter is rebound after mutating the caller's object; cloning copies scalar state and shares a nested object without parameter rebinding."
+    },
+    {
+      "a": "PHP-E26-0208",
+      "b": "PHP-E26-0125",
+      "decision": "distinct objectives; retain",
+      "reason": "Interface membership versus deliberately exported references bypassing later restricted-write checks."
+    }
+  ],
+  "lengthReview": {},
+  "additionalReview": [
+    "0204 original union-default draft rejected for overlap with PHP-PILOT-001; archived before replacement.",
+    "0243 generic error-clearing distractor replaced with a plausible inverted transaction guard.",
+    "273 uses nonrecursive escaping in a SQL pattern boundary; 210 directly compares replacement algorithms. Different objective and failure boundary.",
+    "289 assertion settings made explicit to prevent disabled-assertion ambiguity."
+  ]
+}

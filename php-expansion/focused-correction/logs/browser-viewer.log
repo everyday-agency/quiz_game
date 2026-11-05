@@ -1,0 +1,8 @@
+✓ Code viewer browser: matched desktop and mobile screenshots for PHP-PILOT-003, 013 and 020; exact source text retained
+✓ Code viewer browser: all 20 pilot questions: full-height source, no redundant title/gutter, exact four-space indentation, token spans and exact clipboard copies for all 22 files/fragments
+✓ Code viewer browser: 390px Chrome touch scrolling reveals long PHP lines without wrapping/page overflow; hidden gutter and exact mobile copying preserve the reading view
+✓ Code viewer browser: long-file fixture scrolls on both axes; tabs, CRLF, trailing newline and entity text survive; malicious source/filenames/context stay inert text
+✓ Code viewer browser: clipboard denial gives accessible manual-copy guidance while leaving source readable
+✓ Code viewer browser: mouse, Enter and Space copying do not submit a selected Exam answer or reveal correctness; normal navigation still records neutral progress
+✓ Code viewer browser: existing question without source still renders its prompt and explanation without an empty code panel
+✓ Code viewer browser: viewer and library load locally under a /quiz/ GitHub Pages-style subpath; no external network requests

@@ -1,0 +1,56 @@
+{
+  "browser": "Chrome/156.0.8078.80",
+  "siteDirectory": "_site",
+  "checks": [
+    "legacy totals are preserved without being counted as PHP release progress",
+    "10-question exam hides correctness, score, streak and teaching notes until Submit exam (mouse and keyboard)",
+    "shuffled keys grade 5/10; submission updates stats once; missed review retains code and selected answer",
+    "Review missed uses Learn mode with immediate feedback and three mapped distractor explanations",
+    "switching from revealed Learn feedback to Exam clears all previous correctness indicators",
+    "current local progress survives reload; unfinished review adds no aggregate counts",
+    "all 20 retained pilot IDs and a corrected expansion record render the exact code, versions, key and three specific rationales",
+    "mobile question details render at 390px without document overflow",
+    "no uncaught JavaScript exceptions"
+  ],
+  "examIds": [
+    "PHP-E26-0257",
+    "PHP-E26-0522",
+    "PHP-E26-0517",
+    "PHP-E26-0303",
+    "PHP-E26-0030",
+    "PHP-E26-0050",
+    "PHP-E26-0368",
+    "PHP-E26-0318",
+    "PHP-E26-0533",
+    "PHP-E26-0250"
+  ],
+  "expectedStats": {
+    "answered": 10,
+    "correct": 5,
+    "sessions": 1,
+    "best": 50
+  },
+  "pilotIds": [
+    "PHP-PILOT-001",
+    "PHP-PILOT-002",
+    "PHP-PILOT-003",
+    "PHP-PILOT-004",
+    "PHP-PILOT-005",
+    "PHP-PILOT-006",
+    "PHP-PILOT-007",
+    "PHP-PILOT-008",
+    "PHP-PILOT-009",
+    "PHP-PILOT-010",
+    "PHP-PILOT-011",
+    "PHP-PILOT-012",
+    "PHP-PILOT-013",
+    "PHP-PILOT-014",
+    "PHP-PILOT-015",
+    "PHP-PILOT-016",
+    "PHP-PILOT-017",
+    "PHP-PILOT-018",
+    "PHP-PILOT-019",
+    "PHP-PILOT-020"
+  ],
+  "errors": []
+}

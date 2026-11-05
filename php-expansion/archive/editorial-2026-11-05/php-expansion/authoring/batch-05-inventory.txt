@@ -1,0 +1,69 @@
+PHP-E26-0401|execution|Foundation|nested-positional-destructuring-skip|Trace skipped positions and nested targets in positional array destructuring.
+PHP-E26-0402|execution|Foundation|for-update-expression-after-continue|Trace a for loop’s update expression after continue skips the remaining body.
+PHP-E26-0403|execution|Foundation|numeric-string-versus-lexical-string-order|Distinguish numeric comparison of two numeric strings from lexical comparison of nonnumeric strings.
+PHP-E26-0404|execution|Foundation|negative-string-offset-assignment|Resolve a negative string offset when reading and replacing an ASCII byte.
+PHP-E26-0405|execution|Foundation|argument-count-versus-default-value|Distinguish an omitted optional argument from an explicitly supplied default-valued argument using func_num_args.
+PHP-E26-0406|execution|Foundation|negative-array-pad-target-length|Interpret array_pad’s signed target size without confusing it with a count of added entries.
+PHP-E26-0407|execution|Foundation|string-repeat-count-not-target-width|Interpret str_repeat’s count as repetitions of the entire input string.
+PHP-E26-0408|execution|Foundation|array-chunk-preserved-inner-keys|Trace chunk grouping separately from preservation of the source keys within each chunk.
+PHP-E26-0409|execution|Intermediate|csv-enclosure-doubling-and-embedded-delimiter|Parse a CSV field containing a doubled enclosure and an embedded delimiter.
+PHP-E26-0410|execution|Intermediate|regex-split-capture-delimiters-empty-fields|Trace captured delimiters separately from empty split fields in preg_split.
+PHP-E26-0411|execution|Intermediate|array-filter-both-value-key-argument-order|Trace value and key arguments in an ARRAY_FILTER_USE_BOTH predicate while retaining source keys.
+PHP-E26-0412|execution|Intermediate|stable-usort-equal-comparator-results|Predict retained input order for elements that a PHP 8 sort comparator considers equal.
+PHP-E26-0413|execution|Intermediate|clone-hook-without-constructor-reexecution|Trace constructor and clone-hook calls while separating the original and copied scalar state.
+PHP-E26-0414|execution|Intermediate|sprintf-positional-reuse-and-zero-padding|Resolve positional sprintf arguments independently of placeholder order and field width.
+PHP-E26-0415|execution|Intermediate|get-object-vars-calling-scope-and-uninitialized-properties|Predict property enumeration under different visibility scopes while excluding uninitialized typed properties.
+PHP-E26-0416|execution|Intermediate|stream-get-contents-offset-and-resulting-cursor|Trace an explicit stream_get_contents offset and the cursor left for the next read.
+PHP-E26-0417|execution|Intermediate|exception-thrown-inside-catch-skips-sibling-catches|Trace a new exception thrown inside a catch through finally to an outer handler.
+PHP-E26-0418|execution|Intermediate|class-exists-autoload-toggle-and-loaded-registry|Trace when class_exists invokes an autoloader and when it reads the already-loaded class registry.
+PHP-E26-0419|execution|Advanced|sqlite-replace-delete-insert-foreign-key-cascade|Trace a replacement insert’s deletion side effect through a foreign-key cascade.
+PHP-E26-0420|execution|Advanced|asymmetric-set-visibility-child-partial-update|Trace a child method’s writes through protected(set) and private(set) properties without assuming rollback on Error.
+PHP-E26-0421|execution|Advanced|lazy-ghost-serialization-initialization-policy|Trace whether serialization initializes lazy ghosts under the explicit skip-initialization flag.
+PHP-E26-0422|execution|Advanced|fiber-throw-termination-without-return-value|Distinguish Fiber termination caused by an exception from normal completion with a return value.
+PHP-E26-0423|execution|Advanced|contravariant-implementation-runtime-parameter-check|Identify the concrete method signature used for runtime argument checking through an interface-typed variable.
+PHP-E26-0424|execution|Advanced|last-error-state-versus-handled-diagnostic|Trace the last-error record separately from suppressed display and a custom handler’s observations.
+PHP-E26-0425|execution|Advanced|weakmap-iteration-key-strong-local-reference|Trace object reachability created by the key variable during WeakMap iteration.
+PHP-E26-0426|debugging|Foundation|trim-boundary-spaces-preserve-internal-content|Remove leading and trailing spaces without changing meaningful spaces inside a label.
+PHP-E26-0427|debugging|Foundation|foreach-key-value-target-order-repair|Repair reversed foreach key and value targets while retaining named map entries.
+PHP-E26-0428|debugging|Foundation|zero-divisor-guard-before-evaluation|Place a zero-divisor guard before the operation it must prevent.
+PHP-E26-0429|debugging|Foundation|substring-half-open-end-to-length|Translate an exclusive end position into the length expected by substr.
+PHP-E26-0430|debugging|Foundation|setcookie-does-not-update-current-request-cookie-input|Diagnose a current-request cookie read after successfully setting a response cookie.
+PHP-E26-0431|debugging|Intermediate|session-mutation-after-write-close-not-persisted|Persist a session update before closing its active write lifecycle.
+PHP-E26-0432|debugging|Intermediate|json-top-level-object-with-nested-lists|Force only the top-level JSON value to be an object while preserving nested arrays as lists.
+PHP-E26-0433|debugging|Intermediate|unicode-boundary-trim-not-byte-mask|Trim specified Unicode space characters at the boundaries without damaging multibyte content.
+PHP-E26-0434|debugging|Intermediate|path-percent-decoding-preserves-literal-plus|Decode one URI path-segment representation without applying form-style plus-to-space conversion.
+PHP-E26-0435|debugging|Intermediate|dateinterval-total-days-not-day-component|Read a date difference’s total elapsed day count rather than its residual day component.
+PHP-E26-0436|debugging|Intermediate|hmac-base64-raw-digest-not-hex-text|Encode raw HMAC digest bytes as base64 instead of encoding their hexadecimal display text.
+PHP-E26-0437|debugging|Intermediate|query-string-wire-separators-not-html-entities|Build a raw RFC 3986 query string without HTML-escaping separators or decoding data delimiters.
+PHP-E26-0438|debugging|Intermediate|https-server-state-not-port-or-client-header|Determine transport security from the deployment’s authoritative server state rather than a port convention or client header.
+PHP-E26-0439|debugging|Intermediate|pdo-fetch-group-versus-unique-row-loss|Group every fetched row under a nonunique first-column value without overwriting earlier rows.
+PHP-E26-0440|debugging|Intermediate|recursive-directory-follow-symlink-cycle-policy|Prevent recursive descent through directory symlinks instead of changing entry names or traversal order.
+PHP-E26-0441|debugging|Advanced|idempotency-replay-request-fingerprint-binding|Reject reuse of an idempotency key for a different operation payload before replaying its saved response.
+PHP-E26-0442|debugging|Advanced|redis-lease-release-atomic-owner-comparison|Release only the Redis lease still owned by the finishing worker, using an atomic ownership check.
+PHP-E26-0443|debugging|Advanced|reflection-dnf-intersection-conjunction|Preserve intersection conjunction while recursively evaluating a reflected disjunctive-normal-form type.
+PHP-E26-0444|debugging|Advanced|binary-frame-width-endianness-byte-length|Construct a binary frame with the required integer width, byte order and byte-count unit.
+PHP-E26-0445|debugging|Advanced|composer-transitive-repository-root-configuration|Diagnose why a repository declared only by a dependency is unavailable to the consuming application’s dependency resolver.
+PHP-E26-0446|code-review|Foundation|define-success-result-not-constant-value|Review code that mistakes define’s success result for the value assigned to the constant.
+PHP-E26-0447|code-review|Foundation|nullable-return-fallthrough-requires-explicit-null|Review the assumption that a nullable return declaration permits falling off the end without returning.
+PHP-E26-0448|code-review|Foundation|strtolower-ascii-only-not-unicode-case-fold|Review whether strtolower alone normalizes non-ASCII letter case in UTF-8 text.
+PHP-E26-0449|code-review|Foundation|numeric-string-addition-not-identifier-concatenation|Review arithmetic addition used where textual identifier concatenation is required.
+PHP-E26-0450|code-review|Foundation|constructor-parameter-promotion-removal-loses-property|Review removal of a promotion visibility modifier as a change to object storage, not just constructor syntax.
+PHP-E26-0451|code-review|Intermediate|array-map-failed-assignment-versus-partial-inplace-refactor|Review a mapping refactor’s state after a callback rejects an element partway through processing.
+PHP-E26-0452|code-review|Intermediate|regex-callback-result-not-replacement-template|Review a regex replacement refactor that treats a callback result as a backreference template.
+PHP-E26-0453|code-review|Intermediate|http-204-cannot-carry-required-json-content|Review an HTTP success status against a contract requiring a response body.
+PHP-E26-0454|code-review|Intermediate|session-object-class-loading-before-deserialization|Review class-loading order when a session restores a serialized object.
+PHP-E26-0455|code-review|Intermediate|setcookie-preencoded-value-double-encoding|Review redundant URI encoding before setcookie under PHP’s ordinary cookie decoding behavior.
+PHP-E26-0456|code-review|Intermediate|integer-overflow-float-out-of-range-return|Review integer addition beyond PHP_INT_MAX against an int return contract in weak mode.
+PHP-E26-0457|code-review|Intermediate|array-all-short-circuit-versus-eager-filter|Review replacing a short-circuit all predicate with eager filtering when the predicate can throw.
+PHP-E26-0458|code-review|Intermediate|psr7-set-cookie-separate-header-emission|Emit multiple PSR-7 Set-Cookie values without comma-folding or overwriting earlier header lines.
+PHP-E26-0459|code-review|Intermediate|pdo-execute-array-replaces-explicit-binding-type|Review the parameter type used when execute receives a new value array after an explicit integer binding.
+PHP-E26-0460|code-review|Intermediate|preg-match-all-result-orientation-refactor|Review changing preg_match_all’s result orientation when downstream code uses fixed nested indexes.
+PHP-E26-0461|code-review|Advanced|curl-custom-method-token-retains-post-behavior|Review a cURL handle’s custom method token separately from its configured body and transfer behavior.
+PHP-E26-0462|code-review|Advanced|pdo-emulated-prepare-server-error-boundary|Review a database error boundary after switching from native to emulated PDO preparation.
+PHP-E26-0463|code-review|Advanced|multipleiterator-unequal-length-missing-member-policy|Review lockstep iteration when one attached iterator ends before the others.
+PHP-E26-0464|code-review|Advanced|no-rewind-iterator-break-does-not-advance|Review resumable iteration without confusing suppressed rewind with automatic consumption after break.
+PHP-E26-0465|code-review|Advanced|destructor-failure-after-factory-catch-scope|Review which error boundary can catch a destructor exception after an object has left its factory.
+PHP-E26-0466|implementation|Foundation|logical-boolean-toggle-not-bitwise-complement|Toggle a boolean value using logical negation rather than bitwise or presence operations.
+PHP-E26-0467|implementation|Foundation|ascii-string-fixed-byte-chunks|Split an ASCII string into fixed-size chunks while retaining a final shorter chunk.
+PHP-E26-0468|implementation|Foundation|array-fill-start-index-entry-count|Create a numeric-keyed map with a chosen starting key and a fixed number of identical initial values.
+PHP-E26-0469|implementation|Foundation|magic-method-label-declaring-class-and-method|Select the magic constant that names a method together with its declaring class.

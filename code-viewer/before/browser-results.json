@@ -1,0 +1,9 @@
+{
+  "browser": "Chrome/156.0.8078.80",
+  "phase": "before",
+  "siteDirectory": ".",
+  "checks": [
+    "matched desktop and mobile screenshots for PHP-PILOT-003, 013 and 020; exact source text retained"
+  ],
+  "errors": []
+}

@@ -1,0 +1,100 @@
+0101 Assignment binds before and; the && expression is grouped differently. Both outputs are booleans, so type formatting does not identify the key.
+0102 Unary minus and exponentiation use the documented precedence; parentheses change the base. No floating-point approximation is involved.
+0103 switch loose comparison and match identity are contrasted on the same string input; all branch names are defined.
+0104 By-value foreach changes only its local scalar variable; the final loop variable remains defined. No lingering reference is present.
+0105 Explicit destructuring keys make selection independent of source position. All requested keys exist.
+0106 Array default values are per-call values rather than a persistent mutable default; repeated calls reveal the distinction.
+0107 Named arguments bind to declared parameter positions before func_get_args reports the arguments. The call supplies both parameters.
+0108 A constant is available inside a function without a variable import; local variables remain separate. The example contains no undefined variable access.
+0109 A typed reference parameter can coerce the referenced variable under the stated weak call context. Type and value are both observed.
+0110 Returning by reference and receiving by reference are separate requirements. The example explicitly distinguishes the alias from a copied value.
+0111 Static variables belong to each closure instance; an alias invokes the same instance. Separate factory calls are shown.
+0112 Recursive replacement retains indexed keys and replaces with explicit null; it is not recursive concatenation. Iteration order is fixed.
+0113 array_intersect compares string representations and retains first-array keys. The choices separate membership from strict identity.
+0114 array_map with null and multiple arrays zips positional values and pads absent entries. Unequal lengths expose the padding rule.
+0115 array_splice offset is positional and renumbers numeric keys. Removed values and remaining values are both checked.
+0116 parse_str normalizes incoming field names, causing the documented name collision. This tests parsing behavior without a request dependency.
+0117 EXTR_SKIP preserves an existing local variable and reports the number actually imported. No security recommendation to extract untrusted data is implied.
+0118 RFC3986 query encoding, boolean conversion and null omission are all specified. The example does not rely on platform INI separator settings.
+0119 One reference set must satisfy both typed-property constraints; incompatible binding fails. get_debug_type avoids ambiguous JSON float presentation.
+0120 Repeated evaluation of one anonymous-class expression shares class identity and static state while creating distinct instances.
+0121 Closure binding selects the private property associated with its bound scope. Both parent and child private slots are explicitly initialized.
+0122 Indirect mutation of an overloaded array differs from mutation through a returned object handle; the diagnostic handler makes the notice observable and deterministic.
+0123 parent:: forwards the called class while an explicit class call resets it. The displayed call chain determines the late-static result.
+0124 Lazy ghost raw initialization of one property does not initialize the object; reading the other property does. PHP 8.4 feature prerequisite is explicit.
+0125 A reference exported from the allowed scope can mutate the property even though direct external writes are restricted. The example is marked advanced.
+0126 count requires a countable value; normalize the nullable array at the boundary. Each distractor is tested against the displayed inputs.
+0127 Byte offsets are zero-based and the ASCII premise excludes multibyte ambiguity. The repaired index remains in bounds for all stated nonempty inputs.
+0128 Gapped numeric keys are not consecutive positions; foreach visits actual values. The fixtures include an absent zero key.
+0129 A literal percent sign in sprintf requires %%. The four candidate format strings are executed, not inferred from string matching.
+0130 The string is validated before an explicit cast crosses a strict int boundary. The answer does not claim strict_types parses numeric input.
+0131 Password hashes use salts; verification must use password_verify rather than compare a new hash. Fixtures are local and no real credentials are used.
+0132 Strict base64 decoding rejects malformed input instead of silently discarding bytes. Binary outputs are compared through a deterministic encoding.
+0133 Date parsing can normalize an impossible date; a canonical round trip detects that normalization under the specified format and timezone.
+0134 Header input must reject either CR or LF, including isolated occurrences. The input matrix distinguishes pair-only matching from individual-byte rejection.
+0135 Upload errors are mutually exclusive result codes, not bit flags. UPLOAD_ERR_OK is zero and every supplied alternative is exercised.
+0136 A JSON request body is not a parsed form field array; the supplied local body is decoded explicitly. No network or superglobal population is simulated as real HTTP.
+0137 A dynamic constant name string needs the intended fully qualified name. Namespace syntax does not rewrite arbitrary string contents.
+0138 Unsupported names must return from one autoloader without unregistering it or loading the wrong class. Multi-file trace proves cooperation; standalone option indentation corrected.
+0139 require_once returns true on subsequent inclusion rather than replaying a configuration array return value. The repeated-load requirement is explicit.
+0140 JSON_BIGINT_AS_STRING preserves an oversized JSON integer before precision is lost. Casting after float decoding cannot restore the exact digits.
+0141 Reflection attribute argument evaluation can construct fresh objects on each retrieval. Caching one retrieval preserves identity without changing the declared attribute.
+0142 A durable enum identity includes enum class and case name; backing values can collide across enums, while process object IDs are not durable.
+0143 ROLLBACK TO and RELEASE preserve the outer transaction. Full rollback discards outer work; releasing without rollback retains the failed inner insert. Option formatting corrected.
+0144 Output buffers are process-stack state, not Fiber-local state. The explicit suspension schedule makes mixed output deterministic.
+0145 A final alias can coexist with an overridable original trait method. An initially invalid modifier combination was replaced by a valid but incorrect protected alias; expected visibility/finality failures are checked.
+0146 Function names and variable names have different case rules; all variable references are intentional and defined.
+0147 Literal text after a closing PHP tag is output during inclusion. The separate helper file is displayed rather than concatenated into main.php.
+0148 Replacing a reference-capturing closure with an arrow function changes the outer scalar update. The review evaluates a concrete observable counter.
+0149 Path-segment encoding differs from application/x-www-form-urlencoded plus encoding. The example specifies the URL component being constructed.
+0150 htmlspecialchars escapes HTML syntax while preserving UTF-8 non-ASCII text. Encoding and output context are explicit.
+0151 HttpOnly prevents script reads of the cookie but not authenticated requests. Official cookie documentation supports the limited guarantee; the answer does not claim complete XSS prevention.
+0152 ParseError in an included broken file is catchable by a valid caller. The broken file is intentionally lint-failing and tracked as such, not silently marked syntactically valid.
+0153 The return expression selects an object before finally; mutation in finally changes that same object. No second return masks the first.
+0154 The factory contract now explicitly requires the exact called class for current and future subclasses, stronger than merely satisfying the static return type.
+0155 Required-after-optional parameters are reordered while named-call compatibility is retained. The original deprecation and missing-argument failure are verified, and the repaired signature has one required parameter.
+0156 JSON_HEX_TAG protects an HTML script-text boundary around an already JSON-encoded string. This is not presented as a universal JavaScript or HTML escaping recipe.
+0157 Validation preserves the original email or rejects it; sanitization can silently rewrite user intent. The stated policy makes that distinction decisive.
+0158 Browser-provided upload MIME metadata is untrusted. PHP manual explicitly says it is not checked by PHP; the question does not execute or upload a real file.
+0159 Unserialization can restore state without the constructor invariant. The payload is fixed, local and harmless; no arbitrary user payload is executed.
+0160 Strong object identity storage and weak storage have different lifetime contracts. SplObjectStorage retains keys; WeakMap does not satisfy required retention.
+0161 A child reusing a trait receives separate static property storage in modern PHP. Version prerequisites exclude older shared-state behavior.
+0162 Constructors may have different signatures in subclasses; new static with fixed arguments can fail. The strict scalar argument failure is observed.
+0163 SensitiveParameter changes trace argument representation, not text already copied into an exception message. zend.exception_ignore_args=0 is explicitly set for this fixture.
+0164 Disabled assertions do not evaluate their expression; validation side effects cannot depend on assert. zend.assertions=-1 is part of the question runtime assumptions.
+0165 A parent private helper is resolved in the parent scope and is not overridden by a child same-named method. The signature difference is therefore legal.
+0166 Literal dollar text and interpolated values require distinct quoting choices. All four candidates are executed on the same input.
+0167 Page count requires ceiling division under the stated positive page-size contract. Boundary and partial-page fixtures distinguish the alternatives.
+0168 array_shift removes the first element and reindexes integer keys; moving the internal pointer does not remove anything.
+0169 An allowed field list must be converted into keys before intersecting request keys. The fixture includes allowed values that should not themselves become field names.
+0170 A nullable typed property still needs initialization for direct reading. Explicit null default meets the contract; strict integer assignment remains enforced.
+0171 Argument unpacking supplies variadic elements rather than one array argument. Count and total together distinguish argument shape from arithmetic alone.
+0172 Both allowed HTTP methods must be compared with the request method. A bare nonempty method string in an OR expression is always truthy.
+0173 Parsed scheme/host allowlisting rejects suffix and userinfo tricks under an explicit syntactic URL policy. No DNS-based SSRF prevention guarantee is claimed.
+0174 CSV writer and reader escape conventions must agree. Quote, slash and backslash-containing fields distinguish all candidates; all round trips execute locally.
+0175 Validated fixed-decimal text can be converted to cents without floating point. The large fixture stays within 64-bit integer range while exposing lost float precision.
+0176 Timestamp constructors ignore the supplied timezone; setTimezone changes display after construction. Renamed a draft helper that collided case-insensitively with built-in localtime.
+0177 PDO parameter markers represent data values, not ORDER BY identifiers. The allowlisted identifier design uses application-owned SQL text and a deterministic tie-breaker.
+0178 A bounded take generator must stop immediately after the nth yield resumes, before requesting n+1. A source-side fetch counter distinguishes overconsumption.
+0179 Reflection construction screening requires both instantiability and zero required constructor parameters. Private and abstract classes are included as counterexamples.
+0180 Expected-version equality belongs in the same conditional update as the write. Sequential stale snapshots reproduce lost-update behavior in in-memory SQLite.
+0181 Two absent CSRF strings can compare equal; the regression explicitly tests presence in addition to constant-time equality.
+0182 The recursive leaf-count test contains deeper unequal branching; flat, empty and empty-child cases intentionally do not expose the missing recursive call.
+0183 An ampersand inside a query value becomes syntax unless encoded. Safe letters, digits and hyphens provide realistic passing controls.
+0184 Append mode ignores seek for writes. A nonempty fixture distinguishes overwrite behavior; empty fixtures and a no-op write do not.
+0185 Equal wall-clock fields with different UTC offsets represent different instants. Whole-second precision is explicitly scoped to avoid microsecond ambiguity.
+0186 Revision 2 replaces a pilot-overlapping Throwable test. Optional named capture defaults to empty string inside a successful match; PREG_UNMATCHED_AS_NULL makes the explicit fallback work. Four original/repaired probes isolate the absent capture.
+0187 Default array_unique string comparison conflates integer 1 with string 1. A strict membership repair preserves both, while leading-zero strings remain a passing control.
+0188 The display-label contract deliberately accepts both separators on POSIX. It is not a path-security algorithm; backslash normalization is checked with a local string only.
+0189 rtrim removes a trailing character set, not exactly one CRLF suffix. A payload-ending LF is the unique failing case and repaired byte outputs are checked.
+0190 A spy captures the actual dependency argument; correct return value, count and type do not prove the right JSON was sent.
+0191 A set hook normalizes stored state without changing the assignment expression’s result. The padded-input test distinguishes reading after assignment from returning the assignment.
+0192 Replaced a redundant readonly-clone draft with exception-chain retry classification. The outer permanent classification overrides a transient cause by explicit policy; cause retention is distinguished from retry authority.
+0193 Revision 2 replaces the pilot-overlapping clock design. A neutral enum outcome is mapped independently to HTTP 422 and CLI exit 2; the domain API explicitly excludes transport concepts. Pure mapping witness executes without HTTP output or process exit.
+0194 Composer files autoload makes standalone functions available eagerly; PSR-4 and classmap are class mechanisms, and dependency autoload-dev is root-only.
+0195 Body-only provenance requires $_POST under the stated form content type. Merging or fallback admits query-only values even if body precedence is configured.
+0196 A cache miss can become stale while waiting for a mutex; rechecking under the lock coalesces work. Lock and visibility guarantees are explicit premises, not inferred from an external cache implementation.
+0197 Early configuration validation and two simultaneous thresholds require a validated per-instance dependency. Static and constant alternatives fail the stated lifecycle constraints.
+0198 Stale lease authority is rejected at the protected storage using a monotonic token; a local check has a pause-to-write race. Chubby paper is a primary source, but the question relies on its explicit simplified storage contract.
+0199 Deduplication alone cannot order noncommutative transitions. Durable gap handling is necessary so a prematurely delivered version is not permanently discarded.
+0200 PostgreSQL 18 SET LOCAL ends with the job transaction. The incorrect session SET alternative now explicitly occurs before BEGIN, so rollback cannot accidentally make that option correct. Initial context and discard-on-rollback-failure are explicit.

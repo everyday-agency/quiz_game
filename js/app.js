@@ -1,20 +1,26 @@
-import { QUESTION_BANK, TRACKS, TRACK_TOPICS, DIFFICULTIES } from './questions.mjs';
+import { QUESTION_BANK, TRACKS, TRACK_TOPICS, DIFFICULTIES, COLLECTION_ID } from './questions.mjs';
+import { STATS_KEY as statsKey, HISTORICAL_KEYS, readProgress } from './progress.mjs';
 import { buildLearningNotes } from './learning-notes.mjs';
 import { gradeAnswer, gradeSession } from './exam.mjs';
+import { createCodeLesson as renderCodeLesson, createCodeChoice } from './code-viewer.mjs';
+
+// Old collection bookmarks now open the single released collection.
+const pageUrl = new URL(location.href);
+if (['php-pilot-v1', 'php-engineer-review-v1'].includes(pageUrl.searchParams.get('collection'))) {
+  pageUrl.searchParams.delete('collection');
+  history.replaceState(null, '', pageUrl);
+}
+document.documentElement.dataset.collection = COLLECTION_ID;
+
+const createCodeLesson = (lesson, label) => renderCodeLesson(lesson, label, { reading: true });
+function appendAnswerText(container, text) {
+  container.append(text.includes('\n') ? createCodeChoice(text) : document.createTextNode(text));
+}
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 const domainKey = (track, topic) => `${track}::${topic}`;
 const trackSlug = (track) => track.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-
-const TRACK_META = {
-  Laravel: { mark: 'L', detail: 'Application architecture' },
-  PHP: { mark: 'PHP', detail: 'Language & backend runtime' },
-  TypeScript: { mark: 'TS', detail: 'Type-system design' },
-  React: { mark: 'R', detail: 'Components & application state' },
-  MySQL: { mark: 'DB', detail: 'Data & query reasoning' },
-  'Google Analytics': { mark: 'GA', detail: 'Measurement & insight' },
-};
 
 const topicControl = $('#topicControl');
 const availableCount = $('#availableCount');
@@ -27,9 +33,8 @@ const state = {
   view: 'home',
   size: 20,
   mode: 'learn',
-  tracks: new Set(TRACKS),
   domains: new Set(QUESTION_BANK.map((question) => domainKey(question.track, question.topic))),
-  difficulties: new Set(DIFFICULTIES),
+  difficulties: new Set(['Foundation', 'Intermediate']),
   session: [],
   current: 0,
   selectedOption: null,
@@ -42,23 +47,13 @@ const state = {
 };
 
 function readStats() {
-  try {
-    const stored = localStorage.getItem('underTheHoodStats') || localStorage.getItem('laravelQuizStats');
-    const parsed = JSON.parse(stored);
-    return {
-      answered: Number(parsed?.answered) || 0,
-      correct: Number(parsed?.correct) || 0,
-      sessions: Number(parsed?.sessions) || 0,
-      best: Number(parsed?.best) || 0,
-    };
-  } catch {
-    return { answered: 0, correct: 0, sessions: 0, best: 0 };
-  }
+  try { return readProgress(localStorage); }
+  catch { return readProgress(null); }
 }
 
 function saveStats() {
   try {
-    localStorage.setItem('underTheHoodStats', JSON.stringify(state.stats));
+    localStorage.setItem(statsKey, JSON.stringify(state.stats));
   } catch {
     // The quiz remains fully usable when browser storage is unavailable.
   }
@@ -66,7 +61,7 @@ function saveStats() {
 }
 
 function updateLifetime() {
-  lifetimeCount.textContent = `${state.stats.answered.toLocaleString()} answered`;
+  lifetimeCount.textContent = `${state.stats.answered.toLocaleString()} PHP answers`;
 }
 
 function shuffle(items) {
@@ -87,47 +82,6 @@ function materialize(question) {
       id: question.optionIds[index],
     }))),
   };
-}
-
-function createCodeLesson(lesson, labelText) {
-  const section = document.createElement('section');
-  section.className = 'code-lesson';
-
-  const header = document.createElement('div');
-  header.className = 'code-lesson-header';
-  const label = document.createElement('span');
-  label.textContent = labelText;
-  const language = document.createElement('span');
-  language.className = 'code-language';
-  language.textContent = lesson.language;
-  header.append(label, language);
-
-  const title = document.createElement('strong');
-  title.textContent = lesson.title;
-  section.append(header, title);
-  if (lesson.context) {
-    const context = document.createElement('p');
-    context.textContent = lesson.context;
-    section.append(context);
-  }
-  for (const file of lesson.files || [{ snippet: lesson.snippet }]) {
-    if (file.name) {
-      const filename = document.createElement('h4');
-      filename.textContent = `${file.name}${file.kind === 'php-fragment' ? ' · contextual fragment' : ''}`;
-      section.append(filename);
-    }
-    if (file.context) {
-      const context = document.createElement('p');
-      context.textContent = file.context;
-      section.append(context);
-    }
-    const pre = document.createElement('pre');
-    const code = document.createElement('code');
-    code.textContent = file.snippet;
-    pre.append(code);
-    section.append(pre);
-  }
-  return section;
 }
 
 function createLearningNotes(question, orderedOptions = question.options) {
@@ -160,7 +114,7 @@ function createLearningNotes(question, orderedOptions = question.options) {
     number.textContent = String(alternative.number);
     const copy = document.createElement('div');
     const option = document.createElement('strong');
-    option.textContent = alternative.option;
+    appendAnswerText(option, alternative.option);
     const reason = document.createElement('p');
     reason.textContent = alternative.reason;
     const example = document.createElement('p');
@@ -181,51 +135,15 @@ function createLearningNotes(question, orderedOptions = question.options) {
   return wrapper;
 }
 
-function setupTracks() {
-  const control = $('#trackControl');
-  control.replaceChildren();
-  TRACKS.forEach((track) => {
-    const label = document.createElement('label');
-    label.className = 'track-check';
-    label.dataset.track = trackSlug(track);
-
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.value = track;
-    input.checked = state.tracks.has(track);
-
-    const card = document.createElement('span');
-    card.className = 'track-choice';
-    const mark = document.createElement('span');
-    mark.className = 'track-mark';
-    mark.textContent = TRACK_META[track].mark;
-    const copy = document.createElement('span');
-    const name = document.createElement('strong');
-    name.textContent = track;
-    const detail = document.createElement('small');
-    detail.textContent = TRACK_META[track].detail;
-    copy.append(name, detail);
-    card.append(mark, copy);
-
-    input.addEventListener('change', () => {
-      input.checked ? state.tracks.add(track) : state.tracks.delete(track);
-      setupTopics();
-      updateAvailable();
-    });
-    label.append(input, card);
-    control.append(label);
-  });
-}
-
 function visibleDomains() {
-  return TRACKS.filter((track) => state.tracks.has(track)).flatMap((track) =>
+  return TRACKS.flatMap((track) =>
     TRACK_TOPICS[track].map((topic) => ({ track, topic, key: domainKey(track, topic) }))
   );
 }
 
 function setupTopics() {
   topicControl.replaceChildren();
-  TRACKS.filter((track) => state.tracks.has(track)).forEach((track) => {
+  TRACKS.forEach((track) => {
     const heading = document.createElement('div');
     heading.className = 'topic-section-label';
     heading.dataset.track = trackSlug(track);
@@ -252,18 +170,11 @@ function setupTopics() {
     });
   });
 
-  if (!state.tracks.size) {
-    const empty = document.createElement('p');
-    empty.className = 'topic-empty';
-    empty.textContent = 'Choose a learning track to reveal its domains.';
-    topicControl.append(empty);
-  }
   updateTopicToggle();
 }
 
 function setupBankTopics() {
   const select = $('#bankTopic');
-  const selectedTrack = $('#bankTrack').value;
   const previous = select.value;
   select.replaceChildren();
 
@@ -272,25 +183,21 @@ function setupBankTopics() {
   all.textContent = 'All domains';
   select.append(all);
 
-  const tracks = selectedTrack === 'all' ? TRACKS : [selectedTrack];
-  tracks.forEach((track) => {
-    const parent = selectedTrack === 'all' ? document.createElement('optgroup') : select;
-    if (selectedTrack === 'all') parent.label = track;
+  TRACKS.forEach((track) => {
+    const parent = select;
     TRACK_TOPICS[track].forEach((topic) => {
       const option = document.createElement('option');
       option.value = domainKey(track, topic);
       option.textContent = topic;
       parent.append(option);
     });
-    if (selectedTrack === 'all') select.append(parent);
   });
 
   select.value = [...select.options].some((option) => option.value === previous) ? previous : 'all';
 }
 
 function matchesSetup(question) {
-  return state.tracks.has(question.track)
-    && state.domains.has(domainKey(question.track, question.topic))
+  return state.domains.has(domainKey(question.track, question.topic))
     && state.difficulties.has(question.difficulty);
 }
 
@@ -319,7 +226,7 @@ function startSession(sourceQuestions = null) {
   const pool = sourceQuestions || QUESTION_BANK.filter(matchesSetup);
 
   if (!pool.length) {
-    showToast('Choose at least one track, domain, and difficulty.');
+    showToast('Choose at least one domain and difficulty.');
     return;
   }
 
@@ -350,6 +257,8 @@ function renderQuestion() {
   $('#questionPrompt').textContent = question.prompt;
   const context = $('#questionContext');
   context.textContent = [question.versions?.label, question.assumptions].filter(Boolean).join(' ');
+  $('#questionMeta').textContent = `${question.id} · ${question.format} · Prerequisites: ${question.prerequisites.join(', ')}.`;
+  $('#questionPrompt').dataset.questionId = question.id;
   context.hidden = !context.textContent;
   const questionCode = $('#questionCode');
   questionCode.replaceChildren();
@@ -387,7 +296,7 @@ function renderQuestion() {
     key.textContent = String(index + 1);
     const text = document.createElement('span');
     text.className = 'option-text';
-    text.textContent = option.text;
+    appendAnswerText(text, option.text);
     button.append(key, text);
     button.addEventListener('click', () => selectOption(index));
     list.append(button);
@@ -567,11 +476,14 @@ function renderResults(correct, percent) {
     summary.append(topic, prompt);
     const explanation = document.createElement('p');
     explanation.className = 'review-answer';
-    explanation.textContent = `Correct: ${answer.correctText}. ${answer.question.explanation}`;
+    explanation.append('Correct: ');
+    appendAnswerText(explanation, answer.correctText);
+    explanation.append(`. ${answer.question.explanation}`);
     details.append(summary);
     if (answer.question.code) details.append(createCodeLesson(answer.question.code, 'Question code'));
     const selected = document.createElement('p');
-    selected.textContent = `Your answer: ${answer.selectedText}`;
+    selected.append('Your answer: ');
+    appendAnswerText(selected, answer.selectedText);
     details.append(selected, explanation, createLearningNotes(answer.question, answer.question.displayOptions));
     missedList.append(details);
   });
@@ -587,13 +499,11 @@ let bankRenderLimit = 100;
 
 function renderBank() {
   const term = $('#bankSearch').value.trim().toLowerCase();
-  const track = $('#bankTrack').value;
   const domain = $('#bankTopic').value;
   const difficulty = $('#bankDifficulty').value;
   const matches = QUESTION_BANK.filter((question) => {
-    const searchable = `${question.id} ${question.track} ${question.topic} ${question.prompt} ${question.code?.title || ''} ${question.code?.snippet || ''} ${(question.code?.files || []).map(file => file.snippet).join(' ')} ${question.explanation} ${question.options.join(' ')} ${(question.coreOptions || []).join(' ')}`.toLowerCase();
+    const searchable = `${question.id} ${question.track} ${question.topic} ${question.prompt} ${question.objective} ${question.code?.title || ''} ${question.code?.snippet || ''} ${(question.code?.files || []).map(file => file.snippet).join(' ')} ${question.explanation} ${question.options.join(' ')} ${(question.coreOptions || []).join(' ')}`.toLowerCase();
     return (!term || searchable.includes(term))
-      && (track === 'all' || question.track === track)
       && (domain === 'all' || domainKey(question.track, question.topic) === domain)
       && (difficulty === 'all' || question.difficulty === difficulty);
   });
@@ -639,7 +549,8 @@ function renderBank() {
     details.addEventListener('toggle', () => {
       if (!details.open || answer.dataset.enriched === 'true') return;
       const correct = document.createElement('strong');
-      correct.textContent = `Strongest answer: ${(question.coreOptions || question.options)[question.answer]}`;
+      correct.append('Strongest answer: ');
+      appendAnswerText(correct, (question.coreOptions || question.options)[question.answer]);
       const explanation = document.createElement('p');
       explanation.textContent = question.explanation;
       if (question.code) answer.append(createCodeLesson(question.code, 'Read this code'));
@@ -649,6 +560,10 @@ function renderBank() {
         answer.append(context);
       }
       answer.append(correct, explanation);
+      const metadata = document.createElement('p');
+      metadata.className = 'question-detail';
+      metadata.textContent = `${question.format} · ${question.objective} Prerequisites: ${question.prerequisites.join(', ')}. ${question.difficultyReason}`;
+      answer.append(metadata);
       answer.append(createLearningNotes(question));
       answer.dataset.enriched = 'true';
     });
@@ -757,11 +672,6 @@ $('#brandButton').addEventListener('click', () => {
 $('#bankSearch').addEventListener('input', resetBankAndRender);
 $('#bankDifficulty').addEventListener('change', resetBankAndRender);
 $('#bankTopic').addEventListener('change', resetBankAndRender);
-$('#bankTrack').addEventListener('change', () => {
-  setupBankTopics();
-  resetBankAndRender();
-});
-
 document.addEventListener('keydown', (event) => {
   if (state.view !== 'quiz' || ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
   if (/^[1-4]$/.test(event.key) && !state.locked) {
@@ -774,7 +684,10 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-setupTracks();
+try {
+  $('#historicalProgress').hidden = !HISTORICAL_KEYS.some(key => localStorage.getItem(key) !== null);
+} catch { /* Storage is optional. */ }
+
 setupTopics();
 setupBankTopics();
 updateAvailable();

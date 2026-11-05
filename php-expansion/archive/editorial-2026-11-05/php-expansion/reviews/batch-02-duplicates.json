@@ -1,0 +1,383 @@
+{
+  "sourceHash": "b43113612babe17768203a2663b8d2096060e55641143c0032bf911a78c63792",
+  "method": "Lexical/source candidate search against legacy300, pilot20, accepted batch1 and within batch2; author reviewed each flagged mechanism and separately rejected unflagged semantic repetition in the original 0192 draft.",
+  "records": [
+    {
+      "a": "PHP-E26-0177",
+      "b": "PHP-E26-0035",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "SQL identifier selection differs from delayed bindParam reference lifetime; shared PDO setup is incidental."
+    },
+    {
+      "a": "PHP-E26-0178",
+      "b": "PHP-E26-0074",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Bounded traversal must avoid pulling an extra item; recursive delegation must flatten children and continue siblings."
+    },
+    {
+      "a": "PHP-E26-0176",
+      "b": "PHP-E26-0020",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Timestamp construction ignores the timezone argument; the earlier question tests immutability and a date boundary after setTimezone."
+    },
+    {
+      "a": "PHP-E26-0184",
+      "b": "PHP-E26-0057",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Append-mode writes ignore the seek position; the earlier failure truncates before acquiring a cooperative lock."
+    },
+    {
+      "a": "PHP-E26-0113",
+      "b": "PHP-E26-0002",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "array_intersect compares value string representations; numeric-string array-key conversion is a separate insertion rule."
+    },
+    {
+      "a": "PHP-E26-0106",
+      "b": "PHP-E26-0101",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Per-call default arrays and assignment/operator precedence share only generic output-prediction wording."
+    },
+    {
+      "a": "PHP-E26-0118",
+      "b": "PHP-E26-0112",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Query serialization omits null and encodes booleans; recursive array replacement preserves an explicit null."
+    },
+    {
+      "a": "PHP-E26-0114",
+      "b": "PHP-E26-0112",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Null-callback array_map zips and pads; recursive replacement overwrites indexed entries without zipping."
+    },
+    {
+      "a": "PHP-E26-0118",
+      "b": "PHP-PILOT-004",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "HTTP encoding of null values differs from omission versus explicit null at a function call."
+    },
+    {
+      "a": "PHP-E26-0155",
+      "b": "PHP-E26-0039",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Parameter declaration order and named API compatibility differ from positional-after-named argument unpacking."
+    },
+    {
+      "a": "PHP-E26-0172",
+      "b": "PHP-E26-0166",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "A truthy bare method literal in a predicate differs from quoting a literal dollar label; expression wording is incidental."
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0104",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Reference-return reception needs =&; by-value foreach uses an ordinary local scalar without a reference-returning function."
+    },
+    {
+      "a": "PHP-E26-0169",
+      "b": "PHP-E26-0066",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Key allowlisting and first-delimiter string splitting solve unrelated input boundaries."
+    },
+    {
+      "a": "PHP-E26-0122",
+      "b": "PHP-E26-0019",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Magic getter indirect modification differs from an explicitly by-reference array_walk callback and its return value."
+    },
+    {
+      "a": "PHP-E26-0107",
+      "b": "PHP-E26-0016",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "func_get_args reports bound declared-parameter order; named variadic extras retain names in the variadic array."
+    },
+    {
+      "a": "PHP-E26-0112",
+      "b": "PHP-E26-0106",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Recursive replacement is an array transformation; default arrays test independent function calls."
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PQ-197",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Reference-return binding aliases scalar storage; shallow object cloning concerns nested object handles and copied scalars."
+    },
+    {
+      "a": "PHP-E26-0121",
+      "b": "PHP-E26-0006",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Bound closure class scope selects a private property slot; variable variables select a local variable by its name string."
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Explicit scalar reference assignment differs from object-handle assignment, which aliases an object without =&."
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0019",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Reference-return binding and a callback receiving an element by reference use different call boundaries and return rules."
+    },
+    {
+      "a": "PHP-E26-0120",
+      "b": "PHP-E26-0108",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Anonymous-class expression identity controls static storage; constant visibility across function scope is unrelated."
+    },
+    {
+      "a": "PHP-E26-0122",
+      "b": "PHP-E26-0110",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Overloaded by-value array access cannot be indirectly modified; reference-returning functions explicitly offer aliasable storage."
+    },
+    {
+      "a": "PHP-E26-0124",
+      "b": "PHP-E26-0024",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "A lazy ghost initializes properties on access; a generator suspends execution and delays finally until completion or destruction."
+    },
+    {
+      "a": "PHP-E26-0166",
+      "b": "PHP-E26-0066",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Quoting and interpolation differ from limiting delimiter splitting, despite a common replacement-expression stem."
+    },
+    {
+      "a": "PHP-E26-0106",
+      "b": "PHP-E26-0025",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Default arrays have no embedded references; copied arrays in 0025 intentionally share one referenced element."
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PHP-E26-0025",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Receiving a reference return differs from copying arrays that already contain a reference set and unsetting an external alias."
+    },
+    {
+      "a": "PHP-E26-0101",
+      "b": "PHP-E26-0018",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Boolean operator precedence and last-reference destructor timing have unrelated mechanisms."
+    },
+    {
+      "a": "PHP-E26-0103",
+      "b": "PHP-E26-0002",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "switch versus match controls comparison at selection time; array-key normalization happens at insertion time."
+    },
+    {
+      "a": "PHP-E26-0104",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Assigning a by-value scalar loop variable does not mutate array entries; assigning object handles preserves shared object identity."
+    },
+    {
+      "a": "PHP-E26-0109",
+      "b": "PQ-002",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "By-reference coercion changes the caller’s scalar type; the old exact-type call has no coercion even when strictness changes."
+    },
+    {
+      "a": "PHP-E26-0163",
+      "b": "PHP-E26-0151",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "SensitiveParameter wraps trace arguments while HttpOnly restricts script access to cookies; neither question reuses the other’s technical mechanism."
+    },
+    {
+      "a": "PHP-E26-0104",
+      "b": "PHP-PILOT-002",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "The new single by-value loop has no lingering reference; the pilot requires unsetting a prior by-reference loop binding."
+    },
+    {
+      "a": "PHP-E26-0110",
+      "b": "PQ-014",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Reference-return reception differs from lexical capture by an arrow or anonymous closure."
+    },
+    {
+      "a": "PHP-E26-0112",
+      "b": "PHP-E26-0101",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Recursive array replacement and boolean assignment precedence share only common output wording."
+    },
+    {
+      "a": "PHP-E26-0117",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "EXTR_SKIP controls local variable import and count; object assignment shares a handle rather than importing symbols."
+    },
+    {
+      "a": "PHP-E26-0121",
+      "b": "PHP-E26-0018",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Private scope resolution through bound closures differs from destruction at the final strong reference."
+    },
+    {
+      "a": "PHP-E26-0123",
+      "b": "PHP-PILOT-014",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Late-static forwarding tracks the called class through calls; trait precedence selects which method body exists."
+    },
+    {
+      "a": "PHP-E26-0125",
+      "b": "PHP-E26-0022",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Asymmetric property writes plus an exported reference differ from creating a private trait method alias."
+    },
+    {
+      "a": "PHP-E26-0125",
+      "b": "PHP-E26-0110",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "The advanced question adds asymmetric visibility and an authorized reference escape; 0110 only distinguishes value reception from reference reception."
+    },
+    {
+      "a": "PHP-E26-0168",
+      "b": "PHP-E26-0127",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Queue removal changes array contents; a final-byte offset reads a string without mutation."
+    },
+    {
+      "a": "PHP-E26-0169",
+      "b": "PHP-E26-0166",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Field-name intersection is independent of literal dollar quoting and interpolation."
+    },
+    {
+      "a": "PHP-E26-0114",
+      "b": "PHP-E26-0101",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Null-callback zip/padding has no assignment-precedence issue."
+    },
+    {
+      "a": "PHP-E26-0119",
+      "b": "PHP-E26-0101",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Typed-property reference constraints are independent of and/&& assignment grouping."
+    },
+    {
+      "a": "PHP-E26-0113",
+      "b": "PHP-E26-0103",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "array_intersect uses string representations, unlike switch loose equality or match strict identity; distinct comparison rules must not be conflated."
+    },
+    {
+      "a": "PHP-E26-0101",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Boolean grouping and object aliasing share assignment syntax but not the reasoning needed to determine the result."
+    },
+    {
+      "a": "PHP-E26-0101",
+      "b": "PHP-E26-0025",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Operator precedence does not involve embedded array reference sets or copy behavior."
+    },
+    {
+      "a": "PHP-E26-0105",
+      "b": "PHP-E26-0101",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Explicit destructuring key selection differs from operator precedence; generic printed-JSON stems triggered the heuristic."
+    },
+    {
+      "a": "PHP-E26-0106",
+      "b": "PHP-E26-0018",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Default argument independence and destructor lifetime do not share mutable objects or reference-count transitions."
+    },
+    {
+      "a": "PHP-E26-0109",
+      "b": "PQ-005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Coercion writes a changed type back through a reference; the old multi-file case determines which call site sets strictness."
+    },
+    {
+      "a": "PHP-E26-0111",
+      "b": "PHP-E26-0019",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Per-closure static local lifetime differs from callback return values and explicit array_walk element mutation."
+    },
+    {
+      "a": "PHP-E26-0112",
+      "b": "PHP-PILOT-004",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Recursive array replacement uses null as a stored replacement; the pilot distinguishes an omitted function argument from explicit null."
+    },
+    {
+      "a": "PHP-E26-0114",
+      "b": "PHP-E26-0019",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "array_map with a null callback performs a built-in zip; array_walk invokes a by-reference callback and returns its own boolean."
+    },
+    {
+      "a": "PHP-E26-0122",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "The magic getter question adds by-value overloaded-array indirect mutation and an observable diagnostic, rather than ordinary object assignment alone."
+    },
+    {
+      "a": "PHP-E26-0137",
+      "b": "PHP-E26-0038",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Dynamic constant strings require explicit namespace qualification; an inherited class constant requires late-static rather than self lookup."
+    },
+    {
+      "a": "PHP-E26-0111",
+      "b": "PQ-021",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "The old sequence function has one static local; the new case distinguishes separate closure instances from aliases to the same closure instance."
+    },
+    {
+      "a": "PHP-E26-0109",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Scalar reference coercion can replace a variable’s type; object aliasing shares an object without scalar coercion."
+    },
+    {
+      "a": "PHP-E26-0124",
+      "b": "PHP-E26-0005",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "A non-lazy raw property write postpones ghost initialization; ordinary aliasing has no initializer or per-property lazy state."
+    },
+    {
+      "a": "PHP-E26-0192",
+      "b": "PHP-E26-0034",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "0034 repairs preservation of the diagnostic previous exception; 0192 assumes the chain is already intact and tests an explicit outer permanent-policy override during retry classification."
+    },
+    {
+      "a": "PHP-E26-0186",
+      "b": "PHP-E26-0181",
+      "decision": "retain distinct learning objectives for independent review",
+      "reason": "Optional capture representation and PREG_UNMATCHED_AS_NULL differ from rejecting absent CSRF tokens that compare equal."
+    }
+  ],
+  "lengthReview": {},
+  "wordingReview": "Shortened correct answers 0158 and 0177 without padding alternatives. Replaced the weak partial-result option in 0113 with a plausible comparison-normalization misconception. 32 uniquely longest keys remain a screening signal, not proof of leakage; independent review pending.",
+  "additionalSemanticReview": [
+    {
+      "a": "PHP-E26-0192 (rejected draft)",
+      "b": "PHP-E26-0059",
+      "decision": "replaced before acceptance",
+      "reason": "Same readonly nested-clone rule despite a different format; old draft retained in evidence/rejected-draft-0192.txt."
+    },
+    {
+      "a": "PHP-E26-0186 revision 1",
+      "b": "PHP-PILOT-009",
+      "decision": "replaced with revision 2",
+      "reason": "Changing catch-selection into a failing-test selection still repeated the pilot Throwable boundary."
+    },
+    {
+      "a": "PHP-E26-0193 revision 1",
+      "b": "PHP-PILOT-013",
+      "decision": "replaced with revision 2",
+      "reason": "Clock injection and per-decision time repeated the approved pilot; replaced with domain/transport outcome mapping."
+    }
+  ],
+  "independentApproval": "pending"
+}

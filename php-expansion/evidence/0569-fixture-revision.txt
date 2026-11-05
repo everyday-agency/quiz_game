@@ -1,0 +1,1 @@
+Four-candidate execution rejected the initial red,blue,red fixture: array_flip accidentally produced the same values as the histogram. Changed ordering to red,red,blue so last indexes differ from frequencies. No answer rule changed.

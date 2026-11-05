@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A 2,500-question code-first quiz for Laravel, PHP, TypeScript, React, MySQL, and Google Analytics.">
+  <title>Under the Hood — Engineering Thinking Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <button class="brand" id="brandButton" type="button" aria-label="Return to quiz setup">
+      <span class="brand-mark" aria-hidden="true">U</span>
+      <span>
+        <span class="brand-title">Under the Hood</span>
+        <span class="brand-subtitle">Engineering thinking, not trivia</span>
+      </span>
+    </button>
+    <nav class="top-nav" aria-label="Primary navigation">
+      <button class="nav-button active" data-view="home" type="button">Practice</button>
+      <button class="nav-button" data-view="bank" type="button">Question bank</button>
+      <div class="lifetime-score" title="Lifetime questions answered">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span id="lifetimeCount">0 answered</span>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <aside class="collection-notice" aria-label="Question collection">
+      <span id="collectionNotice">Separate PHP quality pilot · 20 new questions</span>
+      <a id="collectionLink" href="?collection=php-pilot-v1">Open PHP pilot</a>
+    </aside>
+    <section id="homeView" class="view active" aria-labelledby="heroTitle">
+      <div class="home-shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>2,500 scenarios</span><span>6 learning tracks</span><span>4 choices</span></p>
+          <h1 id="heroTitle">Learn to reason<br><em>under the hood.</em></h1>
+          <p class="hero-lede">Trace real code through Laravel, PHP, TypeScript, React, and MySQL, then connect it to Google Analytics measurement. Every answer teaches the reasoning behind the strongest choice.</p>
+          <div class="concept-ribbon" aria-label="Covered concepts">
+            <span>Request flow</span><span>PHP runtime</span><span>Type safety</span><span>React state</span><span>Data integrity</span><span>Measurement</span>
+          </div>
+        </div>
+
+        <aside class="setup-card" aria-labelledby="setupTitle">
+          <div class="setup-heading">
+            <div>
+              <p class="card-kicker">New session</p>
+              <h2 id="setupTitle">Build your practice set</h2>
+            </div>
+            <span class="question-total" id="availableCount">2,500 available</span>
+          </div>
+
+          <fieldset class="control-group">
+            <legend>Learning tracks</legend>
+            <div class="track-grid" id="trackControl"></div>
+          </fieldset>
+
+          <fieldset class="control-group">
+            <legend>Session size</legend>
+            <div class="segmented" id="sizeControl">
+              <button type="button" data-size="10">10</button>
+              <button type="button" data-size="20" class="selected">20</button>
+              <button type="button" data-size="30">30</button>
+              <button type="button" data-size="50">50</button>
+              <button type="button" data-size="all">All</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="control-group">
+            <legend>Mode</legend>
+            <div class="mode-grid" id="modeControl">
+              <button class="mode-card selected" type="button" data-mode="learn">
+                <span class="mode-icon">↳</span>
+                <span><strong>Learn</strong><small>Feedback after each answer</small></span>
+              </button>
+              <button class="mode-card" type="button" data-mode="exam">
+                <span class="mode-icon">◎</span>
+                <span><strong>Exam</strong><small>Results only at the end</small></span>
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset class="control-group">
+            <legend>Difficulty</legend>
+            <div class="check-row" id="difficultyControl">
+              <label><input type="checkbox" value="Foundation" checked><span>Foundation</span></label>
+              <label><input type="checkbox" value="Applied" checked><span>Applied</span></label>
+              <label><input type="checkbox" value="Advanced" checked><span>Advanced</span></label>
+            </div>
+          </fieldset>
+
+          <div class="topic-header">
+            <span>Domains</span>
+            <button id="toggleTopics" type="button">Deselect all</button>
+          </div>
+          <div class="topic-grid" id="topicControl" aria-label="Quiz domains"></div>
+
+          <button id="startButton" class="primary-button" type="button">
+            <span>Start thinking</span><span aria-hidden="true">→</span>
+          </button>
+          <p class="keyboard-hint">Tip: use keys <kbd>1</kbd>–<kbd>4</kbd> to choose and <kbd>Enter</kbd> to continue.</p>
+        </aside>
+      </div>
+
+      <div class="principle-strip" aria-label="Quiz principles">
+        <div><span class="principle-number">01</span><strong>Scenarios over definitions</strong><p>Choose the boundary or mechanism that preserves correctness.</p></div>
+        <div><span class="principle-number">02</span><strong>Consequences over syntax</strong><p>Predict queries, race conditions, data leaks, and failure behavior.</p></div>
+        <div><span class="principle-number">03</span><strong>Explanations over scores</strong><p>Understand why the tempting alternatives are weaker.</p></div>
+      </div>
+    </section>
+
+    <section id="quizView" class="view" aria-live="polite">
+      <div class="quiz-shell">
+        <div class="quiz-topline">
+          <button id="exitQuiz" class="text-button" type="button">← Exit session</button>
+          <div class="quiz-metrics">
+            <span id="scoreMetric">0 correct</span>
+            <span id="streakMetric">0 streak</span>
+          </div>
+        </div>
+        <div class="progress-track" aria-label="Quiz progress"><span id="progressBar"></span></div>
+
+        <article class="question-card">
+          <header class="question-meta">
+            <div><span id="questionTrack" class="track-pill"></span><span id="questionTopic" class="topic-pill"></span><span id="questionDifficulty" class="difficulty-pill"></span></div>
+            <span id="questionNumber">Question 1 of 20</span>
+          </header>
+          <p class="scenario-label">Consider the situation</p>
+          <h2 id="questionPrompt"></h2>
+          <p id="questionContext" class="question-context" hidden></p>
+          <div id="questionCode" class="question-code"></div>
+          <div id="optionList" class="option-list" role="radiogroup" aria-labelledby="questionPrompt"></div>
+
+          <div id="feedbackPanel" class="feedback-panel" hidden>
+            <div class="feedback-heading"><span id="feedbackIcon"></span><strong id="feedbackTitle"></strong></div>
+            <span class="learning-label feedback-label">Why this answer is right</span>
+            <p id="feedbackText"></p>
+            <div id="learningNotes"></div>
+          </div>
+
+          <footer class="question-footer">
+            <span id="answerHint">Choose the strongest answer.</span>
+            <button id="questionAction" class="primary-button compact" type="button" disabled>Check answer</button>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <section id="resultsView" class="view" aria-labelledby="resultsTitle">
+      <div class="results-shell">
+        <div class="result-hero">
+          <p class="eyebrow"><span>Session complete</span></p>
+          <div class="score-ring" id="scoreRing"><div><strong id="scorePercent">0%</strong><span>accuracy</span></div></div>
+          <h1 id="resultsTitle">Your engineering mental model</h1>
+          <p id="resultMessage"></p>
+          <div class="result-actions">
+            <button id="retryMissed" class="primary-button" type="button">Review missed <span>→</span></button>
+            <button id="newSession" class="secondary-button" type="button">New session</button>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <section class="result-card">
+            <div class="result-card-heading"><h2>Domain breakdown</h2><span id="resultCount"></span></div>
+            <div id="topicBreakdown" class="breakdown-list"></div>
+          </section>
+          <section class="result-card">
+            <div class="result-card-heading"><h2>Questions to revisit</h2><span id="missedCount"></span></div>
+            <div id="missedList" class="missed-list"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="bankView" class="view" aria-labelledby="bankTitle">
+      <div class="bank-shell">
+        <div class="bank-intro">
+          <p class="eyebrow"><span>Complete curriculum</span></p>
+          <h1 id="bankTitle">The 2,500-question bank</h1>
+          <p>Browse every Laravel, PHP, TypeScript, React, MySQL, and Google Analytics scenario. Answers stay folded until you deliberately reveal them.</p>
+        </div>
+        <div class="bank-toolbar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="bankSearch" type="search" placeholder="Search scenarios and concepts…">
+          </label>
+          <select id="bankTrack" aria-label="Filter by learning track">
+            <option value="all">All tracks</option>
+            <option>Laravel</option>
+            <option>PHP</option>
+            <option>TypeScript</option>
+            <option>React</option>
+            <option>MySQL</option>
+            <option>Google Analytics</option>
+          </select>
+          <select id="bankTopic" aria-label="Filter by domain"><option value="all">All domains</option></select>
+          <select id="bankDifficulty" aria-label="Filter by difficulty">
+            <option value="all">All difficulties</option><option>Foundation</option><option>Applied</option><option>Advanced</option>
+          </select>
+        </div>
+        <p id="bankCount" class="bank-count"></p>
+        <div id="bankList" class="bank-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

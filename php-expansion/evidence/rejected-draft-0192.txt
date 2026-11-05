@@ -1,0 +1,26 @@
+Rejected before acceptance: duplicates the readonly nested-clone reasoning in PHP-E26-0059 despite changing question format.
+
+q({id:'PHP-E26-0192',format:'T',level:'A',topic:17,subtopic:'readonly-nested-clone-isolation-test',objective:'Verify isolation of a mutable object held in a readonly property after cloning.',reason:'Combine readonly clone-time reassignment with shallow object cloning and nested mutation.',prerequisites:['Object cloning','Readonly properties','PHP 8.3 clone-time readonly reinitialization (advanced)'],lessons:[23,24],coverageComplete:false,stem:'snapshot must produce a distinct Envelope whose Counter can be mutated independently. Each assertion runs with a fresh source and copy from the displayed setup. Which assertion fails?',files:[file(`class Counter
+{
+    public int $value = 1;
+}
+
+class Envelope
+{
+    public function __construct(public readonly Counter $counter)
+    {
+    }
+
+    public function __clone(): void
+    {
+        // Clone hook intentionally has no nested copy yet.
+    }
+}
+
+function snapshot(Envelope $source): Envelope
+{
+    return clone $source;
+}
+
+$source = new Envelope(new Counter());
+$copy = snapshot($source);`)],options:[o('identity','$copy !== $source','The outer clone is already a different Envelope.','Equating distinct outer identity with independent nested state.'),o('isolation','$copy->counter->value = 2; then $source->counter->value === 1','The shallow clone shares Counter, so mutating the copy changes the source to 2.'),o('initial-value','$copy->counter->value === 1','The shared Counter initially has the correct value.','Testing an initial value without testing later isolation.'),o('property-contract',"(new ReflectionProperty(Envelope::class, 'counter'))->isReadOnly() === true",'The property remains readonly, which prevents ordinary reassignment but not mutation of its object.','Treating readonly metadata as proof of deep immutability.')],key:'isolation',explanation:'Readonly restricts assigning the property; it does not freeze the referenced Counter. In PHP 8.4 and 8.5, __clone may reinitialize that readonly property once with a cloned Counter.',trace:'The empty clone hook leaves both envelopes pointing at one Counter. Assigning clone $this->counter inside __clone creates the required separate nested state.',validation:{kind:'tests',marker:'// Clone hook intentionally has no nested copy yet.',repair:'$this->counter = clone $this->counter;',cases:[{option:'identity',probe:'echo json_encode($copy !== $source);',expected:'true'},{option:'isolation',probe:'$copy->counter->value = 2; echo $source->counter->value;',expected:'1'},{option:'initial-value',probe:'echo $copy->counter->value;',expected:'1'},{option:'property-contract',probe:"echo json_encode((new ReflectionProperty(Envelope::class, 'counter'))->isReadOnly());",expected:'true'}]},references:['https://www.php.net/manual/en/language.oop5.cloning.php','https://www.php.net/manual/en/language.oop5.properties.php'] }),
