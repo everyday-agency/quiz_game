@@ -9,7 +9,7 @@ export function laravelPhpFlags(php){
  if(cache.has(php))return cache.get(php);
  const configured=JSON.parse(execFileSync(php,['-r','echo json_encode(["dir"=>ini_get("extension_dir"),"modules"=>get_loaded_extensions()]);'],{encoding:'utf8'}));
  const builtIn=JSON.parse(execFileSync(php,['-n','-r','echo json_encode(get_loaded_extensions());'],{encoding:'utf8'})).map(s=>s.toLowerCase());
- const required=['ctype','dom','fileinfo','iconv','mbstring','openssl','pdo','pdo_sqlite','session','tokenizer','xml','xmlwriter','intl','bcmath','sodium'];
+ const required=['ctype','dom','fileinfo','gd','iconv','mbstring','openssl','pdo','pdo_sqlite','session','tokenizer','xml','xmlwriter','intl','bcmath','sodium'];
  const flags=[];
  for(const name of required){
   if(builtIn.includes(name))continue;
