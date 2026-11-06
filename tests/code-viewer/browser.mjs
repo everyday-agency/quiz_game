@@ -66,7 +66,9 @@ try{
   };
   const until=async expression=>{for(let i=0;i<100;i++){if(await evaluate(expression))return;await delay(30);}throw new Error(`Timed out: ${expression}`);};
   const click=async (selector,index=0)=>{
-    const point=await evaluate(`(()=>{const e=document.querySelectorAll(${JSON.stringify(selector)})[${index}];if(!e)throw new Error('Missing control');e.scrollIntoView({block:'center',behavior:'instant'});const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2};})()`);
+    // CDP can otherwise click before the pending question-focus animation frame
+    // or smooth view transition paints. Measure the actual settled target.
+    const point=await evaluate(`(async()=>{const e=document.querySelectorAll(${JSON.stringify(selector)})[${index}];if(!e)throw new Error('Missing control');e.scrollIntoView({block:'center',behavior:'instant'});await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));const r=e.getBoundingClientRect();const point={x:r.x+r.width/2,y:r.y+r.height/2};const hit=document.elementFromPoint(point.x,point.y);if(!e.contains(hit))throw new Error('Control is not hittable: '+${JSON.stringify(selector)});return point;})()`);
     await call('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,...point});
     await call('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,...point});
   };
@@ -182,7 +184,11 @@ try{
       const questionBefore=await evaluate(`document.querySelector('#questionNumber').textContent`);
       assert.equal(await evaluate(`document.querySelector('#questionAction').disabled`),false);
       await click('#questionCode .code-copy');
-      await key('Enter','Enter',13);await key(' ','Space',32);
+      await until(`document.activeElement===document.querySelector('#questionCode .code-copy')`);
+      assert.equal(await evaluate(`document.querySelector('#scoreMetric').textContent`),'0 of 1 answered','Mouse copy must not submit');
+      await key('Enter','Enter',13);
+      assert.equal(await evaluate(`document.querySelector('#scoreMetric').textContent`),'0 of 1 answered','Enter on Copy must not submit');
+      await key(' ','Space',32);
       await until(`document.querySelector('#questionCode .code-copy').textContent==='Copied'`);
       assert.equal(await evaluate(`document.querySelector('#questionNumber').textContent`),questionBefore);
       assert.deepEqual(await evaluate(`({progress:document.querySelector('#scoreMetric').textContent,feedback:document.querySelector('#feedbackPanel').hidden,markers:document.querySelectorAll('#quizView .correct,#quizView .wrong').length})`),{progress:'0 of 1 answered',feedback:true,markers:0});
