@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0139",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Form Requests",
+  "subtopic": "form-request-fixed-redirect-route",
+  "objective": {
+    "id": "laravel.form-request-fixed-redirect-route",
+    "text": "Select a fixed named route for Form Request failure redirection instead of relying on the Referer."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Select a stable failure destination independently of the referring page."
+  },
+  "prerequisites": [
+    "Form Request failure responses",
+    "Named routes"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A form can be submitted from several pages, but every HTML validation failure must redirect to the parameter-free named route profile.edit. Which Form Request configuration selects that route rather than the Referer?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Set protected $errorBag = \"profile.edit\".",
+      "rationale": "The error bag controls message grouping, not the redirect destination.",
+      "misconception": "The error bag controls message grouping, not the redirect destination."
+    },
+    {
+      "id": "choice-2",
+      "text": "Set protected $redirect = \"profile.edit\".",
+      "rationale": "redirect is treated as a URL/path destination, not a named-route lookup.",
+      "misconception": "redirect is treated as a URL/path destination, not a named-route lookup."
+    },
+    {
+      "id": "choice-3",
+      "text": "Set protected $redirectRoute = \"profile.edit\".",
+      "rationale": "redirectRoute is resolved through the URL generator as a route name when constructing the failure redirect.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Return \"profile.edit\" from authorize().",
+      "rationale": "Authorization decides permission; it is not a named failure-redirect selector.",
+      "misconception": "Authorization decides permission; it is not a named failure-redirect selector."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "redirectRoute is resolved through the URL generator as a route name when constructing the failure redirect.",
+    "trace": [
+      "The error bag controls message grouping, not the redirect destination.",
+      "redirect is treated as a URL/path destination, not a named-route lookup.",
+      "redirectRoute is resolved through the URL generator as a route name when constructing the failure redirect.",
+      "Authorization decides permission; it is not a named failure-redirect selector."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "/profile/edit",
+    "probe": "app('router')->get('/profile/edit', fn () => 'form')->name('profile.edit');\napp('router')->getRoutes()->refreshNameLookups();\nclass FixedRedirectRequest extends Illuminate\\Foundation\\Http\\FormRequest\n{\n    protected $redirectRoute = 'profile.edit';\n    public function rules(): array\n    {\n        return ['name' => 'required'];\n    }\n}\n$r = FixedRedirectRequest::create('/submit', 'POST');\n$r->setContainer(app())->setRedirector(app('redirect'));\ntry {\n    $r->validateResolved();\n} catch (Illuminate\\Validation\\ValidationException $e) {\n    echo parse_url($e->redirectTo, PHP_URL_PATH);\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      2,
+      7
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#customizing-the-redirect-location"
+  ]
+}

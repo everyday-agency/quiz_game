@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0308",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Queue lifecycle",
+  "subtopic": "delete-job-missing-model-policy",
+  "objective": {
+    "id": "laravel.delete-job-missing-model-policy",
+    "text": "Discard a job whose required model has been deleted using the explicit missing-model policy."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Express an intentional no-longer-relevant job policy at restoration time."
+  },
+  "prerequisites": [
+    "Queued Eloquent models",
+    "Missing model handling"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A queued thumbnail job stores a Photo model, but the photo may be permanently deleted before execution. Product policy says such work is obsolete and should be discarded without failing the job. Which job property enables that missing-model behavior?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "public $timeout = 0;",
+      "rationale": "Worker timeout does not decide what to do when a serialized model no longer exists.",
+      "misconception": "Worker timeout does not decide what to do when a serialized model no longer exists."
+    },
+    {
+      "id": "choice-2",
+      "text": "public $afterCommit = true;",
+      "rationale": "After-commit dispatch prevents one pre-commit race but does not handle later permanent deletion.",
+      "misconception": "After-commit dispatch prevents one pre-commit race but does not handle later permanent deletion."
+    },
+    {
+      "id": "choice-3",
+      "text": "public $deleteWhenMissingModels = true;",
+      "rationale": "The queued handler deletes the job when model restoration fails under this explicit policy.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "public $tries = 1;",
+      "rationale": "One allowed attempt still treats a restoration failure as a failure rather than deliberate missing-model deletion.",
+      "misconception": "One allowed attempt still treats a restoration failure as a failure rather than deliberate missing-model deletion."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The queued handler deletes the job when model restoration fails under this explicit policy.",
+    "trace": [
+      "Worker timeout does not decide what to do when a serialized model no longer exists.",
+      "After-commit dispatch prevents one pre-commit race but does not handle later permanent deletion.",
+      "The queued handler deletes the job when model restoration fails under this explicit policy.",
+      "One allowed attempt still treats a restoration failure as a failure rather than deliberate missing-model deletion."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "deleted:0",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\nclass PrintMissing implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public $deleteWhenMissingModels = true;\n\n    public function __construct(public Record $record)\n    {\n    }\n\n    public function handle(): void\n    {\n        echo 'unexpected';\n    }\n}\nIlluminate\\Support\\Facades\\Bus::dispatch(new PrintMissing($record));\n$record->delete();\n$job = app('queue')->connection()->pop();\n$job->fire();\necho ($job->isDeleted() ? 'deleted' : 'retained').':'.Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#ignoring-missing-models"
+  ]
+}

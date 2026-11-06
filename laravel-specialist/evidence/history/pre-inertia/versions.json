@@ -1,0 +1,10 @@
+{
+  "framework": "v13.40.0",
+  "frameworkCommit": "1449bf241017087fbd38c118ecaabef3f6797fdc",
+  "composerLockSha256": "cef287e202041893c7d3bbc3d4f5a2f4995ca68c25d2d9fb387668439446fde9",
+  "php": [
+    "8.4",
+    "8.5"
+  ],
+  "runtimeIsolation": "Each fixture has a new PHP process, temporary app directory, empty environment, local/array fake drivers, SQLite memory only; network/process APIs disabled."
+}

@@ -1,0 +1,5 @@
+Reviewed 2026-11-06.
+https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+https://docs.guzzlephp.org/en/stable/request-options.html#allow-redirects
+Paraphrase: URL and DNS preflight validation cannot establish the actual destination if the client resolves independently later. Enforce the destination policy at connection time for IPv4 and IPv6. Redirects must not bypass the destination policy.
+Guzzle's redirect protocols option restricts schemes, not an application's approved hostnames or address ranges. The question specifies a controlled transport/egress enforcement capability and compares design policies; it does not provide a production SSRF filter or claim remote testing.

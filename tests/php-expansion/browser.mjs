@@ -7,7 +7,8 @@ import {tmpdir} from 'node:os';
 import {join,resolve,extname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {QUESTION_BANK as REVIEW_BANK} from '../../js/questions.mjs';
+import PHP_BANK from '../../js/php-bank.mjs';
+const REVIEW_BANK=PHP_BANK;
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const reportDir=join(root,process.env.BROWSER_REPORT_DIR||'php-expansion/evidence/browser-review');
@@ -85,7 +86,7 @@ try{
   assert.equal(await evaluate(`document.querySelectorAll('#trackControl,#bankTrack,#collectionLink').length`),0);
   assert.equal(await evaluate(`document.querySelector('#difficultyControl input[value="Advanced"]').checked`),false);
   await shot('review-home-desktop');
-  check('Default URL loads the 620-question PHP release; old subject selectors are absent and historical totals are isolated');
+  check('Default URL loads the 620-question PHP release; exactly PHP and Laravel Beta subjects are available and historical totals are isolated');
   const input=async(selector,text)=>{await click(selector);await call('Input.dispatchKeyEvent',{type:'keyDown',key:'a',code:'KeyA',commands:['selectAll']});await call('Input.insertText',{text});if(!text)await key('Backspace','Backspace',8);};
   // SelectOption equivalent: browser DOM input/change events, never application state.
   const select=async(selector,index)=>{await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});e.focus();e.selectedIndex=${index};e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));})()`);assert.equal(await evaluate(`document.querySelector(${JSON.stringify(selector)}).selectedIndex`),index,selector);};

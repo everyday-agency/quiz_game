@@ -1,0 +1,167 @@
+{
+  "phase": "focused-editorial-corrections-delivered",
+  "framework": "laravel/framework v13.40.0",
+  "php": [
+    "8.4",
+    "8.5"
+  ],
+  "collectionId": "laravel-specialist-review-v1",
+  "idPattern": "LAR-S26-0001 through LAR-S26-0600",
+  "target": 600,
+  "accepted": 600,
+  "nextBatch": null,
+  "independentApproval": "pending",
+  "productionActivation": false,
+  "batches": [
+    {
+      "id": 1,
+      "range": [
+        1,
+        100
+      ],
+      "status": "internally-accepted",
+      "sourceHash": "30b65b55718f2082f0d0eb548b8306a28f99cd15a8b4f5c52664110f3976359d",
+      "acceptedHash": "02602a169d55a6a3a89b9c34bc6f9b550142d2d33d7213d6d13e93d82c47f99d",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 2,
+      "range": [
+        101,
+        200
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "8e8492b775180edc1ef29cc7e442264a055926f2784bbfd52f29941d779079ce",
+      "acceptedHash": "00364847686aeb0567bc4563142040be03b28c0d7e75f5f99a9526ff5e9d1b84",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 3,
+      "range": [
+        201,
+        300
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "82e6e36757b2b6e32cf04e77b5c7b84257171e48a009821d1a56f64e584b4c74",
+      "acceptedHash": "b1c3cd774110dd7d70877c3923dd9931bed1e0fba2af3550cc39242698d3bdf1",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 4,
+      "range": [
+        301,
+        400
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "ea0e9006405d85ae47738bfe74b24a0be9bace522cee52c9eede73b0de685d8f",
+      "acceptedHash": "28cc869b9e97c864bc3edf9645393379fc93e60f948994fa0b42852ce2728fc7",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 5,
+      "range": [
+        401,
+        500
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "75cfe1321af965d6afc98bc40894cc0a99e8ac7c693cdc7b535d83e78b757485",
+      "acceptedHash": "a5a3359347d86afc875fd4b6570e89b806cc844dd8f6d570a3df7224429a601b",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 6,
+      "range": [
+        501,
+        600
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "d716aa731661035f560f68b354a5a0a3cf655a615775d09f959ee6137008d152",
+      "acceptedHash": "99e6c823e66b16aea37c897817e1e0476a8a529eee637897e2db19a477ffa9ec",
+      "count": 100,
+      "independentApproval": "pending"
+    }
+  ],
+  "next": "Independent review of FOCUSED_REVISED_7.md and SPOT_CHECK_15.md; all independent approvals pending. Do not regenerate, activate, push, merge or deploy.",
+  "versionDecision": "Laravel 13 compatibility target retained; 13.0.0 was blocked by published advisories, so the harness uses the patched Composer-locked 13.x release.",
+  "finalAudit": "laravel-specialist/evidence/final-audit.json",
+  "reviewCollection": "_laravel-review/",
+  "reviewStatsKey": "underTheHoodLaravelSpecialistReviewV1Stats",
+  "finalChecks": {
+    "batchChecks": "passed",
+    "runtimeFixturesPerPhp": 556,
+    "contractsPerPhp": 44,
+    "phpVersions": [
+      "8.4.17",
+      "8.5.2"
+    ],
+    "framework": "13.40.0",
+    "integration": "passed",
+    "productionRegressions": "passed",
+    "laravelBrowser600": "passed",
+    "phpBrowser620": "passed"
+  },
+  "focusedEditorial": {
+    "ids": [
+      "LAR-S26-0242",
+      "LAR-S26-0284",
+      "LAR-S26-0314",
+      "LAR-S26-0400",
+      "LAR-S26-0535",
+      "LAR-S26-0566",
+      "LAR-S26-0569"
+    ],
+    "baseline": "laravel-specialist/archive/pre-focused-editorial/manifest.json",
+    "report": "laravel-specialist/FOCUSED_EDITORIAL_CORRECTIONS.md",
+    "independentApproval": "pending",
+    "status": "delivered",
+    "changed": 7,
+    "unchangedLaravel": 593,
+    "unchangedProductionPhp": 620,
+    "exports": [
+      "laravel-specialist/FOCUSED_REVISED_7.md",
+      "laravel-specialist/FOCUSED_REVISED_7.json",
+      "laravel-specialist/SPOT_CHECK_15.md",
+      "laravel-specialist/SPOT_CHECK_15.json"
+    ],
+    "review": "laravel-specialist/reviews/focused-editorial.json",
+    "checks": {
+      "affectedBatches": [
+        3,
+        4,
+        6
+      ],
+      "checksPerPhp": 300,
+      "runtimeFixturesPerPhp": 280,
+      "contractsPerPhp": 20,
+      "php": [
+        "8.4.17",
+        "8.5.2"
+      ],
+      "laravel": "13.40.0",
+      "focusedTechnical": "passed",
+      "preservationAndExports": "passed",
+      "integration": "passed",
+      "productionRegressions": "passed",
+      "releaseArtifact": "passed",
+      "acceptanceGuard": "passed",
+      "laravelChrome600DesktopMobile": "passed",
+      "phpChrome620": "not-rerun-in-focused-task",
+      "diffCheck": "passed"
+    },
+    "evidence": "laravel-specialist/evidence/focused-editorial/",
+    "productionActivation": false
+  },
+  "currentReport": "laravel-specialist/FOCUSED_EDITORIAL_CORRECTIONS.md",
+  "finalChecksScope": "Historical initial delivery. Current focused results are in focusedEditorial.checks; the PHP620 Chrome traversal was not repeated.",
+  "finalAuditScope": "Historical initial delivery before seven focused corrections."
+}

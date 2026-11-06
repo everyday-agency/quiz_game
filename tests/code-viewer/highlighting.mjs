@@ -17,7 +17,7 @@ for (const question of [...QUESTION_BANK, ...PHP_PILOT_BANK]) {
   for (const file of question.code.files || [{ snippet: question.code.snippet }]) {
     const tokens = highlightSource(file.snippet, question.code.language);
     assert.equal(tokens.map(token => token.text).join(''), file.snippet, `${question.id}: source changed`);
-    if (question.code.language === 'php') assert(tokens.some(token => token.classes), `${question.id}: PHP highlighting fell back`);
+    if (question.code.language === 'php' && !['blade', 'configuration'].includes(file.kind)) assert(tokens.some(token => token.classes), `${question.id}: PHP highlighting fell back`);
     sources++;
   }
 }

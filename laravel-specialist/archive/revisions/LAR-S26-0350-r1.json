@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0350",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Event tests",
+  "subtopic": "scoped-event-fake-restoration",
+  "objective": {
+    "id": "laravel.scoped-event-fake-restoration",
+    "text": "Restore the real dispatcher after an Event::fakeFor scope."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Track restoration after a scoped fake rather than assuming it lasts for the whole test."
+  },
+  "prerequisites": [
+    "Event fakeFor",
+    "Dispatcher lifetime"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Support\\Facades\\Event;\n\n$count = 0;\nEvent::listen('recount', function () use (&$count) {\n    $count++;\n});\n\nEvent::fakeFor(function () {\n    Event::dispatch('recount');\n});\n\nEvent::dispatch('recount');\n\necho $count;\n"
+      }
+    ]
+  },
+  "stem": "One listener increments $count. What is printed?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "2",
+      "rationale": "The faked event does not invoke the real listener inside the scope.",
+      "misconception": "The faked event does not invoke the real listener inside the scope."
+    },
+    {
+      "id": "choice-2",
+      "text": "1",
+      "rationale": "The event inside fakeFor is intercepted; after the scope, the original dispatcher is restored and the listener runs.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "An exception on the second dispatch",
+      "rationale": "Restoring the original dispatcher is normal supported behavior.",
+      "misconception": "Restoring the original dispatcher is normal supported behavior."
+    },
+    {
+      "id": "choice-4",
+      "text": "0",
+      "rationale": "The scoped fake does not remain active after the callback finishes.",
+      "misconception": "The scoped fake does not remain active after the callback finishes."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The event inside fakeFor is intercepted; after the scope, the original dispatcher is restored and the listener runs.",
+    "trace": [
+      "The faked event does not invoke the real listener inside the scope.",
+      "The event inside fakeFor is intercepted; after the scope, the original dispatcher is restored and the listener runs.",
+      "Restoring the original dispatcher is normal supported behavior.",
+      "The scoped fake does not remain active after the callback finishes."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mocking#scoped-event-fakes"
+  ]
+}

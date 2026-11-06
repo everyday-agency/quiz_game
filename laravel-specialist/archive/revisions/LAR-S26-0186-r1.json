@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0186",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Authorization",
+  "subtopic": "gate-boolean-versus-throwing-check",
+  "objective": {
+    "id": "laravel.gate-boolean-versus-throwing-check",
+    "text": "Stop an unauthorized operation with authorize instead of ignoring a boolean policy result."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Make a failed permission check interrupt the operation instead of discarding its result."
+  },
+  "prerequisites": [
+    "Gate allows",
+    "Gate authorize",
+    "Exception control flow"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An action calls Gate::allows(\"publish\", $post) as a standalone statement, ignores its return value, then publishes. Which standalone replacement stops the action on denial under normal handling?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Gate::denies(\"publish\", $post)",
+      "rationale": "denies returns a boolean; ignoring it still lets the action continue.",
+      "misconception": "denies returns a boolean; ignoring it still lets the action continue."
+    },
+    {
+      "id": "choice-2",
+      "text": "Gate::check(\"publish\", $post)",
+      "rationale": "check reports a boolean result rather than throwing on a denied ability.",
+      "misconception": "check reports a boolean result rather than throwing on a denied ability."
+    },
+    {
+      "id": "choice-3",
+      "text": "Gate::authorize(\"publish\", $post)",
+      "rationale": "authorize throws an AuthorizationException when the ability is denied, interrupting the action.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Gate::inspect(\"publish\", $post)",
+      "rationale": "inspect returns an authorization response for the caller to examine; simply discarding it does not enforce denial.",
+      "misconception": "inspect returns an authorization response for the caller to examine; simply discarding it does not enforce denial."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "authorize throws an AuthorizationException when the ability is denied, interrupting the action.",
+    "trace": [
+      "denies returns a boolean; ignoring it still lets the action continue.",
+      "check reports a boolean result rather than throwing on a denied ability.",
+      "authorize throws an AuthorizationException when the ability is denied, interrupting the action.",
+      "inspect returns an authorization response for the caller to examine; simply discarding it does not enforce denial."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "continued:blocked",
+    "probe": "$gate = new Illuminate\\Auth\\Access\\Gate(app(), fn () => new Illuminate\\Auth\\GenericUser(['id' => 7]));\n$gate->define('publish', fn ($user, $post) => false);\n$post = new stdClass();\n$gate->allows('publish', $post);\necho 'continued:';\ntry {\n    $gate->authorize('publish', $post);\n} catch (Illuminate\\Auth\\Access\\AuthorizationException $e) {\n    echo 'blocked';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authorization#authorizing-or-throwing-exceptions"
+  ]
+}

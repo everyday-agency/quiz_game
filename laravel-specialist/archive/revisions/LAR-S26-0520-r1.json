@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0520",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Request diagnostics",
+  "subtopic": "correlation-id-one-middleware-value",
+  "objective": {
+    "id": "laravel.correlation-id-one-middleware-value",
+    "text": "Correlate a response identifier with the matching log context through one middleware-generated value."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify that an identifier given to a client can locate the matching server record."
+  },
+  "prerequisites": [
+    "Middleware",
+    "Structured logging",
+    "Response diagnostics"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A request-diagnostics middleware should put one generated correlation ID in both the log context and the X-Request-ID response header. Which regression check best verifies that link?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Assert only that the response header is a valid UUID.",
+      "rationale": "A well-formed header can still differ from the identifier written to the log.",
+      "misconception": "A well-formed header can still differ from the identifier written to the log."
+    },
+    {
+      "id": "choice-2",
+      "text": "Assert only that the log message contains the word request.",
+      "rationale": "That does not establish the correlation field or its relationship to the response.",
+      "misconception": "That does not establish the correlation field or its relationship to the response."
+    },
+    {
+      "id": "choice-3",
+      "text": "Generate two independent UUIDs and assert that both have the expected length.",
+      "rationale": "Two valid but different identifiers break the client-to-log lookup contract.",
+      "misconception": "Two valid but different identifiers break the client-to-log lookup contract."
+    },
+    {
+      "id": "choice-4",
+      "text": "Capture a request’s log record and response, then assert their identifiers are equal and nonempty.",
+      "rationale": "The diagnostic contract is the identity match across both surfaces, not merely the presence of some value on each.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The diagnostic contract is the identity match across both surfaces, not merely the presence of some value on each.",
+    "trace": [
+      "A well-formed header can still differ from the identifier written to the log.",
+      "That does not establish the correlation field or its relationship to the response.",
+      "Two valid but different identifiers break the client-to-log lookup contract.",
+      "The diagnostic contract is the identity match across both surfaces, not merely the presence of some value on each."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "matched",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\n$request = Illuminate\\Http\\Request::create('/report');\n$middleware = function ($request, $next) use ($logger) {\n    $id = (string) Illuminate\\Support\\Str::uuid();\n    $logger->withContext(['request_id' => $id]);\n    $logger->info('request');\n    return $next($request)->header('X-Request-ID', $id);\n};\n$response = $middleware($request, fn ($r) => response('ok'));\n$logged = $capture->getRecords()[0]->context['request_id'];\necho $logged !== '' && $logged === $response->headers->get('X-Request-ID') ? 'matched' : 'mismatch';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/logging#contextual-information",
+    "https://laravel.com/docs/13.x/middleware#after-middleware"
+  ]
+}

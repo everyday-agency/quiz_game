@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0563",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Localization",
+  "subtopic": "locale-selection-supported-allowlist",
+  "objective": {
+    "id": "laravel.locale-selection-supported-allowlist",
+    "text": "Select language from an application allowlist instead of accepting arbitrary locale identifiers."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Select only locales the product deliberately supports rather than treating input syntax as product support."
+  },
+  "prerequisites": [
+    "Request locale input",
+    "Supported locales",
+    "Application locale"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The product supports en and fr only. Invalid or unsupported locale input should use en."
+    ],
+    "files": []
+  },
+  "stem": "Which locale-selection policy meets that requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Use the requested value only if it is exactly en or fr; otherwise select en.",
+      "rationale": "An explicit supported-locale list implements the product policy and a defined fallback.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Use the browser’s first language value even if the application has no matching locale.",
+      "rationale": "That ignores the stated supported set and fallback requirement.",
+      "misconception": "That ignores the stated supported set and fallback requirement."
+    },
+    {
+      "id": "choice-3",
+      "text": "Call setLocale with any submitted string and expect it to validate the supported list.",
+      "rationale": "setLocale does not automatically know this product’s two-locale policy.",
+      "misconception": "setLocale does not automatically know this product’s two-locale policy."
+    },
+    {
+      "id": "choice-4",
+      "text": "Accept any two-letter value because every such code has installed translations.",
+      "rationale": "A syntactically plausible locale does not prove the application ships or supports its translations.",
+      "misconception": "A syntactically plausible locale does not prove the application ships or supports its translations."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "An explicit supported-locale list implements the product policy and a defined fallback.",
+    "trace": [
+      "An explicit supported-locale list implements the product policy and a defined fallback.",
+      "That ignores the stated supported set and fallback requirement.",
+      "setLocale does not automatically know this product’s two-locale policy.",
+      "A syntactically plausible locale does not prove the application ships or supports its translations."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "fr:en",
+    "probe": "foreach (['fr', 'de'] as $requested) {\n    $locale = in_array($requested, ['en', 'fr'], true) ? $requested : 'en';\n    app()->setLocale($locale);\n    echo app()->getLocale();\n    if ($requested === 'fr') {\n        echo ':';\n    }\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/localization#configuring-the-locale"
+  ]
+}

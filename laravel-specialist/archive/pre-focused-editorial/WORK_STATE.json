@@ -1,0 +1,113 @@
+{
+  "phase": "local-review-delivered",
+  "framework": "laravel/framework v13.40.0",
+  "php": [
+    "8.4",
+    "8.5"
+  ],
+  "collectionId": "laravel-specialist-review-v1",
+  "idPattern": "LAR-S26-0001 through LAR-S26-0600",
+  "target": 600,
+  "accepted": 600,
+  "nextBatch": null,
+  "independentApproval": "pending",
+  "productionActivation": false,
+  "batches": [
+    {
+      "id": 1,
+      "range": [
+        1,
+        100
+      ],
+      "status": "internally-accepted",
+      "sourceHash": "30b65b55718f2082f0d0eb548b8306a28f99cd15a8b4f5c52664110f3976359d",
+      "acceptedHash": "02602a169d55a6a3a89b9c34bc6f9b550142d2d33d7213d6d13e93d82c47f99d",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 2,
+      "range": [
+        101,
+        200
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "8e8492b775180edc1ef29cc7e442264a055926f2784bbfd52f29941d779079ce",
+      "acceptedHash": "00364847686aeb0567bc4563142040be03b28c0d7e75f5f99a9526ff5e9d1b84",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 3,
+      "range": [
+        201,
+        300
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "b7c19fdcabf10e5c28297c2e81ad7b45335837ac253cfd5666aefd12b4732f78",
+      "acceptedHash": "56b950f8a1886ae50e1c16942046cab60ee1bb32eaa48b24d73eac41ddb544d7",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 4,
+      "range": [
+        301,
+        400
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "4af575f6a37aeae0aead4b54fc74a0e9d26e00c7b204d41adceb2f5e20b6a113",
+      "acceptedHash": "ee513c56874db464908b41b2e5ccda0a32944ab70f39f963a91bceb698ca6cb4",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 5,
+      "range": [
+        401,
+        500
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "75cfe1321af965d6afc98bc40894cc0a99e8ac7c693cdc7b535d83e78b757485",
+      "acceptedHash": "a5a3359347d86afc875fd4b6570e89b806cc844dd8f6d570a3df7224429a601b",
+      "count": 100,
+      "independentApproval": "pending"
+    },
+    {
+      "id": 6,
+      "range": [
+        501,
+        600
+      ],
+      "status": "internally-accepted",
+      "draftCount": 100,
+      "sourceHash": "bb691340eedbee1e8d811f53f8efcab4f075aab3d3d1a2abba0ed523fc510d6d",
+      "acceptedHash": "6eea9d0d12fa5753a5f78e188a6508a0877fa6c4b5fc63d71904d428e058a630",
+      "count": 100,
+      "independentApproval": "pending"
+    }
+  ],
+  "next": "Independent technical/editorial review of all 600; no activation, push, merge or deployment authorized.",
+  "versionDecision": "Laravel 13 compatibility target retained; 13.0.0 was blocked by published advisories, so the harness uses the patched Composer-locked 13.x release.",
+  "finalAudit": "laravel-specialist/evidence/final-audit.json",
+  "reviewCollection": "_laravel-review/",
+  "reviewStatsKey": "underTheHoodLaravelSpecialistReviewV1Stats",
+  "finalChecks": {
+    "batchChecks": "passed",
+    "runtimeFixturesPerPhp": 556,
+    "contractsPerPhp": 44,
+    "phpVersions": [
+      "8.4.17",
+      "8.5.2"
+    ],
+    "framework": "13.40.0",
+    "integration": "passed",
+    "productionRegressions": "passed",
+    "laravelBrowser600": "passed",
+    "phpBrowser620": "passed"
+  }
+}

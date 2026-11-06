@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0535",
+  "revision": 1,
+  "status": "internal-validated",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Outbound request security",
+  "subtopic": "outbound-destination-ssrf-boundary",
+  "objective": {
+    "id": "laravel.outbound-destination-ssrf-boundary",
+    "text": "Constrain user-influenced outbound destinations and redirects rather than treating URL syntax validation as SSRF protection."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Combine application destination selection with connection-time and redirect constraints."
+  },
+  "prerequisites": [
+    "Laravel HTTP client",
+    "SSRF",
+    "DNS and redirects",
+    "Network egress policy"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The feature only needs a known partner export service; arbitrary internet fetches are not a requirement."
+    ],
+    "files": []
+  },
+  "stem": "A proposed endpoint passes a user-submitted URL through the url validation rule and then to Http::get. Which design addresses the missing destination trust boundary?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Validate only the initial hostname, then follow redirects without applying the destination policy again.",
+      "rationale": "An allowed initial endpoint can redirect to a destination outside the permitted boundary.",
+      "misconception": "An allowed initial endpoint can redirect to a destination outside the permitted boundary."
+    },
+    {
+      "id": "choice-2",
+      "text": "Accept any syntactically valid HTTPS URL and rely on TLS to block internal destinations.",
+      "rationale": "TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature.",
+      "misconception": "TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature."
+    },
+    {
+      "id": "choice-3",
+      "text": "Reject the literal string localhost but allow all other valid hostnames and automatic redirects.",
+      "rationale": "Alternate addresses, DNS resolution and redirects can still reach forbidden destinations.",
+      "misconception": "Alternate addresses, DNS resolution and redirects can still reach forbidden destinations."
+    },
+    {
+      "id": "choice-4",
+      "text": "Build the partner request from trusted configuration and constrain actual connections and redirects.",
+      "rationale": "URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy.",
+    "trace": [
+      "An allowed initial endpoint can redirect to a destination outside the permitted boundary.",
+      "TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature.",
+      "Alternate addresses, DNS resolution and redirects can still reach forbidden destinations.",
+      "URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "sourceRoot": "reference",
+    "source": "ssrf-destinations.txt",
+    "contains": [
+      "Domain allowlisting alone does not prevent DNS rebinding.",
+      "prevent redirects from"
+    ],
+    "reason": "OWASP destination and redirect contract; no live DNS, SSRF probing or complete production filter is claimed.",
+    "status": "documented-contract-reviewed",
+    "independentEditorialReview": "pending",
+    "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#request-options",
+    "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+  ]
+}

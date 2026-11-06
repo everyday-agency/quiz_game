@@ -1,0 +1,6 @@
+Reviewed 2026-11-06.
+https://nginx.org/en/docs/http/ngx_http_core_module.html#location
+https://laravel.com/docs/13.x/deployment#nginx
+Paraphrase: after selecting an ordinary prefix location, Nginx checks regex locations; the first matching regex is used. Moving an ordinary location / block earlier does not make it override that regex. Exact matches and ^~ prefixes are different cases and are not present in the question.
+A PHP FastCGI location can invoke an existing script directly without entering Laravel index.php. A file-existence check does not distinguish legitimate entry points from accidentally deployed PHP files. The Laravel example forwards the front controller and rejects other PHP paths.
+No Nginx/PHP-FPM execution, configuration change or security probe is claimed.

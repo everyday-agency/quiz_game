@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0445",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "HTTP client timeouts",
+  "subtopic": "http-connect-versus-total-timeout",
+  "objective": {
+    "id": "laravel.http-connect-versus-total-timeout",
+    "text": "Separate connection establishment timeout from total response timeout."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Configure distinct budgets for connecting and waiting for the complete response."
+  },
+  "prerequisites": [
+    "Connection establishment",
+    "HTTP total timeout",
+    "Transport support"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The production transport supports the configured connect-timeout option."
+    ],
+    "files": []
+  },
+  "stem": "The integration allows at most two seconds to establish a connection and ten seconds for the request overall. Which configuration expresses those separate limits?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Http::timeout(2)->connectTimeout(10)",
+      "rationale": "This reverses the requested budgets.",
+      "misconception": "This reverses the requested budgets."
+    },
+    {
+      "id": "choice-2",
+      "text": "Http::connectTimeout(2)->retry(10, 0)",
+      "rationale": "A retry count is not a ten-second total request timeout.",
+      "misconception": "A retry count is not a ten-second total request timeout."
+    },
+    {
+      "id": "choice-3",
+      "text": "Http::connectTimeout(2)->timeout(10)",
+      "rationale": "connectTimeout sets the connection-establishment budget; timeout bounds the overall request duration.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Http::timeout(10)->timeout(2)",
+      "rationale": "The second call replaces the overall timeout rather than configuring a distinct connection timeout.",
+      "misconception": "The second call replaces the overall timeout rather than configuring a distinct connection timeout."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "connectTimeout sets the connection-establishment budget; timeout bounds the overall request duration.",
+    "trace": [
+      "This reverses the requested budgets.",
+      "A retry count is not a ten-second total request timeout.",
+      "connectTimeout sets the connection-establishment budget; timeout bounds the overall request duration.",
+      "The second call replaces the overall timeout rather than configuring a distinct connection timeout."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:10",
+    "probe": "$factory = new class extends Illuminate\\Http\\Client\\Factory\n{\n    protected function newPendingRequest()\n    {\n        return parent::newPendingRequest()->setHandler(function () {\n            throw new LogicException('No transport permitted in this fixture');\n        });\n    }\n};\nIlluminate\\Support\\Facades\\Http::swap($factory);\n$options = Illuminate\\Support\\Facades\\Http::connectTimeout(2)->timeout(10)->getOptions();\necho $options['connect_timeout'].':'.$options['timeout'];",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#timeout"
+  ]
+}

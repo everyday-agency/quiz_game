@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0594",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Application architecture",
+  "subtopic": "provider-boot-avoids-network-prerequisite",
+  "objective": {
+    "id": "laravel.provider-boot-avoids-network-prerequisite",
+    "text": "Keep package service-provider boot work lightweight rather than performing network I/O during every application boot."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep registration available when an optional integration is unavailable."
+  },
+  "prerequisites": [
+    "Service providers",
+    "Application boot",
+    "External dependencies"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "A provider’s boot method calls an optional vendor API to discover settings. When the vendor is down, unrelated Artisan commands fail during application boot."
+    ],
+    "files": []
+  },
+  "stem": "Which refactor removes that unwanted boot-time dependency?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Catch the boot exception and silently persist an empty settings set as authoritative.",
+      "rationale": "That can turn an outage into durable incorrect configuration rather than handling unavailable optional data at the operation boundary.",
+      "misconception": "That can turn an outage into durable incorrect configuration rather than handling unavailable optional data at the operation boundary."
+    },
+    {
+      "id": "choice-2",
+      "text": "Increase the vendor timeout inside boot to cover longer outages.",
+      "rationale": "That can prolong failures and does not remove the dependency from unrelated commands.",
+      "misconception": "That can prolong failures and does not remove the dependency from unrelated commands."
+    },
+    {
+      "id": "choice-3",
+      "text": "Register the client during bootstrapping; fetch and cache remote settings only in operations that need them.",
+      "rationale": "Registration can remain local while dependent operations own remote failure and freshness handling.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Move the same blocking API call from boot into register.",
+      "rationale": "Both methods participate in application bootstrapping, so unrelated commands still depend on the vendor.",
+      "misconception": "Both methods participate in application bootstrapping, so unrelated commands still depend on the vendor."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Registration can remain local while dependent operations own remote failure and freshness handling.",
+    "trace": [
+      "That can turn an outage into durable incorrect configuration rather than handling unavailable optional data at the operation boundary.",
+      "That can prolong failures and does not remove the dependency from unrelated commands.",
+      "Registration can remain local while dependent operations own remote failure and freshness handling.",
+      "Both methods participate in application bootstrapping, so unrelated commands still depend on the vendor."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:1",
+    "probe": "$calls = 0;\napp()->bind('optional-settings', function () use (&$calls) {\n    $calls++;\n    return ['region' => 'eu'];\n});\necho $calls.':';\napp('optional-settings');\necho $calls;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/providers#the-boot-method",
+    "https://laravel.com/docs/13.x/container#binding-basics"
+  ]
+}

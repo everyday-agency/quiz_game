@@ -1,0 +1,18 @@
+[
+  {
+    php: '8.5.2',
+    framework: '13.40.0',
+    id: 'LAR-S26-0314',
+    revision: 2,
+    stdout: 'afterCommit=1/0;atomic=1/1;rollback=0/0;redelivery=2/1',
+    exitCode: 0
+  },
+  {
+    php: '8.4.17',
+    framework: '13.40.0',
+    id: 'LAR-S26-0314',
+    revision: 2,
+    stdout: 'afterCommit=1/0;atomic=1/1;rollback=0/0;redelivery=2/1',
+    exitCode: 0
+  }
+]

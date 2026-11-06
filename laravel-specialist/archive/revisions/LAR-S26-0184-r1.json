@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0184",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Authorization",
+  "subtopic": "authenticated-not-resource-authorized",
+  "objective": {
+    "id": "laravel.authenticated-not-resource-authorized",
+    "text": "Separate authentication from permission to modify a particular resource."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Add a resource permission check after identifying the caller."
+  },
+  "prerequisites": [
+    "Authentication",
+    "Resource authorization",
+    "Policies"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An update endpoint has auth middleware, but every signed-in user can edit another user's private document by changing the document ID. Which missing boundary addresses this without blocking legitimate owners?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Require the document ID to be an integer.",
+      "rationale": "A well-formed identifier may still identify another user's private document.",
+      "misconception": "A well-formed identifier may still identify another user's private document."
+    },
+    {
+      "id": "choice-2",
+      "text": "Hide edit links for nonowners but leave the endpoint unchanged.",
+      "rationale": "Clients can call the endpoint directly; presentation controls do not enforce server-side permission.",
+      "misconception": "Clients can call the endpoint directly; presentation controls do not enforce server-side permission."
+    },
+    {
+      "id": "choice-3",
+      "text": "Authorize the update ability against the resolved document and current user before writing.",
+      "rationale": "Authentication identifies the caller; a resource-specific policy can decide whether that caller may update this document.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Add auth middleware a second time to the same route.",
+      "rationale": "Repeating identity verification does not add a document ownership/permission decision.",
+      "misconception": "Repeating identity verification does not add a document ownership/permission decision."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Authentication identifies the caller; a resource-specific policy can decide whether that caller may update this document.",
+    "trace": [
+      "A well-formed identifier may still identify another user's private document.",
+      "Clients can call the endpoint directly; presentation controls do not enforce server-side permission.",
+      "Authentication identifies the caller; a resource-specific policy can decide whether that caller may update this document.",
+      "Repeating identity verification does not add a document ownership/permission decision."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false]",
+    "probe": "$owner = new Illuminate\\Auth\\GenericUser(['id' => 7]);\n$other = new Illuminate\\Auth\\GenericUser(['id' => 8]);\n$document = (object) ['owner_id' => 7];\n$gate = new Illuminate\\Auth\\Access\\Gate(app(), fn () => $owner);\n$gate->define('update-document', fn ($user, $doc) => $user->id === $doc->owner_id);\necho json_encode([$gate->allows('update-document', $document), $gate->forUser($other)->allows('update-document', $document)]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authorization#authorizing-actions"
+  ]
+}

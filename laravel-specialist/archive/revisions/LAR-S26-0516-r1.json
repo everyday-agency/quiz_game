@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0516",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Exception severity",
+  "subtopic": "exception-level-not-response-status",
+  "objective": {
+    "id": "laravel.exception-level-not-response-status",
+    "text": "Set an exception type's reporting level without changing the response status."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Set operational severity without altering the client’s failure semantics."
+  },
+  "prerequisites": [
+    "Exception log levels",
+    "HTTP status independence"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A plain RuntimeException must remain a normal server-error response but be logged at critical severity. Which exception configuration targets that requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Set the channel’s minimum level to critical and leave the exception’s level unchanged.",
+      "rationale": "A threshold can filter out an error-level record; it does not promote that record to critical.",
+      "misconception": "A threshold can filter out an error-level record; it does not promote that record to critical."
+    },
+    {
+      "id": "choice-2",
+      "text": "$exceptions->level(RuntimeException::class, \"critical\")",
+      "rationale": "The level mapping controls reporting severity; it does not rewrite the exception’s HTTP status.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Add RuntimeException to dontReport and rely on its 500 status to produce a critical log.",
+      "rationale": "Reporting suppression prevents the ordinary log entry instead of changing its level.",
+      "misconception": "Reporting suppression prevents the ordinary log entry instead of changing its level."
+    },
+    {
+      "id": "choice-4",
+      "text": "Return response(\"critical\", 200) from its render callback.",
+      "rationale": "That changes the client response to success rather than setting log severity.",
+      "misconception": "That changes the client response to success rather than setting log severity."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The level mapping controls reporting severity; it does not rewrite the exception’s HTTP status.",
+    "trace": [
+      "A threshold can filter out an error-level record; it does not promote that record to critical.",
+      "The level mapping controls reporting severity; it does not rewrite the exception’s HTTP status.",
+      "Reporting suppression prevents the ordinary log entry instead of changing its level.",
+      "That changes the client response to success rather than setting log severity."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Critical:500",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\napp()->instance(Psr\\Log\\LoggerInterface::class, $logger);\n$handler = app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class);\n$exceptions = new Illuminate\\Foundation\\Configuration\\Exceptions($handler);\n$exceptions->level(RuntimeException::class, 'critical');\n$e = new RuntimeException('fixture');\n$handler->report($e);\n$r = $handler->render(Illuminate\\Http\\Request::create('/api', server: ['HTTP_ACCEPT' => 'application/json']), $e);\necho $capture->getRecords()[0]->level->name.':'.$r->getStatusCode();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/errors#exception-log-levels"
+  ]
+}

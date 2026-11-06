@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0159",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Blade",
+  "subtopic": "asset-stack-accumulation",
+  "objective": {
+    "id": "laravel.asset-stack-accumulation",
+    "text": "Render multiple pushed assets at a stack rather than treating pushes as a single section."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Accumulate contributions instead of overwriting one named section."
+  },
+  "prerequisites": [
+    "Blade stacks",
+    "Multiple template contributions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Two independently included partials each contribute one script tag. The layout must output both contributions in push order. Which Blade arrangement is designed for this?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Each partial uses @stack(\"scripts\"); the layout uses @push(\"scripts\").",
+      "rationale": "This reverses contribution and rendering: stack reads while push writes.",
+      "misconception": "This reverses contribution and rendering: stack reads while push writes."
+    },
+    {
+      "id": "choice-2",
+      "text": "Each partial uses @push(\"scripts\"); the layout renders @stack(\"scripts\").",
+      "rationale": "A stack accumulates multiple pushes for later rendering in the chosen location.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Each partial defines @section(\"scripts\") without @parent; the layout uses @yield(\"scripts\").",
+      "rationale": "Repeated section definitions without parent composition do not express independent accumulated pushes.",
+      "misconception": "Repeated section definitions without parent composition do not express independent accumulated pushes."
+    },
+    {
+      "id": "choice-4",
+      "text": "The layout uses @includeIf(\"scripts\") without registering a scripts view.",
+      "rationale": "Optional inclusion looks up a view; it does not collect script contributions from partials.",
+      "misconception": "Optional inclusion looks up a view; it does not collect script contributions from partials."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A stack accumulates multiple pushes for later rendering in the chosen location.",
+    "trace": [
+      "This reverses contribution and rendering: stack reads while push writes.",
+      "A stack accumulates multiple pushes for later rendering in the chosen location.",
+      "Repeated section definitions without parent composition do not express independent accumulated pushes.",
+      "Optional inclusion looks up a view; it does not collect script contributions from partials."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "A,B",
+    "probe": "file_put_contents(resource_path('views/stacks.blade.php'), <<<'BLADE'\n@push(\"scripts\")\nA\n@endpush\n@push(\"scripts\")\nB\n@endpush\n@stack(\"scripts\")\nBLADE);\necho preg_replace('/\\s+/', '', view('stacks')->render()) === 'AB' ? 'A,B' : 'unexpected';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      4
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/blade#stacks"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0486",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Parallel tests",
+  "subtopic": "parallel-tests-nondatabase-resource-token",
+  "objective": {
+    "id": "laravel.parallel-tests-nondatabase-resource-token",
+    "text": "Isolate non-database temporary resources by test-process token rather than assuming database isolation covers files."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Extend test isolation to a resource not isolated by database naming."
+  },
+  "prerequisites": [
+    "Parallel test processes",
+    "Shared filesystem resources",
+    "Process tokens"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Parallel tests have separate test databases but all write exports/report.csv in the same filesystem. Intermittent overwrites occur. Which change addresses this non-database collision?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Add a database transaction around the CSV write.",
+      "rationale": "A database transaction does not make a shared file path process-specific.",
+      "misconception": "A database transaction does not make a shared file path process-specific."
+    },
+    {
+      "id": "choice-2",
+      "text": "Disable foreign-key checks in each test database.",
+      "rationale": "Foreign-key enforcement is unrelated to two processes writing the same file.",
+      "misconception": "Foreign-key enforcement is unrelated to two processes writing the same file."
+    },
+    {
+      "id": "choice-3",
+      "text": "Keep the shared path because the database suffix also applies to every file operation.",
+      "rationale": "Laravel’s parallel database naming does not automatically rewrite custom file paths.",
+      "misconception": "Laravel’s parallel database naming does not automatically rewrite custom file paths."
+    },
+    {
+      "id": "choice-4",
+      "text": "Include the parallel process token in each process’s export directory and clean up that directory.",
+      "rationale": "A process-specific namespace separates file artifacts; separate database names do not isolate arbitrary filesystem paths.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "A process-specific namespace separates file artifacts; separate database names do not isolate arbitrary filesystem paths.",
+    "trace": [
+      "A database transaction does not make a shared file path process-specific.",
+      "Foreign-key enforcement is unrelated to two processes writing the same file.",
+      "Laravel’s parallel database naming does not automatically rewrite custom file paths.",
+      "A process-specific namespace separates file artifacts; separate database names do not isolate arbitrary filesystem paths."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "separate",
+    "probe": "$parallel = new Illuminate\\Testing\\ParallelTesting(app());\n$parallel->resolveTokenUsing(fn () => 1);\n$a = 'exports/'.$parallel->token().'/report.csv';\n$parallel->resolveTokenUsing(fn () => 2);\n$b = 'exports/'.$parallel->token().'/report.csv';\necho $a !== $b ? 'separate' : 'collision';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/testing#parallel-testing"
+  ]
+}

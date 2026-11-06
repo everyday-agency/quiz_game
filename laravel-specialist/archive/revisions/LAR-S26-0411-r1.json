@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0411",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Storage uploads",
+  "subtopic": "direct-upload-presigned-headers",
+  "objective": {
+    "id": "laravel.direct-upload-presigned-headers",
+    "text": "Use the temporary upload URL and required headers for a supported direct-to-object-storage upload."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Preserve the signed request contract when a browser uploads directly to storage."
+  },
+  "prerequisites": [
+    "Object storage",
+    "Presigned uploads",
+    "HTTP headers"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "An S3 disk supports temporaryUploadUrl. The server has already authorized the object key and supplied the result to the client."
+    ],
+    "files": []
+  },
+  "stem": "The server returns url and headers from temporaryUploadUrl. What should the browser use for the direct upload?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Navigate to the URL with GET and place the file bytes in the query string.",
+      "rationale": "The generated request is for uploading an object, not downloading through GET.",
+      "misconception": "The generated request is for uploading an object, not downloading through GET."
+    },
+    {
+      "id": "choice-2",
+      "text": "Discard the headers because all request details are necessarily encoded in the URL.",
+      "rationale": "Signed upload requests can require headers supplied separately in the returned result.",
+      "misconception": "Signed upload requests can require headers supplied separately in the returned result."
+    },
+    {
+      "id": "choice-3",
+      "text": "Send the file with the signed upload URL and the returned required headers.",
+      "rationale": "The signature describes an upload request; required signed headers must accompany that request.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "POST the URL string as the file body to the application’s ordinary download route.",
+      "rationale": "That does not perform the authorized direct storage upload.",
+      "misconception": "That does not perform the authorized direct storage upload."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The signature describes an upload request; required signed headers must accompany that request.",
+    "trace": [
+      "The generated request is for uploading an object, not downloading through GET.",
+      "Signed upload requests can require headers supplied separately in the returned result.",
+      "The signature describes an upload request; required signed headers must accompany that request.",
+      "That does not perform the authorized direct storage upload."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Filesystem/AwsS3V3Adapter.php",
+    "contains": [
+      "getCommand('PutObject'",
+      "'url' => (string) $uri",
+      "'headers' => $signedRequest->getHeaders()"
+    ],
+    "reason": "The S3 adapter creates a presigned PutObject request and returns its URL plus headers. No S3 SDK request or external bucket upload is executed.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/filesystem#temporary-upload-urls"
+  ]
+}

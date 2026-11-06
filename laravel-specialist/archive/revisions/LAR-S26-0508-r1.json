@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0508",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Logging context",
+  "subtopic": "logger-clear-unrelated-work-context",
+  "objective": {
+    "id": "laravel.logger-clear-unrelated-work-context",
+    "text": "Clear channel context deliberately so unrelated later log entries do not retain it."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Prevent one unit of work’s metadata from contaminating later entries on the same logger."
+  },
+  "prerequisites": [
+    "Logger context lifetime",
+    "Long-lived application work"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "This is one Illuminate Log Logger instance. It has channel context from withContext, not global Context-facade data."
+    ],
+    "files": []
+  },
+  "stem": "After finishing tenant-specific work, the same logger will serve unrelated work. Which operation removes the channel context before those later entries?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "$logger->withContext([])",
+      "rationale": "Merging an empty context leaves existing keys unchanged.",
+      "misconception": "Merging an empty context leaves existing keys unchanged."
+    },
+    {
+      "id": "choice-2",
+      "text": "$logger->info(\"next\", [])",
+      "rationale": "An empty entry context does not erase the logger’s stored context.",
+      "misconception": "An empty entry context does not erase the logger’s stored context."
+    },
+    {
+      "id": "choice-3",
+      "text": "$logger->withoutContext()",
+      "rationale": "The method clears that logger’s stored channel context.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "$logger->info(\"next\", [\"tenant\" => null])",
+      "rationale": "This overrides tenant only on that entry and does not clear other stored keys or future entries.",
+      "misconception": "This overrides tenant only on that entry and does not clear other stored keys or future entries."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The method clears that logger’s stored channel context.",
+    "trace": [
+      "Merging an empty context leaves existing keys unchanged.",
+      "An empty entry context does not erase the logger’s stored context.",
+      "The method clears that logger’s stored channel context.",
+      "This overrides tenant only on that entry and does not clear other stored keys or future entries."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\n$logger->withContext(['tenant' => 'A']);\n$logger->withoutContext();\n$logger->info('next');\necho count($capture->getRecords()[0]->context);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/logging#contextual-information"
+  ]
+}

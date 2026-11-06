@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0557",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Localization",
+  "subtopic": "translation-empty-php-value-versus-missing",
+  "objective": {
+    "id": "laravel.translation-empty-php-value-versus-missing",
+    "text": "Distinguish an absent translation key from a translated empty string."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish a deliberately empty PHP translation from an absent key."
+  },
+  "prerequisites": [
+    "PHP language files",
+    "Empty translations",
+    "Missing keys"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The current locale is en. There are no JSON translation overrides or custom missing-key callbacks."
+    ],
+    "files": [
+      {
+        "path": "lang/en/messages.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nreturn ['notice' => ''];\n"
+      },
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\necho '['.__('messages.notice').']:['.__('messages.absent').']';\n"
+      }
+    ]
+  },
+  "stem": "What is printed?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "[messages.notice]:[messages.absent]",
+      "rationale": "This treats the existing PHP language-file entry as absent solely because it is empty.",
+      "misconception": "This treats the existing PHP language-file entry as absent solely because it is empty."
+    },
+    {
+      "id": "choice-2",
+      "text": "[]:[]",
+      "rationale": "An absent key is not automatically translated to an empty string.",
+      "misconception": "An absent key is not automatically translated to an empty string."
+    },
+    {
+      "id": "choice-3",
+      "text": "[]:[messages.absent]",
+      "rationale": "The PHP translation file provides an empty string for notice; the absent key falls back to its key text.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "[null]:[null]",
+      "rationale": "The helper does not stringify these cases as the text null.",
+      "misconception": "The helper does not stringify these cases as the text null."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The PHP translation file provides an empty string for notice; the absent key falls back to its key text.",
+    "trace": [
+      "This treats the existing PHP language-file entry as absent solely because it is empty.",
+      "An absent key is not automatically translated to an empty string.",
+      "The PHP translation file provides an empty string for notice; the absent key falls back to its key text.",
+      "The helper does not stringify these cases as the text null."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[]:[messages.absent]",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/localization#retrieving-translation-strings"
+  ]
+}

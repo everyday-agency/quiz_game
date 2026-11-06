@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0115",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Validation",
+  "subtopic": "date-comparison-equality-boundary",
+  "objective": {
+    "id": "laravel.date-comparison-equality-boundary",
+    "text": "Apply a field comparison rule to a date interval and test the equality boundary."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Test the equality boundary that distinguishes inclusive from strict ordering."
+  },
+  "prerequisites": [
+    "Date validation",
+    "Inclusive date comparisons"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A date range may start and end on the same day, but may not end earlier. A developer changes end from after_or_equal:start to after:start. Which previously valid case detects that regression?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "start=2030-04-10, end=2030-04-10",
+      "rationale": "Equality passes the inclusive rule but fails the strictly-after rule.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "start=2030-04-10, end=2030-04-09",
+      "rationale": "An earlier date fails both rules and therefore does not distinguish the regression.",
+      "misconception": "An earlier date fails both rules and therefore does not distinguish the regression."
+    },
+    {
+      "id": "choice-3",
+      "text": "start=2030-04-10, end=not-a-date",
+      "rationale": "Invalid date text is rejected regardless of the equality policy.",
+      "misconception": "Invalid date text is rejected regardless of the equality policy."
+    },
+    {
+      "id": "choice-4",
+      "text": "start=2030-04-10, end=2030-04-11",
+      "rationale": "A later date passes both rules, so it does not reveal the change.",
+      "misconception": "A later date passes both rules, so it does not reveal the change."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Equality passes the inclusive rule but fails the strictly-after rule.",
+    "trace": [
+      "Equality passes the inclusive rule but fails the strictly-after rule.",
+      "An earlier date fails both rules and therefore does not distinguish the regression.",
+      "Invalid date text is rejected regardless of the equality policy.",
+      "A later date passes both rules, so it does not reveal the change."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false]",
+    "probe": "$data = ['start' => '2030-04-10', 'end' => '2030-04-10'];\necho json_encode([\n    validator($data, ['start' => 'date', 'end' => 'date|after_or_equal:start'])->passes(),\n    validator($data, ['start' => 'date', 'end' => 'date|after:start'])->passes(),\n]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-after-or-equal"
+  ]
+}

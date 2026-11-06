@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0413",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Storage security",
+  "subtopic": "disk-path-root-traversal",
+  "objective": {
+    "id": "laravel.disk-path-root-traversal",
+    "text": "Reject a path traversal segment rather than allowing a storage key to escape its disk root."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recognize the disk boundary when an input attempts to traverse above its root."
+  },
+  "prerequisites": [
+    "Filesystem relative paths",
+    "Path normalization"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The standard local Flysystem adapter is used; no custom path normalizer is installed."
+    ],
+    "files": []
+  },
+  "stem": "What happens when Storage::disk(\"local\")->put(\"../outside.txt\", \"x\") attempts to escape the disk root?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The file is written one directory above the configured root.",
+      "rationale": "The disk abstraction does not grant arbitrary parent-directory traversal through this key.",
+      "misconception": "The disk abstraction does not grant arbitrary parent-directory traversal through this key."
+    },
+    {
+      "id": "choice-2",
+      "text": "Path normalization rejects the traversal with an exception.",
+      "rationale": "Flysystem rejects a parent traversal that would move above the root; it is not a permitted relative storage key.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The leading ../ is silently removed and outside.txt is stored at the root.",
+      "rationale": "An escaping parent segment is rejected rather than automatically sanitized into a different valid key.",
+      "misconception": "An escaping parent segment is rejected rather than automatically sanitized into a different valid key."
+    },
+    {
+      "id": "choice-4",
+      "text": "Laravel creates a new disk named outside and writes there.",
+      "rationale": "Path strings do not dynamically define filesystem disks.",
+      "misconception": "Path strings do not dynamically define filesystem disks."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Flysystem rejects a parent traversal that would move above the root; it is not a permitted relative storage key.",
+    "trace": [
+      "The disk abstraction does not grant arbitrary parent-directory traversal through this key.",
+      "Flysystem rejects a parent traversal that would move above the root; it is not a permitted relative storage key.",
+      "An escaping parent segment is rejected rather than automatically sanitized into a different valid key.",
+      "Path strings do not dynamically define filesystem disks."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "rejected",
+    "probe": "try {\n    Illuminate\\Support\\Facades\\Storage::put('../outside.txt', 'x');\n} catch (League\\Flysystem\\PathTraversalDetected $e) {\n    echo 'rejected';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/filesystem#specifying-a-file-name"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0429",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Cache consistency",
+  "subtopic": "cache-publication-after-commit",
+  "objective": {
+    "id": "laravel.cache-publication-after-commit",
+    "text": "Invalidate or publish cache changes after commit so a rolled-back write does not become cached truth."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Avoid publishing a new value that a rolled-back database write never committed."
+  },
+  "prerequisites": [
+    "Database transactions",
+    "Cache publication",
+    "Rollback"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The requirement is to avoid publishing rolled-back values; perfect consistency with all concurrent readers is a separate concern."
+    ],
+    "files": []
+  },
+  "stem": "A transaction changes a product price and updates its cache before a later statement fails. The cache now shows a price absent from the database. Which placement avoids that failure path?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Schedule the cache publication in DB::afterCommit.",
+      "rationale": "An after-commit callback is discarded on rollback, so this failed transaction cannot publish its uncommitted value.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Keep the cache write inside the closure and increase the transaction retry count.",
+      "rationale": "The cache is not transactionally rolled back merely because the database closure may retry.",
+      "misconception": "The cache is not transactionally rolled back merely because the database closure may retry."
+    },
+    {
+      "id": "choice-3",
+      "text": "Write the cache before beginning the database transaction.",
+      "rationale": "That publishes the new value even earlier and still survives a database rollback.",
+      "misconception": "That publishes the new value even earlier and still survives a database rollback."
+    },
+    {
+      "id": "choice-4",
+      "text": "Publish in finally so every exit updates the cache.",
+      "rationale": "finally also runs on failure and would publish the rolled-back value.",
+      "misconception": "finally also runs on failure and would publish the rolled-back value."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "An after-commit callback is discarded on rollback, so this failed transaction cannot publish its uncommitted value.",
+    "trace": [
+      "An after-commit callback is discarded on rollback, so this failed transaction cannot publish its uncommitted value.",
+      "The cache is not transactionally rolled back merely because the database closure may retry.",
+      "That publishes the new value even earlier and still survives a database rollback.",
+      "finally also runs on failure and would publish the rolled-back value."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "old",
+    "probe": "use Illuminate\\Support\\Facades\\DB;\nuse Illuminate\\Support\\Facades\\Cache;\nCache::put('price', 'old', 60);\ntry {\n    DB::transaction(function () {\n        DB::afterCommit(fn () => Cache::put('price', 'new', 60));\n        throw new RuntimeException('rollback');\n    });\n} catch (RuntimeException $e) {\n}\necho Cache::get('price');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database#database-transactions",
+    "https://laravel.com/docs/13.x/cache#storing-items-in-the-cache"
+  ]
+}

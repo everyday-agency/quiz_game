@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0528",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Password reset throttling",
+  "subtopic": "reset-link-issuance-throttle",
+  "objective": {
+    "id": "laravel.reset-link-issuance-throttle",
+    "text": "Refuse repeated token creation within the configured issuance throttle window."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish refusing a new issuance from invalidating the existing token."
+  },
+  "prerequisites": [
+    "Password broker sendResetLink",
+    "Issuance throttle",
+    "Token replacement"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The repository throttle is 60 seconds. A matching user exists. Two sendResetLink calls occur within that window; the delivery callback has no side effects outside the test."
+    ],
+    "files": []
+  },
+  "stem": "What does the second call do?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "It returns the throttled status without creating or delivering a replacement token.",
+      "rationale": "The broker checks recentlyCreatedToken before creating a new token or invoking the delivery callback.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "It reuses the same plaintext token by reading it back from the token column.",
+      "rationale": "The column contains a hash, and the throttled path does not reconstruct or resend plaintext from it.",
+      "misconception": "The column contains a hash, and the throttled path does not reconstruct or resend plaintext from it."
+    },
+    {
+      "id": "choice-3",
+      "text": "It invalidates the current token and returns an invalid-user status.",
+      "rationale": "Throttling neither means the user is absent nor requires deleting the existing token.",
+      "misconception": "Throttling neither means the user is absent nor requires deleting the existing token."
+    },
+    {
+      "id": "choice-4",
+      "text": "It creates a replacement token but delays only the notification callback.",
+      "rationale": "The throttle check occurs before token creation, not just before notification.",
+      "misconception": "The throttle check occurs before token creation, not just before notification."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The broker checks recentlyCreatedToken before creating a new token or invoking the delivery callback.",
+    "trace": [
+      "The broker checks recentlyCreatedToken before creating a new token or invoking the delivery callback.",
+      "The column contains a hash, and the throttled path does not reconstruct or resend plaintext from it.",
+      "Throttling neither means the user is absent nor requires deleting the existing token.",
+      "The throttle check occurs before token creation, not just before notification."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "passwords.sent:passwords.throttled:1",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('users', function ($t) {\n    $t->id();\n    $t->string('email')->unique();\n    $t->string('password');\n    $t->string('remember_token')->nullable();\n    $t->timestamp('email_verified_at')->nullable();\n});\nSchema::create('password_reset_tokens', function ($t) {\n    $t->string('email')->primary();\n    $t->string('token');\n    $t->timestamp('created_at')->nullable();\n});\nclass Member extends Illuminate\\Foundation\\Auth\\User implements Illuminate\\Contracts\\Auth\\MustVerifyEmail\n{\n    protected $table = 'users';\n    protected $guarded = [];\n    public $timestamps = false;\n}\n$hasher = new Illuminate\\Hashing\\BcryptHasher(['rounds' => 4]);\n$user = Member::create(['email' => 'ada@example.test', 'password' => $hasher->make('old-password')]);\n$tokens = new Illuminate\\Auth\\Passwords\\DatabaseTokenRepository(\n    DB::connection(), $hasher, 'password_reset_tokens', 'fixture-hash-key', 3600, 60,\n);\n$provider = new Illuminate\\Auth\\EloquentUserProvider($hasher, Member::class);\n$broker = new Illuminate\\Auth\\Passwords\\PasswordBroker($tokens, $provider, timeboxDuration: 0);\n$sent = 0;\n$deliver = function ($member, $token) use (&$sent) {\n    $sent++;\n};\n$a = $broker->sendResetLink(['email' => $user->email], $deliver);\n$b = $broker->sendResetLink(['email' => $user->email], $deliver);\necho $a.':'.$b.':'.$sent;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/passwords#requesting-the-password-reset-link"
+  ]
+}

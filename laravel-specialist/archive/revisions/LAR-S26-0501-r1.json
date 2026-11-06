@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0501",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Exception reporting",
+  "subtopic": "report-callback-stop-default-logging",
+  "objective": {
+    "id": "laravel.report-callback-stop-default-logging",
+    "text": "Stop default exception logging deliberately from a custom report callback while retaining its own reporting action."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Control duplicate reporting without confusing reporting with HTTP rendering."
+  },
+  "prerequisites": [
+    "Exception reporting callbacks",
+    "Default logging propagation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A custom exception report callback sends a failure to an internal collector. For that exception, the normal Laravel log entry must not also be written. What should the callback return to stop that default reporting path?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "false",
+      "rationale": "Returning false from the report callback stops propagation to the default logger after the callback’s own action.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "A JSON response with status 500",
+      "rationale": "Reporting callbacks do not choose the client response; returning a response object is not the false sentinel.",
+      "misconception": "Reporting callbacks do not choose the client response; returning a response object is not the false sentinel."
+    },
+    {
+      "id": "choice-3",
+      "text": "true",
+      "rationale": "A true return is not the callback’s stop-propagation sentinel.",
+      "misconception": "A true return is not the callback’s stop-propagation sentinel."
+    },
+    {
+      "id": "choice-4",
+      "text": "null",
+      "rationale": "A normal null return allows the default reporting path to continue.",
+      "misconception": "A normal null return allows the default reporting path to continue."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Returning false from the report callback stops propagation to the default logger after the callback’s own action.",
+    "trace": [
+      "Returning false from the report callback stops propagation to the default logger after the callback’s own action.",
+      "Reporting callbacks do not choose the client response; returning a response object is not the false sentinel.",
+      "A true return is not the callback’s stop-propagation sentinel.",
+      "A normal null return allows the default reporting path to continue."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\napp()->instance(Psr\\Log\\LoggerInterface::class, $logger);\n$handler = app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class);\n$exceptions = new Illuminate\\Foundation\\Configuration\\Exceptions($handler);\n$sent = 0;\n$exceptions->report(function (DomainException $e) use (&$sent) {\n    $sent++;\n    return false;\n});\n$handler->report(new DomainException('fixture'));\necho $sent.':'.count($capture->getRecords());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/errors#reporting-exceptions"
+  ]
+}

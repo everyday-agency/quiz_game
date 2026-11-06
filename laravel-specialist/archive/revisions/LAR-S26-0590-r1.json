@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0590",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Integration resilience",
+  "subtopic": "retry-classifier-transient-safe-failure",
+  "objective": {
+    "id": "laravel.retry-classifier-transient-safe-failure",
+    "text": "Apply a retry budget only to safe transient failures instead of retrying every domain rejection."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep bounded retries for failures that another attempt can plausibly resolve."
+  },
+  "prerequisites": [
+    "HTTP retries",
+    "Domain rejection",
+    "Idempotent operations"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "A read-only remote eligibility check returns 503 for a temporary outage and 422 for a stable business rejection. No client input changes between attempts."
+    ],
+    "files": []
+  },
+  "stem": "Which retry classifier fits these contracts?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Retry 422 but stop immediately on 503.",
+      "rationale": "That reverses the stated distinction between stable rejection and transient outage.",
+      "misconception": "That reverses the stated distinction between stable rejection and transient outage."
+    },
+    {
+      "id": "choice-2",
+      "text": "Retry only when the JSON body is empty, regardless of status.",
+      "rationale": "Body emptiness does not encode this service’s transient-versus-domain failure contract.",
+      "misconception": "Body emptiness does not encode this service’s transient-versus-domain failure contract."
+    },
+    {
+      "id": "choice-3",
+      "text": "Retry every non-2xx response with the same budget.",
+      "rationale": "That spends attempts on a domain rejection the contract says will not change for this input.",
+      "misconception": "That spends attempts on a domain rejection the contract says will not change for this input."
+    },
+    {
+      "id": "choice-4",
+      "text": "Retry the temporary 503 within a small budget; return the 422 rejection without repeating identical input.",
+      "rationale": "The read is safe to repeat and the transient outage may recover, while unchanged input will not resolve the specified stable rejection.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The read is safe to repeat and the transient outage may recover, while unchanged input will not resolve the specified stable rejection.",
+    "trace": [
+      "That reverses the stated distinction between stable rejection and transient outage.",
+      "Body emptiness does not encode this service’s transient-versus-domain failure contract.",
+      "That spends attempts on a domain rejection the contract says will not change for this input.",
+      "The read is safe to repeat and the transient outage may recover, while unchanged input will not resolve the specified stable rejection."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "503=2;422=1",
+    "probe": "$factory = new class extends Illuminate\\Http\\Client\\Factory\n{\n    protected function newPendingRequest()\n    {\n        return parent::newPendingRequest()->setHandler(function () {\n            throw new LogicException('No transport permitted in this fixture');\n        });\n    }\n};\nIlluminate\\Support\\Facades\\Http::swap($factory);\nuse Illuminate\\Support\\Facades\\Http;\n$attempts = 0;\n$status = 503;\nHttp::fake(function () use (&$attempts, &$status) {\n    $attempts++;\n    return Http::response([], $status);\n});\nforeach ([503, 422] as $status) {\n    $attempts = 0;\n    Http::retry(2, 0, fn ($e) => $e instanceof Illuminate\\Http\\Client\\RequestException && $e->response->status() === 503, throw: false)\n        ->get('https://eligibility.test/check');\n    echo $status.'='.$attempts.($status === 503 ? ';' : '');\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#retries"
+  ]
+}

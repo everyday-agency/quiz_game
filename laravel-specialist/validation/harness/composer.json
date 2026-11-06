@@ -1,0 +1,13 @@
+{
+  "name": "quiz/laravel-validation-harness",
+  "description": "Local-only patched Laravel 13 contract/behavior validation; never shipped with the quiz",
+  "type": "project",
+  "require": {"php": "^8.4", "laravel/framework": "^13.0"},
+  "require-dev": {
+    "fakerphp/faker": "^1.24",
+    "inertiajs/inertia-laravel": "^3.0",
+    "phpunit/phpunit": "^12.0"
+  },
+  "config": {"allow-plugins": false, "sort-packages": true},
+  "minimum-stability": "stable"
+}

@@ -1,0 +1,243 @@
+# Laravel Specialist — Generate 600 Professional Examination Questions
+
+## Mission
+
+The PHP Engineer examination bank is now complete. We have developed a rigorous workflow for writing, testing, reviewing, and publishing high-quality programming questions.
+
+Your next mission is to create **600 entirely new Laravel Specialist examination questions**, using the same quality standards and infrastructure.
+
+Work autonomously through all 600 questions without requesting approval after each batch.
+
+However, generate, validate, and save the work in **six batches of 100 questions**. Do not produce all 600 as one unvalidated generation step.
+
+## 1. Preserve the Existing Application
+
+The quiz application is a static JavaScript application hosted on GitHub Pages, not a Laravel backend.
+
+Requirements:
+
+- Preserve the existing 620 PHP questions completely.
+- Do not modify PHP question IDs, answers, explanations, grading or progress.
+- Preserve the existing application, styling and code viewer.
+- Archive any existing legacy Laravel questions before replacing them.
+- Keep the new Laravel questions in a separate review collection until approved.
+- Do not introduce a Laravel backend, database or API to the quiz application.
+- Do not push, merge, deploy or activate the new questions yet.
+
+Reuse the existing question schema, authoring helpers, validation infrastructure and editorial workflow wherever appropriate.
+
+## 2. Generate 600 Laravel Questions
+
+Create six batches of 100 original questions.
+
+Cover Laravel application development comprehensively, including:
+
+**Laravel fundamentals**
+- Application structure and configuration
+- Environment variables
+- Request lifecycle
+- Artisan commands
+- Service container and dependency injection
+
+**Routing**
+- GET, POST, PUT, PATCH and DELETE
+- Route parameters and naming
+- Route groups and prefixes
+- Middleware
+- Route model binding and scoped bindings
+- Signed URLs
+
+**Controllers and Requests**
+- Controller responsibilities
+- Request handling
+- Form Requests
+- Input validation
+- Authorization and policies
+- Responses, redirects and JSON
+
+**Database and Eloquent**
+- Migrations and schema changes
+- Foreign keys and deletion policies
+- Models and relationships
+- Query Builder
+- Eager loading and N+1 problems
+- Transactions
+- Factories and seeders
+
+**Frontend integration**
+- Blade templates and components
+- Forms and CSRF
+- Session data and flash messages
+- API responses
+- Laravel with modern JavaScript frontends
+- Inertia integration where relevant
+
+**Professional Laravel engineering**
+- Authentication and authorization
+- File uploads and storage
+- Mail and notifications
+- Queues, jobs and scheduling
+- Caching
+- Events and listeners
+- Testing with PHPUnit/Pest
+- Security
+- Logging and debugging
+- Performance
+- Application architecture
+- Deployment and production configuration
+
+Include genuine engineering decision-making, not just method-name recall.
+
+Use the repository's supported Laravel version as the primary compatibility target. Identify version-dependent behavior explicitly and avoid relying on deprecated or incompatible APIs.
+
+## 3. Question Formats
+
+Use the six formats established in the PHP Engineer bank:
+
+1. Code execution and behavior prediction
+2. Debugging
+3. Code review and refactoring
+4. Implementation choices
+5. Testing and regression detection
+6. Application architecture
+
+Include Foundation, Intermediate and Advanced questions.
+
+Difficulty must be based on the reasoning required, not merely on obscure Laravel features.
+
+Questions should increasingly resemble situations an actual Laravel developer encounters when maintaining a real application.
+
+## 4. Question Quality Requirements
+
+Every question must have:
+
+- One specific, meaningful learning objective.
+- Four plausible answer options.
+- Exactly one objectively defensible correct answer.
+- Accurate explanations for all four alternatives.
+- Readable, properly formatted code where applicable.
+- Complete context and clearly stated assumptions.
+- Appropriate prerequisites.
+- Relevant Laravel/PHP documentation references.
+- Stable ID and revision metadata.
+- Technical validation evidence.
+
+Do not generate questions by repeatedly changing variable names, numbers, or superficial scenarios.
+
+Avoid:
+
+- Obvious distractors.
+- Repetitive question templates.
+- Correct answers identifiable through length or wording.
+- Assumptions that reveal the answer.
+- Questions that reproduce their own solution in the displayed code.
+- Unnecessarily obscure trivia.
+- Incorrect Laravel methods or fabricated framework behavior.
+
+When testing code behavior, validate it against a real compatible Laravel installation where feasible.
+
+PHP syntax checks alone are insufficient to validate Laravel framework behavior.
+
+For scenarios that cannot reasonably be executed, use documented-contract validation and label them explicitly. Never invent test results.
+
+## 5. Curriculum Mapping
+
+Our Laravel Specialist course currently has the following completed lessons:
+
+1. Laravel fundamentals
+2. Routing
+3. Controllers
+4. Blade
+5. HTTP Requests
+6. Request validation
+7. Form Request classes
+8. Middleware
+
+Lesson 9, Eloquent ORM, is planned next.
+
+Map questions to Lessons 1–8 only when the complete set of required knowledge genuinely belongs to those lessons.
+
+Leave advanced and future topics unmapped rather than inventing lesson numbers.
+
+Question identity must remain independent of curriculum mapping.
+
+The bank must eventually support full Laravel Specialist examinations, not just the material already studied.
+
+## 6. Autonomous Batch Workflow
+
+Complete batches 1 through 6 sequentially.
+
+For every batch:
+
+1. Inspect existing objectives and accepted questions.
+2. Plan 100 distinct assessment objectives.
+3. Author complete questions.
+4. Validate executable examples.
+5. Check every answer option.
+6. Review explanations and distractors.
+7. Detect duplicated reasoning against all previously accepted questions.
+8. Repair confirmed defects.
+9. Save the accepted batch and validation evidence.
+10. Record an accurate checkpoint before moving on.
+
+If interrupted, resume from the saved checkpoint without regenerating completed batches.
+
+Do not repeatedly request clarification when the established PHP workflow already supplies the necessary conventions.
+
+## 7. Editorial Audit
+
+After completing all 600 questions, perform the same systematic editorial audit developed for PHP.
+
+Check:
+
+- Answer leakage
+- Wording and length cues
+- Weak distractors
+- Duplicate concepts
+- Ambiguous answers
+- Incorrect difficulty levels
+- Unrealistic engineering scenarios
+- Version-specific behavior
+- Curriculum mapping accuracy
+
+Retain historical revisions for corrected questions.
+
+Internal review does not constitute independent editorial approval.
+
+## 8. Application Integration
+
+Prepare a Laravel-only review collection inside the existing static quiz application.
+
+It should use the existing code viewer, Learn/Exam modes, grading, answer explanations and saved-progress architecture.
+
+Keep its progress separate from PHP and historical Laravel results.
+
+Do not reintroduce unnecessary review filters or duplicate interfaces previously removed.
+
+The current public PHP-only application must remain unchanged until the Laravel collection is independently approved for release.
+
+## 9. Final Deliverables
+
+Produce:
+
+- 600 new Laravel questions in six validated batches.
+- Complete technical validation evidence.
+- Editorial audit report.
+- Objective and curriculum coverage report.
+- Duplicate detection results.
+- 30 representative questions for independent review.
+- Accurate final question counts.
+- A clear list of unresolved issues.
+- Confirmation that the PHP bank remains unchanged.
+
+Run applicable regression and browser tests.
+
+**Do not push, merge, deploy, or activate the Laravel questions.**
+
+## Final Objective
+
+Build a professional Laravel Specialist examination bank that genuinely tests whether someone understands how to design, debug, implement and maintain Laravel applications.
+
+Prioritize correctness, practical engineering competence and meaningful reasoning over superficial volume.
+
+Complete all six batches autonomously, saving checkpoints and validating each batch before continuing.

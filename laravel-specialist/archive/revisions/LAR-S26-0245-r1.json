@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0245",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Polymorphic relationships",
+  "subtopic": "stable-polymorphic-aliases",
+  "objective": {
+    "id": "laravel.stable-polymorphic-aliases",
+    "text": "Use stable morph aliases instead of coupling persisted types to PHP class names."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Decouple stored polymorphic identity from PHP namespace changes while planning existing-data migration."
+  },
+  "prerequisites": [
+    "Eloquent morph maps",
+    "Persisted type identifiers",
+    "Class refactoring"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A commentable_type column currently stores PHP class names. The team expects to move model namespaces without rewriting historical rows on each move. Which design provides a stable boundary, including the initial transition?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Rename the PHP classes and leave all stored type strings and mappings untouched.",
+      "rationale": "Historical class-name values still refer to the old names unless compatibility or migration is provided.",
+      "misconception": "Historical class-name values still refer to the old names unless compatibility or migration is provided."
+    },
+    {
+      "id": "choice-2",
+      "text": "Store only commentable_id and infer the model type from the numeric range.",
+      "rationale": "Different target tables may share identifiers, so this loses explicit polymorphic identity.",
+      "misconception": "Different target tables may share identifiers, so this loses explicit polymorphic identity."
+    },
+    {
+      "id": "choice-3",
+      "text": "Define stable morph aliases, migrate existing type values to those aliases, and enforce the map.",
+      "rationale": "Stored aliases remain stable while the application map points them to current classes; old class-name rows need an intentional transition.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Add a serialization accessor for commentable_type but leave the relation mapping unchanged.",
+      "rationale": "Presentation-only transformation does not establish the persisted-type resolution contract.",
+      "misconception": "Presentation-only transformation does not establish the persisted-type resolution contract."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Stored aliases remain stable while the application map points them to current classes; old class-name rows need an intentional transition.",
+    "trace": [
+      "Historical class-name values still refer to the old names unless compatibility or migration is provided.",
+      "Different target tables may share identifiers, so this loses explicit polymorphic identity.",
+      "Stored aliases remain stable while the application map points them to current classes; old class-name rows need an intentional transition.",
+      "Presentation-only transformation does not establish the persisted-type resolution contract."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "post:Text",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\Relation;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nforeach (['posts', 'videos'] as $name) {\n    Schema::create($name, function ($t) {\n        $t->id();\n        $t->string('title');\n    });\n}\nSchema::create('comments', function ($t) {\n    $t->id();\n    $t->string('commentable_type');\n    $t->unsignedBigInteger('commentable_id');\n    $t->string('body');\n});\nclass Post extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n}\nclass Video extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n}\nclass Comment extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n\n    public function commentable()\n    {\n        return $this->morphTo();\n    }\n}\nRelation::enforceMorphMap(['post' => Post::class, 'video' => Video::class]);\nPost::create(['id' => 1, 'title' => 'Text']);\nVideo::create(['id' => 1, 'title' => 'Film']);\nComment::insert([\n    ['id' => 1, 'commentable_type' => 'post', 'commentable_id' => 1, 'body' => 'P'],\n    ['id' => 2, 'commentable_type' => 'video', 'commentable_id' => 1, 'body' => 'V'],\n]);\necho (new Post())->getMorphClass().':'.Comment::find(1)->commentable->title;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#custom-polymorphic-types"
+  ]
+}

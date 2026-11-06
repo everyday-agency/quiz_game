@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0138",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Form Requests",
+  "subtopic": "rules-method-service-injection",
+  "objective": {
+    "id": "laravel.rules-method-service-injection",
+    "text": "Inject a service into rules through the container instead of reading global state."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Resolve a method dependency before constructing data-dependent rules."
+  },
+  "prerequisites": [
+    "Service container",
+    "Form Request rules",
+    "Array maximum"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass PlanLimits\n{\n    public int $members = 2;\n}\n\nclass InviteRequest extends FormRequest\n{\n    public function authorize(): bool\n    {\n        return true;\n    }\n\n    public function rules(PlanLimits $limits): array\n    {\n        return ['members' => ['required', 'array', 'max:'.$limits->members]];\n    }\n}\n"
+      }
+    ]
+  },
+  "stem": "No custom binding overrides PlanLimits. Three members are submitted. Which outcome follows when Laravel validates this request?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The maximum is interpreted as two bytes of JSON.",
+      "rationale": "For an array-valued field, max constrains its item count rather than serialized byte length.",
+      "misconception": "For an array-valued field, max constrains its item count rather than serialized byte length."
+    },
+    {
+      "id": "choice-2",
+      "text": "A missing PlanLimits argument error occurs before validation.",
+      "rationale": "Laravel supplies this concrete dependency through the container; no manual argument is required.",
+      "misconception": "Laravel supplies this concrete dependency through the container; no manual argument is required."
+    },
+    {
+      "id": "choice-3",
+      "text": "Validation fails because rules receives PlanLimits and limits the array to two entries.",
+      "rationale": "Laravel calls the rules method through the container, resolves PlanLimits, and applies max:2 to the members array.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Validation passes because rules cannot receive dependencies.",
+      "rationale": "The rules method supports container injection, so its returned rules are applied.",
+      "misconception": "The rules method supports container injection, so its returned rules are applied."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Laravel calls the rules method through the container, resolves PlanLimits, and applies max:2 to the members array.",
+    "trace": [
+      "For an array-valued field, max constrains its item count rather than serialized byte length.",
+      "Laravel supplies this concrete dependency through the container; no manual argument is required.",
+      "Laravel calls the rules method through the container, resolves PlanLimits, and applies max:2 to the members array.",
+      "The rules method supports container injection, so its returned rules are applied."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "members",
+    "probe": "require getcwd().'/probe.php';\n$r = InviteRequest::create('/invite', 'POST', ['members' => ['Ada', 'Grace', 'Linus']]);\n$r->setContainer(app())->setRedirector(app('redirect'));\ntry {\n    $r->validateResolved();\n} catch (Illuminate\\Validation\\ValidationException $e) {\n    echo array_key_first($e->errors());\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      1,
+      6,
+      7
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#creating-form-requests"
+  ]
+}

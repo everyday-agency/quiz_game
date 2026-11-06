@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0437",
+  "revision": 2,
+  "status": "internal-validated",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "HTTP client errors",
+  "subtopic": "http-connection-failure-no-response",
+  "objective": {
+    "id": "laravel.http-connection-failure-no-response",
+    "text": "Distinguish a connection failure from an HTTP response error."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Handle a transport failure that has no HTTP status to inspect."
+  },
+  "prerequisites": [
+    "ConnectionException",
+    "HTTP status versus transport failure"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The remote host cannot be reached and no HTTP response is received. With an ordinary Http::get call, which handling strategy covers that failure?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Catch ConnectionException separately from checking HTTP response statuses.",
+      "rationale": "A connection failure is represented by an exception because no response status exists to inspect.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Treat the call as a successful empty response when no throw() was configured.",
+      "rationale": "Default non-throwing HTTP-status behavior does not suppress transport exceptions.",
+      "misconception": "Default non-throwing HTTP-status behavior does not suppress transport exceptions."
+    },
+    {
+      "id": "choice-3",
+      "text": "Check $response->status() === 500 after every connection failure.",
+      "rationale": "A connection failure does not create a server-generated HTTP 500 response object.",
+      "misconception": "A connection failure does not create a server-generated HTTP 500 response object."
+    },
+    {
+      "id": "choice-4",
+      "text": "Use only $response->failed() without catching transport exceptions.",
+      "rationale": "The failed method requires a response and cannot handle a call that throws before returning one.",
+      "misconception": "The failed method requires a response and cannot handle a call that throws before returning one."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "A connection failure is represented by an exception because no response status exists to inspect.",
+    "trace": [
+      "A connection failure is represented by an exception because no response status exists to inspect.",
+      "Default non-throwing HTTP-status behavior does not suppress transport exceptions.",
+      "A connection failure does not create a server-generated HTTP 500 response object.",
+      "The failed method requires a response and cannot handle a call that throws before returning one."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "connection",
+    "probe": "$factory = new class extends Illuminate\\Http\\Client\\Factory\n{\n    protected function newPendingRequest()\n    {\n        return parent::newPendingRequest()->setHandler(function () {\n            throw new LogicException('No transport permitted in this fixture');\n        });\n    }\n};\nIlluminate\\Support\\Facades\\Http::swap($factory);\nuse Illuminate\\Support\\Facades\\Http;\nHttp::fake(['*' => Http::failedConnection('fixture connection failure')]);\ntry {\n    Http::get('https://api.example.test/report');\n} catch (Illuminate\\Http\\Client\\ConnectionException $e) {\n    echo 'connection';\n}",
+    "status": "runtime-verified",
+    "independentEditorialReview": "pending",
+    "evidence": "laravel-specialist/evidence/batch-5-technical.json"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#timeout"
+  ]
+}

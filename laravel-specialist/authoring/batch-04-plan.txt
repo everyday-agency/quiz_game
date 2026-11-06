@@ -1,0 +1,100 @@
+301 | Queue dispatch | Distinguish queued dispatch from immediate handler execution on an asynchronous connection.
+302 | Queue dispatch | Distinguish after-response work in the current PHP process from durable broker-backed background execution.
+303 | Queue dispatch | Distinguish a queue name from a queue connection when routing a job.
+304 | Queue lifecycle | Resolve handle dependencies at execution rather than serializing service objects in the constructor.
+305 | Queue serialization | Recognize that serialized Eloquent models are restored from current database state.
+306 | Queue serialization | Exclude loaded relationships from a serialized job model when they are not required.
+307 | Queue serialization | Account for relationship constraints being lost when serialized relations are restored.
+308 | Queue lifecycle | Discard a job whose required model has been deleted using the explicit missing-model policy.
+309 | Queue transactions | Defer job enqueueing until the surrounding transaction commits.
+310 | Queue transactions | Override connection-level after-commit dispatch when deliberate pre-commit execution is required.
+311 | Queue payloads | Pass a durable storage reference instead of a request-lifetime uploaded-file object.
+312 | Queue safety | Recheck mutable authorization at execution time for a deferred privileged operation.
+313 | Queue idempotency | Prevent duplicate job deliveries from creating duplicate database results with a unique operation key.
+314 | Queue idempotency | Design an outbox to close the commit-versus-publish failure window without claiming exactly-once delivery.
+315 | Queue retries | Recognize that releasing a job does not return from the current handle method.
+316 | Queue retries | Count released reservations toward the worker attempt budget.
+317 | Queue retries | Select a backoff delay from an attempt-indexed array with last-value fallback.
+318 | Queue retries | Bound job retries by a retryUntil deadline rather than an assumed count-only limit.
+319 | Queue timeouts | Keep worker timeout below connection retry_after to avoid overlapping processing.
+320 | Queue failures | Distinguish explicitly failing a job from throwing an exception eligible for retry.
+321 | Queue failures | Avoid relying on unsaved handle-time object mutations inside the failed callback.
+322 | Queue failures | Distinguish retrying a failed job from deleting its failed-job record.
+323 | Queue uniqueness | Use ShouldBeUnique to reject duplicate dispatches while its uniqueness lock is held.
+324 | Queue uniqueness | Release a ShouldBeUniqueUntilProcessing lock before handling rather than after completion.
+325 | Queue uniqueness | Share the uniqueness-lock store across dispatching application nodes.
+326 | Queue middleware | Distinguish dispatch uniqueness from overlap prevention during job processing.
+327 | Queue middleware | Share an overlap key across different job classes when they mutate the same resource.
+328 | Queue middleware | Set an overlap-lock expiration to recover after a worker crashes before releasing it.
+329 | Queue middleware | Use Skip to delete obsolete work without consuming a failed-job path.
+330 | Queue rate limits | Account for rate-limit releases when choosing a job's attempts or retry deadline.
+331 | Job chains | Run chained jobs in order and stop downstream work after an unhandled job failure.
+332 | Job chains | Pass serialized constructor data explicitly instead of assuming one handle return becomes the next input.
+333 | Job chains | Append work to the current chain using the supported job-chain operation.
+334 | Job batches | Distinguish a batch completion callback from its all-success callback.
+335 | Job batches | Choose allowFailures when one failed job must not automatically cancel unrelated batch work.
+336 | Job batches | Check batch cancellation in a long-running or queued job rather than assuming all jobs stop immediately.
+337 | Queue tests | Separate a dispatch assertion from verification of the job handler's side effects.
+338 | Queue tests | Assert dispatch to the intended named queue as well as the job type.
+339 | Queue workers | Restart long-lived workers after code changes because they do not reload the application per job.
+340 | Queue workers | Limit worker lifetime to contain state or memory growth while preserving process supervision.
+341 | Events | Distinguish event dispatch side effects from a function's direct return value.
+342 | Events | Stop ordinary listener propagation when a listener returns false.
+343 | Events | Use until to return the first non-null listener response instead of collecting every response.
+344 | Events | Dispatch an event after database commit when listeners require committed data.
+345 | Event listeners | Queue a listener through ShouldQueue rather than queueing every listener for that event.
+346 | Event listeners | Use shouldQueue to suppress unnecessary queued listener work for a specific event.
+347 | Event listeners | Preserve listener-specific queue routing independently of the event class.
+348 | Event tests | Scope Event::fake so model factory observers needed by setup can still run.
+349 | Event tests | Fake selected event types while allowing unrelated application listeners to execute.
+350 | Event tests | Restore the real dispatcher after an Event::fakeFor scope.
+351 | Event discovery | Avoid registering a discovered listener again and causing duplicate execution.
+352 | Event subscribers | Register several event-method mappings through one subscriber without conflating event payloads.
+353 | Domain events | Carry immutable event facts instead of expecting a later database reread to reproduce historical state.
+354 | Broadcast security | Authorize private-channel membership instead of treating an obscured channel name as access control.
+355 | Broadcast events | Restrict public broadcast payloads with broadcastWith rather than exposing every public property.
+356 | Broadcast events | Distinguish ShouldBroadcastNow from a queued ShouldBroadcast event.
+357 | Broadcast integration | Use the originating socket identifier to exclude that client's duplicate echo with toOthers.
+358 | Event architecture | Keep an essential invariant inside the transaction rather than relying on an eventually queued listener.
+359 | Event architecture | Avoid dispatching the same domain event from both an observer and the application service.
+360 | Event diagnostics | Test event payload contents rather than asserting only the event class was dispatched.
+361 | Mail rendering | Supply explicit view data from a mailable without relying on unrelated request variables.
+362 | Mail headers | Distinguish envelope recipients from message body content.
+363 | Mail attachments | Attach a file from a configured storage disk instead of assuming a disk path is an absolute local path.
+364 | Mail attachments | Delay reading attachment bytes until sending when using an Attachment data callback.
+365 | Mail queueing | Queue a mailable that implements ShouldQueue even when passed to send.
+366 | Mail queueing | Preserve a queued mailable locale while restoring the worker application locale after rendering.
+367 | Mail queueing | Embed an inline mail image with a CID reference instead of exposing a private filesystem path.
+368 | Mail tests | Distinguish assertSent from assertQueued for mail delivery intent.
+369 | Mail tests | Inspect recipients and domain data in a mail assertion callback.
+370 | Mail rendering | Choose text and HTML content deliberately rather than embedding HTML in a plain-text template.
+371 | Mail security | Use BCC for a shared announcement when recipients must not see one another’s addresses.
+372 | Mail addressing | Construct a fresh mailable per loop iteration to avoid accumulating recipients.
+373 | Mail configuration | Select a configured mailer without changing the application's global default.
+374 | Mail delivery | Treat transport acceptance as a handoff rather than proof of inbox delivery.
+375 | Mail events | Cancel sending from MessageSending when an application-level suppression rule applies.
+376 | Mail tests | Render a mailable to check its content separately from fake dispatch assertions.
+377 | Notifications | Select delivery channels per notifiable through via.
+378 | Notifications | Route an on-demand notification without constructing a persisted user.
+379 | Notifications | Distinguish a database notification row from an outbound mail message.
+380 | Notifications | Mark one stored notification read without deleting its historical row.
+381 | Notifications | Queue one delivery job for each recipient and channel when the notification is queued.
+382 | Notifications | Customize queued notification connections per channel with viaConnections.
+383 | Notifications | Re-evaluate whether a queued notification should send using shouldSend at delivery time.
+384 | Notifications | Correlate queued notification channels using the shared notification ID for each recipient without assuming one ID covers all recipients.
+385 | Notification tests | Assert a notification for the intended recipient and channels, not just any dispatch.
+386 | Notification data | Separate database representation from broadcast representation when the consumers need different fields.
+387 | Scheduling | Interpret a schedule in the declared timezone rather than the server's implicit timezone.
+388 | Scheduling | Account for daylight-saving skipped or repeated local times in business-critical schedules.
+389 | Scheduling | Prevent overlapping runs of one scheduled task with a suitable shared cache lock.
+390 | Scheduling | Run one scheduled task on one server across multiple scheduler hosts.
+391 | Scheduling | Give parameterized scheduled jobs distinct names when their single-server locks must be independent.
+392 | Scheduling | Distinguish a task mutex expiration from its cron frequency.
+393 | Scheduling | Combine when and skip conditions without assuming registration order overrides their meaning.
+394 | Scheduling | Restrict scheduled work to the intended application environments.
+395 | Scheduling | Keep maintenance-mode behavior explicit for tasks that must continue during maintenance.
+396 | Scheduling | Understand that the scheduler invokes due events and needs an external recurring trigger.
+397 | Scheduling | Recognize sub-minute schedules require schedule:run to remain alive for the current minute.
+398 | Scheduling | Interrupt a running sub-minute scheduler during deployment so old code does not continue for the rest of the minute.
+399 | Scheduling tests | Freeze time and inspect due events without running their external commands.
+400 | Scheduling architecture | Make scheduled work resumable and idempotent instead of assuming onOneServer guarantees completion.

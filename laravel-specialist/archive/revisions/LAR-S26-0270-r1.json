@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0270",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Query Builder",
+  "subtopic": "dynamic-sort-identifier-allowlist",
+  "objective": {
+    "id": "laravel.dynamic-sort-identifier-allowlist",
+    "text": "Allowlist dynamic sort identifiers rather than assuming value bindings select column names."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Constrain query structure separately from bound row values."
+  },
+  "prerequisites": [
+    "Query Builder ordering",
+    "SQL identifiers versus values",
+    "Input boundaries"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An API accepts sort=name or sort=created_at. A proposed orderByRaw(\"? ASC\", [$request->input(\"sort\")]) is expected to select that column. Which design reliably implements the supported choices?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Map the accepted sort names to fixed column names, reject unknown names, and pass the mapped column to orderBy.",
+      "rationale": "Bindings represent values, not dynamically selected identifiers; an allowlist controls which SQL column is used.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Keep the bound placeholder because PDO turns a matching string into a column identifier.",
+      "rationale": "Binding a value does not change its syntactic role into an identifier.",
+      "misconception": "Binding a value does not change its syntactic role into an identifier."
+    },
+    {
+      "id": "choice-3",
+      "text": "Call get() first, then apply the original orderByRaw to the returned rows.",
+      "rationale": "The returned collection is not a query builder, and the incorrect placeholder semantics remain unresolved.",
+      "misconception": "The returned collection is not a query builder, and the incorrect placeholder semantics remain unresolved."
+    },
+    {
+      "id": "choice-4",
+      "text": "Concatenate any submitted sort text into orderByRaw after trim().",
+      "rationale": "Whitespace trimming does not restrict the caller’s control over SQL structure.",
+      "misconception": "Whitespace trimming does not restrict the caller’s control over SQL structure."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Bindings represent values, not dynamically selected identifiers; an allowlist controls which SQL column is used.",
+    "trace": [
+      "Bindings represent values, not dynamically selected identifiers; an allowlist controls which SQL column is used.",
+      "Binding a value does not change its syntactic role into an identifier.",
+      "The returned collection is not a query builder, and the incorrect placeholder semantics remain unresolved.",
+      "Whitespace trimming does not restrict the caller’s control over SQL structure."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "a,z:bound-value",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$record->update(['name' => 'z']);\nRecord::create(['name' => 'a']);\n$allowed = ['name' => 'name', 'created_at' => 'created_at'];\n$requested = 'name';\n$query = DB::table('records')->orderBy($allowed[$requested]);\necho $query->pluck('name')->implode(',').':';\n$bound = DB::table('records')->orderByRaw('? ASC', ['name']);\necho $bound->getBindings() === ['name'] && str_contains($bound->toSql(), '? ASC') ? 'bound-value' : 'other';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#introduction"
+  ]
+}

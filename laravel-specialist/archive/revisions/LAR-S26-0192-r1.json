@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0192",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Authorization",
+  "subtopic": "blade-permission-not-server-enforcement",
+  "objective": {
+    "id": "laravel.blade-permission-not-server-enforcement",
+    "text": "Keep Blade visibility checks as presentation while enforcing the same permission server-side."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Enforce permission on the operation in addition to deciding what the interface displays."
+  },
+  "prerequisites": [
+    "Blade can directives",
+    "Endpoint authorization",
+    "Client control"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A delete button is inside @can(\"delete\", $post), so unauthorized users never see it. The DELETE endpoint performs no policy check. Which review finding remains valid?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The @can directive automatically installs authorization middleware on the DELETE route.",
+      "rationale": "Rendering a conditional block does not modify the route middleware or action.",
+      "misconception": "Rendering a conditional block does not modify the route middleware or action."
+    },
+    {
+      "id": "choice-2",
+      "text": "The endpoint must authorize deletion too; hiding the button does not prevent a direct request.",
+      "rationale": "Blade controls rendered presentation, while the server endpoint must independently enforce the permission before deleting.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "A CSRF token by itself proves the user may delete this particular post.",
+      "rationale": "Request-forgery protection does not decide resource-specific deletion permission.",
+      "misconception": "Request-forgery protection does not decide resource-specific deletion permission."
+    },
+    {
+      "id": "choice-4",
+      "text": "Using DELETE instead of POST makes the missing policy check unnecessary.",
+      "rationale": "The HTTP verb does not authorize the caller for the target resource.",
+      "misconception": "The HTTP verb does not authorize the caller for the target resource."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Blade controls rendered presentation, while the server endpoint must independently enforce the permission before deleting.",
+    "trace": [
+      "Rendering a conditional block does not modify the route middleware or action.",
+      "Blade controls rendered presentation, while the server endpoint must independently enforce the permission before deleting.",
+      "Request-forgery protection does not decide resource-specific deletion permission.",
+      "The HTTP verb does not authorize the caller for the target resource."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "hidden:denied",
+    "probe": "$gate = app(Illuminate\\Contracts\\Auth\\Access\\Gate::class);\n$gate->define('delete', fn (?Illuminate\\Auth\\GenericUser $user, $post) => false);\nfile_put_contents(resource_path('views/delete.blade.php'), '@can(\"delete\", $post)<button>Delete</button>@endcan');\n$html = view('delete', ['post' => new stdClass()])->render();\necho (str_contains($html, 'Delete') ? 'visible' : 'hidden').':';\ntry {\n    $gate->authorize('delete', new stdClass());\n} catch (Illuminate\\Auth\\Access\\AuthorizationException $e) {\n    echo 'denied';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authorization#via-blade-templates"
+  ]
+}

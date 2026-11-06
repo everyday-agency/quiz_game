@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0444",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "HTTP client headers",
+  "subtopic": "http-header-merge-versus-replace",
+  "objective": {
+    "id": "laravel.http-header-merge-versus-replace",
+    "text": "Distinguish merging headers from replacing the current header set."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Replace one conflicting header value while retaining unrelated headers."
+  },
+  "prerequisites": [
+    "HTTP header values",
+    "PendingRequest mutation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A pending request already has X-Mode: old and X-Trace: abc. It must send only new as X-Mode while retaining X-Trace. Which update fits Laravel 13.40’s header behavior?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "$request->withHeaders([\"X-Mode\" => \"new\"])",
+      "rationale": "withHeaders recursively merges values and can preserve old alongside new for the same key.",
+      "misconception": "withHeaders recursively merges values and can preserve old alongside new for the same key."
+    },
+    {
+      "id": "choice-2",
+      "text": "$request->replaceHeaders([\"X-Mode\" => \"new\"])",
+      "rationale": "replaceHeaders replaces the supplied header’s value while retaining other header keys.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "$request->withHeaders([\"X-Mode\" => [\"old\", \"new\"]])",
+      "rationale": "This explicitly retains both values rather than sending only new.",
+      "misconception": "This explicitly retains both values rather than sending only new."
+    },
+    {
+      "id": "choice-4",
+      "text": "$request->withHeaders([\"X-Trace\" => \"new\"])",
+      "rationale": "This changes the unrelated tracing header and leaves X-Mode unchanged.",
+      "misconception": "This changes the unrelated tracing header and leaves X-Mode unchanged."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "replaceHeaders replaces the supplied header’s value while retaining other header keys.",
+    "trace": [
+      "withHeaders recursively merges values and can preserve old alongside new for the same key.",
+      "replaceHeaders replaces the supplied header’s value while retaining other header keys.",
+      "This explicitly retains both values rather than sending only new.",
+      "This changes the unrelated tracing header and leaves X-Mode unchanged."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "old,new:abc|new:abc",
+    "probe": "$factory = new class extends Illuminate\\Http\\Client\\Factory\n{\n    protected function newPendingRequest()\n    {\n        return parent::newPendingRequest()->setHandler(function () {\n            throw new LogicException('No transport permitted in this fixture');\n        });\n    }\n};\nIlluminate\\Support\\Facades\\Http::swap($factory);\nuse Illuminate\\Support\\Facades\\Http;\nHttp::fake(function ($request) {\n    echo implode(',', $request->header('X-Mode')).':'.$request->header('X-Trace')[0];\n    return Http::response('', 200);\n});\nHttp::withHeaders(['X-Mode' => 'old', 'X-Trace' => 'abc'])\n    ->withHeaders(['X-Mode' => 'new'])->get('https://api.example.test/a');\necho '|';\nHttp::withHeaders(['X-Mode' => 'old', 'X-Trace' => 'abc'])\n    ->replaceHeaders(['X-Mode' => 'new'])->get('https://api.example.test/b');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#headers"
+  ]
+}

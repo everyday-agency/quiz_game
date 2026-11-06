@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0600",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Framework upgrades",
+  "subtopic": "framework-upgrade-behavior-regression-evidence",
+  "objective": {
+    "id": "laravel.framework-upgrade-behavior-regression-evidence",
+    "text": "Validate a locked framework upgrade with behavior regressions instead of treating dependency resolution as proof of application compatibility."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish dependency compatibility constraints from the application behavior they cannot prove."
+  },
+  "prerequisites": [
+    "Composer lock",
+    "Framework upgrade guides",
+    "Behavior regression tests"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Composer resolves and installs a new Laravel version successfully. Which evidence is still needed before concluding the application is compatible?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Relevant upgrade-guide review plus behavior regressions on the locked version and supported runtimes.",
+      "rationale": "Dependency resolution establishes installable constraints; it does not prove application behavior across changed framework contracts.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The absence of changes in application source during the dependency update.",
+      "rationale": "Unchanged caller code may still observe changed dependency behavior.",
+      "misconception": "Unchanged caller code may still observe changed dependency behavior."
+    },
+    {
+      "id": "choice-3",
+      "text": "A second successful composer install with the same lock file, with no application tests.",
+      "rationale": "Reproducing dependency installation is useful but still does not exercise application behavior.",
+      "misconception": "Reproducing dependency installation is useful but still does not exercise application behavior."
+    },
+    {
+      "id": "choice-4",
+      "text": "A successful PHP syntax check of vendor files alone.",
+      "rationale": "Syntax validity cannot detect behavioral changes in routing, validation or persistence.",
+      "misconception": "Syntax validity cannot detect behavioral changes in routing, validation or persistence."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Dependency resolution establishes installable constraints; it does not prove application behavior across changed framework contracts.",
+    "trace": [
+      "Dependency resolution establishes installable constraints; it does not prove application behavior across changed framework contracts.",
+      "Unchanged caller code may still observe changed dependency behavior.",
+      "Reproducing dependency installation is useful but still does not exercise application behavior.",
+      "Syntax validity cannot detect behavioral changes in routing, validation or persistence."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "sourceRoot": "reference",
+    "source": "upgrade-validation.txt",
+    "contains": [
+      "dependency resolution",
+      "behavior regressions"
+    ],
+    "reason": "Composer lock/install contract and the Laravel upgrade guide. This is a validation-planning question, not a claim to have upgraded an unrelated production application.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/upgrade",
+    "https://laravel.com/docs/13.x/testing",
+    "https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+  ]
+}

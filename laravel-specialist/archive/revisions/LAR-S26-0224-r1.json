@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0224",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Eloquent serialization",
+  "subtopic": "appended-accessor-not-sql-column",
+  "objective": {
+    "id": "laravel.appended-accessor-not-sql-column",
+    "text": "Append a computed accessor to output without treating it as a database column."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate serialization-time computation from the table schema."
+  },
+  "prerequisites": [
+    "Eloquent appends",
+    "SQL projection",
+    "Computed attributes"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Customer appends full_name through an accessor that joins first_name and last_name. The table has those two columns but no full_name column. Why does Customer::select(\"full_name\")->get() fail even though full_name appears in toArray()?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Appending affects serialization; the query must select the source columns needed by the accessor.",
+      "rationale": "An accessor is computed in PHP and appends does not add a SQL column to the database table.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The accessor must be renamed to getFullNameAttribute to become a SQL column.",
+      "rationale": "Neither accessor naming convention creates a physical or generated SQL column.",
+      "misconception": "Neither accessor naming convention creates a physical or generated SQL column."
+    },
+    {
+      "id": "choice-3",
+      "text": "Appending requires full_name to be placed in $fillable before selecting it.",
+      "rationale": "Fillable controls mass assignment, not SQL schema or projection.",
+      "misconception": "Fillable controls mass assignment, not SQL schema or projection."
+    },
+    {
+      "id": "choice-4",
+      "text": "select disables every accessor permanently on the model class.",
+      "rationale": "Selecting columns does not remove accessor methods; the invalid database column is the immediate problem.",
+      "misconception": "Selecting columns does not remove accessor methods; the invalid database column is the immediate problem."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "An accessor is computed in PHP and appends does not add a SQL column to the database table.",
+    "trace": [
+      "An accessor is computed in PHP and appends does not add a SQL column to the database table.",
+      "Neither accessor naming convention creates a physical or generated SQL column.",
+      "Fillable controls mass assignment, not SQL schema or projection.",
+      "Selecting columns does not remove accessor methods; the invalid database column is the immediate problem."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Ada Lovelace",
+    "probe": "class Customer extends Illuminate\\Database\\Eloquent\\Model\n{\n    protected $appends = ['full_name'];\n\n    protected function fullName(): Illuminate\\Database\\Eloquent\\Casts\\Attribute\n    {\n        return Illuminate\\Database\\Eloquent\\Casts\\Attribute::make(\n            get: fn ($v, $a) => $a['first_name'].' '.$a['last_name'],\n        );\n    }\n}\n$c = (new Customer())->newFromBuilder(['first_name' => 'Ada', 'last_name' => 'Lovelace']);\necho $c->toArray()['full_name'];",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-serialization#appending-values-to-json"
+  ]
+}

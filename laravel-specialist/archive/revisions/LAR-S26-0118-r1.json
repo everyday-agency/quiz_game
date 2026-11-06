@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0118",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Validation",
+  "subtopic": "list-consecutive-keys",
+  "objective": {
+    "id": "laravel.list-consecutive-keys",
+    "text": "Reject a non-list associative payload when the API requires a consecutive numeric list."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Reject a non-list shape instead of silently normalizing it."
+  },
+  "prerequisites": [
+    "PHP arrays",
+    "List validation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An API requires items to have consecutive numeric keys starting at zero. The directly decoded input [1 => \"A\", 2 => \"B\"] must be rejected, not reindexed. Which rules enforce the shape?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Apply array_values before using required|array.",
+      "rationale": "Reindexing transforms the invalid shape into a list instead of rejecting it as required.",
+      "misconception": "Reindexing transforms the invalid shape into a list instead of rejecting it as required."
+    },
+    {
+      "id": "choice-2",
+      "text": "required|array",
+      "rationale": "An array can have arbitrary keys, so this permits the invalid shape.",
+      "misconception": "An array can have arbitrary keys, so this permits the invalid shape."
+    },
+    {
+      "id": "choice-3",
+      "text": "required|array|min:2",
+      "rationale": "The payload already has two entries; a count minimum does not establish its key sequence.",
+      "misconception": "The payload already has two entries; a count minimum does not establish its key sequence."
+    },
+    {
+      "id": "choice-4",
+      "text": "required|array|list",
+      "rationale": "list requires consecutive numeric keys starting at zero, in addition to the array requirement.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "list requires consecutive numeric keys starting at zero, in addition to the array requirement.",
+    "trace": [
+      "Reindexing transforms the invalid shape into a list instead of rejecting it as required.",
+      "An array can have arbitrary keys, so this permits the invalid shape.",
+      "The payload already has two entries; a count minimum does not establish its key sequence.",
+      "list requires consecutive numeric keys starting at zero, in addition to the array requirement."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[false,true]",
+    "probe": "echo json_encode([\n    validator(['items' => [1 => 'A', 2 => 'B']], ['items' => 'required|array|list'])->passes(),\n    validator(['items' => ['A', 'B']], ['items' => 'required|array|list'])->passes(),\n]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-list"
+  ]
+}

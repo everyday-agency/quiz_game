@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0339",
+  "revision": 2,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Queue workers",
+  "subtopic": "long-lived-worker-code-restart",
+  "objective": {
+    "id": "laravel.long-lived-worker-code-restart",
+    "text": "Restart long-lived workers after code changes because they do not reload the application per job."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Reload application code by replacing long-lived workers after a release."
+  },
+  "prerequisites": [
+    "Queue worker lifecycle",
+    "Deployment",
+    "Process supervision"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Web requests use the new release, but existing queue:work processes still execute old handler code. Which deployment step refreshes those workers while allowing current jobs to finish normally?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Restart PHP-FPM for web traffic but leave the queue worker processes running.",
+      "rationale": "Replacing web-serving PHP processes does not reload the separate queue workers.",
+      "misconception": "Replacing web-serving PHP processes does not reload the separate queue workers."
+    },
+    {
+      "id": "choice-2",
+      "text": "Signal queue:restart and let the process supervisor start replacement workers.",
+      "rationale": "Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Rebuild the route cache while retaining every existing queue worker process.",
+      "rationale": "A route-cache file change does not recreate the worker’s already loaded handler code.",
+      "misconception": "A route-cache file change does not recreate the worker’s already loaded handler code."
+    },
+    {
+      "id": "choice-4",
+      "text": "Run config:cache and assume existing workers re-bootstrap before every job.",
+      "rationale": "Long-lived workers do not rebuild the application for each job merely because a cache file changed.",
+      "misconception": "Long-lived workers do not rebuild the application for each job merely because a cache file changed."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.",
+    "trace": [
+      "Replacing web-serving PHP processes does not reload the separate queue workers.",
+      "Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.",
+      "A route-cache file change does not recreate the worker’s already loaded handler code.",
+      "Long-lived workers do not rebuild the application for each job merely because a cache file changed."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Queue/Worker.php",
+    "contains": [
+      "protected function queueShouldRestart",
+      "getTimestampOfLastQueueRestart"
+    ],
+    "reason": "The worker compares a cache restart timestamp between jobs. Graceful exit and supervisor replacement are operational deployment behavior, not a spawned-daemon test.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#queue-workers-and-deployment"
+  ]
+}

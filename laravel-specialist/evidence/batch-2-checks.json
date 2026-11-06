@@ -1,0 +1,95 @@
+{
+  "batch": 2,
+  "count": 100,
+  "sourceHash": "8e8492b775180edc1ef29cc7e442264a055926f2784bbfd52f29941d779079ce",
+  "formats": {
+    "execution": 34,
+    "implementation": 24,
+    "debugging": 11,
+    "code-review": 14,
+    "testing": 9,
+    "architecture": 8
+  },
+  "difficulty": {
+    "Intermediate": 64,
+    "Foundation": 36
+  },
+  "topics": {
+    "Validation": 35,
+    "Form Requests": 15,
+    "Blade": 12,
+    "Blade components": 8,
+    "Blade forms": 4,
+    "Blade caching": 1,
+    "Sessions and CSRF": 8,
+    "Authorization": 9,
+    "Authentication": 6,
+    "Security architecture": 2
+  },
+  "mapped": 60,
+  "unmapped": 40,
+  "keyPositions": {
+    "1": 20,
+    "2": 23,
+    "3": 34,
+    "4": 23
+  },
+  "wording": {
+    "uniqueLongest": 21,
+    "uniqueShortest": 13,
+    "outliers": []
+  },
+  "duplicateCandidates": [
+    {
+      "a": "LAR-S26-0140",
+      "b": "LQ-314",
+      "kind": "legacy",
+      "similarity": 0.429
+    },
+    {
+      "a": "LAR-S26-0157",
+      "b": "LAR-S26-0156",
+      "kind": "current",
+      "similarity": 0.25
+    },
+    {
+      "a": "LAR-S26-0174",
+      "b": "LAR-S26-0126",
+      "kind": "current",
+      "similarity": 0.242
+    },
+    {
+      "a": "LAR-S26-0135",
+      "b": "LQ-045",
+      "kind": "legacy",
+      "similarity": 0.237
+    },
+    {
+      "a": "LAR-S26-0147",
+      "b": "LQ-314",
+      "kind": "legacy",
+      "similarity": 0.214
+    },
+    {
+      "a": "LAR-S26-0125",
+      "b": "LAR-S26-0106",
+      "kind": "current",
+      "similarity": 0.212
+    },
+    {
+      "a": "LAR-S26-0127",
+      "b": "LAR-S26-0074",
+      "kind": "accepted",
+      "similarity": 0.194
+    },
+    {
+      "a": "LAR-S26-0179",
+      "b": "LQ-360",
+      "kind": "legacy",
+      "similarity": 0.194
+    }
+  ],
+  "limitations": "Lexical signals support human review; they do not prove semantic uniqueness or distractor quality.",
+  "preservation": "PHP 620 unchanged; pre-beta application snapshot intact; current two-subject integration checked separately",
+  "independentApproval": "pending"
+}

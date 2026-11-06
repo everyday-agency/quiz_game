@@ -1,0 +1,22 @@
+{
+  "change": "Allow a bounded reference contract directory, preserving default pinned-framework source checks.",
+  "batches": [
+    {
+      "batch": 1,
+      "result": "runtime and checker pass on both PHP versions; question source unchanged"
+    },
+    {
+      "batch": 2,
+      "result": "runtime and checker pass on both PHP versions; question source unchanged"
+    },
+    {
+      "batch": 3,
+      "result": "runtime and checker pass on both PHP versions; question source unchanged"
+    },
+    {
+      "batch": 4,
+      "result": "runtime and checker pass on both PHP versions; question source unchanged"
+    }
+  ],
+  "independentApproval": "pending"
+}

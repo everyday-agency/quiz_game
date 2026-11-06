@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0384",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Notifications",
+  "subtopic": "notification-id-recipient-correlation",
+  "objective": {
+    "id": "laravel.notification-id-recipient-correlation",
+    "text": "Correlate queued notification channels using the shared notification ID for each recipient without assuming one ID covers all recipients."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Correlate the channel jobs of one recipient without merging separate recipients into one notification identity."
+  },
+  "prerequisites": [
+    "Queued notification IDs",
+    "Recipient/channel work units"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Laravel 13.40; the notification has no explicitly assigned id. Two recipients each use mail and database."
+    ],
+    "files": []
+  },
+  "stem": "Four queued channel jobs are created. How are their notification IDs assigned by the normal sender?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "All four jobs share one ID because the same notification instance was passed to send.",
+      "rationale": "Without an explicit id, the sender creates the identifier inside the recipient loop.",
+      "misconception": "Without an explicit id, the sender creates the identifier inside the recipient loop."
+    },
+    {
+      "id": "choice-2",
+      "text": "The two channels for one recipient share an ID; the other recipient gets a different ID.",
+      "rationale": "The sender creates an ID per recipient and carries it into the cloned notification for each of that recipient’s channels.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Every channel job has a different ID, including channels for the same recipient.",
+      "rationale": "The default ID is shared across a recipient’s channel clones.",
+      "misconception": "The default ID is shared across a recipient’s channel clones."
+    },
+    {
+      "id": "choice-4",
+      "text": "Only the database channel has an ID; mail jobs have none.",
+      "rationale": "The queued notification object receives the recipient ID before individual channel jobs are dispatched.",
+      "misconception": "The queued notification object receives the recipient ID before individual channel jobs are dispatched."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The sender creates an ID per recipient and carries it into the cloned notification for each of that recipient’s channels.",
+    "trace": [
+      "Without an explicit id, the sender creates the identifier inside the recipient loop.",
+      "The sender creates an ID per recipient and carries it into the cloned notification for each of that recipient’s channels.",
+      "The default ID is shared across a recipient’s channel clones.",
+      "The queued notification object receives the recipient ID before individual channel jobs are dispatched."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:shared-within-recipient",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nIlluminate\\Support\\Facades\\Schema::create('members', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('email');\n    $t->boolean('email_notifications')->default(false);\n});\nIlluminate\\Support\\Facades\\Schema::create('notifications', function ($t) {\n    $t->uuid('id')->primary();\n    $t->string('type');\n    $t->morphs('notifiable');\n    $t->text('data');\n    $t->timestamp('read_at')->nullable();\n    $t->timestamps();\n});\nclass Member extends Illuminate\\Database\\Eloquent\\Model\n{\n    use Illuminate\\Notifications\\Notifiable;\n\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$member = Member::create(['name' => 'Ada', 'email' => 'ada@example.test']);\nclass DatabaseNotice extends Illuminate\\Notifications\\Notification\n{\n    public function via($notifiable): array\n    {\n        return ['database'];\n    }\n\n    public function toDatabase($notifiable): array\n    {\n        return ['message' => 'Hello'];\n    }\n}\nclass CorrelatedNotice extends DatabaseNotice implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Bus\\Queueable;\n\n    public function via($notifiable): array\n    {\n        return ['mail', 'database'];\n    }\n}\n$other = Member::create(['name' => 'Lin', 'email' => 'lin@example.test']);\nIlluminate\\Support\\Facades\\Notification::send([$member, $other], new CorrelatedNotice());\n$ids = [];\nforeach (Illuminate\\Support\\Facades\\DB::table('jobs')->orderBy('id')->get() as $row) {\n    $payload = json_decode($row->payload, true);\n    $command = unserialize($payload['data']['command']);\n    $ids[$command->notifiables->first()->id][] = $command->notification->id;\n}\n$all = array_merge(...array_values($ids));\necho count(array_unique($all)).':'.(count(array_unique($ids[1])) === 1 && count(array_unique($ids[2])) === 1 ? 'shared-within-recipient' : 'different');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/notifications#queueing-notifications"
+  ]
+}

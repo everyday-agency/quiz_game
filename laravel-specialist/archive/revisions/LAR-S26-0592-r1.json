@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0592",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Integration resilience",
+  "subtopic": "circuit-open-state-no-downstream-attempt",
+  "objective": {
+    "id": "laravel.circuit-open-state-no-downstream-attempt",
+    "text": "Distinguish a circuit breaker's open state from a per-request retry loop."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish rejecting a call during an open interval from retrying that call downstream."
+  },
+  "prerequisites": [
+    "Circuit breakers",
+    "Retry policies",
+    "Monotonic time"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "This is application policy code, not a built-in Laravel circuit-breaker API. The shared breaker is open until monotonic time 5000 ms. A request arrives at 4200 ms."
+    ],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nfunction mayCall(int $nowMs, int $openUntilMs): bool\n{\n    return $nowMs >= $openUntilMs;\n}\n\n$attempts = 0;\nif (mayCall(4200, 5000)) {\n    $attempts++;\n}\necho $attempts;\n"
+      }
+    ]
+  },
+  "stem": "With the shown policy, how many downstream attempts does that request make?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "One, because every request must test whether the service has recovered.",
+      "rationale": "This policy does not admit a probe before openUntil; recovery probing belongs to a later state or explicit policy.",
+      "misconception": "This policy does not admit a probe before openUntil; recovery probing belongs to a later state or explicit policy."
+    },
+    {
+      "id": "choice-2",
+      "text": "Three, because an open circuit increases the retry count.",
+      "rationale": "The shown open-state gate prevents calls; it does not define or increase a retry count.",
+      "misconception": "The shown open-state gate prevents calls; it does not define or increase a retry count."
+    },
+    {
+      "id": "choice-3",
+      "text": "Zero.",
+      "rationale": "The open interval has not expired, so this policy rejects the downstream call before any per-request retry loop could run.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "A random count determined by Laravel’s queue attempts setting.",
+      "rationale": "This synchronous application gate does not consult queue attempt settings.",
+      "misconception": "This synchronous application gate does not consult queue attempt settings."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The open interval has not expired, so this policy rejects the downstream call before any per-request retry loop could run.",
+    "trace": [
+      "This policy does not admit a probe before openUntil; recovery probing belongs to a later state or explicit policy.",
+      "The shown open-state gate prevents calls; it does not define or increase a retry count.",
+      "The open interval has not expired, so this policy rejects the downstream call before any per-request retry loop could run.",
+      "This synchronous application gate does not consult queue attempt settings."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#retries",
+    "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker"
+  ]
+}

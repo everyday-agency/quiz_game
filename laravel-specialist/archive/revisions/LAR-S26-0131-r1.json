@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0131",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Validation",
+  "subtopic": "unique-ignore-server-identity",
+  "objective": {
+    "id": "laravel.unique-ignore-server-identity",
+    "text": "Ignore the server-selected current model in uniqueness validation without trusting a submitted ignore ID."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep the excluded uniqueness row tied to the authorized update target."
+  },
+  "prerequisites": [
+    "Unique validation",
+    "Eloquent identity",
+    "Untrusted input"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An authorized update targets account 7. The caller submits account_id=9 and an email already owned by account 9. The rule ignores $request->input(\"account_id\"), so validation passes incorrectly. Which replacement excludes only the actual record being updated?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Ignore both the route account ID and the submitted account_id.",
+      "rationale": "Excluding the unrelated row 9 would preserve the very bypass that must be prevented.",
+      "misconception": "Excluding the unrelated row 9 would preserve the very bypass that must be prevented."
+    },
+    {
+      "id": "choice-2",
+      "text": "Use Rule::unique(\"accounts\", \"email\")->ignore($account), where $account is the server-resolved account 7.",
+      "rationale": "The trusted model supplies the real update identity, so the conflicting row 9 remains part of the uniqueness check.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Remove the unique rule whenever the request contains account_id.",
+      "rationale": "Presence of an attacker-controlled field cannot justify skipping the uniqueness requirement.",
+      "misconception": "Presence of an attacker-controlled field cannot justify skipping the uniqueness requirement."
+    },
+    {
+      "id": "choice-4",
+      "text": "Cast the submitted account_id to int and keep using it in ignore().",
+      "rationale": "Type conversion does not establish that the submitted ID is the authorized update target.",
+      "misconception": "Type conversion does not establish that the submitted ID is the authorized update target."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The trusted model supplies the real update identity, so the conflicting row 9 remains part of the uniqueness check.",
+    "trace": [
+      "Excluding the unrelated row 9 would preserve the very bypass that must be prevented.",
+      "The trusted model supplies the real update identity, so the conflicting row 9 remains part of the uniqueness check.",
+      "Presence of an attacker-controlled field cannot justify skipping the uniqueness requirement.",
+      "Type conversion does not establish that the submitted ID is the authorized update target."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[false,true]",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('accounts', function ($table) {\n    $table->id();\n    $table->string('email');\n});\nIlluminate\\Support\\Facades\\DB::table('accounts')->insert([\n    ['id' => 7, 'email' => 'owner@example.test'],\n    ['id' => 9, 'email' => 'other@example.test'],\n]);\nclass Account extends Illuminate\\Database\\Eloquent\\Model\n{\n    public $timestamps = false;\n}\n$account = Account::findOrFail(7);\n$data = ['email' => 'other@example.test'];\necho json_encode([\n    validator($data, ['email' => [Illuminate\\Validation\\Rule::unique('accounts', 'email')->ignore($account)]])->passes(),\n    validator($data, ['email' => [Illuminate\\Validation\\Rule::unique('accounts', 'email')->ignore(9)]])->passes(),\n]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#forcing-a-unique-rule-to-ignore-a-given-id"
+  ]
+}

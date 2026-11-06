@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0105",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Validation",
+  "subtopic": "array-allowed-key-boundary",
+  "objective": {
+    "id": "laravel.array-allowed-key-boundary",
+    "text": "Reject unexpected nested array keys using the array rule's allowed-key list."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Reject an unexpected capability flag at the input boundary."
+  },
+  "prerequisites": [
+    "Nested arrays",
+    "Array validation rules"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A profile object may contain only name and timezone. Extra keys must produce validation errors, not be silently dropped. Which parent rule enforces this allowlist alongside child rules?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "profile => nullable",
+      "rationale": "Nullable addresses nullability, not the keys of a supplied object.",
+      "misconception": "Nullable addresses nullability, not the keys of a supplied object."
+    },
+    {
+      "id": "choice-2",
+      "text": "profile => array",
+      "rationale": "The plain array rule checks the value type but does not restrict its keys.",
+      "misconception": "The plain array rule checks the value type but does not restrict its keys."
+    },
+    {
+      "id": "choice-3",
+      "text": "profile => array:name,timezone",
+      "rationale": "The array rule with named allowed keys rejects additional keys within profile.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "profile => required_array_keys:name,timezone",
+      "rationale": "This requires listed keys but does not reject additional ones.",
+      "misconception": "This requires listed keys but does not reject additional ones."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The array rule with named allowed keys rejects additional keys within profile.",
+    "trace": [
+      "Nullable addresses nullability, not the keys of a supplied object.",
+      "The plain array rule checks the value type but does not restrict its keys.",
+      "The array rule with named allowed keys rejects additional keys within profile.",
+      "This requires listed keys but does not reject additional ones."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false]",
+    "probe": "$rules = ['profile' => 'array:name,timezone'];\necho json_encode([\n    validator(['profile' => ['name' => 'Ada']], $rules)->passes(),\n    validator(['profile' => ['name' => 'Ada', 'is_admin' => true]], $rules)->passes(),\n]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-array"
+  ]
+}

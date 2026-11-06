@@ -1,0 +1,26 @@
+[
+  {
+    "batch": 1,
+    "status": "passed"
+  },
+  {
+    "batch": 2,
+    "status": "passed"
+  },
+  {
+    "batch": 3,
+    "status": "passed"
+  },
+  {
+    "batch": 4,
+    "status": "passed"
+  },
+  {
+    "batch": 5,
+    "status": "passed"
+  },
+  {
+    "batch": 6,
+    "status": "passed"
+  }
+]

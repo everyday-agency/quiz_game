@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0567",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Deployment security",
+  "subtopic": "production-debug-detail-exposure",
+  "objective": {
+    "id": "laravel.production-debug-detail-exposure",
+    "text": "Disable production debug rendering so exception details are not exposed to unauthenticated clients."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Verify that the public error representation does not expose internal diagnostic details."
+  },
+  "prerequisites": [
+    "APP_DEBUG",
+    "Exception responses",
+    "Production information exposure"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An unauthenticated production request fails with an exception containing an internal filesystem path. Which configuration and response check address accidental diagnostic exposure?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Clear route cache after every exception while leaving debug enabled.",
+      "rationale": "Route cache state is not the debug-detail exposure control.",
+      "misconception": "Route cache state is not the debug-detail exposure control."
+    },
+    {
+      "id": "choice-2",
+      "text": "Use debug=true and hide the browser console panel.",
+      "rationale": "Browser tooling visibility does not remove diagnostic data already sent in the response.",
+      "misconception": "Browser tooling visibility does not remove diagnostic data already sent in the response."
+    },
+    {
+      "id": "choice-3",
+      "text": "Use debug=false and verify the public error response omits the internal message and trace.",
+      "rationale": "Production debug rendering can expose details; the regression should verify the actual public response as well as the configuration.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Keep debug=true but change only the logging channel’s level.",
+      "rationale": "Log filtering does not control the detailed HTTP error representation.",
+      "misconception": "Log filtering does not control the detailed HTTP error representation."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Production debug rendering can expose details; the regression should verify the actual public response as well as the configuration.",
+    "trace": [
+      "Route cache state is not the debug-detail exposure control.",
+      "Browser tooling visibility does not remove diagnostic data already sent in the response.",
+      "Production debug rendering can expose details; the regression should verify the actual public response as well as the configuration.",
+      "Log filtering does not control the detailed HTTP error representation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "hidden:shown",
+    "probe": "$request = Illuminate\\Http\\Request::create('/broken', server: ['HTTP_ACCEPT' => 'application/json']);\n$handler = app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class);\n$e = new RuntimeException('internal-path-marker');\nconfig(['app.debug' => false]);\n$a = $handler->render($request, $e)->getContent();\nconfig(['app.debug' => true]);\n$b = $handler->render($request, $e)->getContent();\necho (str_contains($a, 'internal-path-marker') ? 'shown' : 'hidden').':';\necho str_contains($b, 'internal-path-marker') ? 'shown' : 'hidden';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/deployment#debug-mode",
+    "https://laravel.com/docs/13.x/errors#configuration"
+  ]
+}

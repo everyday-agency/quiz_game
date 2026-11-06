@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0285",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Database connections",
+  "subtopic": "sticky-read-write-routing",
+  "objective": {
+    "id": "laravel.sticky-read-write-routing",
+    "text": "Use sticky read routing after a write without claiming replication is synchronous."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Understand connection routing without assuming replication has caught up."
+  },
+  "prerequisites": [
+    "Laravel read/write connections",
+    "Sticky reads",
+    "Replica lag"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A request uses a configured read/write connection with sticky=true. After a successful write on that connection, where do subsequent ordinary reads go during that request?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "To the replica after Laravel waits for a matching replication position.",
+      "rationale": "The sticky option does not implement a replica catch-up wait protocol.",
+      "misconception": "The sticky option does not implement a replica catch-up wait protocol."
+    },
+    {
+      "id": "choice-2",
+      "text": "To whichever connection returned the first read result, even after the write.",
+      "rationale": "The post-write modification state changes routing; it is not fixed by the first read.",
+      "misconception": "The post-write modification state changes routing; it is not fixed by the first read."
+    },
+    {
+      "id": "choice-3",
+      "text": "To the write connection; this gives read-after-write visibility without making replication synchronous.",
+      "rationale": "The modified-record flag and sticky option route reads to the writer for the current connection lifecycle.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "To the replica as usual because stickiness affects writes only.",
+      "rationale": "The purpose of sticky routing is to redirect later reads after a write.",
+      "misconception": "The purpose of sticky routing is to redirect later reads after a write."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The modified-record flag and sticky option route reads to the writer for the current connection lifecycle.",
+    "trace": [
+      "The sticky option does not implement a replica catch-up wait protocol.",
+      "The post-write modification state changes routing; it is not fixed by the first read.",
+      "The modified-record flag and sticky option route reads to the writer for the current connection lifecycle.",
+      "The purpose of sticky routing is to redirect later reads after a write."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "reader:writer",
+    "probe": "$write = new PDO('sqlite::memory:');\n$read = new PDO('sqlite::memory:');\nforeach ([[$write, 'writer'], [$read, 'reader']] as [$pdo, $label]) {\n    $pdo->exec('CREATE TABLE samples (name TEXT)');\n    $pdo->exec(\"INSERT INTO samples (name) VALUES ('$label')\");\n}\n$c = new Illuminate\\Database\\SQLiteConnection($write, ':memory:', '', ['sticky' => true]);\n$c->setReadPdo($read);\necho $c->table('samples')->value('name').':';\n$c->table('samples')->where('name', 'writer')->update(['name' => 'writer']);\necho $c->table('samples')->value('name');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database#the-sticky-option"
+  ]
+}

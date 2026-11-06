@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0527",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Password reset lifecycle",
+  "subtopic": "successful-reset-invalidates-token",
+  "objective": {
+    "id": "laravel.successful-reset-invalidates-token",
+    "text": "Invalidate a reset token after a successful password reset."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Trace token lifecycle after the reset callback completes successfully."
+  },
+  "prerequisites": [
+    "Password broker reset",
+    "Single-use reset tokens"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A valid broker reset invokes its callback, the callback stores the new password and returns normally. What happens to that token’s repository record?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "It remains usable until its original expiry regardless of the successful reset.",
+      "rationale": "That ignores the broker’s post-reset token deletion.",
+      "misconception": "That ignores the broker’s post-reset token deletion."
+    },
+    {
+      "id": "choice-2",
+      "text": "It is deleted, so a later reset cannot reuse the same token.",
+      "rationale": "The broker deletes the user’s token record after successful callback completion.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Its lifetime is extended so the user can repeat the same reset if needed.",
+      "rationale": "A successful reset does not renew the token for reuse.",
+      "misconception": "A successful reset does not renew the token for reuse."
+    },
+    {
+      "id": "choice-4",
+      "text": "Its plaintext value is copied into the user’s remember_token field automatically.",
+      "rationale": "Reset-token cleanup and remember-token handling are different concerns; this is not the broker’s automatic action.",
+      "misconception": "Reset-token cleanup and remember-token handling are different concerns; this is not the broker’s automatic action."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The broker deletes the user’s token record after successful callback completion.",
+    "trace": [
+      "That ignores the broker’s post-reset token deletion.",
+      "The broker deletes the user’s token record after successful callback completion.",
+      "A successful reset does not renew the token for reuse.",
+      "Reset-token cleanup and remember-token handling are different concerns; this is not the broker’s automatic action."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "passwords.reset:invalid:new",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('users', function ($t) {\n    $t->id();\n    $t->string('email')->unique();\n    $t->string('password');\n    $t->string('remember_token')->nullable();\n    $t->timestamp('email_verified_at')->nullable();\n});\nSchema::create('password_reset_tokens', function ($t) {\n    $t->string('email')->primary();\n    $t->string('token');\n    $t->timestamp('created_at')->nullable();\n});\nclass Member extends Illuminate\\Foundation\\Auth\\User implements Illuminate\\Contracts\\Auth\\MustVerifyEmail\n{\n    protected $table = 'users';\n    protected $guarded = [];\n    public $timestamps = false;\n}\n$hasher = new Illuminate\\Hashing\\BcryptHasher(['rounds' => 4]);\n$user = Member::create(['email' => 'ada@example.test', 'password' => $hasher->make('old-password')]);\n$tokens = new Illuminate\\Auth\\Passwords\\DatabaseTokenRepository(\n    DB::connection(), $hasher, 'password_reset_tokens', 'fixture-hash-key', 3600, 60,\n);\n$provider = new Illuminate\\Auth\\EloquentUserProvider($hasher, Member::class);\n$broker = new Illuminate\\Auth\\Passwords\\PasswordBroker($tokens, $provider, timeboxDuration: 0);\n$plain = $tokens->create($user);\n$status = $broker->reset([\n    'email' => $user->email,\n    'token' => $plain,\n    'password' => 'new-password',\n], function ($member, $password) use ($hasher) {\n    $member->password = $hasher->make($password);\n    $member->save();\n});\necho $status.':'.($tokens->exists($user, $plain) ? 'valid' : 'invalid').':';\necho $hasher->check('new-password', $user->fresh()->password) ? 'new' : 'old';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/passwords#handling-the-form-submission"
+  ]
+}

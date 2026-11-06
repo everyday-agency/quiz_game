@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0066",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "HTTP requests",
+  "subtopic": "integer-accessor-not-validation",
+  "objective": {
+    "id": "laravel.integer-accessor-not-validation",
+    "text": "Keep integer retrieval separate from validating a positive integer requirement."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate retrieving a numeric value from rejecting invalid user input."
+  },
+  "prerequisites": [
+    "Input conversion",
+    "Integer validation",
+    "Range requirements"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A booking action uses $request->integer(\"seats\") and assumes this enforces a submitted positive integer. The business rule requires rejecting malformed or nonpositive input with validation errors. Which change enforces that rule?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Validate seats with numeric alone.",
+      "rationale": "numeric permits representations such as decimals and does not impose a positive lower bound.",
+      "misconception": "numeric permits representations such as decimals and does not impose a positive lower bound."
+    },
+    {
+      "id": "choice-2",
+      "text": "Use integer(\"seats\", 1) and keep no validation.",
+      "rationale": "A default does not validate supplied malformed or nonpositive values.",
+      "misconception": "A default does not validate supplied malformed or nonpositive values."
+    },
+    {
+      "id": "choice-3",
+      "text": "Cast input(\"seats\") to int and check only its PHP type.",
+      "rationale": "Casting produces an integer even from many invalid inputs, so type alone does not establish the requirement.",
+      "misconception": "Casting produces an integer even from many invalid inputs, so type alone does not establish the requirement."
+    },
+    {
+      "id": "choice-4",
+      "text": "Validate seats with required, integer, and min:1 before using the converted value.",
+      "rationale": "These rules require a value, reject a non-integer representation, and enforce the positive lower bound.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "These rules require a value, reject a non-integer representation, and enforce the positive lower bound.",
+    "trace": [
+      "numeric permits representations such as decimals and does not impose a positive lower bound.",
+      "A default does not validate supplied malformed or nonpositive values.",
+      "Casting produces an integer even from many invalid inputs, so type alone does not establish the requirement.",
+      "These rules require a value, reject a non-integer representation, and enforce the positive lower bound."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[false,false,false,true]",
+    "probe": "$results = [];\nforeach (['many', '0', '1.5', '2'] as $value) {\n    $results[] = validator(['seats' => $value], ['seats' => ['required', 'integer', 'min:1']])->passes();\n}\necho json_encode($results);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      5,
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/requests#retrieving-integer-input-values",
+    "https://laravel.com/docs/13.x/validation#rule-integer"
+  ]
+}

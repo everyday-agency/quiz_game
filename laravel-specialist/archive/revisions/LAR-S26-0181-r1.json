@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0181",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Sessions and CSRF",
+  "subtopic": "csrf-versus-authentication-failure",
+  "objective": {
+    "id": "laravel.csrf-versus-authentication-failure",
+    "text": "Distinguish a CSRF failure from an authentication failure on a state-changing route."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Identify a failed request-integrity check independently of whether a user is authenticated."
+  },
+  "prerequisites": [
+    "Laravel 13 request-forgery middleware",
+    "Session tokens",
+    "Authentication distinction"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "In Laravel 13.40, an authenticated browser user sends a protected POST without a CSRF token or Sec-Fetch-Site header. The route is not exempt, testing bypass is off, and normal token fallback is enabled. Under default exception handling, what does a 419 indicate?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The request-forgery check failed; authentication alone does not satisfy it.",
+      "rationale": "With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The password was necessarily incorrect.",
+      "rationale": "A 419 token-mismatch response does not establish a credential-verification failure.",
+      "misconception": "A 419 token-mismatch response does not establish a credential-verification failure."
+    },
+    {
+      "id": "choice-3",
+      "text": "The resource policy returned false.",
+      "rationale": "A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary.",
+      "misconception": "A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary."
+    },
+    {
+      "id": "choice-4",
+      "text": "The route does not support POST.",
+      "rationale": "Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status.",
+      "misconception": "Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.",
+    "trace": [
+      "With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.",
+      "A 419 token-mismatch response does not establish a credential-verification failure.",
+      "A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary.",
+      "Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "419",
+    "probe": "app()->instance('env', 'local');\n$session = app('session.store');\n$session->start();\n$r = Illuminate\\Http\\Request::create('/save', 'POST');\n$r->setLaravelSession($session);\n$r->setUserResolver(fn () => new Illuminate\\Auth\\GenericUser(['id' => 7]));\n$middleware = app(Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery::class);\ntry {\n    $middleware->handle($r, fn () => response('saved'));\n} catch (Illuminate\\Session\\TokenMismatchException $e) {\n    echo app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class)->render($r, $e)->getStatusCode();\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/csrf",
+    "https://laravel.com/docs/13.x/authentication"
+  ]
+}

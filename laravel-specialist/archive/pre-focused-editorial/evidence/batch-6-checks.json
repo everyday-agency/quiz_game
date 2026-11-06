@@ -1,0 +1,127 @@
+{
+  "batch": 6,
+  "count": 100,
+  "sourceHash": "bb691340eedbee1e8d811f53f8efcab4f075aab3d3d1a2abba0ed523fc510d6d",
+  "formats": {
+    "implementation": 16,
+    "execution": 39,
+    "code-review": 18,
+    "testing": 8,
+    "architecture": 10,
+    "debugging": 9
+  },
+  "difficulty": {
+    "Foundation": 54,
+    "Intermediate": 43,
+    "Advanced": 3
+  },
+  "topics": {
+    "Exception reporting": 3,
+    "Exception rendering": 1,
+    "Exception context": 1,
+    "Logging": 1,
+    "Logging context": 3,
+    "Logging stacks": 1,
+    "Logging security": 1,
+    "Exception responses": 1,
+    "Context": 2,
+    "Context and queues": 1,
+    "Exception severity": 1,
+    "Error control flow": 2,
+    "Retry control flow": 1,
+    "Request diagnostics": 1,
+    "Encryption": 1,
+    "Encryption integrity": 1,
+    "Encryption rotation": 1,
+    "Encryption failures": 1,
+    "Password reset storage": 1,
+    "Password reset expiry": 1,
+    "Password reset lifecycle": 1,
+    "Password reset throttling": 1,
+    "Email verification": 2,
+    "Authentication state": 1,
+    "Session authentication": 1,
+    "Authentication security": 1,
+    "Encryption formats": 1,
+    "Outbound request security": 1,
+    "Webhook authenticity": 1,
+    "Webhook freshness": 1,
+    "Upload delivery security": 1,
+    "Password confirmation": 1,
+    "Cookie security": 1,
+    "Collections": 9,
+    "Lazy collections": 1,
+    "Helpers": 2,
+    "Strings": 1,
+    "Pipeline": 2,
+    "Localization": 9,
+    "Localization tests": 1,
+    "Deployment": 10,
+    "Deployment security": 1,
+    "Long-lived workers": 2,
+    "Performance": 2,
+    "Application architecture": 9,
+    "Integration contracts": 1,
+    "Integration resilience": 3,
+    "Integration consistency": 1,
+    "Package integration": 3,
+    "Package configuration": 1,
+    "Architecture tests": 1,
+    "Framework upgrades": 1
+  },
+  "mapped": 0,
+  "unmapped": 100,
+  "keyPositions": {
+    "1": 28,
+    "2": 23,
+    "3": 27,
+    "4": 22
+  },
+  "wording": {
+    "uniqueLongest": 33,
+    "uniqueShortest": 23,
+    "outliers": [
+      {
+        "id": "LAR-S26-0596",
+        "uniqueLongest": true,
+        "uniqueShortest": false,
+        "ratio": 2.33
+      }
+    ]
+  },
+  "duplicateCandidates": [
+    {
+      "a": "LAR-S26-0541",
+      "b": "LQ-387",
+      "kind": "legacy",
+      "similarity": 0.231
+    },
+    {
+      "a": "LAR-S26-0528",
+      "b": "LAR-S26-0526",
+      "kind": "current",
+      "similarity": 0.208
+    },
+    {
+      "a": "LAR-S26-0514",
+      "b": "LAR-S26-0206",
+      "kind": "accepted",
+      "similarity": 0.2
+    },
+    {
+      "a": "LAR-S26-0531",
+      "b": "LAR-S26-0193",
+      "kind": "accepted",
+      "similarity": 0.2
+    },
+    {
+      "a": "LAR-S26-0557",
+      "b": "LAR-S26-0071",
+      "kind": "accepted",
+      "similarity": 0.2
+    }
+  ],
+  "limitations": "Lexical signals support human review; they do not prove semantic uniqueness or distractor quality.",
+  "preservation": "PHP 620 and all protected application file hashes unchanged",
+  "independentApproval": "pending"
+}

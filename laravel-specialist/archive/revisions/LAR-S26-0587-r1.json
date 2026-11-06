@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0587",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Application architecture",
+  "subtopic": "report-read-projection-separate-write-model",
+  "objective": {
+    "id": "laravel.report-read-projection-separate-write-model",
+    "text": "Use a dedicated read projection when a report has different data requirements from transactional model writes."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Choose a representation for a report without weakening transactional model semantics."
+  },
+  "prerequisites": [
+    "Aggregations",
+    "Read models",
+    "Eloquent write semantics"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "A report needs monthly totals per currency, not editable order rows. Existing Order models implement write invariants and are used elsewhere."
+    ],
+    "files": []
+  },
+  "stem": "Which design supplies that report without changing what an Order instance represents?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Remove Order’s invariants so both aggregate and ordinary rows can share it.",
+      "rationale": "That weakens unrelated write behavior merely to accommodate a read representation.",
+      "misconception": "That weakens unrelated write behavior merely to accommodate a read representation."
+    },
+    {
+      "id": "choice-2",
+      "text": "Add a physical order row for every monthly total and include it in ordinary order queries.",
+      "rationale": "Mixing summary rows with transactional orders changes their meaning and risks counting summaries as source data.",
+      "misconception": "Mixing summary rows with transactional orders changes their meaning and risks counting summaries as source data."
+    },
+    {
+      "id": "choice-3",
+      "text": "Use a dedicated aggregate query and report result DTO, leaving Order writes on their existing path.",
+      "rationale": "The report’s grouped rows have a different shape and purpose; a separate read representation avoids pretending they are editable orders.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Hydrate monthly totals as Order objects and reuse their save method for report rows.",
+      "rationale": "Grouped totals do not represent individual persisted orders and cannot safely use those write semantics.",
+      "misconception": "Grouped totals do not represent individual persisted orders and cannot safely use those write semantics."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The report’s grouped rows have a different shape and purpose; a separate read representation avoids pretending they are editable orders.",
+    "trace": [
+      "That weakens unrelated write behavior merely to accommodate a read representation.",
+      "Mixing summary rows with transactional orders changes their meaning and risks counting summaries as source data.",
+      "The report’s grouped rows have a different shape and purpose; a separate read representation avoids pretending they are editable orders.",
+      "Grouped totals do not represent individual persisted orders and cannot safely use those write semantics."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[{\"currency\":\"EUR\",\"total\":30},{\"currency\":\"USD\",\"total\":7}]",
+    "probe": "use Illuminate\\Support\\Facades\\DB;\nuse Illuminate\\Support\\Facades\\Schema;\nSchema::create('sales', function ($t) {\n    $t->id();\n    $t->string('currency');\n    $t->integer('cents');\n});\nDB::table('sales')->insert([\n    ['currency' => 'EUR', 'cents' => 10],\n    ['currency' => 'EUR', 'cents' => 20],\n    ['currency' => 'USD', 'cents' => 7],\n]);\necho DB::table('sales')->select('currency')->selectRaw('SUM(cents) AS total')\n    ->groupBy('currency')->orderBy('currency')->get()->toJson();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#aggregates",
+    "https://laravel.com/docs/13.x/queries#grouping"
+  ]
+}

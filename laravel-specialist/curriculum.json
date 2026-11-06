@@ -1,0 +1,41 @@
+{
+  "status": "working course outline",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Laravel fundamentals"
+    },
+    {
+      "id": 2,
+      "title": "Routing"
+    },
+    {
+      "id": 3,
+      "title": "Controllers"
+    },
+    {
+      "id": 4,
+      "title": "Blade"
+    },
+    {
+      "id": 5,
+      "title": "HTTP Requests"
+    },
+    {
+      "id": 6,
+      "title": "Request validation"
+    },
+    {
+      "id": 7,
+      "title": "Form Request classes"
+    },
+    {
+      "id": 8,
+      "title": "Middleware"
+    }
+  ],
+  "planned": [
+    "Eloquent ORM"
+  ],
+  "mappingPolicy": "Map only when the full Laravel prerequisite set is covered by completed lessons. Otherwise null; no invented future lesson IDs. Question IDs never derive from mappings."
+}

@@ -1,0 +1,4 @@
+Official sources checked 2026-11-06:
+https://laravel.com/docs/13.x/upgrade
+https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
+Paraphrase: Composer dependency resolution and a lock file establish selected dependency versions. Laravel publishes behavior-affecting upgrade guidance. Application behavior regressions remain necessary evidence for the caller contracts; successful installation alone does not exercise those contracts.

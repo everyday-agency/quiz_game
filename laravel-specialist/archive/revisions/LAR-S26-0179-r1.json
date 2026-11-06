@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0179",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Sessions and CSRF",
+  "subtopic": "logout-session-invalidation",
+  "objective": {
+    "id": "laravel.logout-session-invalidation",
+    "text": "Invalidate session data and regenerate the CSRF token when logging out."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "End authentication and clear session state at the logout boundary."
+  },
+  "prerequisites": [
+    "Authentication logout",
+    "Session invalidation",
+    "CSRF token rotation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Logout must end the authenticated session, clear its application data, change its identifier, and establish a fresh CSRF token. Which sequence implements the documented session cleanup after Auth::logout()?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "session()->regenerate() only.",
+      "rationale": "Ordinary regeneration retains application session data, contrary to the cleanup requirement.",
+      "misconception": "Ordinary regeneration retains application session data, contrary to the cleanup requirement."
+    },
+    {
+      "id": "choice-2",
+      "text": "session()->invalidate(); session()->regenerateToken();",
+      "rationale": "invalidate clears data and migrates the ID; regenerateToken supplies a new token for subsequent requests.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "session()->flush() only.",
+      "rationale": "Flushing removes attributes but does not by itself migrate the identifier and establish the requested fresh token.",
+      "misconception": "Flushing removes attributes but does not by itself migrate the identifier and establish the requested fresh token."
+    },
+    {
+      "id": "choice-4",
+      "text": "session()->regenerateToken() only.",
+      "rationale": "A new token alone neither clears application session data nor rotates the session identifier.",
+      "misconception": "A new token alone neither clears application session data nor rotates the session identifier."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "invalidate clears data and migrates the ID; regenerateToken supplies a new token for subsequent requests.",
+    "trace": [
+      "Ordinary regeneration retains application session data, contrary to the cleanup requirement.",
+      "invalidate clears data and migrates the ID; regenerateToken supplies a new token for subsequent requests.",
+      "Flushing removes attributes but does not by itself migrate the identifier and establish the requested fresh token.",
+      "A new token alone neither clears application session data nor rotates the session identifier."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false,true]",
+    "probe": "$s = app('session.store');\n$s->start();\n$s->put('private_state', 'old');\n$oldId = $s->getId();\n$oldToken = $s->token();\n$s->invalidate();\n$s->regenerateToken();\necho json_encode([$oldId !== $s->getId(), $s->has('private_state'), $oldToken !== $s->token()]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authentication#logging-out"
+  ]
+}

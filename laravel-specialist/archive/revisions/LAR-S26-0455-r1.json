@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0455",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "HTTP client negotiation",
+  "subtopic": "http-accept-versus-body-content-type",
+  "objective": {
+    "id": "laravel.http-accept-versus-body-content-type",
+    "text": "Distinguish accepting JSON responses from choosing JSON request encoding."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep desired response format independent of submitted body format."
+  },
+  "prerequisites": [
+    "Accept header",
+    "Content-Type header",
+    "Form encoding"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nIlluminate\\Support\\Facades\\Http::acceptJson()\n    ->asForm()\n    ->post('https://api.example.test/search', ['query' => 'books']);\n"
+      }
+    ]
+  },
+  "stem": "What formats does this request ask for and send?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "It asks for a form response and sends a JSON body.",
+      "rationale": "This reverses the roles of acceptJson and asForm.",
+      "misconception": "This reverses the roles of acceptJson and asForm."
+    },
+    {
+      "id": "choice-2",
+      "text": "It sends JSON because acceptJson overrides asForm.",
+      "rationale": "A response preference does not replace the form body format.",
+      "misconception": "A response preference does not replace the form body format."
+    },
+    {
+      "id": "choice-3",
+      "text": "It asks for a JSON response and sends a form-encoded body.",
+      "rationale": "Accept and request Content-Type serve different directions; these calls configure each independently.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "It sends multipart data because all non-JSON POST bodies use multipart.",
+      "rationale": "URL-encoded form bodies are distinct from multipart uploads.",
+      "misconception": "URL-encoded form bodies are distinct from multipart uploads."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Accept and request Content-Type serve different directions; these calls configure each independently.",
+    "trace": [
+      "This reverses the roles of acceptJson and asForm.",
+      "A response preference does not replace the form body format.",
+      "Accept and request Content-Type serve different directions; these calls configure each independently.",
+      "URL-encoded form bodies are distinct from multipart uploads."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "application/json:application/x-www-form-urlencoded",
+    "probe": "$factory = new class extends Illuminate\\Http\\Client\\Factory\n{\n    protected function newPendingRequest()\n    {\n        return parent::newPendingRequest()->setHandler(function () {\n            throw new LogicException('No transport permitted in this fixture');\n        });\n    }\n};\nIlluminate\\Support\\Facades\\Http::swap($factory);\nIlluminate\\Support\\Facades\\Http::fake(function ($r) {\n    echo $r->header('Accept')[0].':'.$r->header('Content-Type')[0];\n    return Illuminate\\Support\\Facades\\Http::response('', 200);\n});\nrequire getcwd().'/probe.php';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-client#headers",
+    "https://laravel.com/docs/13.x/http-client#sending-form-url-encoded-requests"
+  ]
+}

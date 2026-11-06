@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0570",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Deployment",
+  "subtopic": "migration-rollback-not-data-recovery",
+  "objective": {
+    "id": "laravel.migration-rollback-not-data-recovery",
+    "text": "Distinguish migration rollback from restoration of data destroyed by a migration."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate recreating a schema shape from restoring data that was removed."
+  },
+  "prerequisites": [
+    "Migration down methods",
+    "Destructive schema changes",
+    "Data recovery"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A migration drops an obsolete notes column. Its down method adds an empty nullable notes column again. Does migrate:rollback restore the old note text?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "No; recreating the column does not restore its deleted values.",
+      "rationale": "The down method reverses the schema operation as written; recovery of removed data needs a preserved copy or another explicit data-restoration procedure.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Only if the command is run with --force, because that enables value restoration.",
+      "rationale": "The force option bypasses an environment confirmation; it is not a backup-recovery mechanism.",
+      "misconception": "The force option bypasses an environment confirmation; it is not a backup-recovery mechanism."
+    },
+    {
+      "id": "choice-3",
+      "text": "Yes; adding the same column name makes the database reconstruct its prior contents.",
+      "rationale": "Reusing a name does not recreate discarded row values.",
+      "misconception": "Reusing a name does not recreate discarded row values."
+    },
+    {
+      "id": "choice-4",
+      "text": "Yes; Laravel stores every dropped column’s values in the migrations table.",
+      "rationale": "The migration repository records migration execution, not automatic snapshots of all affected data.",
+      "misconception": "The migration repository records migration execution, not automatic snapshots of all affected data."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The down method reverses the schema operation as written; recovery of removed data needs a preserved copy or another explicit data-restoration procedure.",
+    "trace": [
+      "The down method reverses the schema operation as written; recovery of removed data needs a preserved copy or another explicit data-restoration procedure.",
+      "The force option bypasses an environment confirmation; it is not a backup-recovery mechanism.",
+      "Reusing a name does not recreate discarded row values.",
+      "The migration repository records migration execution, not automatic snapshots of all affected data."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "null",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('records', function ($t) {\n    $t->id();\n    $t->text('notes')->nullable();\n});\nDB::table('records')->insert(['notes' => 'original text']);\nSchema::table('records', function ($t) {\n    $t->dropColumn('notes');\n});\nSchema::table('records', function ($t) {\n    $t->text('notes')->nullable();\n});\necho DB::table('records')->value('notes') === null ? 'null' : 'restored';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/migrations#rolling-back-migrations"
+  ]
+}

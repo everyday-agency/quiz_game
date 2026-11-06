@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0464",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "API pagination",
+  "subtopic": "resource-collection-retain-paginator",
+  "objective": {
+    "id": "laravel.resource-collection-retain-paginator",
+    "text": "Preserve paginator links and metadata when transforming the page's records into resources."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep pagination context available while transforming the current page’s items."
+  },
+  "prerequisites": [
+    "Paginator objects",
+    "API resource collections"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A controller calls Model::paginate(20), then passes only $page->items() to ItemResource::collection. Pagination links disappear. Which change preserves them?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Pass the paginator itself to ItemResource::collection($page).",
+      "rationale": "The resource collection recognizes a paginator and can produce its links and metadata alongside transformed items.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Pass count($page->items()) as the second argument to collection.",
+      "rationale": "An item count does not reconstruct the paginator’s URL and page metadata.",
+      "misconception": "An item count does not reconstruct the paginator’s URL and page metadata."
+    },
+    {
+      "id": "choice-3",
+      "text": "Call values() on collect($page->items()) before wrapping it.",
+      "rationale": "Reindexing plain items still discards the paginator context.",
+      "misconception": "Reindexing plain items still discards the paginator context."
+    },
+    {
+      "id": "choice-4",
+      "text": "Add a public links property to every item model.",
+      "rationale": "Per-model properties do not restore the response’s paginator integration.",
+      "misconception": "Per-model properties do not restore the response’s paginator integration."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The resource collection recognizes a paginator and can produce its links and metadata alongside transformed items.",
+    "trace": [
+      "The resource collection recognizes a paginator and can produce its links and metadata alongside transformed items.",
+      "An item count does not reconstruct the paginator’s URL and page metadata.",
+      "Reindexing plain items still discards the paginator context.",
+      "Per-model properties do not restore the response’s paginator integration."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "links:no-links",
+    "probe": "$p = new Illuminate\\Pagination\\LengthAwarePaginator([['id' => 1]], 40, 20, 1);\n$a = Illuminate\\Http\\Resources\\Json\\JsonResource::collection($p)->response()->getData(true);\n$b = Illuminate\\Http\\Resources\\Json\\JsonResource::collection($p->items())->response()->getData(true);\necho (isset($a['links']) ? 'links' : 'no-links').':'.(isset($b['links']) ? 'links' : 'no-links');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#pagination"
+  ]
+}

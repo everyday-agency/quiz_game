@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0003",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Configuration",
+  "subtopic": "external-env-precedence",
+  "objective": {
+    "id": "laravel.external-env-precedence",
+    "text": "Explain precedence of an externally supplied environment value over a dotenv entry."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Distinguish deployment environment precedence from file order."
+  },
+  "prerequisites": [
+    "Dotenv",
+    "Process environment"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A fresh uncached Laravel process starts with BILLING_REGION=eu supplied by its host. Its .env contains BILLING_REGION=us. No code changes the variable. What does env(\"BILLING_REGION\") return?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "eu",
+      "rationale": "The immutable environment repository preserves the value already supplied by the host.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "us",
+      "rationale": "Loading .env does not overwrite a pre-existing external value in the immutable repository.",
+      "misconception": "Loading .env does not overwrite a pre-existing external value in the immutable repository."
+    },
+    {
+      "id": "choice-3",
+      "text": "An array containing eu and us",
+      "rationale": "Environment resolution returns one value rather than combining conflicting definitions.",
+      "misconception": "Environment resolution returns one value rather than combining conflicting definitions."
+    },
+    {
+      "id": "choice-4",
+      "text": "null",
+      "rationale": "Both sources contain a value; there is no missing-key fallback here.",
+      "misconception": "Both sources contain a value; there is no missing-key fallback here."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The immutable environment repository preserves the value already supplied by the host.",
+    "trace": [
+      "The immutable environment repository preserves the value already supplied by the host.",
+      "Loading .env does not overwrite a pre-existing external value in the immutable repository.",
+      "Environment resolution returns one value rather than combining conflicting definitions.",
+      "Both sources contain a value; there is no missing-key fallback here."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "eu",
+    "probe": "putenv('BILLING_REGION=eu');\nfile_put_contents(getcwd().'/.env', \"BILLING_REGION=us\\n\");\nDotenv\\Dotenv::create(Illuminate\\Support\\Env::getRepository(), getcwd())->safeLoad();\necho env('BILLING_REGION');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      1
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/configuration#environment-configuration"
+  ]
+}

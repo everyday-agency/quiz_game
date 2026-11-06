@@ -1,0 +1,6 @@
+Reference: https://vite.dev/guide/env-and-mode
+Retrieved: 2026-11-06
+Exact excerpt (15 words):
+Variables prefixed with VITE_ will be exposed in client-side source code after Vite bundling.
+Scope: default envPrefix; a value referenced by client code. This is documentation
+validation, not a claim that a Vite build was executed in the PHP harness.

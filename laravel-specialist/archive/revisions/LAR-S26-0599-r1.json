@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0599",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Architecture tests",
+  "subtopic": "architecture-boundary-dependency-check",
+  "objective": {
+    "id": "laravel.architecture-boundary-dependency-check",
+    "text": "Detect a forbidden domain-to-HTTP dependency with a targeted architecture boundary check."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Test a dependency rule directly rather than infer architecture from successful behavior."
+  },
+  "prerequisites": [
+    "Architecture tests",
+    "Namespace dependencies",
+    "Transport independence"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The agreed rule forbids App\\Domain from depending on Illuminate\\Http. A new domain service adds a constructor parameter typed Illuminate\\Http\\Request."
+    ],
+    "files": []
+  },
+  "stem": "Which regression check targets the violated rule?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A feature test asserting that the service’s HTTP endpoint returns 200.",
+      "rationale": "A successful endpoint does not prove that domain code is independent of HTTP types.",
+      "misconception": "A successful endpoint does not prove that domain code is independent of HTTP types."
+    },
+    {
+      "id": "choice-2",
+      "text": "A dependency-boundary test that rejects Illuminate\\Http references from App\\Domain.",
+      "rationale": "The rule concerns dependency direction; a targeted architecture check detects the forbidden reference even when behavior still passes.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "A test counting how many routes call the service.",
+      "rationale": "Call-site counts do not establish the namespace dependency rule.",
+      "misconception": "Call-site counts do not establish the namespace dependency rule."
+    },
+    {
+      "id": "choice-4",
+      "text": "A test asserting that every domain class has the suffix Service.",
+      "rationale": "Naming conventions do not detect forbidden type dependencies.",
+      "misconception": "Naming conventions do not detect forbidden type dependencies."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The rule concerns dependency direction; a targeted architecture check detects the forbidden reference even when behavior still passes.",
+    "trace": [
+      "A successful endpoint does not prove that domain code is independent of HTTP types.",
+      "The rule concerns dependency direction; a targeted architecture check detects the forbidden reference even when behavior still passes.",
+      "Call-site counts do not establish the namespace dependency rule.",
+      "Naming conventions do not detect forbidden type dependencies."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "violation",
+    "probe": "eval('namespace App\\Domain; final class Quote { public function __construct(\\Illuminate\\Http\\Request $request) {} }');\n$parameter = (new ReflectionMethod(App\\Domain\\Quote::class, '__construct'))->getParameters()[0];\necho str_starts_with($parameter->getType()->getName(), 'Illuminate\\\\Http\\\\') ? 'violation' : 'allowed';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/testing",
+    "https://pestphp.com/docs/arch-testing"
+  ]
+}

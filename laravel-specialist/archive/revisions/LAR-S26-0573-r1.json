@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0573",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Deployment",
+  "subtopic": "immutable-release-rollback-schema-compatibility",
+  "objective": {
+    "id": "laravel.immutable-release-rollback-schema-compatibility",
+    "text": "Keep the previous immutable release available for rollback without claiming this also reverses database changes."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish switching application artifacts from undoing persistent state."
+  },
+  "prerequisites": [
+    "Immutable releases",
+    "Database compatibility",
+    "Rollback planning"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Release B has failed after a migration. Release A is still available. User writes since B went live must be retained."
+    ],
+    "files": []
+  },
+  "stem": "Before switching traffic back to A, what must the rollback decision establish?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A can operate on the current schema and data, or a separate safe compatibility repair is ready.",
+      "rationale": "Switching code artifacts does not revert the database; compatibility must be checked without assuming new writes can be discarded.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Every migration down method should run even when A supports the current schema.",
+      "rationale": "Automatic reversal may be unnecessary or destructive; compatibility and data retention determine the recovery action.",
+      "misconception": "Automatic reversal may be unnecessary or destructive; compatibility and data retention determine the recovery action."
+    },
+    {
+      "id": "choice-3",
+      "text": "Restoring the pre-release database snapshot is always safe because it matches A.",
+      "rationale": "That can discard the user writes the scenario explicitly requires retaining.",
+      "misconception": "That can discard the user writes the scenario explicitly requires retaining."
+    },
+    {
+      "id": "choice-4",
+      "text": "The A directory exists, so its database state is necessarily still available too.",
+      "rationale": "A retained code directory is not a snapshot of the shared database.",
+      "misconception": "A retained code directory is not a snapshot of the shared database."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Switching code artifacts does not revert the database; compatibility must be checked without assuming new writes can be discarded.",
+    "trace": [
+      "Switching code artifacts does not revert the database; compatibility must be checked without assuming new writes can be discarded.",
+      "Automatic reversal may be unnecessary or destructive; compatibility and data retention determine the recovery action.",
+      "That can discard the user writes the scenario explicitly requires retaining.",
+      "A retained code directory is not a snapshot of the shared database."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Database/Migrations/Migrator.php",
+    "contains": [
+      "public function rollback",
+      "runDown"
+    ],
+    "reason": "Migration reversal is an explicit operation. The release-switch decision additionally follows the stated shared-state and data-retention constraints; no production rollback is executed.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/deployment",
+    "https://laravel.com/docs/13.x/migrations#rolling-back-migrations"
+  ]
+}

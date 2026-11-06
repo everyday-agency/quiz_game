@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0337",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Queue tests",
+  "subtopic": "bus-fake-not-handler-execution",
+  "objective": {
+    "id": "laravel.bus-fake-not-handler-execution",
+    "text": "Separate a dispatch assertion from verification of the job handler's side effects."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Use separate evidence for enqueue intent and actual business side effects."
+  },
+  "prerequisites": [
+    "Laravel Bus fake",
+    "Unit versus dispatch tests"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A test calls Bus::fake(), triggers a controller and successfully asserts that BuildExport was dispatched. It then claims the export file was generated correctly. What evidence is still missing?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A handler test that runs the job and checks its generated output.",
+      "rationale": "The fake records dispatch intent and normally prevents actual handler execution, so it cannot establish file-generation behavior.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Another assertion that BuildExport was dispatched once using the same fake.",
+      "rationale": "A more specific dispatch count still does not execute or inspect the handler’s output.",
+      "misconception": "A more specific dispatch count still does not execute or inspect the handler’s output."
+    },
+    {
+      "id": "choice-3",
+      "text": "A longer timeout for the fake to finish the handler asynchronously.",
+      "rationale": "The fake is not a background worker that eventually runs the intercepted job.",
+      "misconception": "The fake is not a background worker that eventually runs the intercepted job."
+    },
+    {
+      "id": "choice-4",
+      "text": "An assertion that the fake has no pending queue rows in the database.",
+      "rationale": "The absence of real queue rows under a fake does not prove the export logic worked.",
+      "misconception": "The absence of real queue rows under a fake does not prove the export logic worked."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The fake records dispatch intent and normally prevents actual handler execution, so it cannot establish file-generation behavior.",
+    "trace": [
+      "The fake records dispatch intent and normally prevents actual handler execution, so it cannot establish file-generation behavior.",
+      "A more specific dispatch count still does not execute or inspect the handler’s output.",
+      "The fake is not a background worker that eventually runs the intercepted job.",
+      "The absence of real queue rows under a fake does not prove the export logic worked."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "recorded:not-handled",
+    "probe": "class MarkWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function handle(): void\n    {\n        app('cache')->put('handled', true);\n    }\n}\nIlluminate\\Support\\Facades\\Bus::fake();\nIlluminate\\Support\\Facades\\Bus::dispatch(new MarkWork());\nIlluminate\\Support\\Facades\\Bus::assertDispatched(MarkWork::class);\necho 'recorded:'.(app('cache')->get('handled') ? 'handled' : 'not-handled');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mocking#bus-fake",
+    "https://laravel.com/docs/13.x/queues#testing"
+  ]
+}

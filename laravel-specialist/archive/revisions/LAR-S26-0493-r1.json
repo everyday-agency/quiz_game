@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0493",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Frontend security",
+  "subtopic": "vite-prefixed-env-client-visible",
+  "objective": {
+    "id": "laravel.vite-prefixed-env-client-visible",
+    "text": "Treat VITE-prefixed environment values as client-visible rather than server secrets."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep a server credential out of data deliberately bundled into browser code."
+  },
+  "prerequisites": [
+    "Client bundles",
+    "Vite environment exposure",
+    "Server credentials"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Vite uses its default environment prefix. Client code references import.meta.env.VITE_PAYMENT_SECRET."
+    ],
+    "files": []
+  },
+  "stem": "A developer places a server payment credential in VITE_PAYMENT_SECRET, expecting .env to stay private. What is the correct review finding?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The referenced value can be bundled into client code; keep this credential server-side.",
+      "rationale": "The VITE_ prefix opts a value into client exposure. A private source .env file does not make the resulting browser bundle secret.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Production minification encrypts the value against browser users.",
+      "rationale": "Minification is not confidentiality protection for data delivered to the client.",
+      "misconception": "Minification is not confidentiality protection for data delivered to the client."
+    },
+    {
+      "id": "choice-3",
+      "text": "The value remains private because .env itself is not served by Laravel.",
+      "rationale": "Build-time substitution can expose the value without serving the original file.",
+      "misconception": "Build-time substitution can expose the value without serving the original file."
+    },
+    {
+      "id": "choice-4",
+      "text": "Calling config:cache removes the value from an already generated JavaScript bundle.",
+      "rationale": "Laravel’s configuration cache does not rewrite a built client artifact.",
+      "misconception": "Laravel’s configuration cache does not rewrite a built client artifact."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The VITE_ prefix opts a value into client exposure. A private source .env file does not make the resulting browser bundle secret.",
+    "trace": [
+      "The VITE_ prefix opts a value into client exposure. A private source .env file does not make the resulting browser bundle secret.",
+      "Minification is not confidentiality protection for data delivered to the client.",
+      "Build-time substitution can expose the value without serving the original file.",
+      "Laravel’s configuration cache does not rewrite a built client artifact."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "sourceRoot": "reference",
+    "source": "vite-env.txt",
+    "contains": [
+      "Variables prefixed with VITE_ will be exposed in client-side source code after Vite bundling."
+    ],
+    "reason": "Official Vite environment contract, default prefix and a referenced value. No Vite bundler execution is claimed.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/vite#environment-variables",
+    "https://vite.dev/guide/env-and-mode"
+  ]
+}

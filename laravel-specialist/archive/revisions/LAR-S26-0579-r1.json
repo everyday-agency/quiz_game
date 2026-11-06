@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0579",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Performance",
+  "subtopic": "performance-query-and-endpoint-measurement",
+  "objective": {
+    "id": "laravel.performance-query-and-endpoint-measurement",
+    "text": "Measure endpoint query count and latency before selecting caching as the remedy."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Use measurements to distinguish database cost from the rest of request handling."
+  },
+  "prerequisites": [
+    "QueryExecuted events",
+    "Endpoint latency",
+    "Performance diagnosis"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A Laravel endpoint takes 900 ms. Before adding a response cache, which measurement best distinguishes database work from other time in the request?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Compare cache-hit latency after caching and assume it identifies the original bottleneck.",
+      "rationale": "A cache hit bypasses much of the endpoint and does not attribute its original cost.",
+      "misconception": "A cache hit bypasses much of the endpoint and does not attribute its original cost."
+    },
+    {
+      "id": "choice-2",
+      "text": "Record query count and cumulative query time alongside total endpoint duration.",
+      "rationale": "Comparing database time and frequency with the complete request establishes where further investigation belongs.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Record only the number of Eloquent models defined in the application.",
+      "rationale": "Model definitions do not measure queries actually executed by this request.",
+      "misconception": "Model definitions do not measure queries actually executed by this request."
+    },
+    {
+      "id": "choice-4",
+      "text": "Record only the duration of the final SQL query.",
+      "rationale": "The last query can omit earlier queries and non-database work.",
+      "misconception": "The last query can omit earlier queries and non-database work."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Comparing database time and frequency with the complete request establishes where further investigation belongs.",
+    "trace": [
+      "A cache hit bypasses much of the endpoint and does not attribute its original cost.",
+      "Comparing database time and frequency with the complete request establishes where further investigation belongs.",
+      "Model definitions do not measure queries actually executed by this request.",
+      "The last query can omit earlier queries and non-database work."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:timed",
+    "probe": "$count = 0;\n$total = 0.0;\nIlluminate\\Support\\Facades\\DB::listen(function ($event) use (&$count, &$total) {\n    $count++;\n    $total += $event->time;\n});\nIlluminate\\Support\\Facades\\DB::select('select 1');\nIlluminate\\Support\\Facades\\DB::select('select 2');\necho $count.':'.($total >= 0 ? 'timed' : 'invalid');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database#listening-for-query-events",
+    "https://laravel.com/docs/13.x/database#monitoring-cumulative-query-time"
+  ]
+}

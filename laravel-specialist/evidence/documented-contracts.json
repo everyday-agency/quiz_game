@@ -1,0 +1,310 @@
+[
+  {
+    "id": "LAR-S26-0002",
+    "topic": "Configuration",
+    "source": "Illuminate/Foundation/Bootstrap/LoadEnvironmentVariables.php",
+    "sourceRoot": "framework",
+    "reason": "Cached bootstrap skips dotenv; configuration is the stable application access boundary."
+  },
+  {
+    "id": "LAR-S26-0005",
+    "topic": "Deployment basics",
+    "source": "Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
+    "sourceRoot": "framework",
+    "reason": "Retry and refresh are separate maintenance response headers."
+  },
+  {
+    "id": "LAR-S26-0006",
+    "topic": "Service providers",
+    "source": "Illuminate/Foundation/Bootstrap/RegisterProviders.php",
+    "sourceRoot": "framework",
+    "reason": "The standard application builder passes bootstrap/providers.php into provider registration."
+  },
+  {
+    "id": "LAR-S26-0007",
+    "topic": "Service providers",
+    "source": "Illuminate/Foundation/Application.php",
+    "sourceRoot": "framework",
+    "reason": "Provider boot is a distinct phase after eager registration, and boot supports container injection."
+  },
+  {
+    "id": "LAR-S26-0008",
+    "topic": "Service container",
+    "source": "Illuminate/Container/Container.php",
+    "sourceRoot": "framework",
+    "reason": "Scoped registration combines singleton resolution with lifecycle-specific instance flushing."
+  },
+  {
+    "id": "LAR-S26-0026",
+    "topic": "Service providers",
+    "source": "Illuminate/Foundation/ProviderRepository.php",
+    "sourceRoot": "framework",
+    "reason": "The deferred manifest maps provided abstracts to provider classes."
+  },
+  {
+    "id": "LAR-S26-0030",
+    "topic": "Middleware",
+    "source": "Illuminate/Foundation/Http/Kernel.php",
+    "sourceRoot": "framework",
+    "reason": "Terminate resolves a middleware instance separately; sharing handle state requires an appropriate lifetime or external request-local state."
+  },
+  {
+    "id": "LAR-S26-0082",
+    "topic": "Proxies and hosts",
+    "source": "Illuminate/Http/Middleware/TrustHosts.php",
+    "sourceRoot": "framework",
+    "reason": "Trusted-host middleware establishes allowed host patterns; URL escaping and APP_URL address different concerns."
+  },
+  {
+    "id": "LAR-S26-0084",
+    "topic": "Middleware",
+    "source": "Illuminate/Foundation/Configuration/Middleware.php",
+    "sourceRoot": "framework",
+    "reason": "The middleware builder stores custom aliases for the HTTP kernel/router alias table."
+  },
+  {
+    "id": "LAR-S26-0086",
+    "topic": "Middleware",
+    "source": "Illuminate/Foundation/Http/Kernel.php",
+    "sourceRoot": "framework",
+    "reason": "The kernel global pipeline precedes router dispatch; route exclusions operate later on a separate list."
+  },
+  {
+    "id": "LAR-S26-0088",
+    "topic": "Controllers",
+    "source": "Illuminate/Routing/Route.php",
+    "sourceRoot": "framework",
+    "reason": "Legacy instance middleware discovery resolves the controller while gathering route middleware; static HasMiddleware follows a different path."
+  },
+  {
+    "id": "LAR-S26-0099",
+    "topic": "Artisan",
+    "source": "Illuminate/Console/Command.php",
+    "sourceRoot": "framework",
+    "reason": "On mutex contention, the command returns a numeric isolated option value or its configured default isolation exit code."
+  },
+  {
+    "id": "LAR-S26-0134",
+    "topic": "Validation",
+    "source": "Illuminate/Foundation/Auth/EmailVerificationRequest.php",
+    "sourceRoot": "framework",
+    "reason": "Laravel has a separate authenticated verification-request flow; a validation rule alone does not fulfill it. No external email or DNS service is contacted in this evidence check."
+  },
+  {
+    "id": "LAR-S26-0145",
+    "topic": "Form Requests",
+    "source": "Illuminate/Validation/ValidatesWhenResolvedTrait.php",
+    "sourceRoot": "framework",
+    "reason": "The authorization phase precedes validation completion and the action. The required debit/write atomicity belongs to the later application transaction, not this permission hook."
+  },
+  {
+    "id": "LAR-S26-0149",
+    "topic": "Form Requests",
+    "source": "Illuminate/Foundation/Http/FormRequest.php",
+    "sourceRoot": "framework",
+    "reason": "Form Requests expose separate rule and authorization boundaries. This is an architectural contract review, not a claim to execute a particular application policy."
+  },
+  {
+    "id": "LAR-S26-0180",
+    "topic": "Sessions and CSRF",
+    "source": "Illuminate/Session/Middleware/StartSession.php",
+    "sourceRoot": "framework",
+    "reason": "Session blocking coordinates participating requests through the configured cache lock store. This contract check does not claim a multi-process concurrency benchmark."
+  },
+  {
+    "id": "LAR-S26-0182",
+    "topic": "Sessions and CSRF",
+    "source": "Illuminate/Foundation/Configuration/Middleware.php",
+    "sourceRoot": "framework",
+    "reason": "The middleware supports targeted URI exemptions. Provider signature/replay verification is a separate application requirement and is not claimed to be exercised against a payment service."
+  },
+  {
+    "id": "LAR-S26-0280",
+    "topic": "Database concurrency",
+    "source": "Illuminate/Database/Query/Builder.php",
+    "sourceRoot": "framework",
+    "reason": "Laravel requests a write row lock; PostgreSQL holds it until transaction end. Transaction placement and invariant reasoning are documented-contract validation, not a SQLite concurrency test."
+  },
+  {
+    "id": "LAR-S26-0289",
+    "topic": "Database indexes",
+    "source": "Illuminate/Database/Schema/Blueprint.php",
+    "sourceRoot": "framework",
+    "reason": "Laravel preserves the declared composite-index columns. PostgreSQL B-tree leading equality and ordering behavior is documented, not benchmarked in SQLite; planner selection depends on statistics."
+  },
+  {
+    "id": "LAR-S26-0300",
+    "topic": "Database concurrency",
+    "source": "Illuminate/Database/Query/Builder.php",
+    "sourceRoot": "framework",
+    "reason": "PostgreSQL documents consistent lock acquisition order as the principal defense against this wait cycle. Laravel supplies the locking query; no multi-connection PostgreSQL execution is claimed."
+  },
+  {
+    "id": "LAR-S26-0314",
+    "topic": "Queue idempotency",
+    "source": "focused-outbox.txt",
+    "sourceRoot": "reference",
+    "reason": "Pinned Laravel transaction/queue/observer source plus the documented relay failure model. A supplementary local Laravel fixture verifies commit callback timing and atomic pending-row persistence; no Redis/broker crash or exactly-once delivery is claimed."
+  },
+  {
+    "id": "LAR-S26-0319",
+    "topic": "Queue timeouts",
+    "source": "Illuminate/Queue/Worker.php",
+    "sourceRoot": "framework",
+    "reason": "Worker timeout and reservation expiry are distinct operational clocks. The cited Laravel contract requires timeout to be shorter; no actual process kill or live Redis timing is performed."
+  },
+  {
+    "id": "LAR-S26-0339",
+    "topic": "Queue workers",
+    "source": "Illuminate/Queue/Worker.php",
+    "sourceRoot": "framework",
+    "reason": "The worker compares a cache restart timestamp between jobs. Graceful exit and supervisor replacement are operational deployment behavior, not a spawned-daemon test."
+  },
+  {
+    "id": "LAR-S26-0340",
+    "topic": "Queue workers",
+    "source": "Illuminate/Queue/Worker.php",
+    "sourceRoot": "framework",
+    "reason": "Worker lifetime limits are evaluated in the stop conditions. This source contract does not claim a live supervisor or measure parser memory."
+  },
+  {
+    "id": "LAR-S26-0374",
+    "topic": "Mail delivery",
+    "source": "Illuminate/Mail/Mailer.php",
+    "sourceRoot": "framework",
+    "reason": "The source emits the event after transport send returns a message. No external mailbox, delivery receipt or read receipt is tested or implied."
+  },
+  {
+    "id": "LAR-S26-0397",
+    "topic": "Scheduling",
+    "source": "Illuminate/Console/Scheduling/ScheduleRunCommand.php",
+    "sourceRoot": "framework",
+    "reason": "The current command repeats eligible sub-minute events through the minute boundary. The long-running timed loop is source-validated, not run as a live minute-long process."
+  },
+  {
+    "id": "LAR-S26-0410",
+    "topic": "Storage concurrency",
+    "source": "Illuminate/Filesystem/FilesystemAdapter.php",
+    "sourceRoot": "framework",
+    "reason": "The adapter implements append through get and put. This contract check identifies a missing concurrency guarantee; it does not claim to simulate concurrent remote writes."
+  },
+  {
+    "id": "LAR-S26-0411",
+    "topic": "Storage uploads",
+    "source": "Illuminate/Filesystem/AwsS3V3Adapter.php",
+    "sourceRoot": "framework",
+    "reason": "The S3 adapter creates a presigned PutObject request and returns its URL plus headers. No S3 SDK request or external bucket upload is executed."
+  },
+  {
+    "id": "LAR-S26-0415",
+    "topic": "Storage deployment",
+    "source": "Illuminate/Foundation/Console/StorageLinkCommand.php",
+    "sourceRoot": "framework",
+    "reason": "The standard fallback link is inspected. Creating symlinks is intentionally disabled in the isolated fixture runner."
+  },
+  {
+    "id": "LAR-S26-0420",
+    "topic": "Cache invalidation",
+    "source": "Illuminate/Cache/RedisStore.php",
+    "sourceRoot": "framework",
+    "reason": "RedisStore flush delegates to FLUSHDB. This is a documented/source contract; no shared Redis database is contacted or flushed."
+  },
+  {
+    "id": "LAR-S26-0449",
+    "topic": "HTTP client concurrency",
+    "source": "Illuminate/Http/Client/PendingRequest.php",
+    "sourceRoot": "framework",
+    "reason": "The pool result loop preserves request keys. Network concurrency is not benchmarked; the pinned Pool::as source also stores requests under the supplied alias."
+  },
+  {
+    "id": "LAR-S26-0493",
+    "topic": "Frontend security",
+    "source": "vite-env.txt",
+    "sourceRoot": "reference",
+    "reason": "Official Vite environment contract, default prefix and a referenced value. No Vite bundler execution is claimed."
+  },
+  {
+    "id": "LAR-S26-0496",
+    "topic": "Frontend sessions",
+    "source": "fetch-credentials.txt",
+    "sourceRoot": "reference",
+    "reason": "Browser Fetch documentation contract with cookie and server-policy assumptions stated. PHP cannot execute a browser credential policy; no browser network exchange is claimed."
+  },
+  {
+    "id": "LAR-S26-0535",
+    "topic": "Outbound request security",
+    "source": "focused-ssrf.txt",
+    "sourceRoot": "reference",
+    "reason": "OWASP SSRF guidance and Guzzle redirect-option contract. This is a design comparison; no DNS rebinding test, remote request, SSRF probe or production filter is executed."
+  },
+  {
+    "id": "LAR-S26-0538",
+    "topic": "Upload delivery security",
+    "source": "upload-active-content.txt",
+    "sourceRoot": "reference",
+    "reason": "OWASP storage/delivery boundary applied to an explicit download-only requirement. No uploaded active document is executed."
+  },
+  {
+    "id": "LAR-S26-0540",
+    "topic": "Cookie security",
+    "source": "httponly.txt",
+    "sourceRoot": "reference",
+    "reason": "MDN browser cookie contract. This does not claim a live browser attack simulation."
+  },
+  {
+    "id": "LAR-S26-0566",
+    "topic": "Deployment",
+    "source": "focused-nginx.txt",
+    "sourceRoot": "reference",
+    "reason": "Nginx location selection and the official Laravel deployment configuration establish the boundary. No Nginx or PHP-FPM server is installed, reconfigured or executed for this question."
+  },
+  {
+    "id": "LAR-S26-0572",
+    "topic": "Deployment",
+    "source": "deployment-boundaries.txt",
+    "sourceRoot": "reference",
+    "reason": "Official deployment permission contract; no host ownership or permissions are modified."
+  },
+  {
+    "id": "LAR-S26-0573",
+    "topic": "Deployment",
+    "source": "Illuminate/Database/Migrations/Migrator.php",
+    "sourceRoot": "framework",
+    "reason": "Migration reversal is an explicit operation. The release-switch decision additionally follows the stated shared-state and data-retention constraints; no production rollback is executed."
+  },
+  {
+    "id": "LAR-S26-0574",
+    "topic": "Deployment",
+    "source": "Illuminate/Console/ConfirmableTrait.php",
+    "sourceRoot": "framework",
+    "reason": "The real production-confirmation branch explicitly accepts --force. No real deployment command is run."
+  },
+  {
+    "id": "LAR-S26-0578",
+    "topic": "Long-lived workers",
+    "source": "deployment-boundaries.txt",
+    "sourceRoot": "reference",
+    "reason": "Official Octane worker-reload contract. Octane server software is not installed or exercised in this isolated harness."
+  },
+  {
+    "id": "LAR-S26-0580",
+    "topic": "Performance",
+    "source": "index-overhead.txt",
+    "sourceRoot": "reference",
+    "reason": "PostgreSQL index overhead contract plus the stated workload. No PostgreSQL benchmark or production index is executed."
+  },
+  {
+    "id": "LAR-S26-0593",
+    "topic": "Integration consistency",
+    "source": "external-recovery.txt",
+    "sourceRoot": "reference",
+    "reason": "Documented idempotency/failure ambiguity plus the explicit provider contract. No real payment, network request or production recovery is executed."
+  },
+  {
+    "id": "LAR-S26-0600",
+    "topic": "Framework upgrades",
+    "source": "upgrade-validation.txt",
+    "sourceRoot": "reference",
+    "reason": "Composer lock/install contract and the Laravel upgrade guide. This is a validation-planning question, not a claim to have upgraded an unrelated production application."
+  }
+]

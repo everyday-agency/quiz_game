@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0367",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Mail queueing",
+  "subtopic": "inline-mail-image-cid",
+  "objective": {
+    "id": "laravel.inline-mail-image-cid",
+    "text": "Embed an inline mail image with a CID reference instead of exposing a private filesystem path."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Include the image bytes in the message rather than linking to an inaccessible server path."
+  },
+  "prerequisites": [
+    "Mail inline attachments",
+    "Private files",
+    "HTML message references"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An HTML email must display a PNG from a private local file, and the recipient must not need access to the server’s filesystem or a public image URL. In the mail Blade template, which source expression embeds the file with a CID reference?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "{{ asset($absolutePath) }}",
+      "rationale": "Generating an HTTP asset URL does not publish or embed a private local file.",
+      "misconception": "Generating an HTTP asset URL does not publish or embed a private local file."
+    },
+    {
+      "id": "choice-2",
+      "text": "{{ $message->embed($absolutePath) }}",
+      "rationale": "embed adds an inline attachment and returns the content-ID URL used by the email body.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "{{ $absolutePath }}",
+      "rationale": "A server filesystem path is not accessible to the recipient’s mail client.",
+      "misconception": "A server filesystem path is not accessible to the recipient’s mail client."
+    },
+    {
+      "id": "choice-4",
+      "text": "{{ base_path($absolutePath) }}",
+      "rationale": "Resolving a local path still provides no image bytes or usable recipient-side resource.",
+      "misconception": "Resolving a local path still provides no image bytes or usable recipient-side resource."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "embed adds an inline attachment and returns the content-ID URL used by the email body.",
+    "trace": [
+      "Generating an HTTP asset URL does not publish or embed a private local file.",
+      "embed adds an inline attachment and returns the content-ID URL used by the email body.",
+      "A server filesystem path is not accessible to the recipient’s mail client.",
+      "Resolving a local path still provides no image bytes or usable recipient-side resource."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "cid:inline",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\n$path = getcwd().'/logo.png';\nfile_put_contents($path, base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aD1kAAAAASUVORK5CYII='));\nfile_put_contents(resource_path('views/mail/simple.blade.php'), '<img src=\"{{ $message->embed($path) }}\">');\nIlluminate\\Support\\Facades\\Mail::send('mail.simple', ['path' => $path], function ($message) {\n    $message->to('a@example.test')->subject('Logo');\n});\n$message = app('mailer')->getSymfonyTransport()->messages()->first()->getOriginalMessage();\necho (str_contains($message->getHtmlBody(), 'cid:') ? 'cid' : 'path').':'.($message->getAttachments()[0]->getDisposition() === 'inline' ? 'inline' : 'attachment');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#inline-attachments"
+  ]
+}

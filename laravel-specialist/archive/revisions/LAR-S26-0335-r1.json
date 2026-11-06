@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0335",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Job batches",
+  "subtopic": "batch-allow-failures-no-auto-cancel",
+  "objective": {
+    "id": "laravel.batch-allow-failures-no-auto-cancel",
+    "text": "Choose allowFailures when one failed job must not automatically cancel unrelated batch work."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Allow unrelated work to continue while retaining accurate failure records."
+  },
+  "prerequisites": [
+    "Batch failure policy",
+    "Independent work items"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A batch imports independent tenant files. One bad file should be recorded as failed without automatically cancelling the remaining imports. Which batch option expresses that policy?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "allowFailures()",
+      "rationale": "This prevents automatic batch cancellation on a job failure while preserving the failure count.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "cancel() before dispatching the remaining work",
+      "rationale": "Cancellation is the opposite of allowing the independent work to continue.",
+      "misconception": "Cancellation is the opposite of allowing the independent work to continue."
+    },
+    {
+      "id": "choice-3",
+      "text": "onQueue(\"independent\")",
+      "rationale": "A queue name does not alter how the batch reacts to a failed job.",
+      "misconception": "A queue name does not alter how the batch reacts to a failed job."
+    },
+    {
+      "id": "choice-4",
+      "text": "then($callback)",
+      "rationale": "An all-success callback does not change the batch’s failure-cancellation policy.",
+      "misconception": "An all-success callback does not change the batch’s failure-cancellation policy."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "This prevents automatic batch cancellation on a job failure while preserving the failure count.",
+    "trace": [
+      "This prevents automatic batch cancellation on a job failure while preserving the failure count.",
+      "Cancellation is the opposite of allowing the independent work to continue.",
+      "A queue name does not alter how the batch reacts to a failed job.",
+      "An all-success callback does not change the batch’s failure-cancellation policy."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "active:1",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nIlluminate\\Support\\Facades\\Schema::create('job_batches', function ($t) {\n    $t->string('id')->primary();\n    $t->string('name');\n    $t->integer('total_jobs');\n    $t->integer('pending_jobs');\n    $t->integer('failed_jobs');\n    $t->longText('failed_job_ids');\n    $t->mediumText('options')->nullable();\n    $t->integer('cancelled_at')->nullable();\n    $t->integer('created_at');\n    $t->integer('finished_at')->nullable();\n});\nconfig(['queue.batching' => ['database' => 'sqlite', 'table' => 'job_batches']]);\nclass BatchWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n    use Illuminate\\Bus\\Batchable;\n\n    public function __construct(public bool $shouldFail = false)\n    {\n    }\n\n    public function handle(): void\n    {\n        if ($this->shouldFail) {\n            throw new RuntimeException('fixture failure');\n        }\n    }\n}\n$batch = Illuminate\\Support\\Facades\\Bus::batch([new BatchWork(true), new BatchWork()])->allowFailures()->dispatch();\n$job = app('queue')->connection()->pop();\ntry {\n    $job->fire();\n} catch (RuntimeException $e) {\n    $job->fail($e);\n}\n$state = $batch->fresh();\necho ($state->cancelled() ? 'cancelled' : 'active').':'.$state->failedJobs;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#allowing-failures"
+  ]
+}

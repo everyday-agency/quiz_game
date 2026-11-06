@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0537",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Webhook freshness",
+  "subtopic": "webhook-authenticity-not-freshness",
+  "objective": {
+    "id": "laravel.webhook-authenticity-not-freshness",
+    "text": "Add a freshness and replay policy to an authentic webhook instead of treating a valid signature as proof of a new delivery."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate message authenticity from evidence that processing it is fresh and permitted."
+  },
+  "prerequisites": [
+    "Signed webhooks",
+    "Replay windows",
+    "Delivery identity"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The provider signs the timestamp, delivery ID and body. It defines a five-minute acceptance window and a unique delivery ID. The application can store consumed IDs durably."
+    ],
+    "files": []
+  },
+  "stem": "An attacker replays an old authentic delivery unchanged. Which acceptance policy adds the missing replay protection?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Check only that the unsigned request arrival time is recent.",
+      "rationale": "Every replay arrives now; that says nothing about when the provider signed the message.",
+      "misconception": "Every replay arrives now; that says nothing about when the provider signed the message."
+    },
+    {
+      "id": "choice-2",
+      "text": "Accept repeated IDs whenever the body is byte-for-byte identical.",
+      "rationale": "That explicitly permits the unchanged replay the requirement excludes.",
+      "misconception": "That explicitly permits the unchanged replay the requirement excludes."
+    },
+    {
+      "id": "choice-3",
+      "text": "Verify the signature, enforce the signed time window, and reject an already consumed delivery ID.",
+      "rationale": "Signature validity alone survives replay; freshness and consumed-identity checks add the required temporal and replay boundary.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Verify only the signature because authentic bytes cannot be replayed.",
+      "rationale": "A captured authentic message can retain its valid signature when resent unchanged.",
+      "misconception": "A captured authentic message can retain its valid signature when resent unchanged."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Signature validity alone survives replay; freshness and consumed-identity checks add the required temporal and replay boundary.",
+    "trace": [
+      "Every replay arrives now; that says nothing about when the provider signed the message.",
+      "That explicitly permits the unchanged replay the requirement excludes.",
+      "Signature validity alone survives replay; freshness and consumed-identity checks add the required temporal and replay boundary.",
+      "A captured authentic message can retain its valid signature when resent unchanged."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "accepted:replay:expired",
+    "probe": "use Illuminate\\Support\\Facades\\DB;\nuse Illuminate\\Support\\Facades\\Schema;\nSchema::create('consumed_deliveries', function ($t) {\n    $t->string('delivery_id')->primary();\n});\n$accept = function (array $message, string $signature, int $now) {\n    $encoded = json_encode($message);\n    if (! hash_equals(hash_hmac('sha256', $encoded, 'fixture-secret'), $signature)) {\n        return 'invalid';\n    }\n    if (abs($now - $message['timestamp']) > 300) {\n        return 'expired';\n    }\n    return DB::table('consumed_deliveries')->insertOrIgnore(['delivery_id' => $message['id']]) === 1\n        ? 'accepted' : 'replay';\n};\n$message = ['id' => 'evt-1', 'timestamp' => 1000, 'body' => 'paid'];\n$signature = hash_hmac('sha256', json_encode($message), 'fixture-secret');\necho $accept($message, $signature, 1010).':'.$accept($message, $signature, 1011).':'.$accept($message, $signature, 1400);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#store-if-not-present",
+    "https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html"
+  ]
+}

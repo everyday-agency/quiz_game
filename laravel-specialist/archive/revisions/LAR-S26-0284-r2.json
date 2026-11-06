@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0284",
+  "revision": 2,
+  "status": "internal-validated",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Transactions",
+  "subtopic": "transaction-retry-external-side-effect",
+  "objective": {
+    "id": "laravel.transaction-retry-external-side-effect",
+    "text": "Account for repeated closure execution when a transaction retries a concurrency failure."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Separate retried database work from a nontransactional side effect and account for retry duplication."
+  },
+  "prerequisites": [
+    "Laravel transaction retries",
+    "Concurrency errors",
+    "External idempotency"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A transaction closure charges a payment provider, then writes an order. A recognized concurrency error causes Laravel to retry the closure. The provider call is not part of the database transaction. What must the design address?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Use a stable payment idempotency key and a durable reconciliation workflow.",
+      "rationale": "Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Laravel resumes the closure at the failed SQL statement, so the earlier charge runs only once.",
+      "rationale": "A retry invokes the callback again rather than resuming a PHP instruction within it.",
+      "misconception": "A retry invokes the callback again rather than resuming a PHP instruction within it."
+    },
+    {
+      "id": "choice-3",
+      "text": "Setting attempts=1 makes the charge and order atomic across both systems.",
+      "rationale": "Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits.",
+      "misconception": "Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits."
+    },
+    {
+      "id": "choice-4",
+      "text": "The provider charge is rolled back automatically with the order insert.",
+      "rationale": "The provider is outside this database transaction and does not participate in its rollback.",
+      "misconception": "The provider is outside this database transaction and does not participate in its rollback."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.",
+    "trace": [
+      "Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.",
+      "A retry invokes the callback again rather than resuming a PHP instruction within it.",
+      "Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits.",
+      "The provider is outside this database transaction and does not participate in its rollback."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:1",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$charges = 0;\nDB::transaction(function () use (&$charges) {\n    $charges++;\n    DB::table('records')->where('id', 1)->increment('version');\n    if ($charges === 1) {\n        throw new PDOException('serialization failure', 40001);\n    }\n}, attempts: 2);\necho $charges.':'.(DB::table('records')->value('version') - 1);",
+    "status": "runtime-verified",
+    "independentEditorialReview": "pending",
+    "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database#handling-deadlocks"
+  ]
+}

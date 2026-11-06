@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0381",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Notifications",
+  "subtopic": "queued-notification-recipient-channel-jobs",
+  "objective": {
+    "id": "laravel.queued-notification-recipient-channel-jobs",
+    "text": "Queue one delivery job for each recipient and channel when the notification is queued."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Count delivery work units rather than treating the whole recipient collection as one job."
+  },
+  "prerequisites": [
+    "Queued notifications",
+    "Recipients and channels"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A ShouldQueue notification is sent to three recipients. via() returns [\"mail\",\"database\"] for each. No channels are suppressed. How many queued notification delivery jobs are created?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "6",
+      "rationale": "Queueing creates work for each recipient/channel pair: three recipients times two channels.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "1",
+      "rationale": "The complete recipient/channel matrix is not one ordinary queued notification job.",
+      "misconception": "The complete recipient/channel matrix is not one ordinary queued notification job."
+    },
+    {
+      "id": "choice-3",
+      "text": "3",
+      "rationale": "Counting only recipients ignores their two selected delivery channels.",
+      "misconception": "Counting only recipients ignores their two selected delivery channels."
+    },
+    {
+      "id": "choice-4",
+      "text": "2",
+      "rationale": "Counting only channels ignores separate jobs for the three recipients.",
+      "misconception": "Counting only channels ignores separate jobs for the three recipients."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Queueing creates work for each recipient/channel pair: three recipients times two channels.",
+    "trace": [
+      "Queueing creates work for each recipient/channel pair: three recipients times two channels.",
+      "The complete recipient/channel matrix is not one ordinary queued notification job.",
+      "Counting only recipients ignores their two selected delivery channels.",
+      "Counting only channels ignores separate jobs for the three recipients."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "6",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nIlluminate\\Support\\Facades\\Schema::create('members', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('email');\n    $t->boolean('email_notifications')->default(false);\n});\nIlluminate\\Support\\Facades\\Schema::create('notifications', function ($t) {\n    $t->uuid('id')->primary();\n    $t->string('type');\n    $t->morphs('notifiable');\n    $t->text('data');\n    $t->timestamp('read_at')->nullable();\n    $t->timestamps();\n});\nclass Member extends Illuminate\\Database\\Eloquent\\Model\n{\n    use Illuminate\\Notifications\\Notifiable;\n\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$member = Member::create(['name' => 'Ada', 'email' => 'ada@example.test']);\nclass DatabaseNotice extends Illuminate\\Notifications\\Notification\n{\n    public function via($notifiable): array\n    {\n        return ['database'];\n    }\n\n    public function toDatabase($notifiable): array\n    {\n        return ['message' => 'Hello'];\n    }\n}\nclass MultiNotice extends DatabaseNotice implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Bus\\Queueable;\n\n    public function via($notifiable): array\n    {\n        return ['mail', 'database'];\n    }\n}\n$second = Member::create(['name' => 'Lin', 'email' => 'lin@example.test']);\n$third = Member::create(['name' => 'Sam', 'email' => 'sam@example.test']);\nIlluminate\\Support\\Facades\\Notification::send([$member, $second, $third], new MultiNotice());\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/notifications#queueing-notifications"
+  ]
+}

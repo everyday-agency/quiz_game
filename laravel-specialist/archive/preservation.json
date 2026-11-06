@@ -1,0 +1,53 @@
+{
+  "sourceCommit": "7c166faa7f3dbc374a7ea49731568a72ec371d61",
+  "phpCount": 620,
+  "phpSha256": "fe0d515516d7fb92449e62c147701c6e9d72fe191311efabfb2d15a118dfb692",
+  "files": [
+    {
+      "path": "js/php-bank.mjs",
+      "sha256": "377e4608e7a6c10975d93e82299f29e7dbc5d40f988a6100003465175e443d20"
+    },
+    {
+      "path": "js/questions.mjs",
+      "sha256": "373d5f514b9808fae5e9c02a60bb3e19254aee807893efba54cd295a0942a9ca"
+    },
+    {
+      "path": "js/progress.mjs",
+      "sha256": "3ffb1e44b235836c4f7aeae4aa19ba8eaf3e4fe57cb0b4e7ecaacdcaaa7e1f90"
+    },
+    {
+      "path": "js/app.js",
+      "sha256": "93b422c4a99ac5c1e542c4e0df23b2fe8248b732294da8e2f82e1e43dc7c067b"
+    },
+    {
+      "path": "js/exam.mjs",
+      "sha256": "1e5b660f8dfc6977ac2f360251a82a19be656b27fe2505a79fb4c9fdb94e7b45"
+    },
+    {
+      "path": "js/learning-notes.mjs",
+      "sha256": "b7de9fd3037957bb09b04374e5483ef71550708294db6944c83e60ade20cf7d3"
+    },
+    {
+      "path": "index.html",
+      "sha256": "61a1d910758ef6f9c712d636cda0b1004f81dd0c7664ffb2196352ecf74003eb"
+    },
+    {
+      "path": "styles.css",
+      "sha256": "18c49db877b34ecd30b3e8f29eb4d2a9d70ac4534806514be24ec4fe08f5e24a"
+    },
+    {
+      "path": "js/code-viewer.mjs",
+      "sha256": "a89a44fde8f661cca2c2e2cbf6b458dff422668064c689e5bc47db67071572e2"
+    },
+    {
+      "path": "js/code-highlighting.mjs",
+      "sha256": "38557e5087fa15156d7cf3e392beddb62018024eecd43ddca6e75cdfefe82f72"
+    },
+    {
+      "path": "tools/build-site.mjs",
+      "sha256": "50bbd395db81c6ba6a524597d8dc81ff5ed4df21e53819722a7b9e922b51491b"
+    }
+  ],
+  "legacyCount": 600,
+  "legacyArchiveSha256": "3b5dee280622785f244cc342dec75d7d4643a956021ca394d4122fce96778ea9"
+}

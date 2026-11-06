@@ -1,0 +1,2912 @@
+{
+  "independentApproval": "pending",
+  "selection": "Five questions per batch; executable, contract, code/no-code, six formats and three difficulty levels represented.",
+  "questions": [
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0001",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Configuration",
+      "subtopic": "config-null-default",
+      "objective": {
+        "id": "laravel.config-null-default",
+        "text": "Distinguish a missing configuration key from an explicitly configured null."
+      },
+      "difficulty": {
+        "level": "Foundation",
+        "audience": "junior",
+        "rationale": "Follow two lookups and distinguish absence from an explicit value."
+      },
+      "prerequisites": [
+        "Configuration repository",
+        "PHP null"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "No billing.missing key is configured."
+        ],
+        "files": [
+          {
+            "path": "probe.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nconfig(['billing.limit' => null]);\n\necho json_encode([\n    config('billing.limit', 8),\n    config('billing.missing', 8),\n]);\n"
+          }
+        ]
+      },
+      "stem": "A command runs this code after application bootstrap. What is printed?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "[null,null]",
+          "rationale": "A missing key does use the provided default, so the second value is 8.",
+          "misconception": "A missing key does use the provided default, so the second value is 8."
+        },
+        {
+          "id": "choice-2",
+          "text": "[null,8]",
+          "rationale": "The existing limit key retains null; only the missing key uses the supplied default.",
+          "misconception": null
+        },
+        {
+          "id": "choice-3",
+          "text": "[8,null]",
+          "rationale": "This reverses both lookup rules: explicit null is retained and absence uses 8.",
+          "misconception": "This reverses both lookup rules: explicit null is retained and absence uses 8."
+        },
+        {
+          "id": "choice-4",
+          "text": "[8,8]",
+          "rationale": "The default is not a null-coalescing operation; an existing null is returned.",
+          "misconception": "The default is not a null-coalescing operation; an existing null is returned."
+        }
+      ],
+      "correctOptionId": "choice-2",
+      "explanation": {
+        "summary": "The existing limit key retains null; only the missing key uses the supplied default.",
+        "trace": [
+          "A missing key does use the provided default, so the second value is 8.",
+          "The existing limit key retains null; only the missing key uses the supplied default.",
+          "This reverses both lookup rules: explicit null is retained and absence uses 8.",
+          "The default is not a null-coalescing operation; an existing null is returned."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "[null,8]",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-1-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          1
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/configuration#accessing-configuration-values"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0011",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "debugging",
+      "topic": "Service container",
+      "subtopic": "interface-autowiring-boundary",
+      "objective": {
+        "id": "laravel.interface-autowiring-boundary",
+        "text": "Diagnose why constructor autowiring cannot select an implementation for an unbound interface."
+      },
+      "difficulty": {
+        "level": "Foundation",
+        "audience": "junior",
+        "rationale": "Identify why a concrete dependency is required at an interface boundary."
+      },
+      "prerequisites": [
+        "Constructor injection",
+        "Interfaces"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "InvoiceController constructor-injects ReceiptSender, an interface with no binding or container attribute. EmailReceiptSender implements it and is autoloadable. Resolution fails with \"Target [ReceiptSender] is not instantiable\". Which fix addresses the cause?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Change the constructor dependency from public to private.",
+          "rationale": "Property visibility does not select an interface implementation.",
+          "misconception": "Property visibility does not select an interface implementation."
+        },
+        {
+          "id": "choice-2",
+          "text": "Add a return type to EmailReceiptSender::send().",
+          "rationale": "A method return type cannot tell the container which class should satisfy the constructor interface.",
+          "misconception": "A method return type cannot tell the container which class should satisfy the constructor interface."
+        },
+        {
+          "id": "choice-3",
+          "text": "Bind ReceiptSender::class to EmailReceiptSender::class.",
+          "rationale": "The container needs an implementation choice; autoloading an implementation does not select it for an interface.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "Register a singleton for InvoiceController without changing ReceiptSender.",
+          "rationale": "Building the singleton still requires resolving its unbound interface dependency.",
+          "misconception": "Building the singleton still requires resolving its unbound interface dependency."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The container needs an implementation choice; autoloading an implementation does not select it for an interface.",
+        "trace": [
+          "Property visibility does not select an interface implementation.",
+          "A method return type cannot tell the container which class should satisfy the constructor interface.",
+          "The container needs an implementation choice; autoloading an implementation does not select it for an interface.",
+          "Building the singleton still requires resolving its unbound interface dependency."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "unbound:EmailReceiptSender",
+        "probe": "interface ReceiptSender {}\nclass EmailReceiptSender implements ReceiptSender {}\nclass InvoiceController\n{\n    public function __construct(public ReceiptSender $sender) {}\n}\ntry {\n    app(InvoiceController::class);\n} catch (Illuminate\\Contracts\\Container\\BindingResolutionException $e) {\n    echo 'unbound:';\n}\napp()->bind(ReceiptSender::class, EmailReceiptSender::class);\necho get_class(app(InvoiceController::class)->sender);",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-1-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          1
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/container#binding-interfaces-to-implementations"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0027",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Middleware",
+      "subtopic": "middleware-onion-order",
+      "objective": {
+        "id": "laravel.middleware-onion-order",
+        "text": "Trace before/after execution through a two-layer middleware pipeline."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Trace entry and response unwinding through two layers."
+      },
+      "prerequisites": [
+        "Middleware pipeline",
+        "Closures"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": [
+          {
+            "path": "probe.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nuse Illuminate\\Pipeline\\Pipeline;\n\n$trace = [];\n$a = function ($value, $next) use (&$trace) {\n    $trace[] = 'A-in';\n    $result = $next($value);\n    $trace[] = 'A-out';\n\n    return $result;\n};\n$b = function ($value, $next) use (&$trace) {\n    $trace[] = 'B-in';\n    $result = $next($value);\n    $trace[] = 'B-out';\n\n    return $result;\n};\n\napp(Pipeline::class)->send(null)->through([$a, $b])->then(function () use (&$trace) {\n    $trace[] = 'action';\n});\necho implode(',', $trace);\n"
+          }
+        ]
+      },
+      "stem": "The pipeline runs A, then B, then the destination. What sequence is printed?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "A-in,A-out,B-in,B-out,action",
+          "rationale": "The code after next cannot run before the downstream call completes.",
+          "misconception": "The code after next cannot run before the downstream call completes."
+        },
+        {
+          "id": "choice-2",
+          "text": "B-in,A-in,action,A-out,B-out",
+          "rationale": "through([$a, $b]) enters A first, not B.",
+          "misconception": "through([$a, $b]) enters A first, not B."
+        },
+        {
+          "id": "choice-3",
+          "text": "A-in,B-in,action,A-out,B-out",
+          "rationale": "Outgoing work follows call-stack unwinding, so B-out precedes A-out.",
+          "misconception": "Outgoing work follows call-stack unwinding, so B-out precedes A-out."
+        },
+        {
+          "id": "choice-4",
+          "text": "A-in,B-in,action,B-out,A-out",
+          "rationale": "Each layer waits for the downstream result; response handling unwinds in reverse order.",
+          "misconception": null
+        }
+      ],
+      "correctOptionId": "choice-4",
+      "explanation": {
+        "summary": "Each layer waits for the downstream result; response handling unwinds in reverse order.",
+        "trace": [
+          "The code after next cannot run before the downstream call completes.",
+          "through([$a, $b]) enters A first, not B.",
+          "Outgoing work follows call-stack unwinding, so B-out precedes A-out.",
+          "Each layer waits for the downstream result; response handling unwinds in reverse order."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "A-in,B-in,action,B-out,A-out",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-1-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          8
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/middleware#middleware-and-responses"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0050",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "code-review",
+      "topic": "Signed URLs",
+      "subtopic": "ignored-signature-query-trust",
+      "objective": {
+        "id": "laravel.ignored-signature-query-trust",
+        "text": "Assess the trust boundary created by ignoring a query parameter during signature validation."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Identify which data remains authenticated after an explicit signature exclusion."
+      },
+      "prerequisites": [
+        "Signed query strings",
+        "Authorization",
+        "Input validation"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "An export link signs the account path but ignores the query parameter format during validation. The UI currently sends format=csv. Which review comment correctly describes the security boundary?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Treat format as caller-controlled and validate it against allowed formats; the signature does not protect its value.",
+          "rationale": "An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Reject every link with format because ignored parameters always invalidate signatures.",
+          "rationale": "Ignoring a parameter intentionally permits it to vary without invalidating the signature.",
+          "misconception": "Ignoring a parameter intentionally permits it to vary without invalidating the signature."
+        },
+        {
+          "id": "choice-3",
+          "text": "Treat format as trusted because the account path is signed.",
+          "rationale": "Authenticating the path does not authenticate a query parameter explicitly excluded from verification.",
+          "misconception": "Authenticating the path does not authenticate a query parameter explicitly excluded from verification."
+        },
+        {
+          "id": "choice-4",
+          "text": "Use the presence of a signature as authorization for any account ID supplied in the body.",
+          "rationale": "The signed URL authenticates only its covered data and does not authenticate unrelated request body values.",
+          "misconception": "The signed URL authenticates only its covered data and does not authenticate unrelated request body values."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.",
+        "trace": [
+          "An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.",
+          "Ignoring a parameter intentionally permits it to vary without invalidating the signature.",
+          "Authenticating the path does not authenticate a query parameter explicitly excluded from verification.",
+          "The signed URL authenticates only its covered data and does not authenticate unrelated request body values."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "[true,true]",
+        "probe": "app('router')->get('/accounts/{account}/export', fn () => '')->name('export');\napp('router')->getRoutes()->refreshNameLookups();\n$base = app('url')->signedRoute('export', ['account' => 3]);\n$a = Illuminate\\Http\\Request::create($base.'&format=csv');\n$b = Illuminate\\Http\\Request::create($base.'&format=json');\necho json_encode([app('url')->hasValidSignature($a, true, ['format']), app('url')->hasValidSignature($b, true, ['format'])]);",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-1-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/urls#validating-signed-route-requests"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0097",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "Artisan",
+      "subtopic": "command-error-output-versus-exit",
+      "objective": {
+        "id": "laravel.command-error-output-versus-exit",
+        "text": "Return a failing exit status when automation must detect a command failure."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Test process success semantics rather than interpreting message color or wording."
+      },
+      "prerequisites": [
+        "Command exit codes",
+        "CI failure detection"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A command detects a failed precondition, calls $this->error(\"Missing manifest\"), and then returns normally with no integer return. CI checks only the exit code and reports success. Which change and test enforce failure reliably?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Replace error() with warn() and assert exit code 0.",
+          "rationale": "A warning message and successful exit still fail the stated requirement.",
+          "misconception": "A warning message and successful exit still fail the stated requirement."
+        },
+        {
+          "id": "choice-2",
+          "text": "Return Command::FAILURE on that branch and assert the command exit code is 1.",
+          "rationale": "Printing an error message does not set the command exit status; an explicit failure return makes the CI contract observable.",
+          "misconception": null
+        },
+        {
+          "id": "choice-3",
+          "text": "Keep the normal return and assert that the output contains Missing manifest.",
+          "rationale": "That tests a message but leaves the exit-code-only CI integration reporting success.",
+          "misconception": "That tests a message but leaves the exit-code-only CI integration reporting success."
+        },
+        {
+          "id": "choice-4",
+          "text": "Return the string \"1\" and test only that it appears in the output.",
+          "rationale": "Output appearance does not prove a numeric failing exit status; the explicit integer failure return is the intended contract.",
+          "misconception": "Output appearance does not prove a numeric failing exit status; the explicit integer failure return is the intended contract."
+        }
+      ],
+      "correctOptionId": "choice-2",
+      "explanation": {
+        "summary": "Printing an error message does not set the command exit status; an explicit failure return makes the CI contract observable.",
+        "trace": [
+          "A warning message and successful exit still fail the stated requirement.",
+          "Printing an error message does not set the command exit status; an explicit failure return makes the CI contract observable.",
+          "That tests a message but leaves the exit-code-only CI integration reporting success.",
+          "Output appearance does not prove a numeric failing exit status; the explicit integer failure return is the intended contract."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "0:1",
+        "probe": "Illuminate\\Support\\Facades\\Artisan::command('fixture:printed', function () {\n    $this->error('Missing manifest');\n});\nIlluminate\\Support\\Facades\\Artisan::command('fixture:failed', function () {\n    $this->error('Missing manifest');\n    return Illuminate\\Console\\Command::FAILURE;\n});\necho Illuminate\\Support\\Facades\\Artisan::call('fixture:printed').':'.Illuminate\\Support\\Facades\\Artisan::call('fixture:failed');",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-1-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          1
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/artisan#exit-codes"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0105",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "code-review",
+      "topic": "Validation",
+      "subtopic": "array-allowed-key-boundary",
+      "objective": {
+        "id": "laravel.array-allowed-key-boundary",
+        "text": "Reject unexpected nested array keys using the array rule's allowed-key list."
+      },
+      "difficulty": {
+        "level": "Foundation",
+        "audience": "junior",
+        "rationale": "Reject an unexpected capability flag at the input boundary."
+      },
+      "prerequisites": [
+        "Nested arrays",
+        "Array validation rules"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A profile object may contain only name and timezone. Extra keys must produce validation errors, not be silently dropped. Which parent rule enforces this allowlist alongside child rules?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "profile => nullable",
+          "rationale": "Nullable addresses nullability, not the keys of a supplied object.",
+          "misconception": "Nullable addresses nullability, not the keys of a supplied object."
+        },
+        {
+          "id": "choice-2",
+          "text": "profile => array",
+          "rationale": "The plain array rule checks the value type but does not restrict its keys.",
+          "misconception": "The plain array rule checks the value type but does not restrict its keys."
+        },
+        {
+          "id": "choice-3",
+          "text": "profile => array:name,timezone",
+          "rationale": "The array rule with named allowed keys rejects additional keys within profile.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "profile => required_array_keys:name,timezone",
+          "rationale": "This requires listed keys but does not reject additional ones.",
+          "misconception": "This requires listed keys but does not reject additional ones."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The array rule with named allowed keys rejects additional keys within profile.",
+        "trace": [
+          "Nullable addresses nullability, not the keys of a supplied object.",
+          "The plain array rule checks the value type but does not restrict its keys.",
+          "The array rule with named allowed keys rejects additional keys within profile.",
+          "This requires listed keys but does not reject additional ones."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "[true,false]",
+        "probe": "$rules = ['profile' => 'array:name,timezone'];\necho json_encode([\n    validator(['profile' => ['name' => 'Ada']], $rules)->passes(),\n    validator(['profile' => ['name' => 'Ada', 'is_admin' => true]], $rules)->passes(),\n]);",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-2-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          6
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/validation#rule-array"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0136",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Form Requests",
+      "subtopic": "form-request-hook-sequence",
+      "objective": {
+        "id": "laravel.form-request-hook-sequence",
+        "text": "Trace prepareForValidation before authorization and rule evaluation."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Trace framework hook order independently of declaration order."
+      },
+      "prerequisites": [
+        "Form Request lifecycle",
+        "Authorization",
+        "Validation hooks"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "The request contains name=Ada and has its Laravel container and redirector set."
+        ],
+        "files": [
+          {
+            "path": "probe.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass ProfileRequest extends FormRequest\n{\n    public array $trace = [];\n\n    public function rules(): array\n    {\n        $this->trace[] = 'rules';\n\n        return ['name' => ['required']];\n    }\n\n    protected function passedValidation(): void\n    {\n        $this->trace[] = 'passed';\n    }\n\n    public function authorize(): bool\n    {\n        $this->trace[] = 'authorize';\n\n        return true;\n    }\n\n    protected function prepareForValidation(): void\n    {\n        $this->trace[] = 'prepare';\n    }\n}\n"
+          }
+        ]
+      },
+      "stem": "This request passes validation and authorization. Which sequence is recorded during validateResolved()?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "prepare,authorize,rules,passed",
+          "rationale": "Preparation occurs first, authorization is checked next, rules build the validator, and the success hook runs after validation passes.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "rules,passed,authorize,prepare",
+          "rationale": "Declaration order does not determine the framework lifecycle.",
+          "misconception": "Declaration order does not determine the framework lifecycle."
+        },
+        {
+          "id": "choice-3",
+          "text": "authorize,prepare,rules,passed",
+          "rationale": "prepareForValidation precedes the authorization check, so authorize can observe prepared input.",
+          "misconception": "prepareForValidation precedes the authorization check, so authorize can observe prepared input."
+        },
+        {
+          "id": "choice-4",
+          "text": "prepare,rules,authorize,passed",
+          "rationale": "Authorization is checked before constructing and running the normal validator.",
+          "misconception": "Authorization is checked before constructing and running the normal validator."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "Preparation occurs first, authorization is checked next, rules build the validator, and the success hook runs after validation passes.",
+        "trace": [
+          "Preparation occurs first, authorization is checked next, rules build the validator, and the success hook runs after validation passes.",
+          "Declaration order does not determine the framework lifecycle.",
+          "prepareForValidation precedes the authorization check, so authorize can observe prepared input.",
+          "Authorization is checked before constructing and running the normal validator."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "prepare,authorize,rules,passed",
+        "probe": "require getcwd().'/probe.php';\n$r = ProfileRequest::create('/profile', 'POST', ['name' => 'Ada']);\n$r->setContainer(app())->setRedirector(app('redirect'));\n$r->validateResolved();\necho implode(',', $r->trace);",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-2-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          7
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/validation#preparing-input-for-validation",
+        "https://laravel.com/docs/13.x/validation#authorizing-form-requests"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0158",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Blade",
+      "subtopic": "section-parent-content",
+      "objective": {
+        "id": "laravel.section-parent-content",
+        "text": "Preserve parent layout section content with parent instead of replacing it unintentionally."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Preserve inherited section content at the explicit parent placeholder."
+      },
+      "prerequisites": [
+        "Blade layout inheritance",
+        "Section overrides"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": [
+          {
+            "path": "resources/views/layout.blade.php",
+            "kind": "blade",
+            "source": "<aside>\n    @section('sidebar')\n        Base\n    @show\n</aside>"
+          },
+          {
+            "path": "resources/views/page.blade.php",
+            "kind": "blade",
+            "source": "@extends('layout')\n\n@section('sidebar')\n    @parent\n    Child\n@endsection"
+          }
+        ]
+      },
+      "stem": "The page view extends this layout. Ignoring whitespace, what text appears in the aside?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Child Base",
+          "rationale": "The placeholder appears before Child, so the inherited text is rendered first.",
+          "misconception": "The placeholder appears before Child, so the inherited text is rendered first."
+        },
+        {
+          "id": "choice-2",
+          "text": "Child",
+          "rationale": "That would describe replacing the section without its parent placeholder.",
+          "misconception": "That would describe replacing the section without its parent placeholder."
+        },
+        {
+          "id": "choice-3",
+          "text": "Base",
+          "rationale": "The child section is defined and contributes content after the inherited text.",
+          "misconception": "The child section is defined and contributes content after the inherited text."
+        },
+        {
+          "id": "choice-4",
+          "text": "Base Child",
+          "rationale": "The child section inserts the parent content at @parent, then appends Child.",
+          "misconception": null
+        }
+      ],
+      "correctOptionId": "choice-4",
+      "explanation": {
+        "summary": "The child section inserts the parent content at @parent, then appends Child.",
+        "trace": [
+          "The placeholder appears before Child, so the inherited text is rendered first.",
+          "That would describe replacing the section without its parent placeholder.",
+          "The child section is defined and contributes content after the inherited text.",
+          "The child section inserts the parent content at @parent, then appends Child."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "Base Child",
+        "probe": "echo preg_replace('/\\s+/', ' ', trim(strip_tags(view('page')->render())));",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-2-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": [
+          4
+        ],
+        "lessonMappingStatus": "working-completed-outline",
+        "coverageComplete": true
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/blade#layouts-using-template-inheritance"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0181",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "debugging",
+      "topic": "Sessions and CSRF",
+      "subtopic": "csrf-versus-authentication-failure",
+      "objective": {
+        "id": "laravel.csrf-versus-authentication-failure",
+        "text": "Distinguish a CSRF failure from an authentication failure on a state-changing route."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Identify a failed request-integrity check independently of whether a user is authenticated."
+      },
+      "prerequisites": [
+        "Laravel 13 request-forgery middleware",
+        "Session tokens",
+        "Authentication distinction"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "In Laravel 13.40, an authenticated browser user sends a protected POST without a CSRF token or Sec-Fetch-Site header. The route is not exempt, testing bypass is off, and normal token fallback is enabled. Under default exception handling, what does a 419 indicate?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Request-forgery validation failed.",
+          "rationale": "With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "The password was necessarily incorrect.",
+          "rationale": "A 419 token-mismatch response does not establish a credential-verification failure.",
+          "misconception": "A 419 token-mismatch response does not establish a credential-verification failure."
+        },
+        {
+          "id": "choice-3",
+          "text": "The resource policy returned false.",
+          "rationale": "A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary.",
+          "misconception": "A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary."
+        },
+        {
+          "id": "choice-4",
+          "text": "The route does not support POST.",
+          "rationale": "Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status.",
+          "misconception": "Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.",
+        "trace": [
+          "With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.",
+          "A 419 token-mismatch response does not establish a credential-verification failure.",
+          "A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary.",
+          "Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "419",
+        "probe": "app()->instance('env', 'local');\n$session = app('session.store');\n$session->start();\n$r = Illuminate\\Http\\Request::create('/save', 'POST');\n$r->setLaravelSession($session);\n$r->setUserResolver(fn () => new Illuminate\\Auth\\GenericUser(['id' => 7]));\n$middleware = app(Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery::class);\ntry {\n    $middleware->handle($r, fn () => response('saved'));\n} catch (Illuminate\\Session\\TokenMismatchException $e) {\n    echo app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class)->render($r, $e)->getStatusCode();\n}",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-2-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/csrf",
+        "https://laravel.com/docs/13.x/authentication"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0193",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "implementation",
+      "topic": "Authentication",
+      "subtopic": "attempt-plaintext-against-stored-hash",
+      "objective": {
+        "id": "laravel.attempt-plaintext-against-stored-hash",
+        "text": "Authenticate a session-backed request without persisting submitted plaintext credentials."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Give the authentication provider the original submitted credential without changing stored password semantics."
+      },
+      "prerequisites": [
+        "Session authentication",
+        "Hashed passwords",
+        "Eloquent user provider"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "The user provider stores a valid salted password hash. A login action has the submitted plaintext password. Which use of Auth::attempt follows the framework credential contract?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Pass the submitted plaintext password in the credentials array; let the provider verify it against the stored hash.",
+          "rationale": "The provider uses the configured hasher to verify the submitted password and starts a session on success; the login input should not be prehashed.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Pass the stored password hash itself as the submitted password credential.",
+          "rationale": "Supplying the stored hash is not proof of knowing the plaintext password and does not satisfy normal verification.",
+          "misconception": "Supplying the stored hash is not proof of knowing the plaintext password and does not satisfy normal verification."
+        },
+        {
+          "id": "choice-3",
+          "text": "Hash the submitted password with Hash::make and pass that new hash as the password credential.",
+          "rationale": "The new salted hash is not the original secret expected by the provider's password verification step.",
+          "misconception": "The new salted hash is not the original secret expected by the provider's password verification step."
+        },
+        {
+          "id": "choice-4",
+          "text": "Temporarily replace the stored hash with the submitted plaintext before calling attempt.",
+          "rationale": "Authentication does not require or justify persisting plaintext credentials.",
+          "misconception": "Authentication does not require or justify persisting plaintext credentials."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "The provider uses the configured hasher to verify the submitted password and starts a session on success; the login input should not be prehashed.",
+        "trace": [
+          "The provider uses the configured hasher to verify the submitted password and starts a session on success; the login input should not be prehashed.",
+          "Supplying the stored hash is not proof of knowing the plaintext password and does not satisfy normal verification.",
+          "The new salted hash is not the original secret expected by the provider's password verification step.",
+          "Authentication does not require or justify persisting plaintext credentials."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "[true,7,true]",
+        "probe": "class FixtureAuthUser extends Illuminate\\Foundation\\Auth\\User\n{\n    protected $table = 'fixture_users';\n    public $timestamps = false;\n}\nconfig([\n    'auth.providers.users.model' => FixtureAuthUser::class,\n    'hashing.driver' => 'bcrypt',\n    'hashing.bcrypt.rounds' => 4,\n]);\nIlluminate\\Support\\Facades\\Schema::create('fixture_users', function ($table) {\n    $table->id();\n    $table->string('email');\n    $table->string('password');\n    $table->boolean('active');\n    $table->rememberToken();\n});\nIlluminate\\Support\\Facades\\DB::table('fixture_users')->insert([\n    'id' => 7,\n    'email' => 'ada@example.test',\n    'password' => Illuminate\\Support\\Facades\\Hash::make('fixture-password'),\n    'active' => false,\n]);\n$ok = Illuminate\\Support\\Facades\\Auth::attempt(['email' => 'ada@example.test', 'password' => 'fixture-password']);\n$stored = Illuminate\\Support\\Facades\\DB::table('fixture_users')->value('password');\necho json_encode([$ok, Illuminate\\Support\\Facades\\Auth::id(), $stored !== 'fixture-password']);",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-2-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/authentication#manually-authenticating-users",
+        "https://laravel.com/docs/13.x/hashing"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0206",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Eloquent models",
+      "subtopic": "scoped-unguarded-restoration",
+      "objective": {
+        "id": "laravel.scoped-unguarded-restoration",
+        "text": "Restore mass-assignment protection after a scoped unguarded operation."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Track the temporary global guard state across the scoped callback."
+      },
+      "prerequisites": [
+        "Eloquent mass assignment",
+        "Callback scope"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": [
+          {
+            "path": "probe.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Account extends Model\n{\n    protected $fillable = ['name'];\n}\n\n$first = Model::unguarded(fn () => new Account(['role' => 'admin']));\n$second = new Account(['name' => 'Ada', 'role' => 'editor']);\n\necho $first->role.':'.($second->role ?? 'none');\n"
+          }
+        ]
+      },
+      "stem": "Global unguarding is initially off. What is printed?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "admin:none",
+          "rationale": "The callback allows role assignment temporarily, then restores the prior guarded state before the second construction.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "admin:editor",
+          "rationale": "Scoped unguarded does not leave global protection disabled after the callback returns.",
+          "misconception": "Scoped unguarded does not leave global protection disabled after the callback returns."
+        },
+        {
+          "id": "choice-3",
+          "text": "An exception when the callback returns",
+          "rationale": "Restoring the guard state does not invalidate attributes already assigned to the first model.",
+          "misconception": "Restoring the guard state does not invalidate attributes already assigned to the first model."
+        },
+        {
+          "id": "choice-4",
+          "text": "none:none",
+          "rationale": "The scoped callback does permit otherwise guarded attributes.",
+          "misconception": "The scoped callback does permit otherwise guarded attributes."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "The callback allows role assignment temporarily, then restores the prior guarded state before the second construction.",
+        "trace": [
+          "The callback allows role assignment temporarily, then restores the prior guarded state before the second construction.",
+          "Scoped unguarded does not leave global protection disabled after the callback returns.",
+          "Restoring the guard state does not invalidate attributes already assigned to the first model.",
+          "The scoped callback does permit otherwise guarded attributes."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "admin:none",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/eloquent#allowing-mass-assignment"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0242",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Eager loading",
+      "subtopic": "eager-load-per-parent-limit",
+      "objective": {
+        "id": "laravel.eager-load-per-parent-limit",
+        "text": "Apply a per-parent eager-loading limit on a supported database rather than treating it as a global child cap."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Interpret a relationship limit in the current framework instead of assuming one global result cap."
+      },
+      "prerequisites": [
+        "Eloquent constrained eager loading",
+        "Supported SQL window functions"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "Laravel 13.40; SQLite with window-function support. No global scopes."
+        ],
+        "files": [
+          {
+            "path": "probe.php",
+            "kind": "complete-file",
+            "source": "<?php\n\n$writers = Writer::with([\n    'articles' => fn ($query) => $query->orderByDesc('id')->limit(1),\n])->orderBy('id')->get();\n\necho json_encode($writers->map(fn ($writer) => $writer->articles->count())->all());\n"
+          }
+        ]
+      },
+      "stem": "Writer 1 has articles 1 and 2; writer 2 has article 3. How many articles are loaded for each writer?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "An exception because limits are forbidden on all eager-loaded relations",
+          "rationale": "The pinned framework supports this per-parent limit for the stated relationship and database.",
+          "misconception": "The pinned framework supports this per-parent limit for the stated relationship and database."
+        },
+        {
+          "id": "choice-2",
+          "text": "[0,1]",
+          "rationale": "That would apply one global child limit; the current framework uses a grouped limit for this eager load.",
+          "misconception": "That would apply one global child limit; the current framework uses a grouped limit for this eager load."
+        },
+        {
+          "id": "choice-3",
+          "text": "[2,1]",
+          "rationale": "The limit is not silently ignored on the stated supported database.",
+          "misconception": "The limit is not silently ignored on the stated supported database."
+        },
+        {
+          "id": "choice-4",
+          "text": "[1,1]",
+          "rationale": "The supported eager-loading limit is applied per parent, selecting the latest id for each writer.",
+          "misconception": null
+        }
+      ],
+      "correctOptionId": "choice-4",
+      "explanation": {
+        "summary": "The supported eager-loading limit is applied per parent, selecting the latest id for each writer.",
+        "trace": [
+          "The pinned framework supports this per-parent limit for the stated relationship and database.",
+          "That would apply one global child limit; the current framework uses a grouped limit for this eager load.",
+          "The limit is not silently ignored on the stated supported database.",
+          "The supported eager-loading limit is applied per parent, selecting the latest id for each writer."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "[1,1]",
+        "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('writers', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('code')->nullable();\n    $t->timestamps();\n});\nSchema::create('articles', function ($t) {\n    $t->id();\n    $t->unsignedBigInteger('writer_id')->nullable();\n    $t->string('writer_code')->nullable();\n    $t->string('title');\n    $t->boolean('published')->default(false);\n    $t->integer('amount')->default(0);\n    $t->timestamps();\n});\nclass Writer extends Model\n{\n    protected $table = 'writers';\n    protected $guarded = [];\n\n    public function articles()\n    {\n        return $this->hasMany(Article::class, 'writer_id');\n    }\n}\nclass Article extends Model\n{\n    protected $table = 'articles';\n    protected $guarded = [];\n\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id');\n    }\n}\n$writer = Writer::create(['name' => 'Ada', 'code' => 'W-A']);\n$other = Writer::create(['name' => 'Lin', 'code' => 'W-B']);\n$writer->articles()->createMany([\n    ['title' => 'Draft', 'published' => false, 'amount' => 4],\n    ['title' => 'Public', 'published' => true, 'amount' => 6],\n]);\n$other->articles()->create(['title' => 'Other', 'published' => true, 'amount' => 9]);\nrequire getcwd().'/probe.php';",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/eloquent-relationships#constraining-eager-loads"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0280",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Database concurrency",
+      "subtopic": "row-lock-transaction-write-boundary",
+      "objective": {
+        "id": "laravel.row-lock-transaction-write-boundary",
+        "text": "Keep a row lock inside the transaction that protects the corresponding write."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Keep the lock lifetime, validation read and corresponding write in one transaction."
+      },
+      "prerequisites": [
+        "PostgreSQL row locks",
+        "Laravel transactions",
+        "Read-modify-write invariants"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "PostgreSQL 18, READ COMMITTED, ordinary autocommit outside DB::transaction. Every competing stock writer follows the selected protocol."
+        ],
+        "files": []
+      },
+      "stem": "Stock must never become negative. A request reads stock, checks availability and decrements it. Which lock placement protects that read/check/write sequence against another buyer?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Inside one transaction, select the stock row with lockForUpdate, check it, then update before committing.",
+          "rationale": "The row lock remains held through the check and write, serializing competing participants in this protocol.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Select with lockForUpdate in autocommit, then start a transaction for the check and update.",
+          "rationale": "The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence.",
+          "misconception": "The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence."
+        },
+        {
+          "id": "choice-3",
+          "text": "Read and check normally, update, then select with lockForUpdate before returning.",
+          "rationale": "A lock acquired after the decision and write cannot retroactively protect the earlier stale read.",
+          "misconception": "A lock acquired after the decision and write cannot retroactively protect the earlier stale read."
+        },
+        {
+          "id": "choice-4",
+          "text": "Lock only a separate audit row while all buyers read the stock row without a common lock.",
+          "rationale": "Different audit rows do not serialize access to the shared stock invariant.",
+          "misconception": "Different audit rows do not serialize access to the shared stock invariant."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "The row lock remains held through the check and write, serializing competing participants in this protocol.",
+        "trace": [
+          "The row lock remains held through the check and write, serializing competing participants in this protocol.",
+          "The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence.",
+          "A lock acquired after the decision and write cannot retroactively protect the earlier stale read.",
+          "Different audit rows do not serialize access to the shared stock invariant."
+        ]
+      },
+      "validation": {
+        "kind": "documented-contract",
+        "source": "Illuminate/Database/Query/Builder.php",
+        "contains": [
+          "public function lockForUpdate()",
+          "return $this->lock(true);"
+        ],
+        "reason": "Laravel requests a write row lock; PostgreSQL holds it until transaction end. Transaction placement and invariant reasoning are documented-contract validation, not a SQLite concurrency test.",
+        "status": "documented-contract-reviewed",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/queries#pessimistic-locking",
+        "https://laravel.com/docs/13.x/database#database-transactions",
+        "https://www.postgresql.org/docs/18/explicit-locking.html"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0284",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Transactions",
+      "subtopic": "transaction-retry-external-side-effect",
+      "objective": {
+        "id": "laravel.transaction-retry-external-side-effect",
+        "text": "Account for repeated closure execution when a transaction retries a concurrency failure."
+      },
+      "difficulty": {
+        "level": "Advanced",
+        "audience": "advanced",
+        "rationale": "Separate retried database work from a nontransactional side effect and account for retry duplication."
+      },
+      "prerequisites": [
+        "Laravel transaction retries",
+        "Concurrency errors",
+        "External idempotency"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A transaction closure charges a payment provider, then writes an order. A recognized concurrency error causes Laravel to retry the closure. The provider call is not part of the database transaction. What must the design address?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Use a stable payment idempotency key and a durable reconciliation workflow.",
+          "rationale": "Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Laravel resumes the closure at the failed SQL statement, so the earlier charge runs only once.",
+          "rationale": "A retry invokes the callback again rather than resuming a PHP instruction within it.",
+          "misconception": "A retry invokes the callback again rather than resuming a PHP instruction within it."
+        },
+        {
+          "id": "choice-3",
+          "text": "Setting attempts=1 makes the charge and order atomic across both systems.",
+          "rationale": "Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits.",
+          "misconception": "Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits."
+        },
+        {
+          "id": "choice-4",
+          "text": "The provider charge is rolled back automatically with the order insert.",
+          "rationale": "The provider is outside this database transaction and does not participate in its rollback.",
+          "misconception": "The provider is outside this database transaction and does not participate in its rollback."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.",
+        "trace": [
+          "Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.",
+          "A retry invokes the callback again rather than resuming a PHP instruction within it.",
+          "Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits.",
+          "The provider is outside this database transaction and does not participate in its rollback."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "2:1",
+        "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$charges = 0;\nDB::transaction(function () use (&$charges) {\n    $charges++;\n    DB::table('records')->where('id', 1)->increment('version');\n    if ($charges === 1) {\n        throw new PDOException('serialization failure', 40001);\n    }\n}, attempts: 2);\necho $charges.':'.(DB::table('records')->value('version') - 1);",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/database#handling-deadlocks"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0299",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Soft deletes and indexes",
+      "subtopic": "active-only-unique-soft-delete",
+      "objective": {
+        "id": "laravel.active-only-unique-soft-delete",
+        "text": "Enforce uniqueness among active rows with a partial unique index on a database that supports it."
+      },
+      "difficulty": {
+        "level": "Advanced",
+        "audience": "advanced",
+        "rationale": "Enforce uniqueness for active records while permitting historical duplicates without relying on a nullable composite key."
+      },
+      "prerequisites": [
+        "Soft deletes",
+        "Partial unique indexes",
+        "Database-enforced invariants"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "SQLite with partial-index support. Active rows have deleted_at=NULL; historical rows have a non-null deletion timestamp."
+        ],
+        "files": []
+      },
+      "stem": "An email may be reused after soft deletion, but at most one active row may have that email, including under concurrent insertions. Which database constraint matches this rule?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "An ordinary unique index on email across every row.",
+          "rationale": "This also blocks reuse when the only existing row is soft-deleted.",
+          "misconception": "This also blocks reuse when the only existing row is soft-deleted."
+        },
+        {
+          "id": "choice-2",
+          "text": "A nonunique email index plus an application pre-insert exists check.",
+          "rationale": "The check is not an atomic uniqueness guarantee against concurrent insertions.",
+          "misconception": "The check is not an atomic uniqueness guarantee against concurrent insertions."
+        },
+        {
+          "id": "choice-3",
+          "text": "A unique index on email with WHERE deleted_at IS NULL.",
+          "rationale": "The partial index includes active rows only and enforces email uniqueness within that subset.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "An ordinary unique index on (email, deleted_at).",
+          "rationale": "SQLite permits multiple nulls under uniqueness, so multiple active rows can share the same email with deleted_at=NULL.",
+          "misconception": "SQLite permits multiple nulls under uniqueness, so multiple active rows can share the same email with deleted_at=NULL."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The partial index includes active rows only and enforces email uniqueness within that subset.",
+        "trace": [
+          "This also blocks reuse when the only existing row is soft-deleted.",
+          "The check is not an atomic uniqueness guarantee against concurrent insertions.",
+          "The partial index includes active rows only and enforces email uniqueness within that subset.",
+          "SQLite permits multiple nulls under uniqueness, so multiple active rows can share the same email with deleted_at=NULL."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "2:active-conflict",
+        "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('members', function ($t) {\n    $t->id();\n    $t->string('email');\n    $t->softDeletes();\n});\nDB::statement('CREATE UNIQUE INDEX members_active_email ON members(email) WHERE deleted_at IS NULL');\nDB::table('members')->insert(['email' => 'a@example.test', 'deleted_at' => '2026-01-01']);\nDB::table('members')->insert(['email' => 'a@example.test', 'deleted_at' => null]);\ntry {\n    DB::table('members')->insert(['email' => 'a@example.test', 'deleted_at' => null]);\n} catch (Illuminate\\Database\\UniqueConstraintViolationException $e) {\n    echo DB::table('members')->count().':active-conflict';\n}",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/eloquent#soft-deleting",
+        "https://laravel.com/docs/13.x/migrations#indexes",
+        "https://www.sqlite.org/partialindex.html"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0308",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "debugging",
+      "topic": "Queue lifecycle",
+      "subtopic": "delete-job-missing-model-policy",
+      "objective": {
+        "id": "laravel.delete-job-missing-model-policy",
+        "text": "Discard a job whose required model has been deleted using the explicit missing-model policy."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Express an intentional no-longer-relevant job policy at restoration time."
+      },
+      "prerequisites": [
+        "Queued Eloquent models",
+        "Missing model handling"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A thumbnail job uses SerializesModels for its Photo. A try/catch inside handle cannot catch a missing Photo deleted before execution. Obsolete jobs should be discarded without failure. Which explanation and remedy fit?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "The exception arrives after timeout; disable the timeout to let the catch execute.",
+          "rationale": "This failure comes from model restoration, not a timeout that prevents entry into the handler.",
+          "misconception": "This failure comes from model restoration, not a timeout that prevents entry into the handler."
+        },
+        {
+          "id": "choice-2",
+          "text": "The model is stale only before commit; afterCommit makes the photo exist for every later attempt.",
+          "rationale": "After-commit dispatch does not prevent a model from being permanently deleted during a later queue delay.",
+          "misconception": "After-commit dispatch does not prevent a model from being permanently deleted during a later queue delay."
+        },
+        {
+          "id": "choice-3",
+          "text": "Restoration fails before handle; set deleteWhenMissingModels=true on the job.",
+          "rationale": "The queued handler deletes the job when model restoration fails under this explicit policy.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "The handler catches the wrong type; catch QueryException instead and keep the same structure.",
+          "rationale": "Model restoration fails before the handler runs; changing its internal catch type cannot intercept that phase.",
+          "misconception": "Model restoration fails before the handler runs; changing its internal catch type cannot intercept that phase."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The queued handler deletes the job when model restoration fails under this explicit policy.",
+        "trace": [
+          "This failure comes from model restoration, not a timeout that prevents entry into the handler.",
+          "After-commit dispatch does not prevent a model from being permanently deleted during a later queue delay.",
+          "The queued handler deletes the job when model restoration fails under this explicit policy.",
+          "Model restoration fails before the handler runs; changing its internal catch type cannot intercept that phase."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "deleted:0",
+        "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\nclass PrintMissing implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public $deleteWhenMissingModels = true;\n\n    public function __construct(public Record $record)\n    {\n    }\n\n    public function handle(): void\n    {\n        echo 'unexpected';\n    }\n}\nIlluminate\\Support\\Facades\\Bus::dispatch(new PrintMissing($record));\n$record->delete();\n$job = app('queue')->connection()->pop();\n$job->fire();\necho ($job->isDeleted() ? 'deleted' : 'retained').':'.Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-4-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/queues#ignoring-missing-models"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0314",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Queue idempotency",
+      "subtopic": "transactional-outbox-publish-window",
+      "objective": {
+        "id": "laravel.transactional-outbox-publish-window",
+        "text": "Design an outbox to close the commit-versus-publish failure window without claiming exactly-once delivery."
+      },
+      "difficulty": {
+        "level": "Advanced",
+        "audience": "advanced",
+        "rationale": "Resolve the atomicity gap between local commit and remote publication while accounting for relay retries."
+      },
+      "prerequisites": [
+        "Database transactions",
+        "Broker publication",
+        "Outbox relay",
+        "Idempotent consumers"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "An order commits, then the process crashes before publishing OrderAccepted to a broker. The event must remain recoverable without a distributed transaction. Which design also accounts for a relay crash after publishing?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Use only an in-memory afterCommit callback and consider publication guaranteed once commit succeeds.",
+          "rationale": "A process can die after commit but before the callback publishes, leaving no durable publication work item.",
+          "misconception": "A process can die after commit but before the callback publishes, leaving no durable publication work item."
+        },
+        {
+          "id": "choice-2",
+          "text": "Commit an outbox row and mark it sent before publishing, so consumers never receive duplicates.",
+          "rationale": "A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability.",
+          "misconception": "A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability."
+        },
+        {
+          "id": "choice-3",
+          "text": "Publish before the database commit and assume a later rollback retracts the broker message.",
+          "rationale": "A local rollback cannot retract an already published remote message.",
+          "misconception": "A local rollback cannot retract an already published remote message."
+        },
+        {
+          "id": "choice-4",
+          "text": "Commit the order and an outbox row together; retry relay delivery using a stable event ID and idempotent consumers.",
+          "rationale": "The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates.",
+          "misconception": null
+        }
+      ],
+      "correctOptionId": "choice-4",
+      "explanation": {
+        "summary": "The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates.",
+        "trace": [
+          "A process can die after commit but before the callback publishes, leaving no durable publication work item.",
+          "A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability.",
+          "A local rollback cannot retract an already published remote message.",
+          "The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates."
+        ]
+      },
+      "validation": {
+        "kind": "documented-contract",
+        "source": "Illuminate/Database/Concerns/ManagesTransactions.php",
+        "contains": [
+          "public function transaction(",
+          "$this->getPdo()->commit();"
+        ],
+        "reason": "A local transaction can commit the domain row and outbox row atomically. Relay failure-window and consumer-idempotency claims use the cited original outbox pattern; no broker execution or exactly-once guarantee is claimed.",
+        "status": "documented-contract-reviewed",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-4-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/database#database-transactions",
+        "https://microservices.io/patterns/data/transactional-outbox.html"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0339",
+      "revision": 3,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "debugging",
+      "topic": "Queue workers",
+      "subtopic": "long-lived-worker-code-restart",
+      "objective": {
+        "id": "laravel.long-lived-worker-code-restart",
+        "text": "Restart long-lived workers after code changes because they do not reload the application per job."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Reload application code by replacing long-lived workers after a release."
+      },
+      "prerequisites": [
+        "Queue worker lifecycle",
+        "Deployment",
+        "Process supervision"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "Web requests use the new release, but existing queue:work processes still execute old handler code. Which deployment step refreshes those workers while allowing current jobs to finish normally?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Restart PHP-FPM for web traffic but leave the queue worker processes running.",
+          "rationale": "Replacing web-serving PHP processes does not reload the separate queue workers.",
+          "misconception": "Replacing web-serving PHP processes does not reload the separate queue workers."
+        },
+        {
+          "id": "choice-2",
+          "text": "Use queue:restart with supervised worker replacement.",
+          "rationale": "Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.",
+          "misconception": null
+        },
+        {
+          "id": "choice-3",
+          "text": "Rebuild the route cache while retaining every existing queue worker process.",
+          "rationale": "A route-cache file change does not recreate the worker’s already loaded handler code.",
+          "misconception": "A route-cache file change does not recreate the worker’s already loaded handler code."
+        },
+        {
+          "id": "choice-4",
+          "text": "Run config:cache and assume existing workers re-bootstrap before every job.",
+          "rationale": "Long-lived workers do not rebuild the application for each job merely because a cache file changed.",
+          "misconception": "Long-lived workers do not rebuild the application for each job merely because a cache file changed."
+        }
+      ],
+      "correctOptionId": "choice-2",
+      "explanation": {
+        "summary": "Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.",
+        "trace": [
+          "Replacing web-serving PHP processes does not reload the separate queue workers.",
+          "Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.",
+          "A route-cache file change does not recreate the worker’s already loaded handler code.",
+          "Long-lived workers do not rebuild the application for each job merely because a cache file changed."
+        ]
+      },
+      "validation": {
+        "kind": "documented-contract",
+        "source": "Illuminate/Queue/Worker.php",
+        "contains": [
+          "protected function queueShouldRestart",
+          "getTimestampOfLastQueueRestart"
+        ],
+        "reason": "The worker compares a cache restart timestamp between jobs. Graceful exit and supervisor replacement are operational deployment behavior, not a spawned-daemon test.",
+        "status": "documented-contract-reviewed",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-4-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/queues#queue-workers-and-deployment"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0366",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Mail queueing",
+      "subtopic": "queued-mail-locale-restoration",
+      "objective": {
+        "id": "laravel.queued-mail-locale-restoration",
+        "text": "Preserve a queued mailable locale while restoring the worker application locale after rendering."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Apply a per-message locale without leaking it into later work in the worker process."
+      },
+      "prerequisites": [
+        "Localized mailables",
+        "Queued mail",
+        "Worker locale lifetime"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "The worker locale is en. A mailable is queued with locale(\"fr\"), and its template translates Receipt. Both translations exist. Which locale behavior is expected while sending and immediately afterwards?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "The message uses English because queued mail discards locale metadata.",
+          "rationale": "Laravel preserves the mailable locale for queued delivery.",
+          "misconception": "Laravel preserves the mailable locale for queued delivery."
+        },
+        {
+          "id": "choice-2",
+          "text": "Rendering fails unless the worker’s global locale was already fr.",
+          "rationale": "A mailable can explicitly request a locale different from the worker default.",
+          "misconception": "A mailable can explicitly request a locale different from the worker default."
+        },
+        {
+          "id": "choice-3",
+          "text": "French for this message, then en again for the worker.",
+          "rationale": "The mailable carries its chosen locale and applies it within a scope that restores the previous locale.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "The message uses French and permanently switches the worker to fr.",
+          "rationale": "The locale scope restores the prior application locale after the operation.",
+          "misconception": "The locale scope restores the prior application locale after the operation."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The mailable carries its chosen locale and applies it within a scope that restores the previous locale.",
+        "trace": [
+          "Laravel preserves the mailable locale for queued delivery.",
+          "A mailable can explicitly request a locale different from the worker default.",
+          "The mailable carries its chosen locale and applies it within a scope that restores the previous locale.",
+          "The locale scope restores the prior application locale after the operation."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "Reçu:en",
+        "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nif (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nfile_put_contents(lang_path('en.json'), '{\"Receipt\":\"Receipt\"}');\nfile_put_contents(lang_path('fr.json'), '{\"Receipt\":\"Reçu\"}');\nfile_put_contents(resource_path('views/mail/simple.blade.php'), \"{{ __('Receipt') }}\");\nclass LocalizedMail extends SimpleMail implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n}\nIlluminate\\Support\\Facades\\Mail::to('a@example.test')->locale('fr')->queue(new LocalizedMail());\napp('queue')->connection()->pop()->fire();\n$message = app('mailer')->getSymfonyTransport()->messages()->first()->getOriginalMessage();\necho $message->getHtmlBody().':'.app()->getLocale();",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-4-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/mail#localizing-mailables"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0400",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Scheduling architecture",
+      "subtopic": "scheduled-job-durable-resumption",
+      "objective": {
+        "id": "laravel.scheduled-job-durable-resumption",
+        "text": "Make scheduled work resumable and idempotent instead of assuming onOneServer guarantees completion."
+      },
+      "difficulty": {
+        "level": "Advanced",
+        "audience": "advanced",
+        "rationale": "Separate occurrence election from recovery of a partially completed business operation."
+      },
+      "prerequisites": [
+        "Single-server scheduling",
+        "Crash recovery",
+        "Durable checkpoints",
+        "Idempotent item writes"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A nightly import uses onOneServer but crashes after committing 4,000 of 10,000 per-item results. It must resume without duplicating completed results. Which design adds the missing recovery boundary?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Persist stable per-item results and resume from durable progress.",
+          "rationale": "Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Keep the last processed item only in a static PHP property on the scheduler process.",
+          "rationale": "Process-local progress disappears with the crash and cannot identify what a replacement process has already completed.",
+          "misconception": "Process-local progress disappears with the crash and cannot identify what a replacement process has already completed."
+        },
+        {
+          "id": "choice-3",
+          "text": "Increase the mutex expiration until it covers the whole night, with no stored progress.",
+          "rationale": "A longer lock cannot reconstruct completed work after a crash and can delay recovery.",
+          "misconception": "A longer lock cannot reconstruct completed work after a crash and can delay recovery."
+        },
+        {
+          "id": "choice-4",
+          "text": "Rely on onOneServer to remember the last processed item and resume the PHP loop.",
+          "rationale": "The scheduler lock does not capture application loop state or a business checkpoint.",
+          "misconception": "The scheduler lock does not capture application loop state or a business checkpoint."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.",
+        "trace": [
+          "Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.",
+          "Process-local progress disappears with the crash and cannot identify what a replacement process has already completed.",
+          "A longer lock cannot reconstruct completed work after a crash and can delay recovery.",
+          "The scheduler lock does not capture application loop state or a business checkpoint."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "3:5:5",
+        "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('import_results', function ($t) {\n    $t->id();\n    $t->integer('source_item')->unique();\n});\n$process = function (int $stopAfter) {\n    foreach (range(1, 5) as $item) {\n        DB::transaction(function () use ($item) {\n            DB::table('import_results')->updateOrInsert(['source_item' => $item], []);\n        });\n        if ($item === $stopAfter) {\n            break;\n        }\n    }\n};\n$process(3);\necho DB::table('import_results')->count().':';\n$process(5);\necho DB::table('import_results')->count().':'.DB::table('import_results')->distinct()->count('source_item');",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-4-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/scheduling#running-tasks-on-one-server",
+        "https://laravel.com/docs/13.x/database#database-transactions"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0404",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "debugging",
+      "topic": "Storage errors",
+      "subtopic": "filesystem-write-throw-configuration",
+      "objective": {
+        "id": "laravel.filesystem-write-throw-configuration",
+        "text": "Configure failed filesystem writes to throw rather than treating an unchecked false return as success."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Prevent a failed write from being mistaken for a successful operation."
+      },
+      "prerequisites": [
+        "Filesystem write errors",
+        "Boolean returns",
+        "Disk configuration"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A service ignores Storage::disk(\"exports\")->put()’s return value. The disk currently uses throw=false. Its surrounding catch should handle write failures. Which disk setting changes those failures into exceptions?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Set report to true while keeping throw false.",
+          "rationale": "Reporting a failure does not necessarily rethrow it to the service’s catch.",
+          "misconception": "Reporting a failure does not necessarily rethrow it to the service’s catch."
+        },
+        {
+          "id": "choice-2",
+          "text": "Set report to false and keep throw false.",
+          "rationale": "Disabling reporting does not change a caught write failure into an exception for the caller.",
+          "misconception": "Disabling reporting does not change a caught write failure into an exception for the caller."
+        },
+        {
+          "id": "choice-3",
+          "text": "Set throw to true for the exports disk.",
+          "rationale": "The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "Set visibility to private for the exports disk.",
+          "rationale": "Visibility governs access mode; it does not change the failure-return policy.",
+          "misconception": "Visibility governs access mode; it does not change the failure-return policy."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.",
+        "trace": [
+          "Reporting a failure does not necessarily rethrow it to the service’s catch.",
+          "Disabling reporting does not change a caught write failure into an exception for the caller.",
+          "The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.",
+          "Visibility governs access mode; it does not change the failure-return policy."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "false:exception",
+        "probe": "use Illuminate\\Support\\Facades\\Storage;\nforeach ([false, true] as $throw) {\n    $disk = Storage::build([\n        'driver' => 'local',\n        'root' => storage_path('failing-'.(int) $throw),\n        'throw' => $throw,\n    ]);\n    $disk->makeDirectory('occupied');\n    try {\n        $result = $disk->put('occupied', 'data');\n        echo $result === false ? 'false:' : 'true:';\n    } catch (League\\Flysystem\\UnableToWriteFile|League\\Flysystem\\UnableToCreateDirectory $e) {\n        echo 'exception';\n    }\n}",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-5-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/filesystem#failed-writes"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0429",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Cache consistency",
+      "subtopic": "cache-fill-snapshot-version-identity",
+      "objective": {
+        "id": "laravel.cache-fill-snapshot-version-identity",
+        "text": "Prevent a delayed cache fill from overwriting the active version by keying results with the snapshot version."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Follow an interleaving where a delayed old reader republishes data after a writer invalidates the cache."
+      },
+      "prerequisites": [
+        "Cache-aside races",
+        "Committed version numbers",
+        "Snapshot identity"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "Each committed product update increments its version. A result is labelled with the version of the snapshot used to calculate it. Readers select the current committed version before choosing its cache key; this question does not claim full linearizability across a later update."
+        ],
+        "files": []
+      },
+      "stem": "Reader R computes price from version 1. A writer commits version 2 and deletes the old plain-key cache entry. R then publishes its delayed version-1 result. Which scheme prevents that result from occupying the version-2 cache entry?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Include the snapshot version in the cache key used for each fill and lookup.",
+          "rationale": "R can publish only under version 1; a lookup selecting committed version 2 uses a different key.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Acquire a cache lock only in the writer, leaving cache-fill readers outside it.",
+          "rationale": "A reader that does not participate in the lock can still publish its old result after invalidation.",
+          "misconception": "A reader that does not participate in the lock can still publish its old result after invalidation."
+        },
+        {
+          "id": "choice-3",
+          "text": "Delete the same unversioned key just before the database commit instead.",
+          "rationale": "R can still publish its old result after that deletion, recreating stale data under the active plain key.",
+          "misconception": "R can still publish its old result after that deletion, recreating stale data under the active plain key."
+        },
+        {
+          "id": "choice-4",
+          "text": "Keep the unversioned key and shorten its TTL to one second.",
+          "rationale": "A shorter stale interval does not prevent the delayed result from occupying that key.",
+          "misconception": "A shorter stale interval does not prevent the delayed result from occupying that key."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "R can publish only under version 1; a lookup selecting committed version 2 uses a different key.",
+        "trace": [
+          "R can publish only under version 1; a lookup selecting committed version 2 uses a different key.",
+          "A reader that does not participate in the lock can still publish its old result after invalidation.",
+          "R can still publish its old result after that deletion, recreating stale data under the active plain key.",
+          "A shorter stale interval does not prevent the delayed result from occupying that key."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "old:missing:new",
+        "probe": "use Illuminate\\Support\\Facades\\Cache;\n$snapshotVersion = 1;\n$snapshotPrice = 'old';\n$currentVersion = 2;\nCache::forget('price:7');\nCache::put(\"price:7:v$snapshotVersion\", $snapshotPrice, 60);\necho Cache::get('price:7:v1').':'.Cache::get(\"price:7:v$currentVersion\", 'missing').':';\nCache::put(\"price:7:v$currentVersion\", 'new', 60);\necho Cache::get(\"price:7:v$currentVersion\");",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-5-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/cache#storing-items-in-the-cache",
+        "https://laravel.com/docs/13.x/database#database-transactions"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0475",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "HTTP tests",
+      "subtopic": "validation-assertion-response-aware",
+      "objective": {
+        "id": "laravel.validation-assertion-response-aware",
+        "text": "Assert validation errors across both JSON and session-redirect responses with the response-aware testing helper."
+      },
+      "difficulty": {
+        "level": "Foundation",
+        "audience": "junior",
+        "rationale": "Use one assertion contract across the two standard validation response representations."
+      },
+      "prerequisites": [
+        "Feature validation assertions",
+        "JSON errors",
+        "Session error bags"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "A reusable test helper receives either a JSON validation response or a standard web validation redirect with session errors. It must assert that name has a validation error in either case. Which assertion handles both representations?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "$response->assertInvalid([\"name\"])",
+          "rationale": "assertInvalid selects JSON validation errors for a JSON response and the session error bag for a web response.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "$response->assertStatus(422)",
+          "rationale": "A status alone does not verify the name error, and the standard web path is a redirect.",
+          "misconception": "A status alone does not verify the name error, and the standard web path is a redirect."
+        },
+        {
+          "id": "choice-3",
+          "text": "$response->assertJsonValidationErrors([\"name\"])",
+          "rationale": "That assertion targets JSON validation data and does not cover a session-error redirect.",
+          "misconception": "That assertion targets JSON validation data and does not cover a session-error redirect."
+        },
+        {
+          "id": "choice-4",
+          "text": "$response->assertSessionHasErrors([\"name\"])",
+          "rationale": "That targets session errors rather than the JSON validation representation.",
+          "misconception": "That targets session errors rather than the JSON validation representation."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "assertInvalid selects JSON validation errors for a JSON response and the session error bag for a web response.",
+        "trace": [
+          "assertInvalid selects JSON validation errors for a JSON response and the session error bag for a web response.",
+          "A status alone does not verify the name error, and the standard web path is a redirect.",
+          "That assertion targets JSON validation data and does not cover a session-error redirect.",
+          "That targets session errors rather than the JSON validation representation."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "json:web",
+        "probe": "PHPUnit\\TextUI\\Configuration\\Registry::init(\n    (new PHPUnit\\TextUI\\CliArguments\\Builder)->fromParameters(['phpunit', '--no-configuration']),\n    PHPUnit\\TextUI\\XmlConfiguration\\DefaultConfiguration::create(),\n);\n$test = new class('localFixture') extends Illuminate\\Foundation\\Testing\\TestCase\n{\n    public function attach($application): void\n    {\n        $this->app = $application;\n    }\n    public function exposeExceptions(): void\n    {\n        $this->withoutExceptionHandling();\n    }\n};\n$test->attach(app());\napp('router')->post('/profile', function (Illuminate\\Http\\Request $request) {\n    $request->validate(['name' => 'required']);\n    return 'saved';\n})->middleware('web');\n$test->postJson('/profile', [])->assertInvalid(['name']);\necho 'json:';\n$test->post('/profile', [])->assertInvalid(['name']);\necho 'web';",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-5-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/http-tests#assert-invalid"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0487",
+      "revision": 2,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "testing",
+      "topic": "Transaction tests",
+      "subtopic": "test-manager-aftercommit-outer-wrapper",
+      "objective": {
+        "id": "laravel.test-manager-aftercommit-outer-wrapper",
+        "text": "Account for a test's outer transaction when verifying after-commit dispatch."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Apply the test-specific transaction manager’s callback boundary rather than assuming the outer cleanup transaction suppresses all callbacks."
+      },
+      "prerequisites": [
+        "DatabaseTransactions test manager",
+        "Nested application transactions",
+        "After-commit callbacks"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "Laravel 13.40’s DatabaseTransactions trait has installed its normal testing transaction manager. The application opens and commits one transaction inside the outer test transaction."
+        ],
+        "files": []
+      },
+      "stem": "An afterCommit callback is registered inside that application transaction. Must it wait until the outer test transaction commits, which normally never happens?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "No; the testing manager can run it when the application transaction returns to the outer test level.",
+          "rationale": "The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Yes; a database queue is required before any afterCommit callback can run in a test.",
+          "rationale": "The transaction callback mechanism does not require a database queue driver.",
+          "misconception": "The transaction callback mechanism does not require a database queue driver."
+        },
+        {
+          "id": "choice-3",
+          "text": "No; afterCommit callbacks execute immediately even before the inner transaction commits.",
+          "rationale": "The callback registered inside the application transaction waits for its relevant commit boundary.",
+          "misconception": "The callback registered inside the application transaction waits for its relevant commit boundary."
+        },
+        {
+          "id": "choice-4",
+          "text": "Yes; the test manager always behaves identically to the ordinary production transaction manager.",
+          "rationale": "Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction.",
+          "misconception": "Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.",
+        "trace": [
+          "The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.",
+          "The transaction callback mechanism does not require a database queue driver.",
+          "The callback registered inside the application transaction waits for its relevant commit boundary.",
+          "Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "0:1:1",
+        "probe": "$t = new class\n{\n    use Illuminate\\Foundation\\Testing\\DatabaseTransactions;\n    public $app;\n    public function beforeApplicationDestroyed($callback)\n    {\n    }\n};\n$t->app = app();\n$t->beginDatabaseTransaction();\n$ran = 0;\nIlluminate\\Support\\Facades\\DB::transaction(function () use (&$ran) {\n    Illuminate\\Support\\Facades\\DB::afterCommit(function () use (&$ran) {\n        $ran++;\n    });\n    echo $ran.':';\n});\necho $ran.':'.Illuminate\\Support\\Facades\\DB::transactionLevel();",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-5-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/database-testing#resetting-the-database-after-each-test",
+        "https://laravel.com/docs/13.x/queues#jobs-and-database-transactions"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0499",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Inertia versioning",
+      "subtopic": "inertia-asset-version-location-response",
+      "objective": {
+        "id": "laravel.inertia-asset-version-location-response",
+        "text": "Handle an asset-version mismatch with the protocol's full-location response rather than rendering a stale page object."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Interpret a protocol conflict as a reload instruction instead of an application data conflict."
+      },
+      "prerequisites": [
+        "Inertia asset versioning",
+        "Protocol response headers"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "The application uses inertiajs/inertia-laravel 3.7.0 with its standard middleware; server-side rendering is disabled.",
+          "An Inertia GET carries asset version old; the middleware reports current version new."
+        ],
+        "files": []
+      },
+      "stem": "What response does the version-mismatch path use to instruct the client to perform a full visit?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "HTTP 409 with X-Inertia-Location naming the destination.",
+          "rationale": "The Inertia protocol uses this special response to request a full-location visit when the asset version changes.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "HTTP 304 with an empty body because the client’s assets match.",
+          "rationale": "The versions differ, so a not-modified interpretation is incorrect.",
+          "misconception": "The versions differ, so a not-modified interpretation is incorrect."
+        },
+        {
+          "id": "choice-3",
+          "text": "HTTP 422 with field validation errors for the version header.",
+          "rationale": "This is protocol asset synchronization, not a form-field validation failure.",
+          "misconception": "This is protocol asset synchronization, not a form-field validation failure."
+        },
+        {
+          "id": "choice-4",
+          "text": "HTTP 200 with the stale page object and no location instruction.",
+          "rationale": "That would not trigger the protocol’s version-mismatch reload behavior.",
+          "misconception": "That would not trigger the protocol’s version-mismatch reload behavior."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "The Inertia protocol uses this special response to request a full-location visit when the asset version changes.",
+        "trace": [
+          "The Inertia protocol uses this special response to request a full-location visit when the asset version changes.",
+          "The versions differ, so a not-modified interpretation is incorrect.",
+          "This is protocol asset synchronization, not a form-field validation failure.",
+          "That would not trigger the protocol’s version-mismatch reload behavior."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "409:http://localhost/users",
+        "probe": "app()->register(Inertia\\ServiceProvider::class);\nconfig(['inertia.ssr.enabled' => false, 'inertia.dev_tools.enabled' => false]);\nfile_put_contents(resource_path('views/app.blade.php'), '<!doctype html><html><body>@inertia</body></html>');\n$request = Illuminate\\Http\\Request::create('http://localhost/users', server: [\n    'HTTP_X_INERTIA' => 'true',\n    'HTTP_X_INERTIA_VERSION' => 'old',\n]);\napp()->instance('request', $request);\n$middleware = new class extends Inertia\\Middleware\n{\n    public function version(Illuminate\\Http\\Request $request)\n    {\n        return 'new';\n    }\n};\n$response = $middleware->handle($request, fn ($r) => Inertia\\Inertia::render('Users/Index', [])->toResponse($r));\necho $response->getStatusCode().':'.$response->headers->get('X-Inertia-Location');",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-5-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Middleware.php",
+        "https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Response.php"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0535",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Outbound request security",
+      "subtopic": "outbound-destination-ssrf-boundary",
+      "objective": {
+        "id": "laravel.outbound-destination-ssrf-boundary",
+        "text": "Constrain user-influenced outbound destinations and redirects rather than treating URL syntax validation as SSRF protection."
+      },
+      "difficulty": {
+        "level": "Advanced",
+        "audience": "advanced",
+        "rationale": "Combine application destination selection with connection-time and redirect constraints."
+      },
+      "prerequisites": [
+        "Laravel HTTP client",
+        "SSRF",
+        "DNS and redirects",
+        "Network egress policy"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "The feature only needs a known partner export service; arbitrary internet fetches are not a requirement."
+        ],
+        "files": []
+      },
+      "stem": "A proposed endpoint passes a user-submitted URL through the url validation rule and then to Http::get. Which design addresses the missing destination trust boundary?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Validate only the initial hostname, then follow redirects without applying the destination policy again.",
+          "rationale": "An allowed initial endpoint can redirect to a destination outside the permitted boundary.",
+          "misconception": "An allowed initial endpoint can redirect to a destination outside the permitted boundary."
+        },
+        {
+          "id": "choice-2",
+          "text": "Accept any syntactically valid HTTPS URL and rely on TLS to block internal destinations.",
+          "rationale": "TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature.",
+          "misconception": "TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature."
+        },
+        {
+          "id": "choice-3",
+          "text": "Reject the literal string localhost but allow all other valid hostnames and automatic redirects.",
+          "rationale": "Alternate addresses, DNS resolution and redirects can still reach forbidden destinations.",
+          "misconception": "Alternate addresses, DNS resolution and redirects can still reach forbidden destinations."
+        },
+        {
+          "id": "choice-4",
+          "text": "Build the partner request from trusted configuration and constrain actual connections and redirects.",
+          "rationale": "URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy.",
+          "misconception": null
+        }
+      ],
+      "correctOptionId": "choice-4",
+      "explanation": {
+        "summary": "URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy.",
+        "trace": [
+          "An allowed initial endpoint can redirect to a destination outside the permitted boundary.",
+          "TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature.",
+          "Alternate addresses, DNS resolution and redirects can still reach forbidden destinations.",
+          "URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy."
+        ]
+      },
+      "validation": {
+        "kind": "documented-contract",
+        "sourceRoot": "reference",
+        "source": "ssrf-destinations.txt",
+        "contains": [
+          "Domain allowlisting alone does not prevent DNS rebinding.",
+          "prevent redirects from"
+        ],
+        "reason": "OWASP destination and redirect contract; no live DNS, SSRF probing or complete production filter is claimed.",
+        "status": "documented-contract-reviewed",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/http-client#request-options",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0551",
+      "revision": 3,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Helpers",
+      "subtopic": "data-get-wildcard-leaf-default",
+      "objective": {
+        "id": "laravel.data-get-wildcard-leaf-default",
+        "text": "Recognize that data_get's outer default is not forwarded to each wildcard leaf in the pinned framework."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Trace the scope of a default argument through wildcard recursion in the pinned helper."
+      },
+      "prerequisites": [
+        "Nested data helpers",
+        "Wildcard traversal",
+        "Default values"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": [
+          {
+            "path": "probe.php",
+            "kind": "complete-file",
+            "source": "<?php\n\n$rows = [\n    ['user' => ['name' => 'Ada']],\n    ['user' => []],\n];\n\necho json_encode(data_get($rows, '*.user.name', 'guest'));\n"
+          }
+        ]
+      },
+      "stem": "What array is returned?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "[\"Ada\"]",
+          "rationale": "The wildcard result keeps a slot for the missing leaf, with null in the pinned implementation, rather than dropping that row.",
+          "misconception": "The wildcard result keeps a slot for the missing leaf, with null in the pinned implementation, rather than dropping that row."
+        },
+        {
+          "id": "choice-2",
+          "text": "[\"Ada\",null]",
+          "rationale": "The wildcard branch recursively looks up each child without forwarding the outer default, so the missing leaf uses null. To supply a per-row fallback, map each row through data_get with that fallback.",
+          "misconception": null
+        },
+        {
+          "id": "choice-3",
+          "text": "\"guest\"",
+          "rationale": "One missing leaf does not replace the entire wildcard result with the default.",
+          "misconception": "One missing leaf does not replace the entire wildcard result with the default."
+        },
+        {
+          "id": "choice-4",
+          "text": "[\"Ada\",\"guest\"]",
+          "rationale": "In the pinned helper, wildcard recursion does not forward the outer default to each child lookup, so the second missing leaf receives null.",
+          "misconception": "In the pinned helper, wildcard recursion does not forward the outer default to each child lookup, so the second missing leaf receives null."
+        }
+      ],
+      "correctOptionId": "choice-2",
+      "explanation": {
+        "summary": "The wildcard branch recursively looks up each child without forwarding the outer default, so the missing leaf uses null. To supply a per-row fallback, map each row through data_get with that fallback.",
+        "trace": [
+          "The wildcard result keeps a slot for the missing leaf, with null in the pinned implementation, rather than dropping that row.",
+          "The wildcard branch recursively looks up each child without forwarding the outer default, so the missing leaf uses null. To supply a per-row fallback, map each row through data_get with that fallback.",
+          "One missing leaf does not replace the entire wildcard result with the default.",
+          "In the pinned helper, wildcard recursion does not forward the outer default to each child lookup, so the second missing leaf receives null."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "[\"Ada\",null]",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/helpers#method-data-get"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0566",
+      "revision": 3,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "code-review",
+      "topic": "Deployment",
+      "subtopic": "nginx-front-controller-execution-boundary",
+      "objective": {
+        "id": "laravel.nginx-front-controller-execution-boundary",
+        "text": "Restrict web-server PHP execution to the Laravel front controller rather than every PHP file in the public tree."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Distinguish a correct document root from the separate policy selecting which PHP files may execute."
+      },
+      "prerequisites": [
+        "Nginx PHP routing",
+        "Laravel front controller",
+        "Public file execution boundary"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [],
+        "files": []
+      },
+      "stem": "The document root already points to public. A generic Nginx PHP location would execute any .php file placed there. The deployment must execute only Laravel’s index.php entry point and reject other PHP paths. Which policy meets that boundary?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Send every existing .php file under public to PHP-FPM.",
+          "rationale": "The document root is correct but this still permits additional PHP files to execute.",
+          "misconception": "The document root is correct but this still permits additional PHP files to execute."
+        },
+        {
+          "id": "choice-2",
+          "text": "Remove all PHP handling and serve those files as ordinary static content.",
+          "rationale": "That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths.",
+          "misconception": "That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths."
+        },
+        {
+          "id": "choice-3",
+          "text": "Allow the index.php entry-point location, then reject other PHP paths.",
+          "rationale": "A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "Keep the generic PHP handler and reject extra PHP paths inside Laravel middleware.",
+          "rationale": "A separate PHP script can execute without entering Laravel’s front controller or middleware.",
+          "misconception": "A separate PHP script can execute without entering Laravel’s front controller or middleware."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.",
+        "trace": [
+          "The document root is correct but this still permits additional PHP files to execute.",
+          "That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths.",
+          "A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.",
+          "A separate PHP script can execute without entering Laravel’s front controller or middleware."
+        ]
+      },
+      "validation": {
+        "kind": "documented-contract",
+        "sourceRoot": "reference",
+        "source": "nginx-entrypoint.txt",
+        "contains": [
+          "index.php",
+          "reject"
+        ],
+        "reason": "Laravel official Nginx deployment example restricts FastCGI to the front controller and returns 404 for other PHP locations. No live Nginx instance is tested.",
+        "status": "documented-contract-reviewed",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/deployment#server-configuration"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0569",
+      "revision": 3,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "architecture",
+      "topic": "Deployment",
+      "subtopic": "rolling-schema-expand-contract",
+      "objective": {
+        "id": "laravel.rolling-schema-expand-contract",
+        "text": "Use backward-compatible expand-and-contract database changes during a rolling release."
+      },
+      "difficulty": {
+        "level": "Advanced",
+        "audience": "advanced",
+        "rationale": "Keep old and new application versions compatible while a persisted representation changes."
+      },
+      "prerequisites": [
+        "Rolling deployments",
+        "Schema compatibility",
+        "Data backfill",
+        "Mixed application versions"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "Old workers still read full_name while a new release will use display_name. The application must remain available during a gradual rollout."
+        ],
+        "files": []
+      },
+      "stem": "Which migration strategy supports that overlap safely?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "Add and backfill the new column; transition code before removing the old one.",
+          "rationale": "An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.",
+          "misconception": null
+        },
+        {
+          "id": "choice-2",
+          "text": "Rename full_name immediately before updating the first application node.",
+          "rationale": "Old nodes still using full_name would fail while the rollout is mixed.",
+          "misconception": "Old nodes still using full_name would fail while the rollout is mixed."
+        },
+        {
+          "id": "choice-3",
+          "text": "Deploy new readers first, then add and backfill display_name after all nodes switch.",
+          "rationale": "New readers can fail or see missing values before the schema and backfill they require are ready.",
+          "misconception": "New readers can fail or see missing values before the schema and backfill they require are ready."
+        },
+        {
+          "id": "choice-4",
+          "text": "Rename the column inside one transaction and keep old workers serving throughout.",
+          "rationale": "Atomic schema change does not make old workers’ full_name queries compatible after the rename.",
+          "misconception": "Atomic schema change does not make old workers’ full_name queries compatible after the rename."
+        }
+      ],
+      "correctOptionId": "choice-1",
+      "explanation": {
+        "summary": "An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.",
+        "trace": [
+          "An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.",
+          "Old nodes still using full_name would fail while the rollout is mixed.",
+          "New readers can fail or see missing values before the schema and backfill they require are ready.",
+          "Atomic schema change does not make old workers’ full_name queries compatible after the rename."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "Ada:Ada",
+        "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('profiles', function ($t) {\n    $t->id();\n    $t->string('full_name');\n});\nDB::table('profiles')->insert(['full_name' => 'Ada']);\nSchema::table('profiles', function ($t) {\n    $t->string('display_name')->nullable();\n});\nDB::table('profiles')->update(['display_name' => DB::raw('full_name')]);\n$row = DB::table('profiles')->first();\necho $row->full_name.':'.$row->display_name;",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/migrations#modifying-columns",
+        "https://laravel.com/docs/13.x/deployment"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "technology": "laravel",
+      "collectionId": "laravel-specialist-review-v1",
+      "id": "LAR-S26-0596",
+      "revision": 1,
+      "status": "internal-validated",
+      "responseType": "single-choice",
+      "format": "execution",
+      "topic": "Package configuration",
+      "subtopic": "package-config-merge-top-level-only",
+      "objective": {
+        "id": "laravel.package-config-merge-top-level-only",
+        "text": "Understand shallow configuration merging when package defaults contain nested arrays."
+      },
+      "difficulty": {
+        "level": "Intermediate",
+        "audience": "intermediate",
+        "rationale": "Predict a nested configuration result under the actual shallow merge operation."
+      },
+      "prerequisites": [
+        "Package configuration",
+        "PHP array merging",
+        "Nested defaults"
+      ],
+      "runtime": {
+        "php": [
+          "8.4",
+          "8.5"
+        ],
+        "laravel": "13.x",
+        "validatedLaravel": "13.40.0",
+        "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+        "errorPolicy": "E_ALL; UTC; no external services or application data"
+      },
+      "context": {
+        "assumptions": [
+          "Configuration is not cached. The provider calls mergeConfigFrom for the shown package defaults under the key delivery. Existing application config delivery is [\"retry\" => [\"attempts\" => 5]]."
+        ],
+        "files": [
+          {
+            "path": "package-config.php",
+            "kind": "complete-file",
+            "source": "<?php\n\nreturn [\n    'retry' => [\n        'attempts' => 3,\n        'delay' => 100,\n    ],\n    'region' => 'eu',\n];\n"
+          }
+        ]
+      },
+      "stem": "What is config(\"delivery.retry.delay\", \"missing\") after registration?",
+      "options": [
+        {
+          "id": "choice-1",
+          "text": "100",
+          "rationale": "That would require recursively merging the nested retry arrays, which this helper does not do.",
+          "misconception": "That would require recursively merging the nested retry arrays, which this helper does not do."
+        },
+        {
+          "id": "choice-2",
+          "text": "0",
+          "rationale": "A missing nested key uses the supplied default, not an implicit numeric zero.",
+          "misconception": "A missing nested key uses the supplied default, not an implicit numeric zero."
+        },
+        {
+          "id": "choice-3",
+          "text": "missing",
+          "rationale": "The application retry array replaces the package retry array at the top level; mergeConfigFrom does not recursively preserve delay.",
+          "misconception": null
+        },
+        {
+          "id": "choice-4",
+          "text": "5",
+          "rationale": "The attempts value does not become the value of the separate delay key.",
+          "misconception": "The attempts value does not become the value of the separate delay key."
+        }
+      ],
+      "correctOptionId": "choice-3",
+      "explanation": {
+        "summary": "The application retry array replaces the package retry array at the top level; mergeConfigFrom does not recursively preserve delay.",
+        "trace": [
+          "That would require recursively merging the nested retry arrays, which this helper does not do.",
+          "A missing nested key uses the supplied default, not an implicit numeric zero.",
+          "The application retry array replaces the package retry array at the top level; mergeConfigFrom does not recursively preserve delay.",
+          "The attempts value does not become the value of the separate delay key."
+        ]
+      },
+      "validation": {
+        "kind": "runtime",
+        "stdout": "missing:eu",
+        "probe": "config(['delivery' => ['retry' => ['attempts' => 5]]]);\n$provider = new class(app()) extends Illuminate\\Support\\ServiceProvider {\n    public function register(): void\n    {\n        $this->mergeConfigFrom(base_path('package-config.php'), 'delivery');\n    }\n};\n$provider->register();\necho config('delivery.retry.delay', 'missing').':'.config('delivery.region');",
+        "status": "runtime-verified",
+        "independentEditorialReview": "pending",
+        "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+      },
+      "curriculum": {
+        "lessonIds": null,
+        "lessonMappingStatus": "unmapped",
+        "coverageComplete": false
+      },
+      "references": [
+        "https://laravel.com/docs/13.x/packages#default-package-configuration"
+      ]
+    }
+  ]
+}

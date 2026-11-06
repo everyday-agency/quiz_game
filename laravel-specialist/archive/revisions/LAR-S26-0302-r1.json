@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0302",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Queue dispatch",
+  "subtopic": "dispatch-sync-explicit-now",
+  "objective": {
+    "id": "laravel.dispatch-sync-explicit-now",
+    "text": "Force immediate execution of a queueable job with dispatchSync."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Choose immediate execution deliberately without changing the default connection."
+  },
+  "prerequisites": [
+    "Queueable jobs",
+    "Synchronous dispatch"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "MarkWork implements ShouldQueue, and the default connection is asynchronous. A maintenance command must finish this particular handler before its next statement, without changing the global queue default. Which call fits?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "MarkWork::dispatch()->onQueue(\"sync\");",
+      "rationale": "A queue name is not a request to use the sync connection.",
+      "misconception": "A queue name is not a request to use the sync connection."
+    },
+    {
+      "id": "choice-2",
+      "text": "MarkWork::dispatch()->delay(0);",
+      "rationale": "Zero delay makes the queued job immediately available; it does not turn background dispatch into synchronous execution.",
+      "misconception": "Zero delay makes the queued job immediately available; it does not turn background dispatch into synchronous execution."
+    },
+    {
+      "id": "choice-3",
+      "text": "Bus::dispatch(new MarkWork());",
+      "rationale": "With the stated asynchronous connection this schedules the job instead of awaiting the handler.",
+      "misconception": "With the stated asynchronous connection this schedules the job instead of awaiting the handler."
+    },
+    {
+      "id": "choice-4",
+      "text": "Bus::dispatchSync(new MarkWork());",
+      "rationale": "dispatchSync executes this job immediately through the synchronous path rather than enqueueing it for a background worker.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "dispatchSync executes this job immediately through the synchronous path rather than enqueueing it for a background worker.",
+    "trace": [
+      "A queue name is not a request to use the sync connection.",
+      "Zero delay makes the queued job immediately available; it does not turn background dispatch into synchronous execution.",
+      "With the stated asynchronous connection this schedules the job instead of awaiting the handler.",
+      "dispatchSync executes this job immediately through the synchronous path rather than enqueueing it for a background worker."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:handled",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass MarkWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function handle(): void\n    {\n        app('cache')->put('handled', true);\n    }\n}\nIlluminate\\Support\\Facades\\Bus::dispatchSync(new MarkWork());\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count().':'.(app('cache')->get('handled') ? 'handled' : 'waiting');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#synchronous-dispatching"
+  ]
+}

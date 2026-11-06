@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0347",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Event listeners",
+  "subtopic": "queued-listener-queue-routing",
+  "objective": {
+    "id": "laravel.queued-listener-queue-routing",
+    "text": "Preserve listener-specific queue routing independently of the event class."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Route one listener’s work using its event payload without moving every listener to a shared queue."
+  },
+  "prerequisites": [
+    "Queued event listeners",
+    "viaQueue",
+    "Event data"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A queued RenderPreview listener should use urgent for priority events and previews otherwise. The event has a boolean urgent property. Which listener method selects the queue name from that event?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "failed($event), returning the queue name when no exception exists.",
+      "rationale": "Failure handling does not select the destination for a normal dispatch.",
+      "misconception": "Failure handling does not select the destination for a normal dispatch."
+    },
+    {
+      "id": "choice-2",
+      "text": "handle($event), returning the desired queue name before rendering.",
+      "rationale": "The listener has already been routed and executed when handle returns.",
+      "misconception": "The listener has already been routed and executed when handle returns."
+    },
+    {
+      "id": "choice-3",
+      "text": "viaQueue($event), returning \"urgent\" or \"previews\".",
+      "rationale": "The queued-listener dispatcher resolves the queue using this event-aware routing method.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "shouldQueue($event), returning the queue name as a truthy string.",
+      "rationale": "shouldQueue decides eligibility, not the destination queue.",
+      "misconception": "shouldQueue decides eligibility, not the destination queue."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The queued-listener dispatcher resolves the queue using this event-aware routing method.",
+    "trace": [
+      "Failure handling does not select the destination for a normal dispatch.",
+      "The listener has already been routed and executed when handle returns.",
+      "The queued-listener dispatcher resolves the queue using this event-aware routing method.",
+      "shouldQueue decides eligibility, not the destination queue."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "urgent",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass PreviewRequested\n{\n    public function __construct(public bool $urgent)\n    {\n    }\n}\nclass RenderPreview implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    public function viaQueue(PreviewRequested $event): string\n    {\n        return $event->urgent ? 'urgent' : 'previews';\n    }\n\n    public function handle(PreviewRequested $event): void\n    {\n    }\n}\nIlluminate\\Support\\Facades\\Event::listen(PreviewRequested::class, RenderPreview::class);\nevent(new PreviewRequested(true));\necho Illuminate\\Support\\Facades\\DB::table('jobs')->value('queue');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/events#customizing-the-queue-connection-name-delay"
+  ]
+}

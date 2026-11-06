@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0539",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Password confirmation",
+  "subtopic": "password-confirmation-recency",
+  "objective": {
+    "id": "laravel.password-confirmation-recency",
+    "text": "Distinguish a recent password-confirmation requirement from an already authenticated session."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish a live login from recent credential confirmation for a sensitive action."
+  },
+  "prerequisites": [
+    "Authenticated sessions",
+    "password.confirm middleware",
+    "Confirmation timeout"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The user is authenticated. The sensitive JSON route uses password.confirm with a ten-minute timeout. The session’s last password confirmation was twenty minutes ago."
+    ],
+    "files": []
+  },
+  "stem": "What should the middleware require before the action proceeds?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A new password confirmation; being authenticated does not satisfy the expired recency requirement.",
+      "rationale": "The middleware compares auth.password_confirmed_at with its timeout and returns the confirmation-required response when too old.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Email verification instead of password confirmation.",
+      "rationale": "Email ownership is a different control from recent password proof.",
+      "misconception": "Email ownership is a different control from recent password proof."
+    },
+    {
+      "id": "choice-3",
+      "text": "A newly generated CSRF token alone.",
+      "rationale": "CSRF token freshness does not update the password-confirmed timestamp.",
+      "misconception": "CSRF token freshness does not update the password-confirmed timestamp."
+    },
+    {
+      "id": "choice-4",
+      "text": "Nothing further because any authenticated session is always recently confirmed.",
+      "rationale": "Authentication and confirmation recency are separate pieces of session state.",
+      "misconception": "Authentication and confirmation recency are separate pieces of session state."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The middleware compares auth.password_confirmed_at with its timeout and returns the confirmation-required response when too old.",
+    "trace": [
+      "The middleware compares auth.password_confirmed_at with its timeout and returns the confirmation-required response when too old.",
+      "Email ownership is a different control from recent password proof.",
+      "CSRF token freshness does not update the password-confirmed timestamp.",
+      "Authentication and confirmation recency are separate pieces of session state."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "423:200",
+    "probe": "Illuminate\\Support\\Carbon::setTestNow('2026-01-01 12:00:00');\n$request = Illuminate\\Http\\Request::create('/sensitive', server: ['HTTP_ACCEPT' => 'application/json']);\n$request->setLaravelSession(app('session.store'));\n$request->session()->put('auth.password_confirmed_at', now()->subMinutes(20)->timestamp);\n$middleware = new Illuminate\\Auth\\Middleware\\RequirePassword(app(Illuminate\\Contracts\\Routing\\ResponseFactory::class), app('url'), 600);\necho $middleware->handle($request, fn () => response('ok'))->getStatusCode().':';\n$request->session()->put('auth.password_confirmed_at', now()->timestamp);\necho $middleware->handle($request, fn () => response('ok'))->getStatusCode();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authentication#password-confirmation"
+  ]
+}

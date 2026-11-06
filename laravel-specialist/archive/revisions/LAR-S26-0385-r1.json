@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0385",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Notification tests",
+  "subtopic": "notification-recipient-channel-assertion",
+  "objective": {
+    "id": "laravel.notification-recipient-channel-assertion",
+    "text": "Assert a notification for the intended recipient and channels, not just any dispatch."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Catch a regression in the selected delivery channel for a particular recipient."
+  },
+  "prerequisites": [
+    "Notification fake",
+    "Channel assertions",
+    "Recipient identity"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The test must prove that Member 7 receives ReadyNotice through database only. Notification::fake() is active. Which assertion includes both recipient identity and the selected channel list?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Notification::assertSentTo($member8, ReadyNotice::class, fn ($notice, $channels) => $channels === [\"database\"]);",
+      "rationale": "The channel predicate is right but the recipient is not the required member.",
+      "misconception": "The channel predicate is right but the recipient is not the required member."
+    },
+    {
+      "id": "choice-2",
+      "text": "Notification::assertSentTo($member7, ReadyNotice::class);",
+      "rationale": "This checks recipient and type but permits an unintended mail channel as well.",
+      "misconception": "This checks recipient and type but permits an unintended mail channel as well."
+    },
+    {
+      "id": "choice-3",
+      "text": "Notification::assertSentTo($member7, ReadyNotice::class, fn ($notice, $channels) => $channels === [\"database\"]);",
+      "rationale": "The recipient argument scopes the record, and the callback verifies its exact channel list.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Notification::assertSentTimes(ReadyNotice::class, 1);",
+      "rationale": "A total count does not establish the intended recipient or channels.",
+      "misconception": "A total count does not establish the intended recipient or channels."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The recipient argument scopes the record, and the callback verifies its exact channel list.",
+    "trace": [
+      "The channel predicate is right but the recipient is not the required member.",
+      "This checks recipient and type but permits an unintended mail channel as well.",
+      "The recipient argument scopes the record, and the callback verifies its exact channel list.",
+      "A total count does not establish the intended recipient or channels."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "matched",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('members', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('email');\n    $t->boolean('email_notifications')->default(false);\n});\nIlluminate\\Support\\Facades\\Schema::create('notifications', function ($t) {\n    $t->uuid('id')->primary();\n    $t->string('type');\n    $t->morphs('notifiable');\n    $t->text('data');\n    $t->timestamp('read_at')->nullable();\n    $t->timestamps();\n});\nclass Member extends Illuminate\\Database\\Eloquent\\Model\n{\n    use Illuminate\\Notifications\\Notifiable;\n\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$member = Member::create(['name' => 'Ada', 'email' => 'ada@example.test']);\nclass DatabaseNotice extends Illuminate\\Notifications\\Notification\n{\n    public function via($notifiable): array\n    {\n        return ['database'];\n    }\n\n    public function toDatabase($notifiable): array\n    {\n        return ['message' => 'Hello'];\n    }\n}\nIlluminate\\Support\\Facades\\Notification::fake();\n$member->notify(new DatabaseNotice());\nIlluminate\\Support\\Facades\\Notification::assertSentTo($member, DatabaseNotice::class, fn ($n, $channels) => $channels === ['database']);\necho 'matched';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/notifications#testing"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0470",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "API responses",
+  "subtopic": "resource-recently-created-status",
+  "objective": {
+    "id": "laravel.resource-recently-created-status",
+    "text": "Distinguish a resource response for a recently created model from a normally retrieved model."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Trace the resource response status from model creation state rather than the route’s name."
+  },
+  "prerequisites": [
+    "Eloquent model state",
+    "Default resource response status"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "No custom response status or withResponse override is applied."
+    ],
+    "files": []
+  },
+  "stem": "A JsonResource wraps an Eloquent model whose wasRecentlyCreated is true. Another wraps a normally retrieved model with that flag false. What default HTTP statuses do their responses use?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "200 for both, because resources never infer a creation status.",
+      "rationale": "The default resource response does recognize the recently-created model state.",
+      "misconception": "The default resource response does recognize the recently-created model state."
+    },
+    {
+      "id": "choice-2",
+      "text": "204 for the created model; 304 for the retrieved model.",
+      "rationale": "Those statuses do not follow from the described model state and are not these defaults.",
+      "misconception": "Those statuses do not follow from the described model state and are not these defaults."
+    },
+    {
+      "id": "choice-3",
+      "text": "201 for the newly created model; 200 for the retrieved model.",
+      "rationale": "ResourceResponse checks Eloquent’s wasRecentlyCreated flag when choosing the default status.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "201 for both, because constructing any resource creates a new response object.",
+      "rationale": "Creating a resource wrapper is not the same as recently creating its underlying model.",
+      "misconception": "Creating a resource wrapper is not the same as recently creating its underlying model."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "ResourceResponse checks Eloquent’s wasRecentlyCreated flag when choosing the default status.",
+    "trace": [
+      "The default resource response does recognize the recently-created model state.",
+      "Those statuses do not follow from the described model state and are not these defaults.",
+      "ResourceResponse checks Eloquent’s wasRecentlyCreated flag when choosing the default status.",
+      "Creating a resource wrapper is not the same as recently creating its underlying model."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "201:200",
+    "probe": "$a = new class extends Illuminate\\Database\\Eloquent\\Model\n{\n};\n$a->setRawAttributes(['id' => 1]);\n$a->wasRecentlyCreated = true;\n$b = clone $a;\n$b->wasRecentlyCreated = false;\necho (new Illuminate\\Http\\Resources\\Json\\JsonResource($a))->response()->getStatusCode().':';\necho (new Illuminate\\Http\\Resources\\Json\\JsonResource($b))->response()->getStatusCode();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#resource-responses"
+  ]
+}

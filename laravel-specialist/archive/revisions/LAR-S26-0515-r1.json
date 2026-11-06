@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0515",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Context and queues",
+  "subtopic": "queued-context-dispatch-snapshot",
+  "objective": {
+    "id": "laravel.queued-context-dispatch-snapshot",
+    "text": "Carry captured context into a queued execution without treating it as a fresh authenticated request."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Read the context captured with queued work rather than unrelated context present when a worker starts."
+  },
+  "prerequisites": [
+    "Context capture",
+    "Queue payloads",
+    "Worker lifecycle"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The standard ContextServiceProvider is enabled. The job executes through Laravel’s normal worker processing events. No custom dehydration or hydration callbacks modify the data."
+    ],
+    "files": []
+  },
+  "stem": "A job is queued while Context request_id is A. Before that job is processed, the worker’s current context contains B. What request_id does the job receive through normal context hydration?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "No request_id, because context cannot cross a queue boundary.",
+      "rationale": "The context subsystem supports capture and restoration across that boundary.",
+      "misconception": "The context subsystem supports capture and restoration across that boundary."
+    },
+    {
+      "id": "choice-2",
+      "text": "B, because a worker always ignores context stored in queue payloads.",
+      "rationale": "The standard provider explicitly restores captured payload context on JobProcessing.",
+      "misconception": "The standard provider explicitly restores captured payload context on JobProcessing."
+    },
+    {
+      "id": "choice-3",
+      "text": "Both A and B concatenated into one string.",
+      "rationale": "Context hydration does not concatenate conflicting scalar values from unrelated work.",
+      "misconception": "Context hydration does not concatenate conflicting scalar values from unrelated work."
+    },
+    {
+      "id": "choice-4",
+      "text": "A, the value captured with its queue payload.",
+      "rationale": "The queue payload carries dehydrated dispatch context; JobProcessing hydrates that captured context for execution. It is diagnostic context, not authentication proof.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The queue payload carries dehydrated dispatch context; JobProcessing hydrates that captured context for execution. It is diagnostic context, not authentication proof.",
+    "trace": [
+      "The context subsystem supports capture and restoration across that boundary.",
+      "The standard provider explicitly restores captured payload context on JobProcessing.",
+      "Context hydration does not concatenate conflicting scalar values from unrelated work.",
+      "The queue payload carries dehydrated dispatch context; JobProcessing hydrates that captured context for execution. It is diagnostic context, not authentication proof."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "A",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass ContextWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n    public function handle(): void\n    {\n        app('cache')->put('job-context', Illuminate\\Support\\Facades\\Context::get('request_id'));\n    }\n}\nIlluminate\\Support\\Facades\\Context::add('request_id', 'A');\nIlluminate\\Support\\Facades\\Bus::dispatch(new ContextWork);\nIlluminate\\Support\\Facades\\Context::flush();\nIlluminate\\Support\\Facades\\Context::add('request_id', 'B');\n$job = app('queue')->connection('database')->pop();\napp('queue.worker')->process('database', $job, new Illuminate\\Queue\\WorkerOptions);\necho app('cache')->get('job-context');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/context#how-it-works"
+  ]
+}

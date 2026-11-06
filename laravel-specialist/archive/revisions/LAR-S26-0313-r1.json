@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0313",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Queue idempotency",
+  "subtopic": "duplicate-delivery-unique-result-key",
+  "objective": {
+    "id": "laravel.duplicate-delivery-unique-result-key",
+    "text": "Prevent duplicate job deliveries from creating duplicate database results with a unique operation key."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Make the durable result identify the logical operation across repeated job attempts."
+  },
+  "prerequisites": [
+    "At-least-once job delivery",
+    "Database uniqueness",
+    "Idempotent results"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A job may be delivered twice after a worker loses its acknowledgment. Its sole side effect is inserting an export-request row. The same logical request must create at most one such row. Which boundary enforces this even after a previous job has completed?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Set tries=1 and assume acknowledgment loss cannot cause another delivery.",
+      "rationale": "An attempt limit does not turn the queue transport into exactly-once delivery.",
+      "misconception": "An attempt limit does not turn the queue transport into exactly-once delivery."
+    },
+    {
+      "id": "choice-2",
+      "text": "Check whether the row exists and then insert without any constraint.",
+      "rationale": "Concurrent deliveries can both pass the separate check before either insert becomes visible.",
+      "misconception": "Concurrent deliveries can both pass the separate check before either insert becomes visible."
+    },
+    {
+      "id": "choice-3",
+      "text": "Use ShouldBeUnique alone and remove all database uniqueness.",
+      "rationale": "A dispatch uniqueness lock is released during the job lifecycle and is not a permanent record of completed business operations.",
+      "misconception": "A dispatch uniqueness lock is released during the job lifecycle and is not a permanent record of completed business operations."
+    },
+    {
+      "id": "choice-4",
+      "text": "Use a stable request key with a unique database constraint and treat its duplicate as the existing result.",
+      "rationale": "Durable uniqueness on the operation identity prevents repeated deliveries from inserting another result row.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Durable uniqueness on the operation identity prevents repeated deliveries from inserting another result row.",
+    "trace": [
+      "An attempt limit does not turn the queue transport into exactly-once delivery.",
+      "Concurrent deliveries can both pass the separate check before either insert becomes visible.",
+      "A dispatch uniqueness lock is released during the job lifecycle and is not a permanent record of completed business operations.",
+      "Durable uniqueness on the operation identity prevents repeated deliveries from inserting another result row."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:same",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('exports', function ($t) {\n    $t->id();\n    $t->string('request_key')->unique();\n});\n$perform = function () {\n    try {\n        return DB::table('exports')->insertGetId(['request_key' => 'request-7']);\n    } catch (Illuminate\\Database\\UniqueConstraintViolationException $e) {\n        return DB::table('exports')->where('request_key', 'request-7')->value('id');\n    }\n};\n$a = $perform();\n$b = $perform();\necho DB::table('exports')->count().':'.($a === $b ? 'same' : 'different');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#unique-jobs",
+    "https://laravel.com/docs/13.x/migrations#indexes"
+  ]
+}

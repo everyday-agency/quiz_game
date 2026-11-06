@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0209",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Eloquent models",
+  "subtopic": "mass-update-skips-model-events",
+  "objective": {
+    "id": "laravel.mass-update-skips-model-events",
+    "text": "Account for skipped per-model events when using a mass update query."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recognize the lifecycle difference when replacing individual saves with one query."
+  },
+  "prerequisites": [
+    "Eloquent events",
+    "Set-based SQL"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An updated observer writes a per-record audit entry. A refactor replaces a loop of model saves with Record::where(\"name\", \"old\")->update([\"name\" => \"new\"]). The database changes, but audit entries disappear. What explains the regression?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The update is deferred until the matched models are read again.",
+      "rationale": "The SQL update executes immediately; lazy hydration is not delaying the write.",
+      "misconception": "The SQL update executes immediately; lazy hydration is not delaying the write."
+    },
+    {
+      "id": "choice-2",
+      "text": "Observers run only when an update also changes the primary key.",
+      "rationale": "Ordinary instance updates dispatch events without changing their primary key.",
+      "misconception": "Ordinary instance updates dispatch events without changing their primary key."
+    },
+    {
+      "id": "choice-3",
+      "text": "The observer runs once but receives a collection rather than a model.",
+      "rationale": "Eloquent does not substitute a collection event for each updated model in this operation.",
+      "misconception": "Eloquent does not substitute a collection event for each updated model in this operation."
+    },
+    {
+      "id": "choice-4",
+      "text": "The mass update does not hydrate each model, so per-model updated events are not dispatched.",
+      "rationale": "The query writes rows directly; an observer requiring each model lifecycle is not invoked for each matched row.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The query writes rows directly; an observer requiring each model lifecycle is not invoked for each matched row.",
+    "trace": [
+      "The SQL update executes immediately; lazy hydration is not delaying the write.",
+      "Ordinary instance updates dispatch events without changing their primary key.",
+      "Eloquent does not substitute a collection event for each updated model in this operation.",
+      "The query writes rows directly; an observer requiring each model lifecycle is not invoked for each matched row."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:1",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$events = 0;\nRecord::updated(function () use (&$events) {\n    $events++;\n});\nRecord::where('name', 'old')->update(['name' => 'new']);\necho $events.':';\n$record->refresh()->update(['name' => 'next']);\necho $events;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent#mass-updates"
+  ]
+}

@@ -1,0 +1,60 @@
+PHP-ONLY PRODUCTION RELEASE — DEPLOYED AND LIVE-VERIFIED
+
+Repository: everyday-agency/quiz_game (existing public repository)
+Branches: main and remediation/question-quality-pilot
+Deployed commit: 7c166faa7f3dbc374a7ea49731568a72ec371d61
+Public URL: https://everyday-agency.github.io/quiz_game/
+Deployment: SUCCESS — https://github.com/everyday-agency/quiz_game/actions/runs/42015539769
+Live verification: 2026-11-05T11:04:43.541Z
+
+Active bank: exactly 620 PHP questions, comprising PHP-E26-0001 through
+PHP-E26-0600 and the 20 retained PHP-PILOT questions. No non-PHP records are
+active. All IDs, revisions, keys, rationales, objectives, classifications and
+source-code formatting match the frozen release manifest. Advanced is opt-in
+in setup (560 initially selected); all 620 are browsable in the question bank.
+
+Removed from active use: original PHP 300; Laravel 600; TypeScript 600;
+React 300; MySQL 400; Google Analytics 300. Total outgoing records: 2,500.
+There was no separate Git/GitHub bank. All outgoing content, metadata and
+explanations remain recoverable from:
+- release/archive/pre-php-only/manifest.json and questions-and-metadata.json
+- php-expansion/archive/original-php-300.json
+- release/archive/previous-production.json and previous-production-source.tar.gz
+
+Validation: node tests.mjs passed. Local PHP 8.4.17 and 8.5.2 each checked all
+600 expansion records with 1,578 lints and 1,544 isolated executions, plus
+retained pilot and historical regressions. All six schema checks passed.
+All four local Chrome suites passed (31 workflow checks, zero exceptions).
+GitHub's PHP 8.4/8.5 validation, all four Linux Chrome suites, build and Pages
+deployment also passed. CI portability fixes explicitly load the trusted
+shared tokenizer while retaining -n isolation, wait for real page loads,
+and test scrolling with native touch input. No failing assertions were removed.
+
+The actual public site passed byte-for-byte checks against the validated
+runtime and all 620 manifest hashes. The build contains only 14 allowed files;
+checked archive, fixture and retired-bank paths return HTTP 404. No validation
+fixtures, internal reports, private configuration or credentials were shipped.
+
+Live Chrome rendered and answered all 620 questions on desktop and at a 390px
+mobile-emulation viewport, verified 1,860 distractor rationales, then completed
+a neutral-until-submission Exam (10/20). Shuffling, exact source rendering,
+copying, horizontal scrolling, filters and missed-answer review passed.
+Browser exceptions: zero. Screenshots: release/evidence/browser-live/.
+
+Progress: underTheHoodPhpEngineerV1Stats stores only the new collection's
+completed totals. Main, Laravel, pilot and review history keys remain unchanged,
+as does unrelated browser storage. Obsolete IDs seeded into historical storage
+never entered new sessions. Reloading and retired collection bookmarks preserve
+new totals without adding old scores. Live tests used an isolated browser profile.
+
+Limitations/blockers: no deployment blocker remains. Independent editorial
+approval is still pending; this is the user's authorized controlled release,
+not an independent quality certification. Difficulty has not been calibrated
+against learner results; storage retains aggregate totals rather than persistent
+question-level history. GitHub emitted non-blocking deprecation notices for
+existing Pages actions; these ran successfully under the runner's newer Node.
+
+Evidence: release/evidence/test-summary.json, deployment.json, live-http.json,
+and browser-live/browser-results.json. Code, archives and pre-release tests are
+committed and pushed; this final report and post-deployment evidence are saved
+locally, outside the deployed artifact.

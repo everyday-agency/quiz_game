@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0504",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Exception context",
+  "subtopic": "exception-structured-domain-context",
+  "objective": {
+    "id": "laravel.exception-structured-domain-context",
+    "text": "Attach domain identifiers through an exception's context method without placing secrets in its message."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Supply searchable domain metadata without hiding it in prose or exposing unrelated secrets."
+  },
+  "prerequisites": [
+    "Custom exceptions",
+    "Structured log context"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A custom import exception should add import_id=42 to its reported log context. Which class method is intended to supply that structured data?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "__toString() appending a JSON object to the exception text",
+      "rationale": "Text formatting is not the dedicated structured context method and makes the metadata harder to handle consistently.",
+      "misconception": "Text formatting is not the dedicated structured context method and makes the metadata harder to handle consistently."
+    },
+    {
+      "id": "choice-2",
+      "text": "getCode() returning the complete associative array",
+      "rationale": "Exception codes are not arbitrary context arrays and have a different API contract.",
+      "misconception": "Exception codes are not arbitrary context arrays and have a different API contract."
+    },
+    {
+      "id": "choice-3",
+      "text": "render() returning [\"import_id\" => 42]",
+      "rationale": "render controls an HTTP representation rather than supplying report metadata.",
+      "misconception": "render controls an HTTP representation rather than supplying report metadata."
+    },
+    {
+      "id": "choice-4",
+      "text": "context(): array returning [\"import_id\" => 42]",
+      "rationale": "Laravel merges an exception’s context array into the reporting context.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Laravel merges an exception’s context array into the reporting context.",
+    "trace": [
+      "Text formatting is not the dedicated structured context method and makes the metadata harder to handle consistently.",
+      "Exception codes are not arbitrary context arrays and have a different API contract.",
+      "render controls an HTTP representation rather than supplying report metadata.",
+      "Laravel merges an exception’s context array into the reporting context."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "42",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\napp()->instance(Psr\\Log\\LoggerInterface::class, $logger);\n$handler = app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class);\n$exceptions = new Illuminate\\Foundation\\Configuration\\Exceptions($handler);\nclass ImportFailure extends RuntimeException\n{\n    public function context(): array\n    {\n        return ['import_id' => 42];\n    }\n}\n$handler->report(new ImportFailure('import failed'));\necho $capture->getRecords()[0]->context['import_id'];",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/errors#exception-log-context"
+  ]
+}

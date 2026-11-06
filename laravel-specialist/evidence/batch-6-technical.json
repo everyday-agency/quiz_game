@@ -1,0 +1,2464 @@
+{
+  "batch": 6,
+  "sourceHash": "d716aa731661035f560f68b354a5a0a3cf655a615775d09f959ee6137008d152",
+  "harness": {
+    "bootstrapSha256": "3d6a73fb7099103497a54a989f8f103f3ff2a4c26ff50bf7e8c0391424b66672",
+    "runnerSha256": "4aefe73d5e4dbb4f1356ea00b8f3ed5bfeab4d03c0dc83a20ea2e3b709951166",
+    "composerLockSha256": "b8664f812b9856ec98db81bbd5bc1950196c7b4dc230b6096ded263476c34df5"
+  },
+  "createdAt": "2026-11-06T15:14:18.691Z",
+  "reports": [
+    {
+      "php": "8.5.2",
+      "framework": "13.40.0",
+      "sourceHash": "d716aa731661035f560f68b354a5a0a3cf655a615775d09f959ee6137008d152",
+      "records": 100,
+      "runtime": 89,
+      "results": [
+        {
+          "id": "LAR-S26-0501",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "2454a0855d8a80e714a15224bc32be4e92e2a7e250dfbfc122b320b6cab9ecd9"
+        },
+        {
+          "id": "LAR-S26-0502",
+          "kind": "runtime",
+          "lint": [
+            {
+              "path": "exceptions.php",
+              "wrapper": "PHP opening tag; scope supplied in question metadata"
+            }
+          ],
+          "stdout": "500",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "f6a5ff9aa26d3f9c68ed917abdd78353256ad79eb7469e3d75096f831e0c2b34"
+        },
+        {
+          "id": "LAR-S26-0503",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0:500",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "63bf73970d4b23dfa9b5adfa081983567abfad2c653e3963889c3c5cdb784d70"
+        },
+        {
+          "id": "LAR-S26-0504",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "42",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "846a4c58e2c5c65be3e5023ad045f39f8226f353d5da660e029fed00910fe00e"
+        },
+        {
+          "id": "LAR-S26-0505",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "2",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "cdca13da35938257af35cfd17d4cd34d02a9486ae84a2e22695e54f77de4bd90"
+        },
+        {
+          "id": "LAR-S26-0506",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "warning,error",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "8586b253c9a740b4b0c619af5a0da7bdcf6088eb150fab9e34ed21a248f10613"
+        },
+        {
+          "id": "LAR-S26-0507",
+          "kind": "runtime",
+          "lint": [
+            {
+              "path": "logging.php",
+              "wrapper": "PHP opening tag; scope supplied in question metadata"
+            }
+          ],
+          "stdout": "B:A",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "5be951131bd4f6e8d4f86f0e1d567a12b0121700a46567cf5838cd6af5a8e848"
+        },
+        {
+          "id": "LAR-S26-0508",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "f21f694a269c0afcad1c6c8ba94d5124a5cf161339e422ea902e1d3bb648a2ca"
+        },
+        {
+          "id": "LAR-S26-0509",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "r1",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "655e63a6429ae8315baa0a1a7c9fa2f2d6b2bf6263d52e8a2d9cb4247b5b19c4"
+        },
+        {
+          "id": "LAR-S26-0510",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "propagated:continued",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "731f7441e00f21ad26ee0482e34e2bc6115cdc589a5125a13b28aea9ff340cee"
+        },
+        {
+          "id": "LAR-S26-0511",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "[redacted]:r1",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "d4be0ec6c467c5b21a7bf2d498260d0fe62c50382dfcf5d28e6f6676efda1c90"
+        },
+        {
+          "id": "LAR-S26-0512",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "401:Bearer:r1",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "1eb81e28e8853b36daa796eb7f3e481954cf1ace7a8067123c9b8584f2869eb7"
+        },
+        {
+          "id": "LAR-S26-0513",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "r1:omitted:yes",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "0a88cb31d406cd9d0472d8ec778b45d7fe70cb1f035f74b8bf6250922bd94c70"
+        },
+        {
+          "id": "LAR-S26-0514",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "inner:outer:missing",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0515",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "A",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "f906b5c48d6cd177cd8e9656ee90580c046cc72d8a1cc47b3d3240735788eba9"
+        },
+        {
+          "id": "LAR-S26-0516",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "Critical:500",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "aab13dd3a09012fb8f31f352ae9d6eb3156f0e94b6224b2a92c3e50b9de1fbff"
+        },
+        {
+          "id": "LAR-S26-0517",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "handled:continued",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "2ead06641b5dacd91bcb96ed7caa5eb23816a69afcb007ec508c2d49387e04e3"
+        },
+        {
+          "id": "LAR-S26-0518",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "unavailable:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "b44e62fcb30d4134ab60f6d165bdb9b2434e781505cf30244b1f2e9ca5953125"
+        },
+        {
+          "id": "LAR-S26-0519",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "1:false",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0520",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "matched",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "302147b8501c763db67097bf6f86250938b99e7382d6da2da8156382ea2850f5"
+        },
+        {
+          "id": "LAR-S26-0521",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "different:same:same",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "b8e929107edf15e69dc2cfc5b495ccf9227ec2f319007c87a7d24599930beca0"
+        },
+        {
+          "id": "LAR-S26-0522",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "rejected",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "6d90597c3897cf16cfa56edaab169695f8e88acb9125d8b30791bbe6bcbf0eec"
+        },
+        {
+          "id": "LAR-S26-0523",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "old:new:old-key-rejected-new",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "fd845fd14d0109180305568e8c485fb6fa2b730e279df9073fd5a5d401df2eef"
+        },
+        {
+          "id": "LAR-S26-0524",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "default",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "56a085418c249f439f5671987d971bbfd1a2ee80305359045a6fa861ed95064b"
+        },
+        {
+          "id": "LAR-S26-0525",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "different:valid",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "08cdf79e0a56cee47dc94cba4e3e3b028483713c9d283d502d7065c4dafc5d3e"
+        },
+        {
+          "id": "LAR-S26-0526",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "valid:not-throttled:expired",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "8d6ae45e67e83060ed5fb00357a6b535841ed344ebea4fc78c82cf4905f16bd3"
+        },
+        {
+          "id": "LAR-S26-0527",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "passwords.reset:invalid:new",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "f812610ee2c7418354ddd912aa06371123025028a8f86556419ab7cc41f88181"
+        },
+        {
+          "id": "LAR-S26-0528",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "passwords.sent:passwords.throttled:1",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "aecb7e20c40023e0457c39d16b978ff369cea7328db29eec8e8d934fce9eac7d"
+        },
+        {
+          "id": "LAR-S26-0529",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:0:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "5e9bdcafe8e8007d54efc284758dbbe13a225f84e479e53d3077b80acf6d83f2"
+        },
+        {
+          "id": "LAR-S26-0530",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "403:allowed",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "2ddccc72939a5c89b6f426a146060d8a7b0a24ab3b7b061fe7bd402c6260f968"
+        },
+        {
+          "id": "LAR-S26-0531",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "a41d5705219c2d3c2acfaee7ac0ab67320fd40aeac048baefbc8aefa7c115614"
+        },
+        {
+          "id": "LAR-S26-0532",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "rejected",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "dd54e6429828f45cc7bf568d8044d8d3a48eafc64fe37fb2ae37954b1e1fc196"
+        },
+        {
+          "id": "LAR-S26-0533",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "different-internal:same-public",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "439bbb139901cbe40881a717fa1d039323d78e918acf11185084e8516d48a466"
+        },
+        {
+          "id": "LAR-S26-0534",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "s:5:\"hello\";",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0535",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "focused-ssrf.txt",
+          "sourceSha256": "9f90fccbdf5b8c0d61c7ffdb9b0a2c82a62c8bb9f0a33bc7b6dbad77d49e7112",
+          "contract": "OWASP SSRF guidance and Guzzle redirect-option contract. This is a design comparison; no DNS rebinding test, remote request, SSRF probe or production filter is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Restricting redirect schemes does not restrict redirect hostnames or addresses. A redirect can leave the approved host set or reach a forbidden network destination."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "The checked DNS answer can differ from the answer used when connecting. A separate preflight lookup does not bind the connection to the validated addresses."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "IPv6 remains a permitted connection path in this scenario. Filtering only IPv4 leaves private or link-local IPv6 destinations outside the enforcement boundary."
+            },
+            {
+              "id": "choice-4",
+              "key": true,
+              "rationale": "Each redirect must remain within the approved URL policy, and the transport must enforce the destination-address policy when connecting. This avoids both redirect escape and the gap between a DNS check and a later independent resolution."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0536",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "raw-valid:reencoded-invalid",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "36d2300581375aa11377a0ac51f8ad2e3514ad9bc34fc90f985fdcb79b818e23"
+        },
+        {
+          "id": "LAR-S26-0537",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "accepted:replay:expired",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "fb06341e0d43c68ab3e3999eed68542756d6d6b48e175e627c329bb1540be344"
+        },
+        {
+          "id": "LAR-S26-0538",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "upload-active-content.txt",
+          "sourceSha256": "65274af6737d64c501356a9a04b2c142b1019ab23edcb30dc530f329e39731a2",
+          "contract": "OWASP storage/delivery boundary applied to an explicit download-only requirement. No uploaded active document is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "HttpOnly limits cookie reads but does not prevent active content from acting within that origin."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "A different filename does not remove the active-content origin risk."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "Identifying it as HTML does not make its script content trusted."
+            },
+            {
+              "id": "choice-4",
+              "key": true,
+              "rationale": "An isolated delivery origin and attachment disposition avoid treating uploaded HTML as an inline page of the authenticated application; upload authorization and validation remain separate requirements."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0539",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "423:200",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "2dba20309c7c1702e48a787175c9e59ffa279b8501478faa137ba2b8095691ab"
+        },
+        {
+          "id": "LAR-S26-0540",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "httponly.txt",
+          "sourceSha256": "edb9863bd28edc07798ef7589fca95b09e72fdefb0fea87b4724a3319f2d8b5c",
+          "contract": "MDN browser cookie contract. This does not claim a live browser attack simulation.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "HttpOnly does not distinguish those methods or stop automatic cookie attachment."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "HttpOnly prevents reading the cookie value but does not block fetch from sending eligible cookies."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "Eligible form submissions also carry cookies; script access to the value is not required."
+            },
+            {
+              "id": "choice-4",
+              "key": true,
+              "rationale": "Preventing direct access to the cookie value does not prevent the browser from attaching it to a request."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0541",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "2,3:10,20",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0542",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "{\"1\":20,\"2\":30}:[20,30]",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "3a631ce35dcc16b239c17fac4d1290adf6c6ce0082cb3c40a13285eb3a568b15"
+        },
+        {
+          "id": "LAR-S26-0543",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "found:missing",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c27ce862a7610106ab31ee7ada1a34925b5f78cc49751454c1e936881a719b1a"
+        },
+        {
+          "id": "LAR-S26-0544",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "[7,\"7\"]",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "c7dc30b3ceafaef5cce0e67cfb5145423d2b08b56599cbcd7b9a699a09a360b8"
+        },
+        {
+          "id": "LAR-S26-0545",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "last",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0546",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "[1,2,3,[4]]",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0547",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "2:1,3:3",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "38e1bb102cc117ec9762d975125aeddf7983cc98618766e7aebd41a8c5194abe"
+        },
+        {
+          "id": "LAR-S26-0548",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "0:3:2",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0549",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "fast:safe",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0550",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "2:1",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0551",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "[\"Ada\",null]",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0552",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "{\"enabled\":false,\"label\":null,\"limit\":10}",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0553",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "[  laravel  ]:[LARAVEL]",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0554",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "cleanup:caught",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0555",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "14",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0556",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php",
+            "lang/fr/messages.php"
+          ],
+          "stdout": "Welcome",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "29af9b7a6c422bb31345f0ca86bcc55a6d5a87855d997babaea48ff36e11a76b"
+        },
+        {
+          "id": "LAR-S26-0557",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php",
+            "probe.php"
+          ],
+          "stdout": "[]:[messages.absent]",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0558",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php"
+          ],
+          "stdout": "2 files",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "d3941e73c342730fad7dcfa8e13ed5b8b6e29e89d2708f5a9ce2fbcb287aff7a"
+        },
+        {
+          "id": "LAR-S26-0559",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php"
+          ],
+          "stdout": "ada / Ada / ADA",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "6172f0e52a2a516181d6d130c942a68c70c617b62cf875a5cddaf0d6dfd103c9"
+        },
+        {
+          "id": "LAR-S26-0560",
+          "kind": "runtime",
+          "lint": [
+            "package/lang/fr/messages.php"
+          ],
+          "stdout": "Enregistrer:Annuler",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "9c97249e0cafdc34390b80a41cb4369cbaf21c0a92f5f929c7e7ed8e5dca063a"
+        },
+        {
+          "id": "LAR-S26-0561",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/action.php"
+          ],
+          "stdout": "{\"save\":\"Save\",\"cancel\":\"Cancel\"}",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "f1b54a0d882d947b95ccd87c1e9aaa401f89fd76e3030d4c7fe854f81d780fb3"
+        },
+        {
+          "id": "LAR-S26-0562",
+          "kind": "runtime",
+          "lint": [
+            "lang/fr/validation.php"
+          ],
+          "stdout": "email:adresse e-mail obligatoire",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "51b88fe37cff15a72860ddd35016a109cd68a63f35693bf9458a23277c0d9517"
+        },
+        {
+          "id": "LAR-S26-0563",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "fr:en",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "67fae55917d1715b5415a0006843f5a931fd3217cc350f09df82ecbd4916574e"
+        },
+        {
+          "id": "LAR-S26-0564",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "13:00:same-instant",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "cb671c0250e7518b192a0f859000f7420b6595dbbe8b9275fe0117c29691c523"
+        },
+        {
+          "id": "LAR-S26-0565",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "5215e5e5c9467816ab1e64205bbc941bd698d71105ea7a5fb7a0f44dd1eb68aa"
+        },
+        {
+          "id": "LAR-S26-0566",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "focused-nginx.txt",
+          "sourceSha256": "24b14a0a9227484830957768f2f75ea126fdd59b3691a72c376e51dc007f2995",
+          "contract": "Nginx location selection and the official Laravel deployment configuration establish the boundary. No Nginx or PHP-FPM server is installed, reconfigured or executed for this question.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "diagnostic.php exists, so the existence check passes and PHP-FPM still executes it. Checking file existence does not select the application entry point."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "The separate script is sent directly to PHP-FPM, so Laravel’s index.php, middleware and router do not run for it."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "The PHP handler is selected before Laravel runs. A narrow front-controller handler and rejection of other PHP paths prevent the accidental script from executing, while the existing fallback still sends /orders through index.php."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Ordinary prefix locations do not outrank a matching regex simply because they occur earlier in the configuration. Reordering these blocks does not route diagnostic.php through Laravel."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0567",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "hidden:shown",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "0c604b4a0c3295928066cc13a109649edf759fc0c32d09c60d504c347abdb719"
+        },
+        {
+          "id": "LAR-S26-0568",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "staging",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "eae4f028084e0c10d5f41f16e6ad375960b02807509c86acbe6f3f77d60b5c24"
+        },
+        {
+          "id": "LAR-S26-0569",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "safe=Latest/Latest;coalesce=Old;snapshot=Old;split=V2/V1",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "41d9dbcf3f9c905bee599d8d426168a76d9e5ba312b1cdc34a9a1f4279b6fc70"
+        },
+        {
+          "id": "LAR-S26-0570",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "null",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c7fd20c215604a23a75ad4ceddc5d70c0e7252a8064c1a202fa79f30308f2f8a"
+        },
+        {
+          "id": "LAR-S26-0571",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "200:500",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "1ec490f2af8e092c00b53a81dabb2ca673ea120f08b0541f127eb0ca7532b4df"
+        },
+        {
+          "id": "LAR-S26-0572",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "deployment-boundaries.txt",
+          "sourceSha256": "0ce816737ab18df3e0039bcb268bc64975746507e6cd7e4f25186b557c141e4b",
+          "contract": "Official deployment permission contract; no host ownership or permissions are modified.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "That permits the writes but unnecessarily lets the runtime account modify executable application source."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "Warming views does not eliminate ongoing log and file-session writes."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "Laravel uses those runtime/cache directories while normal application source need not be writable by the worker."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Public asset access does not supply the configured log, session and compiled-view write paths."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0573",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "framework",
+          "source": "Illuminate/Database/Migrations/Migrator.php",
+          "sourceSha256": "c2dacb7367ff9c95bdb8e797abe56576fe1a037b2762c10ef33ab5b3c4970bcd",
+          "contract": "Migration reversal is an explicit operation. The release-switch decision additionally follows the stated shared-state and data-retention constraints; no production rollback is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": true,
+              "rationale": "Switching code artifacts does not revert the database; compatibility must be checked without assuming new writes can be discarded."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "That can destroy new data or reverse compatible additions unnecessarily; recovery must first assess current-state compatibility."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "That can discard the user writes the scenario explicitly requires retaining."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "A retained code directory is not a snapshot of the shared database."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0574",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "framework",
+          "source": "Illuminate/Console/ConfirmableTrait.php",
+          "sourceSha256": "263058bb8e912eed3f4b704031d0a12201d5ff4cc434921c24f8aa0fb747a25d",
+          "contract": "The real production-confirmation branch explicitly accepts --force. No real deployment command is run.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Pretend displays intended SQL rather than applying the migrations."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "Suppressing interaction alone is not affirmative consent to the production confirmation."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "The force option tells the production confirmation guard to proceed; it does not make the migrations reversible or transactionally safe."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Status reports migration state rather than running pending migrations."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0575",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "config:clear,cache:clear,clear-compiled,event:clear,route:clear,view:clear",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "3a3f74310714d746a084bb2792849f1dc9c401bffae4b02ca22484d27d1ade85"
+        },
+        {
+          "id": "LAR-S26-0576",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0:1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "d03bbe446dc5ff7553bb241669200738120227a044480744535c04b4de5f09fb"
+        },
+        {
+          "id": "LAR-S26-0577",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "A:B",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "b3efa39c201fbea85738e97cb81b5f8f8297395e1471babcdb0a9760181ee75d"
+        },
+        {
+          "id": "LAR-S26-0578",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "deployment-boundaries.txt",
+          "sourceSha256": "0ce816737ab18df3e0039bcb268bc64975746507e6cd7e4f25186b557c141e4b",
+          "contract": "Official Octane worker-reload contract. Octane server software is not installed or exercised in this isolated harness.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Regenerating autoload metadata does not unload classes already present in a long-lived PHP process."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "That targets queue workers rather than the persistent HTTP workers described."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "Octane’s reload command restarts its application workers so they load the changed code."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "View cache invalidation does not generally replace already loaded application classes."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0579",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "2:timed",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "0c5d92f7923df18a50e1e669a237e51101dd7abbd096bdd52912de51f59a0d04"
+        },
+        {
+          "id": "LAR-S26-0580",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "index-overhead.txt",
+          "sourceSha256": "3b5113fec600f7c857f6d21e1cd970a6835d63d53b30fb83e021f8bd43de5bfb",
+          "contract": "PostgreSQL index overhead contract plus the stated workload. No PostgreSQL benchmark or production index is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Schema operability matters but does not measure production read/write tradeoffs."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "That confirms an isolated read improvement but does not assess the stated frequent-write workload."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "An index can improve a read while imposing maintenance and storage costs elsewhere; the full workload determines the tradeoff."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "That is useful capacity evidence but does not cover the frequent-write maintenance cost and overall workload tradeoff."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0581",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1200:1200",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "4c312d6c7a129d5761ced5f12cbad67c15013e1198a7121b1713ed4b33ba0b96"
+        },
+        {
+          "id": "LAR-S26-0582",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "100:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "a4821728f9e7da1db6540c79a7efda850a2974f8228ddf3850856f8891dd981a"
+        },
+        {
+          "id": "LAR-S26-0583",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "409:unavailable",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "047e63a9d6af349fcbb0bc1918e45f8b4dbe74224b31d5c65524ab2d7c18d8fe"
+        },
+        {
+          "id": "LAR-S26-0584",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "rejected:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "ad78560bf203c631bc2fb9b541593d51618fb5aba51c398c9ea7513bc4b5b902"
+        },
+        {
+          "id": "LAR-S26-0585",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "750",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "0996d0c1a18529ceb5b0d28035dffcec9f1cc4c85acd89840d054d0fd41c69f3"
+        },
+        {
+          "id": "LAR-S26-0586",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "ready:issued",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "aa9c12ef3b38061e63915ba035e7ec101497ef77dbdda1c519a8ce18f35688ab"
+        },
+        {
+          "id": "LAR-S26-0587",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "[{\"currency\":\"EUR\",\"total\":30},{\"currency\":\"USD\",\"total\":7}]",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "224d6a0b00e46e893f74fb5bae2a042e5db2bbb1911e78c4191274fcbb431dad"
+        },
+        {
+          "id": "LAR-S26-0588",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "allowed:denied",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "71c2658b1518628c75b896ffbb4987164bf380dd5a350835c8c7a27abe708fbe"
+        },
+        {
+          "id": "LAR-S26-0589",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "Ada:304:empty",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "252e3eebd3e94d23b9dbf526ed2e027b164af7551e0ca1b400a1321bb7017c38"
+        },
+        {
+          "id": "LAR-S26-0590",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "503=2;422=1",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "06c0f54b23cb85af19773df40fca55e5d0ea789723c3923143a096ad0e956530"
+        },
+        {
+          "id": "LAR-S26-0591",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1000,750:2000",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "5e55f7ccde91f81f4d26d17f456f7d152443eb6de0842f6493ee58d1984e9404"
+        },
+        {
+          "id": "LAR-S26-0592",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "0",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0593",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "external-recovery.txt",
+          "sourceSha256": "1181e22f22417a421b6a432adb30f2e7d3e93497f5733e2cf85de5bee10447ad",
+          "contract": "Documented idempotency/failure ambiguity plus the explicit provider contract. No real payment, network request or production recovery is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "The provider might not have committed it; a timeout also does not prove success."
+            },
+            {
+              "id": "choice-2",
+              "key": true,
+              "rationale": "The outcome is unknown; retaining the operation identity lets recovery discover or replay the original result without intentionally creating a new charge."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "A new key can create a second charge when the first already succeeded."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "A local database rollback cannot undo an independently committed provider operation."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0594",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0:1",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "17269167387207c0dadc959259bcb4e09ac0b8f2d15d0dd0e9fc9e74096b2939"
+        },
+        {
+          "id": "LAR-S26-0595",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "shipping",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "1e3f66b29541082dd42232067896dc9a716c33a17a6de21e83a141c84f6beaa2"
+        },
+        {
+          "id": "LAR-S26-0596",
+          "kind": "runtime",
+          "lint": [
+            "package-config.php"
+          ],
+          "stdout": "missing:eu",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "136e105a6d3354aa7762a46b99c2ea436f070412ebe20087d69a6748048303dc"
+        },
+        {
+          "id": "LAR-S26-0597",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "registered:not-copied",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "f762c4fcee5736f334b0678bbe11b415ecbdecc9a61706ada31d2e56cd3a14b9"
+        },
+        {
+          "id": "LAR-S26-0598",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "registered:sqlite",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "aa1cd654df0dcab75bfe2eeae47981138a920db8ffaeed9a38a1d2dad1aae2ca"
+        },
+        {
+          "id": "LAR-S26-0599",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "violation",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "6c142cfd48c8260153377271b69535250e539bd75a7068931fcac32f3d95f78c"
+        },
+        {
+          "id": "LAR-S26-0600",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "upgrade-validation.txt",
+          "sourceSha256": "a2a895b31d44936034ae7e1c538e5232853977d4a556f51d51534b7f70b06c78",
+          "contract": "Composer lock/install contract and the Laravel upgrade guide. This is a validation-planning question, not a claim to have upgraded an unrelated production application.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": true,
+              "rationale": "Dependency resolution establishes installable constraints; it does not prove application behavior across changed framework contracts."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "Unchanged caller code may still observe changed dependency behavior."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "Reproducing dependency installation is useful but still does not exercise application behavior."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Syntax validity cannot detect behavioral changes in routing, validation or persistence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "php": "8.4.17",
+      "framework": "13.40.0",
+      "sourceHash": "d716aa731661035f560f68b354a5a0a3cf655a615775d09f959ee6137008d152",
+      "records": 100,
+      "runtime": 89,
+      "results": [
+        {
+          "id": "LAR-S26-0501",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "2454a0855d8a80e714a15224bc32be4e92e2a7e250dfbfc122b320b6cab9ecd9"
+        },
+        {
+          "id": "LAR-S26-0502",
+          "kind": "runtime",
+          "lint": [
+            {
+              "path": "exceptions.php",
+              "wrapper": "PHP opening tag; scope supplied in question metadata"
+            }
+          ],
+          "stdout": "500",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "f6a5ff9aa26d3f9c68ed917abdd78353256ad79eb7469e3d75096f831e0c2b34"
+        },
+        {
+          "id": "LAR-S26-0503",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0:500",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "63bf73970d4b23dfa9b5adfa081983567abfad2c653e3963889c3c5cdb784d70"
+        },
+        {
+          "id": "LAR-S26-0504",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "42",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "846a4c58e2c5c65be3e5023ad045f39f8226f353d5da660e029fed00910fe00e"
+        },
+        {
+          "id": "LAR-S26-0505",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "2",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "cdca13da35938257af35cfd17d4cd34d02a9486ae84a2e22695e54f77de4bd90"
+        },
+        {
+          "id": "LAR-S26-0506",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "warning,error",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "8586b253c9a740b4b0c619af5a0da7bdcf6088eb150fab9e34ed21a248f10613"
+        },
+        {
+          "id": "LAR-S26-0507",
+          "kind": "runtime",
+          "lint": [
+            {
+              "path": "logging.php",
+              "wrapper": "PHP opening tag; scope supplied in question metadata"
+            }
+          ],
+          "stdout": "B:A",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "5be951131bd4f6e8d4f86f0e1d567a12b0121700a46567cf5838cd6af5a8e848"
+        },
+        {
+          "id": "LAR-S26-0508",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "f21f694a269c0afcad1c6c8ba94d5124a5cf161339e422ea902e1d3bb648a2ca"
+        },
+        {
+          "id": "LAR-S26-0509",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "r1",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "655e63a6429ae8315baa0a1a7c9fa2f2d6b2bf6263d52e8a2d9cb4247b5b19c4"
+        },
+        {
+          "id": "LAR-S26-0510",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "propagated:continued",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "731f7441e00f21ad26ee0482e34e2bc6115cdc589a5125a13b28aea9ff340cee"
+        },
+        {
+          "id": "LAR-S26-0511",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "[redacted]:r1",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "d4be0ec6c467c5b21a7bf2d498260d0fe62c50382dfcf5d28e6f6676efda1c90"
+        },
+        {
+          "id": "LAR-S26-0512",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "401:Bearer:r1",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "1eb81e28e8853b36daa796eb7f3e481954cf1ace7a8067123c9b8584f2869eb7"
+        },
+        {
+          "id": "LAR-S26-0513",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "r1:omitted:yes",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "0a88cb31d406cd9d0472d8ec778b45d7fe70cb1f035f74b8bf6250922bd94c70"
+        },
+        {
+          "id": "LAR-S26-0514",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "inner:outer:missing",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0515",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "A",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "f906b5c48d6cd177cd8e9656ee90580c046cc72d8a1cc47b3d3240735788eba9"
+        },
+        {
+          "id": "LAR-S26-0516",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "Critical:500",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "aab13dd3a09012fb8f31f352ae9d6eb3156f0e94b6224b2a92c3e50b9de1fbff"
+        },
+        {
+          "id": "LAR-S26-0517",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "handled:continued",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "2ead06641b5dacd91bcb96ed7caa5eb23816a69afcb007ec508c2d49387e04e3"
+        },
+        {
+          "id": "LAR-S26-0518",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "unavailable:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "b44e62fcb30d4134ab60f6d165bdb9b2434e781505cf30244b1f2e9ca5953125"
+        },
+        {
+          "id": "LAR-S26-0519",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "1:false",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0520",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "matched",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "302147b8501c763db67097bf6f86250938b99e7382d6da2da8156382ea2850f5"
+        },
+        {
+          "id": "LAR-S26-0521",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "different:same:same",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "b8e929107edf15e69dc2cfc5b495ccf9227ec2f319007c87a7d24599930beca0"
+        },
+        {
+          "id": "LAR-S26-0522",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "rejected",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "6d90597c3897cf16cfa56edaab169695f8e88acb9125d8b30791bbe6bcbf0eec"
+        },
+        {
+          "id": "LAR-S26-0523",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "old:new:old-key-rejected-new",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "fd845fd14d0109180305568e8c485fb6fa2b730e279df9073fd5a5d401df2eef"
+        },
+        {
+          "id": "LAR-S26-0524",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "default",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "56a085418c249f439f5671987d971bbfd1a2ee80305359045a6fa861ed95064b"
+        },
+        {
+          "id": "LAR-S26-0525",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "different:valid",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "08cdf79e0a56cee47dc94cba4e3e3b028483713c9d283d502d7065c4dafc5d3e"
+        },
+        {
+          "id": "LAR-S26-0526",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "valid:not-throttled:expired",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "8d6ae45e67e83060ed5fb00357a6b535841ed344ebea4fc78c82cf4905f16bd3"
+        },
+        {
+          "id": "LAR-S26-0527",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "passwords.reset:invalid:new",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "f812610ee2c7418354ddd912aa06371123025028a8f86556419ab7cc41f88181"
+        },
+        {
+          "id": "LAR-S26-0528",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "passwords.sent:passwords.throttled:1",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "aecb7e20c40023e0457c39d16b978ff369cea7328db29eec8e8d934fce9eac7d"
+        },
+        {
+          "id": "LAR-S26-0529",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:0:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "5e9bdcafe8e8007d54efc284758dbbe13a225f84e479e53d3077b80acf6d83f2"
+        },
+        {
+          "id": "LAR-S26-0530",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "403:allowed",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "2ddccc72939a5c89b6f426a146060d8a7b0a24ab3b7b061fe7bd402c6260f968"
+        },
+        {
+          "id": "LAR-S26-0531",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "a41d5705219c2d3c2acfaee7ac0ab67320fd40aeac048baefbc8aefa7c115614"
+        },
+        {
+          "id": "LAR-S26-0532",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "rejected",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "dd54e6429828f45cc7bf568d8044d8d3a48eafc64fe37fb2ae37954b1e1fc196"
+        },
+        {
+          "id": "LAR-S26-0533",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "different-internal:same-public",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "439bbb139901cbe40881a717fa1d039323d78e918acf11185084e8516d48a466"
+        },
+        {
+          "id": "LAR-S26-0534",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "s:5:\"hello\";",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0535",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "focused-ssrf.txt",
+          "sourceSha256": "9f90fccbdf5b8c0d61c7ffdb9b0a2c82a62c8bb9f0a33bc7b6dbad77d49e7112",
+          "contract": "OWASP SSRF guidance and Guzzle redirect-option contract. This is a design comparison; no DNS rebinding test, remote request, SSRF probe or production filter is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Restricting redirect schemes does not restrict redirect hostnames or addresses. A redirect can leave the approved host set or reach a forbidden network destination."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "The checked DNS answer can differ from the answer used when connecting. A separate preflight lookup does not bind the connection to the validated addresses."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "IPv6 remains a permitted connection path in this scenario. Filtering only IPv4 leaves private or link-local IPv6 destinations outside the enforcement boundary."
+            },
+            {
+              "id": "choice-4",
+              "key": true,
+              "rationale": "Each redirect must remain within the approved URL policy, and the transport must enforce the destination-address policy when connecting. This avoids both redirect escape and the gap between a DNS check and a later independent resolution."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0536",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "raw-valid:reencoded-invalid",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "36d2300581375aa11377a0ac51f8ad2e3514ad9bc34fc90f985fdcb79b818e23"
+        },
+        {
+          "id": "LAR-S26-0537",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "accepted:replay:expired",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "fb06341e0d43c68ab3e3999eed68542756d6d6b48e175e627c329bb1540be344"
+        },
+        {
+          "id": "LAR-S26-0538",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "upload-active-content.txt",
+          "sourceSha256": "65274af6737d64c501356a9a04b2c142b1019ab23edcb30dc530f329e39731a2",
+          "contract": "OWASP storage/delivery boundary applied to an explicit download-only requirement. No uploaded active document is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "HttpOnly limits cookie reads but does not prevent active content from acting within that origin."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "A different filename does not remove the active-content origin risk."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "Identifying it as HTML does not make its script content trusted."
+            },
+            {
+              "id": "choice-4",
+              "key": true,
+              "rationale": "An isolated delivery origin and attachment disposition avoid treating uploaded HTML as an inline page of the authenticated application; upload authorization and validation remain separate requirements."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0539",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "423:200",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "2dba20309c7c1702e48a787175c9e59ffa279b8501478faa137ba2b8095691ab"
+        },
+        {
+          "id": "LAR-S26-0540",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "httponly.txt",
+          "sourceSha256": "edb9863bd28edc07798ef7589fca95b09e72fdefb0fea87b4724a3319f2d8b5c",
+          "contract": "MDN browser cookie contract. This does not claim a live browser attack simulation.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "HttpOnly does not distinguish those methods or stop automatic cookie attachment."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "HttpOnly prevents reading the cookie value but does not block fetch from sending eligible cookies."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "Eligible form submissions also carry cookies; script access to the value is not required."
+            },
+            {
+              "id": "choice-4",
+              "key": true,
+              "rationale": "Preventing direct access to the cookie value does not prevent the browser from attaching it to a request."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0541",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "2,3:10,20",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0542",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "{\"1\":20,\"2\":30}:[20,30]",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "3a631ce35dcc16b239c17fac4d1290adf6c6ce0082cb3c40a13285eb3a568b15"
+        },
+        {
+          "id": "LAR-S26-0543",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "found:missing",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c27ce862a7610106ab31ee7ada1a34925b5f78cc49751454c1e936881a719b1a"
+        },
+        {
+          "id": "LAR-S26-0544",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "[7,\"7\"]",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "c7dc30b3ceafaef5cce0e67cfb5145423d2b08b56599cbcd7b9a699a09a360b8"
+        },
+        {
+          "id": "LAR-S26-0545",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "last",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0546",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "[1,2,3,[4]]",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0547",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "2:1,3:3",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "38e1bb102cc117ec9762d975125aeddf7983cc98618766e7aebd41a8c5194abe"
+        },
+        {
+          "id": "LAR-S26-0548",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "0:3:2",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0549",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "fast:safe",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0550",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "2:1",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0551",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "[\"Ada\",null]",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0552",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "{\"enabled\":false,\"label\":null,\"limit\":10}",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0553",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "[  laravel  ]:[LARAVEL]",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0554",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "cleanup:caught",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0555",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "14",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0556",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php",
+            "lang/fr/messages.php"
+          ],
+          "stdout": "Welcome",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "29af9b7a6c422bb31345f0ca86bcc55a6d5a87855d997babaea48ff36e11a76b"
+        },
+        {
+          "id": "LAR-S26-0557",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php",
+            "probe.php"
+          ],
+          "stdout": "[]:[messages.absent]",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0558",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php"
+          ],
+          "stdout": "2 files",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "d3941e73c342730fad7dcfa8e13ed5b8b6e29e89d2708f5a9ce2fbcb287aff7a"
+        },
+        {
+          "id": "LAR-S26-0559",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/messages.php"
+          ],
+          "stdout": "ada / Ada / ADA",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "6172f0e52a2a516181d6d130c942a68c70c617b62cf875a5cddaf0d6dfd103c9"
+        },
+        {
+          "id": "LAR-S26-0560",
+          "kind": "runtime",
+          "lint": [
+            "package/lang/fr/messages.php"
+          ],
+          "stdout": "Enregistrer:Annuler",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "9c97249e0cafdc34390b80a41cb4369cbaf21c0a92f5f929c7e7ed8e5dca063a"
+        },
+        {
+          "id": "LAR-S26-0561",
+          "kind": "runtime",
+          "lint": [
+            "lang/en/action.php"
+          ],
+          "stdout": "{\"save\":\"Save\",\"cancel\":\"Cancel\"}",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "f1b54a0d882d947b95ccd87c1e9aaa401f89fd76e3030d4c7fe854f81d780fb3"
+        },
+        {
+          "id": "LAR-S26-0562",
+          "kind": "runtime",
+          "lint": [
+            "lang/fr/validation.php"
+          ],
+          "stdout": "email:adresse e-mail obligatoire",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "51b88fe37cff15a72860ddd35016a109cd68a63f35693bf9458a23277c0d9517"
+        },
+        {
+          "id": "LAR-S26-0563",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "fr:en",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "67fae55917d1715b5415a0006843f5a931fd3217cc350f09df82ecbd4916574e"
+        },
+        {
+          "id": "LAR-S26-0564",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "13:00:same-instant",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "cb671c0250e7518b192a0f859000f7420b6595dbbe8b9275fe0117c29691c523"
+        },
+        {
+          "id": "LAR-S26-0565",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "5215e5e5c9467816ab1e64205bbc941bd698d71105ea7a5fb7a0f44dd1eb68aa"
+        },
+        {
+          "id": "LAR-S26-0566",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "focused-nginx.txt",
+          "sourceSha256": "24b14a0a9227484830957768f2f75ea126fdd59b3691a72c376e51dc007f2995",
+          "contract": "Nginx location selection and the official Laravel deployment configuration establish the boundary. No Nginx or PHP-FPM server is installed, reconfigured or executed for this question.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "diagnostic.php exists, so the existence check passes and PHP-FPM still executes it. Checking file existence does not select the application entry point."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "The separate script is sent directly to PHP-FPM, so Laravel’s index.php, middleware and router do not run for it."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "The PHP handler is selected before Laravel runs. A narrow front-controller handler and rejection of other PHP paths prevent the accidental script from executing, while the existing fallback still sends /orders through index.php."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Ordinary prefix locations do not outrank a matching regex simply because they occur earlier in the configuration. Reordering these blocks does not route diagnostic.php through Laravel."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0567",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "hidden:shown",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "0c604b4a0c3295928066cc13a109649edf759fc0c32d09c60d504c347abdb719"
+        },
+        {
+          "id": "LAR-S26-0568",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "staging",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "eae4f028084e0c10d5f41f16e6ad375960b02807509c86acbe6f3f77d60b5c24"
+        },
+        {
+          "id": "LAR-S26-0569",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "safe=Latest/Latest;coalesce=Old;snapshot=Old;split=V2/V1",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "41d9dbcf3f9c905bee599d8d426168a76d9e5ba312b1cdc34a9a1f4279b6fc70"
+        },
+        {
+          "id": "LAR-S26-0570",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "null",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "c7fd20c215604a23a75ad4ceddc5d70c0e7252a8064c1a202fa79f30308f2f8a"
+        },
+        {
+          "id": "LAR-S26-0571",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "200:500",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "1ec490f2af8e092c00b53a81dabb2ca673ea120f08b0541f127eb0ca7532b4df"
+        },
+        {
+          "id": "LAR-S26-0572",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "deployment-boundaries.txt",
+          "sourceSha256": "0ce816737ab18df3e0039bcb268bc64975746507e6cd7e4f25186b557c141e4b",
+          "contract": "Official deployment permission contract; no host ownership or permissions are modified.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "That permits the writes but unnecessarily lets the runtime account modify executable application source."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "Warming views does not eliminate ongoing log and file-session writes."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "Laravel uses those runtime/cache directories while normal application source need not be writable by the worker."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Public asset access does not supply the configured log, session and compiled-view write paths."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0573",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "framework",
+          "source": "Illuminate/Database/Migrations/Migrator.php",
+          "sourceSha256": "c2dacb7367ff9c95bdb8e797abe56576fe1a037b2762c10ef33ab5b3c4970bcd",
+          "contract": "Migration reversal is an explicit operation. The release-switch decision additionally follows the stated shared-state and data-retention constraints; no production rollback is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": true,
+              "rationale": "Switching code artifacts does not revert the database; compatibility must be checked without assuming new writes can be discarded."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "That can destroy new data or reverse compatible additions unnecessarily; recovery must first assess current-state compatibility."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "That can discard the user writes the scenario explicitly requires retaining."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "A retained code directory is not a snapshot of the shared database."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0574",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "framework",
+          "source": "Illuminate/Console/ConfirmableTrait.php",
+          "sourceSha256": "263058bb8e912eed3f4b704031d0a12201d5ff4cc434921c24f8aa0fb747a25d",
+          "contract": "The real production-confirmation branch explicitly accepts --force. No real deployment command is run.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Pretend displays intended SQL rather than applying the migrations."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "Suppressing interaction alone is not affirmative consent to the production confirmation."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "The force option tells the production confirmation guard to proceed; it does not make the migrations reversible or transactionally safe."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Status reports migration state rather than running pending migrations."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0575",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "config:clear,cache:clear,clear-compiled,event:clear,route:clear,view:clear",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "3a3f74310714d746a084bb2792849f1dc9c401bffae4b02ca22484d27d1ade85"
+        },
+        {
+          "id": "LAR-S26-0576",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0:1:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "d03bbe446dc5ff7553bb241669200738120227a044480744535c04b4de5f09fb"
+        },
+        {
+          "id": "LAR-S26-0577",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "A:B",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "b3efa39c201fbea85738e97cb81b5f8f8297395e1471babcdb0a9760181ee75d"
+        },
+        {
+          "id": "LAR-S26-0578",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "deployment-boundaries.txt",
+          "sourceSha256": "0ce816737ab18df3e0039bcb268bc64975746507e6cd7e4f25186b557c141e4b",
+          "contract": "Official Octane worker-reload contract. Octane server software is not installed or exercised in this isolated harness.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Regenerating autoload metadata does not unload classes already present in a long-lived PHP process."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "That targets queue workers rather than the persistent HTTP workers described."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "Octane’s reload command restarts its application workers so they load the changed code."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "View cache invalidation does not generally replace already loaded application classes."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0579",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "2:timed",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "0c5d92f7923df18a50e1e669a237e51101dd7abbd096bdd52912de51f59a0d04"
+        },
+        {
+          "id": "LAR-S26-0580",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "index-overhead.txt",
+          "sourceSha256": "3b5113fec600f7c857f6d21e1cd970a6835d63d53b30fb83e021f8bd43de5bfb",
+          "contract": "PostgreSQL index overhead contract plus the stated workload. No PostgreSQL benchmark or production index is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "Schema operability matters but does not measure production read/write tradeoffs."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "That confirms an isolated read improvement but does not assess the stated frequent-write workload."
+            },
+            {
+              "id": "choice-3",
+              "key": true,
+              "rationale": "An index can improve a read while imposing maintenance and storage costs elsewhere; the full workload determines the tradeoff."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "That is useful capacity evidence but does not cover the frequent-write maintenance cost and overall workload tradeoff."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0581",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1200:1200",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "4c312d6c7a129d5761ced5f12cbad67c15013e1198a7121b1713ed4b33ba0b96"
+        },
+        {
+          "id": "LAR-S26-0582",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "100:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "a4821728f9e7da1db6540c79a7efda850a2974f8228ddf3850856f8891dd981a"
+        },
+        {
+          "id": "LAR-S26-0583",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "409:unavailable",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "047e63a9d6af349fcbb0bc1918e45f8b4dbe74224b31d5c65524ab2d7c18d8fe"
+        },
+        {
+          "id": "LAR-S26-0584",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "rejected:0",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "ad78560bf203c631bc2fb9b541593d51618fb5aba51c398c9ea7513bc4b5b902"
+        },
+        {
+          "id": "LAR-S26-0585",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "750",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "0996d0c1a18529ceb5b0d28035dffcec9f1cc4c85acd89840d054d0fd41c69f3"
+        },
+        {
+          "id": "LAR-S26-0586",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "ready:issued",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "aa9c12ef3b38061e63915ba035e7ec101497ef77dbdda1c519a8ce18f35688ab"
+        },
+        {
+          "id": "LAR-S26-0587",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "[{\"currency\":\"EUR\",\"total\":30},{\"currency\":\"USD\",\"total\":7}]",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "224d6a0b00e46e893f74fb5bae2a042e5db2bbb1911e78c4191274fcbb431dad"
+        },
+        {
+          "id": "LAR-S26-0588",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "allowed:denied",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "71c2658b1518628c75b896ffbb4987164bf380dd5a350835c8c7a27abe708fbe"
+        },
+        {
+          "id": "LAR-S26-0589",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "Ada:304:empty",
+          "exitCode": 0,
+          "correctOptionId": "choice-1",
+          "probeSha256": "252e3eebd3e94d23b9dbf526ed2e027b164af7551e0ca1b400a1321bb7017c38"
+        },
+        {
+          "id": "LAR-S26-0590",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "503=2;422=1",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "06c0f54b23cb85af19773df40fca55e5d0ea789723c3923143a096ad0e956530"
+        },
+        {
+          "id": "LAR-S26-0591",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "1000,750:2000",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "5e55f7ccde91f81f4d26d17f456f7d152443eb6de0842f6493ee58d1984e9404"
+        },
+        {
+          "id": "LAR-S26-0592",
+          "kind": "runtime",
+          "lint": [
+            "probe.php"
+          ],
+          "stdout": "0",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "c2eb37b20ce03e49a6c9873282aaa40063a62b0992afb2e1b06ff421f5c42e07"
+        },
+        {
+          "id": "LAR-S26-0593",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "external-recovery.txt",
+          "sourceSha256": "1181e22f22417a421b6a432adb30f2e7d3e93497f5733e2cf85de5bee10447ad",
+          "contract": "Documented idempotency/failure ambiguity plus the explicit provider contract. No real payment, network request or production recovery is executed.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": false,
+              "rationale": "The provider might not have committed it; a timeout also does not prove success."
+            },
+            {
+              "id": "choice-2",
+              "key": true,
+              "rationale": "The outcome is unknown; retaining the operation identity lets recovery discover or replay the original result without intentionally creating a new charge."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "A new key can create a second charge when the first already succeeded."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "A local database rollback cannot undo an independently committed provider operation."
+            }
+          ]
+        },
+        {
+          "id": "LAR-S26-0594",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "0:1",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "17269167387207c0dadc959259bcb4e09ac0b8f2d15d0dd0e9fc9e74096b2939"
+        },
+        {
+          "id": "LAR-S26-0595",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "shipping",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "1e3f66b29541082dd42232067896dc9a716c33a17a6de21e83a141c84f6beaa2"
+        },
+        {
+          "id": "LAR-S26-0596",
+          "kind": "runtime",
+          "lint": [
+            "package-config.php"
+          ],
+          "stdout": "missing:eu",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "136e105a6d3354aa7762a46b99c2ea436f070412ebe20087d69a6748048303dc"
+        },
+        {
+          "id": "LAR-S26-0597",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "registered:not-copied",
+          "exitCode": 0,
+          "correctOptionId": "choice-3",
+          "probeSha256": "f762c4fcee5736f334b0678bbe11b415ecbdecc9a61706ada31d2e56cd3a14b9"
+        },
+        {
+          "id": "LAR-S26-0598",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "registered:sqlite",
+          "exitCode": 0,
+          "correctOptionId": "choice-4",
+          "probeSha256": "aa1cd654df0dcab75bfe2eeae47981138a920db8ffaeed9a38a1d2dad1aae2ca"
+        },
+        {
+          "id": "LAR-S26-0599",
+          "kind": "runtime",
+          "lint": [],
+          "stdout": "violation",
+          "exitCode": 0,
+          "correctOptionId": "choice-2",
+          "probeSha256": "6c142cfd48c8260153377271b69535250e539bd75a7068931fcac32f3d95f78c"
+        },
+        {
+          "id": "LAR-S26-0600",
+          "kind": "documented-contract",
+          "execution": "not-applicable",
+          "lint": [],
+          "sourceRoot": "reference",
+          "source": "upgrade-validation.txt",
+          "sourceSha256": "a2a895b31d44936034ae7e1c538e5232853977d4a556f51d51534b7f70b06c78",
+          "contract": "Composer lock/install contract and the Laravel upgrade guide. This is a validation-planning question, not a claim to have upgraded an unrelated production application.",
+          "optionReview": [
+            {
+              "id": "choice-1",
+              "key": true,
+              "rationale": "Dependency resolution establishes installable constraints; it does not prove application behavior across changed framework contracts."
+            },
+            {
+              "id": "choice-2",
+              "key": false,
+              "rationale": "Unchanged caller code may still observe changed dependency behavior."
+            },
+            {
+              "id": "choice-3",
+              "key": false,
+              "rationale": "Reproducing dependency installation is useful but still does not exercise application behavior."
+            },
+            {
+              "id": "choice-4",
+              "key": false,
+              "rationale": "Syntax validity cannot detect behavioral changes in routing, validation or persistence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

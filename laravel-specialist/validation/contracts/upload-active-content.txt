@@ -1,0 +1,10 @@
+Source: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+Reviewed: 2026-11-06
+Exact excerpt:
+"Store the files on a different server."
+Paraphrase: user-uploaded active content can execute when retrieved in a browser;
+storage and public delivery need their own security boundary. For the question's
+download-only requirement, use an isolated origin without application credentials
+and an attachment response rather than rendering untrusted HTML inline in the
+authenticated application's origin. Do not claim this replaces upload validation,
+malware controls or authorization. No active upload was executed in a browser.

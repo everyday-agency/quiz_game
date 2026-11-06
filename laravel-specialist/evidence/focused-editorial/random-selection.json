@@ -1,0 +1,32 @@
+{
+  "seed": "907c73f03434bfa410d96ce7a3ce771944af2f2907147e365367974a5118e1c7",
+  "algorithm": "SHA-256(seed + \":\" + stable ID), ascending hash; first 15 without replacement; seed drawn once with crypto.randomBytes(32)",
+  "poolSize": 593,
+  "excluded": [
+    "LAR-S26-0242",
+    "LAR-S26-0284",
+    "LAR-S26-0314",
+    "LAR-S26-0400",
+    "LAR-S26-0535",
+    "LAR-S26-0566",
+    "LAR-S26-0569"
+  ],
+  "ids": [
+    "LAR-S26-0118",
+    "LAR-S26-0039",
+    "LAR-S26-0534",
+    "LAR-S26-0355",
+    "LAR-S26-0057",
+    "LAR-S26-0437",
+    "LAR-S26-0522",
+    "LAR-S26-0261",
+    "LAR-S26-0448",
+    "LAR-S26-0278",
+    "LAR-S26-0436",
+    "LAR-S26-0460",
+    "LAR-S26-0564",
+    "LAR-S26-0165",
+    "LAR-S26-0084"
+  ],
+  "createdAt": "2026-11-06T13:46:05.185Z"
+}

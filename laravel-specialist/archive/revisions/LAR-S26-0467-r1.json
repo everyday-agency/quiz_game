@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0467",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "API resources",
+  "subtopic": "resource-custom-wrap-name",
+  "objective": {
+    "id": "laravel.resource-custom-wrap-name",
+    "text": "Set a custom outer data wrapper without changing the model's stored attributes."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Rename the outer representation without changing persisted data."
+  },
+  "prerequisites": [
+    "Resource envelope configuration",
+    "Entity attributes"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An unpaginated API resource should use item instead of data as its outer wrapper. Its underlying model must stay unchanged. Which configuration targets that wrapper?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Set public static $wrap = \"item\" on the resource class.",
+      "rationale": "The resource wrapper property controls the outer envelope and does not rename model attributes.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Rename the model’s primary key column to item.",
+      "rationale": "A database identifier name does not configure the resource envelope.",
+      "misconception": "A database identifier name does not configure the resource envelope."
+    },
+    {
+      "id": "choice-3",
+      "text": "Return [\"item\" => $this->id] as the entire toArray result.",
+      "rationale": "That changes entity fields and still sits inside the normal outer wrapper.",
+      "misconception": "That changes entity fields and still sits inside the normal outer wrapper."
+    },
+    {
+      "id": "choice-4",
+      "text": "Add item to the model’s $appends list.",
+      "rationale": "Appended attributes belong to model data, not the outer resource envelope.",
+      "misconception": "Appended attributes belong to model data, not the outer resource envelope."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The resource wrapper property controls the outer envelope and does not rename model attributes.",
+    "trace": [
+      "The resource wrapper property controls the outer envelope and does not rename model attributes.",
+      "A database identifier name does not configure the resource envelope.",
+      "That changes entity fields and still sits inside the normal outer wrapper.",
+      "Appended attributes belong to model data, not the outer resource envelope."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "{\"item\":{\"id\":7}}",
+    "probe": "$r = new class(['id' => 7]) extends Illuminate\\Http\\Resources\\Json\\JsonResource\n{\n    public static $wrap = 'item';\n};\necho $r->response()->getContent();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#data-wrapping"
+  ]
+}

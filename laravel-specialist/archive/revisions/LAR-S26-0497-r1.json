@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0497",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Inertia protocol",
+  "subtopic": "inertia-initial-html-navigation-json",
+  "objective": {
+    "id": "laravel.inertia-initial-html-navigation-json",
+    "text": "Distinguish the initial HTML page response from an Inertia navigation's JSON page object."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish server responses at initial page load and subsequent Inertia navigation."
+  },
+  "prerequisites": [
+    "Inertia page protocol",
+    "Initial document requests",
+    "XHR page visits"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The application uses inertiajs/inertia-laravel 3.7.0 with its standard middleware; server-side rendering is disabled."
+    ],
+    "files": []
+  },
+  "stem": "The same route returns Inertia::render(\"Users/Index\", [\"users\" => []]). How do an ordinary initial request and a navigation with X-Inertia: true differ?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The initial request gets JSON, while later navigation requires a full HTML document.",
+      "rationale": "This reverses the normal initial-load and Inertia-navigation response paths.",
+      "misconception": "This reverses the normal initial-load and Inertia-navigation response paths."
+    },
+    {
+      "id": "choice-2",
+      "text": "The initial request gets an HTML document; the Inertia navigation gets a JSON page object.",
+      "rationale": "The adapter selects the root HTML view for a normal request and a page-protocol JSON response for an Inertia request.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Both receive an ordinary REST array with no component identifier.",
+      "rationale": "An Inertia page response includes component and protocol metadata, not merely arbitrary REST data.",
+      "misconception": "An Inertia page response includes component and protocol metadata, not merely arbitrary REST data."
+    },
+    {
+      "id": "choice-4",
+      "text": "Both receive only the rendered component’s HTML fragment.",
+      "rationale": "The Laravel adapter does not normally render frontend component fragments for each navigation.",
+      "misconception": "The Laravel adapter does not normally render frontend component fragments for each navigation."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The adapter selects the root HTML view for a normal request and a page-protocol JSON response for an Inertia request.",
+    "trace": [
+      "This reverses the normal initial-load and Inertia-navigation response paths.",
+      "The adapter selects the root HTML view for a normal request and a page-protocol JSON response for an Inertia request.",
+      "An Inertia page response includes component and protocol metadata, not merely arbitrary REST data.",
+      "The Laravel adapter does not normally render frontend component fragments for each navigation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "html:json:Users/Index",
+    "probe": "app()->register(Inertia\\ServiceProvider::class);\nconfig(['inertia.ssr.enabled' => false, 'inertia.dev_tools.enabled' => false]);\nfile_put_contents(resource_path('views/app.blade.php'), '<!doctype html><html><body>@inertia</body></html>');\n$normal = Illuminate\\Http\\Request::create('/users');\napp()->instance('request', $normal);\n$html = Inertia\\Inertia::render('Users/Index', ['users' => []])->toResponse($normal);\n$xhr = Illuminate\\Http\\Request::create('/users', server: ['HTTP_X_INERTIA' => 'true']);\napp()->instance('request', $xhr);\n$json = Inertia\\Inertia::render('Users/Index', ['users' => []])->toResponse($xhr);\necho (str_contains($html->getContent(), '<!doctype html>') ? 'html' : 'other').':';\necho (str_contains($json->headers->get('Content-Type'), 'application/json') ? 'json' : 'other').':'.$json->getData(true)['component'];",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Middleware.php",
+    "https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Response.php"
+  ]
+}

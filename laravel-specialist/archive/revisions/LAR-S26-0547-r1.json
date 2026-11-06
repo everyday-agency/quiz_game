@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0547",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Collections",
+  "subtopic": "collection-partition-one-predicate-pass",
+  "objective": {
+    "id": "laravel.collection-partition-one-predicate-pass",
+    "text": "Retain both accepted and rejected items through partition without rerunning a changing predicate."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Classify each input once while retaining both groups."
+  },
+  "prerequisites": [
+    "Collection partition",
+    "Stateful predicates",
+    "Accepted and rejected sets"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A predicate performs a time-sensitive check. The code needs both accepted and rejected items, with each item checked exactly once. Which collection operation fits?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "filter($predicate) and use the same filtered collection for rejected items.",
+      "rationale": "That loses the rejected set and mislabels the accepted items.",
+      "misconception": "That loses the rejected set and mislabels the accepted items."
+    },
+    {
+      "id": "choice-2",
+      "text": "filter($predicate) followed by reject($predicate) on the original collection.",
+      "rationale": "That evaluates the predicate twice per item and can observe different time-sensitive results.",
+      "misconception": "That evaluates the predicate twice per item and can observe different time-sensitive results."
+    },
+    {
+      "id": "choice-3",
+      "text": "partition($predicate), yielding the passing and failing collections together.",
+      "rationale": "partition classifies each item in one pass and retains both outcomes.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "map($predicate) and use the resulting booleans as both item groups.",
+      "rationale": "That replaces the items with boolean results rather than retaining the requested groups.",
+      "misconception": "That replaces the items with boolean results rather than retaining the requested groups."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "partition classifies each item in one pass and retains both outcomes.",
+    "trace": [
+      "That loses the rejected set and mislabels the accepted items.",
+      "That evaluates the predicate twice per item and can observe different time-sensitive results.",
+      "partition classifies each item in one pass and retains both outcomes.",
+      "That replaces the items with boolean results rather than retaining the requested groups."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:1,3:3",
+    "probe": "$calls = 0;\n[$accepted, $rejected] = collect([1, 2, 3])->partition(function ($value) use (&$calls) {\n    $calls++;\n    return $value % 2 === 0;\n});\necho $accepted->implode(',').':'.$rejected->implode(',').':'.$calls;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/collections#method-partition"
+  ]
+}

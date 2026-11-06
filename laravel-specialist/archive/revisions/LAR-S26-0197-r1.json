@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0197",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Authentication",
+  "subtopic": "salted-hash-verification",
+  "objective": {
+    "id": "laravel.salted-hash-verification",
+    "text": "Verify an existing password with the configured hasher rather than comparing new salted hashes."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify against the stored hash instead of comparing two independently salted outputs."
+  },
+  "prerequisites": [
+    "Laravel hashing",
+    "Random salts",
+    "Password verification"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A custom login check compares Hash::make($submitted) === $storedHash and rejects the correct password. The stored hash uses the configured algorithm. Which operation checks the credential correctly?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "hash_equals(Hash::make($submitted), $storedHash)",
+      "rationale": "Constant-time string comparison does not remove the different random salts from newly generated hashes.",
+      "misconception": "Constant-time string comparison does not remove the different random salts from newly generated hashes."
+    },
+    {
+      "id": "choice-2",
+      "text": "decrypt($storedHash) === $submitted",
+      "rationale": "A password hash is not a reversible encrypted value.",
+      "misconception": "A password hash is not a reversible encrypted value."
+    },
+    {
+      "id": "choice-3",
+      "text": "Hash::check($submitted, $storedHash)",
+      "rationale": "check verifies the plaintext against the algorithm, salt and cost encoded in the stored hash.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Hash::needsRehash($storedHash)",
+      "rationale": "needsRehash examines hashing parameters, not whether the submitted password is correct.",
+      "misconception": "needsRehash examines hashing parameters, not whether the submitted password is correct."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "check verifies the plaintext against the algorithm, salt and cost encoded in the stored hash.",
+    "trace": [
+      "Constant-time string comparison does not remove the different random salts from newly generated hashes.",
+      "A password hash is not a reversible encrypted value.",
+      "check verifies the plaintext against the algorithm, salt and cost encoded in the stored hash.",
+      "needsRehash examines hashing parameters, not whether the submitted password is correct."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false]",
+    "probe": "$h = new Illuminate\\Hashing\\BcryptHasher(['rounds' => 4]);\n$stored = $h->make('fixture-password');\necho json_encode([$h->check('fixture-password', $stored), $h->make('fixture-password') === $stored]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/hashing#verifying-that-a-password-matches-a-hash"
+  ]
+}

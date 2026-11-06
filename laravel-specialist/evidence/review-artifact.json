@@ -1,0 +1,41 @@
+{
+  "collectionId": "laravel-specialist-review-v1",
+  "count": 600,
+  "independentApproval": "pending",
+  "statsKey": "underTheHoodLaravelSpecialistReviewV1Stats",
+  "bankSha256": "eaad62a19c9610aa85ecdba93fdc6ca3f51885ff91f66c405834de58e1f55e69",
+  "unchangedFiles": [
+    {
+      "path": "styles.css",
+      "sha256": "e9f7e09d7b7c9daf3d2c61acd50129f802713d3a4393c06862d2563378be84e1"
+    },
+    {
+      "path": "js/exam.mjs",
+      "sha256": "1e5b660f8dfc6977ac2f360251a82a19be656b27fe2505a79fb4c9fdb94e7b45"
+    },
+    {
+      "path": "js/learning-notes.mjs",
+      "sha256": "b7de9fd3037957bb09b04374e5483ef71550708294db6944c83e60ade20cf7d3"
+    },
+    {
+      "path": "js/code-viewer.mjs",
+      "sha256": "a89a44fde8f661cca2c2e2cbf6b458dff422668064c689e5bc47db67071572e2"
+    },
+    {
+      "path": "js/code-highlighting.mjs",
+      "sha256": "38557e5087fa15156d7cf3e392beddb62018024eecd43ddca6e75cdfefe82f72"
+    },
+    {
+      "path": "js/vendor/highlightjs/core.min.mjs",
+      "sha256": "67a339aa68880a40c9803def9c8cebb2225dec76230382db86e349370dee70e9"
+    },
+    {
+      "path": "js/vendor/highlightjs/php.min.mjs",
+      "sha256": "d47d3e20ee16dd1a34bdc8bfa8a605801de7dac8bb33ee40e85cd28f2a6a7bf9"
+    },
+    {
+      "path": "js/vendor/highlightjs/LICENSE",
+      "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490"
+    }
+  ]
+}

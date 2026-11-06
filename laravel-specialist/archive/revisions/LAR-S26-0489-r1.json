@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0489",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Factory tests",
+  "subtopic": "factory-explicit-branch-state",
+  "objective": {
+    "id": "laravel.factory-explicit-branch-state",
+    "text": "Use explicit factory states to cover a branch instead of relying on random attribute generation."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Remove random selection from a test whose purpose is to exercise one business branch."
+  },
+  "prerequisites": [
+    "Model factories",
+    "Deterministic branch coverage"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A test of suspended-account rejection relies on the factory randomly choosing status=\"suspended\". It sometimes creates an active account and misses the branch. Which fixture design makes this test deterministic?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Use an explicit suspended factory state or override status for this test.",
+      "rationale": "The branch prerequisite becomes deliberate rather than dependent on random generated attributes.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Increase the number of unrelated generated users without selecting their status.",
+      "rationale": "More random data does not make the subject of this assertion suspended.",
+      "misconception": "More random data does not make the subject of this assertion suspended."
+    },
+    {
+      "id": "choice-3",
+      "text": "Seed the random generator but never assert or specify the generated status.",
+      "rationale": "A seed may repeat a value, but it does not express or guarantee the required business state across factory changes.",
+      "misconception": "A seed may repeat a value, but it does not express or guarantee the required business state across factory changes."
+    },
+    {
+      "id": "choice-4",
+      "text": "Run the random factory once more whenever the assertion fails.",
+      "rationale": "Retrying can hide a missing branch setup and still does not guarantee the intended state.",
+      "misconception": "Retrying can hide a missing branch setup and still does not guarantee the intended state."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The branch prerequisite becomes deliberate rather than dependent on random generated attributes.",
+    "trace": [
+      "The branch prerequisite becomes deliberate rather than dependent on random generated attributes.",
+      "More random data does not make the subject of this assertion suspended.",
+      "A seed may repeat a value, but it does not express or guarantee the required business state across factory changes.",
+      "Retrying can hide a missing branch setup and still does not guarantee the intended state."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "suspended",
+    "probe": "class Account extends Illuminate\\Database\\Eloquent\\Model\n{\n    protected $guarded = [];\n}\nclass AccountFactory extends Illuminate\\Database\\Eloquent\\Factories\\Factory\n{\n    protected $model = Account::class;\n    public function definition(): array\n    {\n        return ['status' => 'active'];\n    }\n    public function suspended(): static\n    {\n        return $this->state(['status' => 'suspended']);\n    }\n}\necho AccountFactory::new()->suspended()->make()->status;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-factories#factory-states"
+  ]
+}

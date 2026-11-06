@@ -1,0 +1,30 @@
+{
+  "lock": "b8664f812b9856ec98db81bbd5bc1950196c7b4dc230b6096ded263476c34df5",
+  "batches": [
+    {
+      "batch": 1,
+      "technical": "pass on PHP8.4 and8.5",
+      "checks": "pass",
+      "sourceUnchanged": true
+    },
+    {
+      "batch": 2,
+      "technical": "pass on PHP8.4 and8.5",
+      "checks": "pass",
+      "sourceUnchanged": true
+    },
+    {
+      "batch": 3,
+      "technical": "pass on PHP8.4 and8.5",
+      "checks": "pass",
+      "sourceUnchanged": true
+    },
+    {
+      "batch": 4,
+      "technical": "pass on PHP8.4 and8.5",
+      "checks": "pass",
+      "sourceUnchanged": true
+    }
+  ],
+  "production": "unchanged"
+}

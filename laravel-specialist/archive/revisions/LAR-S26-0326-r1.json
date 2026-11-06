@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0326",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Queue middleware",
+  "subtopic": "processing-overlap-versus-dispatch-uniqueness",
+  "objective": {
+    "id": "laravel.processing-overlap-versus-dispatch-uniqueness",
+    "text": "Distinguish dispatch uniqueness from overlap prevention during job processing."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep payload admission distinct from mutual exclusion while processing."
+  },
+  "prerequisites": [
+    "Job middleware",
+    "WithoutOverlapping",
+    "Queue dispatch"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A job uses WithoutOverlapping middleware but does not implement ShouldBeUnique. A developer expects two matching dispatches to create only one queue payload. What is the correction?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Only one can enqueue because all queue middleware runs before serialization.",
+      "rationale": "Processing middleware is not the general dispatch admission mechanism.",
+      "misconception": "Processing middleware is not the general dispatch admission mechanism."
+    },
+    {
+      "id": "choice-2",
+      "text": "Both enqueue and always execute together because middleware cannot use cache locks.",
+      "rationale": "The middleware can prevent overlap through its processing lock.",
+      "misconception": "The middleware can prevent overlap through its processing lock."
+    },
+    {
+      "id": "choice-3",
+      "text": "The second dispatch overwrites the first payload in the queue backend.",
+      "rationale": "The middleware does not implement payload replacement in the queue store.",
+      "misconception": "The middleware does not implement payload replacement in the queue store."
+    },
+    {
+      "id": "choice-4",
+      "text": "Both can enqueue; the middleware arbitrates the lock when a worker processes each job.",
+      "rationale": "WithoutOverlapping controls concurrent processing, while ShouldBeUnique applies a distinct dispatch-time lock policy.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "WithoutOverlapping controls concurrent processing, while ShouldBeUnique applies a distinct dispatch-time lock policy.",
+    "trace": [
+      "Processing middleware is not the general dispatch admission mechanism.",
+      "The middleware can prevent overlap through its processing lock.",
+      "The middleware does not implement payload replacement in the queue store.",
+      "WithoutOverlapping controls concurrent processing, while ShouldBeUnique applies a distinct dispatch-time lock policy."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:released:not-handled",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass LockedWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function middleware(): array\n    {\n        return [(new Illuminate\\Queue\\Middleware\\WithoutOverlapping('catalog'))->releaseAfter(5)];\n    }\n\n    public function handle(): void\n    {\n        app('cache')->put('ran', true);\n    }\n}\nLockedWork::dispatch();\nLockedWork::dispatch();\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count().':';\n$middleware = new Illuminate\\Queue\\Middleware\\WithoutOverlapping('catalog');\n$lock = app('cache')->lock($middleware->getLockKey(new LockedWork()), 60);\n$lock->get();\n$job = app('queue')->connection()->pop();\n$job->fire();\necho ($job->isReleased() ? 'released' : 'not-released').':'.(app('cache')->get('ran') ? 'handled' : 'not-handled');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#preventing-job-overlaps"
+  ]
+}

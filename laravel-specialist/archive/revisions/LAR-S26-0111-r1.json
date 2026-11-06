@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0111",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Validation",
+  "subtopic": "prohibited-field-not-discarded",
+  "objective": {
+    "id": "laravel.prohibited-field-not-discarded",
+    "text": "Reject a forbidden field for one mode rather than silently discarding it."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate rejecting forbidden data from excluding it from the validated result."
+  },
+  "prerequisites": [
+    "Conditional prohibition",
+    "Validation failure"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$validator = validator(\n    ['plan' => 'free', 'trial_days' => 5],\n    [\n        'plan' => ['required', 'in:free,paid'],\n        'trial_days' => ['prohibited_if:plan,free'],\n    ],\n);\n$validator->passes();\n\necho json_encode($validator->errors()->keys());\n"
+      }
+    ]
+  },
+  "stem": "The caller sends a nonempty trial_days value for a free plan. What does validation report?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "[\"plan\",\"trial_days\"]",
+      "rationale": "The trial_days failure does not make the valid plan field fail too.",
+      "misconception": "The trial_days failure does not make the valid plan field fail too."
+    },
+    {
+      "id": "choice-2",
+      "text": "[\"plan\"]",
+      "rationale": "free is an allowed plan value; it activates the separate trial_days prohibition.",
+      "misconception": "free is an allowed plan value; it activates the separate trial_days prohibition."
+    },
+    {
+      "id": "choice-3",
+      "text": "[] because trial_days is silently removed",
+      "rationale": "prohibited_if rejects the supplied nonempty value; exclude_if would instead remove an inapplicable field.",
+      "misconception": "prohibited_if rejects the supplied nonempty value; exclude_if would instead remove an inapplicable field."
+    },
+    {
+      "id": "choice-4",
+      "text": "[\"trial_days\"]",
+      "rationale": "The prohibition condition is true and trial_days is nonempty, so it produces an error.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The prohibition condition is true and trial_days is nonempty, so it produces an error.",
+    "trace": [
+      "The trial_days failure does not make the valid plan field fail too.",
+      "free is an allowed plan value; it activates the separate trial_days prohibition.",
+      "prohibited_if rejects the supplied nonempty value; exclude_if would instead remove an inapplicable field.",
+      "The prohibition condition is true and trial_days is nonempty, so it produces an error."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[\"trial_days\"]",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-prohibited-if"
+  ]
+}

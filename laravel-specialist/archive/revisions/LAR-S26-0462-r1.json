@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0462",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "API resources",
+  "subtopic": "resource-withresponse-header-hook",
+  "objective": {
+    "id": "laravel.resource-withresponse-header-hook",
+    "text": "Customize the final resource response headers through withResponse."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Attach a header to the produced HTTP response rather than to the JSON entity."
+  },
+  "prerequisites": [
+    "JsonResource response customization",
+    "HTTP headers"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A resource must add X-Export-Version: 2 to its final HTTP response. Which hook is intended for this customization?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "with(), returning an X-Export-Version metadata key.",
+      "rationale": "with adds top-level response data rather than HTTP headers.",
+      "misconception": "with adds top-level response data rather than HTTP headers."
+    },
+    {
+      "id": "choice-2",
+      "text": "withResponse($request, $response), setting the response header there.",
+      "rationale": "The hook receives the final JSON response, so it can customize headers without altering resource fields.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "A model accessor named getXExportVersionAttribute.",
+      "rationale": "An accessor changes model data access, not the outgoing response headers.",
+      "misconception": "An accessor changes model data access, not the outgoing response headers."
+    },
+    {
+      "id": "choice-4",
+      "text": "toArray(), returning an X-Export-Version field.",
+      "rationale": "That creates JSON data, not the required HTTP header.",
+      "misconception": "That creates JSON data, not the required HTTP header."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The hook receives the final JSON response, so it can customize headers without altering resource fields.",
+    "trace": [
+      "with adds top-level response data rather than HTTP headers.",
+      "The hook receives the final JSON response, so it can customize headers without altering resource fields.",
+      "An accessor changes model data access, not the outgoing response headers.",
+      "That creates JSON data, not the required HTTP header."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2",
+    "probe": "$r = new class(['id' => 7]) extends Illuminate\\Http\\Resources\\Json\\JsonResource\n{\n    public function withResponse($request, $response)\n    {\n        $response->headers->set('X-Export-Version', '2');\n    }\n};\necho $r->response()->headers->get('X-Export-Version');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#resource-responses"
+  ]
+}

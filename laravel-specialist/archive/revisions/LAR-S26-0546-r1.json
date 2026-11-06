@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0546",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Collections",
+  "subtopic": "collection-flatten-depth-boundary",
+  "objective": {
+    "id": "laravel.collection-flatten-depth-boundary",
+    "text": "Distinguish flattening all nested levels from flattening only one level."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Apply one flattening level without discarding deeper structure."
+  },
+  "prerequisites": [
+    "Nested collections",
+    "Flatten depth"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\necho collect([[1, 2], [3, [4]]])->flatten(1)->toJson();\n"
+      }
+    ]
+  },
+  "stem": "What JSON does flatten(1) produce here?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "[1,2,3,[4]]",
+      "rationale": "One level removes the outer nested arrays, but the array containing 4 remains one level deeper.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "[1,2,[3,4]]",
+      "rationale": "This preserves and changes different branches rather than applying the depth consistently.",
+      "misconception": "This preserves and changes different branches rather than applying the depth consistently."
+    },
+    {
+      "id": "choice-3",
+      "text": "[1,2,3,4]",
+      "rationale": "That fully flattens the nested value rather than stopping after one level.",
+      "misconception": "That fully flattens the nested value rather than stopping after one level."
+    },
+    {
+      "id": "choice-4",
+      "text": "[[1,2],[3,[4]]]",
+      "rationale": "That leaves the input unchanged instead of flattening one level.",
+      "misconception": "That leaves the input unchanged instead of flattening one level."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "One level removes the outer nested arrays, but the array containing 4 remains one level deeper.",
+    "trace": [
+      "One level removes the outer nested arrays, but the array containing 4 remains one level deeper.",
+      "This preserves and changes different branches rather than applying the depth consistently.",
+      "That fully flattens the nested value rather than stopping after one level.",
+      "That leaves the input unchanged instead of flattening one level."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[1,2,3,[4]]",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/collections#method-flatten"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0353",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Domain events",
+  "subtopic": "immutable-domain-event-facts",
+  "objective": {
+    "id": "laravel.immutable-domain-event-facts",
+    "text": "Carry immutable event facts instead of expecting a later database reread to reproduce historical state."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Preserve the event-time value required by a downstream historical consumer."
+  },
+  "prerequisites": [
+    "Domain events",
+    "Queued consumption",
+    "Historical facts versus current models"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A queued audit listener must record the amount accepted when an order was placed. The order’s amount may later change before the listener runs. Which event payload preserves the required fact?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Carry only the order ID and always select the current amount in the listener.",
+      "rationale": "A current-state lookup cannot recover the earlier value without a separate historical source.",
+      "misconception": "A current-state lookup cannot recover the earlier value without a separate historical source."
+    },
+    {
+      "id": "choice-2",
+      "text": "Carry only an Eloquent order model using SerializesModels and read its amount later.",
+      "rationale": "The restored model can contain the newer amount, losing the event-time fact.",
+      "misconception": "The restored model can contain the newer amount, losing the event-time fact."
+    },
+    {
+      "id": "choice-3",
+      "text": "Carry the order ID and the accepted amount as explicit immutable event data.",
+      "rationale": "The event records the historical value rather than asking a later model restoration to reconstruct it.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Use a public-channel broadcast name containing the current amount instead of event data.",
+      "rationale": "Channel naming neither establishes a durable historical payload nor satisfies private audit storage requirements.",
+      "misconception": "Channel naming neither establishes a durable historical payload nor satisfies private audit storage requirements."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The event records the historical value rather than asking a later model restoration to reconstruct it.",
+    "trace": [
+      "A current-state lookup cannot recover the earlier value without a separate historical source.",
+      "The restored model can contain the newer amount, losing the event-time fact.",
+      "The event records the historical value rather than asking a later model restoration to reconstruct it.",
+      "Channel naming neither establishes a durable historical payload nor satisfies private audit storage requirements."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "100:150",
+    "probe": "class OrderFact\n{\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function __construct(public readonly int $orderId, public readonly int $acceptedAmount)\n    {\n    }\n}\n$currentAmount = 100;\n$serialized = serialize(new OrderFact(7, $currentAmount));\n$currentAmount = 150;\n$restored = unserialize($serialized);\necho $restored->acceptedAmount.':'.$currentAmount;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/events#defining-events",
+    "https://laravel.com/docs/13.x/queues#eloquent-models-in-queued-jobs"
+  ]
+}

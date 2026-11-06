@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0415",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Storage deployment",
+  "subtopic": "public-storage-symlink-scope",
+  "objective": {
+    "id": "laravel.public-storage-symlink-scope",
+    "text": "Connect the public storage URL to the intended public-disk symlink without exposing private disks."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Expose the intended public subtree without exposing unrelated private files."
+  },
+  "prerequisites": [
+    "Public disk",
+    "Web root",
+    "Storage symlinks"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The standard public disk uses storage/app/public and /storage URLs; the web server serves public/. Private files use storage/app/private."
+    ],
+    "files": []
+  },
+  "stem": "Public upload URLs return 404 because the expected link is absent. Which link matches the standard setup?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "public/storage → storage/app/private",
+      "rationale": "This exposes the private disk rather than the intended public uploads.",
+      "misconception": "This exposes the private disk rather than the intended public uploads."
+    },
+    {
+      "id": "choice-2",
+      "text": "storage/app/public → public/storage",
+      "rationale": "This reverses the intended web-root link and target relationship.",
+      "misconception": "This reverses the intended web-root link and target relationship."
+    },
+    {
+      "id": "choice-3",
+      "text": "public/storage → storage/app",
+      "rationale": "That exposes a broader parent tree, including private files under the stated layout.",
+      "misconception": "That exposes a broader parent tree, including private files under the stated layout."
+    },
+    {
+      "id": "choice-4",
+      "text": "public/storage → storage/app/public",
+      "rationale": "That maps the public URL subtree to the public disk’s root while leaving the private sibling outside it.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "That maps the public URL subtree to the public disk’s root while leaving the private sibling outside it.",
+    "trace": [
+      "This exposes the private disk rather than the intended public uploads.",
+      "This reverses the intended web-root link and target relationship.",
+      "That exposes a broader parent tree, including private files under the stated layout.",
+      "That maps the public URL subtree to the public disk’s root while leaving the private sibling outside it."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Foundation/Console/StorageLinkCommand.php",
+    "contains": [
+      "public_path('storage') => storage_path('app/public')"
+    ],
+    "reason": "The standard fallback link is inspected. Creating symlinks is intentionally disabled in the isolated fixture runner.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/filesystem#the-public-disk"
+  ]
+}

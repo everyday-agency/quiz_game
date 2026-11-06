@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0234",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Relationships",
+  "subtopic": "with-default-unsaved-model",
+  "objective": {
+    "id": "laravel.with-default-unsaved-model",
+    "text": "Recognize an unsaved default related model returned by withDefault."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Distinguish a presentation default from a persisted parent record."
+  },
+  "prerequisites": [
+    "Eloquent default related models"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Article::writer() is a belongsTo relation with ->withDefault([\"name\" => \"Guest\"]). The article has writer_id=null. What describes $article->writer?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A Writer with name Guest and exists=false; reading it does not insert a writer.",
+      "rationale": "withDefault supplies an unsaved related model for the absent relationship.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The first stored writer, with its name temporarily replaced by Guest.",
+      "rationale": "The default is not an arbitrary existing row borrowed from the writers table.",
+      "misconception": "The default is not an arbitrary existing row borrowed from the writers table."
+    },
+    {
+      "id": "choice-3",
+      "text": "A newly inserted Writer with a generated id and exists=true.",
+      "rationale": "Property access does not automatically persist the default model.",
+      "misconception": "Property access does not automatically persist the default model."
+    },
+    {
+      "id": "choice-4",
+      "text": "null, because withDefault only applies to empty strings.",
+      "rationale": "The absent related model is precisely the supported default case.",
+      "misconception": "The absent related model is precisely the supported default case."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "withDefault supplies an unsaved related model for the absent relationship.",
+    "trace": [
+      "withDefault supplies an unsaved related model for the absent relationship.",
+      "The default is not an arbitrary existing row borrowed from the writers table.",
+      "Property access does not automatically persist the default model.",
+      "The absent related model is precisely the supported default case."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Guest:new:2",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('writers', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('code')->nullable();\n    $t->timestamps();\n});\nSchema::create('articles', function ($t) {\n    $t->id();\n    $t->unsignedBigInteger('writer_id')->nullable();\n    $t->string('writer_code')->nullable();\n    $t->string('title');\n    $t->boolean('published')->default(false);\n    $t->integer('amount')->default(0);\n    $t->timestamps();\n});\nclass Writer extends Model\n{\n    protected $table = 'writers';\n    protected $guarded = [];\n\n    public function articles()\n    {\n        return $this->hasMany(Article::class, 'writer_id');\n    }\n}\nclass Article extends Model\n{\n    protected $table = 'articles';\n    protected $guarded = [];\n\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id');\n    }\n}\n$writer = Writer::create(['name' => 'Ada', 'code' => 'W-A']);\n$other = Writer::create(['name' => 'Lin', 'code' => 'W-B']);\n$writer->articles()->createMany([\n    ['title' => 'Draft', 'published' => false, 'amount' => 4],\n    ['title' => 'Public', 'published' => true, 'amount' => 6],\n]);\n$other->articles()->create(['title' => 'Other', 'published' => true, 'amount' => 9]);\nclass GuestArticle extends Article\n{\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id')->withDefault(['name' => 'Guest']);\n    }\n}\n$a = new GuestArticle();\necho $a->writer->name.':'.($a->writer->exists ? 'stored' : 'new').':'.Writer::count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#default-models"
+  ]
+}

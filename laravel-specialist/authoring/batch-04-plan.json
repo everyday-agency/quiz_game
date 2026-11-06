@@ -1,0 +1,502 @@
+[
+  {
+    "id": "LAR-S26-0301",
+    "topic": "Queue dispatch",
+    "objective": "Distinguish queued dispatch from immediate handler execution on an asynchronous connection."
+  },
+  {
+    "id": "LAR-S26-0302",
+    "topic": "Queue dispatch",
+    "objective": "Distinguish after-response work in the current PHP process from durable broker-backed background execution."
+  },
+  {
+    "id": "LAR-S26-0303",
+    "topic": "Queue dispatch",
+    "objective": "Distinguish a queue name from a queue connection when routing a job."
+  },
+  {
+    "id": "LAR-S26-0304",
+    "topic": "Queue lifecycle",
+    "objective": "Resolve handle dependencies at execution rather than serializing service objects in the constructor."
+  },
+  {
+    "id": "LAR-S26-0305",
+    "topic": "Queue serialization",
+    "objective": "Recognize that serialized Eloquent models are restored from current database state."
+  },
+  {
+    "id": "LAR-S26-0306",
+    "topic": "Queue serialization",
+    "objective": "Exclude loaded relationships from a serialized job model when they are not required."
+  },
+  {
+    "id": "LAR-S26-0307",
+    "topic": "Queue serialization",
+    "objective": "Account for relationship constraints being lost when serialized relations are restored."
+  },
+  {
+    "id": "LAR-S26-0308",
+    "topic": "Queue lifecycle",
+    "objective": "Discard a job whose required model has been deleted using the explicit missing-model policy."
+  },
+  {
+    "id": "LAR-S26-0309",
+    "topic": "Queue transactions",
+    "objective": "Defer job enqueueing until the surrounding transaction commits."
+  },
+  {
+    "id": "LAR-S26-0310",
+    "topic": "Queue transactions",
+    "objective": "Override connection-level after-commit dispatch when deliberate pre-commit execution is required."
+  },
+  {
+    "id": "LAR-S26-0311",
+    "topic": "Queue payloads",
+    "objective": "Pass a durable storage reference instead of a request-lifetime uploaded-file object."
+  },
+  {
+    "id": "LAR-S26-0312",
+    "topic": "Queue safety",
+    "objective": "Recheck mutable authorization at execution time for a deferred privileged operation."
+  },
+  {
+    "id": "LAR-S26-0313",
+    "topic": "Queue idempotency",
+    "objective": "Prevent duplicate job deliveries from creating duplicate database results with a unique operation key."
+  },
+  {
+    "id": "LAR-S26-0314",
+    "topic": "Queue idempotency",
+    "objective": "Design an outbox to close the commit-versus-publish failure window without claiming exactly-once delivery."
+  },
+  {
+    "id": "LAR-S26-0315",
+    "topic": "Queue retries",
+    "objective": "Recognize that releasing a job does not return from the current handle method."
+  },
+  {
+    "id": "LAR-S26-0316",
+    "topic": "Queue retries",
+    "objective": "Count released reservations toward the worker attempt budget."
+  },
+  {
+    "id": "LAR-S26-0317",
+    "topic": "Queue retries",
+    "objective": "Select a backoff delay from an attempt-indexed array with last-value fallback."
+  },
+  {
+    "id": "LAR-S26-0318",
+    "topic": "Queue retries",
+    "objective": "Bound job retries by a retryUntil deadline rather than an assumed count-only limit."
+  },
+  {
+    "id": "LAR-S26-0319",
+    "topic": "Queue timeouts",
+    "objective": "Keep worker timeout below connection retry_after to avoid overlapping processing."
+  },
+  {
+    "id": "LAR-S26-0320",
+    "topic": "Queue failures",
+    "objective": "Distinguish explicitly failing a job from throwing an exception eligible for retry."
+  },
+  {
+    "id": "LAR-S26-0321",
+    "topic": "Queue failures",
+    "objective": "Avoid relying on unsaved handle-time object mutations inside the failed callback."
+  },
+  {
+    "id": "LAR-S26-0322",
+    "topic": "Queue failures",
+    "objective": "Distinguish retrying a failed job from deleting its failed-job record."
+  },
+  {
+    "id": "LAR-S26-0323",
+    "topic": "Queue uniqueness",
+    "objective": "Use ShouldBeUnique to reject duplicate dispatches while its uniqueness lock is held."
+  },
+  {
+    "id": "LAR-S26-0324",
+    "topic": "Queue uniqueness",
+    "objective": "Release a ShouldBeUniqueUntilProcessing lock before handling rather than after completion."
+  },
+  {
+    "id": "LAR-S26-0325",
+    "topic": "Queue uniqueness",
+    "objective": "Share the uniqueness-lock store across dispatching application nodes."
+  },
+  {
+    "id": "LAR-S26-0326",
+    "topic": "Queue middleware",
+    "objective": "Distinguish dispatch uniqueness from overlap prevention during job processing."
+  },
+  {
+    "id": "LAR-S26-0327",
+    "topic": "Queue middleware",
+    "objective": "Share an overlap key across different job classes when they mutate the same resource."
+  },
+  {
+    "id": "LAR-S26-0328",
+    "topic": "Queue middleware",
+    "objective": "Set an overlap-lock expiration to recover after a worker crashes before releasing it."
+  },
+  {
+    "id": "LAR-S26-0329",
+    "topic": "Queue middleware",
+    "objective": "Use Skip to delete obsolete work without consuming a failed-job path."
+  },
+  {
+    "id": "LAR-S26-0330",
+    "topic": "Queue rate limits",
+    "objective": "Account for rate-limit releases when choosing a job's attempts or retry deadline."
+  },
+  {
+    "id": "LAR-S26-0331",
+    "topic": "Job chains",
+    "objective": "Run chained jobs in order and stop downstream work after an unhandled job failure."
+  },
+  {
+    "id": "LAR-S26-0332",
+    "topic": "Job chains",
+    "objective": "Pass serialized constructor data explicitly instead of assuming one handle return becomes the next input."
+  },
+  {
+    "id": "LAR-S26-0333",
+    "topic": "Job chains",
+    "objective": "Append work to the current chain using the supported job-chain operation."
+  },
+  {
+    "id": "LAR-S26-0334",
+    "topic": "Job batches",
+    "objective": "Distinguish a batch completion callback from its all-success callback."
+  },
+  {
+    "id": "LAR-S26-0335",
+    "topic": "Job batches",
+    "objective": "Choose allowFailures when one failed job must not automatically cancel unrelated batch work."
+  },
+  {
+    "id": "LAR-S26-0336",
+    "topic": "Job batches",
+    "objective": "Check batch cancellation in a long-running or queued job rather than assuming all jobs stop immediately."
+  },
+  {
+    "id": "LAR-S26-0337",
+    "topic": "Queue tests",
+    "objective": "Separate a dispatch assertion from verification of the job handler's side effects."
+  },
+  {
+    "id": "LAR-S26-0338",
+    "topic": "Queue tests",
+    "objective": "Assert dispatch to the intended named queue as well as the job type."
+  },
+  {
+    "id": "LAR-S26-0339",
+    "topic": "Queue workers",
+    "objective": "Restart long-lived workers after code changes because they do not reload the application per job."
+  },
+  {
+    "id": "LAR-S26-0340",
+    "topic": "Queue workers",
+    "objective": "Limit worker lifetime to contain state or memory growth while preserving process supervision."
+  },
+  {
+    "id": "LAR-S26-0341",
+    "topic": "Events",
+    "objective": "Distinguish event dispatch side effects from a function's direct return value."
+  },
+  {
+    "id": "LAR-S26-0342",
+    "topic": "Events",
+    "objective": "Stop ordinary listener propagation when a listener returns false."
+  },
+  {
+    "id": "LAR-S26-0343",
+    "topic": "Events",
+    "objective": "Use until to return the first non-null listener response instead of collecting every response."
+  },
+  {
+    "id": "LAR-S26-0344",
+    "topic": "Events",
+    "objective": "Dispatch an event after database commit when listeners require committed data."
+  },
+  {
+    "id": "LAR-S26-0345",
+    "topic": "Event listeners",
+    "objective": "Queue a listener through ShouldQueue rather than queueing every listener for that event."
+  },
+  {
+    "id": "LAR-S26-0346",
+    "topic": "Event listeners",
+    "objective": "Use shouldQueue to suppress unnecessary queued listener work for a specific event."
+  },
+  {
+    "id": "LAR-S26-0347",
+    "topic": "Event listeners",
+    "objective": "Preserve listener-specific queue routing independently of the event class."
+  },
+  {
+    "id": "LAR-S26-0348",
+    "topic": "Event tests",
+    "objective": "Scope Event::fake so model factory observers needed by setup can still run."
+  },
+  {
+    "id": "LAR-S26-0349",
+    "topic": "Event tests",
+    "objective": "Fake selected event types while allowing unrelated application listeners to execute."
+  },
+  {
+    "id": "LAR-S26-0350",
+    "topic": "Event tests",
+    "objective": "Restore the real dispatcher after an Event::fakeFor scope."
+  },
+  {
+    "id": "LAR-S26-0351",
+    "topic": "Event discovery",
+    "objective": "Avoid registering a discovered listener again and causing duplicate execution."
+  },
+  {
+    "id": "LAR-S26-0352",
+    "topic": "Event subscribers",
+    "objective": "Register several event-method mappings through one subscriber without conflating event payloads."
+  },
+  {
+    "id": "LAR-S26-0353",
+    "topic": "Domain events",
+    "objective": "Carry immutable event facts instead of expecting a later database reread to reproduce historical state."
+  },
+  {
+    "id": "LAR-S26-0354",
+    "topic": "Broadcast security",
+    "objective": "Authorize private-channel membership instead of treating an obscured channel name as access control."
+  },
+  {
+    "id": "LAR-S26-0355",
+    "topic": "Broadcast events",
+    "objective": "Restrict public broadcast payloads with broadcastWith rather than exposing every public property."
+  },
+  {
+    "id": "LAR-S26-0356",
+    "topic": "Broadcast events",
+    "objective": "Distinguish ShouldBroadcastNow from a queued ShouldBroadcast event."
+  },
+  {
+    "id": "LAR-S26-0357",
+    "topic": "Broadcast integration",
+    "objective": "Use the originating socket identifier to exclude that client's duplicate echo with toOthers."
+  },
+  {
+    "id": "LAR-S26-0358",
+    "topic": "Event architecture",
+    "objective": "Keep an essential invariant inside the transaction rather than relying on an eventually queued listener."
+  },
+  {
+    "id": "LAR-S26-0359",
+    "topic": "Event architecture",
+    "objective": "Avoid dispatching the same domain event from both an observer and the application service."
+  },
+  {
+    "id": "LAR-S26-0360",
+    "topic": "Event diagnostics",
+    "objective": "Test event payload contents rather than asserting only the event class was dispatched."
+  },
+  {
+    "id": "LAR-S26-0361",
+    "topic": "Mail rendering",
+    "objective": "Supply explicit view data from a mailable without relying on unrelated request variables."
+  },
+  {
+    "id": "LAR-S26-0362",
+    "topic": "Mail headers",
+    "objective": "Distinguish envelope recipients from message body content."
+  },
+  {
+    "id": "LAR-S26-0363",
+    "topic": "Mail attachments",
+    "objective": "Attach a file from a configured storage disk instead of assuming a disk path is an absolute local path."
+  },
+  {
+    "id": "LAR-S26-0364",
+    "topic": "Mail attachments",
+    "objective": "Delay reading attachment bytes until sending when using an Attachment data callback."
+  },
+  {
+    "id": "LAR-S26-0365",
+    "topic": "Mail queueing",
+    "objective": "Queue a mailable that implements ShouldQueue even when passed to send."
+  },
+  {
+    "id": "LAR-S26-0366",
+    "topic": "Mail queueing",
+    "objective": "Preserve a queued mailable locale while restoring the worker application locale after rendering."
+  },
+  {
+    "id": "LAR-S26-0367",
+    "topic": "Mail queueing",
+    "objective": "Embed an inline mail image with a CID reference instead of exposing a private filesystem path."
+  },
+  {
+    "id": "LAR-S26-0368",
+    "topic": "Mail tests",
+    "objective": "Distinguish assertSent from assertQueued for mail delivery intent."
+  },
+  {
+    "id": "LAR-S26-0369",
+    "topic": "Mail tests",
+    "objective": "Inspect recipients and domain data in a mail assertion callback."
+  },
+  {
+    "id": "LAR-S26-0370",
+    "topic": "Mail rendering",
+    "objective": "Choose text and HTML content deliberately rather than embedding HTML in a plain-text template."
+  },
+  {
+    "id": "LAR-S26-0371",
+    "topic": "Mail security",
+    "objective": "Use BCC for a shared announcement when recipients must not see one another\u2019s addresses."
+  },
+  {
+    "id": "LAR-S26-0372",
+    "topic": "Mail addressing",
+    "objective": "Construct a fresh mailable per loop iteration to avoid accumulating recipients."
+  },
+  {
+    "id": "LAR-S26-0373",
+    "topic": "Mail configuration",
+    "objective": "Select a configured mailer without changing the application's global default."
+  },
+  {
+    "id": "LAR-S26-0374",
+    "topic": "Mail delivery",
+    "objective": "Treat transport acceptance as a handoff rather than proof of inbox delivery."
+  },
+  {
+    "id": "LAR-S26-0375",
+    "topic": "Mail events",
+    "objective": "Cancel sending from MessageSending when an application-level suppression rule applies."
+  },
+  {
+    "id": "LAR-S26-0376",
+    "topic": "Mail tests",
+    "objective": "Render a mailable to check its content separately from fake dispatch assertions."
+  },
+  {
+    "id": "LAR-S26-0377",
+    "topic": "Notifications",
+    "objective": "Select delivery channels per notifiable through via."
+  },
+  {
+    "id": "LAR-S26-0378",
+    "topic": "Notifications",
+    "objective": "Route an on-demand notification without constructing a persisted user."
+  },
+  {
+    "id": "LAR-S26-0379",
+    "topic": "Notifications",
+    "objective": "Distinguish a database notification row from an outbound mail message."
+  },
+  {
+    "id": "LAR-S26-0380",
+    "topic": "Notifications",
+    "objective": "Mark one stored notification read without deleting its historical row."
+  },
+  {
+    "id": "LAR-S26-0381",
+    "topic": "Notifications",
+    "objective": "Queue one delivery job for each recipient and channel when the notification is queued."
+  },
+  {
+    "id": "LAR-S26-0382",
+    "topic": "Notifications",
+    "objective": "Customize queued notification connections per channel with viaConnections."
+  },
+  {
+    "id": "LAR-S26-0383",
+    "topic": "Notifications",
+    "objective": "Re-evaluate whether a queued notification should send using shouldSend at delivery time."
+  },
+  {
+    "id": "LAR-S26-0384",
+    "topic": "Notifications",
+    "objective": "Correlate queued notification channels using the shared notification ID for each recipient without assuming one ID covers all recipients."
+  },
+  {
+    "id": "LAR-S26-0385",
+    "topic": "Notification tests",
+    "objective": "Assert a notification for the intended recipient and channels, not just any dispatch."
+  },
+  {
+    "id": "LAR-S26-0386",
+    "topic": "Notification data",
+    "objective": "Separate database representation from broadcast representation when the consumers need different fields."
+  },
+  {
+    "id": "LAR-S26-0387",
+    "topic": "Scheduling",
+    "objective": "Interpret a schedule in the declared timezone rather than the server's implicit timezone."
+  },
+  {
+    "id": "LAR-S26-0388",
+    "topic": "Scheduling",
+    "objective": "Account for daylight-saving skipped or repeated local times in business-critical schedules."
+  },
+  {
+    "id": "LAR-S26-0389",
+    "topic": "Scheduling",
+    "objective": "Prevent overlapping runs of one scheduled task with a suitable shared cache lock."
+  },
+  {
+    "id": "LAR-S26-0390",
+    "topic": "Scheduling",
+    "objective": "Run one scheduled task on one server across multiple scheduler hosts."
+  },
+  {
+    "id": "LAR-S26-0391",
+    "topic": "Scheduling",
+    "objective": "Give parameterized scheduled jobs distinct names when their single-server locks must be independent."
+  },
+  {
+    "id": "LAR-S26-0392",
+    "topic": "Scheduling",
+    "objective": "Distinguish a task mutex expiration from its cron frequency."
+  },
+  {
+    "id": "LAR-S26-0393",
+    "topic": "Scheduling",
+    "objective": "Combine when and skip conditions without assuming registration order overrides their meaning."
+  },
+  {
+    "id": "LAR-S26-0394",
+    "topic": "Scheduling",
+    "objective": "Restrict scheduled work to the intended application environments."
+  },
+  {
+    "id": "LAR-S26-0395",
+    "topic": "Scheduling",
+    "objective": "Keep maintenance-mode behavior explicit for tasks that must continue during maintenance."
+  },
+  {
+    "id": "LAR-S26-0396",
+    "topic": "Scheduling",
+    "objective": "Understand that the scheduler invokes due events and needs an external recurring trigger."
+  },
+  {
+    "id": "LAR-S26-0397",
+    "topic": "Scheduling",
+    "objective": "Recognize sub-minute schedules require schedule:run to remain alive for the current minute."
+  },
+  {
+    "id": "LAR-S26-0398",
+    "topic": "Scheduling",
+    "objective": "Interrupt a running sub-minute scheduler during deployment so old code does not continue for the rest of the minute."
+  },
+  {
+    "id": "LAR-S26-0399",
+    "topic": "Scheduling tests",
+    "objective": "Freeze time and inspect due events without running their external commands."
+  },
+  {
+    "id": "LAR-S26-0400",
+    "topic": "Scheduling architecture",
+    "objective": "Make scheduled work resumable and idempotent instead of assuming onOneServer guarantees completion."
+  }
+]

@@ -1,0 +1,136 @@
+{
+  "batch": 4,
+  "count": 100,
+  "sourceHash": "4af575f6a37aeae0aead4b54fc74a0e9d26e00c7b204d41adceb2f5e20b6a113",
+  "formats": {
+    "execution": 38,
+    "code-review": 10,
+    "debugging": 10,
+    "implementation": 19,
+    "architecture": 13,
+    "testing": 10
+  },
+  "difficulty": {
+    "Foundation": 44,
+    "Intermediate": 54,
+    "Advanced": 2
+  },
+  "topics": {
+    "Queue dispatch": 3,
+    "Queue lifecycle": 2,
+    "Queue serialization": 3,
+    "Queue transactions": 2,
+    "Queue payloads": 1,
+    "Queue safety": 1,
+    "Queue idempotency": 2,
+    "Queue retries": 4,
+    "Queue timeouts": 1,
+    "Queue failures": 3,
+    "Queue uniqueness": 3,
+    "Queue middleware": 4,
+    "Queue rate limits": 1,
+    "Job chains": 3,
+    "Job batches": 3,
+    "Queue tests": 2,
+    "Queue workers": 2,
+    "Events": 4,
+    "Event listeners": 3,
+    "Event tests": 3,
+    "Event discovery": 1,
+    "Event subscribers": 1,
+    "Domain events": 1,
+    "Broadcast security": 1,
+    "Broadcast events": 2,
+    "Broadcast integration": 1,
+    "Event architecture": 2,
+    "Event diagnostics": 1,
+    "Mail rendering": 2,
+    "Mail headers": 1,
+    "Mail attachments": 2,
+    "Mail queueing": 3,
+    "Mail tests": 3,
+    "Mail security": 1,
+    "Mail addressing": 1,
+    "Mail configuration": 1,
+    "Mail delivery": 1,
+    "Mail events": 1,
+    "Notifications": 8,
+    "Notification tests": 1,
+    "Notification data": 1,
+    "Scheduling": 12,
+    "Scheduling tests": 1,
+    "Scheduling architecture": 1
+  },
+  "mapped": 0,
+  "unmapped": 100,
+  "keyPositions": {
+    "1": 27,
+    "2": 18,
+    "3": 28,
+    "4": 27
+  },
+  "wording": {
+    "uniqueLongest": 22,
+    "uniqueShortest": 35,
+    "outliers": []
+  },
+  "duplicateCandidates": [
+    {
+      "a": "LAR-S26-0384",
+      "b": "LAR-S26-0381",
+      "kind": "current",
+      "similarity": 0.286
+    },
+    {
+      "a": "LAR-S26-0339",
+      "b": "LQ-209",
+      "kind": "legacy",
+      "similarity": 0.25
+    },
+    {
+      "a": "LAR-S26-0381",
+      "b": "LAR-S26-0377",
+      "kind": "current",
+      "similarity": 0.243
+    },
+    {
+      "a": "LAR-S26-0314",
+      "b": "LQ-119",
+      "kind": "legacy",
+      "similarity": 0.222
+    },
+    {
+      "a": "LAR-S26-0305",
+      "b": "LAR-S26-0210",
+      "kind": "accepted",
+      "similarity": 0.214
+    },
+    {
+      "a": "LAR-S26-0359",
+      "b": "LAR-S26-0351",
+      "kind": "current",
+      "similarity": 0.214
+    },
+    {
+      "a": "LAR-S26-0339",
+      "b": "LQ-136",
+      "kind": "legacy",
+      "similarity": 0.205
+    },
+    {
+      "a": "LAR-S26-0327",
+      "b": "LQ-142",
+      "kind": "legacy",
+      "similarity": 0.2
+    },
+    {
+      "a": "LAR-S26-0325",
+      "b": "LAR-S26-0323",
+      "kind": "current",
+      "similarity": 0.191
+    }
+  ],
+  "limitations": "Lexical signals support human review; they do not prove semantic uniqueness or distractor quality.",
+  "preservation": "PHP 620 and all protected application file hashes unchanged",
+  "independentApproval": "pending"
+}

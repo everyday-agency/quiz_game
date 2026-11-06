@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0183",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Sessions and CSRF",
+  "subtopic": "csrf-test-environment-bypass",
+  "objective": {
+    "id": "laravel.csrf-test-environment-bypass",
+    "text": "Understand why default test-environment CSRF bypass can conceal missing token behavior."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Avoid interpreting an intentionally bypassed framework test path as evidence of token enforcement."
+  },
+  "prerequisites": [
+    "Laravel testing environment",
+    "Request-forgery middleware",
+    "Negative security tests"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A standard HTTP test runs in the testing environment and a tokenless protected POST succeeds. The team claims this proves token validation is broken in production. What must a focused enforcement test account for?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Asserting that the middleware class appears in the source file is sufficient to prove enforcement.",
+      "rationale": "Class presence does not exercise the runtime decision or a failing token path.",
+      "misconception": "Class presence does not exercise the runtime decision or a failing token path."
+    },
+    {
+      "id": "choice-2",
+      "text": "Changing only Accept to application/json forces CSRF enforcement during ordinary testing.",
+      "rationale": "Accept controls response preference, not the unit-test bypass condition.",
+      "misconception": "Accept controls response preference, not the unit-test bypass condition."
+    },
+    {
+      "id": "choice-3",
+      "text": "Tokenless success proves the middleware is disabled in every environment.",
+      "rationale": "The middleware explicitly considers the environment, so this observation cannot support that global conclusion.",
+      "misconception": "The middleware explicitly considers the environment, so this observation cannot support that global conclusion."
+    },
+    {
+      "id": "choice-4",
+      "text": "The middleware bypasses its check in the normal console testing context; exercise a controlled non-bypass path and explicit origin/token conditions.",
+      "rationale": "A test-environment success can reflect the documented bypass, not production enforcement. Laravel 13 origin acceptance must also be controlled.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "A test-environment success can reflect the documented bypass, not production enforcement. Laravel 13 origin acceptance must also be controlled.",
+    "trace": [
+      "Class presence does not exercise the runtime decision or a failing token path.",
+      "Accept controls response preference, not the unit-test bypass condition.",
+      "The middleware explicitly considers the environment, so this observation cannot support that global conclusion.",
+      "A test-environment success can reflect the documented bypass, not production enforcement. Laravel 13 origin acceptance must also be controlled."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "passed:blocked",
+    "probe": "$s = app('session.store');\n$s->start();\n$r = Illuminate\\Http\\Request::create('/save', 'POST');\n$r->setLaravelSession($s);\n$m = app(Illuminate\\Foundation\\Http\\Middleware\\PreventRequestForgery::class);\n$m->handle($r, fn () => response('ok'));\necho 'passed:';\napp()->instance('env', 'local');\ntry {\n    $m->handle($r, fn () => response('ok'));\n} catch (Illuminate\\Session\\TokenMismatchException $e) {\n    echo 'blocked';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/csrf",
+    "https://laravel.com/docs/13.x/http-tests#session-authentication"
+  ]
+}

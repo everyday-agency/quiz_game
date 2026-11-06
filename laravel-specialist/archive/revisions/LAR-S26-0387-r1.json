@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0387",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Scheduling",
+  "subtopic": "schedule-explicit-timezone",
+  "objective": {
+    "id": "laravel.schedule-explicit-timezone",
+    "text": "Interpret a schedule in the declared timezone rather than the server's implicit timezone."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Apply the event’s timezone to its local wall-clock schedule."
+  },
+  "prerequisites": [
+    "Laravel scheduler",
+    "Named timezones",
+    "UTC conversion"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The server clock uses UTC. On 15 January 2026, Europe/Zurich is UTC+1."
+    ],
+    "files": [
+      {
+        "path": "routes/console-fragment.php",
+        "kind": "fragment",
+        "source": "$schedule->call(fn () => null)\n    ->dailyAt('09:00')\n    ->timezone('Europe/Zurich');",
+        "scope": "Inside schedule registration; $schedule is an Illuminate\\Console\\Scheduling\\Schedule instance."
+      }
+    ]
+  },
+  "stem": "At which UTC time is this daily event due on that date?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "10:00 UTC",
+      "rationale": "This applies the offset in the wrong direction.",
+      "misconception": "This applies the offset in the wrong direction."
+    },
+    {
+      "id": "choice-2",
+      "text": "Every hour at minute 09",
+      "rationale": "dailyAt defines one local time of day, not an hourly minute field.",
+      "misconception": "dailyAt defines one local time of day, not an hourly minute field."
+    },
+    {
+      "id": "choice-3",
+      "text": "08:00 UTC",
+      "rationale": "The event’s 09:00 local time is one hour ahead of UTC on the specified date.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "09:00 UTC",
+      "rationale": "The event explicitly overrides the server’s UTC timezone for its schedule.",
+      "misconception": "The event explicitly overrides the server’s UTC timezone for its schedule."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The event’s 09:00 local time is one hour ahead of UTC on the specified date.",
+    "trace": [
+      "This applies the offset in the wrong direction.",
+      "dailyAt defines one local time of day, not an hourly minute field.",
+      "The event’s 09:00 local time is one hour ahead of UTC on the specified date.",
+      "The event explicitly overrides the server’s UTC timezone for its schedule."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "due:not-due",
+    "probe": "$schedule = new Illuminate\\Console\\Scheduling\\Schedule('UTC');\n$fragment = getcwd().'/routes/console-fragment.php';\nfile_put_contents($fragment, \"<?php\\n\".file_get_contents($fragment));\nrequire $fragment;\n$event = $schedule->events()[0];\nIlluminate\\Support\\Carbon::setTestNow('2026-01-15 08:00:00');\necho ($event->isDue(app()) ? 'due' : 'not-due').':';\nIlluminate\\Support\\Carbon::setTestNow('2026-01-15 09:00:00');\necho $event->isDue(app()) ? 'due' : 'not-due';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#timezones"
+  ]
+}

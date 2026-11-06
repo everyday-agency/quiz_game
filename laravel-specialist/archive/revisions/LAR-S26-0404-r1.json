@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0404",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Storage errors",
+  "subtopic": "filesystem-write-throw-configuration",
+  "objective": {
+    "id": "laravel.filesystem-write-throw-configuration",
+    "text": "Configure failed filesystem writes to throw rather than treating an unchecked false return as success."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Prevent a failed write from being mistaken for a successful operation."
+  },
+  "prerequisites": [
+    "Filesystem write errors",
+    "Boolean returns",
+    "Disk configuration"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A service ignores Storage::disk(\"exports\")->put()’s return value. The disk currently uses throw=false. Its surrounding catch should handle write failures. Which disk setting changes those failures into exceptions?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Set report to true while keeping throw false.",
+      "rationale": "Reporting a failure does not necessarily rethrow it to the service’s catch.",
+      "misconception": "Reporting a failure does not necessarily rethrow it to the service’s catch."
+    },
+    {
+      "id": "choice-2",
+      "text": "Set the file extension to .php before calling put.",
+      "rationale": "A filename extension does not configure how filesystem errors propagate.",
+      "misconception": "A filename extension does not configure how filesystem errors propagate."
+    },
+    {
+      "id": "choice-3",
+      "text": "Set throw to true for the exports disk.",
+      "rationale": "The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Set visibility to private for the exports disk.",
+      "rationale": "Visibility governs access mode; it does not change the failure-return policy.",
+      "misconception": "Visibility governs access mode; it does not change the failure-return policy."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.",
+    "trace": [
+      "Reporting a failure does not necessarily rethrow it to the service’s catch.",
+      "A filename extension does not configure how filesystem errors propagate.",
+      "The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.",
+      "Visibility governs access mode; it does not change the failure-return policy."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "false:exception",
+    "probe": "use Illuminate\\Support\\Facades\\Storage;\nforeach ([false, true] as $throw) {\n    $disk = Storage::build([\n        'driver' => 'local',\n        'root' => storage_path('failing-'.(int) $throw),\n        'throw' => $throw,\n    ]);\n    $disk->makeDirectory('occupied');\n    try {\n        $result = $disk->put('occupied', 'data');\n        echo $result === false ? 'false:' : 'true:';\n    } catch (League\\Flysystem\\UnableToWriteFile|League\\Flysystem\\UnableToCreateDirectory $e) {\n        echo 'exception';\n    }\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/filesystem#failed-writes"
+  ]
+}

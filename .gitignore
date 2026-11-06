@@ -1,3 +1,6 @@
 .DS_Store
 _site/
 
+_laravel-review/
+laravel-specialist/validation/harness/vendor/
+laravel-specialist/validation/harness/.phpunit.cache/

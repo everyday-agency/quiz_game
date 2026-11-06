@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0213",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Eloquent state",
+  "subtopic": "refresh-loaded-relations",
+  "objective": {
+    "id": "laravel.refresh-loaded-relations",
+    "text": "Use refresh to reload a stale model and its already loaded relationships."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Follow both object identity and cached relationship reload during refresh."
+  },
+  "prerequisites": [
+    "Eloquent refresh",
+    "Loaded relationship cache"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "$writer has a loaded articles collection containing two rows. Another query inserts a third child. What is true after $result = $writer->refresh(), assuming the parent still exists?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "$result is a boolean indicating whether any database columns changed.",
+      "rationale": "refresh returns the model, not a dirty-state success flag.",
+      "misconception": "refresh returns the model, not a dirty-state success flag."
+    },
+    {
+      "id": "choice-2",
+      "text": "$result is a new object, while $writer retains the two-row collection.",
+      "rationale": "That describes a separate retrieval rather than the in-place refresh operation.",
+      "misconception": "That describes a separate retrieval rather than the in-place refresh operation."
+    },
+    {
+      "id": "choice-3",
+      "text": "$result is the same object, and its loaded articles collection now contains three rows.",
+      "rationale": "refresh reloads attributes and already loaded ordinary relationships on the existing model.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "$result is the same object, but the loaded articles collection remains at two rows.",
+      "rationale": "refresh also reloads the previously loaded relationship.",
+      "misconception": "refresh also reloads the previously loaded relationship."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "refresh reloads attributes and already loaded ordinary relationships on the existing model.",
+    "trace": [
+      "refresh returns the model, not a dirty-state success flag.",
+      "That describes a separate retrieval rather than the in-place refresh operation.",
+      "refresh reloads attributes and already loaded ordinary relationships on the existing model.",
+      "refresh also reloads the previously loaded relationship."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "same:3",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('writers', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('code')->nullable();\n    $t->timestamps();\n});\nSchema::create('articles', function ($t) {\n    $t->id();\n    $t->unsignedBigInteger('writer_id')->nullable();\n    $t->string('writer_code')->nullable();\n    $t->string('title');\n    $t->boolean('published')->default(false);\n    $t->integer('amount')->default(0);\n    $t->timestamps();\n});\nclass Writer extends Model\n{\n    protected $table = 'writers';\n    protected $guarded = [];\n\n    public function articles()\n    {\n        return $this->hasMany(Article::class, 'writer_id');\n    }\n}\nclass Article extends Model\n{\n    protected $table = 'articles';\n    protected $guarded = [];\n\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id');\n    }\n}\n$writer = Writer::create(['name' => 'Ada', 'code' => 'W-A']);\n$other = Writer::create(['name' => 'Lin', 'code' => 'W-B']);\n$writer->articles()->createMany([\n    ['title' => 'Draft', 'published' => false, 'amount' => 4],\n    ['title' => 'Public', 'published' => true, 'amount' => 6],\n]);\n$other->articles()->create(['title' => 'Other', 'published' => true, 'amount' => 9]);\n$writer->load('articles');\nArticle::create(['writer_id' => $writer->id, 'title' => 'Third']);\n$result = $writer->refresh();\necho ($result === $writer ? 'same' : 'new').':'.$writer->articles->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent#refreshing-models"
+  ]
+}

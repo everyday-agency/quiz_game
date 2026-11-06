@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0360",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Event diagnostics",
+  "subtopic": "event-payload-regression-assertion",
+  "objective": {
+    "id": "laravel.event-payload-regression-assertion",
+    "text": "Test event payload contents rather than asserting only the event class was dispatched."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Catch an incorrect event field even when the expected event class is dispatched."
+  },
+  "prerequisites": [
+    "Event fake assertions",
+    "Payload content"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A regression dispatches OrderPlaced for order 8 when the action created order 7. Event::assertDispatched(OrderPlaced::class) still passes. Which assertion targets the missing requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Event::assertListening(OrderPlaced::class, SendReceipt::class);",
+      "rationale": "Listener registration does not verify the payload emitted by the action.",
+      "misconception": "Listener registration does not verify the payload emitted by the action."
+    },
+    {
+      "id": "choice-2",
+      "text": "Event::assertNothingDispatched();",
+      "rationale": "The action is supposed to dispatch an event; absence is not the required correction.",
+      "misconception": "The action is supposed to dispatch an event; absence is not the required correction."
+    },
+    {
+      "id": "choice-3",
+      "text": "Event::assertDispatched(OrderPlaced::class, fn ($event) => $event->orderId === 7);",
+      "rationale": "The callback checks the domain payload of a recorded event, not only its class.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Event::assertDispatchedTimes(OrderPlaced::class, 1);",
+      "rationale": "One event can still contain the wrong order ID.",
+      "misconception": "One event can still contain the wrong order ID."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The callback checks the domain payload of a recorded event, not only its class.",
+    "trace": [
+      "Listener registration does not verify the payload emitted by the action.",
+      "The action is supposed to dispatch an event; absence is not the required correction.",
+      "The callback checks the domain payload of a recorded event, not only its class.",
+      "One event can still contain the wrong order ID."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "payload-checked",
+    "probe": "class OrderPlaced\n{\n    public function __construct(public int $orderId)\n    {\n    }\n}\nIlluminate\\Support\\Facades\\Event::fake();\nevent(new OrderPlaced(7));\nIlluminate\\Support\\Facades\\Event::assertDispatched(OrderPlaced::class, fn ($event) => $event->orderId === 7);\necho 'payload-checked';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mocking#event-fake"
+  ]
+}

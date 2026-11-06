@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0168",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Blade components",
+  "subtopic": "escaped-client-colon-attribute",
+  "objective": {
+    "id": "laravel.escaped-client-colon-attribute",
+    "text": "Escape a client-side colon attribute so Blade does not evaluate it as PHP."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Preserve a client expression without asking Blade to evaluate it as PHP."
+  },
+  "prerequisites": [
+    "Blade component attributes",
+    "Client-side bindings"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A component forwards its attributes to a button. Alpine should receive the literal attribute :class=\"{ active: isActive }\". Which caller attribute escapes Blade's server-side colon binding?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": ":class=\"{ active: isActive }\"",
+      "rationale": "A single colon requests PHP expression binding on a component, but this is a client-side expression.",
+      "misconception": "A single colon requests PHP expression binding on a component, but this is a client-side expression."
+    },
+    {
+      "id": "choice-2",
+      "text": "::class=\"{ active: isActive }\"",
+      "rationale": "The doubled colon tells Blade to leave a single colon attribute for the client framework.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "class=\"{{ active: isActive }}\"",
+      "rationale": "A Blade echo tries to evaluate server-side PHP and does not emit the required client binding attribute.",
+      "misconception": "A Blade echo tries to evaluate server-side PHP and does not emit the required client binding attribute."
+    },
+    {
+      "id": "choice-4",
+      "text": "class=\"{ active: isActive }\"",
+      "rationale": "Without a colon the browser receives an ordinary class string, not the intended Alpine binding.",
+      "misconception": "Without a colon the browser receives an ordinary class string, not the intended Alpine binding."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The doubled colon tells Blade to leave a single colon attribute for the client framework.",
+    "trace": [
+      "A single colon requests PHP expression binding on a component, but this is a client-side expression.",
+      "The doubled colon tells Blade to leave a single colon attribute for the client framework.",
+      "A Blade echo tries to evaluate server-side PHP and does not emit the required client binding attribute.",
+      "Without a colon the browser receives an ordinary class string, not the intended Alpine binding."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "<button :class=\"{ active: isActive }\">Save</button>",
+    "probe": "if (! is_dir(resource_path('views/components'))) {\n    mkdir(resource_path('views/components'), 0700, true);\n}\nfile_put_contents(base_path('composer.json'), json_encode([\n    'autoload' => ['psr-4' => ['App\\\\' => 'app/']],\n]));\nfile_put_contents(resource_path('views/components/button.blade.php'), '<button {{ $attributes }}>Save</button>');\nfile_put_contents(resource_path('views/main.blade.php'), '<x-button ::class=\"{ active: isActive }\" />');\necho trim(view('main')->render());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      4
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/blade#escaping-attribute-rendering"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "batch": 3,
+  "count": 100,
+  "sourceHash": "82e6e36757b2b6e32cf04e77b5c7b84257171e48a009821d1a56f64e584b4c74",
+  "formats": {
+    "debugging": 17,
+    "implementation": 15,
+    "code-review": 14,
+    "testing": 8,
+    "execution": 35,
+    "architecture": 11
+  },
+  "difficulty": {
+    "Foundation": 22,
+    "Intermediate": 77,
+    "Advanced": 1
+  },
+  "topics": {
+    "Eloquent models": 9,
+    "Eloquent state": 6,
+    "Eloquent casts": 8,
+    "Eloquent accessors": 2,
+    "Eloquent serialization": 3,
+    "Eloquent concurrency": 1,
+    "Eloquent scopes": 1,
+    "Relationships": 6,
+    "Relationship aggregates": 3,
+    "Relationship queries": 3,
+    "Eager loading": 5,
+    "Polymorphic relationships": 4,
+    "Pivot relationships": 9,
+    "Query Builder": 12,
+    "Bulk processing": 4,
+    "Pagination": 2,
+    "Database concurrency": 3,
+    "Transactions": 4,
+    "Database connections": 2,
+    "Database observability": 1,
+    "Migrations": 4,
+    "Database indexes": 2,
+    "Factories": 4,
+    "Seeders": 1,
+    "Soft deletes and indexes": 1
+  },
+  "mapped": 0,
+  "unmapped": 100,
+  "keyPositions": {
+    "1": 29,
+    "2": 21,
+    "3": 20,
+    "4": 30
+  },
+  "wording": {
+    "uniqueLongest": 20,
+    "uniqueShortest": 25,
+    "outliers": []
+  },
+  "duplicateCandidates": 11,
+  "limitations": "Lexical signals support human review; they do not prove semantic uniqueness or distractor quality.",
+  "preservation": "PHP 620 and all protected application file hashes unchanged",
+  "independentApproval": "pending"
+}

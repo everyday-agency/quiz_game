@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0423",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Cache durability",
+  "subtopic": "cache-forever-not-durable-record",
+  "objective": {
+    "id": "laravel.cache-forever-not-durable-record",
+    "text": "Keep cache forever separate from durable storage and eviction guarantees."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate an absence of TTL from a guarantee that business data survives cache loss."
+  },
+  "prerequisites": [
+    "Cache eviction",
+    "Durable business records"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A team proposes storing the only copy of issued invoice numbers with Cache::forever. Losing those records is unacceptable. What is the relevant limitation?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The problem disappears if each value includes its original creation timestamp.",
+      "rationale": "Metadata inside a value cannot preserve that value when the cache loses it.",
+      "misconception": "Metadata inside a value cannot preserve that value when the cache loses it."
+    },
+    {
+      "id": "choice-2",
+      "text": "forever guarantees persistence across all cache flushes and driver replacement.",
+      "rationale": "A cache method cannot guarantee survival of explicit clearing or loss of its backing store.",
+      "misconception": "A cache method cannot guarantee survival of explicit clearing or loss of its backing store."
+    },
+    {
+      "id": "choice-3",
+      "text": "No TTL does not guarantee retention; keep authoritative records in durable storage.",
+      "rationale": "forever omits timed expiration, but cache eviction, flushes and store loss can still remove entries.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Reading a forever entry automatically renews it in the relational database.",
+      "rationale": "The cache does not create an authoritative database record on read.",
+      "misconception": "The cache does not create an authoritative database record on read."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "forever omits timed expiration, but cache eviction, flushes and store loss can still remove entries.",
+    "trace": [
+      "Metadata inside a value cannot preserve that value when the cache loses it.",
+      "A cache method cannot guarantee survival of explicit clearing or loss of its backing store.",
+      "forever omits timed expiration, but cache eviction, flushes and store loss can still remove entries.",
+      "The cache does not create an authoritative database record on read."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "missing",
+    "probe": "use Illuminate\\Support\\Facades\\Cache;\nCache::forever('invoice-number', 42);\nCache::flush();\necho Cache::get('invoice-number', 'missing');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#storing-items-forever"
+  ]
+}

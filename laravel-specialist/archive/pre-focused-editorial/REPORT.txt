@@ -1,0 +1,136 @@
+LARAVEL SPECIALIST — LOCAL REVIEW DELIVERY
+6 November 2026
+Branch: authoring/laravel-specialist-2026
+Status: all six batches internally validated; independent approval PENDING.
+Production activation: false. Nothing pushed, merged or deployed.
+
+600 new records are saved as LAR-S26-0001 through LAR-S26-0600.
+The 620 production PHP records, their IDs, answers, explanations, grading and
+progress implementation remain unchanged. The 600 outgoing legacy Laravel
+records are preserved in archive/legacy-laravel-600.json and are not activated.
+
+Batch   IDs          Runtime / contracts per PHP version
+1       0001–0100     88 / 12
+2       0101–0200     95 / 5
+3       0201–0300     97 / 3
+4       0301–0400     94 / 6
+5       0401–0500     93 / 7
+6       0501–0600     89 / 11
+Total   600           556 / 44
+
+Each batch was planned, authored, checked against earlier accepted objectives,
+validated, edited and saved before the next batch was accepted. Historical
+corrections retain stable IDs. There are 231 archived versions associated with
+221 current records that have revision increments.
+
+WHAT TO REVIEW
+
+- REVIEW_30.txt: 30 complete representative questions, five per batch, including
+  code, assumptions, all options, keys, explanations, prerequisites and evidence.
+- REVIEW_30.json: corresponding complete structured records.
+- batches/batch-01.json through batch-06.json: the complete bank.
+- EDITORIAL_AUDIT.txt: findings, corrections, duplicate review and limitations.
+- COVERAGE.txt: counts and all 600 topic/subtopic/objective/lesson mappings.
+- SCHEMA.txt and RUBRIC.txt: structure and editorial acceptance criteria.
+- evidence/final-audit.json and reviews/final.json: aggregate evidence and the
+  author’s cross-batch review, explicitly distinct from independent approval.
+- evidence/documented-contracts.json: all 44 non-runtime items with limitations.
+- evidence/batch-1-technical.json through batch-6-technical.json: per-question,
+  per-runtime results and source/harness/dependency hashes.
+
+VALIDATION AND REGRESSIONS
+
+The isolated development harness uses real Laravel 13.40.0, PHP 8.4.17 and
+8.5.2. Inertia server-adapter items use locked inertia-laravel 3.7.0. Laravel 13
+was the repository compatibility target; the harness uses the patched locked
+13.x release because Composer rejected the initial 13.0.0 pin for published
+advisories. Security checks were not disabled.
+
+556 runtime fixtures passed on each PHP version: 1,112 executions. The other
+44 questions have explicit source/documented-contract evidence, checked for
+both runtime reports; these 88 contract entries are NOT execution results.
+There are 124 complete PHP source files, 6 contextual fragments and 23 Blade
+files in displayed question content. Blade cases use the real compiler where
+runtime evidence applies. Runtime witnesses do not by themselves establish
+every operational claim; those limits are recorded.
+
+All six final batch checks passed against current sources and evidence.
+A regression also verifies that repeated batch acceptance fails before changing
+accepted snapshots, curriculum mappings or the checkpoint.
+The unchanged grading/explanation helpers passed every one of the 24 answer
+orders for all 600 questions: 14,400 permutations and 43,200 distractor mappings.
+Stable identities, independent lesson remapping, isolated progress, malformed
+or unavailable storage, artifact imports and protected-file hashes passed.
+
+node tests.mjs passed the existing legacy, PHP, pilot, formatting, runtime,
+highlighting, expansion, editorial, focused-correction and release regressions.
+The production build passed its exact 14-file artifact check with 620 PHP items.
+
+Actual Chrome 156.0.8078.81 workflows passed:
+- All 600 Laravel questions rendered and answered on desktop and 390px mobile.
+- Displayed sources matched the records exactly; all 1,800 distractor
+  explanations stayed mapped correctly after answer shuffling.
+- A 20-question Exam with mixed choices scored 10/20 only after submission.
+  Before submission, progress was neutral, with no correctness classes,
+  explanations, score, streak or premature persisted totals.
+- Multi-file display, exact clipboard copy, native touch horizontal scrolling,
+  no-code questions, missed-answer retry and standard topic/difficulty browsing.
+- Reload preserved Laravel review totals separately from seeded PHP, pilot,
+  historical Laravel and unrelated browser entries. No browser exceptions.
+- The unchanged PHP artifact separately passed its full 620-question desktop/
+  mobile workflow and 20-question Exam regression.
+
+Logs: evidence/production-regressions.log, production-artifact.log,
+browser-review.log and browser-php-regression.log.
+Detailed results and screenshots: evidence/browser-review/ and
+evidence/browser-php-regression/. Three visual examples inspected explicitly:
+LAR-S26-0027-desktop.png, LAR-S26-0158-mobile.png and review-exam-neutral.png.
+
+LOCAL APPLICATION INTEGRATION
+
+node tools/build-laravel-review.mjs creates _laravel-review/ from the existing
+application. It copies styles, viewer, syntax highlighting, grading and learning
+helpers unchanged. Generated adaptations provide Laravel labels, the separate
+600-record bank and the progress key:
+underTheHoodLaravelSpecialistReviewV1Stats
+
+No new review filters or separately maintained interface were introduced.
+The 14-file artifact contains no Composer vendor files, PHP runtime, probes,
+archives or reports. It is a static browser application compatible with a
+GitHub Pages subpath. The public PHP build and deployment workflow are unchanged.
+
+To preview locally from the repository root:
+  node tools/build-laravel-review.mjs
+  python3 -m http.server 8766 --bind 127.0.0.1 --directory _laravel-review
+
+Open http://127.0.0.1:8766/ . This serves static files locally; it is not an
+application backend and does not connect to production.
+
+REMAINING LIMITS / RELEASE BLOCKERS
+
+Independent technical/editorial approval remains pending for all 600 questions.
+Internal review and passing tests do not confer that approval.
+
+Distributed concurrency, cloud storage, browser security policies, Nginx,
+Octane and other explicitly documented contracts were not exercised against
+real services. Runtime fixtures use disposable local data, deterministic
+interleavings or fakes where appropriate. External delivery, production
+performance and real multi-node behavior must not be inferred from them.
+
+Difficulty is editorial, not calibrated from candidate performance. The bank
+has 239 Foundation, 354 Intermediate and 7 Advanced questions; it is weighted
+toward ordinary professional development rather than an advanced-only exam.
+Distractor effectiveness and remaining wording bias need independent review
+and later learner statistics.
+
+138 questions have working mappings to completed Lessons 1–8; 462 are null.
+Lesson 9 and later numbers were not invented. The supplied outline has topic
+titles rather than full lesson contents, so confirm prerequisite coverage
+before using mappings to restrict an exam. Mapping changes do not change IDs.
+
+NEXT STEP
+
+Review REVIEW_30.txt and the documented-contract list, then independently review
+the full bank. Apply any confirmed corrections with archived revisions and
+fresh affected evidence. Keep the collection isolated until a separate release
+decision is made. This delivery does not authorize or perform activation.

@@ -1,0 +1,502 @@
+[
+  {
+    "id": "LAR-S26-0201",
+    "topic": "Eloquent models",
+    "objective": "Override inferred table naming when a model maps to an existing nonconventional table."
+  },
+  {
+    "id": "LAR-S26-0202",
+    "topic": "Eloquent models",
+    "objective": "Match timestamp configuration to a legacy schema without nonexistent timestamp writes."
+  },
+  {
+    "id": "LAR-S26-0203",
+    "topic": "Eloquent models",
+    "objective": "Configure a nonincrementing string primary key without coercing it to an integer."
+  },
+  {
+    "id": "LAR-S26-0204",
+    "topic": "Eloquent models",
+    "objective": "Detect silently discarded mass-assignment attributes during development."
+  },
+  {
+    "id": "LAR-S26-0205",
+    "topic": "Eloquent models",
+    "objective": "Distinguish guarded mass assignment from explicit attribute assignment."
+  },
+  {
+    "id": "LAR-S26-0206",
+    "topic": "Eloquent models",
+    "objective": "Restore mass-assignment protection after a scoped unguarded operation."
+  },
+  {
+    "id": "LAR-S26-0207",
+    "topic": "Eloquent models",
+    "objective": "Preserve model identity when selecting partial columns for later updates."
+  },
+  {
+    "id": "LAR-S26-0208",
+    "topic": "Eloquent models",
+    "objective": "Distinguish a model-returning fill call from the boolean result of update."
+  },
+  {
+    "id": "LAR-S26-0209",
+    "topic": "Eloquent models",
+    "objective": "Account for skipped per-model events when using a mass update query."
+  },
+  {
+    "id": "LAR-S26-0210",
+    "topic": "Eloquent state",
+    "objective": "Trace dirty and changed state before and after a successful save."
+  },
+  {
+    "id": "LAR-S26-0211",
+    "topic": "Eloquent state",
+    "objective": "Compare raw original data with accessor-transformed attribute values."
+  },
+  {
+    "id": "LAR-S26-0212",
+    "topic": "Eloquent state",
+    "objective": "Use fresh without assuming the original in-memory model is mutated."
+  },
+  {
+    "id": "LAR-S26-0213",
+    "topic": "Eloquent state",
+    "objective": "Use refresh to reload a stale model and its already loaded relationships."
+  },
+  {
+    "id": "LAR-S26-0214",
+    "topic": "Eloquent state",
+    "objective": "Prevent a replicated unsaved model from reusing a business-unique attribute."
+  },
+  {
+    "id": "LAR-S26-0215",
+    "topic": "Eloquent casts",
+    "objective": "Predict an immutable datetime cast without assuming the model changes when a new date is returned."
+  },
+  {
+    "id": "LAR-S26-0216",
+    "topic": "Eloquent casts",
+    "objective": "Apply a JSON array change through reassignment rather than modifying an overloaded offset."
+  },
+  {
+    "id": "LAR-S26-0217",
+    "topic": "Eloquent casts",
+    "objective": "Use an object-backed array cast when in-place mutation must be tracked."
+  },
+  {
+    "id": "LAR-S26-0218",
+    "topic": "Eloquent casts",
+    "objective": "Handle invalid stored values when hydrating a backed-enum cast."
+  },
+  {
+    "id": "LAR-S26-0219",
+    "topic": "Eloquent casts",
+    "objective": "Avoid double hashing a value through the built-in hashed cast."
+  },
+  {
+    "id": "LAR-S26-0220",
+    "topic": "Eloquent casts",
+    "objective": "Keep plaintext query assumptions separate from encrypted attribute storage."
+  },
+  {
+    "id": "LAR-S26-0221",
+    "topic": "Eloquent casts",
+    "objective": "Preserve null values rather than assuming every cast converts them to zero or false."
+  },
+  {
+    "id": "LAR-S26-0222",
+    "topic": "Eloquent accessors",
+    "objective": "Persist changes to a cached accessor value object through its setter mapping."
+  },
+  {
+    "id": "LAR-S26-0223",
+    "topic": "Eloquent accessors",
+    "objective": "Normalize a stored attribute through a set mutator before persistence."
+  },
+  {
+    "id": "LAR-S26-0224",
+    "topic": "Eloquent serialization",
+    "objective": "Append a computed accessor to output without treating it as a database column."
+  },
+  {
+    "id": "LAR-S26-0225",
+    "topic": "Eloquent serialization",
+    "objective": "Resolve visibility and hidden rules when the same attribute appears in both lists."
+  },
+  {
+    "id": "LAR-S26-0226",
+    "topic": "Eloquent serialization",
+    "objective": "Include only already loaded relationships during ordinary model array serialization."
+  },
+  {
+    "id": "LAR-S26-0227",
+    "topic": "Eloquent casts",
+    "objective": "Preserve a decimal cast's string representation instead of assuming it is a float."
+  },
+  {
+    "id": "LAR-S26-0228",
+    "topic": "Eloquent state",
+    "objective": "Touch a configured parent timestamp when saving a child model."
+  },
+  {
+    "id": "LAR-S26-0229",
+    "topic": "Eloquent concurrency",
+    "objective": "Detect a stale update with a version predicate and affected-row count."
+  },
+  {
+    "id": "LAR-S26-0230",
+    "topic": "Eloquent scopes",
+    "objective": "Remove one global scope without disabling unrelated tenant restrictions."
+  },
+  {
+    "id": "LAR-S26-0231",
+    "topic": "Relationships",
+    "objective": "Choose the relationship direction from the location of the foreign key."
+  },
+  {
+    "id": "LAR-S26-0232",
+    "topic": "Relationships",
+    "objective": "Match a belongsTo relationship to a nonstandard owner key."
+  },
+  {
+    "id": "LAR-S26-0233",
+    "topic": "Relationships",
+    "objective": "Distinguish latestOfMany's default primary-key ordering from a business timestamp."
+  },
+  {
+    "id": "LAR-S26-0234",
+    "topic": "Relationships",
+    "objective": "Recognize an unsaved default related model returned by withDefault."
+  },
+  {
+    "id": "LAR-S26-0235",
+    "topic": "Relationship aggregates",
+    "objective": "Retrieve child counts without hydrating every child collection."
+  },
+  {
+    "id": "LAR-S26-0236",
+    "topic": "Relationship aggregates",
+    "objective": "Project relationship existence without treating it as a loaded relation."
+  },
+  {
+    "id": "LAR-S26-0237",
+    "topic": "Relationship aggregates",
+    "objective": "Identify the attribute name and value produced by withSum."
+  },
+  {
+    "id": "LAR-S26-0238",
+    "topic": "Relationship queries",
+    "objective": "Filter parents by a minimum count of matching related rows."
+  },
+  {
+    "id": "LAR-S26-0239",
+    "topic": "Relationship queries",
+    "objective": "Keep eager-loaded children consistent with the filter used to select parents."
+  },
+  {
+    "id": "LAR-S26-0240",
+    "topic": "Eager loading",
+    "objective": "Retain the foreign key required to match selected children to their parents."
+  },
+  {
+    "id": "LAR-S26-0241",
+    "topic": "Eager loading",
+    "objective": "Distinguish an already loaded relationship snapshot from a fresh relationship count after an insert."
+  },
+  {
+    "id": "LAR-S26-0242",
+    "topic": "Eager loading",
+    "objective": "Apply a per-parent eager-loading limit on a supported database rather than treating it as a global child cap."
+  },
+  {
+    "id": "LAR-S26-0243",
+    "topic": "Eager loading",
+    "objective": "Detect accidental lazy loading with a regression setup that actually exercises hydrated models."
+  },
+  {
+    "id": "LAR-S26-0244",
+    "topic": "Eager loading",
+    "objective": "Hydrate the inverse parent with chaperone to avoid child-to-parent N+1 queries."
+  },
+  {
+    "id": "LAR-S26-0245",
+    "topic": "Polymorphic relationships",
+    "objective": "Use stable morph aliases instead of coupling persisted types to PHP class names."
+  },
+  {
+    "id": "LAR-S26-0246",
+    "topic": "Polymorphic relationships",
+    "objective": "Account for separate eager-loading queries for distinct morphTo target types."
+  },
+  {
+    "id": "LAR-S26-0247",
+    "topic": "Polymorphic relationships",
+    "objective": "Restrict a polymorphic relationship filter to explicitly supported target types."
+  },
+  {
+    "id": "LAR-S26-0248",
+    "topic": "Polymorphic relationships",
+    "objective": "Match both type and identifier when polymorphic targets share the same numeric ID."
+  },
+  {
+    "id": "LAR-S26-0249",
+    "topic": "Pivot relationships",
+    "objective": "Distinguish attach from sync when existing associations must be replaced."
+  },
+  {
+    "id": "LAR-S26-0250",
+    "topic": "Pivot relationships",
+    "objective": "Update requested pivot metadata and add missing links without detaching unrelated existing associations."
+  },
+  {
+    "id": "LAR-S26-0251",
+    "topic": "Pivot relationships",
+    "objective": "Update a pivot attribute without updating the related model's attributes."
+  },
+  {
+    "id": "LAR-S26-0252",
+    "topic": "Pivot relationships",
+    "objective": "Expose an extra pivot column through withPivot."
+  },
+  {
+    "id": "LAR-S26-0253",
+    "topic": "Pivot relationships",
+    "objective": "Order related records by a pivot attribute rather than a related-table column."
+  },
+  {
+    "id": "LAR-S26-0254",
+    "topic": "Pivot relationships",
+    "objective": "Use a pivot value that applies to both retrieval and new association defaults."
+  },
+  {
+    "id": "LAR-S26-0255",
+    "topic": "Pivot relationships",
+    "objective": "Remove an association without deleting the related record."
+  },
+  {
+    "id": "LAR-S26-0256",
+    "topic": "Pivot relationships",
+    "objective": "Predict attached and detached IDs returned by toggle."
+  },
+  {
+    "id": "LAR-S26-0257",
+    "topic": "Pivot relationships",
+    "objective": "Supply both timestamp columns when enabling automatic pivot timestamps."
+  },
+  {
+    "id": "LAR-S26-0258",
+    "topic": "Relationships",
+    "objective": "Persist an associate operation instead of assuming it immediately writes the foreign key."
+  },
+  {
+    "id": "LAR-S26-0259",
+    "topic": "Relationships",
+    "objective": "Follow a hasManyThrough path using the correct intermediate and final keys."
+  },
+  {
+    "id": "LAR-S26-0260",
+    "topic": "Relationship queries",
+    "objective": "Group an orWhere branch so it cannot escape the relationship's foreign-key constraint."
+  },
+  {
+    "id": "LAR-S26-0261",
+    "topic": "Query Builder",
+    "objective": "Extend a projection with addSelect instead of replacing the existing selected columns."
+  },
+  {
+    "id": "LAR-S26-0262",
+    "topic": "Query Builder",
+    "objective": "Distinguish a single-row result from a collection returned by get."
+  },
+  {
+    "id": "LAR-S26-0263",
+    "topic": "Query Builder",
+    "objective": "Retrieve a keyed value list with pluck instead of a single scalar with value."
+  },
+  {
+    "id": "LAR-S26-0264",
+    "topic": "Query Builder",
+    "objective": "Apply database filtering before materializing a result collection."
+  },
+  {
+    "id": "LAR-S26-0265",
+    "topic": "Query Builder",
+    "objective": "Treat an empty whereIn list as matching no records."
+  },
+  {
+    "id": "LAR-S26-0266",
+    "topic": "Query Builder",
+    "objective": "Query a null column value rather than comparing to the literal text NULL."
+  },
+  {
+    "id": "LAR-S26-0267",
+    "topic": "Query Builder",
+    "objective": "Test membership in a JSON array without relying on substring matches."
+  },
+  {
+    "id": "LAR-S26-0268",
+    "topic": "Query Builder",
+    "objective": "Compare two columns with whereColumn instead of treating the second name as a string value."
+  },
+  {
+    "id": "LAR-S26-0269",
+    "topic": "Query Builder",
+    "objective": "Keep values in raw query fragments parameter-bound."
+  },
+  {
+    "id": "LAR-S26-0270",
+    "topic": "Query Builder",
+    "objective": "Allowlist dynamic sort identifiers rather than assuming value bindings select column names."
+  },
+  {
+    "id": "LAR-S26-0271",
+    "topic": "Bulk processing",
+    "objective": "Avoid skipped rows when chunked processing changes the query's filtering field."
+  },
+  {
+    "id": "LAR-S26-0272",
+    "topic": "Bulk processing",
+    "objective": "Bound memory with lazy iteration instead of materializing all rows first."
+  },
+  {
+    "id": "LAR-S26-0273",
+    "topic": "Bulk processing",
+    "objective": "Combine bounded batches with eager loading instead of assuming cursor eager-loads relations."
+  },
+  {
+    "id": "LAR-S26-0274",
+    "topic": "Bulk processing",
+    "objective": "Expose the identifier alias needed by chunkById when using a custom projection."
+  },
+  {
+    "id": "LAR-S26-0275",
+    "topic": "Pagination",
+    "objective": "Use a deterministic unique ordering for cursor pagination with tied business timestamps."
+  },
+  {
+    "id": "LAR-S26-0276",
+    "topic": "Pagination",
+    "objective": "Choose simple pagination when next/previous navigation is sufficient and a total count is unnecessary."
+  },
+  {
+    "id": "LAR-S26-0277",
+    "topic": "Query Builder",
+    "objective": "Align an upsert conflict target with an actual unique index on the specified database."
+  },
+  {
+    "id": "LAR-S26-0278",
+    "topic": "Query Builder",
+    "objective": "Retrieve an inserted identifier without assuming Query Builder applies Eloquent model events or timestamps."
+  },
+  {
+    "id": "LAR-S26-0279",
+    "topic": "Database concurrency",
+    "objective": "Increment a counter atomically instead of writing a stale read-modify-write value."
+  },
+  {
+    "id": "LAR-S26-0280",
+    "topic": "Database concurrency",
+    "objective": "Keep a row lock inside the transaction that protects the corresponding write."
+  },
+  {
+    "id": "LAR-S26-0281",
+    "topic": "Transactions",
+    "objective": "Distinguish returning false from throwing an exception in a transaction closure."
+  },
+  {
+    "id": "LAR-S26-0282",
+    "topic": "Transactions",
+    "objective": "Recover from an inner savepoint rollback while retaining valid outer transaction work."
+  },
+  {
+    "id": "LAR-S26-0283",
+    "topic": "Transactions",
+    "objective": "Discard after-commit callbacks belonging to a rolled-back nested transaction."
+  },
+  {
+    "id": "LAR-S26-0284",
+    "topic": "Transactions",
+    "objective": "Account for repeated closure execution when a transaction retries a concurrency failure."
+  },
+  {
+    "id": "LAR-S26-0285",
+    "topic": "Database connections",
+    "objective": "Use sticky read routing after a write without claiming replication is synchronous."
+  },
+  {
+    "id": "LAR-S26-0286",
+    "topic": "Database observability",
+    "objective": "Inspect query timing and placeholders without indiscriminately logging sensitive bindings."
+  },
+  {
+    "id": "LAR-S26-0287",
+    "topic": "Migrations",
+    "objective": "Apply nullable to a foreign-key column before constructing its foreign-key definition."
+  },
+  {
+    "id": "LAR-S26-0288",
+    "topic": "Migrations",
+    "objective": "Preserve dependent historical records with a nullable foreign key and null-on-delete policy."
+  },
+  {
+    "id": "LAR-S26-0289",
+    "topic": "Database indexes",
+    "objective": "Order a compound index to support the specified equality filter and ordered scan."
+  },
+  {
+    "id": "LAR-S26-0290",
+    "topic": "Database indexes",
+    "objective": "Account for the specified database's treatment of multiple nulls under a unique index."
+  },
+  {
+    "id": "LAR-S26-0291",
+    "topic": "Migrations",
+    "objective": "Preserve intended modifiers explicitly when changing a column definition."
+  },
+  {
+    "id": "LAR-S26-0292",
+    "topic": "Migrations",
+    "objective": "Reverse an added unique index without dropping the column and its data."
+  },
+  {
+    "id": "LAR-S26-0293",
+    "topic": "Database connections",
+    "objective": "Keep model queries on the explicitly selected connection instead of assuming the default connection changes."
+  },
+  {
+    "id": "LAR-S26-0294",
+    "topic": "Factories",
+    "objective": "Distinguish unsaved factory construction from persisted factory creation."
+  },
+  {
+    "id": "LAR-S26-0295",
+    "topic": "Factories",
+    "objective": "Use for to assign a parent and has to create related children in the intended direction."
+  },
+  {
+    "id": "LAR-S26-0296",
+    "topic": "Factories",
+    "objective": "Trace a repeating sequence across several generated model states."
+  },
+  {
+    "id": "LAR-S26-0297",
+    "topic": "Factories",
+    "objective": "Separate afterMaking from afterCreating when a callback needs a persisted identifier."
+  },
+  {
+    "id": "LAR-S26-0298",
+    "topic": "Seeders",
+    "objective": "Suppress model events during a seeder without disabling them for later application work."
+  },
+  {
+    "id": "LAR-S26-0299",
+    "topic": "Soft deletes and indexes",
+    "objective": "Enforce uniqueness among active rows with a partial unique index on a database that supports it."
+  },
+  {
+    "id": "LAR-S26-0300",
+    "topic": "Database concurrency",
+    "objective": "Acquire multiple row locks in a consistent order to avoid the stated deadlock cycle."
+  }
+]

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0254",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Pivot relationships",
+  "subtopic": "pivot-filter-and-attach-default",
+  "objective": {
+    "id": "laravel.pivot-filter-and-attach-default",
+    "text": "Use a pivot value that applies to both retrieval and new association defaults."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep a relation’s read constraint consistent with new links created through it."
+  },
+  "prerequisites": [
+    "Eloquent pivot constraints",
+    "Association creation defaults"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "activeRoles() filters person_role.active=true using wherePivot. A new attach through that relation leaves active at the database default false, so the link disappears from the next read. Which replacement applies the value to both reads and new links?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Replace wherePivot(\"active\", true) with withPivotValue(\"active\", true).",
+      "rationale": "withPivotValue adds the pivot constraint and supplies that value for new pivot records.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Replace wherePivot with withPivot(\"active\").",
+      "rationale": "withPivot selects the column but neither filters it nor establishes the attach default.",
+      "misconception": "withPivot selects the column but neither filters it nor establishes the attach default."
+    },
+    {
+      "id": "choice-3",
+      "text": "Keep wherePivot and add active to Role::$fillable.",
+      "rationale": "The pivot attach values do not come from the related model’s mass-assignment allowlist.",
+      "misconception": "The pivot attach values do not come from the related model’s mass-assignment allowlist."
+    },
+    {
+      "id": "choice-4",
+      "text": "Replace wherePivot with orderByPivot(\"active\").",
+      "rationale": "Ordering does not filter inactive links or set their stored value.",
+      "misconception": "Ordering does not filter inactive links or set their stored value."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "withPivotValue adds the pivot constraint and supplies that value for new pivot records.",
+    "trace": [
+      "withPivotValue adds the pivot constraint and supplies that value for new pivot records.",
+      "withPivot selects the column but neither filters it nor establishes the attach default.",
+      "The pivot attach values do not come from the related model’s mass-assignment allowlist.",
+      "Ordering does not filter inactive links or set their stored value."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:1",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('people', function ($t) {\n    $t->id();\n    $t->string('name');\n});\nSchema::create('roles', function ($t) {\n    $t->id();\n    $t->string('name');\n});\nSchema::create('person_role', function ($t) {\n    $t->unsignedBigInteger('person_id');\n    $t->unsignedBigInteger('role_id');\n    $t->boolean('active')->default(false);\n    $t->integer('rank')->default(0);\n    $t->timestamps();\n    $t->unique(['person_id', 'role_id']);\n});\nclass Person extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n\n    public function roles()\n    {\n        return $this->belongsToMany(Role::class, 'person_role', 'person_id', 'role_id');\n    }\n}\nclass Role extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$person = Person::create(['name' => 'Ada']);\nforeach (['Reader', 'Writer', 'Admin'] as $name) {\n    Role::create(['name' => $name]);\n}\n$person->roles()->attach([1, 2]);\n$relation = $person->roles()->withPivotValue('active', true);\n$relation->attach(3);\necho (int) DB::table('person_role')->where('role_id', 3)->value('active').':'.$person->roles()->withPivotValue('active', true)->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#filtering-queries-via-intermediate-table-columns"
+  ]
+}

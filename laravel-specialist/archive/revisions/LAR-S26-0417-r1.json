@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0417",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Cache retrieval",
+  "subtopic": "cache-null-miss-sentinel",
+  "objective": {
+    "id": "laravel.cache-null-miss-sentinel",
+    "text": "Account for null-valued cache entries being treated as misses by remember."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Explain repeated work when null is used as a negative result."
+  },
+  "prerequisites": [
+    "Cache null semantics",
+    "Negative caching"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A lookup returns null for a missing product. Two consecutive remember calls for that key both query the database. The TTL has not elapsed. What explains it?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Every remember call intentionally refreshes the TTL by rerunning its callback.",
+      "rationale": "A normal non-null hit does not execute the callback.",
+      "misconception": "A normal non-null hit does not execute the callback."
+    },
+    {
+      "id": "choice-2",
+      "text": "remember treats a null result as a miss; cache a non-null negative-result representation if needed.",
+      "rationale": "The helper only returns a cached value early when it is not null, so a stored null does not suppress the next callback.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "remember caches only strings, so every non-string result is ignored.",
+      "rationale": "The cache can store other value types; null has special miss semantics here.",
+      "misconception": "The cache can store other value types; null has special miss semantics here."
+    },
+    {
+      "id": "choice-4",
+      "text": "A null database result automatically deletes every cache key with the same prefix.",
+      "rationale": "There is no such broad invalidation triggered by a callback returning null.",
+      "misconception": "There is no such broad invalidation triggered by a callback returning null."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The helper only returns a cached value early when it is not null, so a stored null does not suppress the next callback.",
+    "trace": [
+      "A normal non-null hit does not execute the callback.",
+      "The helper only returns a cached value early when it is not null, so a stored null does not suppress the next callback.",
+      "The cache can store other value types; null has special miss semantics here.",
+      "There is no such broad invalidation triggered by a callback returning null."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2",
+    "probe": "$calls = 0;\n$lookup = function () use (&$calls) {\n    $calls++;\n    return null;\n};\nIlluminate\\Support\\Facades\\Cache::remember('missing', 60, $lookup);\nIlluminate\\Support\\Facades\\Cache::remember('missing', 60, $lookup);\necho $calls;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#determining-item-existence",
+    "https://laravel.com/docs/13.x/cache#retrieve-and-store"
+  ]
+}

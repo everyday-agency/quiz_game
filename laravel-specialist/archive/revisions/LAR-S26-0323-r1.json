@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0323",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Queue uniqueness",
+  "subtopic": "unique-dispatch-lock-lifecycle",
+  "objective": {
+    "id": "laravel.unique-dispatch-lock-lifecycle",
+    "text": "Use ShouldBeUnique to reject duplicate dispatches while its uniqueness lock is held."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Follow duplicate dispatch rejection while a key is locked and renewed eligibility after completion."
+  },
+  "prerequisites": [
+    "ShouldBeUnique",
+    "Dispatchable",
+    "Cache locks"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "RebuildIndex implements ShouldQueue and ShouldBeUnique with uniqueId()=\"catalog\". Both dispatches use RebuildIndex::dispatch(), the same cache store and no lock expiry. No worker runs between them. How many payloads are enqueued?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "2, but the second is automatically deleted only after a worker starts it.",
+      "rationale": "ShouldBeUnique checks the dispatch boundary rather than merely filtering execution after both payloads are queued.",
+      "misconception": "ShouldBeUnique checks the dispatch boundary rather than merely filtering execution after both payloads are queued."
+    },
+    {
+      "id": "choice-2",
+      "text": "1",
+      "rationale": "The first pending dispatch acquires the unique lock; the second cannot acquire the same lock and is not enqueued.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "0 until the first unique lock is explicitly released by application code.",
+      "rationale": "The first dispatch acquires the available lock and queues normally.",
+      "misconception": "The first dispatch acquires the available lock and queues normally."
+    },
+    {
+      "id": "choice-4",
+      "text": "2 because uniqueness applies only to different job classes",
+      "rationale": "The class and unique ID identify the lock; these matching jobs conflict.",
+      "misconception": "The class and unique ID identify the lock; these matching jobs conflict."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The first pending dispatch acquires the unique lock; the second cannot acquire the same lock and is not enqueued.",
+    "trace": [
+      "ShouldBeUnique checks the dispatch boundary rather than merely filtering execution after both payloads are queued.",
+      "The first pending dispatch acquires the unique lock; the second cannot acquire the same lock and is not enqueued.",
+      "The first dispatch acquires the available lock and queues normally.",
+      "The class and unique ID identify the lock; these matching jobs conflict."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:1",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass RebuildIndex implements Illuminate\\Contracts\\Queue\\ShouldQueue, Illuminate\\Contracts\\Queue\\ShouldBeUnique\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function uniqueId(): string\n    {\n        return 'catalog';\n    }\n\n    public function handle(): void\n    {\n    }\n}\nRebuildIndex::dispatch();\nRebuildIndex::dispatch();\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count().':';\napp('queue')->connection()->pop()->fire();\nRebuildIndex::dispatch();\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#unique-jobs"
+  ]
+}

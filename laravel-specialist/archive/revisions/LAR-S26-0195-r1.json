@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0195",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Authentication",
+  "subtopic": "explicit-authentication-guard",
+  "objective": {
+    "id": "laravel.explicit-authentication-guard",
+    "text": "Use the intended guard explicitly when multiple authentication contexts exist."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Read the identity associated with the intended guard rather than the default one."
+  },
+  "prerequisites": [
+    "Multiple guards",
+    "Authenticated identities"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The default web guard contains customer 7; the admin guard contains administrator 99. An admin-only service must read the administrator identity without changing the default guard globally. Which call is appropriate?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Auth::user(\"admin\")->id",
+      "rationale": "The user accessor is not the documented guard selector; passing a guard name there does not replace guard(\"admin\").",
+      "misconception": "The user accessor is not the documented guard selector; passing a guard name there does not replace guard(\"admin\")."
+    },
+    {
+      "id": "choice-2",
+      "text": "request()->input(\"admin_id\")",
+      "rationale": "A submitted ID is not the authenticated identity maintained by the admin guard.",
+      "misconception": "A submitted ID is not the authenticated identity maintained by the admin guard."
+    },
+    {
+      "id": "choice-3",
+      "text": "Auth::guard(\"admin\")->id()",
+      "rationale": "Selecting the guard explicitly reads its identity while leaving the configured default guard unchanged.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Auth::id()",
+      "rationale": "This reads the default web guard and therefore returns customer 7.",
+      "misconception": "This reads the default web guard and therefore returns customer 7."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Selecting the guard explicitly reads its identity while leaving the configured default guard unchanged.",
+    "trace": [
+      "The user accessor is not the documented guard selector; passing a guard name there does not replace guard(\"admin\").",
+      "A submitted ID is not the authenticated identity maintained by the admin guard.",
+      "Selecting the guard explicitly reads its identity while leaving the configured default guard unchanged.",
+      "This reads the default web guard and therefore returns customer 7."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "99:7",
+    "probe": "config(['auth.guards.admin' => ['driver' => 'session', 'provider' => 'users']]);\nIlluminate\\Support\\Facades\\Auth::guard('web')->setUser(new Illuminate\\Auth\\GenericUser(['id' => 7]));\nIlluminate\\Support\\Facades\\Auth::guard('admin')->setUser(new Illuminate\\Auth\\GenericUser(['id' => 99]));\necho Illuminate\\Support\\Facades\\Auth::guard('admin')->id().':'.Illuminate\\Support\\Facades\\Auth::id();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authentication#accessing-specific-guard-instances"
+  ]
+}

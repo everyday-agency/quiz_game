@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0243",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Eager loading",
+  "subtopic": "lazy-loading-detection-hydrated-set",
+  "objective": {
+    "id": "laravel.lazy-loading-detection-hydrated-set",
+    "text": "Detect accidental lazy loading with a regression setup that actually exercises hydrated models."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Exercise the actual guarded hydration path and trigger a relationship read."
+  },
+  "prerequisites": [
+    "Eloquent lazy-loading prevention",
+    "Regression fixture design"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A test wants to catch an N+1 caused by reading articles without eager loading. In Laravel 13.40, which setup reliably exercises the normal prevention flag on a retrieved collection?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Enable preventLazyLoading and read articles after with(\"articles\")->get().",
+      "rationale": "The relation is already loaded, so this does not exercise the lazy-load failure case.",
+      "misconception": "The relation is already loaded, so this does not exercise the lazy-load failure case."
+    },
+    {
+      "id": "choice-2",
+      "text": "Enable preventLazyLoading, retrieve at least two writers without articles, then access one writer’s articles.",
+      "rationale": "The multi-model hydration path propagates the prevention flag; accessing an unloaded relation then exposes the violation.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Enable preventLazyLoading and instantiate new Writer() without any relationship access.",
+      "rationale": "No retrieved collection or lazy relationship read occurs, so the test cannot expose the N+1.",
+      "misconception": "No retrieved collection or lazy relationship read occurs, so the test cannot expose the N+1."
+    },
+    {
+      "id": "choice-4",
+      "text": "Enable preventLazyLoading and only call Writer::count().",
+      "rationale": "An aggregate count does not hydrate a model or attempt a lazy relationship access.",
+      "misconception": "An aggregate count does not hydrate a model or attempt a lazy relationship access."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The multi-model hydration path propagates the prevention flag; accessing an unloaded relation then exposes the violation.",
+    "trace": [
+      "The relation is already loaded, so this does not exercise the lazy-load failure case.",
+      "The multi-model hydration path propagates the prevention flag; accessing an unloaded relation then exposes the violation.",
+      "No retrieved collection or lazy relationship read occurs, so the test cannot expose the N+1.",
+      "An aggregate count does not hydrate a model or attempt a lazy relationship access."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "detected",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('writers', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('code')->nullable();\n    $t->timestamps();\n});\nSchema::create('articles', function ($t) {\n    $t->id();\n    $t->unsignedBigInteger('writer_id')->nullable();\n    $t->string('writer_code')->nullable();\n    $t->string('title');\n    $t->boolean('published')->default(false);\n    $t->integer('amount')->default(0);\n    $t->timestamps();\n});\nclass Writer extends Model\n{\n    protected $table = 'writers';\n    protected $guarded = [];\n\n    public function articles()\n    {\n        return $this->hasMany(Article::class, 'writer_id');\n    }\n}\nclass Article extends Model\n{\n    protected $table = 'articles';\n    protected $guarded = [];\n\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id');\n    }\n}\n$writer = Writer::create(['name' => 'Ada', 'code' => 'W-A']);\n$other = Writer::create(['name' => 'Lin', 'code' => 'W-B']);\n$writer->articles()->createMany([\n    ['title' => 'Draft', 'published' => false, 'amount' => 4],\n    ['title' => 'Public', 'published' => true, 'amount' => 6],\n]);\n$other->articles()->create(['title' => 'Other', 'published' => true, 'amount' => 9]);\nModel::preventLazyLoading();\n$writers = Writer::orderBy('id')->get();\ntry {\n    $writers[0]->articles;\n} catch (Illuminate\\Database\\LazyLoadingViolationException $e) {\n    echo 'detected';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#preventing-lazy-loading"
+  ]
+}

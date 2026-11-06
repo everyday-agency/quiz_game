@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0536",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Webhook authenticity",
+  "subtopic": "webhook-hmac-exact-raw-body",
+  "objective": {
+    "id": "laravel.webhook-hmac-exact-raw-body",
+    "text": "Compute a webhook signature over the exact raw body rather than a re-encoded parsed JSON object."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Preserve the exact bytes authenticated by the provider’s signature scheme."
+  },
+  "prerequisites": [
+    "Webhook HMAC",
+    "Request raw content",
+    "JSON encoding differences"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The provider specifies HMAC-SHA256 over the exact HTTP body bytes with a shared secret. Its signature is compared using hash_equals."
+    ],
+    "files": []
+  },
+  "stem": "A valid webhook fails signature verification after the application decodes JSON and re-encodes it before calculating the HMAC. What should the calculation use?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Only the first business field because all fields came from one JSON document.",
+      "rationale": "That changes the authenticated message and leaves other fields outside the specified signature.",
+      "misconception": "That changes the authenticated message and leaves other fields outside the specified signature."
+    },
+    {
+      "id": "choice-2",
+      "text": "$request->getContent(), preserving the raw signed body bytes.",
+      "rationale": "Whitespace, key ordering or escape representation can change during JSON re-encoding even when the data means the same thing. The HMAC contract authenticates bytes.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "json_encode($request->all()) with the application’s default options.",
+      "rationale": "Parsing and re-encoding may change the provider’s exact signed representation.",
+      "misconception": "Parsing and re-encoding may change the provider’s exact signed representation."
+    },
+    {
+      "id": "choice-4",
+      "text": "A sorted JSON object to normalize both sides without changing the provider.",
+      "rationale": "Canonicalization works only when both sides share that signing contract; it is not the stated raw-byte scheme.",
+      "misconception": "Canonicalization works only when both sides share that signing contract; it is not the stated raw-byte scheme."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Whitespace, key ordering or escape representation can change during JSON re-encoding even when the data means the same thing. The HMAC contract authenticates bytes.",
+    "trace": [
+      "That changes the authenticated message and leaves other fields outside the specified signature.",
+      "Whitespace, key ordering or escape representation can change during JSON re-encoding even when the data means the same thing. The HMAC contract authenticates bytes.",
+      "Parsing and re-encoding may change the provider’s exact signed representation.",
+      "Canonicalization works only when both sides share that signing contract; it is not the stated raw-byte scheme."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "raw-valid:reencoded-invalid",
+    "probe": "$body = '{ \"amount\": 5, \"id\": \"evt-1\" }';\n$signature = hash_hmac('sha256', $body, 'fixture-secret');\n$request = Illuminate\\Http\\Request::create('/webhook', 'POST', server: ['CONTENT_TYPE' => 'application/json'], content: $body);\n$raw = hash_hmac('sha256', $request->getContent(), 'fixture-secret');\n$normalized = hash_hmac('sha256', json_encode($request->all()), 'fixture-secret');\necho (hash_equals($signature, $raw) ? 'raw-valid' : 'raw-invalid').':';\necho hash_equals($signature, $normalized) ? 'reencoded-valid' : 'reencoded-invalid';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/requests#retrieving-the-request-path",
+    "https://www.php.net/manual/en/function.hash-hmac.php"
+  ]
+}

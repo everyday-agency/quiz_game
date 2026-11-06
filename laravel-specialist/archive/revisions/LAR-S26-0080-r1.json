@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0080",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Proxies and hosts",
+  "subtopic": "trusted-proxy-client-ip",
+  "objective": {
+    "id": "laravel.trusted-proxy-client-ip",
+    "text": "Derive the client address only from explicitly trusted proxy information."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Use a forwarded address only after establishing the direct peer is trusted."
+  },
+  "prerequisites": [
+    "Reverse proxies",
+    "Forwarded headers",
+    "Trust boundaries"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A load balancer at 10.0.0.8 is the only trusted ingress and overwrites X-Forwarded-For. Laravel sees REMOTE_ADDR=10.0.0.8 and X-Forwarded-For=203.0.113.9. No proxies are currently trusted. Which change enables ip() to use the client address with the narrowest stated trust?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Trust 10.0.0.8 and enable the X-Forwarded-For header in the trusted-proxy configuration.",
+      "rationale": "The direct peer is the known proxy; trusting its forwarded-address header permits Laravel to derive the client address.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Enable trusted hosts for example.test without configuring proxies.",
+      "rationale": "Host validation does not establish trust for forwarded client-address headers.",
+      "misconception": "Host validation does not establish trust for forwarded client-address headers."
+    },
+    {
+      "id": "choice-3",
+      "text": "Read X-Forwarded-For directly for every request without checking the peer.",
+      "rationale": "Direct header reads remove the trust boundary and allow spoofing on requests from untrusted peers.",
+      "misconception": "Direct header reads remove the trust boundary and allow spoofing on requests from untrusted peers."
+    },
+    {
+      "id": "choice-4",
+      "text": "Trust 203.0.113.9 as the proxy instead of 10.0.0.8.",
+      "rationale": "The client address is not the immediate forwarding peer whose header must be trusted.",
+      "misconception": "The client address is not the immediate forwarding peer whose header must be trusted."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The direct peer is the known proxy; trusting its forwarded-address header permits Laravel to derive the client address.",
+    "trace": [
+      "The direct peer is the known proxy; trusting its forwarded-address header permits Laravel to derive the client address.",
+      "Host validation does not establish trust for forwarded client-address headers.",
+      "Direct header reads remove the trust boundary and allow spoofing on requests from untrusted peers.",
+      "The client address is not the immediate forwarding peer whose header must be trusted."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "10.0.0.8:203.0.113.9",
+    "probe": "$r = Illuminate\\Http\\Request::create('/', 'GET', [], [], [], ['REMOTE_ADDR' => '10.0.0.8', 'HTTP_X_FORWARDED_FOR' => '203.0.113.9']);\necho $r->ip().':';\nIlluminate\\Http\\Request::setTrustedProxies(['10.0.0.8'], Illuminate\\Http\\Request::HEADER_X_FORWARDED_FOR);\necho $r->ip();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/requests#configuring-trusted-proxies"
+  ]
+}

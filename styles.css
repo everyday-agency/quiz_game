@@ -371,3 +371,9 @@ kbd { padding: 1px 4px; border: 1px solid #ccc5ba; border-bottom-width: 2px; bor
 
 
 .option-text, .choice-analysis > div { min-width: 0; overflow-wrap: anywhere; }
+
+/* One subject selector shared by Learn, Exam and the question bank. */
+.subject-picker { max-width: 1280px; margin: 0 auto 1rem; padding: 0 2rem; display: flex; align-items: center; gap: .75rem; }
+.subject-picker label { font-size: .8rem; color: var(--muted, #666); }
+.subject-picker select { max-width: 100%; min-width: 0; padding: .65rem .8rem; border: 1px solid var(--line, #d9d2c8); border-radius: 8px; background: var(--paper, #fffcf7); color: inherit; font: inherit; font-size: .9rem; }
+@media (max-width: 600px) { .subject-picker { padding: 0 1rem; align-items: stretch; flex-direction: column; gap: .35rem; } }

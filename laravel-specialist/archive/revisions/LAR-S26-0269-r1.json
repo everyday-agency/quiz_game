@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0269",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Query Builder",
+  "subtopic": "raw-expression-value-binding",
+  "objective": {
+    "id": "laravel.raw-expression-value-binding",
+    "text": "Keep values in raw query fragments parameter-bound."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep untrusted data separate from the SQL expression syntax."
+  },
+  "prerequisites": [
+    "Query Builder raw SQL",
+    "Value binding",
+    "SQL injection"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A search uses LOWER(name) in a raw SQL condition. $term is caller-controlled text. Which expression keeps that value parameter-bound?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "whereRaw(\"LOWER(name) = '$term'\")",
+      "rationale": "Interpolation still inserts the submitted text into SQL; quotes inside the value can alter its structure.",
+      "misconception": "Interpolation still inserts the submitted text into SQL; quotes inside the value can alter its structure."
+    },
+    {
+      "id": "choice-2",
+      "text": "whereRaw(\"LOWER(name) = \".$term)",
+      "rationale": "Concatenation puts caller-controlled bytes into SQL syntax without quoting or binding.",
+      "misconception": "Concatenation puts caller-controlled bytes into SQL syntax without quoting or binding."
+    },
+    {
+      "id": "choice-3",
+      "text": "whereRaw(\"LOWER(name) = ?\", [])",
+      "rationale": "A placeholder without its corresponding value does not bind the intended search input.",
+      "misconception": "A placeholder without its corresponding value does not bind the intended search input."
+    },
+    {
+      "id": "choice-4",
+      "text": "whereRaw(\"LOWER(name) = ?\", [mb_strtolower($term)])",
+      "rationale": "The SQL structure remains fixed and the submitted text is supplied as a binding.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The SQL structure remains fixed and the submitted text is supplied as a binding.",
+    "trace": [
+      "Interpolation still inserts the submitted text into SQL; quotes inside the value can alter its structure.",
+      "Concatenation puts caller-controlled bytes into SQL syntax without quoting or binding.",
+      "A placeholder without its corresponding value does not bind the intended search input.",
+      "The SQL structure remains fixed and the submitted text is supplied as a binding."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:bound",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$term = \"x' OR 1=1 --\";\n$query = DB::table('records')->whereRaw('LOWER(name) = ?', [mb_strtolower($term)]);\necho $query->count().':'.($query->getBindings() === [mb_strtolower($term)] ? 'bound' : 'other');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#raw-methods"
+  ]
+}

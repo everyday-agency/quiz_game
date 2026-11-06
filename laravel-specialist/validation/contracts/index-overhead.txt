@@ -1,0 +1,2 @@
+Official source: https://www.postgresql.org/docs/18/indexes.html (checked 2026-11-06).
+Paraphrase: indexes can improve selected reads but impose database overhead, including write maintenance and storage. Evaluate representative workload cost; this is not a benchmark result.

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0459",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "API resources",
+  "subtopic": "resource-preserve-collection-keys",
+  "objective": {
+    "id": "laravel.resource-preserve-collection-keys",
+    "text": "Preserve intentional collection keys instead of relying on default resource reindexing."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Preserve intentional identifiers in an API object instead of silently reindexing them."
+  },
+  "prerequisites": [
+    "Resource collections",
+    "Associative collection keys"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An item resource collection is keyed by stable external codes, and clients require those keys. Default serialization reindexes the collection. Which item-resource setting preserves them?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Declare public static $wrap = \"codes\".",
+      "rationale": "Changing the outer wrapper name does not preserve inner collection keys.",
+      "misconception": "Changing the outer wrapper name does not preserve inner collection keys."
+    },
+    {
+      "id": "choice-2",
+      "text": "Declare public $preserveKeys = true.",
+      "rationale": "The resource collection uses this opt-in to retain the original collection keys.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Add each code to the model’s $hidden list.",
+      "rationale": "Hiding model attributes does not configure collection-key preservation.",
+      "misconception": "Hiding model attributes does not configure collection-key preservation."
+    },
+    {
+      "id": "choice-4",
+      "text": "Call values() on the collection before creating resources.",
+      "rationale": "values explicitly discards existing keys and assigns sequential ones.",
+      "misconception": "values explicitly discards existing keys and assigns sequential ones."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The resource collection uses this opt-in to retain the original collection keys.",
+    "trace": [
+      "Changing the outer wrapper name does not preserve inner collection keys.",
+      "The resource collection uses this opt-in to retain the original collection keys.",
+      "Hiding model attributes does not configure collection-key preservation.",
+      "values explicitly discards existing keys and assigns sequential ones."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "{\"sku-A\":{\"name\":\"A\"},\"sku-B\":{\"name\":\"B\"}}",
+    "probe": "class KeyedItemView extends Illuminate\\Http\\Resources\\Json\\JsonResource\n{\n    public $preserveKeys = true;\n}\n$items = collect(['sku-A' => ['name' => 'A'], 'sku-B' => ['name' => 'B']]);\necho json_encode(KeyedItemView::collection($items)->resolve());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#preserving-collection-keys"
+  ]
+}

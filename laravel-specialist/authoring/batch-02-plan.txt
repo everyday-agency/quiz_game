@@ -1,0 +1,100 @@
+101 | Validation | Limit further rules on one failing attribute with bail without stopping unrelated attributes.
+102 | Validation | Account for after callbacks still running when stopOnFirstFailure halts further attribute validation.
+103 | Validation | Use sometimes with required to distinguish an omitted PATCH field from an explicitly empty field.
+104 | Validation | Allow normalized null values through a non-implicit date rule using nullable.
+105 | Validation | Reject unexpected nested array keys using the array rule's allowed-key list.
+106 | Validation | Expand wildcard rules to concrete nested error paths without losing item identity.
+107 | Validation | Distinguish strict distinct-value checks from default loose comparisons.
+108 | Validation | Require an affirmative consent value with accepted instead of accepting any boolean.
+109 | Validation | Require a dependent field only for the specified discriminator value.
+110 | Validation | Use required_without for alternative contact methods while allowing both to be present.
+111 | Validation | Reject a forbidden field for one mode rather than silently discarding it.
+112 | Validation | Exclude an inapplicable field from validated output with exclude_if.
+113 | Validation | Keep a regular expression containing a pipe intact by using array-form validation rules.
+114 | Validation | Validate a backed enum against its allowed cases rather than accepting arbitrary strings.
+115 | Validation | Apply a field comparison rule to a date interval and test the equality boundary.
+116 | Validation | Use password confirmation field naming without mistaking it for authentication.
+117 | Validation | Separate string length limits from numeric value limits in a quantity field.
+118 | Validation | Reject a non-list associative payload when the API requires a consecutive numeric list.
+119 | Validation | Enforce decimals independently of a numeric range requirement.
+120 | Validation | Limit allowed file content types without trusting the original filename extension.
+121 | Validation | Restrict uploaded image dimensions separately from file size and MIME type.
+122 | Validation | Apply per-item conditional rules with access to the current nested item.
+123 | Validation | Add cross-field domain errors in an after callback without losing ordinary rule errors.
+124 | Validation | Give a custom DataAwareRule access to related input instead of global request state.
+125 | Validation | Identify the namespaced attribute key used by a custom nested validation message.
+126 | Validation | Separate named error bags for two forms rendered on the same page.
+127 | Validation | Assert JSON validation status and nested error keys for an API request.
+128 | Validation | Verify that a web validation redirect flashes errors and selected old input.
+129 | Validation | Use validated output rather than returning to untrusted all input after validation.
+130 | Validation | Avoid assuming that merging new values into ValidatedInput reruns validation.
+131 | Validation | Ignore the server-selected current model in uniqueness validation without trusting a submitted ignore ID.
+132 | Validation | Scope a uniqueness rule to an account while retaining a database uniqueness constraint.
+133 | Validation | Scope an exists rule to records eligible for the operation instead of checking existence alone.
+134 | Validation | Keep email syntax validation independent of mailbox ownership verification.
+135 | Validation | Treat validation as a point-in-time check rather than a concurrency guarantee.
+136 | Form Requests | Trace prepareForValidation before authorization and rule evaluation.
+137 | Form Requests | Reject an unauthorized Form Request before entering the controller action.
+138 | Form Requests | Inject a service into rules through the container instead of reading global state.
+139 | Form Requests | Select a fixed named route for Form Request failure redirection instead of relying on the Referer.
+140 | Form Requests | Distinguish changes made in passedValidation from the validator's validated data snapshot.
+141 | Form Requests | Use failedValidation customization without accidentally returning a successful response.
+142 | Form Requests | Exclude sensitive fields from old-input flashing on validation failure.
+143 | Form Requests | Set a Form Request's error bag without changing the global validation bag.
+144 | Form Requests | Normalize a nullable field without converting every missing PATCH field into a provided value.
+145 | Form Requests | Keep authorization side-effect-free because validation failure can prevent the intended write.
+146 | Form Requests | Test authorization rejection separately from a rule-validation rejection.
+147 | Form Requests | Distinguish validationData overrides from mutations of the underlying request input.
+148 | Form Requests | Interpret a successful Precognition field check without treating it as a completed write or full-form validation.
+149 | Form Requests | Share rules through composition while keeping endpoint-specific authorization separate.
+150 | Form Requests | Distinguish container-resolved Form Requests from direct construction when testing automatic validation.
+151 | Blade | Escape untrusted content through ordinary Blade echo syntax.
+152 | Blade | Restrict raw HTML output to content trusted for the actual HTML context.
+153 | Blade | Encode structured data for a script context using the framework's JavaScript helper.
+154 | Blade | Distinguish server-side Blade comments from HTML comments sent to clients.
+155 | Blade | Render the empty branch of forelse when the supplied collection is empty.
+156 | Blade | Trace loop iteration and index values without off-by-one display errors.
+157 | Blade | Access the parent loop when rendering nested iteration.
+158 | Blade | Preserve parent layout section content with parent instead of replacing it unintentionally.
+159 | Blade | Render multiple pushed assets at a stack rather than treating pushes as a single section.
+160 | Blade | Avoid duplicate per-component script output with pushOnce.
+161 | Blade | Pass values explicitly into isolated each partials rather than assuming all parent variables are inherited.
+162 | Blade | Distinguish an optional include from silently suppressing a template execution error.
+163 | Blade components | Separate component props from the remaining attribute bag.
+164 | Blade components | Merge default CSS classes with caller classes through the attribute bag.
+165 | Blade components | Distinguish default attribute values from enforced values when merging component attributes.
+166 | Blade components | Render a named slot independently from the default slot.
+167 | Blade components | Bind a PHP expression to a component prop instead of passing a literal string.
+168 | Blade components | Escape a client-side colon attribute so Blade does not evaluate it as PHP.
+169 | Blade components | Read ancestor component data through aware only under its documented propagation rules.
+170 | Blade components | Exclude a public component helper from template data while retaining its PHP API.
+171 | Blade forms | Render checked state using a boolean directive instead of treating the text false as absence.
+172 | Blade forms | Render a method-spoofing field for a non-GET/POST HTML form action.
+173 | Blade forms | Supply a CSRF token field without placing the token into an unrelated form value.
+174 | Blade forms | Trace the temporary message variable inside a named-bag error directive and its restoration afterward.
+175 | Blade caching | Recompile deployed Blade views without confusing compiled templates with application data.
+176 | Sessions and CSRF | Distinguish flashed data lifetime from persistent session data over multiple requests.
+177 | Sessions and CSRF | Preserve selected flash data for one additional redirect using keep.
+178 | Sessions and CSRF | Rotate a session identifier after authentication without discarding intended session state.
+179 | Sessions and CSRF | Invalidate session data and regenerate the CSRF token when logging out.
+180 | Sessions and CSRF | Prevent lost concurrent session updates through a supported session-blocking lock.
+181 | Sessions and CSRF | Distinguish a CSRF failure from an authentication failure on a state-changing route.
+182 | Sessions and CSRF | Exempt a verified external webhook narrowly while retaining CSRF on browser forms.
+183 | Sessions and CSRF | Understand why default test-environment CSRF bypass can conceal missing token behavior.
+184 | Authorization | Separate authentication from permission to modify a particular resource.
+185 | Authorization | Use a policy decision against the server-resolved resource rather than a submitted ownership flag.
+186 | Authorization | Stop an unauthorized operation with authorize instead of ignoring a boolean policy result.
+187 | Authorization | Return a not-found denial intentionally without exposing resource existence.
+188 | Authorization | Keep an authorization before hook from denying every unhandled ability.
+189 | Authorization | Allow a guest through a deliberately nullable policy user parameter without globally disabling authentication.
+190 | Authorization | Distinguish Gate::forUser evaluation from changing the application's authenticated user.
+191 | Authorization | Supply additional policy context as separate arguments with the target resource first.
+192 | Authorization | Keep Blade visibility checks as presentation while enforcing the same permission server-side.
+193 | Authentication | Authenticate a session-backed request without persisting submitted plaintext credentials.
+194 | Authentication | Distinguish attempt credential constraints from password hashing responsibilities.
+195 | Authentication | Use the intended guard explicitly when multiple authentication contexts exist.
+196 | Authentication | Preserve a safe intended internal destination across login instead of trusting an arbitrary redirect input.
+197 | Authentication | Verify an existing password with the configured hasher rather than comparing new salted hashes.
+198 | Authentication | Upgrade a stored password hash when the hashing configuration changes.
+199 | Security architecture | Avoid bypassing central Gate hooks when replacing a named ability check with inline authorization.
+200 | Security architecture | Protect mass-assigned administrative attributes through an explicit authorization and write boundary.

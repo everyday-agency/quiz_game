@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0280",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Database concurrency",
+  "subtopic": "row-lock-transaction-write-boundary",
+  "objective": {
+    "id": "laravel.row-lock-transaction-write-boundary",
+    "text": "Keep a row lock inside the transaction that protects the corresponding write."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Keep the lock lifetime, validation read and corresponding write in one transaction."
+  },
+  "prerequisites": [
+    "PostgreSQL row locks",
+    "Laravel transactions",
+    "Read-modify-write invariants"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "PostgreSQL 18, READ COMMITTED, ordinary autocommit outside DB::transaction. Every competing stock writer follows the selected protocol."
+    ],
+    "files": []
+  },
+  "stem": "Stock must never become negative. A request reads stock, checks availability and decrements it. Which lock placement protects that read/check/write sequence against another buyer?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Inside one transaction, select the stock row with lockForUpdate, check it, then update before committing.",
+      "rationale": "The row lock remains held through the check and write, serializing competing participants in this protocol.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Select with lockForUpdate in autocommit, then start a transaction for the check and update.",
+      "rationale": "The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence.",
+      "misconception": "The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence."
+    },
+    {
+      "id": "choice-3",
+      "text": "Read and check normally, update, then select with lockForUpdate before returning.",
+      "rationale": "A lock acquired after the decision and write cannot retroactively protect the earlier stale read.",
+      "misconception": "A lock acquired after the decision and write cannot retroactively protect the earlier stale read."
+    },
+    {
+      "id": "choice-4",
+      "text": "Lock only a separate audit row while all buyers read the stock row without a common lock.",
+      "rationale": "Different audit rows do not serialize access to the shared stock invariant.",
+      "misconception": "Different audit rows do not serialize access to the shared stock invariant."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The row lock remains held through the check and write, serializing competing participants in this protocol.",
+    "trace": [
+      "The row lock remains held through the check and write, serializing competing participants in this protocol.",
+      "The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence.",
+      "A lock acquired after the decision and write cannot retroactively protect the earlier stale read.",
+      "Different audit rows do not serialize access to the shared stock invariant."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Database/Query/Builder.php",
+    "contains": [
+      "public function lockForUpdate()",
+      "return $this->lock(true);"
+    ],
+    "reason": "Laravel requests a write row lock; PostgreSQL holds it until transaction end. Transaction placement and invariant reasoning are documented-contract validation, not a SQLite concurrency test.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#pessimistic-locking",
+    "https://laravel.com/docs/13.x/database#database-transactions",
+    "https://www.postgresql.org/docs/18/explicit-locking.html"
+  ]
+}

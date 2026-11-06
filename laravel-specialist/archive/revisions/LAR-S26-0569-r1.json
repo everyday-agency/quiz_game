@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0569",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Deployment",
+  "subtopic": "rolling-schema-expand-contract",
+  "objective": {
+    "id": "laravel.rolling-schema-expand-contract",
+    "text": "Use backward-compatible expand-and-contract database changes during a rolling release."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Keep old and new application versions compatible while a persisted representation changes."
+  },
+  "prerequisites": [
+    "Rolling deployments",
+    "Schema compatibility",
+    "Data backfill",
+    "Mixed application versions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Old workers still read full_name while a new release will use display_name. The application must remain available during a gradual rollout."
+    ],
+    "files": []
+  },
+  "stem": "Which migration strategy supports that overlap safely?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Add the new column compatibly, backfill and transition readers/writers, then remove the old column after old code is retired.",
+      "rationale": "An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Rename full_name immediately before updating the first application node.",
+      "rationale": "Old nodes still using full_name would fail while the rollout is mixed.",
+      "misconception": "Old nodes still using full_name would fail while the rollout is mixed."
+    },
+    {
+      "id": "choice-3",
+      "text": "Drop full_name and let each old worker recreate it on its next request.",
+      "rationale": "That loses the shared schema contract and risks data loss and request-time migration races.",
+      "misconception": "That loses the shared schema contract and risks data loss and request-time migration races."
+    },
+    {
+      "id": "choice-4",
+      "text": "Change the model accessor only and assume both database columns are created automatically.",
+      "rationale": "An accessor does not create or backfill the required schema representation.",
+      "misconception": "An accessor does not create or backfill the required schema representation."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.",
+    "trace": [
+      "An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.",
+      "Old nodes still using full_name would fail while the rollout is mixed.",
+      "That loses the shared schema contract and risks data loss and request-time migration races.",
+      "An accessor does not create or backfill the required schema representation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Ada:Ada",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('profiles', function ($t) {\n    $t->id();\n    $t->string('full_name');\n});\nDB::table('profiles')->insert(['full_name' => 'Ada']);\nSchema::table('profiles', function ($t) {\n    $t->string('display_name')->nullable();\n});\nDB::table('profiles')->update(['display_name' => DB::raw('full_name')]);\n$row = DB::table('profiles')->first();\necho $row->full_name.':'.$row->display_name;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/migrations#modifying-columns",
+    "https://laravel.com/docs/13.x/deployment"
+  ]
+}

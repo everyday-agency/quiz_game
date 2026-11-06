@@ -1,0 +1,502 @@
+[
+  {
+    "id": "LAR-S26-0001",
+    "topic": "Configuration",
+    "objective": "Distinguish a missing configuration key from an explicitly configured null."
+  },
+  {
+    "id": "LAR-S26-0002",
+    "topic": "Configuration",
+    "objective": "Move environment access behind configuration so cached configuration preserves the intended value."
+  },
+  {
+    "id": "LAR-S26-0003",
+    "topic": "Configuration",
+    "objective": "Explain precedence of an externally supplied environment value over a dotenv entry."
+  },
+  {
+    "id": "LAR-S26-0004",
+    "topic": "Configuration",
+    "objective": "Parse Laravel's reserved dotenv boolean values before applying a feature flag."
+  },
+  {
+    "id": "LAR-S26-0005",
+    "topic": "Deployment basics",
+    "objective": "Choose the maintenance response header that asks clients to retry later."
+  },
+  {
+    "id": "LAR-S26-0006",
+    "topic": "Service providers",
+    "objective": "Register an application provider in the Laravel 13 bootstrap provider list."
+  },
+  {
+    "id": "LAR-S26-0007",
+    "topic": "Service providers",
+    "objective": "Separate container registrations from boot-time use of another provider's service."
+  },
+  {
+    "id": "LAR-S26-0008",
+    "topic": "Service container",
+    "objective": "Choose a scoped binding for state that must reset between worker lifecycles."
+  },
+  {
+    "id": "LAR-S26-0009",
+    "topic": "Service container",
+    "objective": "Trace transient resolution compared with a singleton binding."
+  },
+  {
+    "id": "LAR-S26-0010",
+    "topic": "Service container",
+    "objective": "Resolve different implementations for two consumers using contextual bindings."
+  },
+  {
+    "id": "LAR-S26-0011",
+    "topic": "Service container",
+    "objective": "Diagnose why constructor autowiring cannot select an implementation for an unbound interface."
+  },
+  {
+    "id": "LAR-S26-0012",
+    "topic": "Service container",
+    "objective": "Preserve a host application's explicit override when a package supplies a default binding."
+  },
+  {
+    "id": "LAR-S26-0013",
+    "topic": "Service container",
+    "objective": "Register an already configured object as the shared service instance."
+  },
+  {
+    "id": "LAR-S26-0014",
+    "topic": "Service container",
+    "objective": "Resolve a service through a container alias without creating another singleton."
+  },
+  {
+    "id": "LAR-S26-0015",
+    "topic": "Service container",
+    "objective": "Combine explicitly provided arguments with method injection through Container::call."
+  },
+  {
+    "id": "LAR-S26-0016",
+    "topic": "Service container",
+    "objective": "Provide a primitive constructor dependency contextually without a global scalar binding."
+  },
+  {
+    "id": "LAR-S26-0017",
+    "topic": "Service container",
+    "objective": "Inject one configuration value using a supported contextual attribute."
+  },
+  {
+    "id": "LAR-S26-0018",
+    "topic": "Service container",
+    "objective": "Collect tagged implementations without coupling a consumer to each concrete class."
+  },
+  {
+    "id": "LAR-S26-0019",
+    "topic": "Service container",
+    "objective": "Decorate a resolved binding through the container extension mechanism."
+  },
+  {
+    "id": "LAR-S26-0020",
+    "topic": "Service container",
+    "objective": "Apply a resolving callback to newly constructed service instances."
+  },
+  {
+    "id": "LAR-S26-0021",
+    "topic": "Service container",
+    "objective": "Understand how explicit makeWith parameters interact with a shared binding."
+  },
+  {
+    "id": "LAR-S26-0022",
+    "topic": "Service container",
+    "objective": "Distinguish a registered binding from a service that has actually been resolved."
+  },
+  {
+    "id": "LAR-S26-0023",
+    "topic": "Service container",
+    "objective": "Discard a cached singleton instance while retaining its construction binding."
+  },
+  {
+    "id": "LAR-S26-0024",
+    "topic": "Service container",
+    "objective": "Verify that clearing scoped instances leaves ordinary singletons intact."
+  },
+  {
+    "id": "LAR-S26-0025",
+    "topic": "Facades",
+    "objective": "Clear a facade's cached root when replacing the corresponding container service in a test."
+  },
+  {
+    "id": "LAR-S26-0026",
+    "topic": "Service providers",
+    "objective": "State the service names a deferred provider must advertise."
+  },
+  {
+    "id": "LAR-S26-0027",
+    "topic": "Middleware",
+    "objective": "Trace before/after execution through a two-layer middleware pipeline."
+  },
+  {
+    "id": "LAR-S26-0028",
+    "topic": "Middleware",
+    "objective": "Identify which downstream work is skipped by an early middleware response."
+  },
+  {
+    "id": "LAR-S26-0029",
+    "topic": "Middleware",
+    "objective": "Explain why ordinary code after next() is skipped when a downstream exception escapes."
+  },
+  {
+    "id": "LAR-S26-0030",
+    "topic": "Middleware",
+    "objective": "Avoid assuming a terminable middleware's handle and terminate methods share object state."
+  },
+  {
+    "id": "LAR-S26-0031",
+    "topic": "Routing",
+    "objective": "Predict HEAD handling for a GET route and its response body."
+  },
+  {
+    "id": "LAR-S26-0032",
+    "topic": "Routing",
+    "objective": "Prevent an earlier wildcard route from consuming a literal route for the same HTTP method."
+  },
+  {
+    "id": "LAR-S26-0033",
+    "topic": "Routing",
+    "objective": "Distinguish an unmatched URL from an unsupported method on an existing URL."
+  },
+  {
+    "id": "LAR-S26-0034",
+    "topic": "Routing",
+    "objective": "Enforce a parameter constraint at route matching rather than inside the controller."
+  },
+  {
+    "id": "LAR-S26-0035",
+    "topic": "Routing",
+    "objective": "Supply a PHP default value for an optional route argument."
+  },
+  {
+    "id": "LAR-S26-0036",
+    "topic": "URLs and redirects",
+    "objective": "Distinguish named-route path parameters from surplus query parameters."
+  },
+  {
+    "id": "LAR-S26-0037",
+    "topic": "Routing",
+    "objective": "Compose a route name prefix independently of the URL prefix."
+  },
+  {
+    "id": "LAR-S26-0038",
+    "topic": "Routing",
+    "objective": "Use request-scoped URL defaults without mistaking them for incoming route parameter mutation."
+  },
+  {
+    "id": "LAR-S26-0039",
+    "topic": "Routing",
+    "objective": "Preserve only approved search parameters when replacing a fixed legacy redirect with a generated redirect."
+  },
+  {
+    "id": "LAR-S26-0040",
+    "topic": "Routing",
+    "objective": "Predict domain-specific route precedence in the pinned Laravel 13.40 router."
+  },
+  {
+    "id": "LAR-S26-0041",
+    "topic": "Route binding",
+    "objective": "Match a controller's implicit model-binding argument name to the route placeholder."
+  },
+  {
+    "id": "LAR-S26-0042",
+    "topic": "Route binding",
+    "objective": "Select a model's route key for slug-based URL generation and resolution."
+  },
+  {
+    "id": "LAR-S26-0043",
+    "topic": "Route binding",
+    "objective": "Transform a route parameter with an explicit binding callback."
+  },
+  {
+    "id": "LAR-S26-0044",
+    "topic": "Route binding",
+    "objective": "Restrict nested model resolution to the parent relationship with scoped binding."
+  },
+  {
+    "id": "LAR-S26-0045",
+    "topic": "Route binding",
+    "objective": "Decide whether a soft-deleted model should be eligible for route binding."
+  },
+  {
+    "id": "LAR-S26-0046",
+    "topic": "Route binding",
+    "objective": "Provide a route-specific response when implicit model resolution fails."
+  },
+  {
+    "id": "LAR-S26-0047",
+    "topic": "Routing",
+    "objective": "Handle an encoded slash only in the final permissive route segment."
+  },
+  {
+    "id": "LAR-S26-0048",
+    "topic": "Signed URLs",
+    "objective": "Keep signature validation mode consistent with relative URL generation."
+  },
+  {
+    "id": "LAR-S26-0049",
+    "topic": "Signed URLs",
+    "objective": "Reject an otherwise valid temporary signed URL after its expiry."
+  },
+  {
+    "id": "LAR-S26-0050",
+    "topic": "Signed URLs",
+    "objective": "Assess the trust boundary created by ignoring a query parameter during signature validation."
+  },
+  {
+    "id": "LAR-S26-0051",
+    "topic": "URLs and redirects",
+    "objective": "Encode a query value through the URL generator instead of manual string concatenation."
+  },
+  {
+    "id": "LAR-S26-0052",
+    "topic": "URLs and redirects",
+    "objective": "Flash input when redirecting back after a manually detected form error."
+  },
+  {
+    "id": "LAR-S26-0053",
+    "topic": "URLs and redirects",
+    "objective": "Select a named-route redirect that remains correct when the path changes."
+  },
+  {
+    "id": "LAR-S26-0054",
+    "topic": "HTTP responses",
+    "objective": "Return a JSON response with the intended status code and explicit header."
+  },
+  {
+    "id": "LAR-S26-0055",
+    "topic": "HTTP responses",
+    "objective": "Account for removal of response content when preparing a 204 response."
+  },
+  {
+    "id": "LAR-S26-0056",
+    "topic": "HTTP responses",
+    "objective": "Set a response header without accidentally placing it in the JSON payload."
+  },
+  {
+    "id": "LAR-S26-0057",
+    "topic": "HTTP responses",
+    "objective": "Distinguish creation of a streamed download from execution of its callback."
+  },
+  {
+    "id": "LAR-S26-0058",
+    "topic": "HTTP responses",
+    "objective": "Attach a response cookie without assuming a later request has already sent it back."
+  },
+  {
+    "id": "LAR-S26-0059",
+    "topic": "HTTP requests",
+    "objective": "Read query-only input when the body contains a conflicting key."
+  },
+  {
+    "id": "LAR-S26-0060",
+    "topic": "HTTP requests",
+    "objective": "Make JSON input available by providing the correct request content type."
+  },
+  {
+    "id": "LAR-S26-0061",
+    "topic": "HTTP requests",
+    "objective": "Use mergeIfMissing without replacing an explicitly supplied value."
+  },
+  {
+    "id": "LAR-S26-0062",
+    "topic": "HTTP requests",
+    "objective": "Recognize that replace removes existing input keys not present in the replacement."
+  },
+  {
+    "id": "LAR-S26-0063",
+    "topic": "HTTP requests",
+    "objective": "Distinguish input presence from a nonempty submitted value."
+  },
+  {
+    "id": "LAR-S26-0064",
+    "topic": "HTTP requests",
+    "objective": "Recognize that a truthy conditional-input callback result replaces the fluent request return value."
+  },
+  {
+    "id": "LAR-S26-0065",
+    "topic": "HTTP requests",
+    "objective": "Apply Request::boolean to common checkbox representations."
+  },
+  {
+    "id": "LAR-S26-0066",
+    "topic": "HTTP requests",
+    "objective": "Keep integer retrieval separate from validating a positive integer requirement."
+  },
+  {
+    "id": "LAR-S26-0067",
+    "topic": "HTTP requests",
+    "objective": "Retrieve a collection for an optional array field without assuming the field exists."
+  },
+  {
+    "id": "LAR-S26-0068",
+    "topic": "HTTP requests",
+    "objective": "Explain why input selection alone is not input validation."
+  },
+  {
+    "id": "LAR-S26-0069",
+    "topic": "HTTP requests",
+    "objective": "Retrieve a nested list of input values using dot notation and a wildcard."
+  },
+  {
+    "id": "LAR-S26-0070",
+    "topic": "HTTP requests",
+    "objective": "Avoid confusing dynamic input properties with route parameter lookup."
+  },
+  {
+    "id": "LAR-S26-0071",
+    "topic": "HTTP requests",
+    "objective": "Distinguish an absent header from an explicitly empty header when supplying a default."
+  },
+  {
+    "id": "LAR-S26-0072",
+    "topic": "HTTP requests",
+    "objective": "Retrieve a bearer credential from the Authorization header without custom splitting."
+  },
+  {
+    "id": "LAR-S26-0073",
+    "topic": "HTTP requests",
+    "objective": "Recognize the AJAX Accept-header conditions used by expectsJson."
+  },
+  {
+    "id": "LAR-S26-0074",
+    "topic": "HTTP requests",
+    "objective": "Separate the request body's media type from the client's preferred response type."
+  },
+  {
+    "id": "LAR-S26-0075",
+    "topic": "HTTP requests",
+    "objective": "Honor Accept quality weights when selecting an available response representation."
+  },
+  {
+    "id": "LAR-S26-0076",
+    "topic": "HTTP requests",
+    "objective": "Apply method spoofing only to the appropriate incoming HTTP method."
+  },
+  {
+    "id": "LAR-S26-0077",
+    "topic": "HTTP requests",
+    "objective": "Distinguish a spoofed effective HTTP method from the original transport method."
+  },
+  {
+    "id": "LAR-S26-0078",
+    "topic": "HTTP requests",
+    "objective": "Replace one query parameter while retaining the rest of the current URL query."
+  },
+  {
+    "id": "LAR-S26-0079",
+    "topic": "HTTP requests",
+    "objective": "Distinguish encoded and decoded path representations."
+  },
+  {
+    "id": "LAR-S26-0080",
+    "topic": "Proxies and hosts",
+    "objective": "Derive the client address only from explicitly trusted proxy information."
+  },
+  {
+    "id": "LAR-S26-0081",
+    "topic": "Proxies and hosts",
+    "objective": "Recognize HTTPS behind a trusted forwarding proxy without trusting arbitrary client headers."
+  },
+  {
+    "id": "LAR-S26-0082",
+    "topic": "Proxies and hosts",
+    "objective": "Restrict accepted hostnames before generating links from the request host."
+  },
+  {
+    "id": "LAR-S26-0083",
+    "topic": "Maintenance",
+    "objective": "Invalidate maintenance bypass cookies by changing the maintenance secret without confusing bypass with user authentication."
+  },
+  {
+    "id": "LAR-S26-0084",
+    "topic": "Middleware",
+    "objective": "Register a route middleware alias in the Laravel 13 bootstrap configuration."
+  },
+  {
+    "id": "LAR-S26-0085",
+    "topic": "Middleware",
+    "objective": "Prepend middleware to a named group without replacing the complete group."
+  },
+  {
+    "id": "LAR-S26-0086",
+    "topic": "Middleware",
+    "objective": "Explain why route-level exclusions cannot remove global middleware."
+  },
+  {
+    "id": "LAR-S26-0087",
+    "topic": "Middleware",
+    "objective": "Respect middleware priority when dependencies impose an execution order."
+  },
+  {
+    "id": "LAR-S26-0088",
+    "topic": "Controllers",
+    "objective": "Keep request-specific work out of controller construction that can precede route middleware."
+  },
+  {
+    "id": "LAR-S26-0089",
+    "topic": "Controllers",
+    "objective": "Route to an invokable controller through its class rather than an invented action name."
+  },
+  {
+    "id": "LAR-S26-0090",
+    "topic": "Controllers",
+    "objective": "Choose an API resource route set that omits HTML form actions."
+  },
+  {
+    "id": "LAR-S26-0091",
+    "topic": "Controllers",
+    "objective": "Customize a resource parameter name without changing the resource's action names."
+  },
+  {
+    "id": "LAR-S26-0092",
+    "topic": "Controllers",
+    "objective": "Use shallow nesting to omit the parent parameter from member routes while keeping collection routes nested."
+  },
+  {
+    "id": "LAR-S26-0093",
+    "topic": "Controllers",
+    "objective": "Limit controller middleware to selected actions using the supported controller middleware contract."
+  },
+  {
+    "id": "LAR-S26-0094",
+    "topic": "Controllers",
+    "objective": "Trace type-based dependency injection alongside positional scalar route arguments."
+  },
+  {
+    "id": "LAR-S26-0095",
+    "topic": "Artisan",
+    "objective": "Distinguish an optional command argument from an argument with an explicit default."
+  },
+  {
+    "id": "LAR-S26-0096",
+    "topic": "Artisan",
+    "objective": "Define a repeatable command option rather than manually parsing comma-separated values."
+  },
+  {
+    "id": "LAR-S26-0097",
+    "topic": "Artisan",
+    "objective": "Return a failing exit status when automation must detect a command failure."
+  },
+  {
+    "id": "LAR-S26-0098",
+    "topic": "Artisan",
+    "objective": "Invoke a command with structured parameters through Artisan::call rather than shell quoting."
+  },
+  {
+    "id": "LAR-S26-0099",
+    "topic": "Artisan",
+    "objective": "Request command isolation explicitly and select the exit code when its lock is unavailable."
+  },
+  {
+    "id": "LAR-S26-0100",
+    "topic": "Exception responses",
+    "objective": "Choose JSON rendering for an API boundary independently of exception reporting policy."
+  }
+]

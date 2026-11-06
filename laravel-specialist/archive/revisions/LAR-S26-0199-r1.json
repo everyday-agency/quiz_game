@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0199",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Security architecture",
+  "subtopic": "inline-authorization-hook-bypass",
+  "objective": {
+    "id": "laravel.inline-authorization-hook-bypass",
+    "text": "Avoid bypassing central Gate hooks when replacing a named ability check with inline authorization."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Preserve central hook enforcement when refactoring an authorization call."
+  },
+  "prerequisites": [
+    "Gate before and after hooks",
+    "Inline authorization",
+    "Central access policy"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A Gate::before hook denies suspended users for named abilities. A developer replaces Gate::authorize(\"publish\") with Gate::allowIf(fn ($user) => $user->ownsPost). A suspended owner now passes. Which framework distinction explains the regression?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "allowIf temporarily unsuspends the authenticated user before checking ownership.",
+      "rationale": "The method does not mutate the user; the missing hook execution explains the different result.",
+      "misconception": "The method does not mutate the user; the missing hook execution explains the different result."
+    },
+    {
+      "id": "choice-2",
+      "text": "Named abilities ignore ownership, while inline abilities always grant owners globally.",
+      "rationale": "The difference is which configured checks execute, not an automatic ownership rule built into all gates.",
+      "misconception": "The difference is which configured checks execute, not an automatic ownership rule built into all gates."
+    },
+    {
+      "id": "choice-3",
+      "text": "Inline allowIf does not run the normal before/after authorization hooks.",
+      "rationale": "The inline condition is evaluated through the on-demand path, bypassing the central hooks used for named ability checks.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "The before hook runs twice and the second denial cancels the first.",
+      "rationale": "Inline authorization does not run that hook, and repeated denials would not cancel each other.",
+      "misconception": "Inline authorization does not run that hook, and repeated denials would not cancel each other."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The inline condition is evaluated through the on-demand path, bypassing the central hooks used for named ability checks.",
+    "trace": [
+      "The method does not mutate the user; the missing hook execution explains the different result.",
+      "The difference is which configured checks execute, not an automatic ownership rule built into all gates.",
+      "The inline condition is evaluated through the on-demand path, bypassing the central hooks used for named ability checks.",
+      "Inline authorization does not run that hook, and repeated denials would not cancel each other."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "named-denied:inline-allowed",
+    "probe": "$user = new Illuminate\\Auth\\GenericUser(['id' => 7, 'ownsPost' => true]);\n$gate = new Illuminate\\Auth\\Access\\Gate(app(), fn () => $user);\n$gate->before(fn ($user) => false);\n$gate->define('publish', fn ($user) => $user->ownsPost);\ntry {\n    $gate->authorize('publish');\n} catch (Illuminate\\Auth\\Access\\AuthorizationException $e) {\n    echo 'named-denied:';\n}\n$gate->allowIf(fn ($user) => $user->ownsPost);\necho 'inline-allowed';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authorization#inline-authorization"
+  ]
+}

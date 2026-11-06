@@ -1,0 +1,1027 @@
+{
+  "title": "Fifteen randomly selected unchanged Laravel questions",
+  "independentEditorialApproval": "pending",
+  "note": "All student-visible text plus keys and rationales for reviewer use. The quiz randomizes display order.",
+  "questions": [
+    {
+      "id": "LAR-S26-0118",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Validation",
+      "difficulty": "Foundation",
+      "prompt": "An API requires items to have consecutive numeric keys starting at zero. The directly decoded input [1 => \"A\", 2 => \"B\"] must be rejected, not reindexed. Which rules enforce the shape?",
+      "options": [
+        "Apply array_values before using required|array.",
+        "required|array",
+        "required|array|min:2",
+        "required|array|list"
+      ],
+      "coreOptions": [
+        "Apply array_values before using required|array.",
+        "required|array",
+        "required|array|min:2",
+        "required|array|list"
+      ],
+      "optionIds": [
+        "LAR-S26-0118@2:choice-1",
+        "LAR-S26-0118@2:choice-2",
+        "LAR-S26-0118@2:choice-3",
+        "LAR-S26-0118@2:choice-4"
+      ],
+      "answer": 3,
+      "explanation": "list requires consecutive numeric keys starting at zero, in addition to the array requirement.",
+      "learning": {
+        "trace": "list requires consecutive numeric keys starting at zero, in addition to the array requirement.",
+        "rationales": [
+          "Reindexing transforms the invalid shape into a list instead of rejecting it as required.",
+          "An array can have arbitrary keys, so this permits the invalid shape.",
+          "The payload already has two entries; a count minimum does not establish its key sequence.",
+          "list requires consecutive numeric keys starting at zero, in addition to the array requirement."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Reject a non-list associative payload when the API requires a consecutive numeric list.",
+      "objectiveId": "laravel.list-consecutive-keys",
+      "subtopic": "list-consecutive-keys",
+      "difficultyReason": "Reject a non-list shape instead of silently normalizing it.",
+      "format": "implementation",
+      "prerequisites": [
+        "PHP arrays",
+        "List validation"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/validation#rule-list"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": [
+          6
+        ],
+        "coverageComplete": true
+      }
+    },
+    {
+      "id": "LAR-S26-0039",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Routing",
+      "difficulty": "Intermediate",
+      "prompt": "GET /find?q=php&token=private follows this legacy redirect, but the search term is lost. The new URL must retain q and must omit token. Which replacement for the /find handler meets both requirements?",
+      "options": [
+        "Make the redirect permanent by changing its status to 301.",
+        "Generate a redirect to search with only q from $request->query(\"q\").",
+        "Append the complete incoming query string to /search.",
+        "Keep Route::redirect and add ->where(\"q\", \".*\")."
+      ],
+      "coreOptions": [
+        "Make the redirect permanent by changing its status to 301.",
+        "Generate a redirect to search with only q from $request->query(\"q\").",
+        "Append the complete incoming query string to /search.",
+        "Keep Route::redirect and add ->where(\"q\", \".*\")."
+      ],
+      "optionIds": [
+        "LAR-S26-0039@2:choice-1",
+        "LAR-S26-0039@2:choice-2",
+        "LAR-S26-0039@2:choice-3",
+        "LAR-S26-0039@2:choice-4"
+      ],
+      "answer": 1,
+      "explanation": "A fixed redirect does not transfer the incoming query automatically; explicitly generating the URL with q preserves the allowed value without token.",
+      "learning": {
+        "trace": "A fixed redirect does not transfer the incoming query automatically; explicitly generating the URL with q preserves the allowed value without token.",
+        "rationales": [
+          "Changing the redirect status does not copy q or selectively remove token.",
+          "A fixed redirect does not transfer the incoming query automatically; explicitly generating the URL with q preserves the allowed value without token.",
+          "That preserves q but also carries the private token into the destination URL.",
+          "Route constraints govern URI placeholders, not forwarding of incoming query parameters."
+        ]
+      },
+      "code": {
+        "language": "php",
+        "title": "Code to inspect",
+        "files": [
+          {
+            "name": "routes/fixture.php",
+            "kind": "php-file",
+            "snippet": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::redirect('/find', '/search');\nRoute::get('/search', fn () => 'search')->name('search');\n"
+          }
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Preserve only approved search parameters when replacing a fixed legacy redirect with a generated redirect.",
+      "objectiveId": "laravel.redirect-allowlisted-query",
+      "subtopic": "redirect-allowlisted-query",
+      "difficultyReason": "Preserve useful query state while excluding a credential from the redirect URL.",
+      "format": "code-review",
+      "prerequisites": [
+        "Redirect routes",
+        "Request query selection",
+        "Named URL generation"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/routing#redirect-routes",
+        "https://laravel.com/docs/13.x/responses#redirecting-to-named-routes"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": [
+          2,
+          5
+        ],
+        "coverageComplete": true
+      }
+    },
+    {
+      "id": "LAR-S26-0534",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Encryption formats",
+      "difficulty": "Foundation",
+      "prompt": "What does decryptString return for a value produced by the default encrypt(\"hello\") method?",
+      "options": [
+        "The serialized PHP string representation s:5:\"hello\";",
+        "The plain string hello",
+        "A MAC failure merely because different method names were paired",
+        "The original encrypted base64 payload"
+      ],
+      "coreOptions": [
+        "The serialized PHP string representation s:5:\"hello\";",
+        "The plain string hello",
+        "A MAC failure merely because different method names were paired",
+        "The original encrypted base64 payload"
+      ],
+      "optionIds": [
+        "LAR-S26-0534@2:choice-1",
+        "LAR-S26-0534@2:choice-2",
+        "LAR-S26-0534@2:choice-3",
+        "LAR-S26-0534@2:choice-4"
+      ],
+      "answer": 0,
+      "explanation": "Default encrypt serializes its value first; decryptString decrypts bytes without unserializing them. Use matching APIs for the desired representation.",
+      "learning": {
+        "trace": "Default encrypt serializes its value first; decryptString decrypts bytes without unserializing them. Use matching APIs for the desired representation.",
+        "rationales": [
+          "Default encrypt serializes its value first; decryptString decrypts bytes without unserializing them. Use matching APIs for the desired representation.",
+          "That would require unserialization, as performed by the matching default decrypt method.",
+          "Both use the same encryption format; the mismatched representation does not itself invalidate the MAC.",
+          "decryptString does perform decryption; the distinction is its serialization behavior."
+        ]
+      },
+      "code": {
+        "language": "php",
+        "title": "Code to inspect",
+        "files": [
+          {
+            "name": "probe.php",
+            "kind": "php-file",
+            "snippet": "<?php\n\n$encrypted = Illuminate\\Support\\Facades\\Crypt::encrypt('hello');\n$decoded = Illuminate\\Support\\Facades\\Crypt::decryptString($encrypted);\n\necho $decoded;\n"
+          }
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Keep string encryption and serialized-value encryption paired with the matching decryption API.",
+      "objectiveId": "laravel.encrypt-string-versus-serialized-value",
+      "subtopic": "encrypt-string-versus-serialized-value",
+      "difficultyReason": "Pair encryption and decryption APIs with the representation actually protected.",
+      "format": "execution",
+      "prerequisites": [
+        "Encrypter serialization",
+        "String-specific encryption methods"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/encryption#using-the-encrypter"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0355",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Broadcast events",
+      "difficulty": "Intermediate",
+      "prompt": "A broadcast event has public orderId and internalToken properties. Subscribers need only orderId. Which event method explicitly defines the broadcast payload without exposing internalToken?",
+      "options": [
+        "broadcastOn(), returning [\"orderId\" => $this->orderId].",
+        "viaQueue(), returning \"private\".",
+        "broadcastAs(), returning \"orderId\".",
+        "broadcastWith(), returning [\"orderId\" => $this->orderId]."
+      ],
+      "coreOptions": [
+        "broadcastOn(), returning [\"orderId\" => $this->orderId].",
+        "viaQueue(), returning \"private\".",
+        "broadcastAs(), returning \"orderId\".",
+        "broadcastWith(), returning [\"orderId\" => $this->orderId]."
+      ],
+      "optionIds": [
+        "LAR-S26-0355@1:choice-1",
+        "LAR-S26-0355@1:choice-2",
+        "LAR-S26-0355@1:choice-3",
+        "LAR-S26-0355@1:choice-4"
+      ],
+      "answer": 3,
+      "explanation": "An explicit broadcast payload replaces the default public-property extraction with the selected fields.",
+      "learning": {
+        "trace": "An explicit broadcast payload replaces the default public-property extraction with the selected fields.",
+        "rationales": [
+          "broadcastOn selects channels, not the data fields in the transmitted payload.",
+          "A queue name does not redact fields delivered to subscribers.",
+          "Renaming the event does not remove sensitive public properties from its payload.",
+          "An explicit broadcast payload replaces the default public-property extraction with the selected fields."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Restrict public broadcast payloads with broadcastWith rather than exposing every public property.",
+      "objectiveId": "laravel.broadcast-explicit-public-payload",
+      "subtopic": "broadcast-explicit-public-payload",
+      "difficultyReason": "Control fields exposed to subscribers independently of server-side event data.",
+      "format": "code-review",
+      "prerequisites": [
+        "Broadcast event payloads",
+        "Public properties",
+        "Data minimization"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/broadcasting#broadcast-data"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0057",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "HTTP responses",
+      "difficulty": "Intermediate",
+      "prompt": "At the point shown, what is printed? No response has been sent yet.",
+      "options": [
+        "ran without a,b",
+        "a,bran",
+        "pending",
+        "An error because callbacks cannot print response content"
+      ],
+      "coreOptions": [
+        "ran without a,b",
+        "a,bran",
+        "pending",
+        "An error because callbacks cannot print response content"
+      ],
+      "optionIds": [
+        "LAR-S26-0057@1:choice-1",
+        "LAR-S26-0057@1:choice-2",
+        "LAR-S26-0057@1:choice-3",
+        "LAR-S26-0057@1:choice-4"
+      ],
+      "answer": 2,
+      "explanation": "Constructing the streamed response stores the callback; content sending executes it later.",
+      "learning": {
+        "trace": "Constructing the streamed response stores the callback; content sending executes it later.",
+        "rationales": [
+          "The callback has not run at all; its state change is deferred along with its output.",
+          "This would require the callback to execute during construction, which it does not.",
+          "Constructing the streamed response stores the callback; content sending executes it later.",
+          "Printing content is precisely how a streamed response callback supplies its body."
+        ]
+      },
+      "code": {
+        "language": "php",
+        "title": "Code to inspect",
+        "files": [
+          {
+            "name": "probe.php",
+            "kind": "php-file",
+            "snippet": "<?php\n\n$ran = false;\n$response = response()->streamDownload(function () use (&$ran): void {\n    $ran = true;\n    echo 'a,b';\n}, 'report.csv');\n\necho $ran ? 'ran' : 'pending';\n"
+          }
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Distinguish creation of a streamed download from execution of its callback.",
+      "objectiveId": "laravel.stream-callback-deferred",
+      "subtopic": "stream-callback-deferred",
+      "difficultyReason": "Separate constructing the response from sending its content.",
+      "format": "execution",
+      "prerequisites": [
+        "Streamed responses",
+        "Callback timing"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/responses#streamed-downloads"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0437",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "HTTP client errors",
+      "difficulty": "Foundation",
+      "prompt": "The remote host cannot be reached and no HTTP response is received. With an ordinary Http::get call, which handling strategy covers that failure?",
+      "options": [
+        "Catch ConnectionException separately from checking HTTP response statuses.",
+        "Treat the call as a successful empty response when no throw() was configured.",
+        "Check $response->status() === 500 after every connection failure.",
+        "Use only $response->failed() without catching transport exceptions."
+      ],
+      "coreOptions": [
+        "Catch ConnectionException separately from checking HTTP response statuses.",
+        "Treat the call as a successful empty response when no throw() was configured.",
+        "Check $response->status() === 500 after every connection failure.",
+        "Use only $response->failed() without catching transport exceptions."
+      ],
+      "optionIds": [
+        "LAR-S26-0437@2:choice-1",
+        "LAR-S26-0437@2:choice-2",
+        "LAR-S26-0437@2:choice-3",
+        "LAR-S26-0437@2:choice-4"
+      ],
+      "answer": 0,
+      "explanation": "A connection failure is represented by an exception because no response status exists to inspect.",
+      "learning": {
+        "trace": "A connection failure is represented by an exception because no response status exists to inspect.",
+        "rationales": [
+          "A connection failure is represented by an exception because no response status exists to inspect.",
+          "Default non-throwing HTTP-status behavior does not suppress transport exceptions.",
+          "A connection failure does not create a server-generated HTTP 500 response object.",
+          "The failed method requires a response and cannot handle a call that throws before returning one."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Distinguish a connection failure from an HTTP response error.",
+      "objectiveId": "laravel.http-connection-failure-no-response",
+      "subtopic": "http-connection-failure-no-response",
+      "difficultyReason": "Handle a transport failure that has no HTTP status to inspect.",
+      "format": "debugging",
+      "prerequisites": [
+        "ConnectionException",
+        "HTTP status versus transport failure"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/http-client#timeout"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0522",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Encryption integrity",
+      "difficulty": "Foundation",
+      "prompt": "Which result should the tampering regression test require?",
+      "options": [
+        "decryptString throws DecryptException instead of returning trusted plaintext.",
+        "decryptString returns null as its normal invalid-payload result.",
+        "The modified outer value is accepted whenever it remains valid base64.",
+        "decryptString returns the changed bytes as a successful plaintext value."
+      ],
+      "coreOptions": [
+        "decryptString throws DecryptException instead of returning trusted plaintext.",
+        "decryptString returns null as its normal invalid-payload result.",
+        "The modified outer value is accepted whenever it remains valid base64.",
+        "decryptString returns the changed bytes as a successful plaintext value."
+      ],
+      "optionIds": [
+        "LAR-S26-0522@2:choice-1",
+        "LAR-S26-0522@2:choice-2",
+        "LAR-S26-0522@2:choice-3",
+        "LAR-S26-0522@2:choice-4"
+      ],
+      "answer": 0,
+      "explanation": "The MAC authenticates the protected payload, so changing ciphertext without a valid corresponding MAC must be rejected.",
+      "learning": {
+        "trace": "The MAC authenticates the protected payload, so changing ciphertext without a valid corresponding MAC must be rejected.",
+        "rationales": [
+          "The MAC authenticates the protected payload, so changing ciphertext without a valid corresponding MAC must be rejected.",
+          "The authenticated decryption failure is reported by DecryptException, not a successful null return.",
+          "Base64 validity is only an encoding property, not authenticity.",
+          "That would ignore the integrity guarantee the test is meant to protect."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "The application uses Laravel’s AES-256-CBC encrypter. A test modifies the ciphertext value inside the payload but leaves its original MAC.",
+      "objective": "Reject modified encrypted payloads rather than trusting decryptable-looking base64.",
+      "objectiveId": "laravel.encrypted-payload-tamper-detection",
+      "subtopic": "encrypted-payload-tamper-detection",
+      "difficultyReason": "Verify rejection of a modified protected value rather than only successful round trips.",
+      "format": "testing",
+      "prerequisites": [
+        "Encrypted payload integrity",
+        "MAC verification",
+        "Decryption exceptions"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/encryption#decrypting-a-value"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0261",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Query Builder",
+      "difficulty": "Foundation",
+      "prompt": "A shared query already selects id and name. A helper calls select(\"code\"), and downstream code can no longer read id. Which helper change adds code while retaining the existing projection?",
+      "options": [
+        "Call select(\"code\") twice.",
+        "Call get() before select(\"code\").",
+        "Use addSelect(\"code\").",
+        "Use whereNotNull(\"code\") instead."
+      ],
+      "coreOptions": [
+        "Call select(\"code\") twice.",
+        "Call get() before select(\"code\").",
+        "Use addSelect(\"code\").",
+        "Use whereNotNull(\"code\") instead."
+      ],
+      "optionIds": [
+        "LAR-S26-0261@1:choice-1",
+        "LAR-S26-0261@1:choice-2",
+        "LAR-S26-0261@1:choice-3",
+        "LAR-S26-0261@1:choice-4"
+      ],
+      "answer": 2,
+      "explanation": "addSelect extends the builder’s selected columns instead of resetting them.",
+      "learning": {
+        "trace": "addSelect extends the builder’s selected columns instead of resetting them.",
+        "rationales": [
+          "Repeated select calls still replace the current projection.",
+          "This executes the existing query and changes the workflow rather than extending its projection.",
+          "addSelect extends the builder’s selected columns instead of resetting them.",
+          "A predicate can filter rows but does not add code to the selected columns."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Extend a projection with addSelect instead of replacing the existing selected columns.",
+      "objectiveId": "laravel.add-select-preserves-projection",
+      "subtopic": "add-select-preserves-projection",
+      "difficultyReason": "Extend an existing projection instead of replacing fields required by the caller.",
+      "format": "debugging",
+      "prerequisites": [
+        "Query Builder projection"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/queries#select-statements"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0448",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "HTTP client retries",
+      "difficulty": "Intermediate",
+      "prompt": "An authenticated request receives 401 because its token expired. Which retry callback policy changes the next request appropriately without treating every failure as an expired token?",
+      "options": [
+        "Check for RequestException with status 401, refresh the pending request’s token, then allow retry.",
+        "Treat every 5xx response as proof that the user’s access token expired.",
+        "Return true for every exception but leave the pending request’s token unchanged.",
+        "Refresh a separate newly created request object but retry the original unchanged request."
+      ],
+      "coreOptions": [
+        "Check for RequestException with status 401, refresh the pending request’s token, then allow retry.",
+        "Treat every 5xx response as proof that the user’s access token expired.",
+        "Return true for every exception but leave the pending request’s token unchanged.",
+        "Refresh a separate newly created request object but retry the original unchanged request."
+      ],
+      "optionIds": [
+        "LAR-S26-0448@1:choice-1",
+        "LAR-S26-0448@1:choice-2",
+        "LAR-S26-0448@1:choice-3",
+        "LAR-S26-0448@1:choice-4"
+      ],
+      "answer": 0,
+      "explanation": "The callback receives the pending request and can update its credential for the next attempt while filtering by the relevant failure.",
+      "learning": {
+        "trace": "The callback receives the pending request and can update its credential for the next attempt while filtering by the relevant failure.",
+        "rationales": [
+          "The callback receives the pending request and can update its credential for the next attempt while filtering by the relevant failure.",
+          "Server errors do not uniquely indicate a rejected credential.",
+          "That retries the same rejected credential and does not perform the required refresh.",
+          "Changing an unrelated request does not update the request being retried."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "A trusted local refresh function can provide a new token. Retry budget permits one further attempt.",
+      "objective": "Refresh a rejected token within a status-specific retry callback before the next request.",
+      "objectiveId": "laravel.http-retry-refresh-rejected-token",
+      "subtopic": "http-retry-refresh-rejected-token",
+      "difficultyReason": "Change the next attempt’s credential only for the failure that warrants refresh.",
+      "format": "code-review",
+      "prerequisites": [
+        "Status-specific retry callbacks",
+        "PendingRequest authentication",
+        "Token refresh"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/http-client#retries"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0278",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Query Builder",
+      "difficulty": "Intermediate",
+      "prompt": "records has nullable timestamps. Record has a creating observer that increments a counter. The table starts empty. What follows DB::table(\"records\")->insertGetId([\"name\" => \"new\"])?",
+      "options": [
+        "It returns a Record model and runs creating before the insert.",
+        "It returns the id and runs the observer once because the table name matches Record.",
+        "The id is returned; no observer runs or timestamps are filled.",
+        "It returns the id and automatically fills both timestamps using Record’s defaults."
+      ],
+      "coreOptions": [
+        "It returns a Record model and runs creating before the insert.",
+        "It returns the id and runs the observer once because the table name matches Record.",
+        "The id is returned; no observer runs or timestamps are filled.",
+        "It returns the id and automatically fills both timestamps using Record’s defaults."
+      ],
+      "optionIds": [
+        "LAR-S26-0278@2:choice-1",
+        "LAR-S26-0278@2:choice-2",
+        "LAR-S26-0278@2:choice-3",
+        "LAR-S26-0278@2:choice-4"
+      ],
+      "answer": 2,
+      "explanation": "Query Builder inserts directly and retrieves the key without constructing or saving an Eloquent model.",
+      "learning": {
+        "trace": "Query Builder inserts directly and retrieves the key without constructing or saving an Eloquent model.",
+        "rationales": [
+          "insertGetId returns the identifier, not an Eloquent model with lifecycle hooks.",
+          "Query Builder does not infer a model class from the table name.",
+          "Query Builder inserts directly and retrieves the key without constructing or saving an Eloquent model.",
+          "Eloquent timestamp behavior does not apply to this direct table operation."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Retrieve an inserted identifier without assuming Query Builder applies Eloquent model events or timestamps.",
+      "objectiveId": "laravel.insert-get-id-without-model-lifecycle",
+      "subtopic": "insert-get-id-without-model-lifecycle",
+      "difficultyReason": "Separate raw table insertion from model timestamp and observer behavior.",
+      "format": "execution",
+      "prerequisites": [
+        "Query Builder insertGetId",
+        "Eloquent lifecycle boundary"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/queries#auto-incrementing-ids",
+        "https://laravel.com/docs/13.x/eloquent#events"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0436",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "HTTP client",
+      "difficulty": "Foundation",
+      "prompt": "What happens at this call?",
+      "options": [
+        "The client retries indefinitely until a 2xx response arrives.",
+        "A RequestException is always thrown before $status can be assigned.",
+        "A response is returned and $status is 500.",
+        "The client returns null because a 500 response has no usable response object."
+      ],
+      "coreOptions": [
+        "The client retries indefinitely until a 2xx response arrives.",
+        "A RequestException is always thrown before $status can be assigned.",
+        "A response is returned and $status is 500.",
+        "The client returns null because a 500 response has no usable response object."
+      ],
+      "optionIds": [
+        "LAR-S26-0436@1:choice-1",
+        "LAR-S26-0436@1:choice-2",
+        "LAR-S26-0436@1:choice-3",
+        "LAR-S26-0436@1:choice-4"
+      ],
+      "answer": 2,
+      "explanation": "The client does not throw for HTTP 4xx/5xx statuses by default; callers can inspect or explicitly throw.",
+      "learning": {
+        "trace": "The client does not throw for HTTP 4xx/5xx statuses by default; callers can inspect or explicitly throw.",
+        "rationales": [
+          "There is no implicit unlimited retry loop for an ordinary get.",
+          "That requires an explicit throwing policy or applicable retry behavior, absent here.",
+          "The client does not throw for HTTP 4xx/5xx statuses by default; callers can inspect or explicitly throw.",
+          "Error responses still have a status, headers and potentially a body."
+        ]
+      },
+      "code": {
+        "language": "php",
+        "title": "Code to inspect",
+        "files": [
+          {
+            "name": "probe.php",
+            "kind": "php-file",
+            "snippet": "<?php\n\n$response = Illuminate\\Support\\Facades\\Http::get('https://api.example.test/report');\n$status = $response->status();\n"
+          }
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "The server returns HTTP 500. No retry or throw behavior has been configured.",
+      "objective": "Handle an HTTP error status without assuming the Laravel client throws by default.",
+      "objectiveId": "laravel.http-error-response-no-default-throw",
+      "subtopic": "http-error-response-no-default-throw",
+      "difficultyReason": "Distinguish an HTTP response with an error status from an exception policy.",
+      "format": "execution",
+      "prerequisites": [
+        "Laravel HTTP client",
+        "HTTP status codes"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/http-client#error-handling"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0460",
+      "revision": 2,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "API pagination",
+      "difficulty": "Intermediate",
+      "prompt": "JsonResource::withoutWrapping() is enabled. A resource collection wraps a LengthAwarePaginator. What shape should a client still expect?",
+      "options": [
+        "A data envelope with pagination links and meta.",
+        "An exception because pagination requires the global wrap setting to remain enabled.",
+        "A data envelope and links, but no meta because wrapping was disabled.",
+        "Only the bare item array with no links or meta."
+      ],
+      "coreOptions": [
+        "A data envelope with pagination links and meta.",
+        "An exception because pagination requires the global wrap setting to remain enabled.",
+        "A data envelope and links, but no meta because wrapping was disabled.",
+        "Only the bare item array with no links or meta."
+      ],
+      "optionIds": [
+        "LAR-S26-0460@2:choice-1",
+        "LAR-S26-0460@2:choice-2",
+        "LAR-S26-0460@2:choice-3",
+        "LAR-S26-0460@2:choice-4"
+      ],
+      "answer": 0,
+      "explanation": "Paginated resource responses retain data wrapping to accompany the pagination information.",
+      "learning": {
+        "trace": "Paginated resource responses retain data wrapping to accompany the pagination information.",
+        "rationales": [
+          "Paginated resource responses retain data wrapping to accompany the pagination information.",
+          "The resource machinery handles pagination wrapping even when ordinary wrapping is disabled.",
+          "The pagination response still includes its metadata; disabling ordinary wrapping does not remove that part.",
+          "Disabling ordinary wrapping does not remove the pagination response structure."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Retain the paginated data envelope even when ordinary resource wrapping is disabled.",
+      "objectiveId": "laravel.paginated-resource-always-data-envelope",
+      "subtopic": "paginated-resource-always-data-envelope",
+      "difficultyReason": "Recognize the pagination envelope exception to ordinary unwrapped resources.",
+      "format": "execution",
+      "prerequisites": [
+        "Resource wrapping",
+        "Paginator metadata"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/eloquent-resources#data-wrapping-and-pagination"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0564",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Localization",
+      "difficulty": "Intermediate",
+      "prompt": "A UTC timestamp represents 2026-01-15 12:00:00. The viewer uses Europe/Zurich, and the displayed value must preserve the same instant. Which operation on its CarbonImmutable value is appropriate?",
+      "options": [
+        "shiftTimezone(\"Europe/Zurich\")",
+        "addHour() while keeping the UTC timezone",
+        "Parse the stored UTC text as Europe/Zurich without declaring its original UTC basis",
+        "setTimezone(\"Europe/Zurich\")"
+      ],
+      "coreOptions": [
+        "shiftTimezone(\"Europe/Zurich\")",
+        "addHour() while keeping the UTC timezone",
+        "Parse the stored UTC text as Europe/Zurich without declaring its original UTC basis",
+        "setTimezone(\"Europe/Zurich\")"
+      ],
+      "optionIds": [
+        "LAR-S26-0564@1:choice-1",
+        "LAR-S26-0564@1:choice-2",
+        "LAR-S26-0564@1:choice-3",
+        "LAR-S26-0564@1:choice-4"
+      ],
+      "answer": 3,
+      "explanation": "Timezone conversion changes the wall-clock display to the viewer’s zone while retaining the instant.",
+      "learning": {
+        "trace": "Timezone conversion changes the wall-clock display to the viewer’s zone while retaining the instant.",
+        "rationales": [
+          "That keeps the wall-clock fields while changing the timezone interpretation, which changes the represented instant.",
+          "Adding an hour changes the instant instead of merely displaying it in another zone.",
+          "That interprets the source wall time in the wrong zone rather than converting the known instant.",
+          "Timezone conversion changes the wall-clock display to the viewer’s zone while retaining the instant."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Keep persisted timestamps in a consistent time basis while formatting a viewer-specific timezone.",
+      "objectiveId": "laravel.timezone-display-preserves-instant",
+      "subtopic": "timezone-display-preserves-instant",
+      "difficultyReason": "Change the display timezone without changing which instant the timestamp denotes.",
+      "format": "implementation",
+      "prerequisites": [
+        "UTC storage",
+        "Carbon timezone conversion",
+        "Instant versus wall time"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/eloquent-mutators#date-casting-serialization-and-timezones",
+        "https://carbon.nesbot.com/docs/"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": null,
+        "coverageComplete": false
+      }
+    },
+    {
+      "id": "LAR-S26-0165",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Blade components",
+      "difficulty": "Foundation",
+      "prompt": "A button component uses $attributes->merge([\"type\" => \"button\"]). A caller supplies type=\"submit\". A reviewer claims the default guarantees the component cannot submit a form. Which finding is correct?",
+      "options": [
+        "The default button value always overrides the caller.",
+        "The component throws because type appears in both input and defaults.",
+        "The type becomes \"button submit\", so neither behavior applies.",
+        "The caller's submit value wins; merge supplies a default, not an enforcement policy."
+      ],
+      "coreOptions": [
+        "The default button value always overrides the caller.",
+        "The component throws because type appears in both input and defaults.",
+        "The type becomes \"button submit\", so neither behavior applies.",
+        "The caller's submit value wins; merge supplies a default, not an enforcement policy."
+      ],
+      "optionIds": [
+        "LAR-S26-0165@1:choice-1",
+        "LAR-S26-0165@1:choice-2",
+        "LAR-S26-0165@1:choice-3",
+        "LAR-S26-0165@1:choice-4"
+      ],
+      "answer": 3,
+      "explanation": "For ordinary attributes such as type, a provided caller value overrides the default in the merge.",
+      "learning": {
+        "trace": "For ordinary attributes such as type, a provided caller value overrides the default in the merge.",
+        "rationales": [
+          "This reverses the precedence for an ordinary supplied attribute.",
+          "The merge handles this overlap by choosing the supplied value, not by rejecting it.",
+          "Non-class attributes are not concatenated like CSS classes.",
+          "For ordinary attributes such as type, a provided caller value overrides the default in the merge."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Distinguish default attribute values from enforced values when merging component attributes.",
+      "objectiveId": "laravel.component-nonclass-default-overridable",
+      "subtopic": "component-nonclass-default-overridable",
+      "difficultyReason": "Distinguish a default from an enforced attribute value.",
+      "format": "code-review",
+      "prerequisites": [
+        "Component attribute merging",
+        "HTML button types"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/blade#non-class-attribute-merging"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "runtime-verified",
+      "validationKind": "runtime",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": [
+          4
+        ],
+        "coverageComplete": true
+      }
+    },
+    {
+      "id": "LAR-S26-0084",
+      "revision": 1,
+      "collectionId": "laravel-specialist-review-v1",
+      "track": "Laravel",
+      "topic": "Middleware",
+      "difficulty": "Foundation",
+      "prompt": "A standard Laravel 13 route uses middleware(\"paid\"), but the alias is unknown. PaidSubscription is an autoloadable middleware class. It should run only on routes that name paid. Which bootstrap configuration supplies the missing mapping?",
+      "options": [
+        "Inside withMiddleware, call $middleware->append(PaidSubscription::class).",
+        "Add PaidSubscription::class to bootstrap/providers.php.",
+        "Inside withMiddleware, call $middleware->alias([\"paid\" => PaidSubscription::class]).",
+        "Rename the route itself to paid."
+      ],
+      "coreOptions": [
+        "Inside withMiddleware, call $middleware->append(PaidSubscription::class).",
+        "Add PaidSubscription::class to bootstrap/providers.php.",
+        "Inside withMiddleware, call $middleware->alias([\"paid\" => PaidSubscription::class]).",
+        "Rename the route itself to paid."
+      ],
+      "optionIds": [
+        "LAR-S26-0084@1:choice-1",
+        "LAR-S26-0084@1:choice-2",
+        "LAR-S26-0084@1:choice-3",
+        "LAR-S26-0084@1:choice-4"
+      ],
+      "answer": 2,
+      "explanation": "The alias map resolves the short route middleware name to the class without adding it globally.",
+      "learning": {
+        "trace": "The alias map resolves the short route middleware name to the class without adding it globally.",
+        "rationales": [
+          "Appending makes it global and does not supply the required paid alias mapping.",
+          "That file registers service providers, not route middleware aliases.",
+          "The alias map resolves the short route middleware name to the class without adding it globally.",
+          "A route name is unrelated to resolving middleware(\"paid\")."
+        ]
+      },
+      "versions": {
+        "php": "8.4, 8.5",
+        "laravel": "13.x",
+        "label": "Laravel 13.x (validated 13.40.0) · PHP 8.4 / 8.5. E_ALL; UTC; no external services or application data."
+      },
+      "assumptions": "",
+      "objective": "Register a route middleware alias in the Laravel 13 bootstrap configuration.",
+      "objectiveId": "laravel.middleware-alias-registration",
+      "subtopic": "middleware-alias-registration",
+      "difficultyReason": "Connect a route alias to its middleware class without broadening its scope.",
+      "format": "debugging",
+      "prerequisites": [
+        "Bootstrap middleware configuration",
+        "Route aliases"
+      ],
+      "references": [
+        "https://laravel.com/docs/13.x/middleware#middleware-aliases"
+      ],
+      "status": "internal-validated",
+      "validationStatus": "documented-contract-reviewed",
+      "validationKind": "documented-contract",
+      "independentEditorialReview": "pending",
+      "lessonMapping": {
+        "lessonIds": [
+          8
+        ],
+        "coverageComplete": true
+      }
+    }
+  ]
+}

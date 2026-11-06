@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0397",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Scheduling",
+  "subtopic": "sub-minute-scheduler-process-lifetime",
+  "objective": {
+    "id": "laravel.sub-minute-scheduler-process-lifetime",
+    "text": "Recognize sub-minute schedules require schedule:run to remain alive for the current minute."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Account for the command remaining active to service repeated events within the current minute."
+  },
+  "prerequisites": [
+    "Sub-minute schedules",
+    "schedule:run lifecycle"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An application adds an everyTenSeconds task. Under the normal sub-minute scheduler behavior, why does schedule:run no longer return immediately after its first set of due events?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "It remains active for the rest of the current minute to evaluate repeatable events.",
+      "rationale": "Sub-minute scheduling uses the current command process to service repeat intervals until the minute ends.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "It waits for ten separate cron invocations before starting the task.",
+      "rationale": "The repeated cadence is handled within the minute rather than requiring multiple external cron entries.",
+      "misconception": "The repeated cadence is handled within the minute rather than requiring multiple external cron entries."
+    },
+    {
+      "id": "choice-3",
+      "text": "It becomes a permanent daemon and never exits until the next deployment.",
+      "rationale": "The normal schedule:run loop is bounded by the current minute, unlike an indefinitely running service.",
+      "misconception": "The normal schedule:run loop is bounded by the current minute, unlike an indefinitely running service."
+    },
+    {
+      "id": "choice-4",
+      "text": "It blocks until every queued job dispatched by any task has finished.",
+      "rationale": "The scheduler’s repeated-event loop is not a join on all background queue work.",
+      "misconception": "The scheduler’s repeated-event loop is not a join on all background queue work."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Sub-minute scheduling uses the current command process to service repeat intervals until the minute ends.",
+    "trace": [
+      "Sub-minute scheduling uses the current command process to service repeat intervals until the minute ends.",
+      "The repeated cadence is handled within the minute rather than requiring multiple external cron entries.",
+      "The normal schedule:run loop is bounded by the current minute, unlike an indefinitely running service.",
+      "The scheduler’s repeated-event loop is not a join on all background queue work."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Console/Scheduling/ScheduleRunCommand.php",
+    "contains": [
+      "$this->repeatEvents($events->filter->isRepeatable());",
+      "$endOfMinute = $this->startedAt->copy()->endOfMinute();"
+    ],
+    "reason": "The current command repeats eligible sub-minute events through the minute boundary. The long-running timed loop is source-validated, not run as a live minute-long process.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#sub-minute-scheduled-tasks"
+  ]
+}

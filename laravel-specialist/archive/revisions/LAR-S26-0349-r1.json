@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0349",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Event tests",
+  "subtopic": "selective-event-fake",
+  "objective": {
+    "id": "laravel.selective-event-fake",
+    "text": "Fake selected event types while allowing unrelated application listeners to execute."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Predict which listeners remain active under a targeted fake."
+  },
+  "prerequisites": [
+    "Event fake selection",
+    "Unrelated listeners"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Event::fake([OrderPlaced::class]) is active. Both OrderPlaced and AuditRequested have ordinary listeners. What happens when each event is dispatched once?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Both sets of listeners run, but OrderPlaced is additionally recorded.",
+      "rationale": "For the faked type, recording replaces normal listener execution.",
+      "misconception": "For the faked type, recording replaces normal listener execution."
+    },
+    {
+      "id": "choice-2",
+      "text": "OrderPlaced is recorded without its listeners; AuditRequested’s real listeners still run.",
+      "rationale": "A selective fake intercepts matching event types and delegates the others to the original dispatcher.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "OrderPlaced runs normally while AuditRequested is blocked.",
+      "rationale": "This reverses the selected fake list’s meaning.",
+      "misconception": "This reverses the selected fake list’s meaning."
+    },
+    {
+      "id": "choice-4",
+      "text": "Both events are recorded and neither set of listeners runs.",
+      "rationale": "That describes faking every event rather than the supplied subset.",
+      "misconception": "That describes faking every event rather than the supplied subset."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A selective fake intercepts matching event types and delegates the others to the original dispatcher.",
+    "trace": [
+      "For the faked type, recording replaces normal listener execution.",
+      "A selective fake intercepts matching event types and delegates the others to the original dispatcher.",
+      "This reverses the selected fake list’s meaning.",
+      "That describes faking every event rather than the supplied subset."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "audit:recorded",
+    "probe": "class OrderPlaced\n{\n}\nclass AuditRequested\n{\n}\nIlluminate\\Support\\Facades\\Event::listen(OrderPlaced::class, fn () => print('order'));\nIlluminate\\Support\\Facades\\Event::listen(AuditRequested::class, fn () => print('audit:'));\nIlluminate\\Support\\Facades\\Event::fake([OrderPlaced::class]);\nevent(new OrderPlaced());\nevent(new AuditRequested());\nIlluminate\\Support\\Facades\\Event::assertDispatched(OrderPlaced::class);\necho 'recorded';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mocking#faking-a-subset-of-events"
+  ]
+}

@@ -1,0 +1,13 @@
+✓ PHP expansion browser: Default URL loads the 620-question PHP release; exactly PHP and Laravel Beta subjects are available and historical totals are isolated
+✓ PHP expansion browser: setup has no extra review filters on desktop/mobile; default difficulty selection remains intact
+Rendered and answered 100/620 review questions in desktop/mobile Chrome.
+Rendered and answered 200/620 review questions in desktop/mobile Chrome.
+Rendered and answered 300/620 review questions in desktop/mobile Chrome.
+Rendered and answered 400/620 review questions in desktop/mobile Chrome.
+Rendered and answered 500/620 review questions in desktop/mobile Chrome.
+Rendered and answered 600/620 review questions in desktop/mobile Chrome.
+✓ PHP expansion browser: all 620 questions render exact sources on desktop/mobile; all 1860 distractor rationales map correctly; mixed Learn answers score correctly
+✓ PHP expansion browser: 20-question Exam remains neutral until submission, grades shuffled answers 10/20 and saves completion once
+✓ PHP expansion browser: question bank has no extra review filters; standard topic and difficulty controls still work
+✓ PHP expansion browser: missed-question retry, multi-file review, exact clipboard copy and native mobile horizontal scrolling work
+✓ PHP expansion browser: reload and retired collection bookmarks preserve release and historical progress; no browser exceptions

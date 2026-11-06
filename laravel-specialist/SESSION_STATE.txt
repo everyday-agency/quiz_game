@@ -1,0 +1,225 @@
+Active mission: REQUEST.txt. Complete all SIX sequential 100-question Laravel
+batches autonomously, then full internal audit, static local review collection,
+browser/regression tests and deliverables. Do not stop after one batch; do not
+ask per-batch approval. No agents permitted. No push/merge/deploy/activation.
+
+Branch authoring/laravel-specialist-2026 from PHP release 7c166faa.
+Preexisting uncommitted PHP release evidence and three report/state files are
+unrelated user work and must remain untouched.
+
+Batch 1: ACCEPTED INTERNALLY, 100 records in batches/batch-01.json.
+IDs LAR-S26-0001..0100; 88 actual framework executions per PHP version, 12 explicit
+documented contracts. PHP 8.5.2 / 8.4.17, Laravel 13.40.0. 35 Foundation, 65
+Intermediate. No artificial Advanced quota. Source/harness hashes match evidence.
+All four options internally reviewed. Prior question revisions archived.
+Independent approval pending. 620 PHP and protected app file hashes unchanged.
+
+Batch 2: ACCEPTED INTERNALLY, 100 records in batches/batch-02.json.
+95 real-framework executions and five explicit documented contracts per PHP
+version. 36 Foundation, 64 Intermediate. 60 mapped, 40 unmapped. Review and prior
+revisions archived. No answer-length outliers after targeted corrections.
+Batch 3: ACCEPTED INTERNALLY, 100 records in batches/batch-03.json.
+IDs LAR-S26-0201..0300; 97 real-framework cases and 3 explicit documented
+PostgreSQL contracts per runtime. 22 Foundation,76 Intermediate,2 Advanced;
+all 100 unmapped. Source hash b7c19fdcabf10e5c28297c2e81ad7b45335837ac253cfd5666aefd12b4732f78.
+23 prior question revisions archived. Unique-longest 20%, shortest25%, no
+length outliers. Keys29/21/20/30. Eleven lexical candidates manually dispositioned.
+Q242 plan retargeted before authoring to per-parent eager limit. Q250 retargeted
+with archive to additive pivot metadata synchronization. Q243 validates all four
+lazy-loading-prevention setups (timing, multi-model vs single hydration, property
+inspection). Q241 objective aligned with cached-property vs fresh-query task.
+Q229/280/289/300 downgraded to Intermediate; advanced284/299 remain.
+No application changes or activation. Accepted count300/600.
+
+Batch 4: ACCEPTED INTERNALLY,100 records in batches/batch-04.json.
+IDs LAR-S26-0301..0400.94 real-framework executions and6 explicit documented
+contracts per PHP version.44 Foundation,54 Intermediate,2 Advanced;all100unmapped.
+Hash4af575f6a37aeae0aead4b54fc74a0e9d26e00c7b204d41adceb2f5e20b6a113.
+54 records have archived prior revisions (some multiple due staged editorial
+checks). No length outliers; unique-longest22%,shortest35%; keys27/18/28/27.
+Nine lexical candidates manually dispositioned. Review not independent approval.
+Total accepted400/600. ProductionPHP620and protectedapphashes unchanged.
+
+Batch5:100-objective plan saved,ZERO drafts. Start LAR-S26-0401.
+Storage401-415,cache416-435,HTTPclient436-455,APIresources456-470,
+testing471-490,frontend491-500. Last4Inertia topics require verified adapter
+version. Inertia Laravel v3.7.0 is now INSTALLED as a dev dependency in the local
+harness. Composer installed1 package,updated0,removed0;no advisories. Framework
+stays13.40.0. versions.json has new lock hash+adapter sourcecommit. Previous
+technical evidence1-4 andoldversions archived in evidence/history/pre-inertia.
+Fresh accepted-batch runtime regressions are RUNNING:
+B1 session55412;B2 session24732;B3 session96544;B4 session76781.
+Poll these exec sessions with write_stdin and inspect every result. Once they
+pass run checkersBATCH1..4, then record fresh lock regression outcomes. No
+question changed and accepted source hashes remain unchanged. Main bootstrap
+andrunner also unchanged; adapter is explicitly registered only in future
+Inertia fixtures (notglobally). Original main composer.lock hashcef287... is
+historical. No runtime Inertia questions authored yet. Use3.7.0 explicit
+assumptions, official3.xdocs/taggedsource. v2 protocol URL was inaccessible.
+No subagents, no push/merge/deploy/activation. Continue through600, then full
+cross-review,local reviewbuild,browser/regressions,30completequestion examples.
+
+Authoring:
+- authoring/record.mjs supplies metadata boilerplate, explicit IDs, deterministic
+  option shuffle. Every input is manually authored, not a scenario template.
+- Each batch aggregator imports numbered parts; batch 1 also overlays explicitly
+  authored supplemental runtime probes from validation/probes/batch-01.mjs.
+- q({n,type:E/D/R/I/T/A,level:F/M/A,sub,needs,why,lessons?,docs,ask,code?,
+  assume?,choices:[[text,rationale],...],key:0(default),test,revision:1(default)})
+- Correct input choice may be first; helper redistributes source key positions
+  deterministically. Learner answer randomization is separate.
+- bladeOutput(stdout,probe) wraps output with temporary composer PSR-4 metadata\n  and a views/components directory for anonymous component discovery.\n- file(source,path='probe.php',kind='complete-file',scope='') adds PHP opening tag
+  for full files. Use String.raw for PHP namespaces. Fragments require scope.
+- output(stdout,probe?) uses actual real Laravel bootstrap. With no custom probe,
+  it requires probe.php. Route files routes/fixture.php load at bootstrap.
+- contract(relativeFrameworkSource,exactTokens,interpretation) records a
+  documented-contract check; no runtime claim.
+- File-form PHP is syntax checked; fragments get a PHP-opening-tag lint wrapper.
+  Visible blocks use four spaces and multiline braces.
+
+Validation:
+Before executing changed fixtures, inspect the source, then write
+evidence/batch-N-execution-review.json with SHA256(JSON.stringify(authorRecords)),
+scope "fresh temporary app; no external services", reviewer author internal.
+BATCH=N node tests/laravel-specialist/runtime.mjs
+BATCH=N node tools/laravel-specialist-check.mjs (requires all 100 and fresh evidence)
+Write reviews/batch-NN.json with sourceHash, completed=true, independentApproval
+pending, itemReviews matching IDs/revisions, manual duplicate/wording decisions.
+BATCH=N node tools/laravel-specialist-accept.mjs
+Acceptance writes frozen batch, mapping overlay, WORK_STATE; never activates.
+
+Harness:
+Composer vendor installed locally, ignored. lock pins Laravel13.40.0; old13.0.0
+was refused by Composer security advisories and security blocking was not
+disabled. bootstrap.php supplies temporary config, array cache/session/mail,
+SQLite :memory:, local disk. PHP processes use -n, env {}, open_basedir temp plus
+trusted validation directory, network/process APIs disabled. This is reviewed
+test code, NOT an arbitrary untrusted-code sandbox.
+PHP paths /opt/homebrew/bin/php and /Applications/MAMP/bin/php/php8.4.17/bin/php.
+Use HTTP Kernel for actual HTTP requests, especially handlers injecting Request.
+Direct router->dispatch does NOT refresh the container Request; a RedirectController
+test exposed this and was corrected. No question code is executed in the browser.
+Do not modify bootstrap/runner casually: evidence is bound to their hashes;
+revalidate accepted batches if necessary when changing the harness.
+
+Tool-writing caution:
+functions.exec runs JS. Nested heredoc content in a normal JS string can consume
+PHP namespace backslashes or break on quotes. A reliable pattern uses cmd:String.raw
+with OUTER backticks, writes section-sign characters instead of inner JS template
+backticks, and currency-sign characters instead of template interpolation dollars.
+A final Python pass replaces those placeholders. Never accidentally interpolate
+generated-code template expressions in the tool's own JavaScript execution.
+
+Remaining integration (not implemented):
+Separate _laravel-review static build, deriving UI/runtime from protected root app
+rather than changing production files. Dedicated Laravel progress key; no filters.
+Reuse app/viewer/exam/learning components; generated questions/progress labels only.
+Main PHP production build stays byte-identical. tools/build-site.mjs remains unchanged.
+Need automated schema/grading/progress/browser coverage plus 30 complete representative
+questions and final audit/coverage/duplicate/risk reports. Independent approval remains
+pending throughout.
+
+Documentation exists: SCHEMA.txt, RUBRIC.txt, curriculum.json and editable
+curriculum-mappings.json. Lesson IDs only 1..8 or null. Eloquent is future/unmapped.
+All substantive changed question revisions archived before correction.
+
+No goals or subagents created. No applicable AGENTS found. No plugins/skills needed.
+
+Additional validated framework facts / pitfalls:
+- Laravel13.40 PreventRequestForgery supersedes deprecated ValidateCsrfToken and
+  VerifyCsrfToken aliases. It accepts eligible Sec-Fetch-Site origin metadata as
+  well as tokens; CSRF-negative tests explicitly omit that metadata and disable
+  the console testing bypass by app()->instance('env','local') in the fixture.
+- Blade directives immediately after word characters can fail to compile (e.g.
+  A@endpush). Put directives on their own lines in fixtures and displayed views.
+- Component discovery expects temp composer.json PSR-4 app mapping; bladeOutput
+  supplies it without modifying production or the shared bootstrap.
+- Actual HTTP Kernel handles typed Form Requests automatically; new FormRequest
+  does not validate until the resolved lifecycle runs.
+- Form Request failedValidation must throw to interrupt; returning a response
+  can let the action proceed.
+- Gate inline allowIf/denyIf bypass normal before/after hooks.
+- Code snippets and fixtures were validated on both PHP versions, including
+  Blade rendering, uploaded image validation, temporary SQLite schemas, sessions,
+  Eloquent auth and hashing. No external email, DNS, production DB or services.
+- Checker allows concise code-led prompts; do not pad questions to meet a word
+  count. Token-based PHP layout checking remains enabled.
+
+Batch3 validation notes:
+- model/relations/morph/pivot fixture strings are in authoring/batch-03/fixture.mjs;
+  no shared harness changes were needed.
+- new Schema Blueprint must initialize connection->getSchemaBuilder() first.
+- factory create callbacks and scoped seeder event suppression execute real Laravel.
+- savepoint rollback removes nested afterCommit callbacks.
+- retry witness throws a local PDOException code40001 once; no real service called.
+- sticky routing tested with two separate in-memory PDO handles, not replication.
+- unique-index and optimistic-update fixtures are sequential deterministic witnesses,
+  not concurrent production benchmarks.
+- All public APIs browsed in official Laravel13 documentation and inspected in the
+  pinned installed framework. PG18 locking/index docs and SQLite unique-index docs
+  referenced for database-specific contracts.
+
+Batch4 implementation notes:
+- Shared fixture strings in authoring/batch-04/fixture.mjs: queue (SQLite jobs),
+  marker, batches (job_batches/BatchWork), broadcast (localCaptureBroadcaster),
+  mail (SimpleMail + localview), notifications (Member/notificationsschema).
+- Queue payloads are actually enqueued/popped/fired. Worker process() rethrows
+  MaxAttemptsExceededException after failing; catch it to inspect state.
+- Queue retry Artisan command tested using temporary failed_jobs table.
+- Laravel13.40 Worker maxJobs uses $this->jobsProcessed; maxTime uses currentTime.
+- BroadcastManager is bound by class/Factory, NOT string broadcast.manager.
+- Attachment bodyToString is MIME encoded; getBody returns the source bytes here.
+- ArrayTransport messages()->first()->getOriginalMessage() exposes inspected
+  MIME data; getMessage()->toString() strips Bcc as expected.
+- Fragment files have no PHP opening tag. A runtime probe must explicitly prepend
+  one before require; lint runner already prefixes it for syntax checks.
+- Scheduled event owns public $event->mutex. EventMutex interface need not be
+  separately bound. Callback event tests execute no subprocess. Long-running
+  subminute scheduler loop stays a source contract.
+- Tests freezeCarbon to test DST (Zurich springmissing/autumn twice) and restore
+  process by isolation. No external inbox,broadcaster,Redis or broker used.
+- Q302retargeted fromdispatchSync overlap todispatchAfterResponse lifetime.
+- Q303explicitdefaultsync removesambiguousqueue-onlyalternative.
+- Q308tests modelrestoration beforehandle catch.
+- Q366locale,Q367CID,Q371BCC,Q384notificationID replacedplannedduplicates before
+  authoring. Q384ID is perrecipient sharedacrosschannels unlessexplicitlyassigned.
+- B1-3reviews metadata clarified: optionsReviewed4,distractorsReviewed3. Previously
+  countlabel4 meantalloptions. No questions or technical evidence changed.
+
+CURRENT CHECKPOINT OVERRIDE:
+Batches1-5 ACCEPTED INTERNALLY;500/600. Batch5 hash
+75cfe1321af965d6afc98bc40894cc0a99e8ac7c693cdc7b535d83e78b757485.
+B5:93 runtime+7contract per PHP8.5.2/8.4.17;48Foundation52Intermediate;
+all100unmapped; keys32/28/24/16; longest25%,shortest19%;nooutliers.
+Four lexical candidates dispositioned. All400options internally reviewed.
+429retargeted fromcacheaftercommit toversionedkeysforstaledelayedfills.
+475retargeted frompostJson negotiation toassertInvalid acrossJSONandredirect.
+Prior versions archived. B5editorial overlay supplies focused corrections;
+do not overwrite raw/overlay or regenerateacceptedrecords.
+Inertia3.7.0actualserveradaptercases497-500allpassbothPHPversions.
+NoSSR/clientbrowserInertiatestclaimed. HTTPclientfixturesuseterminaltransport
+whichalwaysrejectsnetworkbutretainsLaravelmiddlewareandfakes.
+B5fixture.mjs also initializes PHPUnitRegistryforfailureassertionformatting;
+featuretestsuseLaravelTestCase methodsattachedtoisolatedapp,notfullPHPUnitsuite.
+Q488comparesSQLite/PostgreSQLgeneratedSQLonly,notPGconcurrentexecution.
+Q445verifiesoptionsonly,notnetworkelapsedtime.
+Runner now supports bounded validation/contracts reference-root in addition
+to pinned frameworksource. Two referencesViteenv/browserFetchareexplicit
+documentationchecks. Previousrunnerarchivedunderhistory/pre-inertia.
+AllacceptedB1-4runtimeandcheckerregressionsRERUNandPASSafterrunnerchange.
+No running sessions remain at this checkpoint.
+WORK_STATE authoritynextBatch6,phasebatch-6-planning.
+Need plan100distinctB6objectivesNOW,thenauthor/validate/review/accept;
+then600crossaudit,localreviewbuild,browser/regressions,30completeexamples.
+Do not stop with500. No push/merge/deploy/activation. ProductionPHP620unchanged.
+
+Batch 6 completed: 100 questions, 89 runtime fixtures + 11 contracts on PHP 8.5.2 and 8.4.17. Internal review complete; independent approval pending. Retargeted 566/595 and corrected wildcard 551; all prior revisions archived. Next: save acceptance, whole-bank audit, local review build, automated/browser regressions.
+
+FINAL CHECKPOINT — 600/600 complete in six accepted batches. Final source/hash/layout checks, 556 runtime fixtures + 44 contracts per PHP version, integration permutations and production regressions passed. Chrome 156 traversed all 600 Laravel and all 620 PHP questions on desktop/mobile; Exam, copy, scroll and separate storage passed. REPORT.txt, EDITORIAL_AUDIT.txt, COVERAGE.txt and REVIEW_30.txt/json delivered. Production PHP hashes and legacy archive unchanged. Independent approval remains pending; no push/merge/deploy/activation. Generated local artifact _laravel-review; rebuild with node tools/build-laravel-review.mjs. Do not regenerate accepted questions on resume.
+
+Local preview confirmed HTTP 200 at http://127.0.0.1:8766/ ; Python loopback static server session 52847. Acceptance helper now rejects stale/repeated batches before any mutation; negative tests for batches 1 and 6 passed with file hashes and mtimes unchanged.
+
+FOCUSED EDITORIAL CHECKPOINT — 6 November 2026
+Exactly 0242/0284/0314/0400/0535/0566/0569 revised once; prior revisions archived. Exact objectives and answer identities preserved; other 593 Laravel and all 620 PHP unchanged. 0284 and 0400 now Intermediate. Affected batches 3/4/6 technical validation passed on PHP 8.4.17 and 8.5.2 / Laravel 13.40.0 (280 runtime + 20 contracts per version); outbox supplement and focused preservation/export tests passed. Local review rebuilt; integration permutations, existing production regressions, release artifact, acceptance guards and Chrome all600 desktop/mobile passed. PHP620 Chrome not rerun this phase. FOCUSED_EDITORIAL_CORRECTIONS.md is current report; FOCUSED_REVISED_7.md/json and SPOT_CHECK_15.md/json are current review exports. Initial full-audit/sample reports marked historical; current coverage and contract indexes mechanically refreshed only for changed records. Independent approvals remain pending. No push/merge/deploy/activation, no other editorial pass. Next independent review, not regeneration. Do not rerun one-time apply-focused helper against accepted revisions.
+
+AUTHORIZED BETA RELEASE — 6 November 2026. User explicitly superseded no-deploy instructions. 0437 prerequisite only changed, r2 archived/r3 current; all other 599 Laravel and 620 PHP unchanged. Combined production runtime now exactly PHP620+LaravelBeta600 with one shared UI and independent progress keys. All local runtime/schema/automated/Chrome suites passed. Current report release/laravel-beta/REPORT.md. Next existing GitHub Actions validation, main deployment, live HTTP/Chrome verification. Independent samples reviewed: 2; no full-bank certification claimed. Do not generate questions or reactivate archived banks.

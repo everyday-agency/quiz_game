@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0585",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Application architecture",
+  "subtopic": "business-port-infrastructure-adapter",
+  "objective": {
+    "id": "laravel.business-port-infrastructure-adapter",
+    "text": "Separate infrastructure adapters from the business interface they implement so alternative transports can be tested."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Define the operation the business needs without exposing an infrastructure client as the business contract."
+  },
+  "prerequisites": [
+    "Interfaces",
+    "Dependency direction",
+    "External integration boundaries"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Checkout needs a shipping quote and must be testable without the carrier’s SDK. The carrier may later be replaced."
+    ],
+    "files": []
+  },
+  "stem": "Which dependency belongs in the checkout service?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The carrier SDK response class so checkout can inspect provider-specific fields itself.",
+      "rationale": "That embeds the carrier’s representation in the business flow and replacement tests.",
+      "misconception": "That embeds the carrier’s representation in the business flow and replacement tests."
+    },
+    {
+      "id": "choice-2",
+      "text": "A static carrier facade whose real implementation is called inside each unit test.",
+      "rationale": "That still requires the live integration for the isolated business tests described.",
+      "misconception": "That still requires the live integration for the isolated business tests described."
+    },
+    {
+      "id": "choice-3",
+      "text": "A ShippingRates interface that returns an application quote value; a carrier adapter implements it.",
+      "rationale": "The business owns the needed operation and result while an adapter translates the provider-specific API.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "A generic container passed to checkout so it resolves the carrier class by string.",
+      "rationale": "A service locator hides the concrete dependency but does not define a stable business contract.",
+      "misconception": "A service locator hides the concrete dependency but does not define a stable business contract."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The business owns the needed operation and result while an adapter translates the provider-specific API.",
+    "trace": [
+      "That embeds the carrier’s representation in the business flow and replacement tests.",
+      "That still requires the live integration for the isolated business tests described.",
+      "The business owns the needed operation and result while an adapter translates the provider-specific API.",
+      "A service locator hides the concrete dependency but does not define a stable business contract."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "750",
+    "probe": "interface ShippingRates\n{\n    public function centsFor(string $zone): int;\n}\nfinal class Checkout\n{\n    public function __construct(private ShippingRates $rates) {}\n    public function shipping(string $zone): int\n    {\n        return $this->rates->centsFor($zone);\n    }\n}\napp()->instance(ShippingRates::class, new class implements ShippingRates {\n    public function centsFor(string $zone): int\n    {\n        return 750;\n    }\n});\necho app(Checkout::class)->shipping('local');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/container#binding-interfaces-to-implementations",
+    "https://laravel.com/docs/13.x/testing#mocking"
+  ]
+}

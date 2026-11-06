@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0426",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Cache locks",
+  "subtopic": "lock-force-release-other-owner",
+  "objective": {
+    "id": "laravel.lock-force-release-other-owner",
+    "text": "Distinguish owner-checked release from forceRelease when another process holds the lock."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Identify the safety difference between normal release and an administrative force release."
+  },
+  "prerequisites": [
+    "Lock ownership",
+    "Recovery operations"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Process A holds an unexpired lock. Process B creates a lock object with the same name but a different owner token. How do B’s release() and forceRelease() differ?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "release respects A’s ownership; forceRelease can remove A’s lock.",
+      "rationale": "The ordinary operation checks the owner, while forceRelease intentionally bypasses that check.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Both operations automatically transfer A’s ownership to B.",
+      "rationale": "Neither release operation is a lock-ownership transfer API.",
+      "misconception": "Neither release operation is a lock-ownership transfer API."
+    },
+    {
+      "id": "choice-3",
+      "text": "Both operations fail unless B supplies A’s owner token.",
+      "rationale": "That describes ordinary release, but not the force-release escape hatch.",
+      "misconception": "That describes ordinary release, but not the force-release escape hatch."
+    },
+    {
+      "id": "choice-4",
+      "text": "release removes A’s lock, while forceRelease only extends its expiration.",
+      "rationale": "This reverses ownership protection and misstates forceRelease as a renewal operation.",
+      "misconception": "This reverses ownership protection and misstates forceRelease as a renewal operation."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The ordinary operation checks the owner, while forceRelease intentionally bypasses that check.",
+    "trace": [
+      "The ordinary operation checks the owner, while forceRelease intentionally bypasses that check.",
+      "Neither release operation is a lock-ownership transfer API.",
+      "That describes ordinary release, but not the force-release escape hatch.",
+      "This reverses ownership protection and misstates forceRelease as a renewal operation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:0:1",
+    "probe": "use Illuminate\\Support\\Facades\\Cache;\n$a = Cache::lock('shared', 60);\n$a->get();\n$b = Cache::lock('shared', 60);\necho (int) $b->release().':';\necho (int) Cache::lock('shared', 60)->get().':';\n$b->forceRelease();\necho (int) Cache::lock('shared', 60)->get();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#managing-locks-across-processes"
+  ]
+}

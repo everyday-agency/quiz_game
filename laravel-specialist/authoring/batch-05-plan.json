@@ -1,0 +1,502 @@
+[
+  {
+    "id": "LAR-S26-0401",
+    "topic": "Storage",
+    "objective": "Select the intended storage disk for a private document without changing the global default."
+  },
+  {
+    "id": "LAR-S26-0402",
+    "topic": "Storage",
+    "objective": "Distinguish an uploaded file's returned storage key from a public URL or absolute path."
+  },
+  {
+    "id": "LAR-S26-0403",
+    "topic": "Storage security",
+    "objective": "Avoid trusting a client-supplied upload filename as a safe storage identifier."
+  },
+  {
+    "id": "LAR-S26-0404",
+    "topic": "Storage errors",
+    "objective": "Configure failed filesystem writes to throw rather than treating an unchecked false return as success."
+  },
+  {
+    "id": "LAR-S26-0405",
+    "topic": "Storage streams",
+    "objective": "Process a storage read stream without loading the full object and close the resource afterwards."
+  },
+  {
+    "id": "LAR-S26-0406",
+    "topic": "Storage responses",
+    "objective": "Choose an attachment download response rather than an inline file response."
+  },
+  {
+    "id": "LAR-S26-0407",
+    "topic": "Storage visibility",
+    "objective": "Distinguish URL generation from changing a stored object's access visibility."
+  },
+  {
+    "id": "LAR-S26-0408",
+    "topic": "Storage operations",
+    "objective": "Predict source and destination existence after copy versus move."
+  },
+  {
+    "id": "LAR-S26-0409",
+    "topic": "Storage tests",
+    "objective": "Use a fake disk to isolate upload persistence assertions from configured real storage."
+  },
+  {
+    "id": "LAR-S26-0410",
+    "topic": "Storage concurrency",
+    "objective": "Recognize that filesystem append implemented as read-modify-write is not a concurrent logging guarantee."
+  },
+  {
+    "id": "LAR-S26-0411",
+    "topic": "Storage uploads",
+    "objective": "Use the temporary upload URL and required headers for a supported direct-to-object-storage upload."
+  },
+  {
+    "id": "LAR-S26-0412",
+    "topic": "Storage consistency",
+    "objective": "Compensate a stored file when a later database transaction rolls back instead of assuming cross-resource atomicity."
+  },
+  {
+    "id": "LAR-S26-0413",
+    "topic": "Storage security",
+    "objective": "Reject a path traversal segment rather than allowing a storage key to escape its disk root."
+  },
+  {
+    "id": "LAR-S26-0414",
+    "topic": "Storage operations",
+    "objective": "Distinguish deleting a directory tree from deleting a single file key."
+  },
+  {
+    "id": "LAR-S26-0415",
+    "topic": "Storage deployment",
+    "objective": "Connect the public storage URL to the intended public-disk symlink without exposing private disks."
+  },
+  {
+    "id": "LAR-S26-0416",
+    "topic": "Cache retrieval",
+    "objective": "Execute a remember callback on a miss and reuse its stored result on a hit."
+  },
+  {
+    "id": "LAR-S26-0417",
+    "topic": "Cache retrieval",
+    "objective": "Account for null-valued cache entries being treated as misses by remember."
+  },
+  {
+    "id": "LAR-S26-0418",
+    "topic": "Cache concurrency",
+    "objective": "Use atomic add when only the first contender should create a cache entry."
+  },
+  {
+    "id": "LAR-S26-0419",
+    "topic": "Cache retrieval",
+    "objective": "Retrieve and remove a value with pull rather than leaving it cached."
+  },
+  {
+    "id": "LAR-S26-0420",
+    "topic": "Cache invalidation",
+    "objective": "Recognize that a whole-store flush may remove entries beyond an application's configured prefix."
+  },
+  {
+    "id": "LAR-S26-0421",
+    "topic": "Cache expiration",
+    "objective": "Interpret integer cache TTL values in seconds for the supported framework."
+  },
+  {
+    "id": "LAR-S26-0422",
+    "topic": "Cache expiration",
+    "objective": "Apply an absolute expiration time without treating it as a relative duration."
+  },
+  {
+    "id": "LAR-S26-0423",
+    "topic": "Cache durability",
+    "objective": "Keep cache forever separate from durable storage and eviction guarantees."
+  },
+  {
+    "id": "LAR-S26-0424",
+    "topic": "Cache locks",
+    "objective": "Handle lock-block timeout explicitly instead of assuming protected work always runs."
+  },
+  {
+    "id": "LAR-S26-0425",
+    "topic": "Cache locks",
+    "objective": "Restore and release a lock using its owner token across a process boundary."
+  },
+  {
+    "id": "LAR-S26-0426",
+    "topic": "Cache locks",
+    "objective": "Distinguish owner-checked release from forceRelease when another process holds the lock."
+  },
+  {
+    "id": "LAR-S26-0427",
+    "topic": "Cache architecture",
+    "objective": "Prevent a cache stampede with a shared lock and a second cache check inside the lock."
+  },
+  {
+    "id": "LAR-S26-0428",
+    "topic": "Cache keys",
+    "objective": "Include all tenant and query dimensions that change the cached result."
+  },
+  {
+    "id": "LAR-S26-0429",
+    "topic": "Cache consistency",
+    "objective": "Prevent a delayed cache fill from overwriting the active version by keying results with the snapshot version."
+  },
+  {
+    "id": "LAR-S26-0430",
+    "topic": "Cache tags",
+    "objective": "Choose a tag-capable store instead of assuming every configured cache driver supports tags."
+  },
+  {
+    "id": "LAR-S26-0431",
+    "topic": "Cache tags",
+    "objective": "Keep tag ordering consistent when retrieving a value stored in a tagged namespace."
+  },
+  {
+    "id": "LAR-S26-0432",
+    "topic": "Cache freshness",
+    "objective": "Trace flexible cache behavior through fresh, stale and deferred-refresh phases."
+  },
+  {
+    "id": "LAR-S26-0433",
+    "topic": "Cache memoization",
+    "objective": "Distinguish request-local memoized reads from changes made directly to the underlying cache store."
+  },
+  {
+    "id": "LAR-S26-0434",
+    "topic": "Rate limiting",
+    "objective": "Distinguish a callback returning false from the callback not running because the rate limit was reached."
+  },
+  {
+    "id": "LAR-S26-0435",
+    "topic": "Cache tests",
+    "objective": "Recognize reference-sharing behavior in an unserialized array cache when testing mutable objects."
+  },
+  {
+    "id": "LAR-S26-0436",
+    "topic": "HTTP client",
+    "objective": "Handle an HTTP error status without assuming the Laravel client throws by default."
+  },
+  {
+    "id": "LAR-S26-0437",
+    "topic": "HTTP client errors",
+    "objective": "Distinguish a connection failure from an HTTP response error."
+  },
+  {
+    "id": "LAR-S26-0438",
+    "topic": "HTTP client retries",
+    "objective": "Count the initial request within the configured maximum retry attempts."
+  },
+  {
+    "id": "LAR-S26-0439",
+    "topic": "HTTP client retries",
+    "objective": "Recognize the retry helper's final HTTP failure exception even without a separate throw call."
+  },
+  {
+    "id": "LAR-S26-0440",
+    "topic": "HTTP client retries",
+    "objective": "Keep connection exceptions distinct when retry is configured with throw=false."
+  },
+  {
+    "id": "LAR-S26-0441",
+    "topic": "HTTP client tests",
+    "objective": "Prevent unstubbed outbound requests rather than allowing fake gaps to reach a real service."
+  },
+  {
+    "id": "LAR-S26-0442",
+    "topic": "HTTP client tests",
+    "objective": "Define response-sequence exhaustion explicitly for repeated calls."
+  },
+  {
+    "id": "LAR-S26-0443",
+    "topic": "HTTP client bodies",
+    "objective": "Send form-encoded data deliberately instead of relying on the default JSON request body."
+  },
+  {
+    "id": "LAR-S26-0444",
+    "topic": "HTTP client headers",
+    "objective": "Distinguish merging headers from replacing the current header set."
+  },
+  {
+    "id": "LAR-S26-0445",
+    "topic": "HTTP client timeouts",
+    "objective": "Separate connection establishment timeout from total response timeout."
+  },
+  {
+    "id": "LAR-S26-0446",
+    "topic": "HTTP client authentication",
+    "objective": "Set a bearer token in the Authorization header without treating it as a query parameter."
+  },
+  {
+    "id": "LAR-S26-0447",
+    "topic": "HTTP client authentication",
+    "objective": "Apply Basic authentication encoding through the client API rather than concatenating plaintext credentials."
+  },
+  {
+    "id": "LAR-S26-0448",
+    "topic": "HTTP client retries",
+    "objective": "Refresh a rejected token within a status-specific retry callback before the next request."
+  },
+  {
+    "id": "LAR-S26-0449",
+    "topic": "HTTP client concurrency",
+    "objective": "Retrieve named pool responses by their request aliases."
+  },
+  {
+    "id": "LAR-S26-0450",
+    "topic": "HTTP client responses",
+    "objective": "Distinguish any successful 2xx response from exactly HTTP 200."
+  },
+  {
+    "id": "LAR-S26-0451",
+    "topic": "HTTP client responses",
+    "objective": "Read a nested JSON value with a default when the path is absent."
+  },
+  {
+    "id": "LAR-S26-0452",
+    "topic": "HTTP client uploads",
+    "objective": "Build a multipart file request instead of placing file bytes in a JSON field."
+  },
+  {
+    "id": "LAR-S26-0453",
+    "topic": "HTTP client contracts",
+    "objective": "Validate a successful response's expected JSON shape rather than treating a 2xx status as schema validation."
+  },
+  {
+    "id": "LAR-S26-0454",
+    "topic": "HTTP client tests",
+    "objective": "Assert method, destination and payload for the intended outbound request."
+  },
+  {
+    "id": "LAR-S26-0455",
+    "topic": "HTTP client negotiation",
+    "objective": "Distinguish accepting JSON responses from choosing JSON request encoding."
+  },
+  {
+    "id": "LAR-S26-0456",
+    "topic": "API resources",
+    "objective": "Add top-level response metadata without placing it inside each resource item."
+  },
+  {
+    "id": "LAR-S26-0457",
+    "topic": "API resources",
+    "objective": "Use whenLoaded to avoid triggering lazy loading during resource serialization."
+  },
+  {
+    "id": "LAR-S26-0458",
+    "topic": "API resources",
+    "objective": "Include a relationship count only when that count was retrieved for the model."
+  },
+  {
+    "id": "LAR-S26-0459",
+    "topic": "API resources",
+    "objective": "Preserve intentional collection keys instead of relying on default resource reindexing."
+  },
+  {
+    "id": "LAR-S26-0460",
+    "topic": "API pagination",
+    "objective": "Retain the paginated data envelope even when ordinary resource wrapping is disabled."
+  },
+  {
+    "id": "LAR-S26-0461",
+    "topic": "API resources",
+    "objective": "Use conditional attribute merging without mixing incompatible numeric and string key structures."
+  },
+  {
+    "id": "LAR-S26-0462",
+    "topic": "API resources",
+    "objective": "Customize the final resource response headers through withResponse."
+  },
+  {
+    "id": "LAR-S26-0463",
+    "topic": "API resource security",
+    "objective": "Avoid explicitly exposing a hidden model secret through a custom resource array."
+  },
+  {
+    "id": "LAR-S26-0464",
+    "topic": "API pagination",
+    "objective": "Preserve paginator links and metadata when transforming the page's records into resources."
+  },
+  {
+    "id": "LAR-S26-0465",
+    "topic": "API resources",
+    "objective": "Convert a missing conditional value into omission rather than a serialized null placeholder."
+  },
+  {
+    "id": "LAR-S26-0466",
+    "topic": "API resources",
+    "objective": "Defer expensive conditional values with a closure instead of evaluating them before when."
+  },
+  {
+    "id": "LAR-S26-0467",
+    "topic": "API resources",
+    "objective": "Set a custom outer data wrapper without changing the model's stored attributes."
+  },
+  {
+    "id": "LAR-S26-0468",
+    "topic": "API resources",
+    "objective": "Read pivot metadata only when the expected intermediate relationship is loaded."
+  },
+  {
+    "id": "LAR-S26-0469",
+    "topic": "API pagination",
+    "objective": "Customize pagination metadata using paginationInformation while retaining the required structure."
+  },
+  {
+    "id": "LAR-S26-0470",
+    "topic": "API responses",
+    "objective": "Distinguish a resource response for a recently created model from a normally retrieved model."
+  },
+  {
+    "id": "LAR-S26-0471",
+    "topic": "Database tests",
+    "objective": "Understand transaction-based test cleanup without assuming every database connection is automatically covered."
+  },
+  {
+    "id": "LAR-S26-0472",
+    "topic": "HTTP tests",
+    "objective": "Distinguish JSON structure assertions from exact payload assertions."
+  },
+  {
+    "id": "LAR-S26-0473",
+    "topic": "HTTP tests",
+    "objective": "Assert a JSON fragment without depending on irrelevant object key ordering."
+  },
+  {
+    "id": "LAR-S26-0474",
+    "topic": "HTTP tests",
+    "objective": "Catch a JSON type regression with an exact path-value assertion."
+  },
+  {
+    "id": "LAR-S26-0475",
+    "topic": "HTTP tests",
+    "objective": "Assert validation errors across both JSON and session-redirect responses with the response-aware testing helper."
+  },
+  {
+    "id": "LAR-S26-0476",
+    "topic": "HTTP tests",
+    "objective": "Disable exception handling to expose the original exception during a failing feature test."
+  },
+  {
+    "id": "LAR-S26-0477",
+    "topic": "HTTP tests",
+    "objective": "Avoid masking an authorization regression by disabling all middleware in the test."
+  },
+  {
+    "id": "LAR-S26-0478",
+    "topic": "Authentication tests",
+    "objective": "Recognize that actingAs establishes test identity without testing the actual login credential flow."
+  },
+  {
+    "id": "LAR-S26-0479",
+    "topic": "Database tests",
+    "objective": "Pair a partial database-row assertion with a count when uniqueness is part of the requirement."
+  },
+  {
+    "id": "LAR-S26-0480",
+    "topic": "Time tests",
+    "objective": "Restore frozen time after a scoped test callback so later assertions use the normal clock."
+  },
+  {
+    "id": "LAR-S26-0481",
+    "topic": "HTTP tests",
+    "objective": "Distinguish the original redirect response from the final response when following redirects in a test."
+  },
+  {
+    "id": "LAR-S26-0482",
+    "topic": "HTTP tests",
+    "objective": "Assert the executed streamed response body instead of reading a nonexistent ordinary response body."
+  },
+  {
+    "id": "LAR-S26-0483",
+    "topic": "HTTP tests",
+    "objective": "Assert that a sensitive JSON path is absent rather than merely null."
+  },
+  {
+    "id": "LAR-S26-0484",
+    "topic": "Console tests",
+    "objective": "Verify both console output and exit status instead of treating printed success text as a successful command result."
+  },
+  {
+    "id": "LAR-S26-0485",
+    "topic": "Service tests",
+    "objective": "Bind a fake collaborator before container resolution rather than expecting it to replace a manually constructed dependency."
+  },
+  {
+    "id": "LAR-S26-0486",
+    "topic": "Parallel tests",
+    "objective": "Isolate non-database temporary resources by test-process token rather than assuming database isolation covers files."
+  },
+  {
+    "id": "LAR-S26-0487",
+    "topic": "Transaction tests",
+    "objective": "Account for a test's outer transaction when verifying after-commit dispatch."
+  },
+  {
+    "id": "LAR-S26-0488",
+    "topic": "Database tests",
+    "objective": "Avoid claiming PostgreSQL row-lock coverage from SQLite-only tests."
+  },
+  {
+    "id": "LAR-S26-0489",
+    "topic": "Factory tests",
+    "objective": "Use explicit factory states to cover a branch instead of relying on random attribute generation."
+  },
+  {
+    "id": "LAR-S26-0490",
+    "topic": "Database tests",
+    "objective": "Distinguish a soft-deleted row from a physically missing model in persistence assertions."
+  },
+  {
+    "id": "LAR-S26-0491",
+    "topic": "Frontend assets",
+    "objective": "Supply the production Vite manifest rather than assuming source entry paths are directly browser-loadable."
+  },
+  {
+    "id": "LAR-S26-0492",
+    "topic": "Frontend assets",
+    "objective": "Remove a stale development hot file that directs production pages to a development server."
+  },
+  {
+    "id": "LAR-S26-0493",
+    "topic": "Frontend security",
+    "objective": "Treat VITE-prefixed environment values as client-visible rather than server secrets."
+  },
+  {
+    "id": "LAR-S26-0494",
+    "topic": "Frontend assets",
+    "objective": "Resolve a bundled resource asset through its build manifest instead of a raw public-path helper."
+  },
+  {
+    "id": "LAR-S26-0495",
+    "topic": "Frontend CORS",
+    "objective": "Use an explicit allowed origin for credentialed cross-origin requests rather than a wildcard response."
+  },
+  {
+    "id": "LAR-S26-0496",
+    "topic": "Frontend sessions",
+    "objective": "Send credentials deliberately for a cross-origin session-authenticated browser request."
+  },
+  {
+    "id": "LAR-S26-0497",
+    "topic": "Inertia protocol",
+    "objective": "Distinguish the initial HTML page response from an Inertia navigation's JSON page object."
+  },
+  {
+    "id": "LAR-S26-0498",
+    "topic": "Inertia props",
+    "objective": "Restrict partial reloads to the same page component and defer unrequested expensive props."
+  },
+  {
+    "id": "LAR-S26-0499",
+    "topic": "Inertia versioning",
+    "objective": "Handle an asset-version mismatch with the protocol's full-location response rather than rendering a stale page object."
+  },
+  {
+    "id": "LAR-S26-0500",
+    "topic": "Inertia validation",
+    "objective": "Carry validation errors through the redirect and shared-props flow rather than expecting a conventional 422 JSON API response."
+  }
+]

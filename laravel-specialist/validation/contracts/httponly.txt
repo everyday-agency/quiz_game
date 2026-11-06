@@ -1,0 +1,8 @@
+Source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+Reviewed: 2026-11-06
+Exact excerpt (13 words):
+"Forbids JavaScript from accessing the cookie, for example, through the Document.cookie property."
+Paraphrase: HttpOnly prevents ordinary script access to the cookie value, but
+eligible cookies still accompany requests, including script-initiated requests.
+It does not replace CSRF defenses or make all effects of XSS impossible.
+This is a browser contract check, not a live cookie-security browser test.

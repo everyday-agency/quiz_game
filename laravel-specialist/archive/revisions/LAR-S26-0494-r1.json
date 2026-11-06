@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0494",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Frontend assets",
+  "subtopic": "vite-resource-asset-manifest-resolution",
+  "objective": {
+    "id": "laravel.vite-resource-asset-manifest-resolution",
+    "text": "Resolve a bundled resource asset through its build manifest instead of a raw public-path helper."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Resolve a hashed build output rather than inventing a web path for a source resource."
+  },
+  "prerequisites": [
+    "Bundled resource assets",
+    "Vite manifest",
+    "Public asset helper"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "resources/images/logo.png is included in the Vite build and has a manifest entry. No development hot file exists."
+    ],
+    "files": []
+  },
+  "stem": "Which Blade-side helper obtains that asset’s generated build URL?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Vite::asset(\"resources/images/logo.png\")",
+      "rationale": "The Vite helper resolves the resource entry through its manifest to the generated asset path.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "public_path(\"resources/images/logo.png\")",
+      "rationale": "That also returns a filesystem path and does not consult the Vite manifest.",
+      "misconception": "That also returns a filesystem path and does not consult the Vite manifest."
+    },
+    {
+      "id": "choice-3",
+      "text": "resource_path(\"images/logo.png\")",
+      "rationale": "That returns a server filesystem path rather than a browser asset URL.",
+      "misconception": "That returns a server filesystem path rather than a browser asset URL."
+    },
+    {
+      "id": "choice-4",
+      "text": "asset(\"resources/images/logo.png\")",
+      "rationale": "asset prefixes a public URL; it does not look up this resource’s hashed Vite output.",
+      "misconception": "asset prefixes a public URL; it does not look up this resource’s hashed Vite output."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The Vite helper resolves the resource entry through its manifest to the generated asset path.",
+    "trace": [
+      "The Vite helper resolves the resource entry through its manifest to the generated asset path.",
+      "That also returns a filesystem path and does not consult the Vite manifest.",
+      "That returns a server filesystem path rather than a browser asset URL.",
+      "asset prefixes a public URL; it does not look up this resource’s hashed Vite output."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "http://localhost/build/assets/logo-a.png",
+    "probe": "mkdir(public_path('build'), 0700, true);\nfile_put_contents(public_path('build/manifest.json'), json_encode([\n    'resources/images/logo.png' => ['file' => 'assets/logo-a.png'],\n]));\necho (new Illuminate\\Foundation\\Vite)->asset('resources/images/logo.png');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/vite#processing-static-assets-with-vite"
+  ]
+}

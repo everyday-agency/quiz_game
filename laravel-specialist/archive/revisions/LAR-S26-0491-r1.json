@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0491",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Frontend assets",
+  "subtopic": "vite-production-manifest-required",
+  "objective": {
+    "id": "laravel.vite-production-manifest-required",
+    "text": "Supply the production Vite manifest rather than assuming source entry paths are directly browser-loadable."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Identify a missing build artifact instead of routing browsers to uncompiled source entries."
+  },
+  "prerequisites": [
+    "Vite production builds",
+    "Blade asset integration",
+    "Deployment artifacts"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "No development hot file exists. The application uses the default build directory and @vite(\"resources/js/app.js\")."
+    ],
+    "files": []
+  },
+  "stem": "Production throws ViteManifestNotFoundException. Which deployment correction addresses the normal production asset path?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Build and deploy the generated public/build assets and their manifest.",
+      "rationale": "The Laravel Vite integration resolves production entry points through the build manifest and generated files.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Run only route:cache because the Vite manifest is a route lookup table.",
+      "rationale": "The asset manifest is a separate build artifact, not Laravel’s route cache.",
+      "misconception": "The asset manifest is a separate build artifact, not Laravel’s route cache."
+    },
+    {
+      "id": "choice-3",
+      "text": "Copy resources/js/app.js into a PHP controller and return its source.",
+      "rationale": "That bypasses the bundler and does not provide the manifest expected by @vite.",
+      "misconception": "That bypasses the bundler and does not provide the manifest expected by @vite."
+    },
+    {
+      "id": "choice-4",
+      "text": "Set APP_DEBUG=true so @vite compiles the JavaScript on each request.",
+      "rationale": "Debug mode does not turn the PHP integration into a production JavaScript compiler.",
+      "misconception": "Debug mode does not turn the PHP integration into a production JavaScript compiler."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The Laravel Vite integration resolves production entry points through the build manifest and generated files.",
+    "trace": [
+      "The Laravel Vite integration resolves production entry points through the build manifest and generated files.",
+      "The asset manifest is a separate build artifact, not Laravel’s route cache.",
+      "That bypasses the bundler and does not provide the manifest expected by @vite.",
+      "Debug mode does not turn the PHP integration into a production JavaScript compiler."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "missing:built",
+    "probe": "$vite = new Illuminate\\Foundation\\Vite;\ntry {\n    $vite('resources/js/app.js');\n} catch (Illuminate\\Foundation\\ViteManifestNotFoundException $e) {\n    echo 'missing:';\n}\nmkdir(public_path('build/assets'), 0700, true);\nfile_put_contents(public_path('build/assets/app-a.js'), 'export {};');\nfile_put_contents(public_path('build/manifest.json'), json_encode([\n    'resources/js/app.js' => ['file' => 'assets/app-a.js', 'isEntry' => true],\n]));\n$html = $vite('resources/js/app.js')->toHtml();\necho str_contains($html, '/build/assets/app-a.js') ? 'built' : 'missing';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/vite#running-vite",
+    "https://laravel.com/docs/13.x/vite#loading-your-scripts-and-styles"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0540",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Cookie security",
+  "subtopic": "httponly-not-csrf-protection",
+  "objective": {
+    "id": "laravel.httponly-not-csrf-protection",
+    "text": "Understand which attacks HttpOnly mitigates without treating it as CSRF protection."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Avoid assigning a cookie flag protections outside its browser contract."
+  },
+  "prerequisites": [
+    "Session cookie flags",
+    "XSS",
+    "CSRF"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The session cookie is HttpOnly. A review proposes removing CSRF protection because JavaScript cannot read that cookie. What is the correct assessment?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Keep CSRF defenses only on GET routes because HttpOnly blocks cookies on POST.",
+      "rationale": "Cookie transmission is not limited to GET by the HttpOnly flag.",
+      "misconception": "Cookie transmission is not limited to GET by the HttpOnly flag."
+    },
+    {
+      "id": "choice-2",
+      "text": "Remove CSRF defenses because HttpOnly prevents all cross-origin requests.",
+      "rationale": "The flag is not a cross-origin request firewall.",
+      "misconception": "The flag is not a cross-origin request firewall."
+    },
+    {
+      "id": "choice-3",
+      "text": "Remove CSRF defenses because HttpOnly requires every request to include a password.",
+      "rationale": "HttpOnly does not introduce per-request password authentication.",
+      "misconception": "HttpOnly does not introduce per-request password authentication."
+    },
+    {
+      "id": "choice-4",
+      "text": "Keep CSRF defenses; HttpOnly blocks script reads but eligible requests can still carry the cookie.",
+      "rationale": "Preventing direct access to the cookie value does not prevent the browser from attaching it to a request.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Preventing direct access to the cookie value does not prevent the browser from attaching it to a request.",
+    "trace": [
+      "Cookie transmission is not limited to GET by the HttpOnly flag.",
+      "The flag is not a cross-origin request firewall.",
+      "HttpOnly does not introduce per-request password authentication.",
+      "Preventing direct access to the cookie value does not prevent the browser from attaching it to a request."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "sourceRoot": "reference",
+    "source": "httponly.txt",
+    "contains": [
+      "Forbids JavaScript from accessing the cookie",
+      "eligible cookies still accompany requests"
+    ],
+    "reason": "MDN browser cookie contract. This does not claim a live browser attack simulation.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/session#configuration",
+    "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie"
+  ]
+}

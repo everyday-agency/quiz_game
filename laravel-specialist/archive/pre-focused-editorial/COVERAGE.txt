@@ -1,0 +1,844 @@
+LARAVEL SPECIALIST — OBJECTIVE AND CURRICULUM COVERAGE
+
+{
+  "formats": {
+    "architecture": 48,
+    "code-review": 86,
+    "debugging": 80,
+    "execution": 211,
+    "implementation": 109,
+    "testing": 66
+  },
+  "difficulty": {
+    "Advanced": 7,
+    "Foundation": 239,
+    "Intermediate": 354
+  },
+  "curriculum": {
+    "mapped": 138,
+    "unmapped": 462,
+    "lessonCounts": {
+      "1": 29,
+      "2": 24,
+      "3": 16,
+      "4": 23,
+      "5": 37,
+      "6": 32,
+      "7": 11,
+      "8": 12
+    },
+    "note": "Working topic mappings to completed Lessons 1–8 only; detailed lesson contents must be confirmed before using them as an exam eligibility gate. Future lessons remain null."
+  }
+}
+
+Counts by topic:
+API pagination: 3
+API resource security: 1
+API resources: 10
+API responses: 1
+Application architecture: 9
+Architecture tests: 1
+Artisan: 5
+Authentication: 6
+Authentication security: 1
+Authentication state: 1
+Authentication tests: 1
+Authorization: 9
+Blade: 12
+Blade caching: 1
+Blade components: 8
+Blade forms: 4
+Broadcast events: 2
+Broadcast integration: 1
+Broadcast security: 1
+Bulk processing: 4
+Cache architecture: 1
+Cache concurrency: 1
+Cache consistency: 1
+Cache durability: 1
+Cache expiration: 2
+Cache freshness: 1
+Cache invalidation: 1
+Cache keys: 1
+Cache locks: 3
+Cache memoization: 1
+Cache retrieval: 3
+Cache tags: 2
+Cache tests: 1
+Collections: 9
+Configuration: 4
+Console tests: 1
+Context: 2
+Context and queues: 1
+Controllers: 7
+Cookie security: 1
+Database concurrency: 3
+Database connections: 2
+Database indexes: 2
+Database observability: 1
+Database tests: 4
+Deployment: 10
+Deployment basics: 1
+Deployment security: 1
+Domain events: 1
+Eager loading: 5
+Eloquent accessors: 2
+Eloquent casts: 8
+Eloquent concurrency: 1
+Eloquent models: 9
+Eloquent scopes: 1
+Eloquent serialization: 3
+Eloquent state: 6
+Email verification: 2
+Encryption: 1
+Encryption failures: 1
+Encryption formats: 1
+Encryption integrity: 1
+Encryption rotation: 1
+Error control flow: 2
+Event architecture: 2
+Event diagnostics: 1
+Event discovery: 1
+Event listeners: 3
+Event subscribers: 1
+Event tests: 3
+Events: 4
+Exception context: 1
+Exception rendering: 1
+Exception reporting: 3
+Exception responses: 2
+Exception severity: 1
+Facades: 1
+Factories: 4
+Factory tests: 1
+Form Requests: 15
+Framework upgrades: 1
+Frontend CORS: 1
+Frontend assets: 3
+Frontend security: 1
+Frontend sessions: 1
+HTTP client: 1
+HTTP client authentication: 2
+HTTP client bodies: 1
+HTTP client concurrency: 1
+HTTP client contracts: 1
+HTTP client errors: 1
+HTTP client headers: 1
+HTTP client negotiation: 1
+HTTP client responses: 2
+HTTP client retries: 4
+HTTP client tests: 3
+HTTP client timeouts: 1
+HTTP client uploads: 1
+HTTP requests: 21
+HTTP responses: 5
+HTTP tests: 9
+Helpers: 2
+Inertia props: 1
+Inertia protocol: 1
+Inertia validation: 1
+Inertia versioning: 1
+Integration consistency: 1
+Integration contracts: 1
+Integration resilience: 3
+Job batches: 3
+Job chains: 3
+Lazy collections: 1
+Localization: 9
+Localization tests: 1
+Logging: 1
+Logging context: 3
+Logging security: 1
+Logging stacks: 1
+Long-lived workers: 2
+Mail addressing: 1
+Mail attachments: 2
+Mail configuration: 1
+Mail delivery: 1
+Mail events: 1
+Mail headers: 1
+Mail queueing: 3
+Mail rendering: 2
+Mail security: 1
+Mail tests: 3
+Maintenance: 1
+Middleware: 8
+Migrations: 4
+Notification data: 1
+Notification tests: 1
+Notifications: 8
+Outbound request security: 1
+Package configuration: 1
+Package integration: 3
+Pagination: 2
+Parallel tests: 1
+Password confirmation: 1
+Password reset expiry: 1
+Password reset lifecycle: 1
+Password reset storage: 1
+Password reset throttling: 1
+Performance: 2
+Pipeline: 2
+Pivot relationships: 9
+Polymorphic relationships: 4
+Proxies and hosts: 3
+Query Builder: 12
+Queue dispatch: 3
+Queue failures: 3
+Queue idempotency: 2
+Queue lifecycle: 2
+Queue middleware: 4
+Queue payloads: 1
+Queue rate limits: 1
+Queue retries: 4
+Queue safety: 1
+Queue serialization: 3
+Queue tests: 2
+Queue timeouts: 1
+Queue transactions: 2
+Queue uniqueness: 3
+Queue workers: 2
+Rate limiting: 1
+Relationship aggregates: 3
+Relationship queries: 3
+Relationships: 6
+Request diagnostics: 1
+Retry control flow: 1
+Route binding: 6
+Routing: 10
+Scheduling: 12
+Scheduling architecture: 1
+Scheduling tests: 1
+Security architecture: 2
+Seeders: 1
+Service container: 17
+Service providers: 3
+Service tests: 1
+Session authentication: 1
+Sessions and CSRF: 8
+Signed URLs: 3
+Soft deletes and indexes: 1
+Storage: 2
+Storage concurrency: 1
+Storage consistency: 1
+Storage deployment: 1
+Storage errors: 1
+Storage operations: 2
+Storage responses: 1
+Storage security: 2
+Storage streams: 1
+Storage tests: 1
+Storage uploads: 1
+Storage visibility: 1
+Strings: 1
+Time tests: 1
+Transaction tests: 1
+Transactions: 4
+URLs and redirects: 4
+Upload delivery security: 1
+Validation: 35
+Webhook authenticity: 1
+Webhook freshness: 1
+
+All 600 stable objective mappings:
+
+LAR-S26-0001 | Configuration | config-null-default | Foundation | lessons [1] | Distinguish a missing configuration key from an explicitly configured null.
+LAR-S26-0002 | Configuration | cached-config-env-boundary | Intermediate | lessons [1] | Move environment access behind configuration so cached configuration preserves the intended value.
+LAR-S26-0003 | Configuration | external-env-precedence | Foundation | lessons [1] | Explain precedence of an externally supplied environment value over a dotenv entry.
+LAR-S26-0004 | Configuration | dotenv-reserved-false | Foundation | lessons [1] | Parse Laravel's reserved dotenv boolean values before applying a feature flag.
+LAR-S26-0005 | Deployment basics | maintenance-retry-header | Intermediate | lessons null | Choose the maintenance response header that asks clients to retry later.
+LAR-S26-0006 | Service providers | bootstrap-provider-registration | Foundation | lessons [1] | Register an application provider in the Laravel 13 bootstrap provider list.
+LAR-S26-0007 | Service providers | provider-register-boot-order | Intermediate | lessons [1] | Separate container registrations from boot-time use of another provider's service.
+LAR-S26-0008 | Service container | worker-scoped-state | Intermediate | lessons null | Choose a scoped binding for state that must reset between worker lifecycles.
+LAR-S26-0009 | Service container | transient-singleton-identity | Foundation | lessons [1] | Trace transient resolution compared with a singleton binding.
+LAR-S26-0010 | Service container | contextual-interface-consumers | Intermediate | lessons [1] | Resolve different implementations for two consumers using contextual bindings.
+LAR-S26-0011 | Service container | interface-autowiring-boundary | Foundation | lessons [1] | Diagnose why constructor autowiring cannot select an implementation for an unbound interface.
+LAR-S26-0012 | Service container | package-bind-if-default | Intermediate | lessons [1] | Preserve a host application's explicit override when a package supplies a default binding.
+LAR-S26-0013 | Service container | container-instance-mutation | Foundation | lessons [1] | Register an already configured object as the shared service instance.
+LAR-S26-0014 | Service container | container-alias-shared-root | Intermediate | lessons [1] | Resolve a service through a container alias without creating another singleton.
+LAR-S26-0015 | Service container | container-call-named-parameters | Intermediate | lessons [1] | Combine explicitly provided arguments with method injection through Container::call.
+LAR-S26-0016 | Service container | contextual-primitive-config | Intermediate | lessons [1] | Provide a primitive constructor dependency contextually without a global scalar binding.
+LAR-S26-0017 | Service container | config-parameter-attribute | Intermediate | lessons [1] | Inject one configuration value using a supported contextual attribute.
+LAR-S26-0018 | Service container | tagged-service-pipeline | Intermediate | lessons [1] | Collect tagged implementations without coupling a consumer to each concrete class.
+LAR-S26-0019 | Service container | container-extension-decoration | Intermediate | lessons [1] | Decorate a resolved binding through the container extension mechanism.
+LAR-S26-0020 | Service container | resolving-callback-singleton-hit | Intermediate | lessons [1] | Apply a resolving callback to newly constructed service instances.
+LAR-S26-0021 | Service container | make-with-parameter-cache-bypass | Intermediate | lessons [1] | Understand how explicit makeWith parameters interact with a shared binding.
+LAR-S26-0022 | Service container | bound-versus-resolved-state | Intermediate | lessons [1] | Distinguish a registered binding from a service that has actually been resolved.
+LAR-S26-0023 | Service container | forget-instance-keeps-factory | Intermediate | lessons [1] | Discard a cached singleton instance while retaining its construction binding.
+LAR-S26-0024 | Service container | scope-reset-regression | Intermediate | lessons null | Verify that clearing scoped instances leaves ordinary singletons intact.
+LAR-S26-0025 | Facades | facade-resolved-root-cache | Intermediate | lessons null | Clear a facade's cached root when replacing the corresponding container service in a test.
+LAR-S26-0026 | Service providers | deferred-provider-service-list | Intermediate | lessons null | State the service names a deferred provider must advertise.
+LAR-S26-0027 | Middleware | middleware-onion-order | Intermediate | lessons [8] | Trace before/after execution through a two-layer middleware pipeline.
+LAR-S26-0028 | Middleware | middleware-short-circuit | Foundation | lessons [8] | Identify which downstream work is skipped by an early middleware response.
+LAR-S26-0029 | Middleware | middleware-exception-finally | Intermediate | lessons [8] | Explain why ordinary code after next() is skipped when a downstream exception escapes.
+LAR-S26-0030 | Middleware | terminable-middleware-instance | Intermediate | lessons null | Avoid assuming a terminable middleware's handle and terminate methods share object state.
+LAR-S26-0031 | Routing | head-get-response-body | Intermediate | lessons [2,5] | Predict HEAD handling for a GET route and its response body.
+LAR-S26-0032 | Routing | wildcard-route-order | Intermediate | lessons [2] | Prevent an earlier wildcard route from consuming a literal route for the same HTTP method.
+LAR-S26-0033 | Routing | missing-url-versus-method | Foundation | lessons [2] | Distinguish an unmatched URL from an unsupported method on an existing URL.
+LAR-S26-0034 | Routing | route-constraint-status | Foundation | lessons [2] | Enforce a parameter constraint at route matching rather than inside the controller.
+LAR-S26-0035 | Routing | optional-route-php-default | Foundation | lessons [2] | Supply a PHP default value for an optional route argument.
+LAR-S26-0036 | URLs and redirects | named-route-surplus-query | Foundation | lessons [2] | Distinguish named-route path parameters from surplus query parameters.
+LAR-S26-0037 | Routing | route-name-group-composition | Foundation | lessons [2] | Compose a route name prefix independently of the URL prefix.
+LAR-S26-0038 | Routing | url-defaults-not-input | Intermediate | lessons [2,5] | Use request-scoped URL defaults without mistaking them for incoming route parameter mutation.
+LAR-S26-0039 | Routing | redirect-allowlisted-query | Intermediate | lessons [2,5] | Preserve only approved search parameters when replacing a fixed legacy redirect with a generated redirect.
+LAR-S26-0040 | Routing | domain-route-precedence-13-40 | Intermediate | lessons [2] | Predict domain-specific route precedence in the pinned Laravel 13.40 router.
+LAR-S26-0041 | Route binding | implicit-binding-parameter-name | Intermediate | lessons null | Match a controller's implicit model-binding argument name to the route placeholder.
+LAR-S26-0042 | Route binding | model-route-key-slug | Intermediate | lessons null | Select a model's route key for slug-based URL generation and resolution.
+LAR-S26-0043 | Route binding | explicit-binding-transformation | Intermediate | lessons [2,8] | Transform a route parameter with an explicit binding callback.
+LAR-S26-0044 | Route binding | nested-scoped-binding-owner | Intermediate | lessons null | Restrict nested model resolution to the parent relationship with scoped binding.
+LAR-S26-0045 | Route binding | soft-deleted-route-eligibility | Intermediate | lessons null | Decide whether a soft-deleted model should be eligible for route binding.
+LAR-S26-0046 | Route binding | route-binding-missing-response | Intermediate | lessons null | Provide a route-specific response when implicit model resolution fails.
+LAR-S26-0047 | Routing | encoded-slash-final-segment | Intermediate | lessons [2] | Handle an encoded slash only in the final permissive route segment.
+LAR-S26-0048 | Signed URLs | relative-signed-url-mode | Intermediate | lessons null | Keep signature validation mode consistent with relative URL generation.
+LAR-S26-0049 | Signed URLs | temporary-signature-expiration | Intermediate | lessons null | Reject an otherwise valid temporary signed URL after its expiry.
+LAR-S26-0050 | Signed URLs | ignored-signature-query-trust | Intermediate | lessons null | Assess the trust boundary created by ignoring a query parameter during signature validation.
+LAR-S26-0051 | URLs and redirects | query-value-encoding | Foundation | lessons [2,5] | Encode a query value through the URL generator instead of manual string concatenation.
+LAR-S26-0052 | URLs and redirects | redirect-flashed-input | Intermediate | lessons null | Flash input when redirecting back after a manually detected form error.
+LAR-S26-0053 | URLs and redirects | named-redirect-path-change | Foundation | lessons [2,3] | Select a named-route redirect that remains correct when the path changes.
+LAR-S26-0054 | HTTP responses | json-status-and-header | Foundation | lessons [3,5] | Return a JSON response with the intended status code and explicit header.
+LAR-S26-0055 | HTTP responses | no-content-response-preparation | Intermediate | lessons [3,5] | Account for removal of response content when preparing a 204 response.
+LAR-S26-0056 | HTTP responses | header-versus-json-member | Foundation | lessons [3,5] | Set a response header without accidentally placing it in the JSON payload.
+LAR-S26-0057 | HTTP responses | stream-callback-deferred | Intermediate | lessons null | Distinguish creation of a streamed download from execution of its callback.
+LAR-S26-0058 | HTTP responses | response-cookie-next-request | Intermediate | lessons [3,5] | Attach a response cookie without assuming a later request has already sent it back.
+LAR-S26-0059 | HTTP requests | query-only-input-source | Foundation | lessons [5] | Read query-only input when the body contains a conflicting key.
+LAR-S26-0060 | HTTP requests | json-body-content-type | Foundation | lessons [5] | Make JSON input available by providing the correct request content type.
+LAR-S26-0061 | HTTP requests | merge-if-missing-explicit-null | Foundation | lessons [5] | Use mergeIfMissing without replacing an explicitly supplied value.
+LAR-S26-0062 | HTTP requests | replace-input-drops-keys | Foundation | lessons [5] | Recognize that replace removes existing input keys not present in the replacement.
+LAR-S26-0063 | HTTP requests | presence-empty-string-test | Foundation | lessons [5] | Distinguish input presence from a nonempty submitted value.
+LAR-S26-0064 | HTTP requests | conditional-input-return-value | Intermediate | lessons [5] | Recognize that a truthy conditional-input callback result replaces the fluent request return value.
+LAR-S26-0065 | HTTP requests | checkbox-boolean-normalization | Foundation | lessons [5] | Apply Request::boolean to common checkbox representations.
+LAR-S26-0066 | HTTP requests | integer-accessor-not-validation | Intermediate | lessons [5,6] | Keep integer retrieval separate from validating a positive integer requirement.
+LAR-S26-0067 | HTTP requests | optional-input-collection | Foundation | lessons [5] | Retrieve a collection for an optional array field without assuming the field exists.
+LAR-S26-0068 | HTTP requests | input-selection-not-validation | Foundation | lessons [5,6] | Explain why input selection alone is not input validation.
+LAR-S26-0069 | HTTP requests | nested-input-wildcard | Foundation | lessons [5] | Retrieve a nested list of input values using dot notation and a wildcard.
+LAR-S26-0070 | HTTP requests | dynamic-input-route-collision | Intermediate | lessons [2,5] | Avoid confusing dynamic input properties with route parameter lookup.
+LAR-S26-0071 | HTTP requests | header-absent-versus-empty | Foundation | lessons [5] | Distinguish an absent header from an explicitly empty header when supplying a default.
+LAR-S26-0072 | HTTP requests | bearer-token-extraction | Foundation | lessons [5] | Retrieve a bearer credential from the Authorization header without custom splitting.
+LAR-S26-0073 | HTTP requests | ajax-html-expects-json | Intermediate | lessons [5] | Recognize the AJAX Accept-header conditions used by expectsJson.
+LAR-S26-0074 | HTTP requests | body-type-versus-response-preference | Foundation | lessons [5] | Separate the request body's media type from the client's preferred response type.
+LAR-S26-0075 | HTTP requests | accept-quality-preference | Intermediate | lessons [5] | Honor Accept quality weights when selecting an available response representation.
+LAR-S26-0076 | HTTP requests | method-spoofing-post-only | Intermediate | lessons [2,5] | Apply method spoofing only to the appropriate incoming HTTP method.
+LAR-S26-0077 | HTTP requests | effective-versus-real-method | Intermediate | lessons [2,5] | Distinguish a spoofed effective HTTP method from the original transport method.
+LAR-S26-0078 | HTTP requests | pagination-query-replacement | Foundation | lessons [5] | Replace one query parameter while retaining the rest of the current URL query.
+LAR-S26-0079 | HTTP requests | encoded-and-decoded-path | Foundation | lessons [5] | Distinguish encoded and decoded path representations.
+LAR-S26-0080 | Proxies and hosts | trusted-proxy-client-ip | Intermediate | lessons null | Derive the client address only from explicitly trusted proxy information.
+LAR-S26-0081 | Proxies and hosts | proxy-forwarded-scheme | Intermediate | lessons null | Recognize HTTPS behind a trusted forwarding proxy without trusting arbitrary client headers.
+LAR-S26-0082 | Proxies and hosts | trusted-host-boundary | Intermediate | lessons null | Restrict accepted hostnames before generating links from the request host.
+LAR-S26-0083 | Maintenance | maintenance-bypass-secret-rotation | Intermediate | lessons null | Invalidate maintenance bypass cookies by changing the maintenance secret without confusing bypass with user authentication.
+LAR-S26-0084 | Middleware | middleware-alias-registration | Foundation | lessons [8] | Register a route middleware alias in the Laravel 13 bootstrap configuration.
+LAR-S26-0085 | Middleware | prepend-custom-middleware-group | Intermediate | lessons [8] | Prepend middleware to a named group without replacing the complete group.
+LAR-S26-0086 | Middleware | route-exclusion-global-boundary | Intermediate | lessons [8] | Explain why route-level exclusions cannot remove global middleware.
+LAR-S26-0087 | Middleware | middleware-priority-order | Intermediate | lessons [8] | Respect middleware priority when dependencies impose an execution order.
+LAR-S26-0088 | Controllers | legacy-controller-construction-before-middleware | Intermediate | lessons [1,3,8] | Keep request-specific work out of controller construction that can precede route middleware.
+LAR-S26-0089 | Controllers | invokable-controller-route | Foundation | lessons [2,3] | Route to an invokable controller through its class rather than an invented action name.
+LAR-S26-0090 | Controllers | api-resource-omits-form-routes | Foundation | lessons [2,3] | Choose an API resource route set that omits HTML form actions.
+LAR-S26-0091 | Controllers | resource-parameter-name-customization | Intermediate | lessons [2,3] | Customize a resource parameter name without changing the resource's action names.
+LAR-S26-0092 | Controllers | shallow-resource-member-routes | Intermediate | lessons [2,3] | Use shallow nesting to omit the parent parameter from member routes while keeping collection routes nested.
+LAR-S26-0093 | Controllers | static-controller-middleware-only | Intermediate | lessons [3,8] | Limit controller middleware to selected actions using the supported controller middleware contract.
+LAR-S26-0094 | Controllers | injected-request-positional-route-values | Intermediate | lessons [1,2,3,5] | Trace type-based dependency injection alongside positional scalar route arguments.
+LAR-S26-0095 | Artisan | artisan-default-argument | Foundation | lessons [1] | Distinguish an optional command argument from an argument with an explicit default.
+LAR-S26-0096 | Artisan | artisan-repeatable-option | Intermediate | lessons [1] | Define a repeatable command option rather than manually parsing comma-separated values.
+LAR-S26-0097 | Artisan | command-error-output-versus-exit | Intermediate | lessons [1] | Return a failing exit status when automation must detect a command failure.
+LAR-S26-0098 | Artisan | artisan-structured-arguments | Intermediate | lessons [1] | Invoke a command with structured parameters through Artisan::call rather than shell quoting.
+LAR-S26-0099 | Artisan | isolated-command-lock-failure-exit | Intermediate | lessons null | Request command isolation explicitly and select the exit code when its lock is unavailable.
+LAR-S26-0100 | Exception responses | exception-render-json-callback | Intermediate | lessons null | Choose JSON rendering for an API boundary independently of exception reporting policy.
+LAR-S26-0101 | Validation | bail-attribute-boundary | Intermediate | lessons [6] | Limit further rules on one failing attribute with bail without stopping unrelated attributes.
+LAR-S26-0102 | Validation | stop-first-after-callbacks | Intermediate | lessons [6] | Account for after callbacks still running when stopOnFirstFailure halts further attribute validation.
+LAR-S26-0103 | Validation | sometimes-required-patch-field | Foundation | lessons [5,6] | Use sometimes with required to distinguish an omitted PATCH field from an explicitly empty field.
+LAR-S26-0104 | Validation | nullable-normalized-date | Foundation | lessons [5,6,8] | Allow normalized null values through a non-implicit date rule using nullable.
+LAR-S26-0105 | Validation | array-allowed-key-boundary | Foundation | lessons [6] | Reject unexpected nested array keys using the array rule's allowed-key list.
+LAR-S26-0106 | Validation | wildcard-error-concrete-index | Foundation | lessons [6] | Expand wildcard rules to concrete nested error paths without losing item identity.
+LAR-S26-0107 | Validation | distinct-strict-comparison | Intermediate | lessons [6] | Distinguish strict distinct-value checks from default loose comparisons.
+LAR-S26-0108 | Validation | affirmative-consent-rule | Foundation | lessons [6] | Require an affirmative consent value with accepted instead of accepting any boolean.
+LAR-S26-0109 | Validation | discriminator-required-field | Foundation | lessons [6] | Require a dependent field only for the specified discriminator value.
+LAR-S26-0110 | Validation | alternative-contact-required-without | Intermediate | lessons [6] | Use required_without for alternative contact methods while allowing both to be present.
+LAR-S26-0111 | Validation | prohibited-field-not-discarded | Foundation | lessons [6] | Reject a forbidden field for one mode rather than silently discarding it.
+LAR-S26-0112 | Validation | exclude-inapplicable-validated-data | Intermediate | lessons [6] | Exclude an inapplicable field from validated output with exclude_if.
+LAR-S26-0113 | Validation | regex-pipe-rule-parsing | Intermediate | lessons [6] | Keep a regular expression containing a pipe intact by using array-form validation rules.
+LAR-S26-0114 | Validation | backed-enum-rule-values | Foundation | lessons [6] | Validate a backed enum against its allowed cases rather than accepting arbitrary strings.
+LAR-S26-0115 | Validation | date-comparison-equality-boundary | Foundation | lessons [6] | Apply a field comparison rule to a date interval and test the equality boundary.
+LAR-S26-0116 | Validation | confirmation-field-convention | Foundation | lessons [6] | Use password confirmation field naming without mistaking it for authentication.
+LAR-S26-0117 | Validation | size-rule-type-semantics | Intermediate | lessons [6] | Separate string length limits from numeric value limits in a quantity field.
+LAR-S26-0118 | Validation | list-consecutive-keys | Foundation | lessons [6] | Reject a non-list associative payload when the API requires a consecutive numeric list.
+LAR-S26-0119 | Validation | decimal-scale-and-range | Intermediate | lessons [6] | Enforce decimals independently of a numeric range requirement.
+LAR-S26-0120 | Validation | upload-content-versus-client-extension | Intermediate | lessons null | Limit allowed file content types without trusting the original filename extension.
+LAR-S26-0121 | Validation | image-dimensions-versus-size | Intermediate | lessons null | Restrict uploaded image dimensions separately from file size and MIME type.
+LAR-S26-0122 | Validation | per-item-conditional-validation | Intermediate | lessons [6] | Apply per-item conditional rules with access to the current nested item.
+LAR-S26-0123 | Validation | after-callback-error-recording | Intermediate | lessons [6] | Add cross-field domain errors in an after callback without losing ordinary rule errors.
+LAR-S26-0124 | Validation | data-aware-rule-interface | Intermediate | lessons [6] | Give a custom DataAwareRule access to related input instead of global request state.
+LAR-S26-0125 | Validation | nested-custom-message-key | Foundation | lessons [6] | Identify the namespaced attribute key used by a custom nested validation message.
+LAR-S26-0126 | Validation | named-error-bag-isolation | Foundation | lessons [4,6] | Separate named error bags for two forms rendered on the same page.
+LAR-S26-0127 | Validation | json-validation-response-contract | Intermediate | lessons [3,5,6] | Assert JSON validation status and nested error keys for an API request.
+LAR-S26-0128 | Validation | web-validation-redirect-flash | Intermediate | lessons null | Verify that a web validation redirect flashes errors and selected old input.
+LAR-S26-0129 | Validation | validated-result-write-boundary | Intermediate | lessons [3,5,6] | Use validated output rather than returning to untrusted all input after validation.
+LAR-S26-0130 | Validation | validated-input-merge-not-validation | Intermediate | lessons [6] | Avoid assuming that merging new values into ValidatedInput reruns validation.
+LAR-S26-0131 | Validation | unique-ignore-server-identity | Intermediate | lessons null | Ignore the server-selected current model in uniqueness validation without trusting a submitted ignore ID.
+LAR-S26-0132 | Validation | tenant-scoped-unique-rule | Intermediate | lessons null | Scope a uniqueness rule to an account while retaining a database uniqueness constraint.
+LAR-S26-0133 | Validation | exists-eligible-record-scope | Intermediate | lessons null | Scope an exists rule to records eligible for the operation instead of checking existence alone.
+LAR-S26-0134 | Validation | email-validation-versus-possession | Intermediate | lessons null | Keep email syntax validation independent of mailbox ownership verification.
+LAR-S26-0135 | Validation | validation-database-race | Intermediate | lessons null | Treat validation as a point-in-time check rather than a concurrency guarantee.
+LAR-S26-0136 | Form Requests | form-request-hook-sequence | Intermediate | lessons [7] | Trace prepareForValidation before authorization and rule evaluation.
+LAR-S26-0137 | Form Requests | form-request-denial-before-action | Intermediate | lessons [3,7] | Reject an unauthorized Form Request before entering the controller action.
+LAR-S26-0138 | Form Requests | rules-method-service-injection | Intermediate | lessons [1,6,7] | Inject a service into rules through the container instead of reading global state.
+LAR-S26-0139 | Form Requests | form-request-fixed-redirect-route | Foundation | lessons [2,7] | Select a fixed named route for Form Request failure redirection instead of relying on the Referer.
+LAR-S26-0140 | Form Requests | passed-validation-snapshot | Intermediate | lessons [7] | Distinguish changes made in passedValidation from the validator's validated data snapshot.
+LAR-S26-0141 | Form Requests | failed-validation-must-interrupt | Intermediate | lessons [3,7] | Use failedValidation customization without accidentally returning a successful response.
+LAR-S26-0142 | Form Requests | sensitive-input-dont-flash | Intermediate | lessons null | Exclude sensitive fields from old-input flashing on validation failure.
+LAR-S26-0143 | Form Requests | form-request-named-error-bag | Foundation | lessons [6,7] | Set a Form Request's error bag without changing the global validation bag.
+LAR-S26-0144 | Form Requests | patch-normalization-preserves-omission | Intermediate | lessons [5,7] | Normalize a nullable field without converting every missing PATCH field into a provided value.
+LAR-S26-0145 | Form Requests | authorization-no-write-side-effects | Intermediate | lessons null | Keep authorization side-effect-free because validation failure can prevent the intended write.
+LAR-S26-0146 | Form Requests | authorization-masks-validation-test | Intermediate | lessons [7] | Test authorization rejection separately from a rule-validation rejection.
+LAR-S26-0147 | Form Requests | validation-data-envelope | Intermediate | lessons [5,7] | Distinguish validationData overrides from mutations of the underlying request input.
+LAR-S26-0148 | Form Requests | precognition-partial-success-boundary | Intermediate | lessons null | Interpret a successful Precognition field check without treating it as a completed write or full-form validation.
+LAR-S26-0149 | Form Requests | shared-rules-separate-authorization | Intermediate | lessons null | Share rules through composition while keeping endpoint-specific authorization separate.
+LAR-S26-0150 | Form Requests | form-request-container-resolution | Intermediate | lessons [1,7] | Distinguish container-resolved Form Requests from direct construction when testing automatic validation.
+LAR-S26-0151 | Blade | blade-escaped-echo | Foundation | lessons [4] | Escape untrusted content through ordinary Blade echo syntax.
+LAR-S26-0152 | Blade | raw-html-trust-context | Intermediate | lessons null | Restrict raw HTML output to content trusted for the actual HTML context.
+LAR-S26-0153 | Blade | script-context-json-encoding | Intermediate | lessons null | Encode structured data for a script context using the framework's JavaScript helper.
+LAR-S26-0154 | Blade | blade-versus-html-comments | Foundation | lessons [4] | Distinguish server-side Blade comments from HTML comments sent to clients.
+LAR-S26-0155 | Blade | forelse-empty-branch | Foundation | lessons [4] | Render the empty branch of forelse when the supplied collection is empty.
+LAR-S26-0156 | Blade | loop-index-iteration-offset | Foundation | lessons [4] | Trace loop iteration and index values without off-by-one display errors.
+LAR-S26-0157 | Blade | nested-loop-parent-metadata | Intermediate | lessons [4] | Access the parent loop when rendering nested iteration.
+LAR-S26-0158 | Blade | section-parent-content | Intermediate | lessons [4] | Preserve parent layout section content with parent instead of replacing it unintentionally.
+LAR-S26-0159 | Blade | asset-stack-accumulation | Foundation | lessons [4] | Render multiple pushed assets at a stack rather than treating pushes as a single section.
+LAR-S26-0160 | Blade | push-once-per-render | Intermediate | lessons [4] | Avoid duplicate per-component script output with pushOnce.
+LAR-S26-0161 | Blade | each-partial-variable-scope | Intermediate | lessons [4] | Pass values explicitly into isolated each partials rather than assuming all parent variables are inherited.
+LAR-S26-0162 | Blade | optional-include-error-boundary | Foundation | lessons [4] | Distinguish an optional include from silently suppressing a template execution error.
+LAR-S26-0163 | Blade components | component-props-attribute-bag | Foundation | lessons [4] | Separate component props from the remaining attribute bag.
+LAR-S26-0164 | Blade components | component-class-merge | Foundation | lessons [4] | Merge default CSS classes with caller classes through the attribute bag.
+LAR-S26-0165 | Blade components | component-nonclass-default-overridable | Foundation | lessons [4] | Distinguish default attribute values from enforced values when merging component attributes.
+LAR-S26-0166 | Blade components | named-versus-default-slot | Foundation | lessons [4] | Render a named slot independently from the default slot.
+LAR-S26-0167 | Blade components | bound-component-expression-versus-literal | Intermediate | lessons [4] | Bind a PHP expression to a component prop instead of passing a literal string.
+LAR-S26-0168 | Blade components | escaped-client-colon-attribute | Foundation | lessons [4] | Escape a client-side colon attribute so Blade does not evaluate it as PHP.
+LAR-S26-0169 | Blade components | aware-parent-default-not-propagated | Intermediate | lessons [4] | Read ancestor component data through aware only under its documented propagation rules.
+LAR-S26-0170 | Blade components | component-except-public-helper | Intermediate | lessons [4] | Exclude a public component helper from template data while retaining its PHP API.
+LAR-S26-0171 | Blade forms | checked-boolean-attribute | Foundation | lessons [4] | Render checked state using a boolean directive instead of treating the text false as absence.
+LAR-S26-0172 | Blade forms | blade-method-hidden-field | Foundation | lessons [2,4,5] | Render a method-spoofing field for a non-GET/POST HTML form action.
+LAR-S26-0173 | Blade forms | blade-csrf-form-field | Foundation | lessons [4,8] | Supply a CSRF token field without placing the token into an unrelated form value.
+LAR-S26-0174 | Blade forms | error-message-variable-restoration | Intermediate | lessons [4,6] | Trace the temporary message variable inside a named-bag error directive and its restoration afterward.
+LAR-S26-0175 | Blade caching | compiled-view-cache-boundary | Foundation | lessons null | Recompile deployed Blade views without confusing compiled templates with application data.
+LAR-S26-0176 | Sessions and CSRF | flash-versus-persistent-session-lifetime | Intermediate | lessons null | Distinguish flashed data lifetime from persistent session data over multiple requests.
+LAR-S26-0177 | Sessions and CSRF | keep-selected-flash-value | Intermediate | lessons null | Preserve selected flash data for one additional redirect using keep.
+LAR-S26-0178 | Sessions and CSRF | session-regeneration-preserves-data | Intermediate | lessons null | Rotate a session identifier after authentication without discarding intended session state.
+LAR-S26-0179 | Sessions and CSRF | logout-session-invalidation | Intermediate | lessons null | Invalidate session data and regenerate the CSRF token when logging out.
+LAR-S26-0180 | Sessions and CSRF | session-concurrent-write-blocking | Intermediate | lessons null | Prevent lost concurrent session updates through a supported session-blocking lock.
+LAR-S26-0181 | Sessions and CSRF | csrf-versus-authentication-failure | Intermediate | lessons null | Distinguish a CSRF failure from an authentication failure on a state-changing route.
+LAR-S26-0182 | Sessions and CSRF | webhook-narrow-csrf-exemption | Intermediate | lessons null | Exempt a verified external webhook narrowly while retaining CSRF on browser forms.
+LAR-S26-0183 | Sessions and CSRF | csrf-test-environment-bypass | Intermediate | lessons null | Understand why default test-environment CSRF bypass can conceal missing token behavior.
+LAR-S26-0184 | Authorization | authenticated-not-resource-authorized | Foundation | lessons null | Separate authentication from permission to modify a particular resource.
+LAR-S26-0185 | Authorization | policy-server-resource-not-body-claim | Foundation | lessons null | Use a policy decision against the server-resolved resource rather than a submitted ownership flag.
+LAR-S26-0186 | Authorization | gate-boolean-versus-throwing-check | Foundation | lessons null | Stop an unauthorized operation with authorize instead of ignoring a boolean policy result.
+LAR-S26-0187 | Authorization | policy-not-found-denial | Intermediate | lessons null | Return a not-found denial intentionally without exposing resource existence.
+LAR-S26-0188 | Authorization | authorization-before-null-fallthrough | Intermediate | lessons null | Keep an authorization before hook from denying every unhandled ability.
+LAR-S26-0189 | Authorization | guest-policy-nullable-user | Intermediate | lessons null | Allow a guest through a deliberately nullable policy user parameter without globally disabling authentication.
+LAR-S26-0190 | Authorization | gate-for-user-isolation | Intermediate | lessons null | Distinguish Gate::forUser evaluation from changing the application's authenticated user.
+LAR-S26-0191 | Authorization | policy-additional-context-arguments | Intermediate | lessons null | Supply additional policy context as separate arguments with the target resource first.
+LAR-S26-0192 | Authorization | blade-permission-not-server-enforcement | Foundation | lessons null | Keep Blade visibility checks as presentation while enforcing the same permission server-side.
+LAR-S26-0193 | Authentication | attempt-plaintext-against-stored-hash | Intermediate | lessons null | Authenticate a session-backed request without persisting submitted plaintext credentials.
+LAR-S26-0194 | Authentication | attempt-additional-query-conditions | Intermediate | lessons null | Distinguish attempt credential constraints from password hashing responsibilities.
+LAR-S26-0195 | Authentication | explicit-authentication-guard | Foundation | lessons null | Use the intended guard explicitly when multiple authentication contexts exist.
+LAR-S26-0196 | Authentication | intended-redirect-session-boundary | Intermediate | lessons null | Preserve a safe intended internal destination across login instead of trusting an arbitrary redirect input.
+LAR-S26-0197 | Authentication | salted-hash-verification | Foundation | lessons null | Verify an existing password with the configured hasher rather than comparing new salted hashes.
+LAR-S26-0198 | Authentication | password-hash-upgrade-input | Intermediate | lessons null | Upgrade a stored password hash when the hashing configuration changes.
+LAR-S26-0199 | Security architecture | inline-authorization-hook-bypass | Intermediate | lessons null | Avoid bypassing central Gate hooks when replacing a named ability check with inline authorization.
+LAR-S26-0200 | Security architecture | privileged-field-write-boundary | Intermediate | lessons null | Protect mass-assigned administrative attributes through an explicit authorization and write boundary.
+LAR-S26-0201 | Eloquent models | explicit-legacy-table | Foundation | lessons null | Override inferred table naming when a model maps to an existing nonconventional table.
+LAR-S26-0202 | Eloquent models | legacy-no-timestamps | Foundation | lessons null | Match timestamp configuration to a legacy schema without nonexistent timestamp writes.
+LAR-S26-0203 | Eloquent models | string-nonincrementing-key | Intermediate | lessons null | Configure a nonincrementing string primary key without coercing it to an integer.
+LAR-S26-0204 | Eloquent models | mass-assignment-discard-detection | Intermediate | lessons null | Detect silently discarded mass-assignment attributes during development.
+LAR-S26-0205 | Eloquent models | explicit-assignment-guard-boundary | Foundation | lessons null | Distinguish guarded mass assignment from explicit attribute assignment.
+LAR-S26-0206 | Eloquent models | scoped-unguarded-restoration | Intermediate | lessons null | Restore mass-assignment protection after a scoped unguarded operation.
+LAR-S26-0207 | Eloquent models | partial-selection-update-identity | Intermediate | lessons null | Preserve model identity when selecting partial columns for later updates.
+LAR-S26-0208 | Eloquent models | fill-model-update-boolean | Foundation | lessons null | Distinguish a model-returning fill call from the boolean result of update.
+LAR-S26-0209 | Eloquent models | mass-update-skips-model-events | Intermediate | lessons null | Account for skipped per-model events when using a mass update query.
+LAR-S26-0210 | Eloquent state | dirty-versus-last-save-changes | Intermediate | lessons null | Trace dirty and changed state before and after a successful save.
+LAR-S26-0211 | Eloquent state | raw-original-accessor-separation | Intermediate | lessons null | Compare raw original data with accessor-transformed attribute values.
+LAR-S26-0212 | Eloquent state | fresh-separate-instance | Foundation | lessons null | Use fresh without assuming the original in-memory model is mutated.
+LAR-S26-0213 | Eloquent state | refresh-loaded-relations | Intermediate | lessons null | Use refresh to reload a stale model and its already loaded relationships.
+LAR-S26-0214 | Eloquent state | replicate-business-unique-value | Intermediate | lessons null | Prevent a replicated unsaved model from reusing a business-unique attribute.
+LAR-S26-0215 | Eloquent casts | immutable-date-return-value | Intermediate | lessons null | Predict an immutable datetime cast without assuming the model changes when a new date is returned.
+LAR-S26-0216 | Eloquent casts | array-cast-offset-reassignment | Intermediate | lessons null | Apply a JSON array change through reassignment rather than modifying an overloaded offset.
+LAR-S26-0217 | Eloquent casts | array-object-in-place-tracking | Intermediate | lessons null | Use an object-backed array cast when in-place mutation must be tracked.
+LAR-S26-0218 | Eloquent casts | enum-invalid-stored-value | Intermediate | lessons null | Handle invalid stored values when hydrating a backed-enum cast.
+LAR-S26-0219 | Eloquent casts | hashed-cast-existing-hash | Intermediate | lessons null | Avoid double hashing a value through the built-in hashed cast.
+LAR-S26-0220 | Eloquent casts | encrypted-attribute-query-boundary | Intermediate | lessons null | Keep plaintext query assumptions separate from encrypted attribute storage.
+LAR-S26-0221 | Eloquent casts | null-cast-preservation | Foundation | lessons null | Preserve null values rather than assuming every cast converts them to zero or false.
+LAR-S26-0222 | Eloquent accessors | cached-value-object-setter-mapping | Intermediate | lessons null | Persist changes to a cached accessor value object through its setter mapping.
+LAR-S26-0223 | Eloquent accessors | set-mutator-normalized-storage | Foundation | lessons null | Normalize a stored attribute through a set mutator before persistence.
+LAR-S26-0224 | Eloquent serialization | appended-accessor-not-sql-column | Intermediate | lessons null | Append a computed accessor to output without treating it as a database column.
+LAR-S26-0225 | Eloquent serialization | visible-hidden-intersection | Intermediate | lessons null | Resolve visibility and hidden rules when the same attribute appears in both lists.
+LAR-S26-0226 | Eloquent serialization | serialization-loaded-relations-only | Intermediate | lessons null | Include only already loaded relationships during ordinary model array serialization.
+LAR-S26-0227 | Eloquent casts | decimal-cast-string-scale | Foundation | lessons null | Preserve a decimal cast's string representation instead of assuming it is a float.
+LAR-S26-0228 | Eloquent state | child-save-parent-touch | Intermediate | lessons null | Touch a configured parent timestamp when saving a child model.
+LAR-S26-0229 | Eloquent concurrency | optimistic-version-affected-rows | Intermediate | lessons null | Detect a stale update with a version predicate and affected-row count.
+LAR-S26-0230 | Eloquent scopes | selective-global-scope-removal | Intermediate | lessons null | Remove one global scope without disabling unrelated tenant restrictions.
+LAR-S26-0231 | Relationships | foreign-key-relationship-direction | Foundation | lessons null | Choose the relationship direction from the location of the foreign key.
+LAR-S26-0232 | Relationships | belongs-to-custom-owner-key | Intermediate | lessons null | Match a belongsTo relationship to a nonstandard owner key.
+LAR-S26-0233 | Relationships | latest-of-many-default-key | Intermediate | lessons null | Distinguish latestOfMany's default primary-key ordering from a business timestamp.
+LAR-S26-0234 | Relationships | with-default-unsaved-model | Foundation | lessons null | Recognize an unsaved default related model returned by withDefault.
+LAR-S26-0235 | Relationship aggregates | relationship-count-without-hydration | Foundation | lessons null | Retrieve child counts without hydrating every child collection.
+LAR-S26-0236 | Relationship aggregates | relationship-exists-projection | Intermediate | lessons null | Project relationship existence without treating it as a loaded relation.
+LAR-S26-0237 | Relationship aggregates | relationship-sum-alias | Intermediate | lessons null | Identify the attribute name and value produced by withSum.
+LAR-S26-0238 | Relationship queries | where-has-minimum-matching-count | Intermediate | lessons null | Filter parents by a minimum count of matching related rows.
+LAR-S26-0239 | Relationship queries | matching-eager-load-and-parent-filter | Intermediate | lessons null | Keep eager-loaded children consistent with the filter used to select parents.
+LAR-S26-0240 | Eager loading | eager-load-selected-foreign-key | Intermediate | lessons null | Retain the foreign key required to match selected children to their parents.
+LAR-S26-0241 | Eager loading | cached-relation-versus-new-query | Intermediate | lessons null | Distinguish an already loaded relationship snapshot from a fresh relationship count after an insert.
+LAR-S26-0242 | Eager loading | eager-load-per-parent-limit | Intermediate | lessons null | Apply a per-parent eager-loading limit on a supported database rather than treating it as a global child cap.
+LAR-S26-0243 | Eager loading | lazy-loading-detection-hydrated-set | Intermediate | lessons null | Detect accidental lazy loading with a regression setup that actually exercises hydrated models.
+LAR-S26-0244 | Eager loading | chaperone-inverse-parent-hydration | Intermediate | lessons null | Hydrate the inverse parent with chaperone to avoid child-to-parent N+1 queries.
+LAR-S26-0245 | Polymorphic relationships | stable-polymorphic-aliases | Intermediate | lessons null | Use stable morph aliases instead of coupling persisted types to PHP class names.
+LAR-S26-0246 | Polymorphic relationships | morph-to-per-type-queries | Intermediate | lessons null | Account for separate eager-loading queries for distinct morphTo target types.
+LAR-S26-0247 | Polymorphic relationships | where-has-morph-explicit-types | Intermediate | lessons null | Restrict a polymorphic relationship filter to explicitly supported target types.
+LAR-S26-0248 | Polymorphic relationships | polymorphic-type-id-pair | Intermediate | lessons null | Match both type and identifier when polymorphic targets share the same numeric ID.
+LAR-S26-0249 | Pivot relationships | sync-replaces-association-set | Foundation | lessons null | Distinguish attach from sync when existing associations must be replaced.
+LAR-S26-0250 | Pivot relationships | additive-pivot-metadata-synchronization | Intermediate | lessons null | Update requested pivot metadata and add missing links without detaching unrelated existing associations.
+LAR-S26-0251 | Pivot relationships | update-existing-pivot-attribute | Intermediate | lessons null | Update a pivot attribute without updating the related model's attributes.
+LAR-S26-0252 | Pivot relationships | select-extra-pivot-columns | Foundation | lessons null | Expose an extra pivot column through withPivot.
+LAR-S26-0253 | Pivot relationships | order-by-pivot-rank | Intermediate | lessons null | Order related records by a pivot attribute rather than a related-table column.
+LAR-S26-0254 | Pivot relationships | pivot-filter-and-attach-default | Intermediate | lessons null | Use a pivot value that applies to both retrieval and new association defaults.
+LAR-S26-0255 | Pivot relationships | detach-link-not-related-row | Foundation | lessons null | Remove an association without deleting the related record.
+LAR-S26-0256 | Pivot relationships | toggle-pivot-result | Intermediate | lessons null | Predict attached and detached IDs returned by toggle.
+LAR-S26-0257 | Pivot relationships | pivot-timestamp-pair | Intermediate | lessons null | Supply both timestamp columns when enabling automatic pivot timestamps.
+LAR-S26-0258 | Relationships | associate-before-save | Intermediate | lessons null | Persist an associate operation instead of assuming it immediately writes the foreign key.
+LAR-S26-0259 | Relationships | has-many-through-key-path | Intermediate | lessons null | Follow a hasManyThrough path using the correct intermediate and final keys.
+LAR-S26-0260 | Relationship queries | relationship-or-predicate-grouping | Intermediate | lessons null | Group an orWhere branch so it cannot escape the relationship's foreign-key constraint.
+LAR-S26-0261 | Query Builder | add-select-preserves-projection | Foundation | lessons null | Extend a projection with addSelect instead of replacing the existing selected columns.
+LAR-S26-0262 | Query Builder | builder-first-get-result-shapes | Foundation | lessons null | Distinguish a single-row result from a collection returned by get.
+LAR-S26-0263 | Query Builder | keyed-pluck-versus-scalar-value | Foundation | lessons null | Retrieve a keyed value list with pluck instead of a single scalar with value.
+LAR-S26-0264 | Query Builder | filter-before-materialization | Intermediate | lessons null | Apply database filtering before materializing a result collection.
+LAR-S26-0265 | Query Builder | empty-where-in-no-match | Foundation | lessons null | Treat an empty whereIn list as matching no records.
+LAR-S26-0266 | Query Builder | sql-null-versus-text-null | Foundation | lessons null | Query a null column value rather than comparing to the literal text NULL.
+LAR-S26-0267 | Query Builder | json-array-membership-not-substring | Intermediate | lessons null | Test membership in a JSON array without relying on substring matches.
+LAR-S26-0268 | Query Builder | where-column-not-bound-column-name | Intermediate | lessons null | Compare two columns with whereColumn instead of treating the second name as a string value.
+LAR-S26-0269 | Query Builder | raw-expression-value-binding | Intermediate | lessons null | Keep values in raw query fragments parameter-bound.
+LAR-S26-0270 | Query Builder | dynamic-sort-identifier-allowlist | Intermediate | lessons null | Allowlist dynamic sort identifiers rather than assuming value bindings select column names.
+LAR-S26-0271 | Bulk processing | chunk-mutable-filter-skips | Intermediate | lessons null | Avoid skipped rows when chunked processing changes the query's filtering field.
+LAR-S26-0272 | Bulk processing | lazy-before-not-after-get | Intermediate | lessons null | Bound memory with lazy iteration instead of materializing all rows first.
+LAR-S26-0273 | Bulk processing | bounded-eager-loading-not-cursor | Intermediate | lessons null | Combine bounded batches with eager loading instead of assuming cursor eager-loads relations.
+LAR-S26-0274 | Bulk processing | chunk-by-id-projection-alias | Intermediate | lessons null | Expose the identifier alias needed by chunkById when using a custom projection.
+LAR-S26-0275 | Pagination | cursor-pagination-unique-tiebreaker | Intermediate | lessons null | Use a deterministic unique ordering for cursor pagination with tied business timestamps.
+LAR-S26-0276 | Pagination | simple-pagination-without-count | Foundation | lessons null | Choose simple pagination when next/previous navigation is sufficient and a total count is unnecessary.
+LAR-S26-0277 | Query Builder | upsert-conflict-unique-index | Intermediate | lessons null | Align an upsert conflict target with an actual unique index on the specified database.
+LAR-S26-0278 | Query Builder | insert-get-id-without-model-lifecycle | Intermediate | lessons null | Retrieve an inserted identifier without assuming Query Builder applies Eloquent model events or timestamps.
+LAR-S26-0279 | Database concurrency | atomic-counter-increment | Intermediate | lessons null | Increment a counter atomically instead of writing a stale read-modify-write value.
+LAR-S26-0280 | Database concurrency | row-lock-transaction-write-boundary | Intermediate | lessons null | Keep a row lock inside the transaction that protects the corresponding write.
+LAR-S26-0281 | Transactions | transaction-false-return-commits | Intermediate | lessons null | Distinguish returning false from throwing an exception in a transaction closure.
+LAR-S26-0282 | Transactions | nested-savepoint-outer-continues | Intermediate | lessons null | Recover from an inner savepoint rollback while retaining valid outer transaction work.
+LAR-S26-0283 | Transactions | rolled-back-nested-after-commit | Intermediate | lessons null | Discard after-commit callbacks belonging to a rolled-back nested transaction.
+LAR-S26-0284 | Transactions | transaction-retry-external-side-effect | Advanced | lessons null | Account for repeated closure execution when a transaction retries a concurrency failure.
+LAR-S26-0285 | Database connections | sticky-read-write-routing | Intermediate | lessons null | Use sticky read routing after a write without claiming replication is synchronous.
+LAR-S26-0286 | Database observability | query-listener-sensitive-bindings | Intermediate | lessons null | Inspect query timing and placeholders without indiscriminately logging sensitive bindings.
+LAR-S26-0287 | Migrations | nullable-before-constrained | Intermediate | lessons null | Apply nullable to a foreign-key column before constructing its foreign-key definition.
+LAR-S26-0288 | Migrations | nullable-foreign-key-preserve-history | Intermediate | lessons null | Preserve dependent historical records with a nullable foreign key and null-on-delete policy.
+LAR-S26-0289 | Database indexes | compound-index-filter-order-prefix | Intermediate | lessons null | Order a compound index to support the specified equality filter and ordered scan.
+LAR-S26-0290 | Database indexes | sqlite-unique-null-distinct | Intermediate | lessons null | Account for the specified database's treatment of multiple nulls under a unique index.
+LAR-S26-0291 | Migrations | change-restate-column-modifiers | Intermediate | lessons null | Preserve intended modifiers explicitly when changing a column definition.
+LAR-S26-0292 | Migrations | rollback-unique-index-only | Foundation | lessons null | Reverse an added unique index without dropping the column and its data.
+LAR-S26-0293 | Database connections | model-explicit-connection-default | Intermediate | lessons null | Keep model queries on the explicitly selected connection instead of assuming the default connection changes.
+LAR-S26-0294 | Factories | factory-make-versus-create | Foundation | lessons null | Distinguish unsaved factory construction from persisted factory creation.
+LAR-S26-0295 | Factories | factory-parent-for-child-has | Intermediate | lessons null | Use for to assign a parent and has to create related children in the intended direction.
+LAR-S26-0296 | Factories | factory-sequence-cycles | Intermediate | lessons null | Trace a repeating sequence across several generated model states.
+LAR-S26-0297 | Factories | factory-callback-persisted-identity | Intermediate | lessons null | Separate afterMaking from afterCreating when a callback needs a persisted identifier.
+LAR-S26-0298 | Seeders | seeder-scoped-model-event-suppression | Intermediate | lessons null | Suppress model events during a seeder without disabling them for later application work.
+LAR-S26-0299 | Soft deletes and indexes | active-only-unique-soft-delete | Advanced | lessons null | Enforce uniqueness among active rows with a partial unique index on a database that supports it.
+LAR-S26-0300 | Database concurrency | consistent-row-lock-acquisition-order | Intermediate | lessons null | Acquire multiple row locks in a consistent order to avoid the stated deadlock cycle.
+LAR-S26-0301 | Queue dispatch | async-dispatch-before-worker | Foundation | lessons null | Distinguish queued dispatch from immediate handler execution on an asynchronous connection.
+LAR-S26-0302 | Queue dispatch | after-response-current-process-lifetime | Intermediate | lessons null | Distinguish after-response work in the current PHP process from durable broker-backed background execution.
+LAR-S26-0303 | Queue dispatch | queue-name-versus-connection | Foundation | lessons null | Distinguish a queue name from a queue connection when routing a job.
+LAR-S26-0304 | Queue lifecycle | job-handle-service-injection | Intermediate | lessons null | Resolve handle dependencies at execution rather than serializing service objects in the constructor.
+LAR-S26-0305 | Queue serialization | serialized-model-current-state | Intermediate | lessons null | Recognize that serialized Eloquent models are restored from current database state.
+LAR-S26-0306 | Queue serialization | without-relations-job-payload | Intermediate | lessons null | Exclude loaded relationships from a serialized job model when they are not required.
+LAR-S26-0307 | Queue serialization | queued-relation-constraint-loss | Intermediate | lessons null | Account for relationship constraints being lost when serialized relations are restored.
+LAR-S26-0308 | Queue lifecycle | delete-job-missing-model-policy | Intermediate | lessons null | Discard a job whose required model has been deleted using the explicit missing-model policy.
+LAR-S26-0309 | Queue transactions | after-commit-job-enqueue | Intermediate | lessons null | Defer job enqueueing until the surrounding transaction commits.
+LAR-S26-0310 | Queue transactions | before-commit-explicit-override | Intermediate | lessons null | Override connection-level after-commit dispatch when deliberate pre-commit execution is required.
+LAR-S26-0311 | Queue payloads | durable-upload-reference-for-job | Intermediate | lessons null | Pass a durable storage reference instead of a request-lifetime uploaded-file object.
+LAR-S26-0312 | Queue safety | queued-operation-current-authorization | Intermediate | lessons null | Recheck mutable authorization at execution time for a deferred privileged operation.
+LAR-S26-0313 | Queue idempotency | duplicate-delivery-unique-result-key | Intermediate | lessons null | Prevent duplicate job deliveries from creating duplicate database results with a unique operation key.
+LAR-S26-0314 | Queue idempotency | transactional-outbox-publish-window | Advanced | lessons null | Design an outbox to close the commit-versus-publish failure window without claiming exactly-once delivery.
+LAR-S26-0315 | Queue retries | release-does-not-return | Foundation | lessons null | Recognize that releasing a job does not return from the current handle method.
+LAR-S26-0316 | Queue retries | release-reservation-attempt-count | Intermediate | lessons null | Count released reservations toward the worker attempt budget.
+LAR-S26-0317 | Queue retries | backoff-array-last-value-fallback | Foundation | lessons null | Select a backoff delay from an attempt-indexed array with last-value fallback.
+LAR-S26-0318 | Queue retries | retry-until-deadline-expired | Intermediate | lessons null | Bound job retries by a retryUntil deadline rather than an assumed count-only limit.
+LAR-S26-0319 | Queue timeouts | timeout-shorter-than-retry-after | Intermediate | lessons null | Keep worker timeout below connection retry_after to avoid overlapping processing.
+LAR-S26-0320 | Queue failures | manual-fail-terminal-job-state | Foundation | lessons null | Distinguish explicitly failing a job from throwing an exception eligible for retry.
+LAR-S26-0321 | Queue failures | failed-callback-restored-job-state | Intermediate | lessons null | Avoid relying on unsaved handle-time object mutations inside the failed callback.
+LAR-S26-0322 | Queue failures | retry-versus-forget-failed-job | Foundation | lessons null | Distinguish retrying a failed job from deleting its failed-job record.
+LAR-S26-0323 | Queue uniqueness | unique-dispatch-lock-lifecycle | Foundation | lessons null | Use ShouldBeUnique to reject duplicate dispatches while its uniqueness lock is held.
+LAR-S26-0324 | Queue uniqueness | unique-until-processing-release-point | Intermediate | lessons null | Release a ShouldBeUniqueUntilProcessing lock before handling rather than after completion.
+LAR-S26-0325 | Queue uniqueness | distributed-unique-lock-store | Intermediate | lessons null | Share the uniqueness-lock store across dispatching application nodes.
+LAR-S26-0326 | Queue middleware | processing-overlap-versus-dispatch-uniqueness | Intermediate | lessons null | Distinguish dispatch uniqueness from overlap prevention during job processing.
+LAR-S26-0327 | Queue middleware | shared-overlap-key-across-classes | Intermediate | lessons null | Share an overlap key across different job classes when they mutate the same resource.
+LAR-S26-0328 | Queue middleware | overlap-lock-crash-expiration | Intermediate | lessons null | Set an overlap-lock expiration to recover after a worker crashes before releasing it.
+LAR-S26-0329 | Queue middleware | skip-obsolete-work-success-path | Foundation | lessons null | Use Skip to delete obsolete work without consuming a failed-job path.
+LAR-S26-0330 | Queue rate limits | rate-limit-releases-attempt-budget | Intermediate | lessons null | Account for rate-limit releases when choosing a job's attempts or retry deadline.
+LAR-S26-0331 | Job chains | chain-failure-stops-successors | Foundation | lessons null | Run chained jobs in order and stop downstream work after an unhandled job failure.
+LAR-S26-0332 | Job chains | chain-no-automatic-return-passing | Intermediate | lessons null | Pass serialized constructor data explicitly instead of assuming one handle return becomes the next input.
+LAR-S26-0333 | Job chains | append-current-job-chain | Foundation | lessons null | Append work to the current chain using the supported job-chain operation.
+LAR-S26-0334 | Job batches | batch-finally-versus-then | Intermediate | lessons null | Distinguish a batch completion callback from its all-success callback.
+LAR-S26-0335 | Job batches | batch-allow-failures-no-auto-cancel | Foundation | lessons null | Choose allowFailures when one failed job must not automatically cancel unrelated batch work.
+LAR-S26-0336 | Job batches | batch-cancellation-cooperative-check | Intermediate | lessons null | Check batch cancellation in a long-running or queued job rather than assuming all jobs stop immediately.
+LAR-S26-0337 | Queue tests | bus-fake-not-handler-execution | Foundation | lessons null | Separate a dispatch assertion from verification of the job handler's side effects.
+LAR-S26-0338 | Queue tests | assert-pushed-on-intended-queue | Foundation | lessons null | Assert dispatch to the intended named queue as well as the job type.
+LAR-S26-0339 | Queue workers | long-lived-worker-code-restart | Intermediate | lessons null | Restart long-lived workers after code changes because they do not reload the application per job.
+LAR-S26-0340 | Queue workers | worker-lifetime-bounds-and-supervision | Intermediate | lessons null | Limit worker lifetime to contain state or memory growth while preserving process supervision.
+LAR-S26-0341 | Events | event-dispatch-response-array | Foundation | lessons null | Distinguish event dispatch side effects from a function's direct return value.
+LAR-S26-0342 | Events | event-false-stops-propagation | Foundation | lessons null | Stop ordinary listener propagation when a listener returns false.
+LAR-S26-0343 | Events | event-until-first-non-null | Intermediate | lessons null | Use until to return the first non-null listener response instead of collecting every response.
+LAR-S26-0344 | Events | event-after-commit-all-listeners | Intermediate | lessons null | Dispatch an event after database commit when listeners require committed data.
+LAR-S26-0345 | Event listeners | queue-individual-listener | Intermediate | lessons null | Queue a listener through ShouldQueue rather than queueing every listener for that event.
+LAR-S26-0346 | Event listeners | listener-should-queue-condition | Foundation | lessons null | Use shouldQueue to suppress unnecessary queued listener work for a specific event.
+LAR-S26-0347 | Event listeners | queued-listener-queue-routing | Foundation | lessons null | Preserve listener-specific queue routing independently of the event class.
+LAR-S26-0348 | Event tests | event-fake-after-observer-dependent-setup | Intermediate | lessons null | Scope Event::fake so model factory observers needed by setup can still run.
+LAR-S26-0349 | Event tests | selective-event-fake | Foundation | lessons null | Fake selected event types while allowing unrelated application listeners to execute.
+LAR-S26-0350 | Event tests | scoped-event-fake-restoration | Foundation | lessons null | Restore the real dispatcher after an Event::fakeFor scope.
+LAR-S26-0351 | Event discovery | duplicate-listener-registration | Intermediate | lessons null | Avoid registering a discovered listener again and causing duplicate execution.
+LAR-S26-0352 | Event subscribers | event-subscriber-method-mapping | Foundation | lessons null | Register several event-method mappings through one subscriber without conflating event payloads.
+LAR-S26-0353 | Domain events | immutable-domain-event-facts | Intermediate | lessons null | Carry immutable event facts instead of expecting a later database reread to reproduce historical state.
+LAR-S26-0354 | Broadcast security | private-channel-membership-authorization | Intermediate | lessons null | Authorize private-channel membership instead of treating an obscured channel name as access control.
+LAR-S26-0355 | Broadcast events | broadcast-explicit-public-payload | Intermediate | lessons null | Restrict public broadcast payloads with broadcastWith rather than exposing every public property.
+LAR-S26-0356 | Broadcast events | broadcast-now-versus-queued | Foundation | lessons null | Distinguish ShouldBroadcastNow from a queued ShouldBroadcast event.
+LAR-S26-0357 | Broadcast integration | to-others-originating-socket | Intermediate | lessons null | Use the originating socket identifier to exclude that client's duplicate echo with toOthers.
+LAR-S26-0358 | Event architecture | transactional-invariant-before-async-listener | Intermediate | lessons null | Keep an essential invariant inside the transaction rather than relying on an eventually queued listener.
+LAR-S26-0359 | Event architecture | single-domain-event-emission-owner | Intermediate | lessons null | Avoid dispatching the same domain event from both an observer and the application service.
+LAR-S26-0360 | Event diagnostics | event-payload-regression-assertion | Foundation | lessons null | Test event payload contents rather than asserting only the event class was dispatched.
+LAR-S26-0361 | Mail rendering | mailable-explicit-view-data | Intermediate | lessons null | Supply explicit view data from a mailable without relying on unrelated request variables.
+LAR-S26-0362 | Mail headers | mail-envelope-versus-body-address | Foundation | lessons null | Distinguish envelope recipients from message body content.
+LAR-S26-0363 | Mail attachments | mail-attachment-storage-disk-reference | Intermediate | lessons null | Attach a file from a configured storage disk instead of assuming a disk path is an absolute local path.
+LAR-S26-0364 | Mail attachments | attachment-data-callback-evaluation | Foundation | lessons null | Delay reading attachment bytes until sending when using an Attachment data callback.
+LAR-S26-0365 | Mail queueing | should-queue-mailable-send-path | Intermediate | lessons null | Queue a mailable that implements ShouldQueue even when passed to send.
+LAR-S26-0366 | Mail queueing | queued-mail-locale-restoration | Intermediate | lessons null | Preserve a queued mailable locale while restoring the worker application locale after rendering.
+LAR-S26-0367 | Mail queueing | inline-mail-image-cid | Foundation | lessons null | Embed an inline mail image with a CID reference instead of exposing a private filesystem path.
+LAR-S26-0368 | Mail tests | mail-fake-queued-versus-sent | Foundation | lessons null | Distinguish assertSent from assertQueued for mail delivery intent.
+LAR-S26-0369 | Mail tests | mail-recipient-and-domain-data-assertion | Foundation | lessons null | Inspect recipients and domain data in a mail assertion callback.
+LAR-S26-0370 | Mail rendering | multipart-html-and-text-mail | Foundation | lessons null | Choose text and HTML content deliberately rather than embedding HTML in a plain-text template.
+LAR-S26-0371 | Mail security | bcc-recipient-privacy | Foundation | lessons null | Use BCC for a shared announcement when recipients must not see one another’s addresses.
+LAR-S26-0372 | Mail addressing | fresh-mailable-per-recipient-loop | Intermediate | lessons null | Construct a fresh mailable per loop iteration to avoid accumulating recipients.
+LAR-S26-0373 | Mail configuration | explicit-mailer-without-default-mutation | Intermediate | lessons null | Select a configured mailer without changing the application's global default.
+LAR-S26-0374 | Mail delivery | mail-transport-handoff-not-inbox-proof | Intermediate | lessons null | Treat transport acceptance as a handoff rather than proof of inbox delivery.
+LAR-S26-0375 | Mail events | message-sending-cancellation | Foundation | lessons null | Cancel sending from MessageSending when an application-level suppression rule applies.
+LAR-S26-0376 | Mail tests | mailable-rendered-content-test | Foundation | lessons null | Render a mailable to check its content separately from fake dispatch assertions.
+LAR-S26-0377 | Notifications | notification-via-per-recipient | Foundation | lessons null | Select delivery channels per notifiable through via.
+LAR-S26-0378 | Notifications | on-demand-notification-routing | Foundation | lessons null | Route an on-demand notification without constructing a persisted user.
+LAR-S26-0379 | Notifications | database-notification-selected-channel | Foundation | lessons null | Distinguish a database notification row from an outbound mail message.
+LAR-S26-0380 | Notifications | notification-read-state-not-deletion | Foundation | lessons null | Mark one stored notification read without deleting its historical row.
+LAR-S26-0381 | Notifications | queued-notification-recipient-channel-jobs | Foundation | lessons null | Queue one delivery job for each recipient and channel when the notification is queued.
+LAR-S26-0382 | Notifications | notification-per-channel-connections | Intermediate | lessons null | Customize queued notification connections per channel with viaConnections.
+LAR-S26-0383 | Notifications | notification-should-send-at-delivery | Intermediate | lessons null | Re-evaluate whether a queued notification should send using shouldSend at delivery time.
+LAR-S26-0384 | Notifications | notification-id-recipient-correlation | Intermediate | lessons null | Correlate queued notification channels using the shared notification ID for each recipient without assuming one ID covers all recipients.
+LAR-S26-0385 | Notification tests | notification-recipient-channel-assertion | Foundation | lessons null | Assert a notification for the intended recipient and channels, not just any dispatch.
+LAR-S26-0386 | Notification data | notification-channel-specific-data | Intermediate | lessons null | Separate database representation from broadcast representation when the consumers need different fields.
+LAR-S26-0387 | Scheduling | schedule-explicit-timezone | Foundation | lessons null | Interpret a schedule in the declared timezone rather than the server's implicit timezone.
+LAR-S26-0388 | Scheduling | schedule-dst-wall-clock-risk | Intermediate | lessons null | Account for daylight-saving skipped or repeated local times in business-critical schedules.
+LAR-S26-0389 | Scheduling | scheduled-task-overlap-mutex | Intermediate | lessons null | Prevent overlapping runs of one scheduled task with a suitable shared cache lock.
+LAR-S26-0390 | Scheduling | single-server-schedule-election | Intermediate | lessons null | Run one scheduled task on one server across multiple scheduler hosts.
+LAR-S26-0391 | Scheduling | parameterized-schedule-unique-names | Intermediate | lessons null | Give parameterized scheduled jobs distinct names when their single-server locks must be independent.
+LAR-S26-0392 | Scheduling | schedule-lock-expiry-not-frequency | Foundation | lessons null | Distinguish a task mutex expiration from its cron frequency.
+LAR-S26-0393 | Scheduling | schedule-when-and-skip-combination | Foundation | lessons null | Combine when and skip conditions without assuming registration order overrides their meaning.
+LAR-S26-0394 | Scheduling | schedule-environment-restriction | Foundation | lessons null | Restrict scheduled work to the intended application environments.
+LAR-S26-0395 | Scheduling | scheduled-maintenance-mode-opt-in | Intermediate | lessons null | Keep maintenance-mode behavior explicit for tasks that must continue during maintenance.
+LAR-S26-0396 | Scheduling | scheduler-recurring-trigger | Foundation | lessons null | Understand that the scheduler invokes due events and needs an external recurring trigger.
+LAR-S26-0397 | Scheduling | sub-minute-scheduler-process-lifetime | Foundation | lessons null | Recognize sub-minute schedules require schedule:run to remain alive for the current minute.
+LAR-S26-0398 | Scheduling | interrupt-sub-minute-schedule-on-deploy | Foundation | lessons null | Interrupt a running sub-minute scheduler during deployment so old code does not continue for the rest of the minute.
+LAR-S26-0399 | Scheduling tests | schedule-due-inspection-without-execution | Intermediate | lessons null | Freeze time and inspect due events without running their external commands.
+LAR-S26-0400 | Scheduling architecture | scheduled-job-durable-resumption | Advanced | lessons null | Make scheduled work resumable and idempotent instead of assuming onOneServer guarantees completion.
+LAR-S26-0401 | Storage | storage-explicit-private-disk | Foundation | lessons null | Select the intended storage disk for a private document without changing the global default.
+LAR-S26-0402 | Storage | uploaded-file-storage-key | Foundation | lessons null | Distinguish an uploaded file's returned storage key from a public URL or absolute path.
+LAR-S26-0403 | Storage security | upload-name-separate-metadata | Intermediate | lessons null | Avoid trusting a client-supplied upload filename as a safe storage identifier.
+LAR-S26-0404 | Storage errors | filesystem-write-throw-configuration | Intermediate | lessons null | Configure failed filesystem writes to throw rather than treating an unchecked false return as success.
+LAR-S26-0405 | Storage streams | storage-stream-finally-close | Intermediate | lessons null | Process a storage read stream without loading the full object and close the resource afterwards.
+LAR-S26-0406 | Storage responses | storage-attachment-response | Foundation | lessons null | Choose an attachment download response rather than an inline file response.
+LAR-S26-0407 | Storage visibility | storage-url-not-access-change | Intermediate | lessons null | Distinguish URL generation from changing a stored object's access visibility.
+LAR-S26-0408 | Storage operations | storage-copy-versus-move | Foundation | lessons null | Predict source and destination existence after copy versus move.
+LAR-S26-0409 | Storage tests | fake-storage-upload-isolation | Foundation | lessons null | Use a fake disk to isolate upload persistence assertions from configured real storage.
+LAR-S26-0410 | Storage concurrency | filesystem-append-concurrency-boundary | Intermediate | lessons null | Recognize that filesystem append implemented as read-modify-write is not a concurrent logging guarantee.
+LAR-S26-0411 | Storage uploads | direct-upload-presigned-headers | Intermediate | lessons null | Use the temporary upload URL and required headers for a supported direct-to-object-storage upload.
+LAR-S26-0412 | Storage consistency | file-database-rollback-compensation | Intermediate | lessons null | Compensate a stored file when a later database transaction rolls back instead of assuming cross-resource atomicity.
+LAR-S26-0413 | Storage security | disk-path-root-traversal | Foundation | lessons null | Reject a path traversal segment rather than allowing a storage key to escape its disk root.
+LAR-S26-0414 | Storage operations | storage-delete-directory-tree | Foundation | lessons null | Distinguish deleting a directory tree from deleting a single file key.
+LAR-S26-0415 | Storage deployment | public-storage-symlink-scope | Foundation | lessons null | Connect the public storage URL to the intended public-disk symlink without exposing private disks.
+LAR-S26-0416 | Cache retrieval | cache-remember-hit-callback | Foundation | lessons null | Execute a remember callback on a miss and reuse its stored result on a hit.
+LAR-S26-0417 | Cache retrieval | cache-null-miss-sentinel | Intermediate | lessons null | Account for null-valued cache entries being treated as misses by remember.
+LAR-S26-0418 | Cache concurrency | cache-add-create-if-absent | Intermediate | lessons null | Use atomic add when only the first contender should create a cache entry.
+LAR-S26-0419 | Cache retrieval | cache-pull-removes-value | Foundation | lessons null | Retrieve and remove a value with pull rather than leaving it cached.
+LAR-S26-0420 | Cache invalidation | cache-flush-ignores-prefix | Intermediate | lessons null | Recognize that a whole-store flush may remove entries beyond an application's configured prefix.
+LAR-S26-0421 | Cache expiration | cache-integer-ttl-seconds | Foundation | lessons null | Interpret integer cache TTL values in seconds for the supported framework.
+LAR-S26-0422 | Cache expiration | cache-absolute-expiration-object | Foundation | lessons null | Apply an absolute expiration time without treating it as a relative duration.
+LAR-S26-0423 | Cache durability | cache-forever-not-durable-record | Foundation | lessons null | Keep cache forever separate from durable storage and eviction guarantees.
+LAR-S26-0424 | Cache locks | cache-block-lock-timeout | Intermediate | lessons null | Handle lock-block timeout explicitly instead of assuming protected work always runs.
+LAR-S26-0425 | Cache locks | cache-lock-owner-transfer | Intermediate | lessons null | Restore and release a lock using its owner token across a process boundary.
+LAR-S26-0426 | Cache locks | lock-force-release-other-owner | Intermediate | lessons null | Distinguish owner-checked release from forceRelease when another process holds the lock.
+LAR-S26-0427 | Cache architecture | cache-stampede-inner-recheck | Intermediate | lessons null | Prevent a cache stampede with a shared lock and a second cache check inside the lock.
+LAR-S26-0428 | Cache keys | cache-key-tenant-filter-dimensions | Intermediate | lessons null | Include all tenant and query dimensions that change the cached result.
+LAR-S26-0429 | Cache consistency | cache-fill-snapshot-version-identity | Intermediate | lessons null | Prevent a delayed cache fill from overwriting the active version by keying results with the snapshot version.
+LAR-S26-0430 | Cache tags | cache-tags-driver-capability | Foundation | lessons null | Choose a tag-capable store instead of assuming every configured cache driver supports tags.
+LAR-S26-0431 | Cache tags | cache-tag-order-namespace | Intermediate | lessons null | Keep tag ordering consistent when retrieving a value stored in a tagged namespace.
+LAR-S26-0432 | Cache freshness | flexible-stale-deferred-refresh | Intermediate | lessons null | Trace flexible cache behavior through fresh, stale and deferred-refresh phases.
+LAR-S26-0433 | Cache memoization | memo-cache-underlying-write-staleness | Intermediate | lessons null | Distinguish request-local memoized reads from changes made directly to the underlying cache store.
+LAR-S26-0434 | Rate limiting | rate-attempt-false-result-ambiguity | Intermediate | lessons null | Distinguish a callback returning false from the callback not running because the rate limit was reached.
+LAR-S26-0435 | Cache tests | array-cache-object-reference-sharing | Intermediate | lessons null | Recognize reference-sharing behavior in an unserialized array cache when testing mutable objects.
+LAR-S26-0436 | HTTP client | http-error-response-no-default-throw | Foundation | lessons null | Handle an HTTP error status without assuming the Laravel client throws by default.
+LAR-S26-0437 | HTTP client errors | http-connection-failure-no-response | Foundation | lessons null | Distinguish a connection failure from an HTTP response error.
+LAR-S26-0438 | HTTP client retries | http-retry-total-attempt-count | Foundation | lessons null | Count the initial request within the configured maximum retry attempts.
+LAR-S26-0439 | HTTP client retries | http-retry-final-status-exception | Intermediate | lessons null | Recognize the retry helper's final HTTP failure exception even without a separate throw call.
+LAR-S26-0440 | HTTP client retries | http-retry-false-still-connection-exception | Intermediate | lessons null | Keep connection exceptions distinct when retry is configured with throw=false.
+LAR-S26-0441 | HTTP client tests | http-prevent-stray-requests | Intermediate | lessons null | Prevent unstubbed outbound requests rather than allowing fake gaps to reach a real service.
+LAR-S26-0442 | HTTP client tests | http-sequence-exhaustion | Foundation | lessons null | Define response-sequence exhaustion explicitly for repeated calls.
+LAR-S26-0443 | HTTP client bodies | http-form-request-encoding | Foundation | lessons null | Send form-encoded data deliberately instead of relying on the default JSON request body.
+LAR-S26-0444 | HTTP client headers | http-header-merge-versus-replace | Intermediate | lessons null | Distinguish merging headers from replacing the current header set.
+LAR-S26-0445 | HTTP client timeouts | http-connect-versus-total-timeout | Foundation | lessons null | Separate connection establishment timeout from total response timeout.
+LAR-S26-0446 | HTTP client authentication | http-bearer-token-header | Foundation | lessons null | Set a bearer token in the Authorization header without treating it as a query parameter.
+LAR-S26-0447 | HTTP client authentication | http-basic-auth-credential-encoding | Foundation | lessons null | Apply Basic authentication encoding through the client API rather than concatenating plaintext credentials.
+LAR-S26-0448 | HTTP client retries | http-retry-refresh-rejected-token | Intermediate | lessons null | Refresh a rejected token within a status-specific retry callback before the next request.
+LAR-S26-0449 | HTTP client concurrency | http-pool-named-response-keys | Foundation | lessons null | Retrieve named pool responses by their request aliases.
+LAR-S26-0450 | HTTP client responses | http-successful-versus-ok | Foundation | lessons null | Distinguish any successful 2xx response from exactly HTTP 200.
+LAR-S26-0451 | HTTP client responses | http-json-dot-path-default | Foundation | lessons null | Read a nested JSON value with a default when the path is absent.
+LAR-S26-0452 | HTTP client uploads | http-multipart-file-part | Foundation | lessons null | Build a multipart file request instead of placing file bytes in a JSON field.
+LAR-S26-0453 | HTTP client contracts | http-success-not-payload-schema | Intermediate | lessons null | Validate a successful response's expected JSON shape rather than treating a 2xx status as schema validation.
+LAR-S26-0454 | HTTP client tests | http-assert-destination-method-payload | Intermediate | lessons null | Assert method, destination and payload for the intended outbound request.
+LAR-S26-0455 | HTTP client negotiation | http-accept-versus-body-content-type | Foundation | lessons null | Distinguish accepting JSON responses from choosing JSON request encoding.
+LAR-S26-0456 | API resources | resource-top-level-additional-meta | Foundation | lessons null | Add top-level response metadata without placing it inside each resource item.
+LAR-S26-0457 | API resources | resource-whenloaded-query-boundary | Intermediate | lessons null | Use whenLoaded to avoid triggering lazy loading during resource serialization.
+LAR-S26-0458 | API resources | resource-whencounted-conditional-count | Intermediate | lessons null | Include a relationship count only when that count was retrieved for the model.
+LAR-S26-0459 | API resources | resource-preserve-collection-keys | Foundation | lessons null | Preserve intentional collection keys instead of relying on default resource reindexing.
+LAR-S26-0460 | API pagination | paginated-resource-always-data-envelope | Intermediate | lessons null | Retain the paginated data envelope even when ordinary resource wrapping is disabled.
+LAR-S26-0461 | API resources | resource-mergewhen-associative-shape | Intermediate | lessons null | Use conditional attribute merging without mixing incompatible numeric and string key structures.
+LAR-S26-0462 | API resources | resource-withresponse-header-hook | Foundation | lessons null | Customize the final resource response headers through withResponse.
+LAR-S26-0463 | API resource security | resource-explicit-hidden-secret-leak | Intermediate | lessons null | Avoid explicitly exposing a hidden model secret through a custom resource array.
+LAR-S26-0464 | API pagination | resource-collection-retain-paginator | Foundation | lessons null | Preserve paginator links and metadata when transforming the page's records into resources.
+LAR-S26-0465 | API resources | resource-missingvalue-versus-null | Foundation | lessons null | Convert a missing conditional value into omission rather than a serialized null placeholder.
+LAR-S26-0466 | API resources | resource-when-lazy-value-closure | Intermediate | lessons null | Defer expensive conditional values with a closure instead of evaluating them before when.
+LAR-S26-0467 | API resources | resource-custom-wrap-name | Foundation | lessons null | Set a custom outer data wrapper without changing the model's stored attributes.
+LAR-S26-0468 | API resources | resource-conditional-pivot-metadata | Intermediate | lessons null | Read pivot metadata only when the expected intermediate relationship is loaded.
+LAR-S26-0469 | API pagination | resource-pagination-information-customization | Intermediate | lessons null | Customize pagination metadata using paginationInformation while retaining the required structure.
+LAR-S26-0470 | API responses | resource-recently-created-status | Intermediate | lessons null | Distinguish a resource response for a recently created model from a normally retrieved model.
+LAR-S26-0471 | Database tests | test-transactions-connection-scope | Intermediate | lessons null | Understand transaction-based test cleanup without assuming every database connection is automatically covered.
+LAR-S26-0472 | HTTP tests | json-structure-not-exact-contract | Foundation | lessons null | Distinguish JSON structure assertions from exact payload assertions.
+LAR-S26-0473 | HTTP tests | json-fragment-object-key-order | Foundation | lessons null | Assert a JSON fragment without depending on irrelevant object key ordering.
+LAR-S26-0474 | HTTP tests | json-path-strict-type-regression | Intermediate | lessons null | Catch a JSON type regression with an exact path-value assertion.
+LAR-S26-0475 | HTTP tests | validation-assertion-response-aware | Foundation | lessons null | Assert validation errors across both JSON and session-redirect responses with the response-aware testing helper.
+LAR-S26-0476 | HTTP tests | feature-expose-original-exception | Foundation | lessons null | Disable exception handling to expose the original exception during a failing feature test.
+LAR-S26-0477 | HTTP tests | feature-authorization-middleware-enabled | Intermediate | lessons null | Avoid masking an authorization regression by disabling all middleware in the test.
+LAR-S26-0478 | Authentication tests | actingas-not-login-credential-test | Foundation | lessons null | Recognize that actingAs establishes test identity without testing the actual login credential flow.
+LAR-S26-0479 | Database tests | database-has-not-uniqueness-proof | Intermediate | lessons null | Pair a partial database-row assertion with a count when uniqueness is part of the requirement.
+LAR-S26-0480 | Time tests | scoped-time-freeze-restoration | Foundation | lessons null | Restore frozen time after a scoped test callback so later assertions use the normal clock.
+LAR-S26-0481 | HTTP tests | following-redirects-final-response | Foundation | lessons null | Distinguish the original redirect response from the final response when following redirects in a test.
+LAR-S26-0482 | HTTP tests | streamed-response-assertion-executes-body | Intermediate | lessons null | Assert the executed streamed response body instead of reading a nonexistent ordinary response body.
+LAR-S26-0483 | HTTP tests | json-path-absent-not-null | Intermediate | lessons null | Assert that a sensitive JSON path is absent rather than merely null.
+LAR-S26-0484 | Console tests | console-output-plus-exit-status | Foundation | lessons null | Verify both console output and exit status instead of treating printed success text as a successful command result.
+LAR-S26-0485 | Service tests | container-fake-versus-manual-dependency | Foundation | lessons null | Bind a fake collaborator before container resolution rather than expecting it to replace a manually constructed dependency.
+LAR-S26-0486 | Parallel tests | parallel-tests-nondatabase-resource-token | Intermediate | lessons null | Isolate non-database temporary resources by test-process token rather than assuming database isolation covers files.
+LAR-S26-0487 | Transaction tests | test-manager-aftercommit-outer-wrapper | Intermediate | lessons null | Account for a test's outer transaction when verifying after-commit dispatch.
+LAR-S26-0488 | Database tests | sqlite-tests-not-postgres-lock-proof | Intermediate | lessons null | Avoid claiming PostgreSQL row-lock coverage from SQLite-only tests.
+LAR-S26-0489 | Factory tests | factory-explicit-branch-state | Foundation | lessons null | Use explicit factory states to cover a branch instead of relying on random attribute generation.
+LAR-S26-0490 | Database tests | soft-delete-versus-physical-missing-assertions | Foundation | lessons null | Distinguish a soft-deleted row from a physically missing model in persistence assertions.
+LAR-S26-0491 | Frontend assets | vite-production-manifest-required | Foundation | lessons null | Supply the production Vite manifest rather than assuming source entry paths are directly browser-loadable.
+LAR-S26-0492 | Frontend assets | vite-stale-hot-file-production | Intermediate | lessons null | Remove a stale development hot file that directs production pages to a development server.
+LAR-S26-0493 | Frontend security | vite-prefixed-env-client-visible | Foundation | lessons null | Treat VITE-prefixed environment values as client-visible rather than server secrets.
+LAR-S26-0494 | Frontend assets | vite-resource-asset-manifest-resolution | Foundation | lessons null | Resolve a bundled resource asset through its build manifest instead of a raw public-path helper.
+LAR-S26-0495 | Frontend CORS | credentialed-cors-explicit-origin | Intermediate | lessons null | Use an explicit allowed origin for credentialed cross-origin requests rather than a wildcard response.
+LAR-S26-0496 | Frontend sessions | cross-origin-fetch-cookie-opt-in | Intermediate | lessons null | Send credentials deliberately for a cross-origin session-authenticated browser request.
+LAR-S26-0497 | Inertia protocol | inertia-initial-html-navigation-json | Foundation | lessons null | Distinguish the initial HTML page response from an Inertia navigation's JSON page object.
+LAR-S26-0498 | Inertia props | inertia-partial-reload-lazy-props | Intermediate | lessons null | Restrict partial reloads to the same page component and defer unrequested expensive props.
+LAR-S26-0499 | Inertia versioning | inertia-asset-version-location-response | Intermediate | lessons null | Handle an asset-version mismatch with the protocol's full-location response rather than rendering a stale page object.
+LAR-S26-0500 | Inertia validation | inertia-validation-redirect-shared-errors | Intermediate | lessons null | Carry validation errors through the redirect and shared-props flow rather than expecting a conventional 422 JSON API response.
+LAR-S26-0501 | Exception reporting | report-callback-stop-default-logging | Foundation | lessons null | Stop default exception logging deliberately from a custom report callback while retaining its own reporting action.
+LAR-S26-0502 | Exception rendering | render-callback-null-fallback | Intermediate | lessons null | Let a type-specific render callback fall back to Laravel's normal rendering when it returns null.
+LAR-S26-0503 | Exception reporting | dontreport-not-http-success | Foundation | lessons null | Keep reporting suppression separate from the HTTP response presented for an exception.
+LAR-S26-0504 | Exception context | exception-structured-domain-context | Foundation | lessons null | Attach domain identifiers through an exception's context method without placing secrets in its message.
+LAR-S26-0505 | Exception reporting | duplicate-report-instance-identity | Intermediate | lessons null | Distinguish duplicate reporting of one exception instance from two separately constructed exceptions.
+LAR-S26-0506 | Logging | log-level-minimum-threshold | Foundation | lessons null | Apply a channel's minimum severity threshold without mistaking it for one exact allowed level.
+LAR-S26-0507 | Logging context | log-entry-context-overrides-channel-key | Intermediate | lessons null | Resolve a duplicate context key between channel context and one log entry.
+LAR-S26-0508 | Logging context | logger-clear-unrelated-work-context | Foundation | lessons null | Clear channel context deliberately so unrelated later log entries do not retain it.
+LAR-S26-0509 | Logging context | shared-log-context-future-channels | Foundation | lessons null | Share context with channels created after the context was registered.
+LAR-S26-0510 | Logging stacks | log-stack-ignore-channel-exceptions | Intermediate | lessons null | Distinguish stack channel failure propagation from an explicit ignore_exceptions policy.
+LAR-S26-0511 | Logging security | structured-log-redaction-before-write | Intermediate | lessons null | Redact sensitive structured context before formatting and writing a log record.
+LAR-S26-0512 | Exception responses | exception-respond-preserve-protocol-fields | Intermediate | lessons null | Customize a rendered exception response while preserving required status and headers.
+LAR-S26-0513 | Context | hidden-context-not-log-extra | Intermediate | lessons null | Keep hidden diagnostic context out of ordinary log context while retaining it for application access.
+LAR-S26-0514 | Context | context-scope-restores-prior-state | Intermediate | lessons null | Restore the previous context after a scoped context operation.
+LAR-S26-0515 | Context and queues | queued-context-dispatch-snapshot | Intermediate | lessons null | Carry captured context into a queued execution without treating it as a fresh authenticated request.
+LAR-S26-0516 | Exception severity | exception-level-not-response-status | Foundation | lessons null | Set an exception type's reporting level without changing the response status.
+LAR-S26-0517 | Error control flow | report-helper-does-not-rethrow | Foundation | lessons null | Report a caught exception without assuming the report helper rethrows it.
+LAR-S26-0518 | Error control flow | rescue-fallback-report-policy | Foundation | lessons null | Use a rescue fallback and an explicit reporting policy without swallowing unrelated code outside its callback.
+LAR-S26-0519 | Retry control flow | retry-helper-false-is-return-value | Foundation | lessons null | Distinguish an exception-triggered retry from a callback that simply returns false.
+LAR-S26-0520 | Request diagnostics | correlation-id-one-middleware-value | Foundation | lessons null | Correlate a response identifier with the matching log context through one middleware-generated value.
+LAR-S26-0521 | Encryption | encryption-randomized-ciphertexts | Foundation | lessons null | Recognize randomized authenticated encryption when equal plaintexts produce different ciphertexts.
+LAR-S26-0522 | Encryption integrity | encrypted-payload-tamper-detection | Foundation | lessons null | Reject modified encrypted payloads rather than trusting decryptable-looking base64.
+LAR-S26-0523 | Encryption rotation | encryption-previous-key-decrypt-only | Intermediate | lessons null | Use previous keys for decryption during rotation while encrypting new values with the current key.
+LAR-S26-0524 | Encryption failures | decryption-failure-not-plaintext-fallback | Foundation | lessons null | Handle decryption failure as invalid protected data rather than accepting the original ciphertext as plaintext.
+LAR-S26-0525 | Password reset storage | reset-token-hashed-storage | Foundation | lessons null | Store a hash of a reset token while verifying the presented plaintext token through the repository.
+LAR-S26-0526 | Password reset expiry | reset-token-expire-versus-throttle-units | Intermediate | lessons null | Distinguish reset-token lifetime from password-broker issuance throttling.
+LAR-S26-0527 | Password reset lifecycle | successful-reset-invalidates-token | Foundation | lessons null | Invalidate a reset token after a successful password reset.
+LAR-S26-0528 | Password reset throttling | reset-link-issuance-throttle | Foundation | lessons null | Refuse repeated token creation within the configured issuance throttle window.
+LAR-S26-0529 | Email verification | verification-user-and-email-binding | Intermediate | lessons null | Validate the signed verification request's user identity and email hash before marking the account verified.
+LAR-S26-0530 | Email verification | verified-email-separate-from-auth | Foundation | lessons null | Require verified email separately from ordinary authentication for a protected application route.
+LAR-S26-0531 | Authentication state | auth-once-no-persistent-login | Foundation | lessons null | Authenticate a single request with once without persisting a login session.
+LAR-S26-0532 | Session authentication | logout-other-devices-password-proof | Intermediate | lessons null | Require the current password when invalidating other authenticated sessions through the supported flow.
+LAR-S26-0533 | Authentication security | reset-public-response-account-enumeration | Intermediate | lessons null | Avoid revealing account existence through publicly distinguishable password-reset outcomes.
+LAR-S26-0534 | Encryption formats | encrypt-string-versus-serialized-value | Foundation | lessons null | Keep string encryption and serialized-value encryption paired with the matching decryption API.
+LAR-S26-0535 | Outbound request security | outbound-destination-ssrf-boundary | Advanced | lessons null | Constrain user-influenced outbound destinations and redirects rather than treating URL syntax validation as SSRF protection.
+LAR-S26-0536 | Webhook authenticity | webhook-hmac-exact-raw-body | Intermediate | lessons null | Compute a webhook signature over the exact raw body rather than a re-encoded parsed JSON object.
+LAR-S26-0537 | Webhook freshness | webhook-authenticity-not-freshness | Intermediate | lessons null | Add a freshness and replay policy to an authentic webhook instead of treating a valid signature as proof of a new delivery.
+LAR-S26-0538 | Upload delivery security | untrusted-upload-active-content-delivery | Intermediate | lessons null | Prevent uploaded active content from becoming trusted same-origin executable content when serving user files.
+LAR-S26-0539 | Password confirmation | password-confirmation-recency | Foundation | lessons null | Distinguish a recent password-confirmation requirement from an already authenticated session.
+LAR-S26-0540 | Cookie security | httponly-not-csrf-protection | Foundation | lessons null | Understand which attacks HttpOnly mitigates without treating it as CSRF protection.
+LAR-S26-0541 | Collections | collection-map-versus-transform-state | Foundation | lessons null | Preserve the original collection when using map instead of a mutating transform.
+LAR-S26-0542 | Collections | filtered-list-json-reindex | Foundation | lessons null | Reindex filtered numeric keys before returning a JSON list contract.
+LAR-S26-0543 | Collections | collection-search-zero-key | Foundation | lessons null | Distinguish a legitimate zero key returned by search from failure using strict comparison.
+LAR-S26-0544 | Collections | collection-unique-strict-identifiers | Foundation | lessons null | Use strict value comparison when loose collection matching would merge identifiers of different types.
+LAR-S26-0545 | Collections | collection-keyby-duplicate-last-wins | Foundation | lessons null | Account for the last value winning when keyBy receives duplicate keys.
+LAR-S26-0546 | Collections | collection-flatten-depth-boundary | Foundation | lessons null | Distinguish flattening all nested levels from flattening only one level.
+LAR-S26-0547 | Collections | collection-partition-one-predicate-pass | Foundation | lessons null | Retain both accepted and rejected items through partition without rerunning a changing predicate.
+LAR-S26-0548 | Lazy collections | lazy-collection-demand-driven-take | Intermediate | lessons null | Defer source iteration and bound consumption with a lazy generator and take.
+LAR-S26-0549 | Collections | collection-merge-union-string-key-precedence | Foundation | lessons null | Distinguish merge from union when combining maps whose string keys overlap.
+LAR-S26-0550 | Collections | groupby-multiple-memberships | Foundation | lessons null | Assign one item to multiple groups when a groupBy callback returns several group keys.
+LAR-S26-0551 | Helpers | data-get-wildcard-leaf-default | Intermediate | lessons null | Recognize that data_get's outer default is not forwarded to each wildcard leaf in the pinned framework.
+LAR-S26-0552 | Helpers | data-fill-array-presence-not-truthiness | Foundation | lessons null | Fill only absent nested values with data_fill without replacing existing false or null values.
+LAR-S26-0553 | Strings | fluent-string-returned-value | Foundation | lessons null | Keep immutable fluent string transformations distinct from mutating the original Stringable value.
+LAR-S26-0554 | Pipeline | pipeline-finally-on-pipe-exception | Intermediate | lessons null | Run pipeline cleanup through finally when a pipe throws before the destination.
+LAR-S26-0555 | Pipeline | pipeline-string-parameters-order | Intermediate | lessons null | Supply per-stage parameters through the pipeline's supported pipe-string parsing.
+LAR-S26-0556 | Localization | translation-fallback-locale | Foundation | lessons null | Resolve a missing locale key through the configured fallback locale.
+LAR-S26-0557 | Localization | translation-empty-php-value-versus-missing | Foundation | lessons null | Distinguish an absent translation key from a translated empty string.
+LAR-S26-0558 | Localization | translation-plural-range-selection | Foundation | lessons null | Select a plural translation branch using the supplied count rather than the displayed placeholder alone.
+LAR-S26-0559 | Localization | translation-placeholder-case | Foundation | lessons null | Apply translation placeholder capitalization consistently for name, Name and NAME.
+LAR-S26-0560 | Localization | package-translation-selective-override | Intermediate | lessons null | Override one namespaced package translation while retaining its other default translations.
+LAR-S26-0561 | Localization | json-translation-file-key-collision | Intermediate | lessons null | Avoid collisions between JSON translation keys and PHP translation filenames.
+LAR-S26-0562 | Localization | localized-validation-label-stable-error-key | Intermediate | lessons null | Resolve localized validation attribute labels while retaining stable machine-readable error keys.
+LAR-S26-0563 | Localization | locale-selection-supported-allowlist | Foundation | lessons null | Select language from an application allowlist instead of accepting arbitrary locale identifiers.
+LAR-S26-0564 | Localization | timezone-display-preserves-instant | Intermediate | lessons null | Keep persisted timestamps in a consistent time basis while formatting a viewer-specific timezone.
+LAR-S26-0565 | Localization tests | locale-completeness-without-fallback | Foundation | lessons null | Detect a missing translation in one locale without letting fallback translations mask the omission.
+LAR-S26-0566 | Deployment | nginx-front-controller-execution-boundary | Intermediate | lessons null | Restrict web-server PHP execution to the Laravel front controller rather than every PHP file in the public tree.
+LAR-S26-0567 | Deployment security | production-debug-detail-exposure | Foundation | lessons null | Disable production debug rendering so exception details are not exposed to unauthenticated clients.
+LAR-S26-0568 | Deployment | config-cache-release-environment-binding | Intermediate | lessons null | Build configuration cache in the intended release environment rather than shipping another environment's resolved values.
+LAR-S26-0569 | Deployment | rolling-schema-expand-contract | Advanced | lessons null | Use backward-compatible expand-and-contract database changes during a rolling release.
+LAR-S26-0570 | Deployment | migration-rollback-not-data-recovery | Foundation | lessons null | Distinguish migration rollback from restoration of data destroyed by a migration.
+LAR-S26-0571 | Deployment | health-readiness-required-dependency | Intermediate | lessons null | Choose readiness checks that reflect required dependencies instead of treating a boot-only health response as proof of full service readiness.
+LAR-S26-0572 | Deployment | runtime-writable-directory-boundary | Foundation | lessons null | Supply production write access to storage and bootstrap/cache without making the entire source tree writable.
+LAR-S26-0573 | Deployment | immutable-release-rollback-schema-compatibility | Intermediate | lessons null | Keep the previous immutable release available for rollback without claiming this also reverses database changes.
+LAR-S26-0574 | Deployment | production-migrate-force-noninteractive | Foundation | lessons null | Run production migrations noninteractively with an explicit deployment decision rather than assuming a prompt will be answered.
+LAR-S26-0575 | Deployment | optimize-clear-clears-not-rebuilds | Foundation | lessons null | Interpret optimize:clear as clearing cached artifacts rather than rebuilding them for the new release.
+LAR-S26-0576 | Deployment | maintenance-state-multiple-nodes | Intermediate | lessons null | Coordinate maintenance state across nodes instead of assuming a local maintenance file changes every server.
+LAR-S26-0577 | Long-lived workers | persistent-singleton-captured-request | Intermediate | lessons null | Avoid capturing a request object in a singleton that outlives the request under a persistent worker.
+LAR-S26-0578 | Long-lived workers | octane-worker-code-reload | Foundation | lessons null | Reload persistent HTTP workers when deploying changed application code.
+LAR-S26-0579 | Performance | performance-query-and-endpoint-measurement | Foundation | lessons null | Measure endpoint query count and latency before selecting caching as the remedy.
+LAR-S26-0580 | Performance | index-workload-read-write-tradeoff | Intermediate | lessons null | Recognize that adding an index has write and storage costs as well as possible read benefits.
+LAR-S26-0581 | Application architecture | domain-calculation-transport-independent | Intermediate | lessons null | Keep a domain calculation independent of HTTP Request and response classes for reuse in jobs and commands.
+LAR-S26-0582 | Application architecture | business-operation-transaction-boundary | Intermediate | lessons null | Put one transaction boundary around a complete local business operation rather than committing each repository write independently.
+LAR-S26-0583 | Application architecture | domain-outcomes-transport-mapping | Foundation | lessons null | Return explicit domain outcomes from a service instead of using transport-specific status codes as business state.
+LAR-S26-0584 | Application architecture | service-extraction-preserves-invariant | Foundation | lessons null | Preserve domain invariants when moving logic out of a controller rather than only relocating unvalidated arrays.
+LAR-S26-0585 | Application architecture | business-port-infrastructure-adapter | Intermediate | lessons null | Separate infrastructure adapters from the business interface they implement so alternative transports can be tested.
+LAR-S26-0586 | Application architecture | observer-cycle-explicit-orchestration | Intermediate | lessons null | Coordinate a multi-step operation through an application service instead of hidden mutually triggering model observers.
+LAR-S26-0587 | Application architecture | report-read-projection-separate-write-model | Intermediate | lessons null | Use a dedicated read projection when a report has different data requirements from transactional model writes.
+LAR-S26-0588 | Application architecture | delayed-operation-current-authorization | Intermediate | lessons null | Make a policy decision on the authoritative current resource state when a delayed operation executes.
+LAR-S26-0589 | Integration contracts | conditional-http-304-reuse-representation | Intermediate | lessons null | Handle a conditional HTTP 304 response by reusing the cached representation rather than parsing an absent new body.
+LAR-S26-0590 | Integration resilience | retry-classifier-transient-safe-failure | Intermediate | lessons null | Apply a retry budget only to safe transient failures instead of retrying every domain rejection.
+LAR-S26-0591 | Integration resilience | retry-overall-deadline-budget | Intermediate | lessons null | Bound an external call's retry policy within the caller's overall request deadline.
+LAR-S26-0592 | Integration resilience | circuit-open-state-no-downstream-attempt | Intermediate | lessons null | Distinguish a circuit breaker's open state from a per-request retry loop.
+LAR-S26-0593 | Integration consistency | uncertain-external-result-reconciliation | Advanced | lessons null | Reconcile an uncertain external outcome before repeating an operation that may already have succeeded.
+LAR-S26-0594 | Application architecture | provider-boot-avoids-network-prerequisite | Foundation | lessons null | Keep package service-provider boot work lightweight rather than performing network I/O during every application boot.
+LAR-S26-0595 | Package integration | package-view-namespace-isolation | Foundation | lessons null | Resolve a namespaced package view without colliding with an application or another package view of the same filename.
+LAR-S26-0596 | Package configuration | package-config-merge-top-level-only | Intermediate | lessons null | Understand shallow configuration merging when package defaults contain nested arrays.
+LAR-S26-0597 | Package integration | package-publish-registration-not-copy | Foundation | lessons null | Publish package assets under an explicit tag without assuming provider registration automatically copies files.
+LAR-S26-0598 | Package integration | package-migration-path-registration | Foundation | lessons null | Load package migrations through the provider without registering a new database connection for the package.
+LAR-S26-0599 | Architecture tests | architecture-boundary-dependency-check | Foundation | lessons null | Detect a forbidden domain-to-HTTP dependency with a targeted architecture boundary check.
+LAR-S26-0600 | Framework upgrades | framework-upgrade-behavior-regression-evidence | Foundation | lessons null | Validate a locked framework upgrade with behavior regressions instead of treating dependency resolution as proof of application compatibility.

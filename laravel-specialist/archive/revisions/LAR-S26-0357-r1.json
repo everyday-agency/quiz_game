@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0357",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Broadcast integration",
+  "subtopic": "to-others-originating-socket",
+  "objective": {
+    "id": "laravel.to-others-originating-socket",
+    "text": "Use the originating socket identifier to exclude that client's duplicate echo with toOthers."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Exclude the initiating connection without confusing connection identity with user or session identity."
+  },
+  "prerequisites": [
+    "Broadcast toOthers",
+    "InteractsWithSockets",
+    "Client socket headers"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A client applies its successful HTTP response locally and then receives a duplicate broadcast update. The event uses InteractsWithSockets and dispatch calls toOthers(). Which request metadata identifies the originating connection to exclude?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The authenticated user ID copied into the event’s orderId property.",
+      "rationale": "A domain identifier is not the socket identity used for this exclusion.",
+      "misconception": "A domain identifier is not the socket identity used for this exclusion."
+    },
+    {
+      "id": "choice-2",
+      "text": "The X-Socket-ID header carrying the active broadcasting connection’s socket ID.",
+      "rationale": "toOthers records the originating socket identifier for the broadcaster to exclude that connection.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The CSRF token assigned to the form submission.",
+      "rationale": "A request-forgery token is not a broadcasting connection identifier.",
+      "misconception": "A request-forgery token is not a broadcasting connection identifier."
+    },
+    {
+      "id": "choice-4",
+      "text": "The session cookie name used by the web middleware.",
+      "rationale": "Session naming does not tell the broadcaster which live socket originated the request.",
+      "misconception": "Session naming does not tell the broadcaster which live socket originated the request."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "toOthers records the originating socket identifier for the broadcaster to exclude that connection.",
+    "trace": [
+      "A domain identifier is not the socket identity used for this exclusion.",
+      "toOthers records the originating socket identifier for the broadcaster to exclude that connection.",
+      "A request-forgery token is not a broadcasting connection identifier.",
+      "Session naming does not tell the broadcaster which live socket originated the request."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "123.456",
+    "probe": "class SocketEvent\n{\n    use Illuminate\\Broadcasting\\InteractsWithSockets;\n}\napp('request')->headers->set('X-Socket-ID', '123.456');\n$event = new SocketEvent();\n$event->dontBroadcastToCurrentUser();\necho $event->socket;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/broadcasting#only-to-others"
+  ]
+}

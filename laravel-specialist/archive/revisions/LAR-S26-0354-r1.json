@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0354",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Broadcast security",
+  "subtopic": "private-channel-membership-authorization",
+  "objective": {
+    "id": "laravel.private-channel-membership-authorization",
+    "text": "Authorize private-channel membership instead of treating an obscured channel name as access control."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Enforce subscription permission rather than relying on hard-to-guess channel identifiers."
+  },
+  "prerequisites": [
+    "Private broadcast channels",
+    "Authenticated users",
+    "Resource authorization"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Order updates contain private customer data. Channel names use long random order tokens, but any logged-in user who learns a token must still be denied unless they own that order. What enforces this requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Use a private channel and an authorization callback that checks the authenticated user against that order.",
+      "rationale": "The private-channel authorization endpoint must decide resource membership before approving the subscription.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Use a public channel with a longer random token and no ownership callback.",
+      "rationale": "Secrecy of the channel identifier is not the required access-control decision once the token is known.",
+      "misconception": "Secrecy of the channel identifier is not the required access-control decision once the token is known."
+    },
+    {
+      "id": "choice-3",
+      "text": "Hide the subscribe button for nonowners while keeping the channel authorization callback unconditional.",
+      "rationale": "A direct subscription request can bypass presentation controls.",
+      "misconception": "A direct subscription request can bypass presentation controls."
+    },
+    {
+      "id": "choice-4",
+      "text": "Approve every authenticated subscriber because login alone identifies an owner.",
+      "rationale": "Authentication establishes identity but not ownership of this specific order.",
+      "misconception": "Authentication establishes identity but not ownership of this specific order."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The private-channel authorization endpoint must decide resource membership before approving the subscription.",
+    "trace": [
+      "The private-channel authorization endpoint must decide resource membership before approving the subscription.",
+      "Secrecy of the channel identifier is not the required access-control decision once the token is known.",
+      "A direct subscription request can bypass presentation controls.",
+      "Authentication establishes identity but not ownership of this specific order."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "allowed:denied",
+    "probe": "class CaptureBroadcaster extends Illuminate\\Broadcasting\\Broadcasters\\Broadcaster\n{\n    public function auth($request)\n    {\n        return $this->verifyUserCanAccessChannel($request, $request->input('channel_name'));\n    }\n\n    public function validAuthenticationResponse($request, $result)\n    {\n        return $result;\n    }\n\n    public function broadcast(array $channels, $event, array $payload = [])\n    {\n        app('cache')->put('broadcast-payload', $payload);\n        app('cache')->increment('broadcast-count');\n    }\n}\nconfig(['broadcasting.default' => 'capture', 'broadcasting.connections.capture' => ['driver' => 'capture']]);\napp(Illuminate\\Broadcasting\\BroadcastManager::class)->extend('capture', fn () => new CaptureBroadcaster());\n$broadcaster = app(Illuminate\\Broadcasting\\BroadcastManager::class)->connection();\n$broadcaster->channel('orders.{orderId}', fn ($user, $orderId) => (int) $user->order_id === (int) $orderId);\n$request = Illuminate\\Http\\Request::create('/', 'POST', ['channel_name' => 'orders.7']);\n$request->setUserResolver(fn () => new Illuminate\\Auth\\GenericUser(['id' => 1, 'order_id' => 7]));\necho ($broadcaster->auth($request) ? 'allowed' : 'denied').':';\n$request->setUserResolver(fn () => new Illuminate\\Auth\\GenericUser(['id' => 2, 'order_id' => 8]));\ntry {\n    $broadcaster->auth($request);\n} catch (Symfony\\Component\\HttpKernel\\Exception\\AccessDeniedHttpException $e) {\n    echo 'denied';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/broadcasting#authorizing-channels"
+  ]
+}

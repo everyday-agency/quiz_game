@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0312",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Queue safety",
+  "subtopic": "queued-operation-current-authorization",
+  "objective": {
+    "id": "laravel.queued-operation-current-authorization",
+    "text": "Recheck mutable authorization at execution time for a deferred privileged operation."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Enforce the stated execution-time permission contract rather than trusting an earlier decision indefinitely."
+  },
+  "prerequisites": [
+    "Queued work",
+    "Laravel Gate",
+    "Revocable permissions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An export can expose private records. Policy requires the requester to still be authorized when it executes, and access may be revoked after dispatch. Which design enforces that policy?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Check only that the resource still exists before exporting it.",
+      "rationale": "Existence does not establish the requester’s current permission to read it.",
+      "misconception": "Existence does not establish the requester’s current permission to read it."
+    },
+    {
+      "id": "choice-2",
+      "text": "Use a signed queue name so the worker treats every submitted export as permanently authorized.",
+      "rationale": "Transport routing or integrity does not replace the application’s execution-time access policy.",
+      "misconception": "Transport routing or integrity does not replace the application’s execution-time access policy."
+    },
+    {
+      "id": "choice-3",
+      "text": "Store the requester and resource IDs, reload them, and authorize again before reading private data.",
+      "rationale": "A queued approval is not current permission; the handler must evaluate the live policy under the stated requirement.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Serialize the controller’s earlier true authorization result and rely on it in handle.",
+      "rationale": "That freezes an obsolete decision and ignores revocation before execution.",
+      "misconception": "That freezes an obsolete decision and ignores revocation before execution."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "A queued approval is not current permission; the handler must evaluate the live policy under the stated requirement.",
+    "trace": [
+      "Existence does not establish the requester’s current permission to read it.",
+      "Transport routing or integrity does not replace the application’s execution-time access policy.",
+      "A queued approval is not current permission; the handler must evaluate the live policy under the stated requirement.",
+      "That freezes an obsolete decision and ignores revocation before execution."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "revoked",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass ProtectedExport implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function __construct(public int $requesterId)\n    {\n    }\n\n    public function handle(): void\n    {\n        $user = new Illuminate\\Auth\\GenericUser(['id' => $this->requesterId]);\n        Illuminate\\Support\\Facades\\Gate::forUser($user)->authorize('export');\n        echo 'leaked';\n    }\n}\n$permitted = true;\nIlluminate\\Support\\Facades\\Gate::define('export', function ($user) use (&$permitted) {\n    return $permitted;\n});\nIlluminate\\Support\\Facades\\Bus::dispatch(new ProtectedExport(7));\n$permitted = false;\ntry {\n    app('queue')->connection()->pop()->fire();\n} catch (Illuminate\\Auth\\Access\\AuthorizationException $e) {\n    echo 'revoked';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#handle-method-dependency-injection",
+    "https://laravel.com/docs/13.x/authorization#authorizing-actions"
+  ]
+}

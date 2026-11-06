@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="620 PHP questions covering code execution, debugging and engineering reasoning.">
-  <title>Under the Hood — PHP Engineer Quiz</title>
+  <meta name="description" content="1,220 questions: PHP Engineer and Laravel Specialist Beta. Practice code execution, debugging and engineering reasoning.">
+  <title>Under the Hood — PHP & Laravel Quiz</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -30,13 +30,15 @@
     </nav>
   </header>
 
+  <div class="subject-picker"><label for="subjectSelect">Subject</label><select id="subjectSelect" aria-label="Subject"></select></div>
+
   <main id="main">
     <section id="homeView" class="view active" aria-labelledby="heroTitle">
       <div class="home-shell">
         <div class="hero-copy">
-          <p class="eyebrow"><span>620 PHP questions</span><span>PHP 8.4 / 8.5</span><span>4 choices</span></p>
+          <p class="eyebrow"><span id="subjectCount">620 PHP Engineer questions</span><span id="subjectVersions">PHP 8.4 / 8.5</span><span>4 choices</span></p>
           <h1 id="heroTitle">Learn to reason<br><em>under the hood.</em></h1>
-          <p class="hero-lede">Trace PHP execution, debug realistic failures, and reason about implementation choices. Every answer explains the behavior and the tempting alternatives.</p>
+          <p class="hero-lede" id="subjectDescription">Trace PHP execution, debug realistic failures, and reason about implementation choices. Every answer explains the behavior and the tempting alternatives.</p>
           <div class="concept-ribbon" aria-label="Covered concepts">
             <span>Execution</span><span>Debugging</span><span>Code review</span><span>Implementation</span><span>Testing</span><span>Architecture</span>
           </div>
@@ -94,7 +96,7 @@
           <button id="startButton" class="primary-button" type="button" disabled>
             <span>Start thinking</span><span aria-hidden="true">→</span>
           </button>
-          <p id="historicalProgress" class="keyboard-hint" hidden>Progress shown here is for this PHP collection. Earlier quiz totals remain saved separately in this browser.</p>
+          <p id="historicalProgress" class="keyboard-hint" hidden>Progress shown here is for the selected subject. Earlier quiz totals remain saved separately in this browser.</p>
           <p class="keyboard-hint">Tip: use keys <kbd>1</kbd>–<kbd>4</kbd> to choose and <kbd>Enter</kbd> to continue.</p>
         </aside>
       </div>
@@ -175,7 +177,7 @@
         <div class="bank-intro">
           <p class="eyebrow"><span>Complete curriculum</span></p>
           <h1 id="bankTitle">The 620-question PHP bank</h1>
-          <p>Browse PHP execution, debugging, testing and engineering scenarios. Answers stay folded until you deliberately reveal them.</p>
+          <p id="bankDescription">Browse PHP execution, debugging, testing and engineering scenarios. Answers stay folded until you deliberately reveal them.</p>
         </div>
         <div class="bank-toolbar">
           <label class="search-box">

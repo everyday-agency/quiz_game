@@ -1,0 +1,34 @@
+Internal editorial rubric
+
+Acceptance requires all of the following; a numeric total cannot offset a
+correctness defect. Independent approval is a separate pending decision.
+
+1. Objective: one useful behavior or engineering decision; distinguish its
+   reasoning from neighboring questions, not just its nouns or numbers.
+2. Correctness: exactly one option satisfies all stated requirements. Check
+   negative cases as well as the intended case where practical.
+3. Context: state inputs, relevant middleware, environment, framework version,
+   state/lifetime, and missing-service assumptions needed to determine the answer.
+4. Distractors: each encodes a realistic misunderstanding; explain precisely
+   which requirement or observed behavior it violates. No generic sabotage.
+5. Explanation: connect the answer to control flow, source behavior or a clear
+   contract. Explain all alternatives without relying on a preferred slogan.
+6. Wording: comparable specificity, no padding, no reliable longest-answer rule,
+   no grammatical clue, and no solution restated in assumptions or comments.
+7. Code: four-space indentation, normal multiline blocks, distinct files,
+   correct syntax or an explicitly intentional defect; no unsafe live execution.
+8. Difficulty: Foundation applies one standard concept; Intermediate combines
+   concepts or traces state across a boundary; Advanced resolves interacting
+   constraints or failure modes. API obscurity alone is not Advanced.
+9. Curriculum: mapping never implies unstated prior knowledge. Map only complete
+   Laravel prerequisite coverage to Lessons 1-8; leave everything else null.
+10. Validation: framework execution where feasible, with exact observed evidence;
+    documented operational contracts clearly separated from executable proofs.
+11. Preservation: PHP 620 and protected runtime file hashes match the starting
+    archive; historical questions remain archived and progress keys isolated.
+
+Each batch is reviewed before the next begins. After batch 6, compare all 600
+again for cross-batch concept duplication, ambiguity, wording cues, genuine
+difficulty, scenario realism, framework compatibility and mapping correctness.
+Any corrected question retains its ID, receives a new revision, and has the
+previous version archived with fresh validation evidence.

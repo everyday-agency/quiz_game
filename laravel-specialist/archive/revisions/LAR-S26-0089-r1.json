@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0089",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Controllers",
+  "subtopic": "invokable-controller-route",
+  "objective": {
+    "id": "laravel.invokable-controller-route",
+    "text": "Route to an invokable controller through its class rather than an invented action name."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Route a single-action controller without assuming an index method exists."
+  },
+  "prerequisites": [
+    "Invokable controllers",
+    "Route actions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "RebuildPreviewController has a public __invoke() action and no index(), handle(), or show() method. Which registration invokes its single action for POST /preview?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Route::post(\"/preview\", RebuildPreviewController::class)",
+      "rationale": "Laravel recognizes the invokable controller class and uses __invoke as its action.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Route::post(\"/preview\", new RebuildPreviewController::class)",
+      "rationale": "This is not valid PHP syntax for naming or constructing the intended route action.",
+      "misconception": "This is not valid PHP syntax for naming or constructing the intended route action."
+    },
+    {
+      "id": "choice-3",
+      "text": "Route::post(\"/preview\", [RebuildPreviewController::class, \"index\"])",
+      "rationale": "No index method exists on this controller.",
+      "misconception": "No index method exists on this controller."
+    },
+    {
+      "id": "choice-4",
+      "text": "Route::post(\"/preview\", [RebuildPreviewController::class, \"handle\"])",
+      "rationale": "handle is a different convention used elsewhere; it is not present here.",
+      "misconception": "handle is a different convention used elsewhere; it is not present here."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Laravel recognizes the invokable controller class and uses __invoke as its action.",
+    "trace": [
+      "Laravel recognizes the invokable controller class and uses __invoke as its action.",
+      "This is not valid PHP syntax for naming or constructing the intended route action.",
+      "No index method exists on this controller.",
+      "handle is a different convention used elsewhere; it is not present here."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "rebuilt",
+    "probe": "class RebuildPreviewController {\n    public function __invoke() { return 'rebuilt'; }\n}\napp('router')->post('/preview', RebuildPreviewController::class);\necho app('router')->dispatch(Illuminate\\Http\\Request::create('/preview', 'POST'))->getContent();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      2,
+      3
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/controllers#single-action-controllers"
+  ]
+}

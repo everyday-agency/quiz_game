@@ -1,0 +1,8 @@
+Reviewed 2026-11-06 against Laravel 13.40.0.
+Sources:
+https://laravel.com/docs/13.x/queues#jobs-and-database-transactions
+https://laravel.com/docs/13.x/eloquent#observers-and-database-transactions
+https://microservices.io/patterns/data/transactional-outbox.html
+Pinned implementation: Illuminate/Database/Concerns/ManagesTransactions.php commits PDO before transaction-manager callbacks; Illuminate/Queue/Queue.php registers afterCommit callbacks; Illuminate/Events/Dispatcher.php defers observers implementing ShouldHandleEventsAfterCommit.
+Interpretation: afterCommit is process-local ordering, not a durable queue record. Business state and pending intent must use the same connection and transaction for local atomicity. Completion before publication loses work; completion after acknowledgment permits redelivery after an ambiguous outcome. Stable event identity plus downstream deduplication handles that redelivery.
+Supplementary local execution tests callback timing and atomic rows; no Redis or broker crash test is claimed.

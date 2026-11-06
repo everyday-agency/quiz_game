@@ -1,0 +1,100 @@
+401 | Storage | Select the intended storage disk for a private document without changing the global default.
+402 | Storage | Distinguish an uploaded file's returned storage key from a public URL or absolute path.
+403 | Storage security | Avoid trusting a client-supplied upload filename as a safe storage identifier.
+404 | Storage errors | Configure failed filesystem writes to throw rather than treating an unchecked false return as success.
+405 | Storage streams | Process a storage read stream without loading the full object and close the resource afterwards.
+406 | Storage responses | Choose an attachment download response rather than an inline file response.
+407 | Storage visibility | Distinguish URL generation from changing a stored object's access visibility.
+408 | Storage operations | Predict source and destination existence after copy versus move.
+409 | Storage tests | Use a fake disk to isolate upload persistence assertions from configured real storage.
+410 | Storage concurrency | Recognize that filesystem append implemented as read-modify-write is not a concurrent logging guarantee.
+411 | Storage uploads | Use the temporary upload URL and required headers for a supported direct-to-object-storage upload.
+412 | Storage consistency | Compensate a stored file when a later database transaction rolls back instead of assuming cross-resource atomicity.
+413 | Storage security | Reject a path traversal segment rather than allowing a storage key to escape its disk root.
+414 | Storage operations | Distinguish deleting a directory tree from deleting a single file key.
+415 | Storage deployment | Connect the public storage URL to the intended public-disk symlink without exposing private disks.
+416 | Cache retrieval | Execute a remember callback on a miss and reuse its stored result on a hit.
+417 | Cache retrieval | Account for null-valued cache entries being treated as misses by remember.
+418 | Cache concurrency | Use atomic add when only the first contender should create a cache entry.
+419 | Cache retrieval | Retrieve and remove a value with pull rather than leaving it cached.
+420 | Cache invalidation | Recognize that a whole-store flush may remove entries beyond an application's configured prefix.
+421 | Cache expiration | Interpret integer cache TTL values in seconds for the supported framework.
+422 | Cache expiration | Apply an absolute expiration time without treating it as a relative duration.
+423 | Cache durability | Keep cache forever separate from durable storage and eviction guarantees.
+424 | Cache locks | Handle lock-block timeout explicitly instead of assuming protected work always runs.
+425 | Cache locks | Restore and release a lock using its owner token across a process boundary.
+426 | Cache locks | Distinguish owner-checked release from forceRelease when another process holds the lock.
+427 | Cache architecture | Prevent a cache stampede with a shared lock and a second cache check inside the lock.
+428 | Cache keys | Include all tenant and query dimensions that change the cached result.
+429 | Cache consistency | Prevent a delayed cache fill from overwriting the active version by keying results with the snapshot version.
+430 | Cache tags | Choose a tag-capable store instead of assuming every configured cache driver supports tags.
+431 | Cache tags | Keep tag ordering consistent when retrieving a value stored in a tagged namespace.
+432 | Cache freshness | Trace flexible cache behavior through fresh, stale and deferred-refresh phases.
+433 | Cache memoization | Distinguish request-local memoized reads from changes made directly to the underlying cache store.
+434 | Rate limiting | Distinguish a callback returning false from the callback not running because the rate limit was reached.
+435 | Cache tests | Recognize reference-sharing behavior in an unserialized array cache when testing mutable objects.
+436 | HTTP client | Handle an HTTP error status without assuming the Laravel client throws by default.
+437 | HTTP client errors | Distinguish a connection failure from an HTTP response error.
+438 | HTTP client retries | Count the initial request within the configured maximum retry attempts.
+439 | HTTP client retries | Recognize the retry helper's final HTTP failure exception even without a separate throw call.
+440 | HTTP client retries | Keep connection exceptions distinct when retry is configured with throw=false.
+441 | HTTP client tests | Prevent unstubbed outbound requests rather than allowing fake gaps to reach a real service.
+442 | HTTP client tests | Define response-sequence exhaustion explicitly for repeated calls.
+443 | HTTP client bodies | Send form-encoded data deliberately instead of relying on the default JSON request body.
+444 | HTTP client headers | Distinguish merging headers from replacing the current header set.
+445 | HTTP client timeouts | Separate connection establishment timeout from total response timeout.
+446 | HTTP client authentication | Set a bearer token in the Authorization header without treating it as a query parameter.
+447 | HTTP client authentication | Apply Basic authentication encoding through the client API rather than concatenating plaintext credentials.
+448 | HTTP client retries | Refresh a rejected token within a status-specific retry callback before the next request.
+449 | HTTP client concurrency | Retrieve named pool responses by their request aliases.
+450 | HTTP client responses | Distinguish any successful 2xx response from exactly HTTP 200.
+451 | HTTP client responses | Read a nested JSON value with a default when the path is absent.
+452 | HTTP client uploads | Build a multipart file request instead of placing file bytes in a JSON field.
+453 | HTTP client contracts | Validate a successful response's expected JSON shape rather than treating a 2xx status as schema validation.
+454 | HTTP client tests | Assert method, destination and payload for the intended outbound request.
+455 | HTTP client negotiation | Distinguish accepting JSON responses from choosing JSON request encoding.
+456 | API resources | Add top-level response metadata without placing it inside each resource item.
+457 | API resources | Use whenLoaded to avoid triggering lazy loading during resource serialization.
+458 | API resources | Include a relationship count only when that count was retrieved for the model.
+459 | API resources | Preserve intentional collection keys instead of relying on default resource reindexing.
+460 | API pagination | Retain the paginated data envelope even when ordinary resource wrapping is disabled.
+461 | API resources | Use conditional attribute merging without mixing incompatible numeric and string key structures.
+462 | API resources | Customize the final resource response headers through withResponse.
+463 | API resource security | Avoid explicitly exposing a hidden model secret through a custom resource array.
+464 | API pagination | Preserve paginator links and metadata when transforming the page's records into resources.
+465 | API resources | Convert a missing conditional value into omission rather than a serialized null placeholder.
+466 | API resources | Defer expensive conditional values with a closure instead of evaluating them before when.
+467 | API resources | Set a custom outer data wrapper without changing the model's stored attributes.
+468 | API resources | Read pivot metadata only when the expected intermediate relationship is loaded.
+469 | API pagination | Customize pagination metadata using paginationInformation while retaining the required structure.
+470 | API responses | Distinguish a resource response for a recently created model from a normally retrieved model.
+471 | Database tests | Understand transaction-based test cleanup without assuming every database connection is automatically covered.
+472 | HTTP tests | Distinguish JSON structure assertions from exact payload assertions.
+473 | HTTP tests | Assert a JSON fragment without depending on irrelevant object key ordering.
+474 | HTTP tests | Catch a JSON type regression with an exact path-value assertion.
+475 | HTTP tests | Assert validation errors across both JSON and session-redirect responses with the response-aware testing helper.
+476 | HTTP tests | Disable exception handling to expose the original exception during a failing feature test.
+477 | HTTP tests | Avoid masking an authorization regression by disabling all middleware in the test.
+478 | Authentication tests | Recognize that actingAs establishes test identity without testing the actual login credential flow.
+479 | Database tests | Pair a partial database-row assertion with a count when uniqueness is part of the requirement.
+480 | Time tests | Restore frozen time after a scoped test callback so later assertions use the normal clock.
+481 | HTTP tests | Distinguish the original redirect response from the final response when following redirects in a test.
+482 | HTTP tests | Assert the executed streamed response body instead of reading a nonexistent ordinary response body.
+483 | HTTP tests | Assert that a sensitive JSON path is absent rather than merely null.
+484 | Console tests | Verify both console output and exit status instead of treating printed success text as a successful command result.
+485 | Service tests | Bind a fake collaborator before container resolution rather than expecting it to replace a manually constructed dependency.
+486 | Parallel tests | Isolate non-database temporary resources by test-process token rather than assuming database isolation covers files.
+487 | Transaction tests | Account for a test's outer transaction when verifying after-commit dispatch.
+488 | Database tests | Avoid claiming PostgreSQL row-lock coverage from SQLite-only tests.
+489 | Factory tests | Use explicit factory states to cover a branch instead of relying on random attribute generation.
+490 | Database tests | Distinguish a soft-deleted row from a physically missing model in persistence assertions.
+491 | Frontend assets | Supply the production Vite manifest rather than assuming source entry paths are directly browser-loadable.
+492 | Frontend assets | Remove a stale development hot file that directs production pages to a development server.
+493 | Frontend security | Treat VITE-prefixed environment values as client-visible rather than server secrets.
+494 | Frontend assets | Resolve a bundled resource asset through its build manifest instead of a raw public-path helper.
+495 | Frontend CORS | Use an explicit allowed origin for credentialed cross-origin requests rather than a wildcard response.
+496 | Frontend sessions | Send credentials deliberately for a cross-origin session-authenticated browser request.
+497 | Inertia protocol | Distinguish the initial HTML page response from an Inertia navigation's JSON page object.
+498 | Inertia props | Restrict partial reloads to the same page component and defer unrequested expensive props.
+499 | Inertia versioning | Handle an asset-version mismatch with the protocol's full-location response rather than rendering a stale page object.
+500 | Inertia validation | Carry validation errors through the redirect and shared-props flow rather than expecting a conventional 422 JSON API response.

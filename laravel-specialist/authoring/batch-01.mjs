@@ -1,0 +1,10 @@
+import a from './batch-01/001-010.mjs';
+import b from './batch-01/011-025.mjs';
+import c from './batch-01/026-040.mjs';
+import d from './batch-01/041-058.mjs';
+import e from './batch-01/059-070.mjs';
+import f from './batch-01/071-082.mjs';
+import g from './batch-01/083-094.mjs';
+import h from './batch-01/095-100.mjs';
+import probes from '../validation/probes/batch-01.mjs';
+export default [...a,...b,...c,...d,...e,...f,...g,...h].map(q=>probes[Number(q.id.slice(-4))]?{...q,validation:{...probes[Number(q.id.slice(-4))],status:'unvalidated',independentEditorialReview:'pending'}}:q);

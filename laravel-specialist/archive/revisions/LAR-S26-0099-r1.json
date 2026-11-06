@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0099",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Artisan",
+  "subtopic": "isolated-command-lock-failure-exit",
+  "objective": {
+    "id": "laravel.isolated-command-lock-failure-exit",
+    "text": "Request command isolation explicitly and select the exit code when its lock is unavailable."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish skipping due to contention from successfully doing the requested work."
+  },
+  "prerequisites": [
+    "Isolatable commands",
+    "Atomic locks",
+    "Automation exit codes"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A command implements Isolatable. When another instance holds its isolation lock, a monitoring script must receive exit code 12 instead of interpreting the skipped run as success. Which invocation selects that contention exit code?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "php artisan sync:catalog --isolated followed by checking only exit code 0",
+      "rationale": "The default contention exit is success unless configured otherwise, so this does not express the required 12.",
+      "misconception": "The default contention exit is success unless configured otherwise, so this does not express the required 12."
+    },
+    {
+      "id": "choice-2",
+      "text": "php artisan sync:catalog --tries=12",
+      "rationale": "tries is not the command isolation contention exit-code option.",
+      "misconception": "tries is not the command isolation contention exit-code option."
+    },
+    {
+      "id": "choice-3",
+      "text": "php artisan sync:catalog --isolated=12",
+      "rationale": "A numeric value supplied to isolated is used as the exit code when the isolation mutex cannot be acquired.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "php artisan sync:catalog --isolated --timeout=12",
+      "rationale": "A timeout setting does not select the status returned on failure to acquire the command isolation mutex.",
+      "misconception": "A timeout setting does not select the status returned on failure to acquire the command isolation mutex."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "A numeric value supplied to isolated is used as the exit code when the isolation mutex cannot be acquired.",
+    "trace": [
+      "The default contention exit is success unless configured otherwise, so this does not express the required 12.",
+      "tries is not the command isolation contention exit-code option.",
+      "A numeric value supplied to isolated is used as the exit code when the isolation mutex cannot be acquired.",
+      "A timeout setting does not select the status returned on failure to acquire the command isolation mutex."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Console/Command.php",
+    "contains": [
+      "$this->commandIsolationMutex()->create($this)",
+      "is_numeric($this->option('isolated'))",
+      "? $this->option('isolated')"
+    ],
+    "reason": "On mutex contention, the command returns a numeric isolated option value or its configured default isolation exit code.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/artisan#isolatable-commands"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "changed": [
+    "LAR-S26-0242",
+    "LAR-S26-0284",
+    "LAR-S26-0314",
+    "LAR-S26-0400",
+    "LAR-S26-0535",
+    "LAR-S26-0566",
+    "LAR-S26-0569"
+  ],
+  "unchangedLaravelRecords": 593,
+  "unchangedPhpRecords": 620,
+  "objectivesPreserved": true,
+  "answerIdsAndPositionsPreserved": true,
+  "revisionIncrements": 7,
+  "archivedPriorVersions": 7,
+  "lessonMappingsUnchanged": true,
+  "randomUnchangedSpotCheck": 15,
+  "independentEditorialApproval": "pending"
+}

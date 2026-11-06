@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0324",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Queue uniqueness",
+  "subtopic": "unique-until-processing-release-point",
+  "objective": {
+    "id": "laravel.unique-until-processing-release-point",
+    "text": "Release a ShouldBeUniqueUntilProcessing lock before handling rather than after completion."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Locate lock release before the handler rather than assuming all uniqueness lasts until completion."
+  },
+  "prerequisites": [
+    "ShouldBeUniqueUntilProcessing",
+    "Job execution lifecycle"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A job uses ShouldBeUniqueUntilProcessing. Its unique cache lock has not expired. Once its worker enters handle(), another matching dispatch arrives. What does this interface permit?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The new dispatch can enqueue because the uniqueness lock was released before processing began.",
+      "rationale": "This interface limits duplicate waiting jobs but releases its dispatch lock before the current handler runs.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The new dispatch waits synchronously for the first handler to finish.",
+      "rationale": "The uniqueness mechanism does not make dispatch a blocking join on the current handler.",
+      "misconception": "The uniqueness mechanism does not make dispatch a blocking join on the current handler."
+    },
+    {
+      "id": "choice-3",
+      "text": "The new dispatch cancels the currently running handler.",
+      "rationale": "Releasing the uniqueness lock does not cancel or replace executing PHP work.",
+      "misconception": "Releasing the uniqueness lock does not cancel or replace executing PHP work."
+    },
+    {
+      "id": "choice-4",
+      "text": "The new dispatch is rejected until the current handler returns successfully.",
+      "rationale": "That describes the longer ordinary ShouldBeUnique lifecycle, not this interface.",
+      "misconception": "That describes the longer ordinary ShouldBeUnique lifecycle, not this interface."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "This interface limits duplicate waiting jobs but releases its dispatch lock before the current handler runs.",
+    "trace": [
+      "This interface limits duplicate waiting jobs but releases its dispatch lock before the current handler runs.",
+      "The uniqueness mechanism does not make dispatch a blocking join on the current handler.",
+      "Releasing the uniqueness lock does not cancel or replace executing PHP work.",
+      "That describes the longer ordinary ShouldBeUnique lifecycle, not this interface."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass RefreshCatalog implements Illuminate\\Contracts\\Queue\\ShouldQueue, Illuminate\\Contracts\\Queue\\ShouldBeUniqueUntilProcessing\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function uniqueId(): string\n    {\n        return 'catalog';\n    }\n\n    public function handle(): void\n    {\n        self::dispatch();\n    }\n}\nRefreshCatalog::dispatch();\napp('queue')->connection()->pop()->fire();\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#keeping-jobs-unique-until-processing-begins"
+  ]
+}

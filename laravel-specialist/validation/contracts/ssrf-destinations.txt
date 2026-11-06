@@ -1,0 +1,10 @@
+Source: https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+Reviewed: 2026-11-06
+Exact excerpt:
+"Domain allowlisting alone does not prevent DNS rebinding."
+Paraphrase: constrain destinations to the service's permitted hosts/networks,
+validate the actual address used for the connection, and prevent redirects from
+escaping that policy. Prefer building requests from trusted configuration and
+validated business input over accepting arbitrary complete URLs. The question
+compares policies, not a complete production SSRF-filter implementation.
+No DNS, remote HTTP or attack request was executed.

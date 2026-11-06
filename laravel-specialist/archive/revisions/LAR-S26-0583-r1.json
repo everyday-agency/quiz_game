@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0583",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Application architecture",
+  "subtopic": "domain-outcomes-transport-mapping",
+  "objective": {
+    "id": "laravel.domain-outcomes-transport-mapping",
+    "text": "Return explicit domain outcomes from a service instead of using transport-specific status codes as business state."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep business outcomes stable while allowing each transport to choose its own response representation."
+  },
+  "prerequisites": [
+    "Service result contracts",
+    "HTTP adapters",
+    "CLI adapters"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A reservation service returns 409 for unavailable stock. A console importer interprets that integer as a process exit code. Which result contract makes the business outcome explicit for both callers?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Return JsonResponse directly and have the importer extract its status code.",
+      "rationale": "The command still depends on an HTTP response contract for a non-HTTP operation.",
+      "misconception": "The command still depends on an HTTP response contract for a non-HTTP operation."
+    },
+    {
+      "id": "choice-2",
+      "text": "Return a Reserved or Unavailable outcome; map it to HTTP status or CLI behavior at each boundary.",
+      "rationale": "A domain outcome conveys what happened without making HTTP status codes the shared business vocabulary.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Return true for reserved and false for every failure, including database outages.",
+      "rationale": "That collapses a normal business rejection and an infrastructure failure into one indistinguishable result.",
+      "misconception": "That collapses a normal business rejection and an infrastructure failure into one indistinguishable result."
+    },
+    {
+      "id": "choice-4",
+      "text": "Throw HttpException for unavailable stock in every entry point.",
+      "rationale": "A transport-specific exception still makes the domain service depend on HTTP semantics.",
+      "misconception": "A transport-specific exception still makes the domain service depend on HTTP semantics."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A domain outcome conveys what happened without making HTTP status codes the shared business vocabulary.",
+    "trace": [
+      "The command still depends on an HTTP response contract for a non-HTTP operation.",
+      "A domain outcome conveys what happened without making HTTP status codes the shared business vocabulary.",
+      "That collapses a normal business rejection and an infrastructure failure into one indistinguishable result.",
+      "A transport-specific exception still makes the domain service depend on HTTP semantics."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "409:unavailable",
+    "probe": "enum ReservationOutcome\n{\n    case Reserved;\n    case Unavailable;\n}\n$outcome = ReservationOutcome::Unavailable;\n$http = response()->json(['state' => 'unavailable'], match ($outcome) {\n    ReservationOutcome::Reserved => 201,\n    ReservationOutcome::Unavailable => 409,\n});\n$cli = match ($outcome) {\n    ReservationOutcome::Reserved => 'reserved',\n    ReservationOutcome::Unavailable => 'unavailable',\n};\necho $http->getStatusCode().':'.$cli;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/responses",
+    "https://laravel.com/docs/13.x/artisan#commands"
+  ]
+}

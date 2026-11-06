@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0598",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Package integration",
+  "subtopic": "package-migration-path-registration",
+  "objective": {
+    "id": "laravel.package-migration-path-registration",
+    "text": "Load package migrations through the provider without registering a new database connection for the package."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Register package migration discovery independently of database connection configuration."
+  },
+  "prerequisites": [
+    "Package service providers",
+    "Migration discovery",
+    "Database connections"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "A private package intentionally runs migrations directly from its installed directory. Its tables use the application’s normal configured connection."
+    ],
+    "files": []
+  },
+  "stem": "What does loadMigrationsFrom($path) supply for that design?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A copy of each migration into database/migrations on every boot.",
+      "rationale": "Path registration uses the package location; publishing is a different operation.",
+      "misconception": "Path registration uses the package location; publishing is a different operation."
+    },
+    {
+      "id": "choice-2",
+      "text": "A separate connection automatically named after the package directory.",
+      "rationale": "A migration search path does not configure or isolate a database connection.",
+      "misconception": "A migration search path does not configure or isolate a database connection."
+    },
+    {
+      "id": "choice-3",
+      "text": "An immediate execution of all pending migrations during provider boot.",
+      "rationale": "Registering discovery paths does not itself run the migration command.",
+      "misconception": "Registering discovery paths does not itself run the migration command."
+    },
+    {
+      "id": "choice-4",
+      "text": "An additional path searched by the migrator; connection selection remains a separate concern.",
+      "rationale": "The helper registers migration paths with the migrator, not a new database connection.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The helper registers migration paths with the migrator, not a new database connection.",
+    "trace": [
+      "Path registration uses the package location; publishing is a different operation.",
+      "A migration search path does not configure or isolate a database connection.",
+      "Registering discovery paths does not itself run the migration command.",
+      "The helper registers migration paths with the migrator, not a new database connection."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "registered:sqlite",
+    "probe": "$provider = new class(app()) extends Illuminate\\Support\\ServiceProvider {\n    public function boot(): void\n    {\n        $this->loadMigrationsFrom(base_path('package-migrations'));\n    }\n};\n$provider->boot();\necho in_array(base_path('package-migrations'), app('migrator')->paths(), true) ? 'registered:' : 'missing:';\necho config('database.default');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/packages",
+    "https://api.laravel.com/docs/13.x/Illuminate/Support/ServiceProvider.html"
+  ]
+}

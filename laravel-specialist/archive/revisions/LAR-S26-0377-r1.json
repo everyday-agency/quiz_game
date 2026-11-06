@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0377",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Notifications",
+  "subtopic": "notification-via-per-recipient",
+  "objective": {
+    "id": "laravel.notification-via-per-recipient",
+    "text": "Select delivery channels per notifiable through via."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Choose channels from the recipient’s delivery preference at the notification boundary."
+  },
+  "prerequisites": [
+    "Notification channels",
+    "Notifiable preferences"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Every recipient needs an in-app database notification, while email is enabled only for recipients who opted in. Which notification method decides the channel list for each notifiable?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "toDatabase($notifiable), returning the string \"mail\" for opted-in recipients.",
+      "rationale": "The database representation is data to store, not a channel-routing instruction.",
+      "misconception": "The database representation is data to store, not a channel-routing instruction."
+    },
+    {
+      "id": "choice-2",
+      "text": "A class name suffix such as OptionalMailNotification.",
+      "rationale": "Naming a notification does not configure its delivery channels.",
+      "misconception": "Naming a notification does not configure its delivery channels."
+    },
+    {
+      "id": "choice-3",
+      "text": "via($notifiable), returning database plus mail only when opted in.",
+      "rationale": "via supplies the channels for that recipient, so it can use the notifiable’s preference.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "toMail($notifiable), returning false for recipients who opted out of all channels.",
+      "rationale": "toMail builds a mail representation; it is not the general channel-selection list and cannot remove or add database delivery this way.",
+      "misconception": "toMail builds a mail representation; it is not the general channel-selection list and cannot remove or add database delivery this way."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "via supplies the channels for that recipient, so it can use the notifiable’s preference.",
+    "trace": [
+      "The database representation is data to store, not a channel-routing instruction.",
+      "Naming a notification does not configure its delivery channels.",
+      "via supplies the channels for that recipient, so it can use the notifiable’s preference.",
+      "toMail builds a mail representation; it is not the general channel-selection list and cannot remove or add database delivery this way."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nIlluminate\\Support\\Facades\\Schema::create('members', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('email');\n    $t->boolean('email_notifications')->default(false);\n});\nIlluminate\\Support\\Facades\\Schema::create('notifications', function ($t) {\n    $t->uuid('id')->primary();\n    $t->string('type');\n    $t->morphs('notifiable');\n    $t->text('data');\n    $t->timestamp('read_at')->nullable();\n    $t->timestamps();\n});\nclass Member extends Illuminate\\Database\\Eloquent\\Model\n{\n    use Illuminate\\Notifications\\Notifiable;\n\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$member = Member::create(['name' => 'Ada', 'email' => 'ada@example.test']);\nclass DatabaseNotice extends Illuminate\\Notifications\\Notification\n{\n    public function via($notifiable): array\n    {\n        return ['database'];\n    }\n\n    public function toDatabase($notifiable): array\n    {\n        return ['message' => 'Hello'];\n    }\n}\nclass PreferenceNotice extends DatabaseNotice\n{\n    public function via($notifiable): array\n    {\n        return $notifiable->email_notifications ? ['database', 'mail'] : ['database'];\n    }\n\n    public function toMail($notifiable)\n    {\n        return (new Illuminate\\Notifications\\Messages\\MailMessage())->view('mail.simple');\n    }\n}\n$member->notify(new PreferenceNotice());\necho Illuminate\\Support\\Facades\\DB::table('notifications')->count().':'.app('mailer')->getSymfonyTransport()->messages()->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/notifications#specifying-delivery-channels"
+  ]
+}

@@ -1,0 +1,1059 @@
+HISTORICAL SNAPSHOT — initial delivery before the seven focused corrections.
+Current revisions and validation: FOCUSED_EDITORIAL_CORRECTIONS.md and FOCUSED_REVISED_7.md.
+Independent approval remains pending. This document was not rerun as a new full audit.
+
+LARAVEL SPECIALIST — 30 QUESTIONS FOR INDEPENDENT REVIEW
+
+All 600 questions remain pending independent approval. These are five complete records from each batch, with keys and all option rationales for reviewer use. The local quiz hides keys during Exam mode.
+
+==============================================================================
+LAR-S26-0001 · revision 1 · execution · Foundation
+Configuration / config-null-default
+Objective: Distinguish a missing configuration key from an explicitly configured null.
+Difficulty rationale: Follow two lookups and distinguish absence from an explicit value.
+Prerequisites: Configuration repository; PHP null
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[1],"coverageComplete":true}
+Assumptions: No billing.missing key is configured.
+
+A command runs this code after application bootstrap. What is printed?
+
+FILE probe.php [complete-file]
+<?php
+
+config(['billing.limit' => null]);
+
+echo json_encode([
+    config('billing.limit', 8),
+    config('billing.missing', 8),
+]);
+
+
+A. [null,null]
+B. [null,8]
+C. [8,null]
+D. [8,8]
+
+Correct answer: B
+The existing limit key retains null; only the missing key uses the supplied default.
+
+A: A missing key does use the provided default, so the second value is 8.
+B: The existing limit key retains null; only the missing key uses the supplied default.
+C: This reverses both lookup rules: explicit null is retained and absence uses 8.
+D: The default is not a null-coalescing operation; an existing null is returned.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-1-technical.json
+Observed stdout on both PHP versions: "[null,8]"
+References:
+https://laravel.com/docs/13.x/configuration#accessing-configuration-values
+
+==============================================================================
+LAR-S26-0011 · revision 1 · debugging · Foundation
+Service container / interface-autowiring-boundary
+Objective: Diagnose why constructor autowiring cannot select an implementation for an unbound interface.
+Difficulty rationale: Identify why a concrete dependency is required at an interface boundary.
+Prerequisites: Constructor injection; Interfaces
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[1],"coverageComplete":true}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+InvoiceController constructor-injects ReceiptSender, an interface with no binding or container attribute. EmailReceiptSender implements it and is autoloadable. Resolution fails with "Target [ReceiptSender] is not instantiable". Which fix addresses the cause?
+
+A. Change the constructor dependency from public to private.
+B. Add a return type to EmailReceiptSender::send().
+C. Bind ReceiptSender::class to EmailReceiptSender::class.
+D. Register a singleton for InvoiceController without changing ReceiptSender.
+
+Correct answer: C
+The container needs an implementation choice; autoloading an implementation does not select it for an interface.
+
+A: Property visibility does not select an interface implementation.
+B: A method return type cannot tell the container which class should satisfy the constructor interface.
+C: The container needs an implementation choice; autoloading an implementation does not select it for an interface.
+D: Building the singleton still requires resolving its unbound interface dependency.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-1-technical.json
+Observed stdout on both PHP versions: "unbound:EmailReceiptSender"
+References:
+https://laravel.com/docs/13.x/container#binding-interfaces-to-implementations
+
+==============================================================================
+LAR-S26-0027 · revision 1 · execution · Intermediate
+Middleware / middleware-onion-order
+Objective: Trace before/after execution through a two-layer middleware pipeline.
+Difficulty rationale: Trace entry and response unwinding through two layers.
+Prerequisites: Middleware pipeline; Closures
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[8],"coverageComplete":true}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+The pipeline runs A, then B, then the destination. What sequence is printed?
+
+FILE probe.php [complete-file]
+<?php
+
+use Illuminate\Pipeline\Pipeline;
+
+$trace = [];
+$a = function ($value, $next) use (&$trace) {
+    $trace[] = 'A-in';
+    $result = $next($value);
+    $trace[] = 'A-out';
+
+    return $result;
+};
+$b = function ($value, $next) use (&$trace) {
+    $trace[] = 'B-in';
+    $result = $next($value);
+    $trace[] = 'B-out';
+
+    return $result;
+};
+
+app(Pipeline::class)->send(null)->through([$a, $b])->then(function () use (&$trace) {
+    $trace[] = 'action';
+});
+echo implode(',', $trace);
+
+
+A. A-in,A-out,B-in,B-out,action
+B. B-in,A-in,action,A-out,B-out
+C. A-in,B-in,action,A-out,B-out
+D. A-in,B-in,action,B-out,A-out
+
+Correct answer: D
+Each layer waits for the downstream result; response handling unwinds in reverse order.
+
+A: The code after next cannot run before the downstream call completes.
+B: through([$a, $b]) enters A first, not B.
+C: Outgoing work follows call-stack unwinding, so B-out precedes A-out.
+D: Each layer waits for the downstream result; response handling unwinds in reverse order.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-1-technical.json
+Observed stdout on both PHP versions: "A-in,B-in,action,B-out,A-out"
+References:
+https://laravel.com/docs/13.x/middleware#middleware-and-responses
+
+==============================================================================
+LAR-S26-0050 · revision 2 · code-review · Intermediate
+Signed URLs / ignored-signature-query-trust
+Objective: Assess the trust boundary created by ignoring a query parameter during signature validation.
+Difficulty rationale: Identify which data remains authenticated after an explicit signature exclusion.
+Prerequisites: Signed query strings; Authorization; Input validation
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+An export link signs the account path but ignores the query parameter format during validation. The UI currently sends format=csv. Which review comment correctly describes the security boundary?
+
+A. Treat format as caller-controlled and validate it against allowed formats; the signature does not protect its value.
+B. Reject every link with format because ignored parameters always invalidate signatures.
+C. Treat format as trusted because the account path is signed.
+D. Use the presence of a signature as authorization for any account ID supplied in the body.
+
+Correct answer: A
+An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.
+
+A: An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.
+B: Ignoring a parameter intentionally permits it to vary without invalidating the signature.
+C: Authenticating the path does not authenticate a query parameter explicitly excluded from verification.
+D: The signed URL authenticates only its covered data and does not authenticate unrelated request body values.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-1-technical.json
+Observed stdout on both PHP versions: "[true,true]"
+References:
+https://laravel.com/docs/13.x/urls#validating-signed-route-requests
+
+==============================================================================
+LAR-S26-0097 · revision 1 · testing · Intermediate
+Artisan / command-error-output-versus-exit
+Objective: Return a failing exit status when automation must detect a command failure.
+Difficulty rationale: Test process success semantics rather than interpreting message color or wording.
+Prerequisites: Command exit codes; CI failure detection
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[1],"coverageComplete":true}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A command detects a failed precondition, calls $this->error("Missing manifest"), and then returns normally with no integer return. CI checks only the exit code and reports success. Which change and test enforce failure reliably?
+
+A. Replace error() with warn() and assert exit code 0.
+B. Return Command::FAILURE on that branch and assert the command exit code is 1.
+C. Keep the normal return and assert that the output contains Missing manifest.
+D. Return the string "1" and test only that it appears in the output.
+
+Correct answer: B
+Printing an error message does not set the command exit status; an explicit failure return makes the CI contract observable.
+
+A: A warning message and successful exit still fail the stated requirement.
+B: Printing an error message does not set the command exit status; an explicit failure return makes the CI contract observable.
+C: That tests a message but leaves the exit-code-only CI integration reporting success.
+D: Output appearance does not prove a numeric failing exit status; the explicit integer failure return is the intended contract.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-1-technical.json
+Observed stdout on both PHP versions: "0:1"
+References:
+https://laravel.com/docs/13.x/artisan#exit-codes
+
+==============================================================================
+LAR-S26-0105 · revision 2 · code-review · Foundation
+Validation / array-allowed-key-boundary
+Objective: Reject unexpected nested array keys using the array rule's allowed-key list.
+Difficulty rationale: Reject an unexpected capability flag at the input boundary.
+Prerequisites: Nested arrays; Array validation rules
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[6],"coverageComplete":true}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A profile object may contain only name and timezone. Extra keys must produce validation errors, not be silently dropped. Which parent rule enforces this allowlist alongside child rules?
+
+A. profile => nullable
+B. profile => array
+C. profile => array:name,timezone
+D. profile => required_array_keys:name,timezone
+
+Correct answer: C
+The array rule with named allowed keys rejects additional keys within profile.
+
+A: Nullable addresses nullability, not the keys of a supplied object.
+B: The plain array rule checks the value type but does not restrict its keys.
+C: The array rule with named allowed keys rejects additional keys within profile.
+D: This requires listed keys but does not reject additional ones.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-2-technical.json
+Observed stdout on both PHP versions: "[true,false]"
+References:
+https://laravel.com/docs/13.x/validation#rule-array
+
+==============================================================================
+LAR-S26-0136 · revision 1 · execution · Intermediate
+Form Requests / form-request-hook-sequence
+Objective: Trace prepareForValidation before authorization and rule evaluation.
+Difficulty rationale: Trace framework hook order independently of declaration order.
+Prerequisites: Form Request lifecycle; Authorization; Validation hooks
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[7],"coverageComplete":true}
+Assumptions: The request contains name=Ada and has its Laravel container and redirector set.
+
+This request passes validation and authorization. Which sequence is recorded during validateResolved()?
+
+FILE probe.php [complete-file]
+<?php
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ProfileRequest extends FormRequest
+{
+    public array $trace = [];
+
+    public function rules(): array
+    {
+        $this->trace[] = 'rules';
+
+        return ['name' => ['required']];
+    }
+
+    protected function passedValidation(): void
+    {
+        $this->trace[] = 'passed';
+    }
+
+    public function authorize(): bool
+    {
+        $this->trace[] = 'authorize';
+
+        return true;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->trace[] = 'prepare';
+    }
+}
+
+
+A. prepare,authorize,rules,passed
+B. rules,passed,authorize,prepare
+C. authorize,prepare,rules,passed
+D. prepare,rules,authorize,passed
+
+Correct answer: A
+Preparation occurs first, authorization is checked next, rules build the validator, and the success hook runs after validation passes.
+
+A: Preparation occurs first, authorization is checked next, rules build the validator, and the success hook runs after validation passes.
+B: Declaration order does not determine the framework lifecycle.
+C: prepareForValidation precedes the authorization check, so authorize can observe prepared input.
+D: Authorization is checked before constructing and running the normal validator.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-2-technical.json
+Observed stdout on both PHP versions: "prepare,authorize,rules,passed"
+References:
+https://laravel.com/docs/13.x/validation#preparing-input-for-validation
+https://laravel.com/docs/13.x/validation#authorizing-form-requests
+
+==============================================================================
+LAR-S26-0158 · revision 1 · execution · Intermediate
+Blade / section-parent-content
+Objective: Preserve parent layout section content with parent instead of replacing it unintentionally.
+Difficulty rationale: Preserve inherited section content at the explicit parent placeholder.
+Prerequisites: Blade layout inheritance; Section overrides
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":[4],"coverageComplete":true}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+The page view extends this layout. Ignoring whitespace, what text appears in the aside?
+
+FILE resources/views/layout.blade.php [blade]
+<aside>
+    @section('sidebar')
+        Base
+    @show
+</aside>
+
+FILE resources/views/page.blade.php [blade]
+@extends('layout')
+
+@section('sidebar')
+    @parent
+    Child
+@endsection
+
+A. Child Base
+B. Child
+C. Base
+D. Base Child
+
+Correct answer: D
+The child section inserts the parent content at @parent, then appends Child.
+
+A: The placeholder appears before Child, so the inherited text is rendered first.
+B: That would describe replacing the section without its parent placeholder.
+C: The child section is defined and contributes content after the inherited text.
+D: The child section inserts the parent content at @parent, then appends Child.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-2-technical.json
+Observed stdout on both PHP versions: "Base Child"
+References:
+https://laravel.com/docs/13.x/blade#layouts-using-template-inheritance
+
+==============================================================================
+LAR-S26-0181 · revision 2 · debugging · Intermediate
+Sessions and CSRF / csrf-versus-authentication-failure
+Objective: Distinguish a CSRF failure from an authentication failure on a state-changing route.
+Difficulty rationale: Identify a failed request-integrity check independently of whether a user is authenticated.
+Prerequisites: Laravel 13 request-forgery middleware; Session tokens; Authentication distinction
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+In Laravel 13.40, an authenticated browser user sends a protected POST without a CSRF token or Sec-Fetch-Site header. The route is not exempt, testing bypass is off, and normal token fallback is enabled. Under default exception handling, what does a 419 indicate?
+
+A. Request-forgery validation failed.
+B. The password was necessarily incorrect.
+C. The resource policy returned false.
+D. The route does not support POST.
+
+Correct answer: A
+With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.
+
+A: With neither accepted origin metadata nor a matching token, this protected POST fails the token check even if a user is authenticated.
+B: A 419 token-mismatch response does not establish a credential-verification failure.
+C: A policy denial normally concerns authorization; the stated failure occurs at the request-forgery boundary.
+D: Unsupported HTTP methods produce a routing failure such as 405, not the stated token-mismatch status.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-2-technical.json
+Observed stdout on both PHP versions: "419"
+References:
+https://laravel.com/docs/13.x/csrf
+https://laravel.com/docs/13.x/authentication
+
+==============================================================================
+LAR-S26-0193 · revision 1 · implementation · Intermediate
+Authentication / attempt-plaintext-against-stored-hash
+Objective: Authenticate a session-backed request without persisting submitted plaintext credentials.
+Difficulty rationale: Give the authentication provider the original submitted credential without changing stored password semantics.
+Prerequisites: Session authentication; Hashed passwords; Eloquent user provider
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+The user provider stores a valid salted password hash. A login action has the submitted plaintext password. Which use of Auth::attempt follows the framework credential contract?
+
+A. Pass the submitted plaintext password in the credentials array; let the provider verify it against the stored hash.
+B. Pass the stored password hash itself as the submitted password credential.
+C. Hash the submitted password with Hash::make and pass that new hash as the password credential.
+D. Temporarily replace the stored hash with the submitted plaintext before calling attempt.
+
+Correct answer: A
+The provider uses the configured hasher to verify the submitted password and starts a session on success; the login input should not be prehashed.
+
+A: The provider uses the configured hasher to verify the submitted password and starts a session on success; the login input should not be prehashed.
+B: Supplying the stored hash is not proof of knowing the plaintext password and does not satisfy normal verification.
+C: The new salted hash is not the original secret expected by the provider's password verification step.
+D: Authentication does not require or justify persisting plaintext credentials.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-2-technical.json
+Observed stdout on both PHP versions: "[true,7,true]"
+References:
+https://laravel.com/docs/13.x/authentication#manually-authenticating-users
+https://laravel.com/docs/13.x/hashing
+
+==============================================================================
+LAR-S26-0206 · revision 1 · execution · Intermediate
+Eloquent models / scoped-unguarded-restoration
+Objective: Restore mass-assignment protection after a scoped unguarded operation.
+Difficulty rationale: Track the temporary global guard state across the scoped callback.
+Prerequisites: Eloquent mass assignment; Callback scope
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+Global unguarding is initially off. What is printed?
+
+FILE probe.php [complete-file]
+<?php
+
+use Illuminate\Database\Eloquent\Model;
+
+class Account extends Model
+{
+    protected $fillable = ['name'];
+}
+
+$first = Model::unguarded(fn () => new Account(['role' => 'admin']));
+$second = new Account(['name' => 'Ada', 'role' => 'editor']);
+
+echo $first->role.':'.($second->role ?? 'none');
+
+
+A. admin:none
+B. admin:editor
+C. An exception when the callback returns
+D. none:none
+
+Correct answer: A
+The callback allows role assignment temporarily, then restores the prior guarded state before the second construction.
+
+A: The callback allows role assignment temporarily, then restores the prior guarded state before the second construction.
+B: Scoped unguarded does not leave global protection disabled after the callback returns.
+C: Restoring the guard state does not invalidate attributes already assigned to the first model.
+D: The scoped callback does permit otherwise guarded attributes.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-3-technical.json
+Observed stdout on both PHP versions: "admin:none"
+References:
+https://laravel.com/docs/13.x/eloquent#allowing-mass-assignment
+
+==============================================================================
+LAR-S26-0242 · revision 1 · execution · Intermediate
+Eager loading / eager-load-per-parent-limit
+Objective: Apply a per-parent eager-loading limit on a supported database rather than treating it as a global child cap.
+Difficulty rationale: Interpret a relationship limit in the current framework instead of assuming one global result cap.
+Prerequisites: Eloquent constrained eager loading; Supported SQL window functions
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Laravel 13.40; SQLite with window-function support. No global scopes.
+
+Writer 1 has articles 1 and 2; writer 2 has article 3. How many articles are loaded for each writer?
+
+FILE probe.php [complete-file]
+<?php
+
+$writers = Writer::with([
+    'articles' => fn ($query) => $query->orderByDesc('id')->limit(1),
+])->orderBy('id')->get();
+
+echo json_encode($writers->map(fn ($writer) => $writer->articles->count())->all());
+
+
+A. An exception because limits are forbidden on all eager-loaded relations
+B. [0,1]
+C. [2,1]
+D. [1,1]
+
+Correct answer: D
+The supported eager-loading limit is applied per parent, selecting the latest id for each writer.
+
+A: The pinned framework supports this per-parent limit for the stated relationship and database.
+B: That would apply one global child limit; the current framework uses a grouped limit for this eager load.
+C: The limit is not silently ignored on the stated supported database.
+D: The supported eager-loading limit is applied per parent, selecting the latest id for each writer.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-3-technical.json
+Observed stdout on both PHP versions: "[1,1]"
+References:
+https://laravel.com/docs/13.x/eloquent-relationships#constraining-eager-loads
+
+==============================================================================
+LAR-S26-0280 · revision 2 · architecture · Intermediate
+Database concurrency / row-lock-transaction-write-boundary
+Objective: Keep a row lock inside the transaction that protects the corresponding write.
+Difficulty rationale: Keep the lock lifetime, validation read and corresponding write in one transaction.
+Prerequisites: PostgreSQL row locks; Laravel transactions; Read-modify-write invariants
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: PostgreSQL 18, READ COMMITTED, ordinary autocommit outside DB::transaction. Every competing stock writer follows the selected protocol.
+
+Stock must never become negative. A request reads stock, checks availability and decrements it. Which lock placement protects that read/check/write sequence against another buyer?
+
+A. Inside one transaction, select the stock row with lockForUpdate, check it, then update before committing.
+B. Select with lockForUpdate in autocommit, then start a transaction for the check and update.
+C. Read and check normally, update, then select with lockForUpdate before returning.
+D. Lock only a separate audit row while all buyers read the stock row without a common lock.
+
+Correct answer: A
+The row lock remains held through the check and write, serializing competing participants in this protocol.
+
+A: The row lock remains held through the check and write, serializing competing participants in this protocol.
+B: The locking statement’s transaction has ended before the protected work begins, so the lock no longer spans the sequence.
+C: A lock acquired after the decision and write cannot retroactively protect the earlier stale read.
+D: Different audit rows do not serialize access to the shared stock invariant.
+
+Validation: documented-contract-reviewed; evidence laravel-specialist/evidence/batch-3-technical.json
+Contract: Laravel requests a write row lock; PostgreSQL holds it until transaction end. Transaction placement and invariant reasoning are documented-contract validation, not a SQLite concurrency test.
+References:
+https://laravel.com/docs/13.x/queries#pessimistic-locking
+https://laravel.com/docs/13.x/database#database-transactions
+https://www.postgresql.org/docs/18/explicit-locking.html
+
+==============================================================================
+LAR-S26-0284 · revision 2 · architecture · Advanced
+Transactions / transaction-retry-external-side-effect
+Objective: Account for repeated closure execution when a transaction retries a concurrency failure.
+Difficulty rationale: Separate retried database work from a nontransactional side effect and account for retry duplication.
+Prerequisites: Laravel transaction retries; Concurrency errors; External idempotency
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A transaction closure charges a payment provider, then writes an order. A recognized concurrency error causes Laravel to retry the closure. The provider call is not part of the database transaction. What must the design address?
+
+A. Use a stable payment idempotency key and a durable reconciliation workflow.
+B. Laravel resumes the closure at the failed SQL statement, so the earlier charge runs only once.
+C. Setting attempts=1 makes the charge and order atomic across both systems.
+D. The provider charge is rolled back automatically with the order insert.
+
+Correct answer: A
+Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.
+
+A: Database rollback cannot undo the external charge, and retry can invoke the closure again. A stable external operation identity and recovery protocol are needed.
+B: A retry invokes the callback again rather than resuming a PHP instruction within it.
+C: Disabling retry avoids automatic repetition but still leaves a failure window after the provider succeeds and before the order commits.
+D: The provider is outside this database transaction and does not participate in its rollback.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-3-technical.json
+Observed stdout on both PHP versions: "2:1"
+References:
+https://laravel.com/docs/13.x/database#handling-deadlocks
+
+==============================================================================
+LAR-S26-0299 · revision 1 · architecture · Advanced
+Soft deletes and indexes / active-only-unique-soft-delete
+Objective: Enforce uniqueness among active rows with a partial unique index on a database that supports it.
+Difficulty rationale: Enforce uniqueness for active records while permitting historical duplicates without relying on a nullable composite key.
+Prerequisites: Soft deletes; Partial unique indexes; Database-enforced invariants
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: SQLite with partial-index support. Active rows have deleted_at=NULL; historical rows have a non-null deletion timestamp.
+
+An email may be reused after soft deletion, but at most one active row may have that email, including under concurrent insertions. Which database constraint matches this rule?
+
+A. An ordinary unique index on email across every row.
+B. A nonunique email index plus an application pre-insert exists check.
+C. A unique index on email with WHERE deleted_at IS NULL.
+D. An ordinary unique index on (email, deleted_at).
+
+Correct answer: C
+The partial index includes active rows only and enforces email uniqueness within that subset.
+
+A: This also blocks reuse when the only existing row is soft-deleted.
+B: The check is not an atomic uniqueness guarantee against concurrent insertions.
+C: The partial index includes active rows only and enforces email uniqueness within that subset.
+D: SQLite permits multiple nulls under uniqueness, so multiple active rows can share the same email with deleted_at=NULL.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-3-technical.json
+Observed stdout on both PHP versions: "2:active-conflict"
+References:
+https://laravel.com/docs/13.x/eloquent#soft-deleting
+https://laravel.com/docs/13.x/migrations#indexes
+https://www.sqlite.org/partialindex.html
+
+==============================================================================
+LAR-S26-0308 · revision 2 · debugging · Intermediate
+Queue lifecycle / delete-job-missing-model-policy
+Objective: Discard a job whose required model has been deleted using the explicit missing-model policy.
+Difficulty rationale: Express an intentional no-longer-relevant job policy at restoration time.
+Prerequisites: Queued Eloquent models; Missing model handling
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A thumbnail job uses SerializesModels for its Photo. A try/catch inside handle cannot catch a missing Photo deleted before execution. Obsolete jobs should be discarded without failure. Which explanation and remedy fit?
+
+A. The exception arrives after timeout; disable the timeout to let the catch execute.
+B. The model is stale only before commit; afterCommit makes the photo exist for every later attempt.
+C. Restoration fails before handle; set deleteWhenMissingModels=true on the job.
+D. The handler catches the wrong type; catch QueryException instead and keep the same structure.
+
+Correct answer: C
+The queued handler deletes the job when model restoration fails under this explicit policy.
+
+A: This failure comes from model restoration, not a timeout that prevents entry into the handler.
+B: After-commit dispatch does not prevent a model from being permanently deleted during a later queue delay.
+C: The queued handler deletes the job when model restoration fails under this explicit policy.
+D: Model restoration fails before the handler runs; changing its internal catch type cannot intercept that phase.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-4-technical.json
+Observed stdout on both PHP versions: "deleted:0"
+References:
+https://laravel.com/docs/13.x/queues#ignoring-missing-models
+
+==============================================================================
+LAR-S26-0314 · revision 1 · architecture · Advanced
+Queue idempotency / transactional-outbox-publish-window
+Objective: Design an outbox to close the commit-versus-publish failure window without claiming exactly-once delivery.
+Difficulty rationale: Resolve the atomicity gap between local commit and remote publication while accounting for relay retries.
+Prerequisites: Database transactions; Broker publication; Outbox relay; Idempotent consumers
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+An order commits, then the process crashes before publishing OrderAccepted to a broker. The event must remain recoverable without a distributed transaction. Which design also accounts for a relay crash after publishing?
+
+A. Use only an in-memory afterCommit callback and consider publication guaranteed once commit succeeds.
+B. Commit an outbox row and mark it sent before publishing, so consumers never receive duplicates.
+C. Publish before the database commit and assume a later rollback retracts the broker message.
+D. Commit the order and an outbox row together; retry relay delivery using a stable event ID and idempotent consumers.
+
+Correct answer: D
+The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates.
+
+A: A process can die after commit but before the callback publishes, leaving no durable publication work item.
+B: A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability.
+C: A local rollback cannot retract an already published remote message.
+D: The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates.
+
+Validation: documented-contract-reviewed; evidence laravel-specialist/evidence/batch-4-technical.json
+Contract: A local transaction can commit the domain row and outbox row atomically. Relay failure-window and consumer-idempotency claims use the cited original outbox pattern; no broker execution or exactly-once guarantee is claimed.
+References:
+https://laravel.com/docs/13.x/database#database-transactions
+https://microservices.io/patterns/data/transactional-outbox.html
+
+==============================================================================
+LAR-S26-0339 · revision 3 · debugging · Intermediate
+Queue workers / long-lived-worker-code-restart
+Objective: Restart long-lived workers after code changes because they do not reload the application per job.
+Difficulty rationale: Reload application code by replacing long-lived workers after a release.
+Prerequisites: Queue worker lifecycle; Deployment; Process supervision
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+Web requests use the new release, but existing queue:work processes still execute old handler code. Which deployment step refreshes those workers while allowing current jobs to finish normally?
+
+A. Restart PHP-FPM for web traffic but leave the queue worker processes running.
+B. Use queue:restart with supervised worker replacement.
+C. Rebuild the route cache while retaining every existing queue worker process.
+D. Run config:cache and assume existing workers re-bootstrap before every job.
+
+Correct answer: B
+Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.
+
+A: Replacing web-serving PHP processes does not reload the separate queue workers.
+B: Workers retain their booted application; the restart signal is observed between jobs and fresh processes load the new code.
+C: A route-cache file change does not recreate the worker’s already loaded handler code.
+D: Long-lived workers do not rebuild the application for each job merely because a cache file changed.
+
+Validation: documented-contract-reviewed; evidence laravel-specialist/evidence/batch-4-technical.json
+Contract: The worker compares a cache restart timestamp between jobs. Graceful exit and supervisor replacement are operational deployment behavior, not a spawned-daemon test.
+References:
+https://laravel.com/docs/13.x/queues#queue-workers-and-deployment
+
+==============================================================================
+LAR-S26-0366 · revision 2 · execution · Intermediate
+Mail queueing / queued-mail-locale-restoration
+Objective: Preserve a queued mailable locale while restoring the worker application locale after rendering.
+Difficulty rationale: Apply a per-message locale without leaking it into later work in the worker process.
+Prerequisites: Localized mailables; Queued mail; Worker locale lifetime
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+The worker locale is en. A mailable is queued with locale("fr"), and its template translates Receipt. Both translations exist. Which locale behavior is expected while sending and immediately afterwards?
+
+A. The message uses English because queued mail discards locale metadata.
+B. Rendering fails unless the worker’s global locale was already fr.
+C. French for this message, then en again for the worker.
+D. The message uses French and permanently switches the worker to fr.
+
+Correct answer: C
+The mailable carries its chosen locale and applies it within a scope that restores the previous locale.
+
+A: Laravel preserves the mailable locale for queued delivery.
+B: A mailable can explicitly request a locale different from the worker default.
+C: The mailable carries its chosen locale and applies it within a scope that restores the previous locale.
+D: The locale scope restores the prior application locale after the operation.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-4-technical.json
+Observed stdout on both PHP versions: "Reçu:en"
+References:
+https://laravel.com/docs/13.x/mail#localizing-mailables
+
+==============================================================================
+LAR-S26-0400 · revision 2 · architecture · Advanced
+Scheduling architecture / scheduled-job-durable-resumption
+Objective: Make scheduled work resumable and idempotent instead of assuming onOneServer guarantees completion.
+Difficulty rationale: Separate occurrence election from recovery of a partially completed business operation.
+Prerequisites: Single-server scheduling; Crash recovery; Durable checkpoints; Idempotent item writes
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A nightly import uses onOneServer but crashes after committing 4,000 of 10,000 per-item results. It must resume without duplicating completed results. Which design adds the missing recovery boundary?
+
+A. Persist stable per-item results and resume from durable progress.
+B. Keep the last processed item only in a static PHP property on the scheduler process.
+C. Increase the mutex expiration until it covers the whole night, with no stored progress.
+D. Rely on onOneServer to remember the last processed item and resume the PHP loop.
+
+Correct answer: A
+Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.
+
+A: Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.
+B: Process-local progress disappears with the crash and cannot identify what a replacement process has already completed.
+C: A longer lock cannot reconstruct completed work after a crash and can delay recovery.
+D: The scheduler lock does not capture application loop state or a business checkpoint.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-4-technical.json
+Observed stdout on both PHP versions: "3:5:5"
+References:
+https://laravel.com/docs/13.x/scheduling#running-tasks-on-one-server
+https://laravel.com/docs/13.x/database#database-transactions
+
+==============================================================================
+LAR-S26-0404 · revision 2 · debugging · Intermediate
+Storage errors / filesystem-write-throw-configuration
+Objective: Configure failed filesystem writes to throw rather than treating an unchecked false return as success.
+Difficulty rationale: Prevent a failed write from being mistaken for a successful operation.
+Prerequisites: Filesystem write errors; Boolean returns; Disk configuration
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A service ignores Storage::disk("exports")->put()’s return value. The disk currently uses throw=false. Its surrounding catch should handle write failures. Which disk setting changes those failures into exceptions?
+
+A. Set report to true while keeping throw false.
+B. Set report to false and keep throw false.
+C. Set throw to true for the exports disk.
+D. Set visibility to private for the exports disk.
+
+Correct answer: C
+The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.
+
+A: Reporting a failure does not necessarily rethrow it to the service’s catch.
+B: Disabling reporting does not change a caught write failure into an exception for the caller.
+C: The adapter rethrows supported write exceptions when that disk’s throw setting is enabled.
+D: Visibility governs access mode; it does not change the failure-return policy.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-5-technical.json
+Observed stdout on both PHP versions: "false:exception"
+References:
+https://laravel.com/docs/13.x/filesystem#failed-writes
+
+==============================================================================
+LAR-S26-0429 · revision 2 · architecture · Intermediate
+Cache consistency / cache-fill-snapshot-version-identity
+Objective: Prevent a delayed cache fill from overwriting the active version by keying results with the snapshot version.
+Difficulty rationale: Follow an interleaving where a delayed old reader republishes data after a writer invalidates the cache.
+Prerequisites: Cache-aside races; Committed version numbers; Snapshot identity
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Each committed product update increments its version. A result is labelled with the version of the snapshot used to calculate it. Readers select the current committed version before choosing its cache key; this question does not claim full linearizability across a later update.
+
+Reader R computes price from version 1. A writer commits version 2 and deletes the old plain-key cache entry. R then publishes its delayed version-1 result. Which scheme prevents that result from occupying the version-2 cache entry?
+
+A. Include the snapshot version in the cache key used for each fill and lookup.
+B. Acquire a cache lock only in the writer, leaving cache-fill readers outside it.
+C. Delete the same unversioned key just before the database commit instead.
+D. Keep the unversioned key and shorten its TTL to one second.
+
+Correct answer: A
+R can publish only under version 1; a lookup selecting committed version 2 uses a different key.
+
+A: R can publish only under version 1; a lookup selecting committed version 2 uses a different key.
+B: A reader that does not participate in the lock can still publish its old result after invalidation.
+C: R can still publish its old result after that deletion, recreating stale data under the active plain key.
+D: A shorter stale interval does not prevent the delayed result from occupying that key.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-5-technical.json
+Observed stdout on both PHP versions: "old:missing:new"
+References:
+https://laravel.com/docs/13.x/cache#storing-items-in-the-cache
+https://laravel.com/docs/13.x/database#database-transactions
+
+==============================================================================
+LAR-S26-0475 · revision 2 · testing · Foundation
+HTTP tests / validation-assertion-response-aware
+Objective: Assert validation errors across both JSON and session-redirect responses with the response-aware testing helper.
+Difficulty rationale: Use one assertion contract across the two standard validation response representations.
+Prerequisites: Feature validation assertions; JSON errors; Session error bags
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+A reusable test helper receives either a JSON validation response or a standard web validation redirect with session errors. It must assert that name has a validation error in either case. Which assertion handles both representations?
+
+A. $response->assertInvalid(["name"])
+B. $response->assertStatus(422)
+C. $response->assertJsonValidationErrors(["name"])
+D. $response->assertSessionHasErrors(["name"])
+
+Correct answer: A
+assertInvalid selects JSON validation errors for a JSON response and the session error bag for a web response.
+
+A: assertInvalid selects JSON validation errors for a JSON response and the session error bag for a web response.
+B: A status alone does not verify the name error, and the standard web path is a redirect.
+C: That assertion targets JSON validation data and does not cover a session-error redirect.
+D: That targets session errors rather than the JSON validation representation.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-5-technical.json
+Observed stdout on both PHP versions: "json:web"
+References:
+https://laravel.com/docs/13.x/http-tests#assert-invalid
+
+==============================================================================
+LAR-S26-0487 · revision 2 · testing · Intermediate
+Transaction tests / test-manager-aftercommit-outer-wrapper
+Objective: Account for a test's outer transaction when verifying after-commit dispatch.
+Difficulty rationale: Apply the test-specific transaction manager’s callback boundary rather than assuming the outer cleanup transaction suppresses all callbacks.
+Prerequisites: DatabaseTransactions test manager; Nested application transactions; After-commit callbacks
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Laravel 13.40’s DatabaseTransactions trait has installed its normal testing transaction manager. The application opens and commits one transaction inside the outer test transaction.
+
+An afterCommit callback is registered inside that application transaction. Must it wait until the outer test transaction commits, which normally never happens?
+
+A. No; the testing manager can run it when the application transaction returns to the outer test level.
+B. Yes; a database queue is required before any afterCommit callback can run in a test.
+C. No; afterCommit callbacks execute immediately even before the inner transaction commits.
+D. Yes; the test manager always behaves identically to the ordinary production transaction manager.
+
+Correct answer: A
+The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.
+
+A: The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.
+B: The transaction callback mechanism does not require a database queue driver.
+C: The callback registered inside the application transaction waits for its relevant commit boundary.
+D: Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-5-technical.json
+Observed stdout on both PHP versions: "0:1:1"
+References:
+https://laravel.com/docs/13.x/database-testing#resetting-the-database-after-each-test
+https://laravel.com/docs/13.x/queues#jobs-and-database-transactions
+
+==============================================================================
+LAR-S26-0499 · revision 1 · execution · Intermediate
+Inertia versioning / inertia-asset-version-location-response
+Objective: Handle an asset-version mismatch with the protocol's full-location response rather than rendering a stale page object.
+Difficulty rationale: Interpret a protocol conflict as a reload instruction instead of an application data conflict.
+Prerequisites: Inertia asset versioning; Protocol response headers
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: The application uses inertiajs/inertia-laravel 3.7.0 with its standard middleware; server-side rendering is disabled. An Inertia GET carries asset version old; the middleware reports current version new.
+
+What response does the version-mismatch path use to instruct the client to perform a full visit?
+
+A. HTTP 409 with X-Inertia-Location naming the destination.
+B. HTTP 304 with an empty body because the client’s assets match.
+C. HTTP 422 with field validation errors for the version header.
+D. HTTP 200 with the stale page object and no location instruction.
+
+Correct answer: A
+The Inertia protocol uses this special response to request a full-location visit when the asset version changes.
+
+A: The Inertia protocol uses this special response to request a full-location visit when the asset version changes.
+B: The versions differ, so a not-modified interpretation is incorrect.
+C: This is protocol asset synchronization, not a form-field validation failure.
+D: That would not trigger the protocol’s version-mismatch reload behavior.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-5-technical.json
+Observed stdout on both PHP versions: "409:http://localhost/users"
+References:
+https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Middleware.php
+https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Response.php
+
+==============================================================================
+LAR-S26-0535 · revision 1 · architecture · Advanced
+Outbound request security / outbound-destination-ssrf-boundary
+Objective: Constrain user-influenced outbound destinations and redirects rather than treating URL syntax validation as SSRF protection.
+Difficulty rationale: Combine application destination selection with connection-time and redirect constraints.
+Prerequisites: Laravel HTTP client; SSRF; DNS and redirects; Network egress policy
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: The feature only needs a known partner export service; arbitrary internet fetches are not a requirement.
+
+A proposed endpoint passes a user-submitted URL through the url validation rule and then to Http::get. Which design addresses the missing destination trust boundary?
+
+A. Validate only the initial hostname, then follow redirects without applying the destination policy again.
+B. Accept any syntactically valid HTTPS URL and rely on TLS to block internal destinations.
+C. Reject the literal string localhost but allow all other valid hostnames and automatic redirects.
+D. Build the partner request from trusted configuration and constrain actual connections and redirects.
+
+Correct answer: D
+URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy.
+
+A: An allowed initial endpoint can redirect to a destination outside the permitted boundary.
+B: TLS authenticates a connection’s peer; it does not prove that destination is allowed for this feature.
+C: Alternate addresses, DNS resolution and redirects can still reach forbidden destinations.
+D: URL syntax alone does not establish an allowed destination. Use validated business input, an explicit destination policy, connection-time network controls and redirects that cannot escape the policy.
+
+Validation: documented-contract-reviewed; evidence laravel-specialist/evidence/batch-6-technical.json
+Contract: OWASP destination and redirect contract; no live DNS, SSRF probing or complete production filter is claimed.
+References:
+https://laravel.com/docs/13.x/http-client#request-options
+https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+
+==============================================================================
+LAR-S26-0551 · revision 3 · execution · Intermediate
+Helpers / data-get-wildcard-leaf-default
+Objective: Recognize that data_get's outer default is not forwarded to each wildcard leaf in the pinned framework.
+Difficulty rationale: Trace the scope of a default argument through wildcard recursion in the pinned helper.
+Prerequisites: Nested data helpers; Wildcard traversal; Default values
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+What array is returned?
+
+FILE probe.php [complete-file]
+<?php
+
+$rows = [
+    ['user' => ['name' => 'Ada']],
+    ['user' => []],
+];
+
+echo json_encode(data_get($rows, '*.user.name', 'guest'));
+
+
+A. ["Ada"]
+B. ["Ada",null]
+C. "guest"
+D. ["Ada","guest"]
+
+Correct answer: B
+The wildcard branch recursively looks up each child without forwarding the outer default, so the missing leaf uses null. To supply a per-row fallback, map each row through data_get with that fallback.
+
+A: The wildcard result keeps a slot for the missing leaf, with null in the pinned implementation, rather than dropping that row.
+B: The wildcard branch recursively looks up each child without forwarding the outer default, so the missing leaf uses null. To supply a per-row fallback, map each row through data_get with that fallback.
+C: One missing leaf does not replace the entire wildcard result with the default.
+D: In the pinned helper, wildcard recursion does not forward the outer default to each child lookup, so the second missing leaf receives null.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-6-technical.json
+Observed stdout on both PHP versions: "[\"Ada\",null]"
+References:
+https://laravel.com/docs/13.x/helpers#method-data-get
+
+==============================================================================
+LAR-S26-0566 · revision 3 · code-review · Intermediate
+Deployment / nginx-front-controller-execution-boundary
+Objective: Restrict web-server PHP execution to the Laravel front controller rather than every PHP file in the public tree.
+Difficulty rationale: Distinguish a correct document root from the separate policy selecting which PHP files may execute.
+Prerequisites: Nginx PHP routing; Laravel front controller; Public file execution boundary
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Only the scenario and code stated below; ordinary pinned framework defaults unless specified.
+
+The document root already points to public. A generic Nginx PHP location would execute any .php file placed there. The deployment must execute only Laravel’s index.php entry point and reject other PHP paths. Which policy meets that boundary?
+
+A. Send every existing .php file under public to PHP-FPM.
+B. Remove all PHP handling and serve those files as ordinary static content.
+C. Allow the index.php entry-point location, then reject other PHP paths.
+D. Keep the generic PHP handler and reject extra PHP paths inside Laravel middleware.
+
+Correct answer: C
+A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.
+
+A: The document root is correct but this still permits additional PHP files to execute.
+B: That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths.
+C: A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.
+D: A separate PHP script can execute without entering Laravel’s front controller or middleware.
+
+Validation: documented-contract-reviewed; evidence laravel-specialist/evidence/batch-6-technical.json
+Contract: Laravel official Nginx deployment example restricts FastCGI to the front controller and returns 404 for other PHP locations. No live Nginx instance is tested.
+References:
+https://laravel.com/docs/13.x/deployment#server-configuration
+
+==============================================================================
+LAR-S26-0569 · revision 3 · architecture · Advanced
+Deployment / rolling-schema-expand-contract
+Objective: Use backward-compatible expand-and-contract database changes during a rolling release.
+Difficulty rationale: Keep old and new application versions compatible while a persisted representation changes.
+Prerequisites: Rolling deployments; Schema compatibility; Data backfill; Mixed application versions
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Old workers still read full_name while a new release will use display_name. The application must remain available during a gradual rollout.
+
+Which migration strategy supports that overlap safely?
+
+A. Add and backfill the new column; transition code before removing the old one.
+B. Rename full_name immediately before updating the first application node.
+C. Deploy new readers first, then add and backfill display_name after all nodes switch.
+D. Rename the column inside one transaction and keep old workers serving throughout.
+
+Correct answer: A
+An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.
+
+A: An expand-and-contract transition provides a period in which both versions can operate, with removal deferred until the old dependency is gone.
+B: Old nodes still using full_name would fail while the rollout is mixed.
+C: New readers can fail or see missing values before the schema and backfill they require are ready.
+D: Atomic schema change does not make old workers’ full_name queries compatible after the rename.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-6-technical.json
+Observed stdout on both PHP versions: "Ada:Ada"
+References:
+https://laravel.com/docs/13.x/migrations#modifying-columns
+https://laravel.com/docs/13.x/deployment
+
+==============================================================================
+LAR-S26-0596 · revision 1 · execution · Intermediate
+Package configuration / package-config-merge-top-level-only
+Objective: Understand shallow configuration merging when package defaults contain nested arrays.
+Difficulty rationale: Predict a nested configuration result under the actual shallow merge operation.
+Prerequisites: Package configuration; PHP array merging; Nested defaults
+Versions: Laravel 13.x; verified 13.40.0; PHP 8.4 / 8.5
+Lesson mapping: {"lessonIds":null,"coverageComplete":false}
+Assumptions: Configuration is not cached. The provider calls mergeConfigFrom for the shown package defaults under the key delivery. Existing application config delivery is ["retry" => ["attempts" => 5]].
+
+What is config("delivery.retry.delay", "missing") after registration?
+
+FILE package-config.php [complete-file]
+<?php
+
+return [
+    'retry' => [
+        'attempts' => 3,
+        'delay' => 100,
+    ],
+    'region' => 'eu',
+];
+
+
+A. 100
+B. 0
+C. missing
+D. 5
+
+Correct answer: C
+The application retry array replaces the package retry array at the top level; mergeConfigFrom does not recursively preserve delay.
+
+A: That would require recursively merging the nested retry arrays, which this helper does not do.
+B: A missing nested key uses the supplied default, not an implicit numeric zero.
+C: The application retry array replaces the package retry array at the top level; mergeConfigFrom does not recursively preserve delay.
+D: The attempts value does not become the value of the separate delay key.
+
+Validation: runtime-verified; evidence laravel-specialist/evidence/batch-6-technical.json
+Observed stdout on both PHP versions: "missing:eu"
+References:
+https://laravel.com/docs/13.x/packages#default-package-configuration
+

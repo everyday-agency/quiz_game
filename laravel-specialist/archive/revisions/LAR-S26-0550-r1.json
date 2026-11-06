@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0550",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Collections",
+  "subtopic": "groupby-multiple-memberships",
+  "objective": {
+    "id": "laravel.groupby-multiple-memberships",
+    "text": "Assign one item to multiple groups when a groupBy callback returns several group keys."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Interpret an array-valued grouping callback as several memberships, not a serialized single key."
+  },
+  "prerequisites": [
+    "groupBy callback",
+    "Multiple group keys"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$members = collect([\n    ['name' => 'Ada', 'roles' => ['author', 'editor']],\n    ['name' => 'Lin', 'roles' => ['author']],\n]);\n\n$groups = $members->groupBy(fn ($member) => $member['roles']);\n\necho $groups['author']->count().':'.$groups['editor']->count();\n"
+      }
+    ]
+  },
+  "stem": "How many records appear in the author and editor groups?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "2:0",
+      "rationale": "This assumes only the first role in each callback result is used.",
+      "misconception": "This assumes only the first role in each callback result is used."
+    },
+    {
+      "id": "choice-2",
+      "text": "An error because groupBy callbacks must always return a scalar key",
+      "rationale": "The callback can return multiple keys to place an item into several groups.",
+      "misconception": "The callback can return multiple keys to place an item into several groups."
+    },
+    {
+      "id": "choice-3",
+      "text": "2:1",
+      "rationale": "An array of group keys places Ada in both groups and Lin in author.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "1:1",
+      "rationale": "This assumes each item can belong to only one returned group.",
+      "misconception": "This assumes each item can belong to only one returned group."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "An array of group keys places Ada in both groups and Lin in author.",
+    "trace": [
+      "This assumes only the first role in each callback result is used.",
+      "The callback can return multiple keys to place an item into several groups.",
+      "An array of group keys places Ada in both groups and Lin in author.",
+      "This assumes each item can belong to only one returned group."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:1",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/collections#method-groupby"
+  ]
+}

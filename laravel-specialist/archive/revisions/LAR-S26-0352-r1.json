@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0352",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Event subscribers",
+  "subtopic": "event-subscriber-method-mapping",
+  "objective": {
+    "id": "laravel.event-subscriber-method-mapping",
+    "text": "Register several event-method mappings through one subscriber without conflating event payloads."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Follow subscriber mappings without assuming every event invokes every subscriber method."
+  },
+  "prerequisites": [
+    "Event subscribers",
+    "Event-to-method mapping"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Support\\Facades\\Event;\n\nclass Opened\n{\n}\n\nclass Closed\n{\n}\n\nclass SessionSubscriber\n{\n    public function opened(Opened $event): void\n    {\n        echo 'O';\n    }\n\n    public function closed(Closed $event): void\n    {\n        echo 'C';\n    }\n\n    public function subscribe($events): array\n    {\n        return [\n            Opened::class => 'opened',\n            Closed::class => 'closed',\n        ];\n    }\n}\n\nEvent::subscribe(SessionSubscriber::class);\nEvent::dispatch(new Closed());\n"
+      }
+    ]
+  },
+  "stem": "The subscriber is registered once. What is printed?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "O",
+      "rationale": "The dispatcher uses the event key, not the first entry in the mapping.",
+      "misconception": "The dispatcher uses the event key, not the first entry in the mapping."
+    },
+    {
+      "id": "choice-2",
+      "text": "Nothing because subscribe must manually call every handler",
+      "rationale": "Returning the supported event-to-method mapping registers these handlers.",
+      "misconception": "Returning the supported event-to-method mapping registers these handlers."
+    },
+    {
+      "id": "choice-3",
+      "text": "OC",
+      "rationale": "Registering a subscriber does not make every method run for every subscribed event.",
+      "misconception": "Registering a subscriber does not make every method run for every subscribed event."
+    },
+    {
+      "id": "choice-4",
+      "text": "C",
+      "rationale": "The Closed event maps to closed; the other mapped method is not invoked for this event.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The Closed event maps to closed; the other mapped method is not invoked for this event.",
+    "trace": [
+      "The dispatcher uses the event key, not the first entry in the mapping.",
+      "Returning the supported event-to-method mapping registers these handlers.",
+      "Registering a subscriber does not make every method run for every subscribed event.",
+      "The Closed event maps to closed; the other mapped method is not invoked for this event."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "C",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/events#event-subscribers"
+  ]
+}

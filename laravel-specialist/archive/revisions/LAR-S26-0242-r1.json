@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0242",
+  "revision": 1,
+  "status": "internal-validated",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Eager loading",
+  "subtopic": "eager-load-per-parent-limit",
+  "objective": {
+    "id": "laravel.eager-load-per-parent-limit",
+    "text": "Apply a per-parent eager-loading limit on a supported database rather than treating it as a global child cap."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Interpret a relationship limit in the current framework instead of assuming one global result cap."
+  },
+  "prerequisites": [
+    "Eloquent constrained eager loading",
+    "Supported SQL window functions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Laravel 13.40; SQLite with window-function support. No global scopes."
+    ],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$writers = Writer::with([\n    'articles' => fn ($query) => $query->orderByDesc('id')->limit(1),\n])->orderBy('id')->get();\n\necho json_encode($writers->map(fn ($writer) => $writer->articles->count())->all());\n"
+      }
+    ]
+  },
+  "stem": "Writer 1 has articles 1 and 2; writer 2 has article 3. How many articles are loaded for each writer?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "An exception because limits are forbidden on all eager-loaded relations",
+      "rationale": "The pinned framework supports this per-parent limit for the stated relationship and database.",
+      "misconception": "The pinned framework supports this per-parent limit for the stated relationship and database."
+    },
+    {
+      "id": "choice-2",
+      "text": "[0,1]",
+      "rationale": "That would apply one global child limit; the current framework uses a grouped limit for this eager load.",
+      "misconception": "That would apply one global child limit; the current framework uses a grouped limit for this eager load."
+    },
+    {
+      "id": "choice-3",
+      "text": "[2,1]",
+      "rationale": "The limit is not silently ignored on the stated supported database.",
+      "misconception": "The limit is not silently ignored on the stated supported database."
+    },
+    {
+      "id": "choice-4",
+      "text": "[1,1]",
+      "rationale": "The supported eager-loading limit is applied per parent, selecting the latest id for each writer.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The supported eager-loading limit is applied per parent, selecting the latest id for each writer.",
+    "trace": [
+      "The pinned framework supports this per-parent limit for the stated relationship and database.",
+      "That would apply one global child limit; the current framework uses a grouped limit for this eager load.",
+      "The limit is not silently ignored on the stated supported database.",
+      "The supported eager-loading limit is applied per parent, selecting the latest id for each writer."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[1,1]",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('writers', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('code')->nullable();\n    $t->timestamps();\n});\nSchema::create('articles', function ($t) {\n    $t->id();\n    $t->unsignedBigInteger('writer_id')->nullable();\n    $t->string('writer_code')->nullable();\n    $t->string('title');\n    $t->boolean('published')->default(false);\n    $t->integer('amount')->default(0);\n    $t->timestamps();\n});\nclass Writer extends Model\n{\n    protected $table = 'writers';\n    protected $guarded = [];\n\n    public function articles()\n    {\n        return $this->hasMany(Article::class, 'writer_id');\n    }\n}\nclass Article extends Model\n{\n    protected $table = 'articles';\n    protected $guarded = [];\n\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id');\n    }\n}\n$writer = Writer::create(['name' => 'Ada', 'code' => 'W-A']);\n$other = Writer::create(['name' => 'Lin', 'code' => 'W-B']);\n$writer->articles()->createMany([\n    ['title' => 'Draft', 'published' => false, 'amount' => 4],\n    ['title' => 'Public', 'published' => true, 'amount' => 6],\n]);\n$other->articles()->create(['title' => 'Other', 'published' => true, 'amount' => 9]);\nrequire getcwd().'/probe.php';",
+    "status": "runtime-verified",
+    "independentEditorialReview": "pending",
+    "evidence": "laravel-specialist/evidence/batch-3-technical.json"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#constraining-eager-loads"
+  ]
+}

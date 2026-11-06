@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0336",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Job batches",
+  "subtopic": "batch-cancellation-cooperative-check",
+  "objective": {
+    "id": "laravel.batch-cancellation-cooperative-check",
+    "text": "Check batch cancellation in a long-running or queued job rather than assuming all jobs stop immediately."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Make cancellation affect actual job behavior instead of treating a metadata flag as a process kill."
+  },
+  "prerequisites": [
+    "Batch cancellation",
+    "Queued jobs",
+    "Cooperative stopping"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A user cancels a batch while some jobs are waiting and another is doing a long loop. Which implementation makes the cancellation meaningful for the work itself?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Assume cancel() deletes every queued payload from every supported backend.",
+      "rationale": "The metadata operation does not guarantee physical removal of all already queued jobs.",
+      "misconception": "The metadata operation does not guarantee physical removal of all already queued jobs."
+    },
+    {
+      "id": "choice-2",
+      "text": "Clear the batch name so workers cannot locate their work anymore.",
+      "rationale": "The batch’s identifier and cancellation state govern its metadata; renaming is not a stop protocol.",
+      "misconception": "The batch’s identifier and cancellation state govern its metadata; renaming is not a stop protocol."
+    },
+    {
+      "id": "choice-3",
+      "text": "Rely on cancel() to terminate every active PHP worker immediately.",
+      "rationale": "Batch cancellation is not an operating-system process-kill mechanism.",
+      "misconception": "Batch cancellation is not an operating-system process-kill mechanism."
+    },
+    {
+      "id": "choice-4",
+      "text": "Check batch cancellation before work and at safe loop checkpoints, or use cancellation middleware for the entry check.",
+      "rationale": "Cancellation records state; handlers need cooperative checks to avoid or stop work at safe boundaries.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Cancellation records state; handlers need cooperative checks to avoid or stop work at safe boundaries.",
+    "trace": [
+      "The metadata operation does not guarantee physical removal of all already queued jobs.",
+      "The batch’s identifier and cancellation state govern its metadata; renaming is not a stop protocol.",
+      "Batch cancellation is not an operating-system process-kill mechanism.",
+      "Cancellation records state; handlers need cooperative checks to avoid or stop work at safe boundaries."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "skipped",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nIlluminate\\Support\\Facades\\Schema::create('job_batches', function ($t) {\n    $t->string('id')->primary();\n    $t->string('name');\n    $t->integer('total_jobs');\n    $t->integer('pending_jobs');\n    $t->integer('failed_jobs');\n    $t->longText('failed_job_ids');\n    $t->mediumText('options')->nullable();\n    $t->integer('cancelled_at')->nullable();\n    $t->integer('created_at');\n    $t->integer('finished_at')->nullable();\n});\nconfig(['queue.batching' => ['database' => 'sqlite', 'table' => 'job_batches']]);\nclass BatchWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n    use Illuminate\\Bus\\Batchable;\n\n    public function __construct(public bool $shouldFail = false)\n    {\n    }\n\n    public function handle(): void\n    {\n        if ($this->shouldFail) {\n            throw new RuntimeException('fixture failure');\n        }\n    }\n}\nclass CooperativeWork extends BatchWork\n{\n    public function handle(): void\n    {\n        if ($this->batch()?->cancelled()) {\n            echo 'skipped';\n\n            return;\n        }\n        echo 'worked';\n    }\n}\n$batch = Illuminate\\Support\\Facades\\Bus::batch([new CooperativeWork()])->dispatch();\n$batch->cancel();\napp('queue')->connection()->pop()->fire();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#cancelling-batches"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0552",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Helpers",
+  "subtopic": "data-fill-array-presence-not-truthiness",
+  "objective": {
+    "id": "laravel.data-fill-array-presence-not-truthiness",
+    "text": "Fill only absent nested values with data_fill without replacing existing false or null values."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish absence from a present falsey value when filling defaults."
+  },
+  "prerequisites": [
+    "Nested array defaults",
+    "data_fill",
+    "Present null and false"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$settings = ['enabled' => false, 'label' => null];\n\ndata_fill($settings, 'enabled', true);\ndata_fill($settings, 'label', 'default');\ndata_fill($settings, 'limit', 10);\n\necho json_encode($settings);\n"
+      }
+    ]
+  },
+  "stem": "What JSON results from these fills?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "{\"enabled\":true,\"label\":\"default\",\"limit\":10}",
+      "rationale": "This treats the operation as overwriting all falsey or existing values.",
+      "misconception": "This treats the operation as overwriting all falsey or existing values."
+    },
+    {
+      "id": "choice-2",
+      "text": "{\"enabled\":false,\"label\":\"default\",\"limit\":10}",
+      "rationale": "Array key existence preserves the present null as well as false.",
+      "misconception": "Array key existence preserves the present null as well as false."
+    },
+    {
+      "id": "choice-3",
+      "text": "{\"enabled\":false,\"label\":null}",
+      "rationale": "The absent limit is filled; preserving existing values does not mean doing nothing.",
+      "misconception": "The absent limit is filled; preserving existing values does not mean doing nothing."
+    },
+    {
+      "id": "choice-4",
+      "text": "{\"enabled\":false,\"label\":null,\"limit\":10}",
+      "rationale": "For this array, data_fill preserves existing keys including false and null and supplies only the absent limit.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "For this array, data_fill preserves existing keys including false and null and supplies only the absent limit.",
+    "trace": [
+      "This treats the operation as overwriting all falsey or existing values.",
+      "Array key existence preserves the present null as well as false.",
+      "The absent limit is filled; preserving existing values does not mean doing nothing.",
+      "For this array, data_fill preserves existing keys including false and null and supplies only the absent limit."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "{\"enabled\":false,\"label\":null,\"limit\":10}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/helpers#method-data-fill"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0331",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Job chains",
+  "subtopic": "chain-failure-stops-successors",
+  "objective": {
+    "id": "laravel.chain-failure-stops-successors",
+    "text": "Run chained jobs in order and stop downstream work after an unhandled job failure."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Trace sequential dependencies rather than treating a chain as independent batch work."
+  },
+  "prerequisites": [
+    "Job chains",
+    "Unhandled failures"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A chain contains Prepare, Render and Publish. Prepare succeeds. Render throws and is ultimately marked failed without a recovery dispatch. Which normal chain behavior follows?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Publish runs before Render is retried so the chain can finish sooner.",
+      "rationale": "A successor does not bypass the failure of its prerequisite.",
+      "misconception": "A successor does not bypass the failure of its prerequisite."
+    },
+    {
+      "id": "choice-2",
+      "text": "Publish is not dispatched by the chain.",
+      "rationale": "The queued handler dispatches the next chained job only after successful processing of the current one.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Prepare is automatically rolled back even though it already completed.",
+      "rationale": "A chain is not a distributed transaction that undoes earlier job side effects.",
+      "misconception": "A chain is not a distributed transaction that undoes earlier job side effects."
+    },
+    {
+      "id": "choice-4",
+      "text": "Publish runs immediately because the chain was fully enqueued at the start.",
+      "rationale": "The normal chain advances one successful step at a time rather than queueing every successor independently.",
+      "misconception": "The normal chain advances one successful step at a time rather than queueing every successor independently."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The queued handler dispatches the next chained job only after successful processing of the current one.",
+    "trace": [
+      "A successor does not bypass the failure of its prerequisite.",
+      "The queued handler dispatches the next chained job only after successful processing of the current one.",
+      "A chain is not a distributed transaction that undoes earlier job side effects.",
+      "The normal chain advances one successful step at a time rather than queueing every successor independently."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "prepare,render:0",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass ChainStep implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function __construct(public string $name)\n    {\n    }\n\n    public function handle(): void\n    {\n        app('cache')->put('trace', [...app('cache')->get('trace', []), $this->name]);\n        if ($this->name === 'render') {\n            throw new RuntimeException('render failed');\n        }\n    }\n}\nIlluminate\\Support\\Facades\\Bus::chain([new ChainStep('prepare'), new ChainStep('render'), new ChainStep('publish')])->dispatch();\napp('queue')->connection()->pop()->fire();\n$job = app('queue')->connection()->pop();\ntry {\n    $job->fire();\n} catch (RuntimeException $e) {\n    $job->fail($e);\n}\necho implode(',', app('cache')->get('trace')).':'.Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#job-chaining"
+  ]
+}

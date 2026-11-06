@@ -1,0 +1,14 @@
+✓ Laravel Specialist browser: Existing PHP progress survives; the regular subject selector opens 600 Laravel Beta questions with fresh isolated totals
+✓ Laravel Specialist browser: setup has no extra review filters on desktop/mobile; default difficulty selection remains intact
+Rendered and answered 100/600 review questions in desktop/mobile Chrome.
+Rendered and answered 200/600 review questions in desktop/mobile Chrome.
+Rendered and answered 300/600 review questions in desktop/mobile Chrome.
+Rendered and answered 400/600 review questions in desktop/mobile Chrome.
+Rendered and answered 500/600 review questions in desktop/mobile Chrome.
+Rendered and answered 600/600 review questions in desktop/mobile Chrome.
+✓ Laravel Specialist browser: all 600 questions render exact sources on desktop/mobile; all 1800 distractor rationales map correctly; mixed Learn answers score correctly
+✓ Laravel Specialist browser: 20-question Exam remains neutral until submission, grades shuffled answers 10/20 and saves completion once
+✓ Laravel Specialist browser: question bank has no extra review filters; standard topic and difficulty controls still work
+✓ Laravel Specialist browser: missed-question retry, multi-file review, exact clipboard copy and native mobile horizontal scrolling work
+✓ Laravel Specialist browser: switching subjects and reloading preserves PHP, Beta and isolated review totals without merging
+✓ Laravel Specialist browser: reload preserves Laravel Beta, PHP and historical progress independently; no browser exceptions

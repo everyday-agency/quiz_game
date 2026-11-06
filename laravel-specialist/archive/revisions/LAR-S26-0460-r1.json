@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0460",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "API pagination",
+  "subtopic": "paginated-resource-always-data-envelope",
+  "objective": {
+    "id": "laravel.paginated-resource-always-data-envelope",
+    "text": "Retain the paginated data envelope even when ordinary resource wrapping is disabled."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recognize the pagination envelope exception to ordinary unwrapped resources."
+  },
+  "prerequisites": [
+    "Resource wrapping",
+    "Paginator metadata"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "JsonResource::withoutWrapping() is enabled. A resource collection wraps a LengthAwarePaginator. What shape should a client still expect?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A data envelope with pagination links and meta.",
+      "rationale": "Paginated resource responses retain data wrapping to accompany the pagination information.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "An exception because pagination requires the global wrap setting to remain enabled.",
+      "rationale": "The resource machinery handles pagination wrapping even when ordinary wrapping is disabled.",
+      "misconception": "The resource machinery handles pagination wrapping even when ordinary wrapping is disabled."
+    },
+    {
+      "id": "choice-3",
+      "text": "Only pagination links, because items require wrapping to serialize.",
+      "rationale": "The items still serialize inside the paginated response.",
+      "misconception": "The items still serialize inside the paginated response."
+    },
+    {
+      "id": "choice-4",
+      "text": "Only the bare item array with no links or meta.",
+      "rationale": "Disabling ordinary wrapping does not remove the pagination response structure.",
+      "misconception": "Disabling ordinary wrapping does not remove the pagination response structure."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Paginated resource responses retain data wrapping to accompany the pagination information.",
+    "trace": [
+      "Paginated resource responses retain data wrapping to accompany the pagination information.",
+      "The resource machinery handles pagination wrapping even when ordinary wrapping is disabled.",
+      "The items still serialize inside the paginated response.",
+      "Disabling ordinary wrapping does not remove the pagination response structure."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "data,links,meta",
+    "probe": "Illuminate\\Http\\Resources\\Json\\JsonResource::withoutWrapping();\n$p = new Illuminate\\Pagination\\LengthAwarePaginator([['id' => 7]], 3, 1, 1);\n$r = Illuminate\\Http\\Resources\\Json\\JsonResource::collection($p)->response()->getData(true);\necho implode(',', array_keys($r));",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#data-wrapping-and-pagination"
+  ]
+}

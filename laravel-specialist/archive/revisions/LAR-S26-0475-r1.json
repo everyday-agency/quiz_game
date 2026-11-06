@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0475",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "HTTP tests",
+  "subtopic": "feature-validation-json-negotiation",
+  "objective": {
+    "id": "laravel.feature-validation-json-negotiation",
+    "text": "Request JSON explicitly when testing a validation failure's 422 response."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Exercise the JSON validation response path instead of the browser redirect path."
+  },
+  "prerequisites": [
+    "Feature requests",
+    "Validation responses",
+    "Accept JSON"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A form validation test expects 422 JSON but sends an ordinary HTML-oriented POST and receives a redirect. Which test request explicitly exercises the JSON path?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "$this->postJson(\"/profile\", [])",
+      "rationale": "The JSON request helper sets the request and response expectations needed for the standard JSON validation response.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "$this->followingRedirects()->post(\"/profile\", [])",
+      "rationale": "Following the redirect tests the resulting page rather than selecting the JSON validation path.",
+      "misconception": "Following the redirect tests the resulting page rather than selecting the JSON validation path."
+    },
+    {
+      "id": "choice-3",
+      "text": "$this->post(\"/profile\", []) followed by assertStatus(422)",
+      "rationale": "An assertion cannot change how the earlier request negotiated its response.",
+      "misconception": "An assertion cannot change how the earlier request negotiated its response."
+    },
+    {
+      "id": "choice-4",
+      "text": "$this->get(\"/profile\") with no submitted fields",
+      "rationale": "That changes the route method and does not test the intended invalid POST.",
+      "misconception": "That changes the route method and does not test the intended invalid POST."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The JSON request helper sets the request and response expectations needed for the standard JSON validation response.",
+    "trace": [
+      "The JSON request helper sets the request and response expectations needed for the standard JSON validation response.",
+      "Following the redirect tests the resulting page rather than selecting the JSON validation path.",
+      "An assertion cannot change how the earlier request negotiated its response.",
+      "That changes the route method and does not test the intended invalid POST."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "422:invalid",
+    "probe": "PHPUnit\\TextUI\\Configuration\\Registry::init(\n    (new PHPUnit\\TextUI\\CliArguments\\Builder)->fromParameters(['phpunit', '--no-configuration']),\n    PHPUnit\\TextUI\\XmlConfiguration\\DefaultConfiguration::create(),\n);\n$test = new class('localFixture') extends Illuminate\\Foundation\\Testing\\TestCase\n{\n    public function attach($application): void\n    {\n        $this->app = $application;\n    }\n    public function exposeExceptions(): void\n    {\n        $this->withoutExceptionHandling();\n    }\n};\n$test->attach(app());\napp('router')->post('/profile', function (Illuminate\\Http\\Request $request) {\n    $request->validate(['name' => 'required']);\n    return response()->json(['saved' => true]);\n});\n$r = $test->postJson('/profile', []);\n$r->assertUnprocessable()->assertJsonValidationErrors('name');\necho $r->status().':invalid';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-tests#testing-json-apis",
+    "https://laravel.com/docs/13.x/validation#validation-error-response-format"
+  ]
+}

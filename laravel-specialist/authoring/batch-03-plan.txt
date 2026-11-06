@@ -1,0 +1,100 @@
+201 | Eloquent models | Override inferred table naming when a model maps to an existing nonconventional table.
+202 | Eloquent models | Match timestamp configuration to a legacy schema without nonexistent timestamp writes.
+203 | Eloquent models | Configure a nonincrementing string primary key without coercing it to an integer.
+204 | Eloquent models | Detect silently discarded mass-assignment attributes during development.
+205 | Eloquent models | Distinguish guarded mass assignment from explicit attribute assignment.
+206 | Eloquent models | Restore mass-assignment protection after a scoped unguarded operation.
+207 | Eloquent models | Preserve model identity when selecting partial columns for later updates.
+208 | Eloquent models | Distinguish a model-returning fill call from the boolean result of update.
+209 | Eloquent models | Account for skipped per-model events when using a mass update query.
+210 | Eloquent state | Trace dirty and changed state before and after a successful save.
+211 | Eloquent state | Compare raw original data with accessor-transformed attribute values.
+212 | Eloquent state | Use fresh without assuming the original in-memory model is mutated.
+213 | Eloquent state | Use refresh to reload a stale model and its already loaded relationships.
+214 | Eloquent state | Prevent a replicated unsaved model from reusing a business-unique attribute.
+215 | Eloquent casts | Predict an immutable datetime cast without assuming the model changes when a new date is returned.
+216 | Eloquent casts | Apply a JSON array change through reassignment rather than modifying an overloaded offset.
+217 | Eloquent casts | Use an object-backed array cast when in-place mutation must be tracked.
+218 | Eloquent casts | Handle invalid stored values when hydrating a backed-enum cast.
+219 | Eloquent casts | Avoid double hashing a value through the built-in hashed cast.
+220 | Eloquent casts | Keep plaintext query assumptions separate from encrypted attribute storage.
+221 | Eloquent casts | Preserve null values rather than assuming every cast converts them to zero or false.
+222 | Eloquent accessors | Persist changes to a cached accessor value object through its setter mapping.
+223 | Eloquent accessors | Normalize a stored attribute through a set mutator before persistence.
+224 | Eloquent serialization | Append a computed accessor to output without treating it as a database column.
+225 | Eloquent serialization | Resolve visibility and hidden rules when the same attribute appears in both lists.
+226 | Eloquent serialization | Include only already loaded relationships during ordinary model array serialization.
+227 | Eloquent casts | Preserve a decimal cast's string representation instead of assuming it is a float.
+228 | Eloquent state | Touch a configured parent timestamp when saving a child model.
+229 | Eloquent concurrency | Detect a stale update with a version predicate and affected-row count.
+230 | Eloquent scopes | Remove one global scope without disabling unrelated tenant restrictions.
+231 | Relationships | Choose the relationship direction from the location of the foreign key.
+232 | Relationships | Match a belongsTo relationship to a nonstandard owner key.
+233 | Relationships | Distinguish latestOfMany's default primary-key ordering from a business timestamp.
+234 | Relationships | Recognize an unsaved default related model returned by withDefault.
+235 | Relationship aggregates | Retrieve child counts without hydrating every child collection.
+236 | Relationship aggregates | Project relationship existence without treating it as a loaded relation.
+237 | Relationship aggregates | Identify the attribute name and value produced by withSum.
+238 | Relationship queries | Filter parents by a minimum count of matching related rows.
+239 | Relationship queries | Keep eager-loaded children consistent with the filter used to select parents.
+240 | Eager loading | Retain the foreign key required to match selected children to their parents.
+241 | Eager loading | Distinguish an already loaded relationship snapshot from a fresh relationship count after an insert.
+242 | Eager loading | Apply a per-parent eager-loading limit on a supported database rather than treating it as a global child cap.
+243 | Eager loading | Detect accidental lazy loading with a regression setup that actually exercises hydrated models.
+244 | Eager loading | Hydrate the inverse parent with chaperone to avoid child-to-parent N+1 queries.
+245 | Polymorphic relationships | Use stable morph aliases instead of coupling persisted types to PHP class names.
+246 | Polymorphic relationships | Account for separate eager-loading queries for distinct morphTo target types.
+247 | Polymorphic relationships | Restrict a polymorphic relationship filter to explicitly supported target types.
+248 | Polymorphic relationships | Match both type and identifier when polymorphic targets share the same numeric ID.
+249 | Pivot relationships | Distinguish attach from sync when existing associations must be replaced.
+250 | Pivot relationships | Update requested pivot metadata and add missing links without detaching unrelated existing associations.
+251 | Pivot relationships | Update a pivot attribute without updating the related model's attributes.
+252 | Pivot relationships | Expose an extra pivot column through withPivot.
+253 | Pivot relationships | Order related records by a pivot attribute rather than a related-table column.
+254 | Pivot relationships | Use a pivot value that applies to both retrieval and new association defaults.
+255 | Pivot relationships | Remove an association without deleting the related record.
+256 | Pivot relationships | Predict attached and detached IDs returned by toggle.
+257 | Pivot relationships | Supply both timestamp columns when enabling automatic pivot timestamps.
+258 | Relationships | Persist an associate operation instead of assuming it immediately writes the foreign key.
+259 | Relationships | Follow a hasManyThrough path using the correct intermediate and final keys.
+260 | Relationship queries | Group an orWhere branch so it cannot escape the relationship's foreign-key constraint.
+261 | Query Builder | Extend a projection with addSelect instead of replacing the existing selected columns.
+262 | Query Builder | Distinguish a single-row result from a collection returned by get.
+263 | Query Builder | Retrieve a keyed value list with pluck instead of a single scalar with value.
+264 | Query Builder | Apply database filtering before materializing a result collection.
+265 | Query Builder | Treat an empty whereIn list as matching no records.
+266 | Query Builder | Query a null column value rather than comparing to the literal text NULL.
+267 | Query Builder | Test membership in a JSON array without relying on substring matches.
+268 | Query Builder | Compare two columns with whereColumn instead of treating the second name as a string value.
+269 | Query Builder | Keep values in raw query fragments parameter-bound.
+270 | Query Builder | Allowlist dynamic sort identifiers rather than assuming value bindings select column names.
+271 | Bulk processing | Avoid skipped rows when chunked processing changes the query's filtering field.
+272 | Bulk processing | Bound memory with lazy iteration instead of materializing all rows first.
+273 | Bulk processing | Combine bounded batches with eager loading instead of assuming cursor eager-loads relations.
+274 | Bulk processing | Expose the identifier alias needed by chunkById when using a custom projection.
+275 | Pagination | Use a deterministic unique ordering for cursor pagination with tied business timestamps.
+276 | Pagination | Choose simple pagination when next/previous navigation is sufficient and a total count is unnecessary.
+277 | Query Builder | Align an upsert conflict target with an actual unique index on the specified database.
+278 | Query Builder | Retrieve an inserted identifier without assuming Query Builder applies Eloquent model events or timestamps.
+279 | Database concurrency | Increment a counter atomically instead of writing a stale read-modify-write value.
+280 | Database concurrency | Keep a row lock inside the transaction that protects the corresponding write.
+281 | Transactions | Distinguish returning false from throwing an exception in a transaction closure.
+282 | Transactions | Recover from an inner savepoint rollback while retaining valid outer transaction work.
+283 | Transactions | Discard after-commit callbacks belonging to a rolled-back nested transaction.
+284 | Transactions | Account for repeated closure execution when a transaction retries a concurrency failure.
+285 | Database connections | Use sticky read routing after a write without claiming replication is synchronous.
+286 | Database observability | Inspect query timing and placeholders without indiscriminately logging sensitive bindings.
+287 | Migrations | Apply nullable to a foreign-key column before constructing its foreign-key definition.
+288 | Migrations | Preserve dependent historical records with a nullable foreign key and null-on-delete policy.
+289 | Database indexes | Order a compound index to support the specified equality filter and ordered scan.
+290 | Database indexes | Account for the specified database's treatment of multiple nulls under a unique index.
+291 | Migrations | Preserve intended modifiers explicitly when changing a column definition.
+292 | Migrations | Reverse an added unique index without dropping the column and its data.
+293 | Database connections | Keep model queries on the explicitly selected connection instead of assuming the default connection changes.
+294 | Factories | Distinguish unsaved factory construction from persisted factory creation.
+295 | Factories | Use for to assign a parent and has to create related children in the intended direction.
+296 | Factories | Trace a repeating sequence across several generated model states.
+297 | Factories | Separate afterMaking from afterCreating when a callback needs a persisted identifier.
+298 | Seeders | Suppress model events during a seeder without disabling them for later application work.
+299 | Soft deletes and indexes | Enforce uniqueness among active rows with a partial unique index on a database that supports it.
+300 | Database concurrency | Acquire multiple row locks in a consistent order to avoid the stated deadlock cycle.

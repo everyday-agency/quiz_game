@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0595",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Package integration",
+  "subtopic": "package-view-namespace-override-precedence",
+  "objective": {
+    "id": "laravel.package-view-namespace-override-precedence",
+    "text": "Use namespaced package views and application overrides without copying the entire package into application source."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Resolve an application override without losing package defaults for other views."
+  },
+  "prerequisites": [
+    "Package view namespaces",
+    "Application overrides",
+    "Blade rendering"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The provider calls loadViewsFrom(package_path, \"billing\"). Package views include receipt and footer. The application overrides only resources/views/vendor/billing/receipt.blade.php."
+    ],
+    "files": []
+  },
+  "stem": "Which templates render for view(\"billing::receipt\") and view(\"billing::footer\")?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Both application templates, with the receipt automatically reused for footer.",
+      "rationale": "Each named view is resolved separately; one override is not reused for every name.",
+      "misconception": "Each named view is resolved separately; one override is not reused for every name."
+    },
+    {
+      "id": "choice-2",
+      "text": "The application receipt and the package footer.",
+      "rationale": "The application namespace override is checked first, while missing overrides fall back to package views.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The application receipt and a missing-view error for footer.",
+      "rationale": "Overriding one view does not remove the package fallback for other views.",
+      "misconception": "Overriding one view does not remove the package fallback for other views."
+    },
+    {
+      "id": "choice-4",
+      "text": "Both package templates, because a namespace bypasses application overrides.",
+      "rationale": "loadViewsFrom registers the conventional application override path before the package path.",
+      "misconception": "loadViewsFrom registers the conventional application override path before the package path."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The application namespace override is checked first, while missing overrides fall back to package views.",
+    "trace": [
+      "Each named view is resolved separately; one override is not reused for every name.",
+      "The application namespace override is checked first, while missing overrides fall back to package views.",
+      "Overriding one view does not remove the package fallback for other views.",
+      "loadViewsFrom registers the conventional application override path before the package path."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "app-receipt:package-footer",
+    "probe": "mkdir(base_path('package-views'), 0700, true);\nmkdir(resource_path('views/vendor/billing'), 0700, true);\nfile_put_contents(base_path('package-views/receipt.blade.php'), 'package-receipt');\nfile_put_contents(base_path('package-views/footer.blade.php'), 'package-footer');\nfile_put_contents(resource_path('views/vendor/billing/receipt.blade.php'), 'app-receipt');\n$provider = new class(app()) extends Illuminate\\Support\\ServiceProvider {\n    public function boot(): void\n    {\n        $this->loadViewsFrom(base_path('package-views'), 'billing');\n    }\n};\n$provider->boot();\necho view('billing::receipt')->render().':'.view('billing::footer')->render();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/packages#views"
+  ]
+}

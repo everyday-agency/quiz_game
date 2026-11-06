@@ -1,0 +1,180 @@
+{
+  "scope": "Seven revised questions only, compared against all current Laravel and PHP records",
+  "candidates": [
+    {
+      "id": "LAR-S26-0242",
+      "nearest": [
+        {
+          "id": "PHP-E26-0503",
+          "bank": "php",
+          "similarity": 0.156
+        },
+        {
+          "id": "PHP-E26-0279",
+          "bank": "php",
+          "similarity": 0.149
+        },
+        {
+          "id": "PHP-E26-0014",
+          "bank": "php",
+          "similarity": 0.135
+        },
+        {
+          "id": "PHP-E26-0525",
+          "bank": "php",
+          "similarity": 0.12
+        }
+      ]
+    },
+    {
+      "id": "LAR-S26-0284",
+      "nearest": [
+        {
+          "id": "LAR-S26-0412",
+          "bank": "laravel",
+          "similarity": 0.15
+        },
+        {
+          "id": "LAR-S26-0271",
+          "bank": "laravel",
+          "similarity": 0.129
+        },
+        {
+          "id": "LAR-S26-0300",
+          "bank": "laravel",
+          "similarity": 0.125
+        },
+        {
+          "id": "PHP-E26-0200",
+          "bank": "php",
+          "similarity": 0.111
+        }
+      ]
+    },
+    {
+      "id": "LAR-S26-0314",
+      "nearest": [
+        {
+          "id": "PHP-E26-0079",
+          "bank": "php",
+          "similarity": 0.141
+        },
+        {
+          "id": "LAR-S26-0391",
+          "bank": "laravel",
+          "similarity": 0.095
+        },
+        {
+          "id": "LAR-S26-0358",
+          "bank": "laravel",
+          "similarity": 0.09
+        },
+        {
+          "id": "PHP-E26-0200",
+          "bank": "php",
+          "similarity": 0.09
+        }
+      ]
+    },
+    {
+      "id": "LAR-S26-0400",
+      "nearest": [
+        {
+          "id": "LAR-S26-0388",
+          "bank": "laravel",
+          "similarity": 0.124
+        },
+        {
+          "id": "LAR-S26-0429",
+          "bank": "laravel",
+          "similarity": 0.111
+        },
+        {
+          "id": "PHP-E26-0579",
+          "bank": "php",
+          "similarity": 0.096
+        },
+        {
+          "id": "LAR-S26-0273",
+          "bank": "laravel",
+          "similarity": 0.094
+        }
+      ]
+    },
+    {
+      "id": "LAR-S26-0535",
+      "nearest": [
+        {
+          "id": "PHP-E26-0363",
+          "bank": "php",
+          "similarity": 0.118
+        },
+        {
+          "id": "PHP-E26-0173",
+          "bank": "php",
+          "similarity": 0.103
+        },
+        {
+          "id": "LAR-S26-0533",
+          "bank": "laravel",
+          "similarity": 0.095
+        },
+        {
+          "id": "PHP-E26-0438",
+          "bank": "php",
+          "similarity": 0.095
+        }
+      ]
+    },
+    {
+      "id": "LAR-S26-0566",
+      "nearest": [
+        {
+          "id": "LAR-S26-0180",
+          "bank": "laravel",
+          "similarity": 0.097
+        },
+        {
+          "id": "LAR-S26-0355",
+          "bank": "laravel",
+          "similarity": 0.096
+        },
+        {
+          "id": "LAR-S26-0029",
+          "bank": "laravel",
+          "similarity": 0.095
+        },
+        {
+          "id": "LAR-S26-0486",
+          "bank": "laravel",
+          "similarity": 0.09
+        }
+      ]
+    },
+    {
+      "id": "LAR-S26-0569",
+      "nearest": [
+        {
+          "id": "LAR-S26-0523",
+          "bank": "laravel",
+          "similarity": 0.145
+        },
+        {
+          "id": "PHP-E26-0394",
+          "bank": "php",
+          "similarity": 0.112
+        },
+        {
+          "id": "LAR-S26-0305",
+          "bank": "laravel",
+          "similarity": 0.089
+        },
+        {
+          "id": "LAR-S26-0420",
+          "bank": "laravel",
+          "similarity": 0.083
+        }
+      ]
+    }
+  ]
+}

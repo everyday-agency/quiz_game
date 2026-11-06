@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0250",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Pivot relationships",
+  "subtopic": "add-associations-preserve-existing",
+  "objective": {
+    "id": "laravel.add-associations-preserve-existing",
+    "text": "Add associations without detaching existing links."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Apply additive assignment without removing existing membership or duplicating an existing link."
+  },
+  "prerequisites": [
+    "Eloquent pivot synchronization"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An additive grant operation receives role IDs [2,3]. Role 2 may already be linked, and existing role 1 must remain. The pivot has a unique person/role pair. Which operation handles this request?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "$person->roles()->attach([2,3]);",
+      "rationale": "Blindly attaching role 2 can violate the unique pivot pair when it is already present.",
+      "misconception": "Blindly attaching role 2 can violate the unique pivot pair when it is already present."
+    },
+    {
+      "id": "choice-2",
+      "text": "$person->roles()->sync([2,3]);",
+      "rationale": "Full synchronization removes role 1 because it is omitted from the supplied set.",
+      "misconception": "Full synchronization removes role 1 because it is omitted from the supplied set."
+    },
+    {
+      "id": "choice-3",
+      "text": "$person->roles()->syncWithoutDetaching([2,3]);",
+      "rationale": "This retains existing associations, skips already present requested links and adds missing ones.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "$person->roles()->toggle([2,3]);",
+      "rationale": "Toggle removes an already attached requested role, which is not additive grant behavior.",
+      "misconception": "Toggle removes an already attached requested role, which is not additive grant behavior."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "This retains existing associations, skips already present requested links and adds missing ones.",
+    "trace": [
+      "Blindly attaching role 2 can violate the unique pivot pair when it is already present.",
+      "Full synchronization removes role 1 because it is omitted from the supplied set.",
+      "This retains existing associations, skips already present requested links and adds missing ones.",
+      "Toggle removes an already attached requested role, which is not additive grant behavior."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[1,2,3]",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('people', function ($t) {\n    $t->id();\n    $t->string('name');\n});\nSchema::create('roles', function ($t) {\n    $t->id();\n    $t->string('name');\n});\nSchema::create('person_role', function ($t) {\n    $t->unsignedBigInteger('person_id');\n    $t->unsignedBigInteger('role_id');\n    $t->boolean('active')->default(false);\n    $t->integer('rank')->default(0);\n    $t->timestamps();\n    $t->unique(['person_id', 'role_id']);\n});\nclass Person extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n\n    public function roles()\n    {\n        return $this->belongsToMany(Role::class, 'person_role', 'person_id', 'role_id');\n    }\n}\nclass Role extends Model\n{\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$person = Person::create(['name' => 'Ada']);\nforeach (['Reader', 'Writer', 'Admin'] as $name) {\n    Role::create(['name' => $name]);\n}\n$person->roles()->attach([1, 2]);\n$person->roles()->syncWithoutDetaching([2, 3]);\necho json_encode($person->roles()->orderBy('roles.id')->pluck('roles.id')->all());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#syncing-associations"
+  ]
+}

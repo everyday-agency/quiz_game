@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0364",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Mail attachments",
+  "subtopic": "attachment-data-callback-evaluation",
+  "objective": {
+    "id": "laravel.attachment-data-callback-evaluation",
+    "text": "Delay reading attachment bytes until sending when using an Attachment data callback."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Identify the moment data generation occurs instead of assuming declaration eagerly produces bytes."
+  },
+  "prerequisites": [
+    "Mail Attachment fromData",
+    "Lazy callback evaluation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Mail\\Mailables\\Attachment;\n\n$reads = 0;\n\n$attachment = Attachment::fromData(function () use (&$reads) {\n    $reads++;\n\n    return 'report bytes';\n}, 'report.txt');\n"
+      }
+    ]
+  },
+  "stem": "What is $reads immediately after this declaration, before the attachment is attached to a message?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "2",
+      "rationale": "There is no automatic construction-time validation pass that reads the callback twice.",
+      "misconception": "There is no automatic construction-time validation pass that reads the callback twice."
+    },
+    {
+      "id": "choice-2",
+      "text": "An undefined variable because by-reference captures cannot be deferred",
+      "rationale": "The closure retains a valid reference to the variable in this scope.",
+      "misconception": "The closure retains a valid reference to the variable in this scope."
+    },
+    {
+      "id": "choice-3",
+      "text": "0",
+      "rationale": "fromData retains the callback; the bytes are produced when the attachment is materialized for a message.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "1",
+      "rationale": "Constructing the attachment descriptor does not immediately invoke the data callback.",
+      "misconception": "Constructing the attachment descriptor does not immediately invoke the data callback."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "fromData retains the callback; the bytes are produced when the attachment is materialized for a message.",
+    "trace": [
+      "There is no automatic construction-time validation pass that reads the callback twice.",
+      "The closure retains a valid reference to the variable in this scope.",
+      "fromData retains the callback; the bytes are produced when the attachment is materialized for a message.",
+      "Constructing the attachment descriptor does not immediately invoke the data callback."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:1",
+    "probe": "require getcwd().'/probe.php';\necho $reads.':';\n$message = new Illuminate\\Mail\\Message(new Symfony\\Component\\Mime\\Email());\n$attachment->attachTo($message);\necho $reads;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#raw-data-attachments"
+  ]
+}

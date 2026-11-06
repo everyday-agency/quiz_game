@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0220",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Eloquent casts",
+  "subtopic": "encrypted-attribute-query-boundary",
+  "objective": {
+    "id": "laravel.encrypted-attribute-query-boundary",
+    "text": "Keep plaintext query assumptions separate from encrypted attribute storage."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate model decryption from database equality semantics and account for a deliberate search design."
+  },
+  "prerequisites": [
+    "Eloquent encrypted casts",
+    "Randomized encryption",
+    "Search design"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A support tool stores notes through an encrypted cast. It tries where(\"notes\", $plaintext)->first() to locate an exact note, but stored ciphertext is randomized. Which design statement is accurate?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Eloquent decrypts every notes column inside SQL before applying the where clause.",
+      "rationale": "The application-level cast does not install a database decryption expression.",
+      "misconception": "The application-level cast does not install a database decryption expression."
+    },
+    {
+      "id": "choice-2",
+      "text": "The cast does not make plaintext SQL equality work; searchable sensitive data needs a separately designed lookup strategy.",
+      "rationale": "Casting decrypts retrieved model attributes. It does not rewrite a plaintext WHERE value into a useful match for randomized ciphertext.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Encrypt the input once and equality will always match independently encrypted identical notes.",
+      "rationale": "Randomized encryption can produce different ciphertext for the same plaintext.",
+      "misconception": "Randomized encryption can produce different ciphertext for the same plaintext."
+    },
+    {
+      "id": "choice-4",
+      "text": "Add notes to $fillable so the query builder applies its encrypted cast to predicates.",
+      "rationale": "Mass-assignment permission does not transform database comparison semantics.",
+      "misconception": "Mass-assignment permission does not transform database comparison semantics."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Casting decrypts retrieved model attributes. It does not rewrite a plaintext WHERE value into a useful match for randomized ciphertext.",
+    "trace": [
+      "The application-level cast does not install a database decryption expression.",
+      "Casting decrypts retrieved model attributes. It does not rewrite a plaintext WHERE value into a useful match for randomized ciphertext.",
+      "Randomized encryption can produce different ciphertext for the same plaintext.",
+      "Mass-assignment permission does not transform database comparison semantics."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:secret",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$record->mergeCasts(['data' => 'encrypted']);\n$record->data = 'secret';\n$record->save();\necho Record::where('data', 'secret')->count().':'.$record->fresh()->mergeCasts(['data' => 'encrypted'])->data;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-mutators#encrypted-casting"
+  ]
+}

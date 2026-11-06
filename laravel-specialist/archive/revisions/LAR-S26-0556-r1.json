@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0556",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Localization",
+  "subtopic": "translation-fallback-locale",
+  "objective": {
+    "id": "laravel.translation-fallback-locale",
+    "text": "Resolve a missing locale key through the configured fallback locale."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Resolve a missing locale entry through the configured fallback."
+  },
+  "prerequisites": [
+    "Language files",
+    "Current and fallback locales"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The current locale is fr, fallback is en, and these are the only matching translations."
+    ],
+    "files": [
+      {
+        "path": "lang/en/messages.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nreturn ['welcome' => 'Welcome'];\n"
+      },
+      {
+        "path": "lang/fr/messages.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nreturn ['goodbye' => 'Au revoir'];\n"
+      }
+    ]
+  },
+  "stem": "What does __(\"messages.welcome\") return?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Au revoir",
+      "rationale": "The translator does not substitute an unrelated key from the requested locale.",
+      "misconception": "The translator does not substitute an unrelated key from the requested locale."
+    },
+    {
+      "id": "choice-2",
+      "text": "Welcome",
+      "rationale": "The French file lacks welcome, so the configured English fallback supplies it.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "An exception because every locale file must contain identical keys",
+      "rationale": "Missing locale entries can use fallback behavior instead of making the file invalid.",
+      "misconception": "Missing locale entries can use fallback behavior instead of making the file invalid."
+    },
+    {
+      "id": "choice-4",
+      "text": "messages.welcome",
+      "rationale": "That would be the usual missing-key result if no configured locale supplied the translation.",
+      "misconception": "That would be the usual missing-key result if no configured locale supplied the translation."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The French file lacks welcome, so the configured English fallback supplies it.",
+    "trace": [
+      "The translator does not substitute an unrelated key from the requested locale.",
+      "The French file lacks welcome, so the configured English fallback supplies it.",
+      "Missing locale entries can use fallback behavior instead of making the file invalid.",
+      "That would be the usual missing-key result if no configured locale supplied the translation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Welcome",
+    "probe": "app()->setLocale('fr');\napp('translator')->setFallback('en');\necho __('messages.welcome');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/localization#configuring-the-locale",
+    "https://laravel.com/docs/13.x/localization#retrieving-translation-strings"
+  ]
+}

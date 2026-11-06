@@ -1,4 +1,4 @@
-name: Validate PHP release
+name: Validate PHP and Laravel Beta release
 
 on:
   pull_request:
@@ -25,8 +25,10 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-          tools: none
-          extensions: tokenizer, pdo_sqlite, ctype, mbstring, openssl, intl, bcmath, zip, sodium
+          tools: composer:v2
+          extensions: dom, xml, xmlwriter, fileinfo, iconv, tokenizer, pdo_sqlite, ctype, mbstring, openssl, intl, bcmath, zip, sodium
+      - name: Install the locked local Laravel validation harness
+        run: composer install --working-dir=laravel-specialist/validation/harness --no-interaction --prefer-dist --no-progress --no-scripts
       - name: Check archive, identities, grading, PHP and framework contracts
         run: node tests.mjs
       - name: Prepare static artifact
@@ -38,6 +40,24 @@ jobs:
           for batch in 1 2 3 4 5 6; do
             BATCH="$batch" node tests/php-expansion/runtime.mjs
           done
+      - name: Validate all Laravel batches in the selected isolated runtime
+        run: |
+          export PHP_BINARIES="$(command -v php)"
+          export REQUIRED_PHP_VERSIONS="${{ matrix.php }}"
+          for batch in 1 2 3 4 5 6; do
+            BATCH="$batch" node tests/laravel-specialist/runtime.mjs
+            BATCH="$batch" node tools/laravel-specialist-check.mjs
+          done
+          node tests/laravel-specialist/focused-technical.mjs
+          node tests/laravel-specialist/focused-editorial.mjs
+          node tests/laravel-specialist/integration.mjs
+          node tests/laravel-specialist/acceptance.mjs
+      - name: Exercise Laravel Beta and subject switching in Chrome
+        if: matrix.php == '8.5'
+        run: node tests/laravel-specialist/browser.mjs
+        env:
+          QUIZ_SITE_DIR: _site
+          BROWSER_REPORT_DIR: release/laravel-beta/evidence/browser-laravel
       - name: Exercise real Chrome against the prepared artifact
         if: matrix.php == '8.5'
         run: node tests/browser.mjs

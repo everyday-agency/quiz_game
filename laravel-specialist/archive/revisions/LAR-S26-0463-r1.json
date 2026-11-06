@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0463",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "API resource security",
+  "subtopic": "resource-explicit-hidden-secret-leak",
+  "objective": {
+    "id": "laravel.resource-explicit-hidden-secret-leak",
+    "text": "Avoid explicitly exposing a hidden model secret through a custom resource array."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recognize that an explicit resource field can bypass model serialization hiding."
+  },
+  "prerequisites": [
+    "Eloquent hidden attributes",
+    "Custom API resources",
+    "Secret exposure"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nclass AccountView extends Illuminate\\Http\\Resources\\Json\\JsonResource\n{\n    public function toArray($request): array\n    {\n        return [\n            'id' => $this->id,\n            'token' => $this->api_token,\n        ];\n    }\n}\n"
+      }
+    ]
+  },
+  "stem": "The model hides api_token. Does that protect this resource response from exposing it?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Yes; renaming api_token to token automatically preserves its hidden status.",
+      "rationale": "The custom output key does not inherit a model hidden-list rule for another name.",
+      "misconception": "The custom output key does not inherit a model hidden-list rule for another name."
+    },
+    {
+      "id": "choice-2",
+      "text": "No; hidden only works when the token is also listed in fillable.",
+      "rationale": "Mass-assignment settings and serialization hiding are separate, and fillable does not solve this explicit exposure.",
+      "misconception": "Mass-assignment settings and serialization hiding are separate, and fillable does not solve this explicit exposure."
+    },
+    {
+      "id": "choice-3",
+      "text": "Yes; hidden makes the attribute unreadable through all PHP property access.",
+      "rationale": "The attribute still exists and can be accessed by application code.",
+      "misconception": "The attribute still exists and can be accessed by application code."
+    },
+    {
+      "id": "choice-4",
+      "text": "No; the resource explicitly reads and returns the attribute, so the field must be removed or separately authorized.",
+      "rationale": "Model hidden settings affect model array serialization; they do not prevent an explicit attribute read in a custom resource.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Model hidden settings affect model array serialization; they do not prevent an explicit attribute read in a custom resource.",
+    "trace": [
+      "The custom output key does not inherit a model hidden-list rule for another name.",
+      "Mass-assignment settings and serialization hiding are separate, and fillable does not solve this explicit exposure.",
+      "The attribute still exists and can be accessed by application code.",
+      "Model hidden settings affect model array serialization; they do not prevent an explicit attribute read in a custom resource."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "{\"id\":7,\"token\":\"secret\"}",
+    "probe": "require getcwd().'/probe.php';\n$m = new class extends Illuminate\\Database\\Eloquent\\Model\n{\n    protected $hidden = ['api_token'];\n};\n$m->setRawAttributes(['id' => 7, 'api_token' => 'secret']);\necho json_encode((new AccountView($m))->resolve());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#writing-resources",
+    "https://laravel.com/docs/13.x/eloquent-serialization#hiding-attributes-from-json"
+  ]
+}

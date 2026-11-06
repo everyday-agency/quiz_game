@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0424",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Cache locks",
+  "subtopic": "cache-block-lock-timeout",
+  "objective": {
+    "id": "laravel.cache-block-lock-timeout",
+    "text": "Handle lock-block timeout explicitly instead of assuming protected work always runs."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Handle inability to acquire the lock before assuming the protected callback ran."
+  },
+  "prerequisites": [
+    "Atomic locks",
+    "Lock timeout exceptions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Another owner keeps a cache lock beyond a contender’s block timeout. Which outcome should code around block($seconds, $callback) handle?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The old owner’s lock is forcibly released and the callback always runs.",
+      "rationale": "Waiting to acquire a lock does not forcibly take ownership from a valid holder.",
+      "misconception": "Waiting to acquire a lock does not forcibly take ownership from a valid holder."
+    },
+    {
+      "id": "choice-2",
+      "text": "A LockTimeoutException; the protected callback has not run.",
+      "rationale": "When acquisition cannot complete before the blocking deadline, the helper throws instead of executing unlocked work.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The callback runs in a queue worker once the timeout expires.",
+      "rationale": "The cache lock API does not implicitly dispatch timed-out work to a queue.",
+      "misconception": "The cache lock API does not implicitly dispatch timed-out work to a queue."
+    },
+    {
+      "id": "choice-4",
+      "text": "A null result after executing the callback without the lock.",
+      "rationale": "Timeout does not authorize an unlocked fallback execution of the supplied callback.",
+      "misconception": "Timeout does not authorize an unlocked fallback execution of the supplied callback."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "When acquisition cannot complete before the blocking deadline, the helper throws instead of executing unlocked work.",
+    "trace": [
+      "Waiting to acquire a lock does not forcibly take ownership from a valid holder.",
+      "When acquisition cannot complete before the blocking deadline, the helper throws instead of executing unlocked work.",
+      "The cache lock API does not implicitly dispatch timed-out work to a queue.",
+      "Timeout does not authorize an unlocked fallback execution of the supplied callback."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "timeout:0",
+    "probe": "use Illuminate\\Support\\Facades\\Cache;\n$holder = Cache::lock('report', 60);\n$holder->get();\n$ran = 0;\ntry {\n    Cache::lock('report', 60)->block(0, function () use (&$ran) {\n        $ran++;\n    });\n} catch (Illuminate\\Contracts\\Cache\\LockTimeoutException $e) {\n    echo 'timeout:'.$ran;\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#managing-locks"
+  ]
+}

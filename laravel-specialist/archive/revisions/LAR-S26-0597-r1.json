@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0597",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Package integration",
+  "subtopic": "package-publish-registration-not-copy",
+  "objective": {
+    "id": "laravel.package-publish-registration-not-copy",
+    "text": "Publish package assets under an explicit tag without assuming provider registration automatically copies files."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Separate registering publishable paths from actually copying them into the application."
+  },
+  "prerequisites": [
+    "Service providers",
+    "Publish tags",
+    "Package assets"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A package provider registers an asset mapping with publishes(..., \"calendar-assets\"). After provider registration, public/vendor/calendar is absent. What step normally performs that copy?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Resolve the provider from the container a second time.",
+      "rationale": "Resolving the provider does not turn mapping registration into asset copying.",
+      "misconception": "Resolving the provider does not turn mapping registration into asset copying."
+    },
+    {
+      "id": "choice-2",
+      "text": "Run php artisan view:cache.",
+      "rationale": "Compiling Blade views does not copy tagged package asset paths.",
+      "misconception": "Compiling Blade views does not copy tagged package asset paths."
+    },
+    {
+      "id": "choice-3",
+      "text": "Run php artisan vendor:publish --tag=calendar-assets.",
+      "rationale": "publishes registers the mapping; vendor:publish performs the selected copy operation.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Add the tag name to the route middleware group.",
+      "rationale": "Publish tags select filesystem mappings; they are not middleware aliases.",
+      "misconception": "Publish tags select filesystem mappings; they are not middleware aliases."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "publishes registers the mapping; vendor:publish performs the selected copy operation.",
+    "trace": [
+      "Resolving the provider does not turn mapping registration into asset copying.",
+      "Compiling Blade views does not copy tagged package asset paths.",
+      "publishes registers the mapping; vendor:publish performs the selected copy operation.",
+      "Publish tags select filesystem mappings; they are not middleware aliases."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "registered:not-copied",
+    "probe": "$provider = new class(app()) extends Illuminate\\Support\\ServiceProvider {\n    public function boot(): void\n    {\n        $this->publishes([base_path('package-assets') => public_path('vendor/calendar')], 'calendar-assets');\n    }\n};\n$provider->boot();\n$paths = Illuminate\\Support\\ServiceProvider::pathsToPublish(null, 'calendar-assets');\necho isset($paths[base_path('package-assets')]) ? 'registered:' : 'missing:';\necho is_dir(public_path('vendor/calendar')) ? 'copied' : 'not-copied';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/packages#public-assets"
+  ]
+}

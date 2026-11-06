@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0513",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Context",
+  "subtopic": "hidden-context-not-log-extra",
+  "objective": {
+    "id": "laravel.hidden-context-not-log-extra",
+    "text": "Keep hidden diagnostic context out of ordinary log context while retaining it for application access."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish context available to application code from context automatically added to logs."
+  },
+  "prerequisites": [
+    "Context facade",
+    "Hidden diagnostic context",
+    "Log processors"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Context contains public request_id and hidden internal_flag. With Laravel’s standard context log processor, what is automatically attached to a log record?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "request_id is included; internal_flag is omitted but remains accessible through hidden-context access.",
+      "rationale": "Hidden context is retained by the repository without being included in the processor’s ordinary log extra data.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Neither value is logged unless each is repeated in the log call.",
+      "rationale": "The standard context processor adds public context automatically.",
+      "misconception": "The standard context processor adds public context automatically."
+    },
+    {
+      "id": "choice-3",
+      "text": "internal_flag is logged as an encrypted string by default.",
+      "rationale": "Hidden context is omitted from ordinary log extras, not automatically encrypted into them.",
+      "misconception": "Hidden context is omitted from ordinary log extras, not automatically encrypted into them."
+    },
+    {
+      "id": "choice-4",
+      "text": "Both values are logged because hidden applies only to Eloquent serialization.",
+      "rationale": "Context has its own hidden-data facility independent of Eloquent model serialization.",
+      "misconception": "Context has its own hidden-data facility independent of Eloquent model serialization."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Hidden context is retained by the repository without being included in the processor’s ordinary log extra data.",
+    "trace": [
+      "Hidden context is retained by the repository without being included in the processor’s ordinary log extra data.",
+      "The standard context processor adds public context automatically.",
+      "Hidden context is omitted from ordinary log extras, not automatically encrypted into them.",
+      "Context has its own hidden-data facility independent of Eloquent model serialization."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "r1:omitted:yes",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\nuse Illuminate\\Support\\Facades\\Context;\nContext::add('request_id', 'r1');\nContext::addHidden('internal_flag', 'yes');\n$monolog->pushProcessor(new Illuminate\\Log\\Context\\ContextLogProcessor);\n$logger->info('event');\n$r = $capture->getRecords()[0];\necho $r->extra['request_id'].':'.($r->extra['internal_flag'] ?? 'omitted').':'.Context::getHidden('internal_flag');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/context#hidden-context"
+  ]
+}

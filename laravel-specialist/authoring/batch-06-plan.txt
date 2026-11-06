@@ -1,0 +1,100 @@
+501 | Exception reporting | Stop default exception logging deliberately from a custom report callback while retaining its own reporting action.
+502 | Exception rendering | Let a type-specific render callback fall back to Laravel's normal rendering when it returns null.
+503 | Exception reporting | Keep reporting suppression separate from the HTTP response presented for an exception.
+504 | Exception context | Attach domain identifiers through an exception's context method without placing secrets in its message.
+505 | Exception reporting | Distinguish duplicate reporting of one exception instance from two separately constructed exceptions.
+506 | Logging | Apply a channel's minimum severity threshold without mistaking it for one exact allowed level.
+507 | Logging context | Resolve a duplicate context key between channel context and one log entry.
+508 | Logging context | Clear channel context deliberately so unrelated later log entries do not retain it.
+509 | Logging context | Share context with channels created after the context was registered.
+510 | Logging stacks | Distinguish stack channel failure propagation from an explicit ignore_exceptions policy.
+511 | Logging security | Redact sensitive structured context before formatting and writing a log record.
+512 | Exception responses | Customize a rendered exception response while preserving required status and headers.
+513 | Context | Keep hidden diagnostic context out of ordinary log context while retaining it for application access.
+514 | Context | Restore the previous context after a scoped context operation.
+515 | Context and queues | Carry captured context into a queued execution without treating it as a fresh authenticated request.
+516 | Exception severity | Set an exception type's reporting level without changing the response status.
+517 | Error control flow | Report a caught exception without assuming the report helper rethrows it.
+518 | Error control flow | Use a rescue fallback and an explicit reporting policy without swallowing unrelated code outside its callback.
+519 | Retry control flow | Distinguish an exception-triggered retry from a callback that simply returns false.
+520 | Request diagnostics | Correlate a response identifier with the matching log context through one middleware-generated value.
+521 | Encryption | Recognize randomized authenticated encryption when equal plaintexts produce different ciphertexts.
+522 | Encryption integrity | Reject modified encrypted payloads rather than trusting decryptable-looking base64.
+523 | Encryption rotation | Use previous keys for decryption during rotation while encrypting new values with the current key.
+524 | Encryption failures | Handle decryption failure as invalid protected data rather than accepting the original ciphertext as plaintext.
+525 | Password reset storage | Store a hash of a reset token while verifying the presented plaintext token through the repository.
+526 | Password reset expiry | Distinguish reset-token lifetime from password-broker issuance throttling.
+527 | Password reset lifecycle | Invalidate a reset token after a successful password reset.
+528 | Password reset throttling | Refuse repeated token creation within the configured issuance throttle window.
+529 | Email verification | Validate the signed verification request's user identity and email hash before marking the account verified.
+530 | Email verification | Require verified email separately from ordinary authentication for a protected application route.
+531 | Authentication state | Authenticate a single request with once without persisting a login session.
+532 | Session authentication | Require the current password when invalidating other authenticated sessions through the supported flow.
+533 | Authentication security | Avoid revealing account existence through publicly distinguishable password-reset outcomes.
+534 | Encryption formats | Keep string encryption and serialized-value encryption paired with the matching decryption API.
+535 | Outbound request security | Constrain user-influenced outbound destinations and redirects rather than treating URL syntax validation as SSRF protection.
+536 | Webhook authenticity | Compute a webhook signature over the exact raw body rather than a re-encoded parsed JSON object.
+537 | Webhook freshness | Add a freshness and replay policy to an authentic webhook instead of treating a valid signature as proof of a new delivery.
+538 | Upload delivery security | Prevent uploaded active content from becoming trusted same-origin executable content when serving user files.
+539 | Password confirmation | Distinguish a recent password-confirmation requirement from an already authenticated session.
+540 | Cookie security | Understand which attacks HttpOnly mitigates without treating it as CSRF protection.
+541 | Collections | Preserve the original collection when using map instead of a mutating transform.
+542 | Collections | Reindex filtered numeric keys before returning a JSON list contract.
+543 | Collections | Distinguish a legitimate zero key returned by search from failure using strict comparison.
+544 | Collections | Use strict value comparison when loose collection matching would merge identifiers of different types.
+545 | Collections | Account for the last value winning when keyBy receives duplicate keys.
+546 | Collections | Distinguish flattening all nested levels from flattening only one level.
+547 | Collections | Retain both accepted and rejected items through partition without rerunning a changing predicate.
+548 | Lazy collections | Defer source iteration and bound consumption with a lazy generator and take.
+549 | Collections | Distinguish merge from union when combining maps whose string keys overlap.
+550 | Collections | Assign one item to multiple groups when a groupBy callback returns several group keys.
+551 | Helpers | Recognize that data_get's outer default is not forwarded to each wildcard leaf in the pinned framework.
+552 | Helpers | Fill only absent nested values with data_fill without replacing existing false or null values.
+553 | Strings | Keep immutable fluent string transformations distinct from mutating the original Stringable value.
+554 | Pipeline | Run pipeline cleanup through finally when a pipe throws before the destination.
+555 | Pipeline | Supply per-stage parameters through the pipeline's supported pipe-string parsing.
+556 | Localization | Resolve a missing locale key through the configured fallback locale.
+557 | Localization | Distinguish an absent translation key from a translated empty string.
+558 | Localization | Select a plural translation branch using the supplied count rather than the displayed placeholder alone.
+559 | Localization | Apply translation placeholder capitalization consistently for name, Name and NAME.
+560 | Localization | Override one namespaced package translation while retaining its other default translations.
+561 | Localization | Avoid collisions between JSON translation keys and PHP translation filenames.
+562 | Localization | Resolve localized validation attribute labels while retaining stable machine-readable error keys.
+563 | Localization | Select language from an application allowlist instead of accepting arbitrary locale identifiers.
+564 | Localization | Keep persisted timestamps in a consistent time basis while formatting a viewer-specific timezone.
+565 | Localization tests | Detect a missing translation in one locale without letting fallback translations mask the omission.
+566 | Deployment | Point the web document root at public so application source and environment files are not directly served.
+567 | Deployment security | Disable production debug rendering so exception details are not exposed to unauthenticated clients.
+568 | Deployment | Build configuration cache in the intended release environment rather than shipping another environment's resolved values.
+569 | Deployment | Use backward-compatible expand-and-contract database changes during a rolling release.
+570 | Deployment | Distinguish migration rollback from restoration of data destroyed by a migration.
+571 | Deployment | Choose readiness checks that reflect required dependencies instead of treating a boot-only health response as proof of full service readiness.
+572 | Deployment | Supply production write access to storage and bootstrap/cache without making the entire source tree writable.
+573 | Deployment | Keep the previous immutable release available for rollback without claiming this also reverses database changes.
+574 | Deployment | Run production migrations noninteractively with an explicit deployment decision rather than assuming a prompt will be answered.
+575 | Deployment | Interpret optimize:clear as clearing cached artifacts rather than rebuilding them for the new release.
+576 | Deployment | Coordinate maintenance state across nodes instead of assuming a local maintenance file changes every server.
+577 | Long-lived workers | Avoid capturing a request object in a singleton that outlives the request under a persistent worker.
+578 | Long-lived workers | Reload persistent HTTP workers when deploying changed application code.
+579 | Performance | Measure endpoint query count and latency before selecting caching as the remedy.
+580 | Performance | Recognize that adding an index has write and storage costs as well as possible read benefits.
+581 | Application architecture | Keep a domain calculation independent of HTTP Request and response classes for reuse in jobs and commands.
+582 | Application architecture | Put one transaction boundary around a complete local business operation rather than committing each repository write independently.
+583 | Application architecture | Return explicit domain outcomes from a service instead of using transport-specific status codes as business state.
+584 | Application architecture | Preserve domain invariants when moving logic out of a controller rather than only relocating unvalidated arrays.
+585 | Application architecture | Separate infrastructure adapters from the business interface they implement so alternative transports can be tested.
+586 | Application architecture | Coordinate a multi-step operation through an application service instead of hidden mutually triggering model observers.
+587 | Application architecture | Use a dedicated read projection when a report has different data requirements from transactional model writes.
+588 | Application architecture | Make a policy decision on the authoritative current resource state when a delayed operation executes.
+589 | Integration contracts | Handle a conditional HTTP 304 response by reusing the cached representation rather than parsing an absent new body.
+590 | Integration resilience | Apply a retry budget only to safe transient failures instead of retrying every domain rejection.
+591 | Integration resilience | Bound an external call's retry policy within the caller's overall request deadline.
+592 | Integration resilience | Distinguish a circuit breaker's open state from a per-request retry loop.
+593 | Integration consistency | Reconcile an uncertain external outcome before repeating an operation that may already have succeeded.
+594 | Application architecture | Keep package service-provider boot work lightweight rather than performing network I/O during every application boot.
+595 | Package integration | Use namespaced package views and application overrides without copying the entire package into application source.
+596 | Package configuration | Understand shallow configuration merging when package defaults contain nested arrays.
+597 | Package integration | Publish package assets under an explicit tag without assuming provider registration automatically copies files.
+598 | Package integration | Load package migrations through the provider without registering a new database connection for the package.
+599 | Architecture tests | Detect a forbidden domain-to-HTTP dependency with a targeted architecture boundary check.
+600 | Framework upgrades | Validate a locked framework upgrade with behavior regressions instead of treating dependency resolution as proof of application compatibility.

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0487",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Transaction tests",
+  "subtopic": "test-manager-aftercommit-outer-wrapper",
+  "objective": {
+    "id": "laravel.test-manager-aftercommit-outer-wrapper",
+    "text": "Account for a test's outer transaction when verifying after-commit dispatch."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Apply the test-specific transaction manager’s callback boundary rather than assuming the outer cleanup transaction suppresses all callbacks."
+  },
+  "prerequisites": [
+    "DatabaseTransactions test manager",
+    "Nested application transactions",
+    "After-commit callbacks"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Laravel 13.40’s DatabaseTransactions trait has installed its normal testing transaction manager. The application opens and commits one transaction inside the outer test transaction."
+    ],
+    "files": []
+  },
+  "stem": "An afterCommit callback is registered inside that application transaction. Must it wait until the outer test transaction commits, which normally never happens?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "No; the testing manager can run it when the application transaction returns to the outer test level.",
+      "rationale": "The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Yes; the callback is permanently disabled whenever any PHPUnit assertion runs.",
+      "rationale": "Assertions do not globally disable after-commit callbacks.",
+      "misconception": "Assertions do not globally disable after-commit callbacks."
+    },
+    {
+      "id": "choice-3",
+      "text": "No; afterCommit callbacks execute immediately even before the inner transaction commits.",
+      "rationale": "The callback registered inside the application transaction waits for its relevant commit boundary.",
+      "misconception": "The callback registered inside the application transaction waits for its relevant commit boundary."
+    },
+    {
+      "id": "choice-4",
+      "text": "Yes; the test manager always behaves identically to the ordinary production transaction manager.",
+      "rationale": "Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction.",
+      "misconception": "Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.",
+    "trace": [
+      "The test manager treats the wrapping test transaction specially and executes callbacks at that boundary. This does not prove a real production commit occurred.",
+      "Assertions do not globally disable after-commit callbacks.",
+      "The callback registered inside the application transaction waits for its relevant commit boundary.",
+      "Laravel’s testing manager explicitly adjusts callback applicability for the outer test transaction."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:1:1",
+    "probe": "$t = new class\n{\n    use Illuminate\\Foundation\\Testing\\DatabaseTransactions;\n    public $app;\n    public function beforeApplicationDestroyed($callback)\n    {\n    }\n};\n$t->app = app();\n$t->beginDatabaseTransaction();\n$ran = 0;\nIlluminate\\Support\\Facades\\DB::transaction(function () use (&$ran) {\n    Illuminate\\Support\\Facades\\DB::afterCommit(function () use (&$ran) {\n        $ran++;\n    });\n    echo $ran.':';\n});\necho $ran.':'.Illuminate\\Support\\Facades\\DB::transactionLevel();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database-testing#resetting-the-database-after-each-test",
+    "https://laravel.com/docs/13.x/queues#jobs-and-database-transactions"
+  ]
+}

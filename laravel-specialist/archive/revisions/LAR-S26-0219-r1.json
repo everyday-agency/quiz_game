@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0219",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Eloquent casts",
+  "subtopic": "hashed-cast-existing-hash",
+  "objective": {
+    "id": "laravel.hashed-cast-existing-hash",
+    "text": "Avoid double hashing a value through the built-in hashed cast."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify both plaintext hashing and preservation of an already compatible hash."
+  },
+  "prerequisites": [
+    "Eloquent hashed cast",
+    "Password hash verification"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A password attribute uses the hashed cast. The configured algorithm is bcrypt and $existing was created with that same current configuration. Which regression assertion fits assigning $model->password = $existing?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The stored attribute becomes the original plaintext recovered from $existing.",
+      "rationale": "Hashing is not reversible; the cast cannot recover plaintext from a hash.",
+      "misconception": "Hashing is not reversible; the cast cannot recover plaintext from a hash."
+    },
+    {
+      "id": "choice-2",
+      "text": "The stored attribute differs, and only the old hash string verifies as the new password.",
+      "rationale": "That describes unwanted double hashing, not the compatible-hash handling.",
+      "misconception": "That describes unwanted double hashing, not the compatible-hash handling."
+    },
+    {
+      "id": "choice-3",
+      "text": "The cast always throws because assignments must be plaintext strings.",
+      "rationale": "The cast accepts compatible already-hashed values.",
+      "misconception": "The cast accepts compatible already-hashed values."
+    },
+    {
+      "id": "choice-4",
+      "text": "The stored attribute remains $existing, and the original plaintext still verifies against it.",
+      "rationale": "The cast recognizes a compatible hash instead of blindly hashing it again.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The cast recognizes a compatible hash instead of blindly hashing it again.",
+    "trace": [
+      "Hashing is not reversible; the cast cannot recover plaintext from a hash.",
+      "That describes unwanted double hashing, not the compatible-hash handling.",
+      "The cast accepts compatible already-hashed values.",
+      "The cast recognizes a compatible hash instead of blindly hashing it again."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,true]",
+    "probe": "config(['hashing.driver' => 'bcrypt', 'hashing.bcrypt.rounds' => 4]);\nclass Secret extends Illuminate\\Database\\Eloquent\\Model\n{\n    protected function casts(): array\n    {\n        return ['password' => 'hashed'];\n    }\n}\n$existing = Illuminate\\Support\\Facades\\Hash::make('fixture-secret');\n$model = new Secret();\n$model->password = $existing;\necho json_encode([$model->password === $existing, Illuminate\\Support\\Facades\\Hash::check('fixture-secret', $model->password)]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-mutators#attribute-casting",
+    "https://laravel.com/docs/13.x/hashing"
+  ]
+}

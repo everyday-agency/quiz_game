@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0503",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Exception reporting",
+  "subtopic": "dontreport-not-http-success",
+  "objective": {
+    "id": "laravel.dontreport-not-http-success",
+    "text": "Keep reporting suppression separate from the HTTP response presented for an exception."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate observability policy from the failure response contract."
+  },
+  "prerequisites": [
+    "Exception reporting",
+    "HTTP exception rendering"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The exception is a plain RuntimeException, debug is disabled, and no custom renderer is registered."
+    ],
+    "files": []
+  },
+  "stem": "RuntimeException is added to dontReport. If one escapes a controller, does this make the request successful?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Yes; Laravel resumes the controller immediately after the throw.",
+      "rationale": "The controller’s exception unwind is not reversed by an observability setting.",
+      "misconception": "The controller’s exception unwind is not reversed by an observability setting."
+    },
+    {
+      "id": "choice-2",
+      "text": "Yes; suppressing its report converts the request to HTTP 200.",
+      "rationale": "A reporting exclusion does not set a successful response status.",
+      "misconception": "A reporting exclusion does not set a successful response status."
+    },
+    {
+      "id": "choice-3",
+      "text": "No; dontReport changes the response to HTTP 404 for every exception type.",
+      "rationale": "The method does not impose a not-found rendering policy either.",
+      "misconception": "The method does not impose a not-found rendering policy either."
+    },
+    {
+      "id": "choice-4",
+      "text": "No; reporting is skipped, but the normal failure response is still rendered.",
+      "rationale": "dontReport controls reporting, not whether a failed controller invocation becomes a success.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "dontReport controls reporting, not whether a failed controller invocation becomes a success.",
+    "trace": [
+      "The controller’s exception unwind is not reversed by an observability setting.",
+      "A reporting exclusion does not set a successful response status.",
+      "The method does not impose a not-found rendering policy either.",
+      "dontReport controls reporting, not whether a failed controller invocation becomes a success."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:500",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\napp()->instance(Psr\\Log\\LoggerInterface::class, $logger);\n$handler = app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class);\n$exceptions = new Illuminate\\Foundation\\Configuration\\Exceptions($handler);\n$exceptions->dontReport([RuntimeException::class]);\n$e = new RuntimeException('fixture');\n$handler->report($e);\n$request = Illuminate\\Http\\Request::create('/broken', server: ['HTTP_ACCEPT' => 'application/json']);\necho count($capture->getRecords()).':'.$handler->render($request, $e)->getStatusCode();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/errors#ignoring-exceptions-by-type"
+  ]
+}

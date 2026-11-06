@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0534",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Encryption formats",
+  "subtopic": "encrypt-string-versus-serialized-value",
+  "objective": {
+    "id": "laravel.encrypt-string-versus-serialized-value",
+    "text": "Keep string encryption and serialized-value encryption paired with the matching decryption API."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Pair encryption and decryption APIs with the representation actually protected."
+  },
+  "prerequisites": [
+    "Encrypter serialization",
+    "String-specific encryption methods"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$encrypted = Illuminate\\Support\\Facades\\Crypt::encrypt('hello');\n$decoded = Illuminate\\Support\\Facades\\Crypt::decryptString($encrypted);\n\necho $decoded;\n"
+      }
+    ]
+  },
+  "stem": "What does decryptString return for a value produced by the default encrypt(\"hello\") method?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The serialized PHP string representation s:5:\"hello\";",
+      "rationale": "Default encrypt serializes its value first; decryptString decrypts bytes without unserializing them. Use matching APIs for the desired representation.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The plain string hello",
+      "rationale": "That would require unserialization, as performed by the matching default decrypt method.",
+      "misconception": "That would require unserialization, as performed by the matching default decrypt method."
+    },
+    {
+      "id": "choice-3",
+      "text": "A MAC failure merely because different method names were paired",
+      "rationale": "Both use the same encryption format; the mismatched representation does not itself invalidate the MAC.",
+      "misconception": "Both use the same encryption format; the mismatched representation does not itself invalidate the MAC."
+    },
+    {
+      "id": "choice-4",
+      "text": "The original encrypted base64 payload",
+      "rationale": "decryptString does perform decryption; the distinction is its serialization behavior.",
+      "misconception": "decryptString does perform decryption; the distinction is its serialization behavior."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Default encrypt serializes its value first; decryptString decrypts bytes without unserializing them. Use matching APIs for the desired representation.",
+    "trace": [
+      "Default encrypt serializes its value first; decryptString decrypts bytes without unserializing them. Use matching APIs for the desired representation.",
+      "That would require unserialization, as performed by the matching default decrypt method.",
+      "Both use the same encryption format; the mismatched representation does not itself invalidate the MAC.",
+      "decryptString does perform decryption; the distinction is its serialization behavior."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "s:5:\"hello\";",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/encryption#using-the-encrypter"
+  ]
+}

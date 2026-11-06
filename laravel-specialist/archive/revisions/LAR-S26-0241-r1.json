@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0241",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Eager loading",
+  "subtopic": "cached-relation-versus-new-query",
+  "objective": {
+    "id": "laravel.cached-relation-versus-new-query",
+    "text": "Reload a cached relationship after a separate insert changes its database rows."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate an already loaded collection from a freshly executed relationship query."
+  },
+  "prerequisites": [
+    "Eloquent relationship cache",
+    "Relation query methods"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$writer = Writer::with('articles')->findOrFail(1);\n$writer->articles()->create(['title' => 'Third']);\n\necho $writer->articles->count().':'.$writer->articles()->count();\n"
+      }
+    ]
+  },
+  "stem": "Writer 1 initially has two articles. What is printed?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "3:3",
+      "rationale": "Creating through the relation does not automatically append the new model to an already loaded collection.",
+      "misconception": "Creating through the relation does not automatically append the new model to an already loaded collection."
+    },
+    {
+      "id": "choice-2",
+      "text": "2:2",
+      "rationale": "The relationship query is not bound to the old loaded collection.",
+      "misconception": "The relationship query is not bound to the old loaded collection."
+    },
+    {
+      "id": "choice-3",
+      "text": "2:3",
+      "rationale": "The loaded collection remains the earlier snapshot; the method builds a new database count that sees the insertion.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "3:2",
+      "rationale": "This reverses the cached property and fresh query behaviors.",
+      "misconception": "This reverses the cached property and fresh query behaviors."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The loaded collection remains the earlier snapshot; the method builds a new database count that sees the insertion.",
+    "trace": [
+      "Creating through the relation does not automatically append the new model to an already loaded collection.",
+      "The relationship query is not bound to the old loaded collection.",
+      "The loaded collection remains the earlier snapshot; the method builds a new database count that sees the insertion.",
+      "This reverses the cached property and fresh query behaviors."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:3",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('writers', function ($t) {\n    $t->id();\n    $t->string('name');\n    $t->string('code')->nullable();\n    $t->timestamps();\n});\nSchema::create('articles', function ($t) {\n    $t->id();\n    $t->unsignedBigInteger('writer_id')->nullable();\n    $t->string('writer_code')->nullable();\n    $t->string('title');\n    $t->boolean('published')->default(false);\n    $t->integer('amount')->default(0);\n    $t->timestamps();\n});\nclass Writer extends Model\n{\n    protected $table = 'writers';\n    protected $guarded = [];\n\n    public function articles()\n    {\n        return $this->hasMany(Article::class, 'writer_id');\n    }\n}\nclass Article extends Model\n{\n    protected $table = 'articles';\n    protected $guarded = [];\n\n    public function writer()\n    {\n        return $this->belongsTo(Writer::class, 'writer_id');\n    }\n}\n$writer = Writer::create(['name' => 'Ada', 'code' => 'W-A']);\n$other = Writer::create(['name' => 'Lin', 'code' => 'W-B']);\n$writer->articles()->createMany([\n    ['title' => 'Draft', 'published' => false, 'amount' => 4],\n    ['title' => 'Public', 'published' => true, 'amount' => 6],\n]);\n$other->articles()->create(['title' => 'Other', 'published' => true, 'amount' => 9]);\nrequire getcwd().'/probe.php';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-relationships#the-save-method"
+  ]
+}

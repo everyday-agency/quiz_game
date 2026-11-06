@@ -1,0 +1,16 @@
+[
+  {
+    "a": "LAR-S26-0157",
+    "b": "LAR-S26-0156",
+    "similarity": 0.476,
+    "aObjective": "Access the parent loop when rendering nested iteration.",
+    "bObjective": "Trace loop iteration and index values without off-by-one display errors."
+  },
+  {
+    "a": "LAR-S26-0531",
+    "b": "LAR-S26-0193",
+    "similarity": 0.434,
+    "aObjective": "Authenticate a single request with once without persisting a login session.",
+    "bObjective": "Authenticate a session-backed request without persisting submitted plaintext credentials."
+  }
+]

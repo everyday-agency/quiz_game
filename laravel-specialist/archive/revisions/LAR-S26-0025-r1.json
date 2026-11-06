@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0025",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Facades",
+  "subtopic": "facade-resolved-root-cache",
+  "objective": {
+    "id": "laravel.facade-resolved-root-cache",
+    "text": "Clear a facade's cached root when replacing the corresponding container service in a test."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Trace two caches and repair only the stale facade root."
+  },
+  "prerequisites": [
+    "Facades",
+    "Container instance replacement",
+    "Testing isolation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A test resolves a custom cached facade whose accessor is \"currency\". It later replaces the container instance under \"currency\", but the facade still calls the old object. No facade swap or rebinding hook is installed. Which next step makes the facade resolve the replacement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Call app()->forgetInstance(\"currency\") after registering the replacement.",
+      "rationale": "This removes the desired replacement from the container while leaving the facade cache untouched.",
+      "misconception": "This removes the desired replacement from the container while leaving the facade cache untouched."
+    },
+    {
+      "id": "choice-2",
+      "text": "Call Facade::clearResolvedInstance(\"currency\") before using the facade again.",
+      "rationale": "Clearing the facade root cache causes the next facade call to resolve the new container instance.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Clear the application cache store with Cache::flush().",
+      "rationale": "Facade resolution state is a static in-process cache, not the configured application cache store.",
+      "misconception": "Facade resolution state is a static in-process cache, not the configured application cache store."
+    },
+    {
+      "id": "choice-4",
+      "text": "Register an alias from \"currency\" to the facade class.",
+      "rationale": "An alias does not invalidate the already cached facade root.",
+      "misconception": "An alias does not invalidate the already cached facade root."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Clearing the facade root cache causes the next facade call to resolve the new container instance.",
+    "trace": [
+      "This removes the desired replacement from the container while leaving the facade cache untouched.",
+      "Clearing the facade root cache causes the next facade call to resolve the new container instance.",
+      "Facade resolution state is a static in-process cache, not the configured application cache store.",
+      "An alias does not invalidate the already cached facade root."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Support/Facades/Facade.php",
+    "contains": [
+      "static::$resolvedInstance[$name]",
+      "public static function clearResolvedInstance($name = null)"
+    ],
+    "reason": "A cached facade can retain a root independently of the container instance cache.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/facades"
+  ]
+}

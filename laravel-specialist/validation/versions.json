@@ -1,0 +1,17 @@
+{
+  "framework": "v13.40.0",
+  "frameworkCommit": "1449bf241017087fbd38c118ecaabef3f6797fdc",
+  "composerLockSha256": "b8664f812b9856ec98db81bbd5bc1950196c7b4dc230b6096ded263476c34df5",
+  "php": [
+    "8.4",
+    "8.5"
+  ],
+  "runtimeIsolation": "Each fixture has a new PHP process, temporary app directory, empty environment, local/array fake drivers, SQLite memory only; network/process APIs disabled.",
+  "optionalPackages": {
+    "inertiajs/inertia-laravel": {
+      "version": "v3.7.0",
+      "commit": "9d3f9060c1614565eb4d3a3208015ed01de347bb",
+      "activation": "Only explicitly registered by individual local adapter fixtures; not part of static app."
+    }
+  }
+}

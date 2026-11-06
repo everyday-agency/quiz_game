@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0502",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Exception rendering",
+  "subtopic": "render-callback-null-fallback",
+  "objective": {
+    "id": "laravel.render-callback-null-fallback",
+    "text": "Let a type-specific render callback fall back to Laravel's normal rendering when it returns null."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Follow rendering when a custom callback elects not to provide a response."
+  },
+  "prerequisites": [
+    "Exception rendering callbacks",
+    "Fallback responses"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "exceptions.php",
+        "kind": "fragment",
+        "source": "$exceptions->render(function (DomainException $e, Illuminate\\Http\\Request $request) {\n    if ($request->is('api/special')) {\n        return response()->json(['error' => 'special'], 409);\n    }\n\n    return null;\n});",
+        "scope": "Inside withExceptions configuration; $exceptions is the Laravel Exceptions configuration object."
+      }
+    ]
+  },
+  "stem": "The render callback below does not handle this request path. What happens when a DomainException reaches the handler for /other?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The exception is considered handled and the failed controller resumes.",
+      "rationale": "Rendering a failure does not resume execution at the point where the exception escaped.",
+      "misconception": "Rendering a failure does not resume execution at the point where the exception escaped."
+    },
+    {
+      "id": "choice-2",
+      "text": "Laravel continues its normal exception rendering.",
+      "rationale": "A null result means this callback did not produce a response, allowing the handler’s fallback path.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The handler returns the previous request’s cached error response.",
+      "rationale": "Rendering callbacks do not reuse another request’s response as this fallback.",
+      "misconception": "Rendering callbacks do not reuse another request’s response as this fallback."
+    },
+    {
+      "id": "choice-4",
+      "text": "The handler sends an empty successful HTTP 200 response.",
+      "rationale": "A null callback result is not itself an empty success response.",
+      "misconception": "A null callback result is not itself an empty success response."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A null result means this callback did not produce a response, allowing the handler’s fallback path.",
+    "trace": [
+      "Rendering a failure does not resume execution at the point where the exception escaped.",
+      "A null result means this callback did not produce a response, allowing the handler’s fallback path.",
+      "Rendering callbacks do not reuse another request’s response as this fallback.",
+      "A null callback result is not itself an empty success response."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "500",
+    "probe": "$capture = new Monolog\\Handler\\TestHandler;\n$monolog = new Monolog\\Logger('fixture', [$capture]);\n$logger = new Illuminate\\Log\\Logger($monolog, app('events'));\napp()->instance(Psr\\Log\\LoggerInterface::class, $logger);\n$handler = app(Illuminate\\Contracts\\Debug\\ExceptionHandler::class);\n$exceptions = new Illuminate\\Foundation\\Configuration\\Exceptions($handler);\n$fragment = getcwd().'/exceptions.php';\nfile_put_contents($fragment, \"<?php\\n\".file_get_contents($fragment));\nrequire $fragment;\n$request = Illuminate\\Http\\Request::create('/other', server: ['HTTP_ACCEPT' => 'application/json']);\necho $handler->render($request, new DomainException('fixture'))->getStatusCode();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/errors#rendering-exceptions"
+  ]
+}

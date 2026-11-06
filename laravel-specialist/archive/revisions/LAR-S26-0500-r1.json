@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0500",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Inertia validation",
+  "subtopic": "inertia-validation-redirect-shared-errors",
+  "objective": {
+    "id": "laravel.inertia-validation-redirect-shared-errors",
+    "text": "Carry validation errors through the redirect and shared-props flow rather than expecting a conventional 422 JSON API response."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Use the form-navigation error flow rather than expecting a conventional JSON API validation response."
+  },
+  "prerequisites": [
+    "Laravel validation redirects",
+    "Session error bags",
+    "Inertia shared props"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The application uses inertiajs/inertia-laravel 3.7.0 with its standard middleware; server-side rendering is disabled.",
+      "The standard web session and validation flow is enabled. The Inertia form request accepts HTML, not application/json."
+    ],
+    "files": []
+  },
+  "stem": "A failed Inertia form submission redirects back. How does the next page visit normally expose validation errors to the frontend?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Laravel puts all validation errors into the redirect URL’s query string.",
+      "rationale": "The normal validation redirect uses the session error bag, not mandatory query-string serialization.",
+      "misconception": "The normal validation redirect uses the session error bag, not mandatory query-string serialization."
+    },
+    {
+      "id": "choice-2",
+      "text": "The frontend must parse a 422 JSON body from the redirect response itself.",
+      "rationale": "The stated response is a redirect, and the usual Inertia validation flow obtains errors from shared props on the next visit.",
+      "misconception": "The stated response is a redirect, and the usual Inertia validation flow obtains errors from shared props on the next visit."
+    },
+    {
+      "id": "choice-3",
+      "text": "Flashed session errors are shared in the page props for the redirected visit.",
+      "rationale": "The standard adapter shares the session error bag; this navigation flow does not rely on the client receiving a conventional 422 JSON API body.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "The adapter converts every failed field into an HTTP 500 response.",
+      "rationale": "Validation failures are expected form feedback rather than server crashes.",
+      "misconception": "Validation failures are expected form feedback rather than server crashes."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The standard adapter shares the session error bag; this navigation flow does not rely on the client receiving a conventional 422 JSON API body.",
+    "trace": [
+      "The normal validation redirect uses the session error bag, not mandatory query-string serialization.",
+      "The stated response is a redirect, and the usual Inertia validation flow obtains errors from shared props on the next visit.",
+      "The standard adapter shares the session error bag; this navigation flow does not rely on the client receiving a conventional 422 JSON API body.",
+      "Validation failures are expected form feedback rather than server crashes."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "302:required",
+    "probe": "PHPUnit\\TextUI\\Configuration\\Registry::init(\n    (new PHPUnit\\TextUI\\CliArguments\\Builder)->fromParameters(['phpunit', '--no-configuration']),\n    PHPUnit\\TextUI\\XmlConfiguration\\DefaultConfiguration::create(),\n);\n$test = new class('localFixture') extends Illuminate\\Foundation\\Testing\\TestCase\n{\n    public function attach($application): void\n    {\n        $this->app = $application;\n    }\n    public function exposeExceptions(): void\n    {\n        $this->withoutExceptionHandling();\n    }\n};\n$test->attach(app());\napp()->register(Inertia\\ServiceProvider::class);\nconfig(['inertia.ssr.enabled' => false, 'inertia.dev_tools.enabled' => false]);\nfile_put_contents(resource_path('views/app.blade.php'), '<!doctype html><html><body>@inertia</body></html>');\napp('router')->get('/form', fn () => Inertia\\Inertia::render('Form', []))\n    ->middleware(['web', Inertia\\Middleware::class]);\napp('router')->post('/form', function (Illuminate\\Http\\Request $request) {\n    $request->validate(['name' => 'required'], ['name.required' => 'required']);\n    return redirect('/form');\n})->middleware(['web', Inertia\\Middleware::class]);\n$failed = $test->withHeaders(['X-Inertia' => 'true', 'Accept' => 'text/html'])\n    ->from('/form')->post('/form', []);\necho $failed->status().':';\n$next = $test->get('/form');\necho $next->json('props.errors.name');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Middleware.php",
+    "https://github.com/inertiajs/inertia-laravel/blob/v3.7.0/src/Response.php"
+  ]
+}

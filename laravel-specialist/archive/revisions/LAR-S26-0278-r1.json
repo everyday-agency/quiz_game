@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0278",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Query Builder",
+  "subtopic": "insert-get-id-without-model-lifecycle",
+  "objective": {
+    "id": "laravel.insert-get-id-without-model-lifecycle",
+    "text": "Retrieve an inserted identifier without assuming Query Builder applies Eloquent model events or timestamps."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate raw table insertion from model timestamp and observer behavior."
+  },
+  "prerequisites": [
+    "Query Builder insertGetId",
+    "Eloquent lifecycle boundary"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "records has nullable timestamps. Record has a creating observer that increments a counter. The table starts empty. What follows DB::table(\"records\")->insertGetId([\"name\" => \"new\"])?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "It returns a Record model and runs creating before the insert.",
+      "rationale": "insertGetId returns the identifier, not an Eloquent model with lifecycle hooks.",
+      "misconception": "insertGetId returns the identifier, not an Eloquent model with lifecycle hooks."
+    },
+    {
+      "id": "choice-2",
+      "text": "It returns the id and runs the observer once because the table name matches Record.",
+      "rationale": "Query Builder does not infer a model class from the table name.",
+      "misconception": "Query Builder does not infer a model class from the table name."
+    },
+    {
+      "id": "choice-3",
+      "text": "It returns the generated id; the observer is not called and omitted timestamps remain null.",
+      "rationale": "Query Builder inserts directly and retrieves the key without constructing or saving an Eloquent model.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "It returns the id and automatically fills both timestamps using Record’s defaults.",
+      "rationale": "Eloquent timestamp behavior does not apply to this direct table operation.",
+      "misconception": "Eloquent timestamp behavior does not apply to this direct table operation."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Query Builder inserts directly and retrieves the key without constructing or saving an Eloquent model.",
+    "trace": [
+      "insertGetId returns the identifier, not an Eloquent model with lifecycle hooks.",
+      "Query Builder does not infer a model class from the table name.",
+      "Query Builder inserts directly and retrieves the key without constructing or saving an Eloquent model.",
+      "Eloquent timestamp behavior does not apply to this direct table operation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0:null",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\nRecord::query()->delete();\nDB::statement(\"DELETE FROM sqlite_sequence WHERE name = 'records'\");\n$events = 0;\nRecord::creating(function () use (&$events) {\n    $events++;\n});\n$id = DB::table('records')->insertGetId(['name' => 'new']);\necho $id.':'.$events.':'.(DB::table('records')->value('created_at') === null ? 'null' : 'date');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#auto-incrementing-ids",
+    "https://laravel.com/docs/13.x/eloquent#events"
+  ]
+}

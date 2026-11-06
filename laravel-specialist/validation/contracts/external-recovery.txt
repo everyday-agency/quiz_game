@@ -1,0 +1,2 @@
+Official source checked 2026-11-06: https://stripe.com/blog/idempotency
+Paraphrase: a connection failure can leave the client with an unknown result. A documented idempotency contract permits recovery with the same identity rather than a new business operation. The question explicitly supplies its provider lookup/retry contract; no payment is sent.

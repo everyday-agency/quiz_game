@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0039",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Routing",
+  "subtopic": "literal-before-resource-placeholder",
+  "objective": {
+    "id": "laravel.literal-before-resource-placeholder",
+    "text": "Order a literal route before an unconstrained parameter route."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Explain why a reserved literal is being interpreted as an identifier."
+  },
+  "prerequisites": [
+    "Route order",
+    "Unconstrained parameters"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "routes/fixture.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/teams/{team}', fn (string $team) => 'team '.$team);\nRoute::get('/teams/new', fn () => 'create form');\n"
+      }
+    ]
+  },
+  "stem": "GET /teams/new returns \"team new\". Both paths must remain available. What is the smallest routing correction?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Make the team parameter optional.",
+      "rationale": "Optionality broadens matching and does not protect the reserved literal.",
+      "misconception": "Optionality broadens matching and does not protect the reserved literal."
+    },
+    {
+      "id": "choice-2",
+      "text": "Register /teams/new before /teams/{team}.",
+      "rationale": "The unconstrained parameter matches new; placing the literal first selects the form handler.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Rename the team placeholder to id.",
+      "rationale": "Changing the placeholder name does not change the strings it matches.",
+      "misconception": "Changing the placeholder name does not change the strings it matches."
+    },
+    {
+      "id": "choice-4",
+      "text": "Add a route name to /teams/new.",
+      "rationale": "Names affect URL generation, not precedence during matching.",
+      "misconception": "Names affect URL generation, not precedence during matching."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The unconstrained parameter matches new; placing the literal first selects the form handler.",
+    "trace": [
+      "Optionality broadens matching and does not protect the reserved literal.",
+      "The unconstrained parameter matches new; placing the literal first selects the form handler.",
+      "Changing the placeholder name does not change the strings it matches.",
+      "Names affect URL generation, not precedence during matching."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "team new",
+    "probe": "echo app('router')->dispatch(Illuminate\\Http\\Request::create('/teams/new'))->getContent();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      2
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/routing#route-parameters"
+  ]
+}

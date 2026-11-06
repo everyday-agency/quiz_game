@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0544",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Collections",
+  "subtopic": "collection-unique-strict-identifiers",
+  "objective": {
+    "id": "laravel.collection-unique-strict-identifiers",
+    "text": "Use strict value comparison when loose collection matching would merge identifiers of different types."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep identifiers whose type is part of the contract from being collapsed by loose matching."
+  },
+  "prerequisites": [
+    "Collection uniqueness",
+    "Scalar types",
+    "Loose comparison"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The identifiers 7 and \"7\" are intentionally distinct in this input contract. Which collection operation removes exact duplicates while retaining both typed identifiers?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "map(fn ($id) => (int) $id)->uniqueStrict()->values()",
+      "rationale": "Converting both to integers also erases the distinction before strict comparison.",
+      "misconception": "Converting both to integers also erases the distinction before strict comparison."
+    },
+    {
+      "id": "choice-2",
+      "text": "map(fn ($id) => (string) $id)->unique()->values()",
+      "rationale": "Converting both values to strings erases the type distinction before deduplication.",
+      "misconception": "Converting both values to strings erases the type distinction before deduplication."
+    },
+    {
+      "id": "choice-3",
+      "text": "unique()->values()",
+      "rationale": "Default loose uniqueness can collapse the integer and numeric string into one value.",
+      "misconception": "Default loose uniqueness can collapse the integer and numeric string into one value."
+    },
+    {
+      "id": "choice-4",
+      "text": "uniqueStrict()->values()",
+      "rationale": "Strict uniqueness keeps integer 7 distinct from string \"7\"; values only reindexes the result.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Strict uniqueness keeps integer 7 distinct from string \"7\"; values only reindexes the result.",
+    "trace": [
+      "Converting both to integers also erases the distinction before strict comparison.",
+      "Converting both values to strings erases the type distinction before deduplication.",
+      "Default loose uniqueness can collapse the integer and numeric string into one value.",
+      "Strict uniqueness keeps integer 7 distinct from string \"7\"; values only reindexes the result."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[7,\"7\"]",
+    "probe": "echo collect([7, '7', 7])->uniqueStrict()->values()->toJson();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/collections#method-unique",
+    "https://laravel.com/docs/13.x/collections#method-uniquestrict"
+  ]
+}

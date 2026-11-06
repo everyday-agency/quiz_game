@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0079",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "HTTP requests",
+  "subtopic": "encoded-and-decoded-path",
+  "objective": {
+    "id": "laravel.encoded-and-decoded-path",
+    "text": "Distinguish encoded and decoded path representations."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Select the decoded representation without accidentally decoding it twice."
+  },
+  "prerequisites": [
+    "URL percent encoding",
+    "Request path helpers"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The request URL is https://example.test/manual/a%20b. No proxy rewrites it. Which pair do path() and decodedPath() return?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "/manual/a%20b; /manual/a b",
+      "rationale": "Both helpers return the path without the leading slash for this non-root path.",
+      "misconception": "Both helpers return the path without the leading slash for this non-root path."
+    },
+    {
+      "id": "choice-2",
+      "text": "manual/a%20b; manual/a+ b",
+      "rationale": "Percent decoding turns %20 into a space; it does not insert a plus sign.",
+      "misconception": "Percent decoding turns %20 into a space; it does not insert a plus sign."
+    },
+    {
+      "id": "choice-3",
+      "text": "manual/a%20b; manual/a b",
+      "rationale": "path retains percent encoding and trims the surrounding slash; decodedPath decodes the encoded space.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "manual/a b; manual/a b",
+      "rationale": "path does not perform the additional percent decoding applied by decodedPath.",
+      "misconception": "path does not perform the additional percent decoding applied by decodedPath."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "path retains percent encoding and trims the surrounding slash; decodedPath decodes the encoded space.",
+    "trace": [
+      "Both helpers return the path without the leading slash for this non-root path.",
+      "Percent decoding turns %20 into a space; it does not insert a plus sign.",
+      "path retains percent encoding and trims the surrounding slash; decodedPath decodes the encoded space.",
+      "path does not perform the additional percent decoding applied by decodedPath."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "manual/a%20b;manual/a b",
+    "probe": "$r = Illuminate\\Http\\Request::create('https://example.test/manual/a%20b');\necho $r->path().';'.$r->decodedPath();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      5
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/requests#retrieving-the-request-path"
+  ]
+}

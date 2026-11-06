@@ -1,0 +1,13 @@
+{
+  "count": 1220,
+  "php": 620,
+  "laravelBeta": 600,
+  "permutations": 29280,
+  "distractorMappings": 87840,
+  "onlyChangedQuestion": "LAR-S26-0437",
+  "otherLaravelUnchanged": 599,
+  "php620Unchanged": true,
+  "stableIds": true,
+  "curriculumRemapping": true,
+  "progressIsolated": true
+}

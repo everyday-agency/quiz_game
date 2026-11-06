@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0435",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Cache tests",
+  "subtopic": "array-cache-object-reference-sharing",
+  "objective": {
+    "id": "laravel.array-cache-object-reference-sharing",
+    "text": "Recognize reference-sharing behavior in an unserialized array cache when testing mutable objects."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Explain a test-only mutation that may not model serialized production cache storage."
+  },
+  "prerequisites": [
+    "PHP object identity",
+    "Array cache serialization",
+    "Test fidelity"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The array cache store uses serialize=false."
+    ],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Support\\Facades\\Cache;\n\n$item = (object) ['count' => 1];\nCache::put('item', $item, 60);\n\n$item->count = 2;\n\necho Cache::get('item')->count;\n"
+      }
+    ]
+  },
+  "stem": "Why can this test read 2 without a second cache write?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Every cache driver rereads the original PHP variable on each get.",
+      "rationale": "External stores cannot hold a live reference to an arbitrary variable in this PHP process.",
+      "misconception": "External stores cannot hold a live reference to an arbitrary variable in this PHP process."
+    },
+    {
+      "id": "choice-2",
+      "text": "The numeric field expires sooner than the object and is recomputed.",
+      "rationale": "TTL applies to the entry; there is no per-property recomputation in this code.",
+      "misconception": "TTL applies to the entry; there is no per-property recomputation in this code."
+    },
+    {
+      "id": "choice-3",
+      "text": "The unserialized array store retains the same object reference.",
+      "rationale": "Mutating that object changes the in-process value held by this store; a serialized external store need not behave the same way.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Cache::put installs an Eloquent observer on every object.",
+      "rationale": "This plain object has no Eloquent persistence observer, and the cache does not install one.",
+      "misconception": "This plain object has no Eloquent persistence observer, and the cache does not install one."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Mutating that object changes the in-process value held by this store; a serialized external store need not behave the same way.",
+    "trace": [
+      "External stores cannot hold a live reference to an arbitrary variable in this PHP process.",
+      "TTL applies to the entry; there is no per-property recomputation in this code.",
+      "Mutating that object changes the in-process value held by this store; a serialized external store need not behave the same way.",
+      "This plain object has no Eloquent persistence observer, and the cache does not install one."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#configuration"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0375",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Mail events",
+  "subtopic": "message-sending-cancellation",
+  "objective": {
+    "id": "laravel.message-sending-cancellation",
+    "text": "Cancel sending from MessageSending when an application-level suppression rule applies."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Apply an explicit pre-transport suppression decision to the send lifecycle."
+  },
+  "prerequisites": [
+    "Mail MessageSending event",
+    "Listener return values"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A synchronous MessageSending listener returns false for a suppressed recipient. No other listener overrides the outcome. What happens to this send attempt?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The message is automatically queued for a later retry.",
+      "rationale": "A false pre-send decision is not an instruction to schedule another attempt.",
+      "misconception": "A false pre-send decision is not an instruction to schedule another attempt."
+    },
+    {
+      "id": "choice-2",
+      "text": "The false return is ignored because mail events cannot affect sending.",
+      "rationale": "MessageSending is specifically consulted as a pre-send decision point.",
+      "misconception": "MessageSending is specifically consulted as a pre-send decision point."
+    },
+    {
+      "id": "choice-3",
+      "text": "The message is sent and then retracted from the recipient’s mailbox.",
+      "rationale": "Cancellation occurs before transport, and Laravel does not retract delivered mail this way.",
+      "misconception": "Cancellation occurs before transport, and Laravel does not retract delivered mail this way."
+    },
+    {
+      "id": "choice-4",
+      "text": "The mailer does not send the message through the transport.",
+      "rationale": "The pre-send decision is halting; a false response prevents the transport call.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The pre-send decision is halting; a false response prevents the transport call.",
+    "trace": [
+      "A false pre-send decision is not an instruction to schedule another attempt.",
+      "MessageSending is specifically consulted as a pre-send decision point.",
+      "Cancellation occurs before transport, and Laravel does not retract delivered mail this way.",
+      "The pre-send decision is halting; a false response prevents the transport call."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "0:no-result",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nIlluminate\\Support\\Facades\\Event::listen(Illuminate\\Mail\\Events\\MessageSending::class, fn ($event) => false);\n$result = Illuminate\\Support\\Facades\\Mail::to('a@example.test')->send(new SimpleMail());\necho app('mailer')->getSymfonyTransport()->messages()->count().':'.($result === null ? 'no-result' : 'sent');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#events"
+  ]
+}

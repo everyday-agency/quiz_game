@@ -1,0 +1,125 @@
+# Laravel Specialist — Focused Editorial Corrections
+
+## Context
+
+The Laravel Specialist question bank contains 600 internally validated questions (LAR-S26-0001 through LAR-S26-0600).
+
+An independent review of 30 representative questions found 23 editorially acceptable and seven requiring improvements.
+
+Your task is to correct these seven questions and verify the changes.
+
+**This is a focused remediation task, not another complete 600-question audit.**
+
+## 1. Questions requiring attention
+
+**LAR-S26-0242 — Eloquent eager loading**
+
+Clarify the assumed model relationship, fixture data and relevant database behavior. Ensure the question is self-contained and doesn't require guessing unseen model definitions.
+
+**LAR-S26-0284 — Transaction retries and payments**
+
+Improve the incorrect alternatives so they represent realistic engineering mistakes. The correct answer should require reasoning about transaction retries and external payment side effects, not simply recognizing the most professional wording.
+
+Reevaluate whether Advanced difficulty is justified.
+
+**LAR-S26-0314 — Transactional outbox**
+
+Remove any prerequisites or assumptions that reveal the solution.
+
+Improve distractors and check similarity against the existing PHP question bank, especially its transactional-outbox questions.
+
+Preserve the Laravel-specific engineering objective.
+
+**LAR-S26-0400 — Scheduled job recovery**
+
+The current question is relatively straightforward for an Advanced classification.
+
+Either introduce a genuinely more demanding recovery scenario while preserving its learning objective, or reclassify it appropriately.
+
+**LAR-S26-0535 — SSRF protection**
+
+Improve the alternatives so several represent plausible security designs with subtle but meaningful weaknesses.
+
+Avoid making the correct answer identifiable through its length or professional-sounding completeness.
+
+**LAR-S26-0566 — Nginx and Laravel deployment**
+
+The question currently reveals much of the correct answer through its requirements.
+
+Rewrite the scenario so the candidate must reason about the Nginx execution boundary instead of repeating the policy stated in the question.
+
+**LAR-S26-0569 — Rolling database migrations**
+
+Strengthen the scenario by explicitly considering old and new application versions, including concurrent writers during deployment.
+
+Require reasoning about backward-compatible schema changes, data backfilling and eventual removal of legacy columns.
+
+## 2. Quality requirements
+
+For each revised question:
+
+- Preserve its stable question ID and learning objective.
+- Increment its revision number.
+- Archive its previous version.
+- Preserve exactly one defensible correct answer.
+- Ensure all four alternatives are plausible.
+- Remove answer clues from assumptions and prerequisites.
+- Calibrate difficulty based on actual reasoning.
+- Verify the explanations for every alternative.
+- Test executable examples against the pinned Laravel 13.40.0 environment and PHP 8.4/8.5 where applicable.
+- Clearly identify documented-contract cases that cannot be executed locally.
+
+Do not change the correct answer solely to alter its position.
+
+Do not artificially equalize answer lengths with filler text.
+
+## 3. Preservation
+
+The existing 620 production PHP questions must remain completely unchanged.
+
+Preserve all other 593 Laravel questions unless a necessary shared infrastructure fix is discovered. Report any such need before expanding the scope.
+
+Do not change scoring, progress tracking, frontend design, existing question identities or deployed application behavior.
+
+Do not reactivate legacy questions.
+
+## 4. Validation
+
+After correcting the seven questions:
+
+1. Run the affected Laravel technical validation.
+2. Verify correctness on both supported PHP versions.
+3. Run schema, identity and revision checks.
+4. Run relevant duplicate and editorial checks.
+5. Rebuild the local Laravel review collection.
+6. Run regression and Chrome browser tests.
+7. Verify PHP production preservation.
+8. Confirm Laravel questions remain isolated from the public application.
+
+## 5. Deliverables
+
+Create `laravel-specialist/FOCUSED_EDITORIAL_CORRECTIONS.md` containing:
+
+- All seven question IDs and their final dispositions.
+- Specific before/after improvements.
+- Difficulty changes and reasons.
+- Technical validation evidence.
+- Remaining risks or unresolved issues.
+
+Export the seven revised questions with their complete student-visible content, answer options, answer keys and explanations.
+
+Also export 15 additional randomly selected questions from the other 593 records for a fresh independent spot-check.
+
+## Final instructions
+
+Work autonomously and finish the corrections without requiring approval after each question.
+
+Do not begin another complete editorial audit.
+
+Do not generate 600 replacement questions.
+
+Do not push, merge, deploy or activate the Laravel bank.
+
+Keep independent editorial approval pending until the next external review.
+
+**Goal: improve the seven identified weaknesses while preserving the validated Laravel examination bank and the existing PHP application.**

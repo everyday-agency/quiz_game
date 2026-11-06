@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0495",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Frontend CORS",
+  "subtopic": "credentialed-cors-explicit-origin",
+  "objective": {
+    "id": "laravel.credentialed-cors-explicit-origin",
+    "text": "Use an explicit allowed origin for credentialed cross-origin requests rather than a wildcard response."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Return a credential-compatible origin policy without granting arbitrary origins access."
+  },
+  "prerequisites": [
+    "Browser CORS",
+    "Credentials",
+    "Origin allowlists"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The allowed frontend is https://app.example.test. Its browser request includes eligible cookies, and the endpoint is meant to allow this origin."
+    ],
+    "files": []
+  },
+  "stem": "The response has Access-Control-Allow-Origin: * and Access-Control-Allow-Credentials: true, and the browser refuses access. Which response policy fixes this mismatch?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Keep the wildcard and add Access-Control-Allow-Headers: Cookie.",
+      "rationale": "Allowing a request-header name does not change the credentialed origin rule.",
+      "misconception": "Allowing a request-header name does not change the credentialed origin rule."
+    },
+    {
+      "id": "choice-2",
+      "text": "Echo any Origin value without validating it against an allowlist.",
+      "rationale": "That removes the intended origin restriction and can expose credentialed responses to untrusted origins.",
+      "misconception": "That removes the intended origin restriction and can expose credentialed responses to untrusted origins."
+    },
+    {
+      "id": "choice-3",
+      "text": "Keep the wildcard and repeat Access-Control-Allow-Credentials twice.",
+      "rationale": "Repeating the credential header does not make the wildcard compatible.",
+      "misconception": "Repeating the credential header does not make the wildcard compatible."
+    },
+    {
+      "id": "choice-4",
+      "text": "Return the allowed frontend origin explicitly and allow credentials.",
+      "rationale": "Credentialed CORS cannot use a wildcard Allow-Origin response; the server should select an origin from its allowlist.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "Credentialed CORS cannot use a wildcard Allow-Origin response; the server should select an origin from its allowlist.",
+    "trace": [
+      "Allowing a request-header name does not change the credentialed origin rule.",
+      "That removes the intended origin restriction and can expose credentialed responses to untrusted origins.",
+      "Repeating the credential header does not make the wildcard compatible.",
+      "Credentialed CORS cannot use a wildcard Allow-Origin response; the server should select an origin from its allowlist."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "https://app.example.test:true",
+    "probe": "$cors = new Fruitcake\\Cors\\CorsService([\n    'allowedOrigins' => ['https://app.example.test'],\n    'allowedMethods' => ['GET'],\n    'allowedHeaders' => ['*'],\n    'supportsCredentials' => true,\n]);\n$request = Illuminate\\Http\\Request::create('/api/me', 'GET', server: ['HTTP_ORIGIN' => 'https://app.example.test']);\n$response = $cors->addActualRequestHeaders(response('ok'), $request);\necho $response->headers->get('Access-Control-Allow-Origin').':'.$response->headers->get('Access-Control-Allow-Credentials');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/routing#cross-origin-resource-sharing-cors",
+    "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSNotSupportingCredentials"
+  ]
+}

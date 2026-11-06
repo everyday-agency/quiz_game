@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0425",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Cache locks",
+  "subtopic": "cache-lock-owner-transfer",
+  "objective": {
+    "id": "laravel.cache-lock-owner-transfer",
+    "text": "Restore and release a lock using its owner token across a process boundary."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Transfer the capability to release a lock without acquiring an unrelated owner identity."
+  },
+  "prerequisites": [
+    "Lock ownership",
+    "Cross-process handoff"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The receiving worker uses the same shared lock store; the acquired lock has not expired."
+    ],
+    "files": []
+  },
+  "stem": "A web request acquires a lock and delegates completion to a job. Which value and operation let that job release this particular lock with ownership checking?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Pass the cache prefix and call Cache::forget($name).",
+      "rationale": "A generic value deletion does not express the lock provider’s ownership-checked release contract.",
+      "misconception": "A generic value deletion does not express the lock provider’s ownership-checked release contract."
+    },
+    {
+      "id": "choice-2",
+      "text": "Pass owner() and call restoreLock($name, $owner)->release().",
+      "rationale": "The owner token restores the identity associated with the acquired lock, allowing an ownership-checked release.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Pass the lock name and call lock($name)->release() with a new token.",
+      "rationale": "A newly constructed lock has a different owner and cannot normally release the existing owner’s lock.",
+      "misconception": "A newly constructed lock has a different owner and cannot normally release the existing owner’s lock."
+    },
+    {
+      "id": "choice-4",
+      "text": "Pass the request URL and call forceRelease on any matching name.",
+      "rationale": "forceRelease bypasses ownership, and a request URL is not the lock owner token.",
+      "misconception": "forceRelease bypasses ownership, and a request URL is not the lock owner token."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The owner token restores the identity associated with the acquired lock, allowing an ownership-checked release.",
+    "trace": [
+      "A generic value deletion does not express the lock provider’s ownership-checked release contract.",
+      "The owner token restores the identity associated with the acquired lock, allowing an ownership-checked release.",
+      "A newly constructed lock has a different owner and cannot normally release the existing owner’s lock.",
+      "forceRelease bypasses ownership, and a request URL is not the lock owner token."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:1",
+    "probe": "use Illuminate\\Support\\Facades\\Cache;\n$lock = Cache::lock('handoff', 60);\n$lock->get();\necho (int) Cache::restoreLock('handoff', $lock->owner())->release().':';\necho (int) Cache::lock('handoff', 60)->get();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#managing-locks-across-processes"
+  ]
+}

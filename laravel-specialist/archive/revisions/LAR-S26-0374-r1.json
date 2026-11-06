@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0374",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Mail delivery",
+  "subtopic": "mail-transport-handoff-not-inbox-proof",
+  "objective": {
+    "id": "laravel.mail-transport-handoff-not-inbox-proof",
+    "text": "Treat transport acceptance as a handoff rather than proof of inbox delivery."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Interpret the framework’s send completion at the transport boundary rather than promising recipient delivery."
+  },
+  "prerequisites": [
+    "Mail transport results",
+    "Delivery lifecycle",
+    "Operational evidence"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A MessageSent event is observed after the configured transport accepts a message. Can the application conclude that the recipient has read it or that it reached the inbox rather than a spam folder?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "No; MessageSent proves only that a Blade template was compiled, before any transport call.",
+      "rationale": "That understates the event: it follows the successful transport operation rather than mere template compilation.",
+      "misconception": "That understates the event: it follows the successful transport operation rather than mere template compilation."
+    },
+    {
+      "id": "choice-2",
+      "text": "Yes; MessageSent is emitted only after the recipient opens the email.",
+      "rationale": "The mailer has no such read acknowledgment in its ordinary send lifecycle.",
+      "misconception": "The mailer has no such read acknowledgment in its ordinary send lifecycle."
+    },
+    {
+      "id": "choice-3",
+      "text": "No; it confirms transport handoff, while downstream delivery and reading require separate evidence.",
+      "rationale": "The framework event describes completion of its transport send operation, not the recipient server’s later classification or user behavior.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Yes for inbox delivery, because successful transport acceptance excludes later bounces.",
+      "rationale": "A downstream system can still reject, bounce or classify an accepted message later.",
+      "misconception": "A downstream system can still reject, bounce or classify an accepted message later."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The framework event describes completion of its transport send operation, not the recipient server’s later classification or user behavior.",
+    "trace": [
+      "That understates the event: it follows the successful transport operation rather than mere template compilation.",
+      "The mailer has no such read acknowledgment in its ordinary send lifecycle.",
+      "The framework event describes completion of its transport send operation, not the recipient server’s later classification or user behavior.",
+      "A downstream system can still reject, bounce or classify an accepted message later."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Mail/Mailer.php",
+    "contains": [
+      "$symfonySentMessage = $this->sendSymfonyMessage($symfonyMessage);",
+      "new MessageSent($message, $data)"
+    ],
+    "reason": "The source emits the event after transport send returns a message. No external mailbox, delivery receipt or read receipt is tested or implied.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#events"
+  ]
+}

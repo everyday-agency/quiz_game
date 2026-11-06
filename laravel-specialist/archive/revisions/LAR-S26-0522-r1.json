@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0522",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Encryption integrity",
+  "subtopic": "encrypted-payload-tamper-detection",
+  "objective": {
+    "id": "laravel.encrypted-payload-tamper-detection",
+    "text": "Reject modified encrypted payloads rather than trusting decryptable-looking base64."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify rejection of a modified protected value rather than only successful round trips."
+  },
+  "prerequisites": [
+    "Encrypted payload integrity",
+    "MAC verification",
+    "Decryption exceptions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The application uses Laravel’s AES-256-CBC encrypter. A test modifies the ciphertext value inside the payload but leaves its original MAC."
+    ],
+    "files": []
+  },
+  "stem": "Which result should the tampering regression test require?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "decryptString throws DecryptException instead of returning trusted plaintext.",
+      "rationale": "The MAC authenticates the protected payload, so changing ciphertext without a valid corresponding MAC must be rejected.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "decryptString silently repairs the payload using the application key.",
+      "rationale": "The encrypter does not infer and repair the intended original ciphertext.",
+      "misconception": "The encrypter does not infer and repair the intended original ciphertext."
+    },
+    {
+      "id": "choice-3",
+      "text": "The modified outer value is accepted whenever it remains valid base64.",
+      "rationale": "Base64 validity is only an encoding property, not authenticity.",
+      "misconception": "Base64 validity is only an encoding property, not authenticity."
+    },
+    {
+      "id": "choice-4",
+      "text": "decryptString returns the changed bytes as a successful plaintext value.",
+      "rationale": "That would ignore the integrity guarantee the test is meant to protect.",
+      "misconception": "That would ignore the integrity guarantee the test is meant to protect."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The MAC authenticates the protected payload, so changing ciphertext without a valid corresponding MAC must be rejected.",
+    "trace": [
+      "The MAC authenticates the protected payload, so changing ciphertext without a valid corresponding MAC must be rejected.",
+      "The encrypter does not infer and repair the intended original ciphertext.",
+      "Base64 validity is only an encoding property, not authenticity.",
+      "That would ignore the integrity guarantee the test is meant to protect."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "rejected",
+    "probe": "$encrypted = Illuminate\\Support\\Facades\\Crypt::encryptString('protected');\n$p = json_decode(base64_decode($encrypted), true);\n$p['value'][0] = $p['value'][0] === 'A' ? 'B' : 'A';\n$tampered = base64_encode(json_encode($p));\ntry {\n    Illuminate\\Support\\Facades\\Crypt::decryptString($tampered);\n} catch (Illuminate\\Contracts\\Encryption\\DecryptException $e) {\n    echo 'rejected';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/encryption#decrypting-a-value"
+  ]
+}

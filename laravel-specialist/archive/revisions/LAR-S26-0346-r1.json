@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0346",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Event listeners",
+  "subtopic": "listener-should-queue-condition",
+  "objective": {
+    "id": "laravel.listener-should-queue-condition",
+    "text": "Use shouldQueue to suppress unnecessary queued listener work for a specific event."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Suppress unnecessary payloads at the listener queueing decision rather than inside every worker invocation."
+  },
+  "prerequisites": [
+    "Queued event listeners",
+    "Conditional queueing"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A queued StockAlert listener is needed only when an event’s remaining quantity is below five. Which listener method can return a boolean to decide whether this particular event should be queued at all?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "viaQueue($event)",
+      "rationale": "viaQueue chooses a queue name rather than returning the eligibility decision.",
+      "misconception": "viaQueue chooses a queue name rather than returning the eligibility decision."
+    },
+    {
+      "id": "choice-2",
+      "text": "handle($event)",
+      "rationale": "A guard inside handle can skip work, but the queued payload has already been created and delivered by then.",
+      "misconception": "A guard inside handle can skip work, but the queued payload has already been created and delivered by then."
+    },
+    {
+      "id": "choice-3",
+      "text": "shouldQueue($event)",
+      "rationale": "The dispatcher consults this method before enqueueing the listener for the event.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "failed($event)",
+      "rationale": "Failure callbacks run on a failure path, not as the normal pre-enqueue condition.",
+      "misconception": "Failure callbacks run on a failure path, not as the normal pre-enqueue condition."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The dispatcher consults this method before enqueueing the listener for the event.",
+    "trace": [
+      "viaQueue chooses a queue name rather than returning the eligibility decision.",
+      "A guard inside handle can skip work, but the queued payload has already been created and delivered by then.",
+      "The dispatcher consults this method before enqueueing the listener for the event.",
+      "Failure callbacks run on a failure path, not as the normal pre-enqueue condition."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass StockChanged\n{\n    public function __construct(public int $remaining)\n    {\n    }\n}\nclass StockAlert implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    public function shouldQueue(StockChanged $event): bool\n    {\n        return $event->remaining < 5;\n    }\n\n    public function handle(StockChanged $event): void\n    {\n    }\n}\nIlluminate\\Support\\Facades\\Event::listen(StockChanged::class, StockAlert::class);\nevent(new StockChanged(20));\nevent(new StockChanged(2));\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/events#conditionally-queueing-listeners"
+  ]
+}

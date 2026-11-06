@@ -1,0 +1,5 @@
+Official sources checked 2026-11-06:
+https://laravel.com/docs/13.x/deployment#directory-permissions
+https://laravel.com/docs/13.x/octane#reloading-the-workers
+Paraphrase: the web process needs write access to storage and bootstrap/cache. Source code does not generally need runtime write access.
+Paraphrase: octane:reload gracefully reloads persistent application workers after code changes. No Octane server run is claimed.

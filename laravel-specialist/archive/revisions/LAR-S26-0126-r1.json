@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0126",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Validation",
+  "subtopic": "named-error-bag-isolation",
+  "objective": {
+    "id": "laravel.named-error-bag-isolation",
+    "text": "Separate named error bags for two forms rendered on the same page."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Read the intended form's message without falling back to the default bag."
+  },
+  "prerequisites": [
+    "Validation error bags",
+    "Multiple forms"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A view has an errors ViewErrorBag containing default.email=\"Login email required\" and billing.email=\"Billing email invalid\". What does $errors->getBag(\"billing\")->first(\"email\") return?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Both messages concatenated",
+      "rationale": "Selecting a bag does not merge it with every other named bag.",
+      "misconception": "Selecting a bag does not merge it with every other named bag."
+    },
+    {
+      "id": "choice-2",
+      "text": "Login email required",
+      "rationale": "That message belongs to the default bag, which was not selected.",
+      "misconception": "That message belongs to the default bag, which was not selected."
+    },
+    {
+      "id": "choice-3",
+      "text": "Billing email invalid",
+      "rationale": "getBag selects billing explicitly, so first reads the email error in that bag.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "An empty string because email is duplicated across bags",
+      "rationale": "Separate bags may contain the same field name without a collision.",
+      "misconception": "Separate bags may contain the same field name without a collision."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "getBag selects billing explicitly, so first reads the email error in that bag.",
+    "trace": [
+      "Selecting a bag does not merge it with every other named bag.",
+      "That message belongs to the default bag, which was not selected.",
+      "getBag selects billing explicitly, so first reads the email error in that bag.",
+      "Separate bags may contain the same field name without a collision."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Billing email invalid",
+    "probe": "$errors = new Illuminate\\Support\\ViewErrorBag();\n$errors->put('default', new Illuminate\\Support\\MessageBag(['email' => 'Login email required']));\n$errors->put('billing', new Illuminate\\Support\\MessageBag(['email' => 'Billing email invalid']));\necho $errors->getBag('billing')->first('email');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      4,
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#named-error-bags"
+  ]
+}

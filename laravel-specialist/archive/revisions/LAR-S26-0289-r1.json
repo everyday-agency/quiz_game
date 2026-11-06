@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0289",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Database indexes",
+  "subtopic": "compound-index-filter-order-prefix",
+  "objective": {
+    "id": "laravel.compound-index-filter-order-prefix",
+    "text": "Order a compound index to support the specified equality filter and ordered scan."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Align the leading key with tenant equality and the remaining keys with a deterministic ordered scan."
+  },
+  "prerequisites": [
+    "PostgreSQL B-tree indexes",
+    "Equality predicates",
+    "Ordered scans"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "PostgreSQL 18, B-tree index, query WHERE tenant_id = ? ORDER BY created_at ASC, id ASC LIMIT 50. No other predicates."
+    ],
+    "files": []
+  },
+  "stem": "Which proposed index order directly supports narrowing to one tenant and scanning that tenant in the requested order, without assuming the planner must choose it?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "(tenant_id, created_at, id)",
+      "rationale": "Equality on the leading tenant key leaves rows ordered by created_at and id within that tenant’s index range.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "(created_at, tenant_id, id)",
+      "rationale": "This leads with time across all tenants, so it does not provide the same contiguous tenant-first range.",
+      "misconception": "This leads with time across all tenants, so it does not provide the same contiguous tenant-first range."
+    },
+    {
+      "id": "choice-3",
+      "text": "(tenant_id, id, created_at)",
+      "rationale": "Within the tenant, this orders primarily by id rather than created_at.",
+      "misconception": "Within the tenant, this orders primarily by id rather than created_at."
+    },
+    {
+      "id": "choice-4",
+      "text": "Separate indexes on tenant_id and created_at",
+      "rationale": "Independent indexes do not themselves provide the specified composite ordered path including the id tiebreaker.",
+      "misconception": "Independent indexes do not themselves provide the specified composite ordered path including the id tiebreaker."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Equality on the leading tenant key leaves rows ordered by created_at and id within that tenant’s index range.",
+    "trace": [
+      "Equality on the leading tenant key leaves rows ordered by created_at and id within that tenant’s index range.",
+      "This leads with time across all tenants, so it does not provide the same contiguous tenant-first range.",
+      "Within the tenant, this orders primarily by id rather than created_at.",
+      "Independent indexes do not themselves provide the specified composite ordered path including the id tiebreaker."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Database/Schema/Blueprint.php",
+    "contains": [
+      "public function index($columns",
+      "return $this->indexCommand"
+    ],
+    "reason": "Laravel preserves the declared composite-index columns. PostgreSQL B-tree leading equality and ordering behavior is documented, not benchmarked in SQLite; planner selection depends on statistics.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/migrations#indexes",
+    "https://www.postgresql.org/docs/18/indexes-multicolumn.html"
+  ]
+}

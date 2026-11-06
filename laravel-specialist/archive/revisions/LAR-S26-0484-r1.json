@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0484",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Console tests",
+  "subtopic": "console-output-plus-exit-status",
+  "objective": {
+    "id": "laravel.console-output-plus-exit-status",
+    "text": "Verify both console output and exit status instead of treating printed success text as a successful command result."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify operational success independently of a printed message."
+  },
+  "prerequisites": [
+    "Artisan commands",
+    "Exit codes",
+    "Console tests"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A command prints \"Imported\" but returns exit code 1 after detecting an incomplete import. A regression test currently checks only that text. What should it also verify for a successful-import case?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The console output is nonempty regardless of its content.",
+      "rationale": "Even an error path can produce nonempty output and a failure exit code.",
+      "misconception": "Even an error path can produce nonempty output and a failure exit code."
+    },
+    {
+      "id": "choice-2",
+      "text": "The command class has a nonempty description.",
+      "rationale": "Command metadata does not establish successful execution.",
+      "misconception": "Command metadata does not establish successful execution."
+    },
+    {
+      "id": "choice-3",
+      "text": "The command exits successfully, in addition to printing the expected output.",
+      "rationale": "Printed text and process success are independent; checking both catches the stated contradiction.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "The output contains \"Imported\" twice.",
+      "rationale": "Repeating the text check still does not inspect the exit status.",
+      "misconception": "Repeating the text check still does not inspect the exit status."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Printed text and process success are independent; checking both catches the stated contradiction.",
+    "trace": [
+      "Even an error path can produce nonempty output and a failure exit code.",
+      "Command metadata does not establish successful execution.",
+      "Printed text and process success are independent; checking both catches the stated contradiction.",
+      "Repeating the text check still does not inspect the exit status."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "printed:1",
+    "probe": "Illuminate\\Support\\Facades\\Artisan::command('probe:import', function () {\n    $this->info('Imported');\n    return 1;\n});\n$status = Illuminate\\Support\\Facades\\Artisan::call('probe:import');\necho (str_contains(Illuminate\\Support\\Facades\\Artisan::output(), 'Imported') ? 'printed' : 'missing').':'.$status;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/console-tests#success-failure-expectations",
+    "https://laravel.com/docs/13.x/console-tests#input-output-expectations"
+  ]
+}

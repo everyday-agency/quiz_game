@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0208",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Eloquent models",
+  "subtopic": "fill-model-update-boolean",
+  "objective": {
+    "id": "laravel.fill-model-update-boolean",
+    "text": "Distinguish a model-returning fill call from the boolean result of update."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Keep a model reference while applying and persisting changes."
+  },
+  "prerequisites": [
+    "Eloquent fill and update",
+    "Return values"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A service assigns $record = $record->update([\"name\" => \"new\"]) and later calls $record->getKey(). Why does the latter call fail after a successful update?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "update returns a boolean; retain the model separately or call fill(...)->save() without replacing it.",
+      "rationale": "A successful instance update returns true, so assigning that result overwrites the model variable.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "update returns the new primary-key integer rather than the model.",
+      "rationale": "The instance update result reports success; it does not return the key.",
+      "misconception": "The instance update result reports success; it does not return the key."
+    },
+    {
+      "id": "choice-3",
+      "text": "update turns the model into an Eloquent collection containing the updated row.",
+      "rationale": "No collection is produced by this instance mutation.",
+      "misconception": "No collection is produced by this instance mutation."
+    },
+    {
+      "id": "choice-4",
+      "text": "The model loses its primary key whenever a fillable attribute changes.",
+      "rationale": "Changing name does not remove id; the failure is the overwritten variable type.",
+      "misconception": "Changing name does not remove id; the failure is the overwritten variable type."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "A successful instance update returns true, so assigning that result overwrites the model variable.",
+    "trace": [
+      "A successful instance update returns true, so assigning that result overwrites the model variable.",
+      "The instance update result reports success; it does not return the key.",
+      "No collection is produced by this instance mutation.",
+      "Changing name does not remove id; the failure is the overwritten variable type."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "model:boolean",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\necho ($record->fill(['name' => 'new']) === $record ? 'model' : 'other').':'.gettype($record->update(['name' => 'next']));",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent#updates",
+    "https://laravel.com/docs/13.x/eloquent#mass-assignment"
+  ]
+}

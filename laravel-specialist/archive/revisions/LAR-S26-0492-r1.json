@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0492",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Frontend assets",
+  "subtopic": "vite-stale-hot-file-production",
+  "objective": {
+    "id": "laravel.vite-stale-hot-file-production",
+    "text": "Remove a stale development hot file that directs production pages to a development server."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Explain development-server URLs despite a valid production manifest."
+  },
+  "prerequisites": [
+    "Vite hot-file detection",
+    "Production asset URLs"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "A valid production manifest is deployed, but public/hot still contains http://localhost:5173. No development server should be used in production."
+    ],
+    "files": []
+  },
+  "stem": "Why does @vite generate development-server asset URLs, and what deployment cleanup addresses it?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "APP_NAME must match the manifest filename to disable the development URL.",
+      "rationale": "Application naming does not control the hot-file detection path.",
+      "misconception": "Application naming does not control the hot-file detection path."
+    },
+    {
+      "id": "choice-2",
+      "text": "The browser chose localhost because the JavaScript entry has a relative import.",
+      "rationale": "The server-generated asset URL already reflects the hot-file configuration before browser import resolution.",
+      "misconception": "The server-generated asset URL already reflects the hot-file configuration before browser import resolution."
+    },
+    {
+      "id": "choice-3",
+      "text": "The production manifest always redirects through localhost before serving hashed assets.",
+      "rationale": "That is not the normal production manifest behavior.",
+      "misconception": "That is not the normal production manifest behavior."
+    },
+    {
+      "id": "choice-4",
+      "text": "The hot file selects development mode; remove that stale artifact from the production release.",
+      "rationale": "The integration checks for the hot file before using the production manifest.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The integration checks for the hot file before using the production manifest.",
+    "trace": [
+      "Application naming does not control the hot-file detection path.",
+      "The server-generated asset URL already reflects the hot-file configuration before browser import resolution.",
+      "That is not the normal production manifest behavior.",
+      "The integration checks for the hot file before using the production manifest."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "hot:build",
+    "probe": "mkdir(public_path('build'), 0700, true);\nfile_put_contents(public_path('hot'), 'http://localhost:5173');\nfile_put_contents(public_path('build/manifest.json'), json_encode([\n    'resources/js/app.js' => ['file' => 'assets/app-a.js', 'isEntry' => true],\n]));\n$v = new Illuminate\\Foundation\\Vite;\necho str_contains($v('resources/js/app.js')->toHtml(), 'localhost:5173') ? 'hot:' : 'other:';\nunlink(public_path('hot'));\necho str_contains($v('resources/js/app.js')->toHtml(), '/build/assets/app-a.js') ? 'build' : 'other';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/vite#running-vite",
+    "https://laravel.com/docs/13.x/vite#advanced-customization"
+  ]
+}

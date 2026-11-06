@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0229",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Eloquent concurrency",
+  "subtopic": "optimistic-version-affected-rows",
+  "objective": {
+    "id": "laravel.optimistic-version-affected-rows",
+    "text": "Detect a stale update with a version predicate and affected-row count."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Combine an atomic predicate, version advancement and a failure branch to reject a stale writer."
+  },
+  "prerequisites": [
+    "Eloquent update counts",
+    "Concurrent stale reads",
+    "Optimistic locking"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Two editors read document 7 at version 4. The first saves version 5. The second must detect the conflict rather than overwrite it; no long-lived lock is held across editing. Which write protocol meets that requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "UPDATE where id=7 and version=4, set content and version=5; treat zero affected rows as a conflict.",
+      "rationale": "The version predicate and update execute atomically, so the stale editor cannot match a row already advanced to version 5.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Update by id alone, then compare the new content to the submitted content.",
+      "rationale": "Matching your own overwritten content does not detect the lost earlier update.",
+      "misconception": "Matching your own overwritten content does not detect the lost earlier update."
+    },
+    {
+      "id": "choice-3",
+      "text": "Reload version 5 and submit the stale content using version 5 without notifying the editor.",
+      "rationale": "This deliberately discards the conflict information and overwrites changes the stale editor has not incorporated.",
+      "misconception": "This deliberately discards the conflict information and overwrites changes the stale editor has not incorporated."
+    },
+    {
+      "id": "choice-4",
+      "text": "Read the current version, then update by id alone if the read returned 4.",
+      "rationale": "Another writer can commit between the separate read and the unconstrained update.",
+      "misconception": "Another writer can commit between the separate read and the unconstrained update."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The version predicate and update execute atomically, so the stale editor cannot match a row already advanced to version 5.",
+    "trace": [
+      "The version predicate and update execute atomically, so the stale editor cannot match a row already advanced to version 5.",
+      "Matching your own overwritten content does not detect the lost earlier update.",
+      "This deliberately discards the conflict information and overwrites changes the stale editor has not incorporated.",
+      "Another writer can commit between the separate read and the unconstrained update."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0:first",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\nDB::table('records')->where('id', 1)->update(['version' => 4]);\n$first = Record::whereKey(1)->where('version', 4)->update(['name' => 'first', 'version' => 5]);\n$second = Record::whereKey(1)->where('version', 4)->update(['name' => 'second', 'version' => 5]);\necho $first.':'.$second.':'.Record::find(1)->name;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#update-statements"
+  ]
+}

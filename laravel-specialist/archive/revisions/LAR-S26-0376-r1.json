@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0376",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Mail tests",
+  "subtopic": "mailable-rendered-content-test",
+  "objective": {
+    "id": "laravel.mailable-rendered-content-test",
+    "text": "Render a mailable to check its content separately from fake dispatch assertions."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Validate the user-visible template rather than only the intent to send a mailable class."
+  },
+  "prerequisites": [
+    "Mailable content assertions",
+    "Blade rendering",
+    "Mail fake limitations"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A dispatch test using Mail::fake() passes, but a broken Blade variable makes the receipt body fail when rendered. Which additional test exercises the mailable’s HTML content without sending real mail?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Assert the class implements ShouldQueue.",
+      "rationale": "Queueability says nothing about whether the HTML view renders correctly.",
+      "misconception": "Queueability says nothing about whether the HTML view renders correctly."
+    },
+    {
+      "id": "choice-2",
+      "text": "Assert the mailable was queued exactly once under the fake.",
+      "rationale": "Queue count does not compile or inspect the body template.",
+      "misconception": "Queue count does not compile or inspect the body template."
+    },
+    {
+      "id": "choice-3",
+      "text": "Construct the mailable with fixture data and call assertSeeInHtml on expected rendered text.",
+      "rationale": "The content assertion renders the mailable and checks its HTML, exposing template/data problems while avoiding transport delivery.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Assert the configured SMTP host string is nonempty.",
+      "rationale": "Transport configuration does not validate the template or its supplied data.",
+      "misconception": "Transport configuration does not validate the template or its supplied data."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The content assertion renders the mailable and checks its HTML, exposing template/data problems while avoiding transport delivery.",
+    "trace": [
+      "Queueability says nothing about whether the HTML view renders correctly.",
+      "Queue count does not compile or inspect the body template.",
+      "The content assertion renders the mailable and checks its HTML, exposing template/data problems while avoiding transport delivery.",
+      "Transport configuration does not validate the template or its supplied data."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "rendered:0",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\n$message = new SimpleMail();\n$message->assertSeeInHtml('Receipt');\necho 'rendered:'.app('mailer')->getSymfonyTransport()->messages()->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#testing-mailable-content"
+  ]
+}

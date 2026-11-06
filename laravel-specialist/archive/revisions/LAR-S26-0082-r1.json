@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0082",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Proxies and hosts",
+  "subtopic": "trusted-host-boundary",
+  "objective": {
+    "id": "laravel.trusted-host-boundary",
+    "text": "Restrict accepted hostnames before generating links from the request host."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Separate host acceptance from environment defaults and proxy trust."
+  },
+  "prerequisites": [
+    "Host headers",
+    "Absolute URL generation",
+    "Trusted-host middleware"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A public application should accept only example.test and its explicitly allowed subdomains. It sometimes generates absolute links from incoming requests. Which application boundary rejects requests with attacker-controlled Host values outside that set?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Configure trusted-host patterns and run the trusted-host middleware for incoming requests.",
+      "rationale": "Host validation rejects unapproved hostnames before application code relies on them for absolute links.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Escape the generated URL as HTML without checking its host.",
+      "rationale": "HTML escaping prevents markup interpretation but does not make a destination hostname trusted.",
+      "misconception": "HTML escaping prevents markup interpretation but does not make a destination hostname trusted."
+    },
+    {
+      "id": "choice-3",
+      "text": "Trust every proxy header while leaving host acceptance unrestricted.",
+      "rationale": "Proxy trust determines which forwarded data is used; it does not provide the required host allowlist.",
+      "misconception": "Proxy trust determines which forwarded data is used; it does not provide the required host allowlist."
+    },
+    {
+      "id": "choice-4",
+      "text": "Set APP_URL to https://example.test and accept every incoming Host.",
+      "rationale": "APP_URL is not a general incoming Host allowlist for HTTP requests.",
+      "misconception": "APP_URL is not a general incoming Host allowlist for HTTP requests."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Host validation rejects unapproved hostnames before application code relies on them for absolute links.",
+    "trace": [
+      "Host validation rejects unapproved hostnames before application code relies on them for absolute links.",
+      "HTML escaping prevents markup interpretation but does not make a destination hostname trusted.",
+      "Proxy trust determines which forwarded data is used; it does not provide the required host allowlist.",
+      "APP_URL is not a general incoming Host allowlist for HTTP requests."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Http/Middleware/TrustHosts.php",
+    "contains": [
+      "setTrustedHosts",
+      "hosts()"
+    ],
+    "reason": "Trusted-host middleware establishes allowed host patterns; URL escaping and APP_URL address different concerns.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/requests#configuring-trusted-hosts"
+  ]
+}

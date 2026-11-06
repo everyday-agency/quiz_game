@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0566",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Deployment",
+  "subtopic": "deployment-public-document-root",
+  "objective": {
+    "id": "laravel.deployment-public-document-root",
+    "text": "Point the web document root at public so application source and environment files are not directly served."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Expose the intended front controller without serving the private application tree."
+  },
+  "prerequisites": [
+    "Laravel directory layout",
+    "Web document root",
+    "Source-file exposure"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A web-server configuration points its document root at the Laravel project root and makes .env downloadable. Which deployment boundary should replace that setup?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Keep the project root and rename .env to a less predictable filename only.",
+      "rationale": "Obscuring one filename does not establish the intended public/private directory boundary.",
+      "misconception": "Obscuring one filename does not establish the intended public/private directory boundary."
+    },
+    {
+      "id": "choice-2",
+      "text": "Keep the project root and enable route:cache to hide non-route files.",
+      "rationale": "A route cache does not stop the web server from serving filesystem files directly.",
+      "misconception": "A route cache does not stop the web server from serving filesystem files directly."
+    },
+    {
+      "id": "choice-3",
+      "text": "Serve the application through its public directory as the document root.",
+      "rationale": "The public directory contains the web entry point and public assets; private application files should not be exposed by serving the project root.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Point the document root at storage so all framework-generated files are reachable.",
+      "rationale": "Storage includes private runtime data and is not the intended public entry-point directory.",
+      "misconception": "Storage includes private runtime data and is not the intended public entry-point directory."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The public directory contains the web entry point and public assets; private application files should not be exposed by serving the project root.",
+    "trace": [
+      "Obscuring one filename does not establish the intended public/private directory boundary.",
+      "A route cache does not stop the web server from serving filesystem files directly.",
+      "The public directory contains the web entry point and public assets; private application files should not be exposed by serving the project root.",
+      "Storage includes private runtime data and is not the intended public entry-point directory."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Foundation/Application.php",
+    "contains": [
+      "$this->publicPath ?: $this->basePath('public')"
+    ],
+    "reason": "Laravel publicPath defaults to the public subtree; official deployment guidance requires serving through public/index.php. No web-server configuration is changed or penetration-tested.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/deployment#server-configuration"
+  ]
+}

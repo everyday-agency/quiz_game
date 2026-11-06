@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0400",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Scheduling architecture",
+  "subtopic": "scheduled-job-durable-resumption",
+  "objective": {
+    "id": "laravel.scheduled-job-durable-resumption",
+    "text": "Make scheduled work resumable and idempotent instead of assuming onOneServer guarantees completion."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Separate occurrence election from recovery of a partially completed business operation."
+  },
+  "prerequisites": [
+    "Single-server scheduling",
+    "Crash recovery",
+    "Durable checkpoints",
+    "Idempotent item writes"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A nightly import uses onOneServer but crashes after committing 4,000 of 10,000 per-item results. It must resume without duplicating completed results. Which design adds the missing recovery boundary?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Persist progress and stable per-item result keys; resume unfinished items with idempotent writes.",
+      "rationale": "Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Delete all completed result rows whenever a run restarts, even if downstream consumers have used them.",
+      "rationale": "Destructive restart does not satisfy preserving completed results and can invalidate already consumed output.",
+      "misconception": "Destructive restart does not satisfy preserving completed results and can invalidate already consumed output."
+    },
+    {
+      "id": "choice-3",
+      "text": "Increase the mutex expiration until it covers the whole night, with no stored progress.",
+      "rationale": "A longer lock cannot reconstruct completed work after a crash and can delay recovery.",
+      "misconception": "A longer lock cannot reconstruct completed work after a crash and can delay recovery."
+    },
+    {
+      "id": "choice-4",
+      "text": "Rely on onOneServer to remember the last processed item and resume the PHP loop.",
+      "rationale": "The scheduler lock does not capture application loop state or a business checkpoint.",
+      "misconception": "The scheduler lock does not capture application loop state or a business checkpoint."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.",
+    "trace": [
+      "Single-server election does not persist completion. Durable item identity and progress allow a later attempt to continue safely after partial success.",
+      "Destructive restart does not satisfy preserving completed results and can invalidate already consumed output.",
+      "A longer lock cannot reconstruct completed work after a crash and can delay recovery.",
+      "The scheduler lock does not capture application loop state or a business checkpoint."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "3:5:5",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('import_results', function ($t) {\n    $t->id();\n    $t->integer('source_item')->unique();\n});\n$process = function (int $stopAfter) {\n    foreach (range(1, 5) as $item) {\n        DB::transaction(function () use ($item) {\n            DB::table('import_results')->updateOrInsert(['source_item' => $item], []);\n        });\n        if ($item === $stopAfter) {\n            break;\n        }\n    }\n};\n$process(3);\necho DB::table('import_results')->count().':';\n$process(5);\necho DB::table('import_results')->count().':'.DB::table('import_results')->distinct()->count('source_item');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#running-tasks-on-one-server",
+    "https://laravel.com/docs/13.x/database#database-transactions"
+  ]
+}

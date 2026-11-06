@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0200",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Security architecture",
+  "subtopic": "privileged-field-write-boundary",
+  "objective": {
+    "id": "laravel.privileged-field-write-boundary",
+    "text": "Protect mass-assigned administrative attributes through an explicit authorization and write boundary."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep administrative changes out of a general self-service update path."
+  },
+  "prerequisites": [
+    "Eloquent mass assignment",
+    "Field authorization",
+    "Validation versus permission"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A self-service profile endpoint validates role as one of user or admin. The model permits role assignment, but ordinary users must not promote themselves. Which design keeps name updates available without granting role changes through this payload?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Keep role in the public payload and trust its successful in:user,admin validation.",
+      "rationale": "The rule validates the value's domain, not the caller's permission to promote an account.",
+      "misconception": "The rule validates the value's domain, not the caller's permission to promote an account."
+    },
+    {
+      "id": "choice-2",
+      "text": "Put role in the model's hidden array while continuing to assign the payload.",
+      "rationale": "Serialization visibility does not stop writes to a mass-assignable attribute.",
+      "misconception": "Serialization visibility does not stop writes to a mass-assignable attribute."
+    },
+    {
+      "id": "choice-3",
+      "text": "Restrict the public write payload to profile fields; handle role changes through a separately authorized administrative operation.",
+      "rationale": "A valid enum value is not permission to assign it. The write boundary must exclude privileged changes from the public profile operation.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Cast role to a PHP enum while continuing to assign it for every user.",
+      "rationale": "A type-safe representation still permits an unauthorized transition unless the application enforces permission.",
+      "misconception": "A type-safe representation still permits an unauthorized transition unless the application enforces permission."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "A valid enum value is not permission to assign it. The write boundary must exclude privileged changes from the public profile operation.",
+    "trace": [
+      "The rule validates the value's domain, not the caller's permission to promote an account.",
+      "Serialization visibility does not stop writes to a mass-assignable attribute.",
+      "A valid enum value is not permission to assign it. The write boundary must exclude privileged changes from the public profile operation.",
+      "A type-safe representation still permits an unauthorized transition unless the application enforces permission."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "admin:user",
+    "probe": "class ProfileMember extends Illuminate\\Database\\Eloquent\\Model\n{\n    protected $fillable = ['name', 'role'];\n}\n$data = ['name' => 'Ada', 'role' => 'admin'];\n$unsafe = (new ProfileMember())->forceFill(['role' => 'user']);\n$safe = clone $unsafe;\n$unsafe->fill($data);\n$safe->fill(Illuminate\\Support\\Arr::only($data, ['name']));\necho $unsafe->role.':'.$safe->role;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent#mass-assignment",
+    "https://laravel.com/docs/13.x/authorization"
+  ]
+}

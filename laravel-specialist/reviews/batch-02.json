@@ -1,0 +1,1622 @@
+{
+  "batch": 2,
+  "sourceHash": "8e8492b775180edc1ef29cc7e442264a055926f2784bbfd52f29941d779079ce",
+  "reviewer": "author internal editorial review; not independent approval",
+  "completed": true,
+  "independentApproval": "pending",
+  "scope": [
+    "all 100 objectives/stems",
+    "all 400 choices and rationales",
+    "all visible snippets and assumptions",
+    "95 real-framework witnesses and five explicit contracts",
+    "difficulty and complete-prerequisite mapping",
+    "comparison against accepted batch 1 and inactive legacy bank"
+  ],
+  "decisions": [
+    {
+      "ids": [
+        "LAR-S26-0102"
+      ],
+      "finding": "Initial plan risked merely repeating the bail stopping question.",
+      "action": "Assesses the distinct after-callback phase despite stopOnFirstFailure."
+    },
+    {
+      "ids": [
+        "LAR-S26-0130"
+      ],
+      "finding": "Safe-subset selection risked repeating the validated-payload boundary.",
+      "action": "Assesses that merging new values into ValidatedInput does not rerun validation."
+    },
+    {
+      "ids": [
+        "LAR-S26-0139",
+        "LAR-S26-0148",
+        "LAR-S26-0150",
+        "LAR-S26-0170",
+        "LAR-S26-0174",
+        "LAR-S26-0199"
+      ],
+      "finding": "Plan-level review identified overlaps or a less useful objective.",
+      "action": "Retargeted before acceptance to named failure redirects, Precognition partial success, automatic resolution validation, component helper exclusion, error-variable restoration, and inline Gate hook bypass."
+    },
+    {
+      "ids": [
+        "LAR-S26-0103",
+        "LAR-S26-0121",
+        "LAR-S26-0131",
+        "LAR-S26-0138",
+        "LAR-S26-0150",
+        "LAR-S26-0179",
+        "LAR-S26-0181",
+        "LAR-S26-0183",
+        "LAR-S26-0184",
+        "LAR-S26-0185",
+        "LAR-S26-0200"
+      ],
+      "finding": "Draft answer-length cues.",
+      "action": "Shortened correct answers, moved a shared identity assumption into the stem, or compared meaningful alternative implementations; no filler padding."
+    },
+    {
+      "ids": [
+        "LAR-S26-0135"
+      ],
+      "finding": "Default database isolation could vary by deployment.",
+      "action": "Explicit READ COMMITTED assumption excludes an unintended serializable-transaction interpretation. The SQLite witness checks two pre-write observations and actual constraint rejection; it is not a concurrent isolation benchmark."
+    },
+    {
+      "ids": [
+        "LAR-S26-0181",
+        "LAR-S26-0183"
+      ],
+      "finding": "Laravel 13.40 accepts eligible origin metadata as well as tokens.",
+      "action": "Specified origin/header and testing-bypass conditions; exercised PreventRequestForgery, not deprecated middleware aliases."
+    },
+    {
+      "ids": [
+        "LAR-S26-0199"
+      ],
+      "finding": "Some distractors invented unlikely user mutation or hook cancellation.",
+      "action": "Replaced with plausible misunderstandings about closure abilities, Closure truthiness and cached decisions."
+    },
+    {
+      "ids": [
+        "LAR-S26-0103",
+        "LAR-S26-0105",
+        "LAR-S26-0111",
+        "LAR-S26-0114",
+        "LAR-S26-0115",
+        "LAR-S26-0118",
+        "LAR-S26-0126",
+        "LAR-S26-0139",
+        "LAR-S26-0159",
+        "LAR-S26-0162",
+        "LAR-S26-0168",
+        "LAR-S26-0175",
+        "LAR-S26-0184",
+        "LAR-S26-0185",
+        "LAR-S26-0186",
+        "LAR-S26-0192",
+        "LAR-S26-0195",
+        "LAR-S26-0197"
+      ],
+      "finding": "Default Intermediate label overstated several single-concept tasks.",
+      "action": "Reclassified based on reasoning; current distribution is 36 Foundation and 64 Intermediate."
+    }
+  ],
+  "duplicateCandidateDispositions": [
+    {
+      "a": "LAR-S26-0140",
+      "b": "LQ-314",
+      "kind": "legacy",
+      "similarity": 0.429,
+      "disposition": "retained",
+      "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+    },
+    {
+      "a": "LAR-S26-0157",
+      "b": "LAR-S26-0156",
+      "kind": "current",
+      "similarity": 0.25,
+      "disposition": "retained",
+      "reason": "Nested parent/current loop state is different from one loop index-versus-iteration offset."
+    },
+    {
+      "a": "LAR-S26-0174",
+      "b": "LAR-S26-0126",
+      "kind": "current",
+      "similarity": 0.242,
+      "disposition": "retained",
+      "reason": "This tests restoration of a temporary view variable, not selection of a named error bag alone."
+    },
+    {
+      "a": "LAR-S26-0135",
+      "b": "LQ-045",
+      "kind": "legacy",
+      "similarity": 0.237,
+      "disposition": "retained",
+      "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+    },
+    {
+      "a": "LAR-S26-0147",
+      "b": "LQ-314",
+      "kind": "legacy",
+      "similarity": 0.214,
+      "disposition": "retained",
+      "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+    },
+    {
+      "a": "LAR-S26-0125",
+      "b": "LAR-S26-0106",
+      "kind": "current",
+      "similarity": 0.212,
+      "disposition": "retained",
+      "reason": "Custom-message pattern matching differs from concrete wildcard error-path expansion."
+    },
+    {
+      "a": "LAR-S26-0127",
+      "b": "LAR-S26-0074",
+      "kind": "accepted",
+      "similarity": 0.194,
+      "disposition": "retained",
+      "reason": "The API validation response contract adds exception handling, status and nested error keys; earlier 0074 distinguishes request body type from response preference."
+    },
+    {
+      "a": "LAR-S26-0179",
+      "b": "LQ-360",
+      "kind": "legacy",
+      "similarity": 0.194,
+      "disposition": "retained",
+      "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+    }
+  ],
+  "itemReviews": [
+    {
+      "id": "LAR-S26-0101",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0102",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0103",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        5,
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0104",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        5,
+        6,
+        8
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0105",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0106",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0107",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0108",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0109",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0110",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0111",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0112",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0113",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0114",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0115",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0116",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0117",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0118",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0119",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0120",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0121",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0122",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0123",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0124",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0125",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0126",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4,
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0127",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        3,
+        5,
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0128",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0129",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        3,
+        5,
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0130",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0131",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0132",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0133",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0134",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "documented-contract",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0135",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0136",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0137",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        3,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0138",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        1,
+        6,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0139",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        2,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0140",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0141",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        3,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0142",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0143",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        6,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0144",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        5,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0145",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "documented-contract",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0146",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0147",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        5,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0148",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0149",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "documented-contract",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0150",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        1,
+        7
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0151",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0152",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0153",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0154",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0155",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0156",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0157",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0158",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0159",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0160",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0161",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0162",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0163",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0164",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0165",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0166",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0167",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0168",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0169",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0170",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0171",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0172",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        2,
+        4,
+        5
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0173",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": [
+        4,
+        8
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0174",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": [
+        4,
+        6
+      ],
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0175",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0176",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0177",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0178",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0179",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0180",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "documented-contract",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0181",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0182",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "documented-contract",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0183",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0184",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0185",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0186",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0187",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0188",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0189",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0190",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0191",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0192",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0193",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0194",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0195",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0196",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0197",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Foundation",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0198",
+      "revision": 1,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0199",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    },
+    {
+      "id": "LAR-S26-0200",
+      "revision": 2,
+      "oneDefensibleKey": true,
+      "distractorsReviewed": 3,
+      "objectiveDistinctWithinAcceptedBank": true,
+      "assumptionsReviewed": true,
+      "difficulty": "Intermediate",
+      "mapping": null,
+      "validation": "runtime",
+      "independentApproval": "pending",
+      "optionsReviewed": 4
+    }
+  ],
+  "limitations": [
+    "Author review is not independent approval.",
+    "Five source/operational contracts are not runtime-tested.",
+    "SQLite invariant witnesses are not production concurrency benchmarks.",
+    "The complete six-batch cross-review is still required."
+  ],
+  "reviewCountClarification": "Four options reviewed: one correct answer and three distractors. Earlier count label used four for all options; no question or technical evidence changed."
+}

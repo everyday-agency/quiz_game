@@ -1,0 +1,13 @@
+{
+  "count": 600,
+  "permutations": 14400,
+  "distractorMappings": 43200,
+  "stableIds": true,
+  "curriculumRemapping": true,
+  "php620Unchanged": true,
+  "legacyArchiveUnchanged": true,
+  "progressIsolated": true,
+  "artifactFiles": 14,
+  "unchangedUiFiles": 8,
+  "independentApproval": "pending"
+}

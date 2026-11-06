@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0523",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Encryption rotation",
+  "subtopic": "encryption-previous-key-decrypt-only",
+  "objective": {
+    "id": "laravel.encryption-previous-key-decrypt-only",
+    "text": "Use previous keys for decryption during rotation while encrypting new values with the current key."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep old protected values readable while moving new encryption to the new key."
+  },
+  "prerequisites": [
+    "Encryption key rotation",
+    "Previous keys",
+    "Ciphertext migration"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "During a controlled key rotation, existing values use the old key and new writes must use the new key. Which configuration supports that transition?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Remove the old key immediately and expect the new key to decrypt all old values.",
+      "rationale": "Ciphertexts protected by the old key do not become decryptable by an unrelated new key.",
+      "misconception": "Ciphertexts protected by the old key do not become decryptable by an unrelated new key."
+    },
+    {
+      "id": "choice-2",
+      "text": "Alternate current keys on each request and keep no previous-key list.",
+      "rationale": "That gives inconsistent read compatibility and no controlled transition boundary.",
+      "misconception": "That gives inconsistent read compatibility and no controlled transition boundary."
+    },
+    {
+      "id": "choice-3",
+      "text": "Use the new key as current and retain the old key among previous decryption keys.",
+      "rationale": "The current key encrypts new values; previous keys are tried when decrypting older protected values.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Use the old key as current and put the new key only among previous keys.",
+      "rationale": "That keeps encrypting new values with the old key, contrary to the transition requirement.",
+      "misconception": "That keeps encrypting new values with the old key, contrary to the transition requirement."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The current key encrypts new values; previous keys are tried when decrypting older protected values.",
+    "trace": [
+      "Ciphertexts protected by the old key do not become decryptable by an unrelated new key.",
+      "That gives inconsistent read compatibility and no controlled transition boundary.",
+      "The current key encrypts new values; previous keys are tried when decrypting older protected values.",
+      "That keeps encrypting new values with the old key, contrary to the transition requirement."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "old:new:old-key-rejected-new",
+    "probe": "$oldKey = str_repeat('a', 32);\n$newKey = str_repeat('b', 32);\n$old = new Illuminate\\Encryption\\Encrypter($oldKey, 'AES-256-CBC');\n$current = new Illuminate\\Encryption\\Encrypter($newKey, 'AES-256-CBC');\n$current->previousKeys([$oldKey]);\necho $current->decryptString($old->encryptString('old')).':';\n$newValue = $current->encryptString('new');\necho $current->decryptString($newValue).':';\ntry {\n    $old->decryptString($newValue);\n} catch (Illuminate\\Contracts\\Encryption\\DecryptException $e) {\n    echo 'old-key-rejected-new';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/encryption#gracefully-rotating-encryption-keys"
+  ]
+}

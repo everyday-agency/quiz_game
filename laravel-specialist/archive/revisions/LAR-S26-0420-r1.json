@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0420",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Cache invalidation",
+  "subtopic": "cache-flush-ignores-prefix",
+  "objective": {
+    "id": "laravel.cache-flush-ignores-prefix",
+    "text": "Recognize that a whole-store flush may remove entries beyond an application's configured prefix."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recognize that a naming prefix is not an isolation boundary for a whole-store flush."
+  },
+  "prerequisites": [
+    "Shared Redis cache",
+    "Key prefixes",
+    "Flush scope"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Two applications use different Laravel cache prefixes but share a Redis logical database. One runs Cache::flush(). Why is the other application’s cache at risk?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The risk applies only if the applications generated an identical individual key.",
+      "rationale": "Whole-database flushing can remove distinct prefixed keys as well.",
+      "misconception": "Whole-database flushing can remove distinct prefixed keys as well."
+    },
+    {
+      "id": "choice-2",
+      "text": "Different prefixes are merged only when both applications use the same APP_NAME.",
+      "rationale": "APP_NAME does not make flushdb selectively respect prefixes.",
+      "misconception": "APP_NAME does not make flushdb selectively respect prefixes."
+    },
+    {
+      "id": "choice-3",
+      "text": "The Redis store flush clears the database rather than restricting deletion to that prefix.",
+      "rationale": "A prefix helps namespace ordinary keys, but this whole-store operation uses flushdb.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Laravel automatically synchronizes all prefixed keys whenever one key is removed.",
+      "rationale": "Ordinary single-key removal is not the broad operation described here.",
+      "misconception": "Ordinary single-key removal is not the broad operation described here."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "A prefix helps namespace ordinary keys, but this whole-store operation uses flushdb.",
+    "trace": [
+      "Whole-database flushing can remove distinct prefixed keys as well.",
+      "APP_NAME does not make flushdb selectively respect prefixes.",
+      "A prefix helps namespace ordinary keys, but this whole-store operation uses flushdb.",
+      "Ordinary single-key removal is not the broad operation described here."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Cache/RedisStore.php",
+    "contains": [
+      "$this->connection()->flushdb();"
+    ],
+    "reason": "RedisStore flush delegates to FLUSHDB. This is a documented/source contract; no shared Redis database is contacted or flushed.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#removing-items-from-the-cache"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0356",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Broadcast events",
+  "subtopic": "broadcast-now-versus-queued",
+  "objective": {
+    "id": "laravel.broadcast-now-versus-queued",
+    "text": "Distinguish ShouldBroadcastNow from a queued ShouldBroadcast event."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Predict the broadcast execution boundary under the two interfaces."
+  },
+  "prerequisites": [
+    "ShouldBroadcast",
+    "ShouldBroadcastNow",
+    "Queue execution"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The normal queue is asynchronous; the broadcaster is configured and succeeds. No worker runs during the two dispatch calls."
+    ],
+    "files": []
+  },
+  "stem": "One event implements ShouldBroadcast and another implements ShouldBroadcastNow. What distinguishes their broadcast work when dispatched?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Both broadcast synchronously because events are never queued.",
+      "rationale": "The normal ShouldBroadcast path uses a queued broadcast job.",
+      "misconception": "The normal ShouldBroadcast path uses a queued broadcast job."
+    },
+    {
+      "id": "choice-2",
+      "text": "The first queues broadcast work; the second broadcasts synchronously.",
+      "rationale": "ShouldBroadcastNow selects the immediate broadcast dispatch path instead of the normal queue.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The first broadcasts synchronously and the second waits for the next scheduler tick.",
+      "rationale": "This reverses the first behavior and invents a scheduling requirement for the second.",
+      "misconception": "This reverses the first behavior and invents a scheduling requirement for the second."
+    },
+    {
+      "id": "choice-4",
+      "text": "Both wait for a worker; Now only assigns higher queue priority.",
+      "rationale": "Now changes the dispatch mode, not merely priority within an asynchronous queue.",
+      "misconception": "Now changes the dispatch mode, not merely priority within an asynchronous queue."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "ShouldBroadcastNow selects the immediate broadcast dispatch path instead of the normal queue.",
+    "trace": [
+      "The normal ShouldBroadcast path uses a queued broadcast job.",
+      "ShouldBroadcastNow selects the immediate broadcast dispatch path instead of the normal queue.",
+      "This reverses the first behavior and invents a scheduling requirement for the second.",
+      "Now changes the dispatch mode, not merely priority within an asynchronous queue."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:1:2",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass CaptureBroadcaster extends Illuminate\\Broadcasting\\Broadcasters\\Broadcaster\n{\n    public function auth($request)\n    {\n        return $this->verifyUserCanAccessChannel($request, $request->input('channel_name'));\n    }\n\n    public function validAuthenticationResponse($request, $result)\n    {\n        return $result;\n    }\n\n    public function broadcast(array $channels, $event, array $payload = [])\n    {\n        app('cache')->put('broadcast-payload', $payload);\n        app('cache')->increment('broadcast-count');\n    }\n}\nconfig(['broadcasting.default' => 'capture', 'broadcasting.connections.capture' => ['driver' => 'capture']]);\napp(Illuminate\\Broadcasting\\BroadcastManager::class)->extend('capture', fn () => new CaptureBroadcaster());\nclass QueuedUpdate implements Illuminate\\Contracts\\Broadcasting\\ShouldBroadcast\n{\n    public function broadcastOn(): array\n    {\n        return [new Illuminate\\Broadcasting\\Channel('updates')];\n    }\n}\nclass ImmediateUpdate implements Illuminate\\Contracts\\Broadcasting\\ShouldBroadcastNow\n{\n    public function broadcastOn(): array\n    {\n        return [new Illuminate\\Broadcasting\\Channel('updates')];\n    }\n}\nevent(new QueuedUpdate());\nevent(new ImmediateUpdate());\necho Illuminate\\Support\\Facades\\DB::table('jobs')->count().':'.app('cache')->get('broadcast-count').':';\napp('queue')->connection()->pop()->fire();\necho app('cache')->get('broadcast-count');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/broadcasting#broadcast-queue"
+  ]
+}

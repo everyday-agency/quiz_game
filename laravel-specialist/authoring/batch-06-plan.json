@@ -1,0 +1,502 @@
+[
+  {
+    "id": "LAR-S26-0501",
+    "topic": "Exception reporting",
+    "objective": "Stop default exception logging deliberately from a custom report callback while retaining its own reporting action."
+  },
+  {
+    "id": "LAR-S26-0502",
+    "topic": "Exception rendering",
+    "objective": "Let a type-specific render callback fall back to Laravel's normal rendering when it returns null."
+  },
+  {
+    "id": "LAR-S26-0503",
+    "topic": "Exception reporting",
+    "objective": "Keep reporting suppression separate from the HTTP response presented for an exception."
+  },
+  {
+    "id": "LAR-S26-0504",
+    "topic": "Exception context",
+    "objective": "Attach domain identifiers through an exception's context method without placing secrets in its message."
+  },
+  {
+    "id": "LAR-S26-0505",
+    "topic": "Exception reporting",
+    "objective": "Distinguish duplicate reporting of one exception instance from two separately constructed exceptions."
+  },
+  {
+    "id": "LAR-S26-0506",
+    "topic": "Logging",
+    "objective": "Apply a channel's minimum severity threshold without mistaking it for one exact allowed level."
+  },
+  {
+    "id": "LAR-S26-0507",
+    "topic": "Logging context",
+    "objective": "Resolve a duplicate context key between channel context and one log entry."
+  },
+  {
+    "id": "LAR-S26-0508",
+    "topic": "Logging context",
+    "objective": "Clear channel context deliberately so unrelated later log entries do not retain it."
+  },
+  {
+    "id": "LAR-S26-0509",
+    "topic": "Logging context",
+    "objective": "Share context with channels created after the context was registered."
+  },
+  {
+    "id": "LAR-S26-0510",
+    "topic": "Logging stacks",
+    "objective": "Distinguish stack channel failure propagation from an explicit ignore_exceptions policy."
+  },
+  {
+    "id": "LAR-S26-0511",
+    "topic": "Logging security",
+    "objective": "Redact sensitive structured context before formatting and writing a log record."
+  },
+  {
+    "id": "LAR-S26-0512",
+    "topic": "Exception responses",
+    "objective": "Customize a rendered exception response while preserving required status and headers."
+  },
+  {
+    "id": "LAR-S26-0513",
+    "topic": "Context",
+    "objective": "Keep hidden diagnostic context out of ordinary log context while retaining it for application access."
+  },
+  {
+    "id": "LAR-S26-0514",
+    "topic": "Context",
+    "objective": "Restore the previous context after a scoped context operation."
+  },
+  {
+    "id": "LAR-S26-0515",
+    "topic": "Context and queues",
+    "objective": "Carry captured context into a queued execution without treating it as a fresh authenticated request."
+  },
+  {
+    "id": "LAR-S26-0516",
+    "topic": "Exception severity",
+    "objective": "Set an exception type's reporting level without changing the response status."
+  },
+  {
+    "id": "LAR-S26-0517",
+    "topic": "Error control flow",
+    "objective": "Report a caught exception without assuming the report helper rethrows it."
+  },
+  {
+    "id": "LAR-S26-0518",
+    "topic": "Error control flow",
+    "objective": "Use a rescue fallback and an explicit reporting policy without swallowing unrelated code outside its callback."
+  },
+  {
+    "id": "LAR-S26-0519",
+    "topic": "Retry control flow",
+    "objective": "Distinguish an exception-triggered retry from a callback that simply returns false."
+  },
+  {
+    "id": "LAR-S26-0520",
+    "topic": "Request diagnostics",
+    "objective": "Correlate a response identifier with the matching log context through one middleware-generated value."
+  },
+  {
+    "id": "LAR-S26-0521",
+    "topic": "Encryption",
+    "objective": "Recognize randomized authenticated encryption when equal plaintexts produce different ciphertexts."
+  },
+  {
+    "id": "LAR-S26-0522",
+    "topic": "Encryption integrity",
+    "objective": "Reject modified encrypted payloads rather than trusting decryptable-looking base64."
+  },
+  {
+    "id": "LAR-S26-0523",
+    "topic": "Encryption rotation",
+    "objective": "Use previous keys for decryption during rotation while encrypting new values with the current key."
+  },
+  {
+    "id": "LAR-S26-0524",
+    "topic": "Encryption failures",
+    "objective": "Handle decryption failure as invalid protected data rather than accepting the original ciphertext as plaintext."
+  },
+  {
+    "id": "LAR-S26-0525",
+    "topic": "Password reset storage",
+    "objective": "Store a hash of a reset token while verifying the presented plaintext token through the repository."
+  },
+  {
+    "id": "LAR-S26-0526",
+    "topic": "Password reset expiry",
+    "objective": "Distinguish reset-token lifetime from password-broker issuance throttling."
+  },
+  {
+    "id": "LAR-S26-0527",
+    "topic": "Password reset lifecycle",
+    "objective": "Invalidate a reset token after a successful password reset."
+  },
+  {
+    "id": "LAR-S26-0528",
+    "topic": "Password reset throttling",
+    "objective": "Refuse repeated token creation within the configured issuance throttle window."
+  },
+  {
+    "id": "LAR-S26-0529",
+    "topic": "Email verification",
+    "objective": "Validate the signed verification request's user identity and email hash before marking the account verified."
+  },
+  {
+    "id": "LAR-S26-0530",
+    "topic": "Email verification",
+    "objective": "Require verified email separately from ordinary authentication for a protected application route."
+  },
+  {
+    "id": "LAR-S26-0531",
+    "topic": "Authentication state",
+    "objective": "Authenticate a single request with once without persisting a login session."
+  },
+  {
+    "id": "LAR-S26-0532",
+    "topic": "Session authentication",
+    "objective": "Require the current password when invalidating other authenticated sessions through the supported flow."
+  },
+  {
+    "id": "LAR-S26-0533",
+    "topic": "Authentication security",
+    "objective": "Avoid revealing account existence through publicly distinguishable password-reset outcomes."
+  },
+  {
+    "id": "LAR-S26-0534",
+    "topic": "Encryption formats",
+    "objective": "Keep string encryption and serialized-value encryption paired with the matching decryption API."
+  },
+  {
+    "id": "LAR-S26-0535",
+    "topic": "Outbound request security",
+    "objective": "Constrain user-influenced outbound destinations and redirects rather than treating URL syntax validation as SSRF protection."
+  },
+  {
+    "id": "LAR-S26-0536",
+    "topic": "Webhook authenticity",
+    "objective": "Compute a webhook signature over the exact raw body rather than a re-encoded parsed JSON object."
+  },
+  {
+    "id": "LAR-S26-0537",
+    "topic": "Webhook freshness",
+    "objective": "Add a freshness and replay policy to an authentic webhook instead of treating a valid signature as proof of a new delivery."
+  },
+  {
+    "id": "LAR-S26-0538",
+    "topic": "Upload delivery security",
+    "objective": "Prevent uploaded active content from becoming trusted same-origin executable content when serving user files."
+  },
+  {
+    "id": "LAR-S26-0539",
+    "topic": "Password confirmation",
+    "objective": "Distinguish a recent password-confirmation requirement from an already authenticated session."
+  },
+  {
+    "id": "LAR-S26-0540",
+    "topic": "Cookie security",
+    "objective": "Understand which attacks HttpOnly mitigates without treating it as CSRF protection."
+  },
+  {
+    "id": "LAR-S26-0541",
+    "topic": "Collections",
+    "objective": "Preserve the original collection when using map instead of a mutating transform."
+  },
+  {
+    "id": "LAR-S26-0542",
+    "topic": "Collections",
+    "objective": "Reindex filtered numeric keys before returning a JSON list contract."
+  },
+  {
+    "id": "LAR-S26-0543",
+    "topic": "Collections",
+    "objective": "Distinguish a legitimate zero key returned by search from failure using strict comparison."
+  },
+  {
+    "id": "LAR-S26-0544",
+    "topic": "Collections",
+    "objective": "Use strict value comparison when loose collection matching would merge identifiers of different types."
+  },
+  {
+    "id": "LAR-S26-0545",
+    "topic": "Collections",
+    "objective": "Account for the last value winning when keyBy receives duplicate keys."
+  },
+  {
+    "id": "LAR-S26-0546",
+    "topic": "Collections",
+    "objective": "Distinguish flattening all nested levels from flattening only one level."
+  },
+  {
+    "id": "LAR-S26-0547",
+    "topic": "Collections",
+    "objective": "Retain both accepted and rejected items through partition without rerunning a changing predicate."
+  },
+  {
+    "id": "LAR-S26-0548",
+    "topic": "Lazy collections",
+    "objective": "Defer source iteration and bound consumption with a lazy generator and take."
+  },
+  {
+    "id": "LAR-S26-0549",
+    "topic": "Collections",
+    "objective": "Distinguish merge from union when combining maps whose string keys overlap."
+  },
+  {
+    "id": "LAR-S26-0550",
+    "topic": "Collections",
+    "objective": "Assign one item to multiple groups when a groupBy callback returns several group keys."
+  },
+  {
+    "id": "LAR-S26-0551",
+    "topic": "Helpers",
+    "objective": "Recognize that data_get's outer default is not forwarded to each wildcard leaf in the pinned framework."
+  },
+  {
+    "id": "LAR-S26-0552",
+    "topic": "Helpers",
+    "objective": "Fill only absent nested values with data_fill without replacing existing false or null values."
+  },
+  {
+    "id": "LAR-S26-0553",
+    "topic": "Strings",
+    "objective": "Keep immutable fluent string transformations distinct from mutating the original Stringable value."
+  },
+  {
+    "id": "LAR-S26-0554",
+    "topic": "Pipeline",
+    "objective": "Run pipeline cleanup through finally when a pipe throws before the destination."
+  },
+  {
+    "id": "LAR-S26-0555",
+    "topic": "Pipeline",
+    "objective": "Supply per-stage parameters through the pipeline's supported pipe-string parsing."
+  },
+  {
+    "id": "LAR-S26-0556",
+    "topic": "Localization",
+    "objective": "Resolve a missing locale key through the configured fallback locale."
+  },
+  {
+    "id": "LAR-S26-0557",
+    "topic": "Localization",
+    "objective": "Distinguish an absent translation key from a translated empty string."
+  },
+  {
+    "id": "LAR-S26-0558",
+    "topic": "Localization",
+    "objective": "Select a plural translation branch using the supplied count rather than the displayed placeholder alone."
+  },
+  {
+    "id": "LAR-S26-0559",
+    "topic": "Localization",
+    "objective": "Apply translation placeholder capitalization consistently for name, Name and NAME."
+  },
+  {
+    "id": "LAR-S26-0560",
+    "topic": "Localization",
+    "objective": "Override one namespaced package translation while retaining its other default translations."
+  },
+  {
+    "id": "LAR-S26-0561",
+    "topic": "Localization",
+    "objective": "Avoid collisions between JSON translation keys and PHP translation filenames."
+  },
+  {
+    "id": "LAR-S26-0562",
+    "topic": "Localization",
+    "objective": "Resolve localized validation attribute labels while retaining stable machine-readable error keys."
+  },
+  {
+    "id": "LAR-S26-0563",
+    "topic": "Localization",
+    "objective": "Select language from an application allowlist instead of accepting arbitrary locale identifiers."
+  },
+  {
+    "id": "LAR-S26-0564",
+    "topic": "Localization",
+    "objective": "Keep persisted timestamps in a consistent time basis while formatting a viewer-specific timezone."
+  },
+  {
+    "id": "LAR-S26-0565",
+    "topic": "Localization tests",
+    "objective": "Detect a missing translation in one locale without letting fallback translations mask the omission."
+  },
+  {
+    "id": "LAR-S26-0566",
+    "topic": "Deployment",
+    "objective": "Point the web document root at public so application source and environment files are not directly served."
+  },
+  {
+    "id": "LAR-S26-0567",
+    "topic": "Deployment security",
+    "objective": "Disable production debug rendering so exception details are not exposed to unauthenticated clients."
+  },
+  {
+    "id": "LAR-S26-0568",
+    "topic": "Deployment",
+    "objective": "Build configuration cache in the intended release environment rather than shipping another environment's resolved values."
+  },
+  {
+    "id": "LAR-S26-0569",
+    "topic": "Deployment",
+    "objective": "Use backward-compatible expand-and-contract database changes during a rolling release."
+  },
+  {
+    "id": "LAR-S26-0570",
+    "topic": "Deployment",
+    "objective": "Distinguish migration rollback from restoration of data destroyed by a migration."
+  },
+  {
+    "id": "LAR-S26-0571",
+    "topic": "Deployment",
+    "objective": "Choose readiness checks that reflect required dependencies instead of treating a boot-only health response as proof of full service readiness."
+  },
+  {
+    "id": "LAR-S26-0572",
+    "topic": "Deployment",
+    "objective": "Supply production write access to storage and bootstrap/cache without making the entire source tree writable."
+  },
+  {
+    "id": "LAR-S26-0573",
+    "topic": "Deployment",
+    "objective": "Keep the previous immutable release available for rollback without claiming this also reverses database changes."
+  },
+  {
+    "id": "LAR-S26-0574",
+    "topic": "Deployment",
+    "objective": "Run production migrations noninteractively with an explicit deployment decision rather than assuming a prompt will be answered."
+  },
+  {
+    "id": "LAR-S26-0575",
+    "topic": "Deployment",
+    "objective": "Interpret optimize:clear as clearing cached artifacts rather than rebuilding them for the new release."
+  },
+  {
+    "id": "LAR-S26-0576",
+    "topic": "Deployment",
+    "objective": "Coordinate maintenance state across nodes instead of assuming a local maintenance file changes every server."
+  },
+  {
+    "id": "LAR-S26-0577",
+    "topic": "Long-lived workers",
+    "objective": "Avoid capturing a request object in a singleton that outlives the request under a persistent worker."
+  },
+  {
+    "id": "LAR-S26-0578",
+    "topic": "Long-lived workers",
+    "objective": "Reload persistent HTTP workers when deploying changed application code."
+  },
+  {
+    "id": "LAR-S26-0579",
+    "topic": "Performance",
+    "objective": "Measure endpoint query count and latency before selecting caching as the remedy."
+  },
+  {
+    "id": "LAR-S26-0580",
+    "topic": "Performance",
+    "objective": "Recognize that adding an index has write and storage costs as well as possible read benefits."
+  },
+  {
+    "id": "LAR-S26-0581",
+    "topic": "Application architecture",
+    "objective": "Keep a domain calculation independent of HTTP Request and response classes for reuse in jobs and commands."
+  },
+  {
+    "id": "LAR-S26-0582",
+    "topic": "Application architecture",
+    "objective": "Put one transaction boundary around a complete local business operation rather than committing each repository write independently."
+  },
+  {
+    "id": "LAR-S26-0583",
+    "topic": "Application architecture",
+    "objective": "Return explicit domain outcomes from a service instead of using transport-specific status codes as business state."
+  },
+  {
+    "id": "LAR-S26-0584",
+    "topic": "Application architecture",
+    "objective": "Preserve domain invariants when moving logic out of a controller rather than only relocating unvalidated arrays."
+  },
+  {
+    "id": "LAR-S26-0585",
+    "topic": "Application architecture",
+    "objective": "Separate infrastructure adapters from the business interface they implement so alternative transports can be tested."
+  },
+  {
+    "id": "LAR-S26-0586",
+    "topic": "Application architecture",
+    "objective": "Coordinate a multi-step operation through an application service instead of hidden mutually triggering model observers."
+  },
+  {
+    "id": "LAR-S26-0587",
+    "topic": "Application architecture",
+    "objective": "Use a dedicated read projection when a report has different data requirements from transactional model writes."
+  },
+  {
+    "id": "LAR-S26-0588",
+    "topic": "Application architecture",
+    "objective": "Make a policy decision on the authoritative current resource state when a delayed operation executes."
+  },
+  {
+    "id": "LAR-S26-0589",
+    "topic": "Integration contracts",
+    "objective": "Handle a conditional HTTP 304 response by reusing the cached representation rather than parsing an absent new body."
+  },
+  {
+    "id": "LAR-S26-0590",
+    "topic": "Integration resilience",
+    "objective": "Apply a retry budget only to safe transient failures instead of retrying every domain rejection."
+  },
+  {
+    "id": "LAR-S26-0591",
+    "topic": "Integration resilience",
+    "objective": "Bound an external call's retry policy within the caller's overall request deadline."
+  },
+  {
+    "id": "LAR-S26-0592",
+    "topic": "Integration resilience",
+    "objective": "Distinguish a circuit breaker's open state from a per-request retry loop."
+  },
+  {
+    "id": "LAR-S26-0593",
+    "topic": "Integration consistency",
+    "objective": "Reconcile an uncertain external outcome before repeating an operation that may already have succeeded."
+  },
+  {
+    "id": "LAR-S26-0594",
+    "topic": "Application architecture",
+    "objective": "Keep package service-provider boot work lightweight rather than performing network I/O during every application boot."
+  },
+  {
+    "id": "LAR-S26-0595",
+    "topic": "Package integration",
+    "objective": "Use namespaced package views and application overrides without copying the entire package into application source."
+  },
+  {
+    "id": "LAR-S26-0596",
+    "topic": "Package configuration",
+    "objective": "Understand shallow configuration merging when package defaults contain nested arrays."
+  },
+  {
+    "id": "LAR-S26-0597",
+    "topic": "Package integration",
+    "objective": "Publish package assets under an explicit tag without assuming provider registration automatically copies files."
+  },
+  {
+    "id": "LAR-S26-0598",
+    "topic": "Package integration",
+    "objective": "Load package migrations through the provider without registering a new database connection for the package."
+  },
+  {
+    "id": "LAR-S26-0599",
+    "topic": "Architecture tests",
+    "objective": "Detect a forbidden domain-to-HTTP dependency with a targeted architecture boundary check."
+  },
+  {
+    "id": "LAR-S26-0600",
+    "topic": "Framework upgrades",
+    "objective": "Validate a locked framework upgrade with behavior regressions instead of treating dependency resolution as proof of application compatibility."
+  }
+]

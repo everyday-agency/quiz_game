@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0509",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Logging context",
+  "subtopic": "shared-log-context-future-channels",
+  "objective": {
+    "id": "laravel.shared-log-context-future-channels",
+    "text": "Share context with channels created after the context was registered."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Propagate one correlation field beyond the currently selected channel."
+  },
+  "prerequisites": [
+    "LogManager channels",
+    "Shared context"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A correlation ID should be available on all logging channels, including channels first resolved later in this request. Which Log facade operation is designed for that scope?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Log::info(\"start\", [\"request_id\" => $id])",
+      "rationale": "Per-entry context is attached only to that record.",
+      "misconception": "Per-entry context is attached only to that record."
+    },
+    {
+      "id": "choice-2",
+      "text": "Log::shareContext([\"request_id\" => $id])",
+      "rationale": "The manager stores shared context and applies it to existing and subsequently resolved channels.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Log::channel(\"single\")->info(\"start\", [\"request_id\" => $id])",
+      "rationale": "Selecting a channel and adding entry context does not establish shared context for others.",
+      "misconception": "Selecting a channel and adding entry context does not establish shared context for others."
+    },
+    {
+      "id": "choice-4",
+      "text": "Log::channel(\"single\")->withContext([\"request_id\" => $id])",
+      "rationale": "That targets one logger rather than all future channels.",
+      "misconception": "That targets one logger rather than all future channels."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The manager stores shared context and applies it to existing and subsequently resolved channels.",
+    "trace": [
+      "Per-entry context is attached only to that record.",
+      "The manager stores shared context and applies it to existing and subsequently resolved channels.",
+      "Selecting a channel and adding entry context does not establish shared context for others.",
+      "That targets one logger rather than all future channels."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "r1",
+    "probe": "config(['logging.channels.later' => [\n    'driver' => 'single',\n    'path' => storage_path('logs/later.log'),\n]]);\nIlluminate\\Support\\Facades\\Log::shareContext(['request_id' => 'r1']);\n$channel = Illuminate\\Support\\Facades\\Log::channel('later');\n$channel->info('event');\necho str_contains(file_get_contents(storage_path('logs/later.log')), '\"request_id\":\"r1\"') ? 'r1' : 'missing';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/logging#contextual-information"
+  ]
+}

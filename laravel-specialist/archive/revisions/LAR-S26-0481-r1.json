@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0481",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "HTTP tests",
+  "subtopic": "following-redirects-final-response",
+  "objective": {
+    "id": "laravel.following-redirects-final-response",
+    "text": "Distinguish the original redirect response from the final response when following redirects in a test."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Choose the response boundary that actually verifies a redirect."
+  },
+  "prerequisites": [
+    "Feature test redirects",
+    "Intermediate versus final responses"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A POST redirects to a page that returns 200. A test uses followingRedirects()->post(...) and then expects a redirect status on the returned TestResponse. Why does that fail?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The helper returns the final followed response, so assert the redirect before enabling redirect following.",
+      "rationale": "Following redirects consumes the intermediate redirect and exposes the destination response.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "A POST can never produce a redirect in a feature test.",
+      "rationale": "Redirect responses are valid and testable without following them.",
+      "misconception": "Redirect responses are valid and testable without following them."
+    },
+    {
+      "id": "choice-3",
+      "text": "followingRedirects changes the controller’s redirect into a JSON response.",
+      "rationale": "The helper follows requests; it does not rewrite the controller’s response format.",
+      "misconception": "The helper follows requests; it does not rewrite the controller’s response format."
+    },
+    {
+      "id": "choice-4",
+      "text": "The helper deletes the Location header from the application’s original response before routing.",
+      "rationale": "The issue is which response is returned, not an application redirect being removed before it exists.",
+      "misconception": "The issue is which response is returned, not an application redirect being removed before it exists."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Following redirects consumes the intermediate redirect and exposes the destination response.",
+    "trace": [
+      "Following redirects consumes the intermediate redirect and exposes the destination response.",
+      "Redirect responses are valid and testable without following them.",
+      "The helper follows requests; it does not rewrite the controller’s response format.",
+      "The issue is which response is returned, not an application redirect being removed before it exists."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "302:200:done",
+    "probe": "PHPUnit\\TextUI\\Configuration\\Registry::init(\n    (new PHPUnit\\TextUI\\CliArguments\\Builder)->fromParameters(['phpunit', '--no-configuration']),\n    PHPUnit\\TextUI\\XmlConfiguration\\DefaultConfiguration::create(),\n);\n$test = new class('localFixture') extends Illuminate\\Foundation\\Testing\\TestCase\n{\n    public function attach($application): void\n    {\n        $this->app = $application;\n    }\n    public function exposeExceptions(): void\n    {\n        $this->withoutExceptionHandling();\n    }\n};\n$test->attach(app());\napp('router')->post('/submit', fn () => redirect('/done'));\napp('router')->get('/done', fn () => 'done');\necho $test->post('/submit')->status().':';\n$final = $test->followingRedirects()->post('/submit');\necho $final->status().':'.$final->getContent();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/http-tests#following-redirects",
+    "https://laravel.com/docs/13.x/http-tests#assert-redirect"
+  ]
+}

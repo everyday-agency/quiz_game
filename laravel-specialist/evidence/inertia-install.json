@@ -1,0 +1,11 @@
+{
+  "command": "composer require --dev inertiajs/inertia-laravel:^3.0 --no-interaction --no-scripts --no-plugins --no-progress --minimal-changes",
+  "result": "one install; zero updates; zero removals; no security vulnerability advisories found",
+  "framework": "v13.40.0",
+  "adapter": "v3.7.0",
+  "composerLockSha256": "b8664f812b9856ec98db81bbd5bc1950196c7b4dc230b6096ded263476c34df5",
+  "scriptExecution": false,
+  "pluginExecution": false,
+  "shipping": false,
+  "priorEvidence": "laravel-specialist/evidence/history/pre-inertia"
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0150",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Form Requests",
+  "subtopic": "form-request-container-resolution",
+  "objective": {
+    "id": "laravel.form-request-container-resolution",
+    "text": "Distinguish container-resolved Form Requests from direct construction when testing automatic validation."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Exercise the framework resolution hook instead of assuming a constructor invokes validation."
+  },
+  "prerequisites": [
+    "Form Request service provider",
+    "Object construction",
+    "Automatic validation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A unit test only executes new SignupRequest() and sees no ValidationException despite missing required email. The request rules are correct. What must the test exercise to verify Laravel's automatic validation workflow?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Resolve the request through Laravel's configured container or send an HTTP request to an action that type-hints it.",
+      "rationale": "Automatic validation is attached to container resolution of ValidatesWhenResolved objects; plain construction does not invoke that hook.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Call json_encode on the new request before checking for an exception.",
+      "rationale": "Serialization does not run the Form Request resolution hook.",
+      "misconception": "Serialization does not run the Form Request resolution hook."
+    },
+    {
+      "id": "choice-3",
+      "text": "Make email a public property so construction discovers its rule.",
+      "rationale": "Validation rules are not triggered by declaring matching public properties.",
+      "misconception": "Validation rules are not triggered by declaring matching public properties."
+    },
+    {
+      "id": "choice-4",
+      "text": "Assert that plain construction throws and keep the same setup.",
+      "rationale": "The constructor is not the framework validation lifecycle entry point.",
+      "misconception": "The constructor is not the framework validation lifecycle entry point."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Automatic validation is attached to container resolution of ValidatesWhenResolved objects; plain construction does not invoke that hook.",
+    "trace": [
+      "Automatic validation is attached to container resolution of ValidatesWhenResolved objects; plain construction does not invoke that hook.",
+      "Serialization does not run the Form Request resolution hook.",
+      "Validation rules are not triggered by declaring matching public properties.",
+      "The constructor is not the framework validation lifecycle entry point."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "constructed:validated",
+    "probe": "class SignupRequest extends Illuminate\\Foundation\\Http\\FormRequest\n{\n    public function rules(): array\n    {\n        return ['email' => 'required'];\n    }\n}\n$new = new SignupRequest();\necho 'constructed:';\ntry {\n    app(SignupRequest::class);\n} catch (Illuminate\\Validation\\ValidationException $e) {\n    echo 'validated';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      1,
+      7
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#form-request-validation"
+  ]
+}

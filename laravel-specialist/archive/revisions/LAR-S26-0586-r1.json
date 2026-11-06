@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0586",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Application architecture",
+  "subtopic": "observer-cycle-explicit-orchestration",
+  "objective": {
+    "id": "laravel.observer-cycle-explicit-orchestration",
+    "text": "Coordinate a multi-step operation through an application service instead of hidden mutually triggering model observers."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Make a bidirectional update workflow explicit rather than breaking its recursion by suppressing required behavior."
+  },
+  "prerequisites": [
+    "Model observers",
+    "Recursive side effects",
+    "Application services"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "An Order observer updates Invoice. An Invoice observer updates Order. Each save changes a field and retriggers the other observer. Both updates are required for this operation."
+    ],
+    "files": []
+  },
+  "stem": "Which redesign addresses the cycle while retaining both required updates?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Put the operation’s ordered updates in one application service and remove the reciprocal observer triggers.",
+      "rationale": "An explicit owner can perform both updates once, making ordering and failure behavior visible without recursive triggers.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Catch the recursion failure and return success from the controller.",
+      "rationale": "That leaves required work incomplete and misreports the outcome.",
+      "misconception": "That leaves required work incomplete and misreports the outcome."
+    },
+    {
+      "id": "choice-3",
+      "text": "Add saveQuietly to every model save in the application.",
+      "rationale": "Global event suppression can discard other required behavior and leaves the operation’s ownership unclear.",
+      "misconception": "Global event suppression can discard other required behavior and leaves the operation’s ownership unclear."
+    },
+    {
+      "id": "choice-4",
+      "text": "Queue both observer updates while retaining their reciprocal triggers.",
+      "rationale": "Asynchrony changes timing but still permits an unbounded feedback loop.",
+      "misconception": "Asynchrony changes timing but still permits an unbounded feedback loop."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "An explicit owner can perform both updates once, making ordering and failure behavior visible without recursive triggers.",
+    "trace": [
+      "An explicit owner can perform both updates once, making ordering and failure behavior visible without recursive triggers.",
+      "That leaves required work incomplete and misreports the outcome.",
+      "Global event suppression can discard other required behavior and leaves the operation’s ownership unclear.",
+      "Asynchrony changes timing but still permits an unbounded feedback loop."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "ready:issued",
+    "probe": "use Illuminate\\Support\\Facades\\DB;\nuse Illuminate\\Support\\Facades\\Schema;\nSchema::create('orders', function ($t) {\n    $t->id();\n    $t->string('status');\n});\nSchema::create('invoices', function ($t) {\n    $t->id();\n    $t->string('status');\n});\nDB::table('orders')->insert(['id' => 1, 'status' => 'draft']);\nDB::table('invoices')->insert(['id' => 1, 'status' => 'draft']);\nDB::transaction(function () {\n    DB::table('orders')->where('id', 1)->update(['status' => 'ready']);\n    DB::table('invoices')->where('id', 1)->update(['status' => 'issued']);\n});\necho DB::table('orders')->value('status').':'.DB::table('invoices')->value('status');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent#observers",
+    "https://laravel.com/docs/13.x/eloquent#muting-events"
+  ]
+}

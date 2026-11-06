@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0549",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Collections",
+  "subtopic": "collection-merge-union-string-key-precedence",
+  "objective": {
+    "id": "laravel.collection-merge-union-string-key-precedence",
+    "text": "Distinguish merge from union when combining maps whose string keys overlap."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Choose the desired precedence when combining maps with colliding string keys."
+  },
+  "prerequisites": [
+    "Associative collections",
+    "merge",
+    "union"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\n$base = collect(['mode' => 'safe', 'limit' => 10]);\n$incoming = ['mode' => 'fast'];\n\necho $base->merge($incoming)['mode'].':';\necho $base->union($incoming)['mode'];\n"
+      }
+    ]
+  },
+  "stem": "What values are printed for mode?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "fast:safe",
+      "rationale": "merge replaces a duplicate string key with the incoming value; union keeps the original collection’s value for that key.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "safe:safe",
+      "rationale": "merge does allow the incoming value to replace a duplicate string key.",
+      "misconception": "merge does allow the incoming value to replace a duplicate string key."
+    },
+    {
+      "id": "choice-3",
+      "text": "fast:fast",
+      "rationale": "union does not overwrite the existing string-key value.",
+      "misconception": "union does not overwrite the existing string-key value."
+    },
+    {
+      "id": "choice-4",
+      "text": "safe:fast",
+      "rationale": "This reverses the two operations’ key precedence.",
+      "misconception": "This reverses the two operations’ key precedence."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "merge replaces a duplicate string key with the incoming value; union keeps the original collection’s value for that key.",
+    "trace": [
+      "merge replaces a duplicate string key with the incoming value; union keeps the original collection’s value for that key.",
+      "merge does allow the incoming value to replace a duplicate string key.",
+      "union does not overwrite the existing string-key value.",
+      "This reverses the two operations’ key precedence."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "fast:safe",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/collections#method-merge",
+    "https://laravel.com/docs/13.x/collections#method-union"
+  ]
+}

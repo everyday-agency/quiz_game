@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0300",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Database concurrency",
+  "subtopic": "consistent-row-lock-acquisition-order",
+  "objective": {
+    "id": "laravel.consistent-row-lock-acquisition-order",
+    "text": "Acquire multiple row locks in a consistent order to avoid the stated deadlock cycle."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Break the stated wait cycle by making all participants acquire the shared resources in the same order."
+  },
+  "prerequisites": [
+    "PostgreSQL row locks",
+    "Deadlock cycles",
+    "Transaction retry boundaries"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "PostgreSQL 18. Transfers lock two existing account rows one at a time with lockForUpdate inside a transaction. All transfer paths can follow the chosen rule."
+    ],
+    "files": []
+  },
+  "stem": "Transfer A locks account 4 then waits for 9. Transfer B locks 9 then waits for 4. Which change prevents this particular opposite-order cycle while retaining exclusive protection of both balances?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Increase the deadlock retry count but keep both acquisition orders unchanged.",
+      "rationale": "Retries can recover failed attempts but do not prevent this ordering cycle from recurring.",
+      "misconception": "Retries can recover failed attempts but do not prevent this ordering cycle from recurring."
+    },
+    {
+      "id": "choice-2",
+      "text": "Sort the two account IDs and acquire both row locks in ascending order in every transfer path.",
+      "rationale": "A common resource order prevents one transfer holding 9 while waiting for 4 as another holds 4 and waits for 9. Other causes still warrant bounded retries.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Acquire the second lock after committing the first balance update.",
+      "rationale": "This splits the protected transfer and sacrifices atomic protection of the two balances.",
+      "misconception": "This splits the protected transfer and sacrifices atomic protection of the two balances."
+    },
+    {
+      "id": "choice-4",
+      "text": "Use the sender account first in every transfer, regardless of numeric order.",
+      "rationale": "Opposite-direction transfers still start with different rows and recreate the described cycle.",
+      "misconception": "Opposite-direction transfers still start with different rows and recreate the described cycle."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A common resource order prevents one transfer holding 9 while waiting for 4 as another holds 4 and waits for 9. Other causes still warrant bounded retries.",
+    "trace": [
+      "Retries can recover failed attempts but do not prevent this ordering cycle from recurring.",
+      "A common resource order prevents one transfer holding 9 while waiting for 4 as another holds 4 and waits for 9. Other causes still warrant bounded retries.",
+      "This splits the protected transfer and sacrifices atomic protection of the two balances.",
+      "Opposite-direction transfers still start with different rows and recreate the described cycle."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Database/Query/Builder.php",
+    "contains": [
+      "public function lockForUpdate()",
+      "return $this->lock(true);"
+    ],
+    "reason": "PostgreSQL documents consistent lock acquisition order as the principal defense against this wait cycle. Laravel supplies the locking query; no multi-connection PostgreSQL execution is claimed.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queries#pessimistic-locking",
+    "https://laravel.com/docs/13.x/database#handling-deadlocks",
+    "https://www.postgresql.org/docs/18/explicit-locking.html"
+  ]
+}

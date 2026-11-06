@@ -1,0 +1,502 @@
+[
+  {
+    "id": "LAR-S26-0101",
+    "topic": "Validation",
+    "objective": "Limit further rules on one failing attribute with bail without stopping unrelated attributes."
+  },
+  {
+    "id": "LAR-S26-0102",
+    "topic": "Validation",
+    "objective": "Account for after callbacks still running when stopOnFirstFailure halts further attribute validation."
+  },
+  {
+    "id": "LAR-S26-0103",
+    "topic": "Validation",
+    "objective": "Use sometimes with required to distinguish an omitted PATCH field from an explicitly empty field."
+  },
+  {
+    "id": "LAR-S26-0104",
+    "topic": "Validation",
+    "objective": "Allow normalized null values through a non-implicit date rule using nullable."
+  },
+  {
+    "id": "LAR-S26-0105",
+    "topic": "Validation",
+    "objective": "Reject unexpected nested array keys using the array rule's allowed-key list."
+  },
+  {
+    "id": "LAR-S26-0106",
+    "topic": "Validation",
+    "objective": "Expand wildcard rules to concrete nested error paths without losing item identity."
+  },
+  {
+    "id": "LAR-S26-0107",
+    "topic": "Validation",
+    "objective": "Distinguish strict distinct-value checks from default loose comparisons."
+  },
+  {
+    "id": "LAR-S26-0108",
+    "topic": "Validation",
+    "objective": "Require an affirmative consent value with accepted instead of accepting any boolean."
+  },
+  {
+    "id": "LAR-S26-0109",
+    "topic": "Validation",
+    "objective": "Require a dependent field only for the specified discriminator value."
+  },
+  {
+    "id": "LAR-S26-0110",
+    "topic": "Validation",
+    "objective": "Use required_without for alternative contact methods while allowing both to be present."
+  },
+  {
+    "id": "LAR-S26-0111",
+    "topic": "Validation",
+    "objective": "Reject a forbidden field for one mode rather than silently discarding it."
+  },
+  {
+    "id": "LAR-S26-0112",
+    "topic": "Validation",
+    "objective": "Exclude an inapplicable field from validated output with exclude_if."
+  },
+  {
+    "id": "LAR-S26-0113",
+    "topic": "Validation",
+    "objective": "Keep a regular expression containing a pipe intact by using array-form validation rules."
+  },
+  {
+    "id": "LAR-S26-0114",
+    "topic": "Validation",
+    "objective": "Validate a backed enum against its allowed cases rather than accepting arbitrary strings."
+  },
+  {
+    "id": "LAR-S26-0115",
+    "topic": "Validation",
+    "objective": "Apply a field comparison rule to a date interval and test the equality boundary."
+  },
+  {
+    "id": "LAR-S26-0116",
+    "topic": "Validation",
+    "objective": "Use password confirmation field naming without mistaking it for authentication."
+  },
+  {
+    "id": "LAR-S26-0117",
+    "topic": "Validation",
+    "objective": "Separate string length limits from numeric value limits in a quantity field."
+  },
+  {
+    "id": "LAR-S26-0118",
+    "topic": "Validation",
+    "objective": "Reject a non-list associative payload when the API requires a consecutive numeric list."
+  },
+  {
+    "id": "LAR-S26-0119",
+    "topic": "Validation",
+    "objective": "Enforce decimals independently of a numeric range requirement."
+  },
+  {
+    "id": "LAR-S26-0120",
+    "topic": "Validation",
+    "objective": "Limit allowed file content types without trusting the original filename extension."
+  },
+  {
+    "id": "LAR-S26-0121",
+    "topic": "Validation",
+    "objective": "Restrict uploaded image dimensions separately from file size and MIME type."
+  },
+  {
+    "id": "LAR-S26-0122",
+    "topic": "Validation",
+    "objective": "Apply per-item conditional rules with access to the current nested item."
+  },
+  {
+    "id": "LAR-S26-0123",
+    "topic": "Validation",
+    "objective": "Add cross-field domain errors in an after callback without losing ordinary rule errors."
+  },
+  {
+    "id": "LAR-S26-0124",
+    "topic": "Validation",
+    "objective": "Give a custom DataAwareRule access to related input instead of global request state."
+  },
+  {
+    "id": "LAR-S26-0125",
+    "topic": "Validation",
+    "objective": "Identify the namespaced attribute key used by a custom nested validation message."
+  },
+  {
+    "id": "LAR-S26-0126",
+    "topic": "Validation",
+    "objective": "Separate named error bags for two forms rendered on the same page."
+  },
+  {
+    "id": "LAR-S26-0127",
+    "topic": "Validation",
+    "objective": "Assert JSON validation status and nested error keys for an API request."
+  },
+  {
+    "id": "LAR-S26-0128",
+    "topic": "Validation",
+    "objective": "Verify that a web validation redirect flashes errors and selected old input."
+  },
+  {
+    "id": "LAR-S26-0129",
+    "topic": "Validation",
+    "objective": "Use validated output rather than returning to untrusted all input after validation."
+  },
+  {
+    "id": "LAR-S26-0130",
+    "topic": "Validation",
+    "objective": "Avoid assuming that merging new values into ValidatedInput reruns validation."
+  },
+  {
+    "id": "LAR-S26-0131",
+    "topic": "Validation",
+    "objective": "Ignore the server-selected current model in uniqueness validation without trusting a submitted ignore ID."
+  },
+  {
+    "id": "LAR-S26-0132",
+    "topic": "Validation",
+    "objective": "Scope a uniqueness rule to an account while retaining a database uniqueness constraint."
+  },
+  {
+    "id": "LAR-S26-0133",
+    "topic": "Validation",
+    "objective": "Scope an exists rule to records eligible for the operation instead of checking existence alone."
+  },
+  {
+    "id": "LAR-S26-0134",
+    "topic": "Validation",
+    "objective": "Keep email syntax validation independent of mailbox ownership verification."
+  },
+  {
+    "id": "LAR-S26-0135",
+    "topic": "Validation",
+    "objective": "Treat validation as a point-in-time check rather than a concurrency guarantee."
+  },
+  {
+    "id": "LAR-S26-0136",
+    "topic": "Form Requests",
+    "objective": "Trace prepareForValidation before authorization and rule evaluation."
+  },
+  {
+    "id": "LAR-S26-0137",
+    "topic": "Form Requests",
+    "objective": "Reject an unauthorized Form Request before entering the controller action."
+  },
+  {
+    "id": "LAR-S26-0138",
+    "topic": "Form Requests",
+    "objective": "Inject a service into rules through the container instead of reading global state."
+  },
+  {
+    "id": "LAR-S26-0139",
+    "topic": "Form Requests",
+    "objective": "Select a fixed named route for Form Request failure redirection instead of relying on the Referer."
+  },
+  {
+    "id": "LAR-S26-0140",
+    "topic": "Form Requests",
+    "objective": "Distinguish changes made in passedValidation from the validator's validated data snapshot."
+  },
+  {
+    "id": "LAR-S26-0141",
+    "topic": "Form Requests",
+    "objective": "Use failedValidation customization without accidentally returning a successful response."
+  },
+  {
+    "id": "LAR-S26-0142",
+    "topic": "Form Requests",
+    "objective": "Exclude sensitive fields from old-input flashing on validation failure."
+  },
+  {
+    "id": "LAR-S26-0143",
+    "topic": "Form Requests",
+    "objective": "Set a Form Request's error bag without changing the global validation bag."
+  },
+  {
+    "id": "LAR-S26-0144",
+    "topic": "Form Requests",
+    "objective": "Normalize a nullable field without converting every missing PATCH field into a provided value."
+  },
+  {
+    "id": "LAR-S26-0145",
+    "topic": "Form Requests",
+    "objective": "Keep authorization side-effect-free because validation failure can prevent the intended write."
+  },
+  {
+    "id": "LAR-S26-0146",
+    "topic": "Form Requests",
+    "objective": "Test authorization rejection separately from a rule-validation rejection."
+  },
+  {
+    "id": "LAR-S26-0147",
+    "topic": "Form Requests",
+    "objective": "Distinguish validationData overrides from mutations of the underlying request input."
+  },
+  {
+    "id": "LAR-S26-0148",
+    "topic": "Form Requests",
+    "objective": "Interpret a successful Precognition field check without treating it as a completed write or full-form validation."
+  },
+  {
+    "id": "LAR-S26-0149",
+    "topic": "Form Requests",
+    "objective": "Share rules through composition while keeping endpoint-specific authorization separate."
+  },
+  {
+    "id": "LAR-S26-0150",
+    "topic": "Form Requests",
+    "objective": "Distinguish container-resolved Form Requests from direct construction when testing automatic validation."
+  },
+  {
+    "id": "LAR-S26-0151",
+    "topic": "Blade",
+    "objective": "Escape untrusted content through ordinary Blade echo syntax."
+  },
+  {
+    "id": "LAR-S26-0152",
+    "topic": "Blade",
+    "objective": "Restrict raw HTML output to content trusted for the actual HTML context."
+  },
+  {
+    "id": "LAR-S26-0153",
+    "topic": "Blade",
+    "objective": "Encode structured data for a script context using the framework's JavaScript helper."
+  },
+  {
+    "id": "LAR-S26-0154",
+    "topic": "Blade",
+    "objective": "Distinguish server-side Blade comments from HTML comments sent to clients."
+  },
+  {
+    "id": "LAR-S26-0155",
+    "topic": "Blade",
+    "objective": "Render the empty branch of forelse when the supplied collection is empty."
+  },
+  {
+    "id": "LAR-S26-0156",
+    "topic": "Blade",
+    "objective": "Trace loop iteration and index values without off-by-one display errors."
+  },
+  {
+    "id": "LAR-S26-0157",
+    "topic": "Blade",
+    "objective": "Access the parent loop when rendering nested iteration."
+  },
+  {
+    "id": "LAR-S26-0158",
+    "topic": "Blade",
+    "objective": "Preserve parent layout section content with parent instead of replacing it unintentionally."
+  },
+  {
+    "id": "LAR-S26-0159",
+    "topic": "Blade",
+    "objective": "Render multiple pushed assets at a stack rather than treating pushes as a single section."
+  },
+  {
+    "id": "LAR-S26-0160",
+    "topic": "Blade",
+    "objective": "Avoid duplicate per-component script output with pushOnce."
+  },
+  {
+    "id": "LAR-S26-0161",
+    "topic": "Blade",
+    "objective": "Pass values explicitly into isolated each partials rather than assuming all parent variables are inherited."
+  },
+  {
+    "id": "LAR-S26-0162",
+    "topic": "Blade",
+    "objective": "Distinguish an optional include from silently suppressing a template execution error."
+  },
+  {
+    "id": "LAR-S26-0163",
+    "topic": "Blade components",
+    "objective": "Separate component props from the remaining attribute bag."
+  },
+  {
+    "id": "LAR-S26-0164",
+    "topic": "Blade components",
+    "objective": "Merge default CSS classes with caller classes through the attribute bag."
+  },
+  {
+    "id": "LAR-S26-0165",
+    "topic": "Blade components",
+    "objective": "Distinguish default attribute values from enforced values when merging component attributes."
+  },
+  {
+    "id": "LAR-S26-0166",
+    "topic": "Blade components",
+    "objective": "Render a named slot independently from the default slot."
+  },
+  {
+    "id": "LAR-S26-0167",
+    "topic": "Blade components",
+    "objective": "Bind a PHP expression to a component prop instead of passing a literal string."
+  },
+  {
+    "id": "LAR-S26-0168",
+    "topic": "Blade components",
+    "objective": "Escape a client-side colon attribute so Blade does not evaluate it as PHP."
+  },
+  {
+    "id": "LAR-S26-0169",
+    "topic": "Blade components",
+    "objective": "Read ancestor component data through aware only under its documented propagation rules."
+  },
+  {
+    "id": "LAR-S26-0170",
+    "topic": "Blade components",
+    "objective": "Exclude a public component helper from template data while retaining its PHP API."
+  },
+  {
+    "id": "LAR-S26-0171",
+    "topic": "Blade forms",
+    "objective": "Render checked state using a boolean directive instead of treating the text false as absence."
+  },
+  {
+    "id": "LAR-S26-0172",
+    "topic": "Blade forms",
+    "objective": "Render a method-spoofing field for a non-GET/POST HTML form action."
+  },
+  {
+    "id": "LAR-S26-0173",
+    "topic": "Blade forms",
+    "objective": "Supply a CSRF token field without placing the token into an unrelated form value."
+  },
+  {
+    "id": "LAR-S26-0174",
+    "topic": "Blade forms",
+    "objective": "Trace the temporary message variable inside a named-bag error directive and its restoration afterward."
+  },
+  {
+    "id": "LAR-S26-0175",
+    "topic": "Blade caching",
+    "objective": "Recompile deployed Blade views without confusing compiled templates with application data."
+  },
+  {
+    "id": "LAR-S26-0176",
+    "topic": "Sessions and CSRF",
+    "objective": "Distinguish flashed data lifetime from persistent session data over multiple requests."
+  },
+  {
+    "id": "LAR-S26-0177",
+    "topic": "Sessions and CSRF",
+    "objective": "Preserve selected flash data for one additional redirect using keep."
+  },
+  {
+    "id": "LAR-S26-0178",
+    "topic": "Sessions and CSRF",
+    "objective": "Rotate a session identifier after authentication without discarding intended session state."
+  },
+  {
+    "id": "LAR-S26-0179",
+    "topic": "Sessions and CSRF",
+    "objective": "Invalidate session data and regenerate the CSRF token when logging out."
+  },
+  {
+    "id": "LAR-S26-0180",
+    "topic": "Sessions and CSRF",
+    "objective": "Prevent lost concurrent session updates through a supported session-blocking lock."
+  },
+  {
+    "id": "LAR-S26-0181",
+    "topic": "Sessions and CSRF",
+    "objective": "Distinguish a CSRF failure from an authentication failure on a state-changing route."
+  },
+  {
+    "id": "LAR-S26-0182",
+    "topic": "Sessions and CSRF",
+    "objective": "Exempt a verified external webhook narrowly while retaining CSRF on browser forms."
+  },
+  {
+    "id": "LAR-S26-0183",
+    "topic": "Sessions and CSRF",
+    "objective": "Understand why default test-environment CSRF bypass can conceal missing token behavior."
+  },
+  {
+    "id": "LAR-S26-0184",
+    "topic": "Authorization",
+    "objective": "Separate authentication from permission to modify a particular resource."
+  },
+  {
+    "id": "LAR-S26-0185",
+    "topic": "Authorization",
+    "objective": "Use a policy decision against the server-resolved resource rather than a submitted ownership flag."
+  },
+  {
+    "id": "LAR-S26-0186",
+    "topic": "Authorization",
+    "objective": "Stop an unauthorized operation with authorize instead of ignoring a boolean policy result."
+  },
+  {
+    "id": "LAR-S26-0187",
+    "topic": "Authorization",
+    "objective": "Return a not-found denial intentionally without exposing resource existence."
+  },
+  {
+    "id": "LAR-S26-0188",
+    "topic": "Authorization",
+    "objective": "Keep an authorization before hook from denying every unhandled ability."
+  },
+  {
+    "id": "LAR-S26-0189",
+    "topic": "Authorization",
+    "objective": "Allow a guest through a deliberately nullable policy user parameter without globally disabling authentication."
+  },
+  {
+    "id": "LAR-S26-0190",
+    "topic": "Authorization",
+    "objective": "Distinguish Gate::forUser evaluation from changing the application's authenticated user."
+  },
+  {
+    "id": "LAR-S26-0191",
+    "topic": "Authorization",
+    "objective": "Supply additional policy context as separate arguments with the target resource first."
+  },
+  {
+    "id": "LAR-S26-0192",
+    "topic": "Authorization",
+    "objective": "Keep Blade visibility checks as presentation while enforcing the same permission server-side."
+  },
+  {
+    "id": "LAR-S26-0193",
+    "topic": "Authentication",
+    "objective": "Authenticate a session-backed request without persisting submitted plaintext credentials."
+  },
+  {
+    "id": "LAR-S26-0194",
+    "topic": "Authentication",
+    "objective": "Distinguish attempt credential constraints from password hashing responsibilities."
+  },
+  {
+    "id": "LAR-S26-0195",
+    "topic": "Authentication",
+    "objective": "Use the intended guard explicitly when multiple authentication contexts exist."
+  },
+  {
+    "id": "LAR-S26-0196",
+    "topic": "Authentication",
+    "objective": "Preserve a safe intended internal destination across login instead of trusting an arbitrary redirect input."
+  },
+  {
+    "id": "LAR-S26-0197",
+    "topic": "Authentication",
+    "objective": "Verify an existing password with the configured hasher rather than comparing new salted hashes."
+  },
+  {
+    "id": "LAR-S26-0198",
+    "topic": "Authentication",
+    "objective": "Upgrade a stored password hash when the hashing configuration changes."
+  },
+  {
+    "id": "LAR-S26-0199",
+    "topic": "Security architecture",
+    "objective": "Avoid bypassing central Gate hooks when replacing a named ability check with inline authorization."
+  },
+  {
+    "id": "LAR-S26-0200",
+    "topic": "Security architecture",
+    "objective": "Protect mass-assigned administrative attributes through an explicit authorization and write boundary."
+  }
+]

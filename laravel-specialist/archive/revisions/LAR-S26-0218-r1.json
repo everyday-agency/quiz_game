@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0218",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Eloquent casts",
+  "subtopic": "enum-invalid-stored-value",
+  "objective": {
+    "id": "laravel.enum-invalid-stored-value",
+    "text": "Handle invalid stored values when hydrating a backed-enum cast."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Locate the invalid-data failure at cast access rather than silently coercing a case."
+  },
+  "prerequisites": [
+    "Eloquent enum casts",
+    "PHP backed enums"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Database\\Eloquent\\Model;\n\nenum Status: string\n{\n    case Active = 'active';\n    case Paused = 'paused';\n}\n\nclass Service extends Model\n{\n    protected function casts(): array\n    {\n        return ['status' => Status::class];\n    }\n}\n\n$service = (new Service())->newFromBuilder(['id' => 1, 'status' => 'retired']);\n\necho $service->status->value;\n"
+      }
+    ]
+  },
+  "stem": "The database row contains status=\"retired\", which is not an enum case. What happens at the final line?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "active is printed because the first case is a default.",
+      "rationale": "The cast has no first-case fallback for an unknown stored value.",
+      "misconception": "The cast has no first-case fallback for an unknown stored value."
+    },
+    {
+      "id": "choice-2",
+      "text": "An empty string is printed because invalid values always cast to null.",
+      "rationale": "A non-null invalid enum value does not receive null fallback semantics.",
+      "misconception": "A non-null invalid enum value does not receive null fallback semantics."
+    },
+    {
+      "id": "choice-3",
+      "text": "retired is printed as an automatically added enum case.",
+      "rationale": "Backed enums have a closed set of cases; hydration does not add new cases.",
+      "misconception": "Backed enums have a closed set of cases; hydration does not add new cases."
+    },
+    {
+      "id": "choice-4",
+      "text": "A ValueError is thrown when the invalid value is converted to the enum.",
+      "rationale": "The backed-enum cast uses the declared cases; it cannot turn retired into a valid Status.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The backed-enum cast uses the declared cases; it cannot turn retired into a valid Status.",
+    "trace": [
+      "The cast has no first-case fallback for an unknown stored value.",
+      "A non-null invalid enum value does not receive null fallback semantics.",
+      "Backed enums have a closed set of cases; hydration does not add new cases.",
+      "The backed-enum cast uses the declared cases; it cannot turn retired into a valid Status."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "ValueError",
+    "probe": "try {\n    require getcwd().'/probe.php';\n} catch (ValueError $e) {\n    echo 'ValueError';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-mutators#enum-casting"
+  ]
+}

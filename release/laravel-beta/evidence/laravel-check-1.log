@@ -1,0 +1,53 @@
+{
+  "batch": 1,
+  "count": 100,
+  "sourceHash": "30b65b55718f2082f0d0eb548b8306a28f99cd15a8b4f5c52664110f3976359d",
+  "formats": {
+    "execution": 41,
+    "debugging": 17,
+    "implementation": 17,
+    "code-review": 15,
+    "architecture": 2,
+    "testing": 8
+  },
+  "difficulty": {
+    "Foundation": 35,
+    "Intermediate": 65
+  },
+  "topics": {
+    "Configuration": 4,
+    "Deployment basics": 1,
+    "Service providers": 3,
+    "Service container": 17,
+    "Facades": 1,
+    "Middleware": 8,
+    "Routing": 10,
+    "URLs and redirects": 4,
+    "Route binding": 6,
+    "Signed URLs": 3,
+    "HTTP responses": 5,
+    "HTTP requests": 21,
+    "Proxies and hosts": 3,
+    "Maintenance": 1,
+    "Controllers": 7,
+    "Artisan": 5,
+    "Exception responses": 1
+  },
+  "mapped": 78,
+  "unmapped": 22,
+  "keyPositions": {
+    "1": 28,
+    "2": 24,
+    "3": 26,
+    "4": 22
+  },
+  "wording": {
+    "uniqueLongest": 25,
+    "uniqueShortest": 16,
+    "outliers": []
+  },
+  "duplicateCandidates": 7,
+  "limitations": "Lexical signals support human review; they do not prove semantic uniqueness or distractor quality.",
+  "preservation": "PHP 620 unchanged; pre-beta application snapshot intact; current two-subject integration checked separately",
+  "independentApproval": "pending"
+}

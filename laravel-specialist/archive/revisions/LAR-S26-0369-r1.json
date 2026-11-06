@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0369",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Mail tests",
+  "subtopic": "mail-recipient-and-domain-data-assertion",
+  "objective": {
+    "id": "laravel.mail-recipient-and-domain-data-assertion",
+    "text": "Inspect recipients and domain data in a mail assertion callback."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify both destination and business context instead of only a class or count."
+  },
+  "prerequisites": [
+    "Mail fake callbacks",
+    "Recipient routing",
+    "Mailable data"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A receipt test must verify invoice 7 is sent to owner@example.test. The mailable exposes invoiceId. Which assertion checks both requirements?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Mail::assertSent(ReceiptMail::class, 1);",
+      "rationale": "A count alone does not establish either recipient or invoice identity.",
+      "misconception": "A count alone does not establish either recipient or invoice identity."
+    },
+    {
+      "id": "choice-2",
+      "text": "Mail::assertSent(ReceiptMail::class, fn ($mail) => $mail->hasTo(\"owner@example.test\"));",
+      "rationale": "This checks the recipient but can pass for the wrong invoice.",
+      "misconception": "This checks the recipient but can pass for the wrong invoice."
+    },
+    {
+      "id": "choice-3",
+      "text": "Mail::assertSent(ReceiptMail::class, fn ($mail) => $mail->hasTo(\"owner@example.test\") && $mail->invoiceId === 7);",
+      "rationale": "The predicate examines the actual recorded mailable recipient and its domain data.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Mail::assertSent(ReceiptMail::class, fn ($mail) => $mail->invoiceId === 7);",
+      "rationale": "This checks the invoice but can pass for mail sent to the wrong recipient.",
+      "misconception": "This checks the invoice but can pass for mail sent to the wrong recipient."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The predicate examines the actual recorded mailable recipient and its domain data.",
+    "trace": [
+      "A count alone does not establish either recipient or invoice identity.",
+      "This checks the recipient but can pass for the wrong invoice.",
+      "The predicate examines the actual recorded mailable recipient and its domain data.",
+      "This checks the invoice but can pass for mail sent to the wrong recipient."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "matched",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nclass ReceiptMail extends SimpleMail\n{\n    public function __construct(public int $invoiceId)\n    {\n    }\n}\nIlluminate\\Support\\Facades\\Mail::fake();\nIlluminate\\Support\\Facades\\Mail::to('owner@example.test')->send(new ReceiptMail(7));\nIlluminate\\Support\\Facades\\Mail::assertSent(ReceiptMail::class, fn ($m) => $m->hasTo('owner@example.test') && $m->invoiceId === 7);\necho 'matched';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#testing-mailable-sending"
+  ]
+}

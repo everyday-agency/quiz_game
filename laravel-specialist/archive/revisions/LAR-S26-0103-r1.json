@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0103",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Validation",
+  "subtopic": "sometimes-required-patch-field",
+  "objective": {
+    "id": "laravel.sometimes-required-patch-field",
+    "text": "Use sometimes with required to distinguish an omitted PATCH field from an explicitly empty field."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Allow omission while rejecting an explicitly empty replacement."
+  },
+  "prerequisites": [
+    "PATCH semantics",
+    "Conditional validation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A PATCH endpoint permits omitting display_name to leave it unchanged. If supplied, it must be a nonempty string. Which rule set expresses that distinction?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "sometimes|required|string",
+      "rationale": "sometimes skips an absent field; required rejects an explicitly empty value, and string constrains the supplied type.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "required|string",
+      "rationale": "This rejects omission even though the endpoint permits leaving the field unchanged.",
+      "misconception": "This rejects omission even though the endpoint permits leaving the field unchanged."
+    },
+    {
+      "id": "choice-3",
+      "text": "nullable|string",
+      "rationale": "This allows an explicitly null value, which violates the required nonempty replacement.",
+      "misconception": "This allows an explicitly null value, which violates the required nonempty replacement."
+    },
+    {
+      "id": "choice-4",
+      "text": "present|string",
+      "rationale": "present requires the key on every request and string alone does not reject every empty string in this context.",
+      "misconception": "present requires the key on every request and string alone does not reject every empty string in this context."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "sometimes skips an absent field; required rejects an explicitly empty value, and string constrains the supplied type.",
+    "trace": [
+      "sometimes skips an absent field; required rejects an explicitly empty value, and string constrains the supplied type.",
+      "This rejects omission even though the endpoint permits leaving the field unchanged.",
+      "This allows an explicitly null value, which violates the required nonempty replacement.",
+      "present requires the key on every request and string alone does not reject every empty string in this context."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false,true]",
+    "probe": "$results = [];\nforeach ([[], ['display_name' => ''], ['display_name' => 'Ada']] as $data) {\n    $results[] = validator($data, ['display_name' => 'sometimes|required|string'])->passes();\n}\necho json_encode($results);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      5,
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#validating-when-present"
+  ]
+}

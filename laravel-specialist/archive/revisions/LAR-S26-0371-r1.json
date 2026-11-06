@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0371",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Mail security",
+  "subtopic": "bcc-recipient-privacy",
+  "objective": {
+    "id": "laravel.bcc-recipient-privacy",
+    "text": "Use BCC for a shared announcement when recipients must not see one another’s addresses."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Choose delivery addressing that does not expose the full recipient list in message headers."
+  },
+  "prerequisites": [
+    "Mailable recipient headers",
+    "BCC",
+    "Recipient privacy"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A single generic announcement must reach several customers, but recipients must not see one another’s addresses in its headers. Which addressing choice supports that requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Place customer addresses only in Reply-To.",
+      "rationale": "Reply-To controls where replies go; it does not designate the intended delivery recipients.",
+      "misconception": "Reply-To controls where replies go; it does not designate the intended delivery recipients."
+    },
+    {
+      "id": "choice-2",
+      "text": "Place the customer addresses in BCC, with a suitable public sender/To identity.",
+      "rationale": "BCC recipients participate in delivery without their address list appearing in the transmitted message headers.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Place the customer addresses in CC.",
+      "rationale": "CC addresses are visible in the message headers.",
+      "misconception": "CC addresses are visible in the message headers."
+    },
+    {
+      "id": "choice-4",
+      "text": "Place every customer address in To.",
+      "rationale": "To recipients can see the other To addresses.",
+      "misconception": "To recipients can see the other To addresses."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "BCC recipients participate in delivery without their address list appearing in the transmitted message headers.",
+    "trace": [
+      "Reply-To controls where replies go; it does not designate the intended delivery recipients.",
+      "BCC recipients participate in delivery without their address list appearing in the transmitted message headers.",
+      "CC addresses are visible in the message headers.",
+      "To recipients can see the other To addresses."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2:hidden",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nIlluminate\\Support\\Facades\\Mail::to('announcements@example.test')\n    ->bcc(['a@example.test', 'b@example.test'])\n    ->send(new SimpleMail());\n$sent = app('mailer')->getSymfonyTransport()->messages()->first();\necho count($sent->getOriginalMessage()->getBcc()).':'.(str_contains($sent->getMessage()->toString(), 'Bcc:') ? 'exposed' : 'hidden');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#sending-mail"
+  ]
+}

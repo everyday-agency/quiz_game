@@ -1,16 +1,18 @@
-import { QUESTION_BANK, TRACKS, TRACK_TOPICS, DIFFICULTIES, COLLECTION_ID } from './questions.mjs';
-import { STATS_KEY as statsKey, HISTORICAL_KEYS, readProgress } from './progress.mjs';
+import { QUESTION_BANK, TRACKS, TRACK_TOPICS, DIFFICULTIES, SUBJECTS } from './questions.mjs';
+import { HISTORICAL_KEYS, readProgress } from './progress.mjs';
 import { buildLearningNotes } from './learning-notes.mjs';
 import { gradeAnswer, gradeSession } from './exam.mjs';
 import { createCodeLesson as renderCodeLesson, createCodeChoice } from './code-viewer.mjs';
 
-// Old collection bookmarks now open the single released collection.
+// Old PHP bookmarks retain the PHP default; subject selection is explicit in the URL.
 const pageUrl = new URL(location.href);
 if (['php-pilot-v1', 'php-engineer-review-v1'].includes(pageUrl.searchParams.get('collection'))) {
   pageUrl.searchParams.delete('collection');
   history.replaceState(null, '', pageUrl);
 }
-document.documentElement.dataset.collection = COLLECTION_ID;
+let activeSubject = SUBJECTS.find(subject => subject.track.toLowerCase() === pageUrl.searchParams.get('subject')) || SUBJECTS[0];
+document.documentElement.dataset.collection = activeSubject.collectionId;
+const activeQuestions = () => QUESTION_BANK.filter(question => question.track === activeSubject.track);
 
 const createCodeLesson = (lesson, label) => renderCodeLesson(lesson, label, { reading: true });
 function appendAnswerText(container, text) {
@@ -33,7 +35,7 @@ const state = {
   view: 'home',
   size: 20,
   mode: 'learn',
-  domains: new Set(QUESTION_BANK.map((question) => domainKey(question.track, question.topic))),
+  domains: new Set(activeQuestions().map((question) => domainKey(question.track, question.topic))),
   difficulties: new Set(['Foundation', 'Intermediate']),
   session: [],
   current: 0,
@@ -47,13 +49,13 @@ const state = {
 };
 
 function readStats() {
-  try { return readProgress(localStorage); }
-  catch { return readProgress(null); }
+  try { return readProgress(localStorage, activeSubject.statsKey); }
+  catch { return readProgress(null, activeSubject.statsKey); }
 }
 
 function saveStats() {
   try {
-    localStorage.setItem(statsKey, JSON.stringify(state.stats));
+    localStorage.setItem(activeSubject.statsKey, JSON.stringify(state.stats));
   } catch {
     // The quiz remains fully usable when browser storage is unavailable.
   }
@@ -61,7 +63,7 @@ function saveStats() {
 }
 
 function updateLifetime() {
-  lifetimeCount.textContent = `${state.stats.answered.toLocaleString()} PHP answers`;
+  lifetimeCount.textContent = `${state.stats.answered.toLocaleString()} ${activeSubject.track} answers`;
 }
 
 function shuffle(items) {
@@ -136,14 +138,14 @@ function createLearningNotes(question, orderedOptions = question.options) {
 }
 
 function visibleDomains() {
-  return TRACKS.flatMap((track) =>
+  return [activeSubject.track].flatMap((track) =>
     TRACK_TOPICS[track].map((topic) => ({ track, topic, key: domainKey(track, topic) }))
   );
 }
 
 function setupTopics() {
   topicControl.replaceChildren();
-  TRACKS.forEach((track) => {
+  [activeSubject.track].forEach((track) => {
     const heading = document.createElement('div');
     heading.className = 'topic-section-label';
     heading.dataset.track = trackSlug(track);
@@ -183,7 +185,7 @@ function setupBankTopics() {
   all.textContent = 'All domains';
   select.append(all);
 
-  TRACKS.forEach((track) => {
+  [activeSubject.track].forEach((track) => {
     const parent = select;
     TRACK_TOPICS[track].forEach((topic) => {
       const option = document.createElement('option');
@@ -197,7 +199,8 @@ function setupBankTopics() {
 }
 
 function matchesSetup(question) {
-  return state.domains.has(domainKey(question.track, question.topic))
+  return question.track === activeSubject.track
+    && state.domains.has(domainKey(question.track, question.topic))
     && state.difficulties.has(question.difficulty);
 }
 
@@ -501,7 +504,7 @@ function renderBank() {
   const term = $('#bankSearch').value.trim().toLowerCase();
   const domain = $('#bankTopic').value;
   const difficulty = $('#bankDifficulty').value;
-  const matches = QUESTION_BANK.filter((question) => {
+  const matches = activeQuestions().filter((question) => {
     const searchable = `${question.id} ${question.track} ${question.topic} ${question.prompt} ${question.objective} ${question.code?.title || ''} ${question.code?.snippet || ''} ${(question.code?.files || []).map(file => file.snippet).join(' ')} ${question.explanation} ${question.options.join(' ')} ${(question.coreOptions || []).join(' ')}`.toLowerCase();
     return (!term || searchable.includes(term))
       && (domain === 'all' || domainKey(question.track, question.topic) === domain)
@@ -510,7 +513,7 @@ function renderBank() {
 
   const visibleMatches = matches.slice(0, bankRenderLimit);
   const showing = visibleMatches.length < matches.length ? ` · showing ${visibleMatches.length.toLocaleString()}` : '';
-  $('#bankCount').textContent = `${matches.length.toLocaleString()} of ${QUESTION_BANK.length.toLocaleString()} scenarios${showing}`;
+  $('#bankCount').textContent = `${matches.length.toLocaleString()} of ${activeQuestions().length.toLocaleString()} scenarios${showing}`;
   const list = $('#bankList');
   list.replaceChildren();
   if (!matches.length) {
@@ -687,6 +690,52 @@ document.addEventListener('keydown', (event) => {
 try {
   $('#historicalProgress').hidden = !HISTORICAL_KEYS.some(key => localStorage.getItem(key) !== null);
 } catch { /* Storage is optional. */ }
+
+const subjectSelect = $('#subjectSelect');
+for (const subject of SUBJECTS) {
+  const option = document.createElement('option');
+  option.value = subject.track;
+  option.textContent = `${subject.label} — ${subject.count} questions`;
+  subjectSelect.append(option);
+}
+subjectSelect.value = activeSubject.track;
+
+function updateSubjectCopy() {
+  document.documentElement.dataset.collection = activeSubject.collectionId;
+  $('#subjectCount').textContent = `${activeSubject.count} ${activeSubject.label} questions`;
+  $('#subjectVersions').textContent = activeSubject.track === 'Laravel' ? 'Laravel 13 · PHP 8.4 / 8.5' : 'PHP 8.4 / 8.5';
+  $('#subjectDescription').textContent = `Trace ${activeSubject.track} behavior, debug realistic failures, and reason about implementation choices. Every answer explains the behavior and the tempting alternatives.`;
+  $('#bankTitle').textContent = `The ${activeSubject.count}-question ${activeSubject.label} bank`;
+  $('#bankDescription').textContent = `Browse ${activeSubject.track} execution, debugging, testing and engineering scenarios. Answers stay folded until you deliberately reveal them.`;
+  $('.lifetime-score').title = `Completed answers in ${activeSubject.label}`;
+}
+subjectSelect.addEventListener('change', () => {
+  if (state.view === 'quiz' && state.answers.length && !state.completed &&
+      !window.confirm('Switch subjects? Current answers will not be saved.')) {
+    subjectSelect.value = activeSubject.track;
+    return;
+  }
+  activeSubject = SUBJECTS.find(subject => subject.track === subjectSelect.value);
+  const url = new URL(location.href);
+  if (activeSubject === SUBJECTS[0]) url.searchParams.delete('subject');
+  else url.searchParams.set('subject', activeSubject.track.toLowerCase());
+  history.replaceState(null, '', url);
+  state.stats = readStats();
+  state.domains = new Set(activeQuestions().map(question => domainKey(question.track, question.topic)));
+  state.session = [];
+  state.answers = [];
+  state.completed = false;
+  $('#bankSearch').value = '';
+  $('#bankTopic').value = 'all';
+  bankRenderLimit = 100;
+  setupTopics();
+  setupBankTopics();
+  updateSubjectCopy();
+  updateAvailable();
+  updateLifetime();
+  showView('home');
+});
+updateSubjectCopy();
 
 setupTopics();
 setupBankTopics();

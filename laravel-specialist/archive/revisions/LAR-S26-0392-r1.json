@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0392",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Scheduling",
+  "subtopic": "schedule-lock-expiry-not-frequency",
+  "objective": {
+    "id": "laravel.schedule-lock-expiry-not-frequency",
+    "text": "Distinguish a task mutex expiration from its cron frequency."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Keep the execution frequency distinct from the abandoned-lock expiration policy."
+  },
+  "prerequisites": [
+    "Scheduler withoutOverlapping",
+    "Cron frequency",
+    "Lock expiration units"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A named task uses everyMinute()->withoutOverlapping(10). It normally releases its lock on completion. What does 10 configure?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A ten-second delay before each invocation starts.",
+      "rationale": "The argument is not a startup delay and is measured in minutes here.",
+      "misconception": "The argument is not a startup delay and is measured in minutes here."
+    },
+    {
+      "id": "choice-2",
+      "text": "A maximum of ten successful task invocations before it is disabled.",
+      "rationale": "The lock setting is not a lifetime execution counter.",
+      "misconception": "The lock setting is not a lifetime execution counter."
+    },
+    {
+      "id": "choice-3",
+      "text": "A new cron frequency of once every ten minutes.",
+      "rationale": "withoutOverlapping does not replace the separately configured everyMinute expression.",
+      "misconception": "withoutOverlapping does not replace the separately configured everyMinute expression."
+    },
+    {
+      "id": "choice-4",
+      "text": "The overlap lock’s expiration in minutes; the task is still scheduled every minute.",
+      "rationale": "The argument bounds the mutex lifetime if it is not released, rather than changing the cron frequency.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The argument bounds the mutex lifetime if it is not released, rather than changing the cron frequency.",
+    "trace": [
+      "The argument is not a startup delay and is measured in minutes here.",
+      "The lock setting is not a lifetime execution counter.",
+      "withoutOverlapping does not replace the separately configured everyMinute expression.",
+      "The argument bounds the mutex lifetime if it is not released, rather than changing the cron frequency."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "* * * * *:10",
+    "probe": "$schedule = new Illuminate\\Console\\Scheduling\\Schedule('UTC');\n$event = $schedule->call(fn () => null)->name('report')->everyMinute()->withoutOverlapping(10);\necho $event->expression.':'.$event->expiresAt;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#preventing-task-overlaps"
+  ]
+}

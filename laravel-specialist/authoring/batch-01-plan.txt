@@ -1,0 +1,100 @@
+001 | Configuration | Distinguish a missing configuration key from an explicitly configured null.
+002 | Configuration | Move environment access behind configuration so cached configuration preserves the intended value.
+003 | Configuration | Explain precedence of an externally supplied environment value over a dotenv entry.
+004 | Configuration | Parse Laravel's reserved dotenv boolean values before applying a feature flag.
+005 | Deployment basics | Choose the maintenance response header that asks clients to retry later.
+006 | Service providers | Register an application provider in the Laravel 13 bootstrap provider list.
+007 | Service providers | Separate container registrations from boot-time use of another provider's service.
+008 | Service container | Choose a scoped binding for state that must reset between worker lifecycles.
+009 | Service container | Trace transient resolution compared with a singleton binding.
+010 | Service container | Resolve different implementations for two consumers using contextual bindings.
+011 | Service container | Diagnose why constructor autowiring cannot select an implementation for an unbound interface.
+012 | Service container | Preserve a host application's explicit override when a package supplies a default binding.
+013 | Service container | Register an already configured object as the shared service instance.
+014 | Service container | Resolve a service through a container alias without creating another singleton.
+015 | Service container | Combine explicitly provided arguments with method injection through Container::call.
+016 | Service container | Provide a primitive constructor dependency contextually without a global scalar binding.
+017 | Service container | Inject one configuration value using a supported contextual attribute.
+018 | Service container | Collect tagged implementations without coupling a consumer to each concrete class.
+019 | Service container | Decorate a resolved binding through the container extension mechanism.
+020 | Service container | Apply a resolving callback to newly constructed service instances.
+021 | Service container | Understand how explicit makeWith parameters interact with a shared binding.
+022 | Service container | Distinguish a registered binding from a service that has actually been resolved.
+023 | Service container | Discard a cached singleton instance while retaining its construction binding.
+024 | Service container | Verify that clearing scoped instances leaves ordinary singletons intact.
+025 | Facades | Clear a facade's cached root when replacing the corresponding container service in a test.
+026 | Service providers | State the service names a deferred provider must advertise.
+027 | Middleware | Trace before/after execution through a two-layer middleware pipeline.
+028 | Middleware | Identify which downstream work is skipped by an early middleware response.
+029 | Middleware | Explain why ordinary code after next() is skipped when a downstream exception escapes.
+030 | Middleware | Avoid assuming a terminable middleware's handle and terminate methods share object state.
+031 | Routing | Predict HEAD handling for a GET route and its response body.
+032 | Routing | Prevent an earlier wildcard route from consuming a literal route for the same HTTP method.
+033 | Routing | Distinguish an unmatched URL from an unsupported method on an existing URL.
+034 | Routing | Enforce a parameter constraint at route matching rather than inside the controller.
+035 | Routing | Supply a PHP default value for an optional route argument.
+036 | URLs and redirects | Distinguish named-route path parameters from surplus query parameters.
+037 | Routing | Compose a route name prefix independently of the URL prefix.
+038 | Routing | Use request-scoped URL defaults without mistaking them for incoming route parameter mutation.
+039 | Routing | Preserve only approved search parameters when replacing a fixed legacy redirect with a generated redirect.
+040 | Routing | Predict domain-specific route precedence in the pinned Laravel 13.40 router.
+041 | Route binding | Match a controller's implicit model-binding argument name to the route placeholder.
+042 | Route binding | Select a model's route key for slug-based URL generation and resolution.
+043 | Route binding | Transform a route parameter with an explicit binding callback.
+044 | Route binding | Restrict nested model resolution to the parent relationship with scoped binding.
+045 | Route binding | Decide whether a soft-deleted model should be eligible for route binding.
+046 | Route binding | Provide a route-specific response when implicit model resolution fails.
+047 | Routing | Handle an encoded slash only in the final permissive route segment.
+048 | Signed URLs | Keep signature validation mode consistent with relative URL generation.
+049 | Signed URLs | Reject an otherwise valid temporary signed URL after its expiry.
+050 | Signed URLs | Assess the trust boundary created by ignoring a query parameter during signature validation.
+051 | URLs and redirects | Encode a query value through the URL generator instead of manual string concatenation.
+052 | URLs and redirects | Flash input when redirecting back after a manually detected form error.
+053 | URLs and redirects | Select a named-route redirect that remains correct when the path changes.
+054 | HTTP responses | Return a JSON response with the intended status code and explicit header.
+055 | HTTP responses | Account for removal of response content when preparing a 204 response.
+056 | HTTP responses | Set a response header without accidentally placing it in the JSON payload.
+057 | HTTP responses | Distinguish creation of a streamed download from execution of its callback.
+058 | HTTP responses | Attach a response cookie without assuming a later request has already sent it back.
+059 | HTTP requests | Read query-only input when the body contains a conflicting key.
+060 | HTTP requests | Make JSON input available by providing the correct request content type.
+061 | HTTP requests | Use mergeIfMissing without replacing an explicitly supplied value.
+062 | HTTP requests | Recognize that replace removes existing input keys not present in the replacement.
+063 | HTTP requests | Distinguish input presence from a nonempty submitted value.
+064 | HTTP requests | Recognize that a truthy conditional-input callback result replaces the fluent request return value.
+065 | HTTP requests | Apply Request::boolean to common checkbox representations.
+066 | HTTP requests | Keep integer retrieval separate from validating a positive integer requirement.
+067 | HTTP requests | Retrieve a collection for an optional array field without assuming the field exists.
+068 | HTTP requests | Explain why input selection alone is not input validation.
+069 | HTTP requests | Retrieve a nested list of input values using dot notation and a wildcard.
+070 | HTTP requests | Avoid confusing dynamic input properties with route parameter lookup.
+071 | HTTP requests | Distinguish an absent header from an explicitly empty header when supplying a default.
+072 | HTTP requests | Retrieve a bearer credential from the Authorization header without custom splitting.
+073 | HTTP requests | Recognize the AJAX Accept-header conditions used by expectsJson.
+074 | HTTP requests | Separate the request body's media type from the client's preferred response type.
+075 | HTTP requests | Honor Accept quality weights when selecting an available response representation.
+076 | HTTP requests | Apply method spoofing only to the appropriate incoming HTTP method.
+077 | HTTP requests | Distinguish a spoofed effective HTTP method from the original transport method.
+078 | HTTP requests | Replace one query parameter while retaining the rest of the current URL query.
+079 | HTTP requests | Distinguish encoded and decoded path representations.
+080 | Proxies and hosts | Derive the client address only from explicitly trusted proxy information.
+081 | Proxies and hosts | Recognize HTTPS behind a trusted forwarding proxy without trusting arbitrary client headers.
+082 | Proxies and hosts | Restrict accepted hostnames before generating links from the request host.
+083 | Maintenance | Invalidate maintenance bypass cookies by changing the maintenance secret without confusing bypass with user authentication.
+084 | Middleware | Register a route middleware alias in the Laravel 13 bootstrap configuration.
+085 | Middleware | Prepend middleware to a named group without replacing the complete group.
+086 | Middleware | Explain why route-level exclusions cannot remove global middleware.
+087 | Middleware | Respect middleware priority when dependencies impose an execution order.
+088 | Controllers | Keep request-specific work out of controller construction that can precede route middleware.
+089 | Controllers | Route to an invokable controller through its class rather than an invented action name.
+090 | Controllers | Choose an API resource route set that omits HTML form actions.
+091 | Controllers | Customize a resource parameter name without changing the resource's action names.
+092 | Controllers | Use shallow nesting to omit the parent parameter from member routes while keeping collection routes nested.
+093 | Controllers | Limit controller middleware to selected actions using the supported controller middleware contract.
+094 | Controllers | Trace type-based dependency injection alongside positional scalar route arguments.
+095 | Artisan | Distinguish an optional command argument from an argument with an explicit default.
+096 | Artisan | Define a repeatable command option rather than manually parsing comma-separated values.
+097 | Artisan | Return a failing exit status when automation must detect a command failure.
+098 | Artisan | Invoke a command with structured parameters through Artisan::call rather than shell quoting.
+099 | Artisan | Request command isolation explicitly and select the exit code when its lock is unavailable.
+100 | Exception responses | Choose JSON rendering for an API boundary independently of exception reporting policy.

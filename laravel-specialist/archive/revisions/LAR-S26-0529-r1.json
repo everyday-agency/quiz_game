@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0529",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Email verification",
+  "subtopic": "verification-user-and-email-binding",
+  "objective": {
+    "id": "laravel.verification-user-and-email-binding",
+    "text": "Validate the signed verification request's user identity and email hash before marking the account verified."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Bind a valid verification link to the current account and current email rather than trusting its signature alone."
+  },
+  "prerequisites": [
+    "EmailVerificationRequest",
+    "Signed routes",
+    "Current authenticated user"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The route uses auth and signed middleware. The URL signature is valid. The handler receives the standard EmailVerificationRequest."
+    ],
+    "files": []
+  },
+  "stem": "The route id belongs to a different account, or its hash was generated for an email the current user no longer has. What additional authorization does EmailVerificationRequest apply?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "It checks only that hash has forty characters, regardless of its value.",
+      "rationale": "The request compares the hash with the expected digest, not merely its format.",
+      "misconception": "The request compares the hash with the expected digest, not merely its format."
+    },
+    {
+      "id": "choice-2",
+      "text": "It compares the route ID with the current user and the hash with that user’s current verification email.",
+      "rationale": "The form request checks both bindings before fulfillment; a valid URL signature alone is not enough to satisfy them.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "It authorizes any authenticated user because signed middleware already verified the URL.",
+      "rationale": "The standard request still verifies account identity and the email hash.",
+      "misconception": "The standard request still verifies account identity and the email hash."
+    },
+    {
+      "id": "choice-4",
+      "text": "It selects the account solely from the route ID and logs that account in.",
+      "rationale": "The request authorizes against the current user; it does not switch authentication to the route target.",
+      "misconception": "The request authorizes against the current user; it does not switch authentication to the route target."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The form request checks both bindings before fulfillment; a valid URL signature alone is not enough to satisfy them.",
+    "trace": [
+      "The request compares the hash with the expected digest, not merely its format.",
+      "The form request checks both bindings before fulfillment; a valid URL signature alone is not enough to satisfy them.",
+      "The standard request still verifies account identity and the email hash.",
+      "The request authorizes against the current user; it does not switch authentication to the route target."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0:0",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('users', function ($t) {\n    $t->id();\n    $t->string('email')->unique();\n    $t->string('password');\n    $t->string('remember_token')->nullable();\n    $t->timestamp('email_verified_at')->nullable();\n});\nSchema::create('password_reset_tokens', function ($t) {\n    $t->string('email')->primary();\n    $t->string('token');\n    $t->timestamp('created_at')->nullable();\n});\nclass Member extends Illuminate\\Foundation\\Auth\\User implements Illuminate\\Contracts\\Auth\\MustVerifyEmail\n{\n    protected $table = 'users';\n    protected $guarded = [];\n    public $timestamps = false;\n}\n$hasher = new Illuminate\\Hashing\\BcryptHasher(['rounds' => 4]);\n$user = Member::create(['email' => 'ada@example.test', 'password' => $hasher->make('old-password')]);\n$tokens = new Illuminate\\Auth\\Passwords\\DatabaseTokenRepository(\n    DB::connection(), $hasher, 'password_reset_tokens', 'fixture-hash-key', 3600, 60,\n);\n$provider = new Illuminate\\Auth\\EloquentUserProvider($hasher, Member::class);\n$broker = new Illuminate\\Auth\\Passwords\\PasswordBroker($tokens, $provider, timeboxDuration: 0);\n$check = function ($id, $hash) use ($user) {\n    $request = Illuminate\\Foundation\\Auth\\EmailVerificationRequest::create(\"/verify/$id/$hash\");\n    $route = new Illuminate\\Routing\\Route('GET', 'verify/{id}/{hash}', fn () => null);\n    $route->bind($request);\n    $request->setRouteResolver(fn () => $route);\n    $request->setUserResolver(fn () => $user);\n    return (int) $request->authorize();\n};\n$hash = sha1($user->email);\necho $check($user->id, $hash).':'.$check($user->id + 1, $hash).':'.$check($user->id, sha1('old@example.test'));",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/verification#the-email-verification-handler"
+  ]
+}

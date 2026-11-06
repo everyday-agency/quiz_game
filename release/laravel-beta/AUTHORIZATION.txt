@@ -1,0 +1,10 @@
+6 November 2026 — user-authorized Laravel Specialist Beta release.
+Correct only LAR-S26-0437 prerequisites; preserve objective, answer and explanations,
+increment revision and archive the previous record. Activate PHP Engineer (620)
+and Laravel Specialist (Beta, 600) in the regular static application. Preserve
+existing PHP progress and separate all Laravel Beta/review/legacy namespaces.
+Validate PHP 8.4/8.5, pinned Laravel 13.40.0, automated and Chrome workflows;
+use the existing GitHub Pages repository and deployment workflow.
+No new questions, full editorial audit or discontinued subject activation.
+Two independent samples were reviewed; Beta authorization is not a full-bank
+independent certification. Source request is the user's message in this session.

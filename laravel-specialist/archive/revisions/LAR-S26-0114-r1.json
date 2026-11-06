@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0114",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Validation",
+  "subtopic": "backed-enum-rule-values",
+  "objective": {
+    "id": "laravel.backed-enum-rule-values",
+    "text": "Validate a backed enum against its allowed cases rather than accepting arbitrary strings."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish a case name from its backed input value."
+  },
+  "prerequisites": [
+    "PHP backed enums",
+    "Enum validation rules"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Validation\\Rule;\n\nenum ShipmentState: string\n{\n    case Waiting = 'queued';\n    case Sent = 'sent';\n}\n\n$rules = ['state' => ['required', Rule::enum(ShipmentState::class)]];\n"
+      }
+    ]
+  },
+  "stem": "Which submitted string passes the state rule?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "waiting",
+      "rationale": "Backed enum values are not automatically lowercased from the case name; waiting is not a declared value.",
+      "misconception": "Backed enum values are not automatically lowercased from the case name; waiting is not a declared value."
+    },
+    {
+      "id": "choice-2",
+      "text": "queued",
+      "rationale": "The rule accepts a valid backed value, and queued is the value of ShipmentState::Waiting.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Waiting",
+      "rationale": "Waiting is the PHP case name, not its backed string value.",
+      "misconception": "Waiting is the PHP case name, not its backed string value."
+    },
+    {
+      "id": "choice-4",
+      "text": "ShipmentState::Waiting",
+      "rationale": "A textual PHP expression is not evaluated into an enum case during input validation.",
+      "misconception": "A textual PHP expression is not evaluated into an enum case during input validation."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The rule accepts a valid backed value, and queued is the value of ShipmentState::Waiting.",
+    "trace": [
+      "Backed enum values are not automatically lowercased from the case name; waiting is not a declared value.",
+      "The rule accepts a valid backed value, and queued is the value of ShipmentState::Waiting.",
+      "Waiting is the PHP case name, not its backed string value.",
+      "A textual PHP expression is not evaluated into an enum case during input validation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,false,false,false]",
+    "probe": "require getcwd().'/probe.php';\n$results = [];\nforeach (['queued', 'Waiting', 'ShipmentState::Waiting', 'waiting'] as $value) {\n    $results[] = validator(['state' => $value], $rules)->passes();\n}\necho json_encode($results);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      6
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-enum"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0398",
+  "revision": 2,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Scheduling",
+  "subtopic": "interrupt-sub-minute-schedule-on-deploy",
+  "objective": {
+    "id": "laravel.interrupt-sub-minute-schedule-on-deploy",
+    "text": "Interrupt a running sub-minute scheduler during deployment so old code does not continue for the rest of the minute."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Stop the old release’s repeat loop through the scheduler-specific signal."
+  },
+  "prerequisites": [
+    "Sub-minute scheduler",
+    "Deployment",
+    "Interrupt signal"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Schedule interrupting is enabled, and the running scheduler and deployment command use the same cache store."
+    ],
+    "files": []
+  },
+  "stem": "A deployment switches releases while an old schedule:run process is still serving sub-minute tasks. Which command signals that old scheduler loop to stop repeating?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "php artisan schedule:interrupt",
+      "rationale": "The scheduler-specific interrupt signal is checked by the repeated-event loop.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "php artisan schedule:clear-cache",
+      "rationale": "Clearing scheduler mutexes does not publish the sub-minute loop’s interrupt signal.",
+      "misconception": "Clearing scheduler mutexes does not publish the sub-minute loop’s interrupt signal."
+    },
+    {
+      "id": "choice-3",
+      "text": "php artisan queue:restart",
+      "rationale": "That signals queue workers, not the scheduler’s sub-minute loop.",
+      "misconception": "That signals queue workers, not the scheduler’s sub-minute loop."
+    },
+    {
+      "id": "choice-4",
+      "text": "php artisan schedule:list",
+      "rationale": "Listing events does not publish an interrupt signal.",
+      "misconception": "Listing events does not publish an interrupt signal."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The scheduler-specific interrupt signal is checked by the repeated-event loop.",
+    "trace": [
+      "The scheduler-specific interrupt signal is checked by the repeated-event loop.",
+      "Clearing scheduler mutexes does not publish the sub-minute loop’s interrupt signal.",
+      "That signals queue workers, not the scheduler’s sub-minute loop.",
+      "Listing events does not publish an interrupt signal."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "signalled",
+    "probe": "Illuminate\\Support\\Facades\\Artisan::call('schedule:interrupt');\necho is_numeric(app('cache')->get('illuminate:schedule:interrupt')) ? 'signalled' : 'missing';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#interrupting-sub-minute-tasks"
+  ]
+}

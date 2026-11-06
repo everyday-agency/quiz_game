@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0328",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Queue middleware",
+  "subtopic": "overlap-lock-crash-expiration",
+  "objective": {
+    "id": "laravel.overlap-lock-crash-expiration",
+    "text": "Set an overlap-lock expiration to recover after a worker crashes before releasing it."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recover a lock left by an ungraceful process death without expiring it during valid processing."
+  },
+  "prerequisites": [
+    "Job overlap locks",
+    "Worker crash recovery",
+    "TTL sizing"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A worker can be killed before its overlap middleware’s finally block releases a lock. Legitimate processing has a measured upper bound. Which setting limits the orphan lock lifetime, with a duration chosen beyond valid processing time?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A longer queue name containing the expected duration.",
+      "rationale": "A logical queue label does not configure cache lock expiration.",
+      "misconception": "A logical queue label does not configure cache lock expiration."
+    },
+    {
+      "id": "choice-2",
+      "text": "releaseAfter on the overlap middleware.",
+      "rationale": "This delays a job that failed to acquire the lock; it does not expire the lock held by the dead worker.",
+      "misconception": "This delays a job that failed to acquire the lock; it does not expire the lock held by the dead worker."
+    },
+    {
+      "id": "choice-3",
+      "text": "dontRelease on the overlap middleware.",
+      "rationale": "This discards a contending job rather than repairing the orphaned lock’s lifetime.",
+      "misconception": "This discards a contending job rather than repairing the orphaned lock’s lifetime."
+    },
+    {
+      "id": "choice-4",
+      "text": "expireAfter on the overlap middleware.",
+      "rationale": "This supplies a lock TTL so an abandoned lock can eventually be acquired again; sizing must avoid expiry during legitimate work.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "This supplies a lock TTL so an abandoned lock can eventually be acquired again; sizing must avoid expiry during legitimate work.",
+    "trace": [
+      "A logical queue label does not configure cache lock expiration.",
+      "This delays a job that failed to acquire the lock; it does not expire the lock held by the dead worker.",
+      "This discards a contending job rather than repairing the orphaned lock’s lifetime.",
+      "This supplies a lock TTL so an abandoned lock can eventually be acquired again; sizing must avoid expiry during legitimate work."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "180",
+    "probe": "$middleware = (new Illuminate\\Queue\\Middleware\\WithoutOverlapping('report:7'))->expireAfter(180);\necho $middleware->expiresAfter;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#preventing-job-overlaps"
+  ]
+}

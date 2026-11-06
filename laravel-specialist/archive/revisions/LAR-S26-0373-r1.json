@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0373",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Mail configuration",
+  "subtopic": "explicit-mailer-without-default-mutation",
+  "objective": {
+    "id": "laravel.explicit-mailer-without-default-mutation",
+    "text": "Select a configured mailer without changing the application's global default."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Route this message through the intended configured transport while leaving shared defaults intact."
+  },
+  "prerequisites": [
+    "Configured mailers",
+    "Per-message transport selection"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Two mailers are configured: default and transactional. One receipt must use transactional without changing the application’s default mailer for subsequent messages. Which call selects it explicitly?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "config([\"mail.default\" => \"transactional\"]); Mail::to($address)->send($mail)",
+      "rationale": "This mutates the default for later operations, contrary to the stated requirement.",
+      "misconception": "This mutates the default for later operations, contrary to the stated requirement."
+    },
+    {
+      "id": "choice-2",
+      "text": "Mail::mailer(\"transactional\")->to($address)->send($mail)",
+      "rationale": "The selected mailer handles this operation without rewriting the global default.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Mail::to(\"transactional\")->send($mail)",
+      "rationale": "to expects a recipient address, not a configured transport name.",
+      "misconception": "to expects a recipient address, not a configured transport name."
+    },
+    {
+      "id": "choice-4",
+      "text": "Mail::alwaysFrom(\"transactional\")->send($mail)",
+      "rationale": "The sender address setting does not select a mailer and is not the intended per-message routing API.",
+      "misconception": "The sender address setting does not select a mailer and is not the intended per-message routing API."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "The selected mailer handles this operation without rewriting the global default.",
+    "trace": [
+      "This mutates the default for later operations, contrary to the stated requirement.",
+      "The selected mailer handles this operation without rewriting the global default.",
+      "to expects a recipient address, not a configured transport name.",
+      "The sender address setting does not select a mailer and is not the intended per-message routing API."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0:array",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nconfig(['mail.mailers.transactional' => ['transport' => 'array']]);\nIlluminate\\Support\\Facades\\Mail::mailer('transactional')->to('a@example.test')->send(new SimpleMail());\necho app('mail.manager')->mailer('transactional')->getSymfonyTransport()->messages()->count().':'.app('mail.manager')->mailer()->getSymfonyTransport()->messages()->count().':'.config('mail.default');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#sending-mail-via-a-specific-mailer"
+  ]
+}

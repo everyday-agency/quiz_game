@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0185",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Authorization",
+  "subtopic": "policy-server-resource-not-body-claim",
+  "objective": {
+    "id": "laravel.policy-server-resource-not-body-claim",
+    "text": "Use a policy decision against the server-resolved resource rather than a submitted ownership flag."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Use persisted authorization facts rather than a caller-selected ownership claim."
+  },
+  "prerequisites": [
+    "Policies",
+    "Trusted resource state",
+    "Untrusted form fields"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A document policy allows updates when the request body says is_owner=true. A caller can choose that value. The server-resolved document has a trusted owner_id. Which policy predicate uses the relevant authority?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Require the is_owner key to be present and hide it in the rendered form.",
+      "rationale": "A hidden form field is still client-controlled, and presence does not establish the permission.",
+      "misconception": "A hidden form field is still client-controlled, and presence does not establish the permission."
+    },
+    {
+      "id": "choice-2",
+      "text": "Require is_owner to pass the accepted validation rule before trusting it.",
+      "rationale": "A caller can submit an accepted value; validation of the claim is not proof of ownership.",
+      "misconception": "A caller can submit an accepted value; validation of the claim is not proof of ownership."
+    },
+    {
+      "id": "choice-3",
+      "text": "Compare the authenticated user identity with the resolved document's owner_id, subject to the stated access policy.",
+      "rationale": "The decision uses server-controlled resource ownership rather than the caller's unsupported ownership claim.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Cast the submitted is_owner field to boolean before trusting it.",
+      "rationale": "Conversion changes representation but does not make the claim authoritative.",
+      "misconception": "Conversion changes representation but does not make the claim authoritative."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The decision uses server-controlled resource ownership rather than the caller's unsupported ownership claim.",
+    "trace": [
+      "A hidden form field is still client-controlled, and presence does not establish the permission.",
+      "A caller can submit an accepted value; validation of the claim is not proof of ownership.",
+      "The decision uses server-controlled resource ownership rather than the caller's unsupported ownership claim.",
+      "Conversion changes representation but does not make the claim authoritative."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "false",
+    "probe": "$user = new Illuminate\\Auth\\GenericUser(['id' => 7]);\n$document = (object) ['owner_id' => 9];\n$gate = new Illuminate\\Auth\\Access\\Gate(app(), fn () => $user);\n$gate->define('update', fn ($user, $doc) => $user->id === $doc->owner_id);\n$submitted = ['is_owner' => true];\necho json_encode($gate->allows('update', $document));",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authorization#writing-policies"
+  ]
+}

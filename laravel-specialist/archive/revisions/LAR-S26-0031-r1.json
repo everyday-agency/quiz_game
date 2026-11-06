@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0031",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Routing",
+  "subtopic": "head-get-response-body",
+  "objective": {
+    "id": "laravel.head-get-response-body",
+    "text": "Predict HEAD handling for a GET route and its response body."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Separate route execution from the body sent for HEAD."
+  },
+  "prerequisites": [
+    "GET and HEAD",
+    "HTTP response preparation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "No middleware changes this response."
+    ],
+    "files": [
+      {
+        "path": "routes/fixture.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/ping', function () {\n    return response('pong', 200);\n});\n"
+      }
+    ]
+  },
+  "stem": "This is the only matching route. What status and body does a HEAD /ping request receive through the HTTP kernel?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "405 with an empty body",
+      "rationale": "GET route registration includes HEAD, so this method is accepted.",
+      "misconception": "GET route registration includes HEAD, so this method is accepted."
+    },
+    {
+      "id": "choice-2",
+      "text": "200 with an empty body",
+      "rationale": "A GET route also accepts HEAD; response preparation removes the body for a HEAD request.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "404 with body pong",
+      "rationale": "The route matches; neither a missing route nor that contradictory body describes the response.",
+      "misconception": "The route matches; neither a missing route nor that contradictory body describes the response."
+    },
+    {
+      "id": "choice-4",
+      "text": "200 with body pong",
+      "rationale": "The handler produces content, but the HEAD response is prepared without that body.",
+      "misconception": "The handler produces content, but the HEAD response is prepared without that body."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A GET route also accepts HEAD; response preparation removes the body for a HEAD request.",
+    "trace": [
+      "GET route registration includes HEAD, so this method is accepted.",
+      "A GET route also accepts HEAD; response preparation removes the body for a HEAD request.",
+      "The route matches; neither a missing route nor that contradictory body describes the response.",
+      "The handler produces content, but the HEAD response is prepared without that body."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "200:0",
+    "probe": "$request = Illuminate\\Http\\Request::create('/ping', 'HEAD');\n$response = app(Illuminate\\Contracts\\Http\\Kernel::class)->handle($request);\necho $response->getStatusCode().':'.strlen($response->getContent());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      2,
+      5
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/routing#available-router-methods",
+    "https://laravel.com/docs/13.x/responses"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0351",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Event discovery",
+  "subtopic": "duplicate-listener-registration",
+  "objective": {
+    "id": "laravel.duplicate-listener-registration",
+    "text": "Avoid registering a discovered listener again and causing duplicate execution."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish duplicate registration from duplicate event dispatch."
+  },
+  "prerequisites": [
+    "Event discovery",
+    "Explicit listener registration",
+    "Listener diagnostics"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Diagnostics show one OrderPlaced dispatch but two calls to the same SendReceipt listener. That listener is discovered automatically and also registered explicitly. What should be corrected first?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Make the listener synchronous while retaining both registrations.",
+      "rationale": "Execution mode does not deduplicate the two registrations.",
+      "misconception": "Execution mode does not deduplicate the two registrations."
+    },
+    {
+      "id": "choice-2",
+      "text": "Keep one registration path for that listener/event pair.",
+      "rationale": "Registering the same handler through both paths can invoke it twice for one event.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Dispatch OrderPlaced only after a delay while retaining both registrations.",
+      "rationale": "Timing does not remove duplicate listeners for a single event.",
+      "misconception": "Timing does not remove duplicate listeners for a single event."
+    },
+    {
+      "id": "choice-4",
+      "text": "Add Event::fake() in production before dispatching OrderPlaced.",
+      "rationale": "A test fake suppresses real behavior rather than correcting the application’s registration graph.",
+      "misconception": "A test fake suppresses real behavior rather than correcting the application’s registration graph."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "Registering the same handler through both paths can invoke it twice for one event.",
+    "trace": [
+      "Execution mode does not deduplicate the two registrations.",
+      "Registering the same handler through both paths can invoke it twice for one event.",
+      "Timing does not remove duplicate listeners for a single event.",
+      "A test fake suppresses real behavior rather than correcting the application’s registration graph."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "2",
+    "probe": "class OrderPlaced\n{\n}\nclass ReceiptListener\n{\n    public function handle(OrderPlaced $event): void\n    {\n        app('cache')->increment('receipts');\n    }\n}\nIlluminate\\Support\\Facades\\Event::listen(OrderPlaced::class, ReceiptListener::class);\nIlluminate\\Support\\Facades\\Event::listen(OrderPlaced::class, ReceiptListener::class);\nevent(new OrderPlaced());\necho app('cache')->get('receipts');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/events#event-discovery",
+    "https://laravel.com/docs/13.x/events#manually-registering-events"
+  ]
+}

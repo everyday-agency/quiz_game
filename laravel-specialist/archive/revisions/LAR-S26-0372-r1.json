@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0372",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Mail addressing",
+  "subtopic": "fresh-mailable-per-recipient-loop",
+  "objective": {
+    "id": "laravel.fresh-mailable-per-recipient-loop",
+    "text": "Construct a fresh mailable per loop iteration to avoid accumulating recipients."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Avoid accumulated addressing state when sending individualized messages in a loop."
+  },
+  "prerequisites": [
+    "Mutable mailable recipients",
+    "Repeated sends"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A loop reuses one mailable instance in Mail::to($address)->send($mail). The second message unexpectedly includes the first recipient too. Which repair addresses the accumulated recipient state?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Queue the same reused mailable instead of sending it.",
+      "rationale": "Queueing does not prevent recipient lists accumulating before each payload is serialized.",
+      "misconception": "Queueing does not prevent recipient lists accumulating before each payload is serialized."
+    },
+    {
+      "id": "choice-2",
+      "text": "Change only the subject before every send.",
+      "rationale": "Changing a header value does not reset the existing recipient list.",
+      "misconception": "Changing a header value does not reset the existing recipient list."
+    },
+    {
+      "id": "choice-3",
+      "text": "Create a fresh mailable inside each loop iteration.",
+      "rationale": "PendingMail adds recipients to the mailable; a new instance starts each individualized message with clean addressing state.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Move the same reused object into a static property.",
+      "rationale": "A longer-lived shared object retains rather than removes its accumulated state.",
+      "misconception": "A longer-lived shared object retains rather than removes its accumulated state."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "PendingMail adds recipients to the mailable; a new instance starts each individualized message with clean addressing state.",
+    "trace": [
+      "Queueing does not prevent recipient lists accumulating before each payload is serialized.",
+      "Changing a header value does not reset the existing recipient list.",
+      "PendingMail adds recipients to the mailable; a new instance starts each individualized message with clean addressing state.",
+      "A longer-lived shared object retains rather than removes its accumulated state."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:2",
+    "probe": "if (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\n$mail = new SimpleMail();\nforeach (['a@example.test', 'b@example.test'] as $recipient) {\n    Illuminate\\Support\\Facades\\Mail::to($recipient)->send($mail);\n}\n$messages = app('mailer')->getSymfonyTransport()->messages();\necho count($messages[0]->getOriginalMessage()->getTo()).':'.count($messages[1]->getOriginalMessage()->getTo());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#looping-over-recipients"
+  ]
+}

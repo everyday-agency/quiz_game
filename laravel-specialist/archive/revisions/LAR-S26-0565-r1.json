@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0565",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Localization tests",
+  "subtopic": "locale-completeness-without-fallback",
+  "objective": {
+    "id": "laravel.locale-completeness-without-fallback",
+    "text": "Detect a missing translation in one locale without letting fallback translations mask the omission."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Detect a missing local translation even when ordinary rendering has a usable fallback."
+  },
+  "prerequisites": [
+    "Translator existence checks",
+    "Fallback locale",
+    "Translation coverage"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "French is current, English is fallback, and only English defines messages.save."
+    ],
+    "files": []
+  },
+  "stem": "A translation-completeness test must detect the missing French entry instead of passing because English can render it. Which check targets French itself?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Lang::hasForLocale(\"messages.save\", \"fr\")",
+      "rationale": "hasForLocale disables fallback for the existence check, exposing the missing French translation.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Lang::has(\"messages.save\", \"fr\") with default fallback behavior",
+      "rationale": "The default check can succeed through the configured fallback locale.",
+      "misconception": "The default check can succeed through the configured fallback locale."
+    },
+    {
+      "id": "choice-3",
+      "text": "Assert that __(\"messages.save\") is not empty",
+      "rationale": "A nonempty fallback string does not prove French coverage.",
+      "misconception": "A nonempty fallback string does not prove French coverage."
+    },
+    {
+      "id": "choice-4",
+      "text": "Assert that the French language directory exists",
+      "rationale": "Directory presence does not establish that this particular key is translated.",
+      "misconception": "Directory presence does not establish that this particular key is translated."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "hasForLocale disables fallback for the existence check, exposing the missing French translation.",
+    "trace": [
+      "hasForLocale disables fallback for the existence check, exposing the missing French translation.",
+      "The default check can succeed through the configured fallback locale.",
+      "A nonempty fallback string does not prove French coverage.",
+      "Directory presence does not establish that this particular key is translated."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:0",
+    "probe": "$loader = new Illuminate\\Translation\\ArrayLoader;\n$loader->addMessages('en', 'messages', ['save' => 'Save']);\n$translator = new Illuminate\\Translation\\Translator($loader, 'fr');\n$translator->setFallback('en');\necho (int) $translator->has('messages.save', 'fr').':'.(int) $translator->hasForLocale('messages.save', 'fr');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/localization#retrieving-translation-strings"
+  ]
+}

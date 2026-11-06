@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0532",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Session authentication",
+  "subtopic": "logout-other-devices-password-proof",
+  "objective": {
+    "id": "laravel.logout-other-devices-password-proof",
+    "text": "Require the current password when invalidating other authenticated sessions through the supported flow."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Require fresh credential proof for the supported cross-device invalidation flow."
+  },
+  "prerequisites": [
+    "Session authentication middleware",
+    "logoutOtherDevices",
+    "Current-password verification"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The application uses the supported auth.session middleware flow, and the current user is authenticated."
+    ],
+    "files": []
+  },
+  "stem": "A settings action calls Auth::logoutOtherDevices with an arbitrary placeholder string because it assumes being logged in is sufficient. What does the method require?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The current valid password; a mismatch is rejected.",
+      "rationale": "The guard verifies the supplied password before forcing the password-hash change used by the session invalidation flow.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "The user’s already stored hash instead of the plaintext password.",
+      "rationale": "The method checks the supplied password against the stored hash; submitting the hash itself is not the intended credential.",
+      "misconception": "The method checks the supplied password against the stored hash; submitting the hash itself is not the intended credential."
+    },
+    {
+      "id": "choice-3",
+      "text": "The current session ID because the password is never checked again.",
+      "rationale": "The method’s credential verification is independent of a session-ID argument.",
+      "misconception": "The method’s credential verification is independent of a session-ID argument."
+    },
+    {
+      "id": "choice-4",
+      "text": "Any nonempty string, because the argument is only a device label.",
+      "rationale": "The argument is a password to verify, not a device name.",
+      "misconception": "The argument is a password to verify, not a device name."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The guard verifies the supplied password before forcing the password-hash change used by the session invalidation flow.",
+    "trace": [
+      "The guard verifies the supplied password before forcing the password-hash change used by the session invalidation flow.",
+      "The method checks the supplied password against the stored hash; submitting the hash itself is not the intended credential.",
+      "The method’s credential verification is independent of a session-ID argument.",
+      "The argument is a password to verify, not a device name."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "rejected",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('users', function ($t) {\n    $t->id();\n    $t->string('email')->unique();\n    $t->string('password');\n    $t->string('remember_token')->nullable();\n    $t->timestamp('email_verified_at')->nullable();\n});\nSchema::create('password_reset_tokens', function ($t) {\n    $t->string('email')->primary();\n    $t->string('token');\n    $t->timestamp('created_at')->nullable();\n});\nclass Member extends Illuminate\\Foundation\\Auth\\User implements Illuminate\\Contracts\\Auth\\MustVerifyEmail\n{\n    protected $table = 'users';\n    protected $guarded = [];\n    public $timestamps = false;\n}\n$hasher = new Illuminate\\Hashing\\BcryptHasher(['rounds' => 4]);\n$user = Member::create(['email' => 'ada@example.test', 'password' => $hasher->make('old-password')]);\n$tokens = new Illuminate\\Auth\\Passwords\\DatabaseTokenRepository(\n    DB::connection(), $hasher, 'password_reset_tokens', 'fixture-hash-key', 3600, 60,\n);\n$provider = new Illuminate\\Auth\\EloquentUserProvider($hasher, Member::class);\n$broker = new Illuminate\\Auth\\Passwords\\PasswordBroker($tokens, $provider, timeboxDuration: 0);\nconfig([\n    'auth.defaults.guard' => 'web',\n    'auth.guards.web' => ['driver' => 'session', 'provider' => 'members'],\n    'auth.providers.members' => ['driver' => 'eloquent', 'model' => Member::class],\n]);\n$guard = app('auth')->guard('web');\n$guard->setUser($user);\ntry {\n    $guard->logoutOtherDevices('placeholder');\n} catch (InvalidArgumentException $e) {\n    echo 'rejected';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authentication#invalidating-sessions-on-other-devices"
+  ]
+}

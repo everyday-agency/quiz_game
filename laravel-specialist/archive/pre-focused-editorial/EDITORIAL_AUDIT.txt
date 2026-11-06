@@ -1,0 +1,110 @@
+LARAVEL SPECIALIST — FINAL INTERNAL EDITORIAL AUDIT
+All 600 remain pending independent approval.
+
+The audit combines six complete item reviews with a final cross-batch review.
+It checked objectives, all four alternatives, explanation consistency, code
+context and formatting, version assumptions, difficulty, curriculum mapping,
+wording cues, related reasoning families and operational realism. Machine
+signals support these judgments; they cannot certify them.
+
+Coverage:
+  Execution 211; debugging 80; code review 86; implementation 109;
+  testing 66; architecture 48.
+  Foundation 239; Intermediate 354; Advanced 7.
+  138 mapped to completed Lessons 1–8; 462 unmapped.
+  Exact per-topic counts and all objectives are in COVERAGE.txt.
+
+CORRECTIONS THAT MATTER
+
+LAR-S26-0242: retargeted from nearby relationship-loading reasoning to the
+per-parent behavior of constrained eager-load limits. Real parent/child
+fixtures establish the result.
+
+LAR-S26-0250: replaced overlapping pivot reasoning with additive association
+synchronization and pivot metadata. Separate existing-link updates remain a
+different objective.
+
+LAR-S26-0322: validated failed-job retry through the real queue:retry command
+and an isolated failed-job table rather than assuming retry from source syntax.
+
+LAR-S26-0429: retargeted from repeated after-commit cache publication to delayed
+stale fills and versioned keys. The witness models the relevant interleaving;
+it does not claim a distributed stress test.
+
+LAR-S26-0475: retargeted from repeated JSON negotiation to assertInvalid across
+both session-redirect and JSON validation responses.
+
+LAR-S26-0487: verified the special DatabaseTransactions testing manager rather
+than importing ordinary production transaction timing into a test assertion.
+
+LAR-S26-0497–0500: pinned and exercised the actual Inertia PHP adapter for
+HTML/JSON negotiation, partial props, asset-version response and flashed errors.
+No mounted JavaScript client or SSR service was claimed.
+
+LAR-S26-0551: the first answer incorrectly forwarded data_get's outer default
+into every wildcard leaf. Both PHP runs on Laravel 13.40 produce ["Ada",null].
+The key and relevant explanations were corrected; prior revisions are archived.
+
+LAR-S26-0566: the initial document-root question was too close to the inactive
+legacy item. It now distinguishes public-root selection from the separate
+Nginx rule restricting PHP execution to the Laravel front controller.
+
+LAR-S26-0595: the initial package-view override question repeated the adjacent
+translation-override pattern. It now tests distinct view namespaces despite
+colliding filenames, verified through real framework view lookup.
+
+Other batch edits replaced generic or unrelated distractors, shortened
+overlong keyed choices, corrected concrete framework assumptions and moved
+single-contract tasks to Foundation. No artificial answer-length padding was
+added. See reviews/batch-01.json through batch-06.json for item-level decisions.
+
+DUPLICATES AND ANSWER CUES
+
+No normalized whole-question duplicate or repeated objective ID exists among
+the 600 final records. The per-batch lexical scan produced 44 candidate pairs
+against both the new bank and inactive legacy material. Every pair has a
+recorded disposition. A second weighted whole-bank text pass produced two
+candidates: 0156/0157 (single versus parent loop state) and 0193/0531 (attempt
+credential/session handling versus once request-only authentication). Their
+assessment objectives remain distinct.
+
+Some standard concepts necessarily overlap the inactive legacy curriculum.
+The new collection contains original stems/options/evidence; it does not
+reactivate legacy records. Shared concepts alone are not proof of duplication.
+Conversely, low text similarity is not proof of semantic originality.
+
+The correct choice is uniquely longest in 146/600 (24.3%) and uniquely shortest
+in 131/600 (21.8%). These aggregate signals do not provide a reliable longest-
+answer rule. One ratio flag remains: 0596 has the exact output "missing" versus
+short numeric outputs. It was retained rather than padded. Individual wording
+and distractor quality still require independent editorial judgment.
+
+Known related mechanisms were reviewed in context: scoped state restoration,
+request-only versus persisted authentication, queued versus synchronous
+invariants, transaction boundaries, stale cache fills, key rotation, retry
+classification, namespace isolation and deployment compatibility. Their
+framework contracts and failure observations, rather than renamed examples,
+define the assessment distinction.
+
+QUALITY LIMITATIONS
+
+There are no known unresolved answer-key or syntax defects after the recorded
+repairs and checks. This is an author conclusion, not independent approval.
+In particular, no lexical metric can prove that every distractor will attract
+real candidates. No empirical discrimination or item difficulty data exists.
+
+44 documented-contract questions are explicitly non-runtime validations.
+The evidence identifies each source and the limits of the inference. Small
+architecture witnesses demonstrate the stated constraints, not correctness
+of a complete production system. Browser tests verify presentation and
+grading, not factual Laravel correctness.
+
+Working lesson mappings are independent of identity and remain editable.
+The course outline’s broad titles are not a substitute for checking the actual
+lesson content before curriculum-gated examinations. No future lesson numbers
+were invented.
+
+Recommended review order: the 30 complete samples, all documented contracts,
+the seven Advanced questions, framework-version-sensitive behaviors, and
+the remaining full collection. Record independent decisions separately from
+this completed internal review. Preserve revisions for any later correction.

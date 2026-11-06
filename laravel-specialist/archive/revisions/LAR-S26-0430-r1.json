@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0430",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Cache tags",
+  "subtopic": "cache-tags-driver-capability",
+  "objective": {
+    "id": "laravel.cache-tags-driver-capability",
+    "text": "Choose a tag-capable store instead of assuming every configured cache driver supports tags."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Identify a store capability mismatch rather than changing unrelated cache keys."
+  },
+  "prerequisites": [
+    "Cache stores",
+    "Tag support"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Code using Cache::tags works with a tag-capable store but fails after the application switches to the file cache driver. What should the design account for?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Tags require a supporting store; choose one or implement a different invalidation strategy.",
+      "rationale": "The repository checks the store’s tag capability, and the file store does not supply it.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Every store supports tags if the tag names contain only letters.",
+      "rationale": "Naming conventions cannot add a missing driver capability.",
+      "misconception": "Naming conventions cannot add a missing driver capability."
+    },
+    {
+      "id": "choice-3",
+      "text": "Setting a longer TTL automatically enables file-store tags.",
+      "rationale": "Expiration duration and tag support are independent features.",
+      "misconception": "Expiration duration and tag support are independent features."
+    },
+    {
+      "id": "choice-4",
+      "text": "Calling Cache::remember first creates the missing tag index for the file driver.",
+      "rationale": "remember stores values but does not install tag support in the underlying store.",
+      "misconception": "remember stores values but does not install tag support in the underlying store."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The repository checks the store’s tag capability, and the file store does not supply it.",
+    "trace": [
+      "The repository checks the store’s tag capability, and the file store does not supply it.",
+      "Naming conventions cannot add a missing driver capability.",
+      "Expiration duration and tag support are independent features.",
+      "remember stores values but does not install tag support in the underlying store."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "unsupported",
+    "probe": "$store = new Illuminate\\Cache\\FileStore(app('files'), storage_path('file-cache'));\n$repository = new Illuminate\\Cache\\Repository($store);\ntry {\n    $repository->tags(['catalog']);\n} catch (BadMethodCallException $e) {\n    echo 'unsupported';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#cache-tags"
+  ]
+}

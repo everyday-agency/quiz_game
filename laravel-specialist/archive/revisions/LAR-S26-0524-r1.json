@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0524",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Encryption failures",
+  "subtopic": "decryption-failure-not-plaintext-fallback",
+  "objective": {
+    "id": "laravel.decryption-failure-not-plaintext-fallback",
+    "text": "Handle decryption failure as invalid protected data rather than accepting the original ciphertext as plaintext."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Prevent a compatibility fallback from accepting data whose protection could not be verified."
+  },
+  "prerequisites": [
+    "Protected data trust boundary",
+    "DecryptException",
+    "Failure handling"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A protected preference cookie fails decryptString. A proposed catch returns the original cookie value as if it were trusted plaintext. The application supports only encrypted cookies. What should the review require?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Base64-decode the original value and trust any printable output.",
+      "rationale": "Encoding and printability do not verify the protected value.",
+      "misconception": "Encoding and printability do not verify the protected value."
+    },
+    {
+      "id": "choice-2",
+      "text": "Reject or discard the invalid protected value and apply an explicit safe default.",
+      "rationale": "A decryption failure means the value was not successfully authenticated/decrypted; treating the supplied bytes as trusted plaintext bypasses the protection.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Keep the fallback whenever the original bytes form valid JSON.",
+      "rationale": "JSON syntax does not establish authenticity under the required encrypted-cookie contract.",
+      "misconception": "JSON syntax does not establish authenticity under the required encrypted-cookie contract."
+    },
+    {
+      "id": "choice-4",
+      "text": "Catch only a generic Exception and continue with the original value.",
+      "rationale": "Changing the catch type does not repair the unsafe acceptance policy.",
+      "misconception": "Changing the catch type does not repair the unsafe acceptance policy."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A decryption failure means the value was not successfully authenticated/decrypted; treating the supplied bytes as trusted plaintext bypasses the protection.",
+    "trace": [
+      "Encoding and printability do not verify the protected value.",
+      "A decryption failure means the value was not successfully authenticated/decrypted; treating the supplied bytes as trusted plaintext bypasses the protection.",
+      "JSON syntax does not establish authenticity under the required encrypted-cookie contract.",
+      "Changing the catch type does not repair the unsafe acceptance policy."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "default",
+    "probe": "$cookie = 'not-an-authenticated-payload';\ntry {\n    $preference = Illuminate\\Support\\Facades\\Crypt::decryptString($cookie);\n} catch (Illuminate\\Contracts\\Encryption\\DecryptException $e) {\n    $preference = 'default';\n}\necho $preference;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/encryption#decrypting-a-value"
+  ]
+}

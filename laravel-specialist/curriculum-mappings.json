@@ -1,0 +1,2728 @@
+{
+  "revision": 1,
+  "outline": "working completed Lessons 1-8; no future numbers",
+  "questions": {
+    "LAR-S26-0001": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0002": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0003": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0004": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0005": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0006": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0007": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0008": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0009": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0010": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0011": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0012": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0013": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0014": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0015": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0016": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0017": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0018": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0019": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0020": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0021": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0022": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0023": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0024": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0025": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0026": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0027": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0028": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0029": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0030": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0031": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0032": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0033": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0034": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0035": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0036": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0037": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0038": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0039": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0040": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0041": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0042": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0043": {
+      "lessonIds": [
+        2,
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0044": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0045": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0046": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0047": {
+      "lessonIds": [
+        2
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0048": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0049": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0050": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0051": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0052": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0053": {
+      "lessonIds": [
+        2,
+        3
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0054": {
+      "lessonIds": [
+        3,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0055": {
+      "lessonIds": [
+        3,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0056": {
+      "lessonIds": [
+        3,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0057": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0058": {
+      "lessonIds": [
+        3,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0059": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0060": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0061": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0062": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0063": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0064": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0065": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0066": {
+      "lessonIds": [
+        5,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0067": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0068": {
+      "lessonIds": [
+        5,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0069": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0070": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0071": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0072": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0073": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0074": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0075": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0076": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0077": {
+      "lessonIds": [
+        2,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0078": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0079": {
+      "lessonIds": [
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0080": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0081": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0082": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0083": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0084": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0085": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0086": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0087": {
+      "lessonIds": [
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0088": {
+      "lessonIds": [
+        1,
+        3,
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0089": {
+      "lessonIds": [
+        2,
+        3
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0090": {
+      "lessonIds": [
+        2,
+        3
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0091": {
+      "lessonIds": [
+        2,
+        3
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0092": {
+      "lessonIds": [
+        2,
+        3
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0093": {
+      "lessonIds": [
+        3,
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0094": {
+      "lessonIds": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0095": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0096": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0097": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0098": {
+      "lessonIds": [
+        1
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0099": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0100": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0101": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0102": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0103": {
+      "lessonIds": [
+        5,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0104": {
+      "lessonIds": [
+        5,
+        6,
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0105": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0106": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0107": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0108": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0109": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0110": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0111": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0112": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0113": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0114": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0115": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0116": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0117": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0118": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0119": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0120": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0121": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0122": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0123": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0124": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0125": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0126": {
+      "lessonIds": [
+        4,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0127": {
+      "lessonIds": [
+        3,
+        5,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0128": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0129": {
+      "lessonIds": [
+        3,
+        5,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0130": {
+      "lessonIds": [
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0131": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0132": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0133": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0134": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0135": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0136": {
+      "lessonIds": [
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0137": {
+      "lessonIds": [
+        3,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0138": {
+      "lessonIds": [
+        1,
+        6,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0139": {
+      "lessonIds": [
+        2,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0140": {
+      "lessonIds": [
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0141": {
+      "lessonIds": [
+        3,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0142": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0143": {
+      "lessonIds": [
+        6,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0144": {
+      "lessonIds": [
+        5,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0145": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0146": {
+      "lessonIds": [
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0147": {
+      "lessonIds": [
+        5,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0148": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0149": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0150": {
+      "lessonIds": [
+        1,
+        7
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0151": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0152": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0153": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0154": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0155": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0156": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0157": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0158": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0159": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0160": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0161": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0162": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0163": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0164": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0165": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0166": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0167": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0168": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0169": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0170": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0171": {
+      "lessonIds": [
+        4
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0172": {
+      "lessonIds": [
+        2,
+        4,
+        5
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0173": {
+      "lessonIds": [
+        4,
+        8
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0174": {
+      "lessonIds": [
+        4,
+        6
+      ],
+      "coverageComplete": true
+    },
+    "LAR-S26-0175": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0176": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0177": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0178": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0179": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0180": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0181": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0182": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0183": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0184": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0185": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0186": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0187": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0188": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0189": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0190": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0191": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0192": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0193": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0194": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0195": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0196": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0197": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0198": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0199": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0200": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0201": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0202": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0203": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0204": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0205": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0206": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0207": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0208": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0209": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0210": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0211": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0212": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0213": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0214": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0215": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0216": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0217": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0218": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0219": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0220": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0221": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0222": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0223": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0224": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0225": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0226": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0227": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0228": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0229": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0230": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0231": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0232": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0233": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0234": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0235": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0236": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0237": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0238": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0239": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0240": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0241": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0242": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0243": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0244": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0245": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0246": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0247": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0248": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0249": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0250": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0251": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0252": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0253": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0254": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0255": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0256": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0257": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0258": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0259": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0260": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0261": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0262": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0263": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0264": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0265": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0266": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0267": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0268": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0269": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0270": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0271": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0272": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0273": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0274": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0275": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0276": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0277": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0278": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0279": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0280": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0281": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0282": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0283": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0284": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0285": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0286": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0287": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0288": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0289": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0290": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0291": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0292": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0293": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0294": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0295": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0296": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0297": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0298": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0299": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0300": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0301": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0302": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0303": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0304": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0305": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0306": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0307": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0308": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0309": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0310": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0311": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0312": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0313": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0314": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0315": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0316": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0317": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0318": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0319": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0320": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0321": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0322": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0323": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0324": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0325": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0326": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0327": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0328": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0329": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0330": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0331": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0332": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0333": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0334": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0335": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0336": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0337": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0338": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0339": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0340": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0341": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0342": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0343": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0344": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0345": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0346": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0347": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0348": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0349": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0350": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0351": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0352": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0353": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0354": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0355": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0356": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0357": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0358": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0359": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0360": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0361": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0362": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0363": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0364": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0365": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0366": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0367": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0368": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0369": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0370": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0371": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0372": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0373": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0374": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0375": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0376": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0377": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0378": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0379": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0380": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0381": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0382": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0383": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0384": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0385": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0386": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0387": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0388": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0389": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0390": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0391": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0392": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0393": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0394": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0395": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0396": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0397": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0398": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0399": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0400": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0401": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0402": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0403": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0404": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0405": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0406": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0407": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0408": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0409": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0410": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0411": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0412": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0413": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0414": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0415": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0416": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0417": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0418": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0419": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0420": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0421": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0422": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0423": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0424": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0425": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0426": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0427": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0428": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0429": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0430": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0431": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0432": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0433": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0434": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0435": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0436": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0437": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0438": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0439": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0440": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0441": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0442": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0443": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0444": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0445": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0446": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0447": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0448": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0449": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0450": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0451": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0452": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0453": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0454": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0455": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0456": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0457": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0458": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0459": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0460": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0461": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0462": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0463": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0464": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0465": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0466": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0467": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0468": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0469": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0470": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0471": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0472": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0473": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0474": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0475": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0476": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0477": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0478": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0479": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0480": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0481": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0482": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0483": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0484": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0485": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0486": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0487": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0488": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0489": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0490": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0491": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0492": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0493": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0494": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0495": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0496": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0497": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0498": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0499": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0500": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0501": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0502": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0503": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0504": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0505": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0506": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0507": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0508": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0509": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0510": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0511": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0512": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0513": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0514": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0515": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0516": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0517": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0518": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0519": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0520": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0521": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0522": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0523": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0524": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0525": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0526": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0527": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0528": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0529": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0530": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0531": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0532": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0533": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0534": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0535": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0536": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0537": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0538": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0539": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0540": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0541": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0542": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0543": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0544": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0545": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0546": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0547": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0548": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0549": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0550": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0551": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0552": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0553": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0554": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0555": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0556": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0557": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0558": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0559": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0560": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0561": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0562": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0563": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0564": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0565": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0566": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0567": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0568": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0569": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0570": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0571": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0572": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0573": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0574": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0575": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0576": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0577": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0578": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0579": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0580": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0581": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0582": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0583": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0584": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0585": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0586": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0587": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0588": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0589": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0590": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0591": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0592": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0593": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0594": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0595": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0596": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0597": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0598": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0599": {
+      "lessonIds": null,
+      "coverageComplete": false
+    },
+    "LAR-S26-0600": {
+      "lessonIds": null,
+      "coverageComplete": false
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0490",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Database tests",
+  "subtopic": "soft-delete-versus-physical-missing-assertions",
+  "objective": {
+    "id": "laravel.soft-delete-versus-physical-missing-assertions",
+    "text": "Distinguish a soft-deleted row from a physically missing model in persistence assertions."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Verify logical deletion without incorrectly requiring the physical row to disappear."
+  },
+  "prerequisites": [
+    "Eloquent SoftDeletes",
+    "Database assertions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The deletion endpoint uses SoftDeletes and should retain the row with deleted_at set. Which assertion targets that requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "assertDatabaseMissing(\"documents\", [\"id\" => $id])",
+      "rationale": "That requires the matching physical row to be absent, contrary to soft deletion.",
+      "misconception": "That requires the matching physical row to be absent, contrary to soft deletion."
+    },
+    {
+      "id": "choice-2",
+      "text": "assertDatabaseHas(\"documents\", [\"id\" => $id]) alone",
+      "rationale": "The row’s existence does not establish that deleted_at was set.",
+      "misconception": "The row’s existence does not establish that deleted_at was set."
+    },
+    {
+      "id": "choice-3",
+      "text": "Assert only that a normal model query cannot find the ID.",
+      "rationale": "A normal scoped query can hide the row for other reasons and does not directly prove the required retained soft-delete state.",
+      "misconception": "A normal scoped query can hide the row for other reasons and does not directly prove the required retained soft-delete state."
+    },
+    {
+      "id": "choice-4",
+      "text": "assertSoftDeleted(\"documents\", [\"id\" => $id])",
+      "rationale": "The soft-delete assertion verifies a matching row with a non-null deletion timestamp.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The soft-delete assertion verifies a matching row with a non-null deletion timestamp.",
+    "trace": [
+      "That requires the matching physical row to be absent, contrary to soft deletion.",
+      "The row’s existence does not establish that deleted_at was set.",
+      "A normal scoped query can hide the row for other reasons and does not directly prove the required retained soft-delete state.",
+      "The soft-delete assertion verifies a matching row with a non-null deletion timestamp."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "soft-deleted:row-retained",
+    "probe": "PHPUnit\\TextUI\\Configuration\\Registry::init(\n    (new PHPUnit\\TextUI\\CliArguments\\Builder)->fromParameters(['phpunit', '--no-configuration']),\n    PHPUnit\\TextUI\\XmlConfiguration\\DefaultConfiguration::create(),\n);\n$test = new class('localFixture') extends Illuminate\\Foundation\\Testing\\TestCase\n{\n    public function attach($application): void\n    {\n        $this->app = $application;\n    }\n    public function exposeExceptions(): void\n    {\n        $this->withoutExceptionHandling();\n    }\n};\n$test->attach(app());\nIlluminate\\Support\\Facades\\Schema::create('documents', function ($t) {\n    $t->id();\n    $t->softDeletes();\n});\nclass Document extends Illuminate\\Database\\Eloquent\\Model\n{\n    use Illuminate\\Database\\Eloquent\\SoftDeletes;\n    public $timestamps = false;\n    protected $guarded = [];\n}\n$d = Document::create([]);\n$d->delete();\n(function () use ($d) {\n    $this->assertSoftDeleted('documents', ['id' => $d->id]);\n    $this->assertDatabaseHas('documents', ['id' => $d->id]);\n})->call($test);\necho 'soft-deleted:row-retained';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database-testing#assert-soft-deleted",
+    "https://laravel.com/docs/13.x/eloquent#soft-deleting"
+  ]
+}

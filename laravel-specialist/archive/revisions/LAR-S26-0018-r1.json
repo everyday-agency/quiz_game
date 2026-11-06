@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0018",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Service container",
+  "subtopic": "tagged-service-pipeline",
+  "objective": {
+    "id": "laravel.tagged-service-pipeline",
+    "text": "Collect tagged implementations without coupling a consumer to each concrete class."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Select an extensible group without changing a global interface binding."
+  },
+  "prerequisites": [
+    "Container tags",
+    "Iterable injection"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Several packages contribute independent Check implementations. A coordinator must run all registered checks, and adding a package should not require editing its constructor. Which container arrangement directly supports this?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Tag each contributed service as health.checks and inject the iterable from tagged(\"health.checks\").",
+      "rationale": "Tags group separate registrations so the coordinator can consume all tagged services.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Alias every contribution to the same health.checks abstract.",
+      "rationale": "An alias identifies another abstract; it is not a collection of implementations.",
+      "misconception": "An alias identifies another abstract; it is not a collection of implementations."
+    },
+    {
+      "id": "choice-3",
+      "text": "Bind Check repeatedly, once for each contributed implementation.",
+      "rationale": "Repeated bindings for one abstract replace the selected implementation rather than accumulating a group.",
+      "misconception": "Repeated bindings for one abstract replace the selected implementation rather than accumulating a group."
+    },
+    {
+      "id": "choice-4",
+      "text": "Use bindIf(Check::class, ...) for every contribution.",
+      "rationale": "Only the first eligible binding survives, so the coordinator does not receive all checks.",
+      "misconception": "Only the first eligible binding survives, so the coordinator does not receive all checks."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "Tags group separate registrations so the coordinator can consume all tagged services.",
+    "trace": [
+      "Tags group separate registrations so the coordinator can consume all tagged services.",
+      "An alias identifies another abstract; it is not a collection of implementations.",
+      "Repeated bindings for one abstract replace the selected implementation rather than accumulating a group.",
+      "Only the first eligible binding survives, so the coordinator does not receive all checks."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Container/Container.php",
+    "contains": [
+      "public function tag(",
+      "public function tagged(",
+      "RewindableGenerator"
+    ],
+    "reason": "Tag membership provides a lazy iterable of the separately registered services.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      1
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/container#tagging"
+  ]
+}

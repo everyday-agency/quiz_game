@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0456",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "API resources",
+  "subtopic": "resource-top-level-additional-meta",
+  "objective": {
+    "id": "laravel.resource-top-level-additional-meta",
+    "text": "Add top-level response metadata without placing it inside each resource item."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Place metadata at the response level rather than duplicating it in each entity."
+  },
+  "prerequisites": [
+    "JsonResource responses",
+    "Response metadata"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A resource response needs a top-level meta.request_id beside data. Which expression adds it without making request_id an attribute on every item?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "$resource->additional([\"meta\" => [\"request_id\" => $id]])",
+      "rationale": "additional merges response-level data into the resource response.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Set $resource->resource->request_id = $id on every model.",
+      "rationale": "Mutating model attributes does not specify the required outer response shape.",
+      "misconception": "Mutating model attributes does not specify the required outer response shape."
+    },
+    {
+      "id": "choice-3",
+      "text": "Add request_id to every item’s toArray result.",
+      "rationale": "That places the value in each item rather than as top-level response metadata.",
+      "misconception": "That places the value in each item rather than as top-level response metadata."
+    },
+    {
+      "id": "choice-4",
+      "text": "Return only [\"meta\" => [\"request_id\" => $id]] from the item resource.",
+      "rationale": "That replaces the entity representation rather than adding metadata beside it.",
+      "misconception": "That replaces the entity representation rather than adding metadata beside it."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "additional merges response-level data into the resource response.",
+    "trace": [
+      "additional merges response-level data into the resource response.",
+      "Mutating model attributes does not specify the required outer response shape.",
+      "That places the value in each item rather than as top-level response metadata.",
+      "That replaces the entity representation rather than adding metadata beside it."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "{\"data\":{\"id\":7},\"meta\":{\"request_id\":\"r1\"}}",
+    "probe": "$resource = new Illuminate\\Http\\Resources\\Json\\JsonResource(['id' => 7]);\necho $resource->additional(['meta' => ['request_id' => 'r1']])->response()->getContent();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-resources#adding-meta-data"
+  ]
+}

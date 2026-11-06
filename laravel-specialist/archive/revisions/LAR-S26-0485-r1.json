@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0485",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "testing",
+  "topic": "Service tests",
+  "subtopic": "container-fake-versus-manual-dependency",
+  "objective": {
+    "id": "laravel.container-fake-versus-manual-dependency",
+    "text": "Bind a fake collaborator before container resolution rather than expecting it to replace a manually constructed dependency."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Choose a construction boundary through which a test replacement can actually flow."
+  },
+  "prerequisites": [
+    "Dependency injection",
+    "Test doubles",
+    "Manual construction"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A test binds a fake PaymentGateway in the container. The action still executes new Checkout(new RealGateway). Why does the fake not intercept that collaborator?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Container bindings apply only to static methods on the gateway.",
+      "rationale": "Bindings control resolution of objects, not a static-method-only interception mechanism.",
+      "misconception": "Bindings control resolution of objects, not a static-method-only interception mechanism."
+    },
+    {
+      "id": "choice-2",
+      "text": "Manual construction bypasses the container binding; resolve or inject the collaborator through that boundary.",
+      "rationale": "A container replacement affects dependencies obtained from the container, not an explicitly constructed unrelated object.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "The fake must have the same object ID as the manually constructed real gateway.",
+      "rationale": "Object IDs are not a mechanism for replacing manually created dependencies.",
+      "misconception": "Object IDs are not a mechanism for replacing manually created dependencies."
+    },
+    {
+      "id": "choice-4",
+      "text": "The binding will replace the real gateway after its first method call.",
+      "rationale": "The container does not retroactively swap arbitrary object references after a call.",
+      "misconception": "The container does not retroactively swap arbitrary object references after a call."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "A container replacement affects dependencies obtained from the container, not an explicitly constructed unrelated object.",
+    "trace": [
+      "Bindings control resolution of objects, not a static-method-only interception mechanism.",
+      "A container replacement affects dependencies obtained from the container, not an explicitly constructed unrelated object.",
+      "Object IDs are not a mechanism for replacing manually created dependencies.",
+      "The container does not retroactively swap arbitrary object references after a call."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "real:fake",
+    "probe": "interface PaymentGateway\n{\n    public function charge(): string;\n}\nclass RealGateway implements PaymentGateway\n{\n    public function charge(): string\n    {\n        return 'real';\n    }\n}\nclass Checkout\n{\n    public function __construct(public PaymentGateway $gateway)\n    {\n    }\n}\napp()->instance(PaymentGateway::class, new class implements PaymentGateway\n{\n    public function charge(): string\n    {\n        return 'fake';\n    }\n});\necho (new Checkout(new RealGateway))->gateway->charge().':';\necho app(Checkout::class)->gateway->charge();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mocking#mocking-objects"
+  ]
+}

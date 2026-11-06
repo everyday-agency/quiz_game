@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0002",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Configuration",
+  "subtopic": "cached-config-env-boundary",
+  "objective": {
+    "id": "laravel.cached-config-env-boundary",
+    "text": "Move environment access behind configuration so cached configuration preserves the intended value."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Connect bootstrap caching to a production-only flag defect."
+  },
+  "prerequisites": [
+    "Configuration cache",
+    "Environment variables"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A feature works locally but is disabled after config:cache. BILLING_ENABLED=true exists only in .env, not the process environment. A service reads env(\"BILLING_ENABLED\", false). Which repair retains cached configuration and makes the service use the deployment value?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Read env in config/billing.php and read config(\"billing.enabled\") in the service; rebuild the cache.",
+      "rationale": "The configuration file captures the environment value when the cache is built, and the service reads that stored configuration.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Move the same env call into the service provider boot method.",
+      "rationale": "Moving execution to boot does not change cached bootstrap: .env still is not loaded.",
+      "misconception": "Moving execution to boot does not change cached bootstrap: .env still is not loaded."
+    },
+    {
+      "id": "choice-3",
+      "text": "Keep the service call and run config:cache again after every request.",
+      "rationale": "Rebuilding is not a per-request solution and does not make cached bootstrap load .env for that service call.",
+      "misconception": "Rebuilding is not a per-request solution and does not make cached bootstrap load .env for that service call."
+    },
+    {
+      "id": "choice-4",
+      "text": "Change the service call to env(\"BILLING_ENABLED\", true).",
+      "rationale": "A true fallback masks a missing value and ignores an intended false deployment setting.",
+      "misconception": "A true fallback masks a missing value and ignores an intended false deployment setting."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The configuration file captures the environment value when the cache is built, and the service reads that stored configuration.",
+    "trace": [
+      "The configuration file captures the environment value when the cache is built, and the service reads that stored configuration.",
+      "Moving execution to boot does not change cached bootstrap: .env still is not loaded.",
+      "Rebuilding is not a per-request solution and does not make cached bootstrap load .env for that service call.",
+      "A true fallback masks a missing value and ignores an intended false deployment setting."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Foundation/Bootstrap/LoadEnvironmentVariables.php",
+    "contains": [
+      "configurationIsCached",
+      "return;"
+    ],
+    "reason": "Cached bootstrap skips dotenv; configuration is the stable application access boundary.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      1
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/configuration#configuration-caching"
+  ]
+}

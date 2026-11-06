@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0566",
+  "revision": 3,
+  "status": "internal-validated",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Deployment",
+  "subtopic": "nginx-front-controller-execution-boundary",
+  "objective": {
+    "id": "laravel.nginx-front-controller-execution-boundary",
+    "text": "Restrict web-server PHP execution to the Laravel front controller rather than every PHP file in the public tree."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish a correct document root from the separate policy selecting which PHP files may execute."
+  },
+  "prerequisites": [
+    "Nginx PHP routing",
+    "Laravel front controller",
+    "Public file execution boundary"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The document root already points to public. A generic Nginx PHP location would execute any .php file placed there. The deployment must execute only Laravel’s index.php entry point and reject other PHP paths. Which policy meets that boundary?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Send every existing .php file under public to PHP-FPM.",
+      "rationale": "The document root is correct but this still permits additional PHP files to execute.",
+      "misconception": "The document root is correct but this still permits additional PHP files to execute."
+    },
+    {
+      "id": "choice-2",
+      "text": "Remove all PHP handling and serve those files as ordinary static content.",
+      "rationale": "That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths.",
+      "misconception": "That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths."
+    },
+    {
+      "id": "choice-3",
+      "text": "Allow the index.php entry-point location, then reject other PHP paths.",
+      "rationale": "A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Keep the generic PHP handler and reject extra PHP paths inside Laravel middleware.",
+      "rationale": "A separate PHP script can execute without entering Laravel’s front controller or middleware.",
+      "misconception": "A separate PHP script can execute without entering Laravel’s front controller or middleware."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.",
+    "trace": [
+      "The document root is correct but this still permits additional PHP files to execute.",
+      "That prevents Laravel from executing and may disclose source rather than safely rejecting PHP paths.",
+      "A narrow FastCGI entry point plus rejection of other PHP paths enforces the stated execution boundary.",
+      "A separate PHP script can execute without entering Laravel’s front controller or middleware."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "sourceRoot": "reference",
+    "source": "nginx-entrypoint.txt",
+    "contains": [
+      "index.php",
+      "reject"
+    ],
+    "reason": "Laravel official Nginx deployment example restricts FastCGI to the front controller and returns 404 for other PHP locations. No live Nginx instance is tested.",
+    "status": "documented-contract-reviewed",
+    "independentEditorialReview": "pending",
+    "evidence": "laravel-specialist/evidence/batch-6-technical.json"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/deployment#server-configuration"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0314",
+  "revision": 1,
+  "status": "internal-validated",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Queue idempotency",
+  "subtopic": "transactional-outbox-publish-window",
+  "objective": {
+    "id": "laravel.transactional-outbox-publish-window",
+    "text": "Design an outbox to close the commit-versus-publish failure window without claiming exactly-once delivery."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Resolve the atomicity gap between local commit and remote publication while accounting for relay retries."
+  },
+  "prerequisites": [
+    "Database transactions",
+    "Broker publication",
+    "Outbox relay",
+    "Idempotent consumers"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An order commits, then the process crashes before publishing OrderAccepted to a broker. The event must remain recoverable without a distributed transaction. Which design also accounts for a relay crash after publishing?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Use only an in-memory afterCommit callback and consider publication guaranteed once commit succeeds.",
+      "rationale": "A process can die after commit but before the callback publishes, leaving no durable publication work item.",
+      "misconception": "A process can die after commit but before the callback publishes, leaving no durable publication work item."
+    },
+    {
+      "id": "choice-2",
+      "text": "Commit an outbox row and mark it sent before publishing, so consumers never receive duplicates.",
+      "rationale": "A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability.",
+      "misconception": "A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability."
+    },
+    {
+      "id": "choice-3",
+      "text": "Publish before the database commit and assume a later rollback retracts the broker message.",
+      "rationale": "A local rollback cannot retract an already published remote message.",
+      "misconception": "A local rollback cannot retract an already published remote message."
+    },
+    {
+      "id": "choice-4",
+      "text": "Commit the order and an outbox row together; retry relay delivery using a stable event ID and idempotent consumers.",
+      "rationale": "The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates.",
+    "trace": [
+      "A process can die after commit but before the callback publishes, leaving no durable publication work item.",
+      "A crash after marking sent but before publishing loses the event; avoiding duplicates this way sacrifices recoverability.",
+      "A local rollback cannot retract an already published remote message.",
+      "The durable outbox survives a post-commit process crash. A relay may publish twice after an ambiguous acknowledgment, so consumers must tolerate duplicates."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Database/Concerns/ManagesTransactions.php",
+    "contains": [
+      "public function transaction(",
+      "$this->getPdo()->commit();"
+    ],
+    "reason": "A local transaction can commit the domain row and outbox row atomically. Relay failure-window and consumer-idempotency claims use the cited original outbox pattern; no broker execution or exactly-once guarantee is claimed.",
+    "status": "documented-contract-reviewed",
+    "independentEditorialReview": "pending",
+    "evidence": "laravel-specialist/evidence/batch-4-technical.json"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/database#database-transactions",
+    "https://microservices.io/patterns/data/transactional-outbox.html"
+  ]
+}

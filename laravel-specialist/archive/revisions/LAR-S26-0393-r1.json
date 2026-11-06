@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0393",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Scheduling",
+  "subtopic": "schedule-when-and-skip-combination",
+  "objective": {
+    "id": "laravel.schedule-when-and-skip-combination",
+    "text": "Combine when and skip conditions without assuming registration order overrides their meaning."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Apply both eligibility and veto conditions rather than letting the last registration win."
+  },
+  "prerequisites": [
+    "Scheduler condition filters",
+    "Positive and negative predicates"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "schedule-fragment.php",
+        "kind": "fragment",
+        "source": "$enabled = true;\n$paused = true;\n\n$event = $schedule->call(fn () => null)\n    ->when(fn () => $enabled)\n    ->skip(fn () => $paused);",
+        "scope": "Inside schedule registration; $schedule is a Schedule instance."
+      }
+    ]
+  },
+  "stem": "The event is due and its environment permits running. With the shown values, do its filters permit execution?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Yes; the two true values cancel each other.",
+      "rationale": "The scheduler does not combine these conditions with exclusive-or arithmetic.",
+      "misconception": "The scheduler does not combine these conditions with exclusive-or arithmetic."
+    },
+    {
+      "id": "choice-2",
+      "text": "Yes; a true when result overrides every skip predicate.",
+      "rationale": "A positive condition does not disable the independent rejection condition.",
+      "misconception": "A positive condition does not disable the independent rejection condition."
+    },
+    {
+      "id": "choice-3",
+      "text": "No; when passes but skip supplies a veto.",
+      "rationale": "All positive filters must pass and no skip predicate may reject the event.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "It depends only on whether skip was registered last.",
+      "rationale": "The filters and rejects have defined roles rather than a last-call-wins boolean setting.",
+      "misconception": "The filters and rejects have defined roles rather than a last-call-wins boolean setting."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "All positive filters must pass and no skip predicate may reject the event.",
+    "trace": [
+      "The scheduler does not combine these conditions with exclusive-or arithmetic.",
+      "A positive condition does not disable the independent rejection condition.",
+      "All positive filters must pass and no skip predicate may reject the event.",
+      "The filters and rejects have defined roles rather than a last-call-wins boolean setting."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "blocked",
+    "probe": "$schedule = new Illuminate\\Console\\Scheduling\\Schedule('UTC');\n$fragment = getcwd().'/schedule-fragment.php';\nfile_put_contents($fragment, \"<?php\\n\".file_get_contents($fragment));\nrequire $fragment;\necho $event->filtersPass(app()) ? 'allowed' : 'blocked';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#truth-test-constraints"
+  ]
+}

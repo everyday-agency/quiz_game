@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0394",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Scheduling",
+  "subtopic": "schedule-environment-restriction",
+  "objective": {
+    "id": "laravel.schedule-environment-restriction",
+    "text": "Restrict scheduled work to the intended application environments."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Restrict the scheduled operation using the scheduler’s environment condition."
+  },
+  "prerequisites": [
+    "Application environment",
+    "Scheduler eligibility"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A billing command is registered on all environments, but the scheduler should consider it eligible only in production. Which event constraint expresses that requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "->timezone(\"production\")",
+      "rationale": "A timezone names a clock region, not an application environment.",
+      "misconception": "A timezone names a clock region, not an application environment."
+    },
+    {
+      "id": "choice-2",
+      "text": "->onOneServer()",
+      "rationale": "Single-server election does not prevent the task from running in a staging environment.",
+      "misconception": "Single-server election does not prevent the task from running in a staging environment."
+    },
+    {
+      "id": "choice-3",
+      "text": "->environments([\"production\"])",
+      "rationale": "The event checks the current application environment against the allowed list.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "->name(\"production\")",
+      "rationale": "The event name identifies the task and does not restrict the environment.",
+      "misconception": "The event name identifies the task and does not restrict the environment."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The event checks the current application environment against the allowed list.",
+    "trace": [
+      "A timezone names a clock region, not an application environment.",
+      "Single-server election does not prevent the task from running in a staging environment.",
+      "The event checks the current application environment against the allowed list.",
+      "The event name identifies the task and does not restrict the environment."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "blocked:allowed",
+    "probe": "$schedule = new Illuminate\\Console\\Scheduling\\Schedule('UTC');\n$event = $schedule->call(fn () => null)->everyMinute()->environments(['production']);\napp()->instance('env', 'staging');\necho ($event->isDue(app()) ? 'allowed' : 'blocked').':';\napp()->instance('env', 'production');\necho $event->isDue(app()) ? 'allowed' : 'blocked';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/scheduling#environment-constraints"
+  ]
+}

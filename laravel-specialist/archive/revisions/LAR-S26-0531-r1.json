@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0531",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Authentication state",
+  "subtopic": "auth-once-no-persistent-login",
+  "objective": {
+    "id": "laravel.auth-once-no-persistent-login",
+    "text": "Authenticate a single request with once without persisting a login session."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish setting the current request identity from persisting a session login."
+  },
+  "prerequisites": [
+    "Session guard",
+    "once authentication",
+    "Request-local identity"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The session starts without a login, credentials are valid, and no later code calls login or attempt."
+    ],
+    "files": []
+  },
+  "stem": "What does Auth::once($credentials) establish through the session guard?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "A normal session login that remains on later requests until logout.",
+      "rationale": "That describes persistent login rather than once’s request-scoped behavior.",
+      "misconception": "That describes persistent login rather than once’s request-scoped behavior."
+    },
+    {
+      "id": "choice-2",
+      "text": "An authenticated user for this request without writing a persistent login into the session.",
+      "rationale": "once validates credentials and sets the guard’s current user without the normal session-login persistence path.",
+      "misconception": null
+    },
+    {
+      "id": "choice-3",
+      "text": "Only a password-valid boolean, leaving the guard’s user unset for this request.",
+      "rationale": "once also sets the current guard user when authentication succeeds.",
+      "misconception": "once also sets the current guard user when authentication succeeds."
+    },
+    {
+      "id": "choice-4",
+      "text": "A remember-me cookie that survives after the request but no current user.",
+      "rationale": "The once method does not create that persistent remember-me login.",
+      "misconception": "The once method does not create that persistent remember-me login."
+    }
+  ],
+  "correctOptionId": "choice-2",
+  "explanation": {
+    "summary": "once validates credentials and sets the guard’s current user without the normal session-login persistence path.",
+    "trace": [
+      "That describes persistent login rather than once’s request-scoped behavior.",
+      "once validates credentials and sets the guard’s current user without the normal session-login persistence path.",
+      "once also sets the current guard user when authentication succeeds.",
+      "The once method does not create that persistent remember-me login."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "1:1:0",
+    "probe": "use Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\nSchema::create('users', function ($t) {\n    $t->id();\n    $t->string('email')->unique();\n    $t->string('password');\n    $t->string('remember_token')->nullable();\n    $t->timestamp('email_verified_at')->nullable();\n});\nSchema::create('password_reset_tokens', function ($t) {\n    $t->string('email')->primary();\n    $t->string('token');\n    $t->timestamp('created_at')->nullable();\n});\nclass Member extends Illuminate\\Foundation\\Auth\\User implements Illuminate\\Contracts\\Auth\\MustVerifyEmail\n{\n    protected $table = 'users';\n    protected $guarded = [];\n    public $timestamps = false;\n}\n$hasher = new Illuminate\\Hashing\\BcryptHasher(['rounds' => 4]);\n$user = Member::create(['email' => 'ada@example.test', 'password' => $hasher->make('old-password')]);\n$tokens = new Illuminate\\Auth\\Passwords\\DatabaseTokenRepository(\n    DB::connection(), $hasher, 'password_reset_tokens', 'fixture-hash-key', 3600, 60,\n);\n$provider = new Illuminate\\Auth\\EloquentUserProvider($hasher, Member::class);\n$broker = new Illuminate\\Auth\\Passwords\\PasswordBroker($tokens, $provider, timeboxDuration: 0);\nconfig([\n    'auth.defaults.guard' => 'web',\n    'auth.guards.web' => ['driver' => 'session', 'provider' => 'members'],\n    'auth.providers.members' => ['driver' => 'eloquent', 'model' => Member::class],\n]);\n$guard = app('auth')->guard('web');\n$ok = $guard->once(['email' => $user->email, 'password' => 'old-password']);\necho (int) $ok.':'.$guard->id().':'.(int) app('session.store')->has($guard->getName());",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/authentication#authenticate-a-user-once"
+  ]
+}

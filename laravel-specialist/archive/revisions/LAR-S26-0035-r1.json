@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0035",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Routing",
+  "subtopic": "optional-route-php-default",
+  "objective": {
+    "id": "laravel.optional-route-php-default",
+    "text": "Supply a PHP default value for an optional route argument."
+  },
+  "difficulty": {
+    "level": "Foundation",
+    "audience": "junior",
+    "rationale": "Satisfy an absent URI value at the PHP invocation boundary."
+  },
+  "prerequisites": [
+    "Optional route parameters",
+    "PHP parameter defaults"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "For Route::get(\"/greet/{name?}\", ...), the handler should return \"Hello guest\" for /greet and \"Hello Ada\" for /greet/Ada. Which handler supports both without an argument error?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "function (string $name) { return \"Hello \".$name; }",
+      "rationale": "The route placeholder is optional, but the PHP argument remains required.",
+      "misconception": "The route placeholder is optional, but the PHP argument remains required."
+    },
+    {
+      "id": "choice-2",
+      "text": "function (string $name = \"\") { return \"Hello \".$name; }",
+      "rationale": "This avoids an argument error but returns Hello with an empty name instead of the required guest fallback.",
+      "misconception": "This avoids an argument error but returns Hello with an empty name instead of the required guest fallback."
+    },
+    {
+      "id": "choice-3",
+      "text": "function (string $name = \"guest\") { return \"Hello \".$name; }",
+      "rationale": "The PHP default supplies the omitted optional route parameter while a present value replaces it.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "function (?string $name) { return \"Hello \".($name ?? \"guest\"); }",
+      "rationale": "Nullable allows null when supplied; it does not make the PHP parameter optional without a default.",
+      "misconception": "Nullable allows null when supplied; it does not make the PHP parameter optional without a default."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The PHP default supplies the omitted optional route parameter while a present value replaces it.",
+    "trace": [
+      "The route placeholder is optional, but the PHP argument remains required.",
+      "This avoids an argument error but returns Hello with an empty name instead of the required guest fallback.",
+      "The PHP default supplies the omitted optional route parameter while a present value replaces it.",
+      "Nullable allows null when supplied; it does not make the PHP parameter optional without a default."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Hello guest|Hello Ada",
+    "probe": "app('router')->get('/greet/{name?}', function (string $name = 'guest') { return 'Hello '.$name; });\nforeach (['/greet', '/greet/Ada'] as $i => $path) {\n    echo ($i ? '|' : '').app('router')->dispatch(Illuminate\\Http\\Request::create($path))->getContent();\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": [
+      2
+    ],
+    "lessonMappingStatus": "working-completed-outline",
+    "coverageComplete": true
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/routing#optional-parameters"
+  ]
+}

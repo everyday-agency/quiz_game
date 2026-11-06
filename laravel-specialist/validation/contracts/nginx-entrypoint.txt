@@ -1,0 +1,1 @@
+Official source checked 2026-11-06: https://laravel.com/docs/13.x/deployment#nginx\nParaphrase: the example directs FastCGI handling to the index.php front controller and uses another PHP location to reject other PHP paths with 404. The document root alone does not establish this PHP execution restriction. No live Nginx test is claimed.\n

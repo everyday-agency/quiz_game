@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0427",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Cache architecture",
+  "subtopic": "cache-stampede-inner-recheck",
+  "objective": {
+    "id": "laravel.cache-stampede-inner-recheck",
+    "text": "Prevent a cache stampede with a shared lock and a second cache check inside the lock."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Reason about a waiter whose original miss becomes stale while another worker fills the cache."
+  },
+  "prerequisites": [
+    "Cache stampede",
+    "Shared locks",
+    "Double-checked retrieval"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Workers share the cache and lock store. The lock lifetime safely covers one computation. Lock-acquisition timeout is handled separately."
+    ],
+    "files": []
+  },
+  "stem": "Many workers miss the same expensive result, then wait for one shared lock. What must each worker do after acquiring it to avoid recomputing a result an earlier holder already produced?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Use a unique lock name per worker so all misses finish sooner.",
+      "rationale": "Different locks do not coordinate the workers contending for this same expensive result.",
+      "misconception": "Different locks do not coordinate the workers contending for this same expensive result."
+    },
+    {
+      "id": "choice-2",
+      "text": "Compute immediately inside the lock because the earlier miss remains authoritative.",
+      "rationale": "The lock serializes work but does not make a previously observed miss remain true.",
+      "misconception": "The lock serializes work but does not make a previously observed miss remain true."
+    },
+    {
+      "id": "choice-3",
+      "text": "Read the cache again inside the lock before computing and storing a missing result.",
+      "rationale": "The first miss may precede another worker’s successful computation; an inner check lets later holders reuse that result.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Delete the cache entry immediately after acquiring the lock.",
+      "rationale": "Deleting a newly filled entry defeats reuse and forces sequential recomputation.",
+      "misconception": "Deleting a newly filled entry defeats reuse and forces sequential recomputation."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The first miss may precede another worker’s successful computation; an inner check lets later holders reuse that result.",
+    "trace": [
+      "Different locks do not coordinate the workers contending for this same expensive result.",
+      "The lock serializes work but does not make a previously observed miss remain true.",
+      "The first miss may precede another worker’s successful computation; an inner check lets later holders reuse that result.",
+      "Deleting a newly filled entry defeats reuse and forces sequential recomputation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "cached:0",
+    "probe": "use Illuminate\\Support\\Facades\\Cache;\n$firstRead = Cache::get('result');\nCache::put('result', 'cached', 60);\n$computations = 0;\n$value = Cache::lock('compute:result', 30)->get(function () use (&$computations) {\n    return Cache::remember('result', 60, function () use (&$computations) {\n        $computations++;\n        return 'computed';\n    });\n});\necho $value.':'.$computations;",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/cache#atomic-locks",
+    "https://laravel.com/docs/13.x/cache#retrieve-and-store"
+  ]
+}

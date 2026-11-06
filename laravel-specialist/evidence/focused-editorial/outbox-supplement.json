@@ -1,0 +1,58 @@
+{
+  "kind": "supplementary-local-witness",
+  "question": "LAR-S26-0314",
+  "revision": 2,
+  "sourceHash": "ea0e9006405d85ae47738bfe74b24a0be9bace522cee52c9eede73b0de685d8f",
+  "probeHash": "1d9ae51e5ffb3491824d9bc19deae54071f6c1201ba33c3d9daa617f8331dd0a",
+  "runnerHash": "a789dcf6aa65168293b3f386cb7d9e2da5876d5259a2231e09804db3b8b57607",
+  "harnessHash": "3d6a73fb7099103497a54a989f8f103f3ff2a4c26ff50bf7e8c0391424b66672",
+  "lockHash": "b8664f812b9856ec98db81bbd5bc1950196c7b4dc230b6096ded263476c34df5",
+  "results": [
+    {
+      "php": "8.5.2",
+      "framework": "13.40.0",
+      "id": "LAR-S26-0314",
+      "revision": 2,
+      "stdout": "afterCommit=1/0;atomic=1/1;rollback=0/0;redelivery=2/1",
+      "exitCode": 0
+    },
+    {
+      "php": "8.4.17",
+      "framework": "13.40.0",
+      "id": "LAR-S26-0314",
+      "revision": 2,
+      "stdout": "afterCommit=1/0;atomic=1/1;rollback=0/0;redelivery=2/1",
+      "exitCode": 0
+    }
+  ],
+  "references": [
+    {
+      "path": "Illuminate/Database/Concerns/ManagesTransactions.php",
+      "sha256": "f0f453371194693b8decbaf3e49e033a0e9c04b8a473dcb73bd04c29305135db",
+      "tokens": [
+        "$this->getPdo()->commit();",
+        "$this->transactionsManager?->commit("
+      ]
+    },
+    {
+      "path": "Illuminate/Queue/Queue.php",
+      "sha256": "6044e1b8953b0f92541d2c7198750d962c87b946adce2c7e2713d4f5bd0ad3ff",
+      "tokens": [
+        "$this->container->make('db.transactions')->addCallback("
+      ]
+    },
+    {
+      "path": "Illuminate/Events/Dispatcher.php",
+      "sha256": "d5d4c00f5e9a0c9f75a12861305a0021ecc8c4d18fb9ebb3ee4ae01bb52bc6b2",
+      "tokens": [
+        "ShouldHandleEventsAfterCommit",
+        "createCallbackForListenerRunningAfterCommits"
+      ]
+    }
+  ],
+  "limitations": [
+    "The shown Redis connection is substituted with a disposable local database queue to observe the actual Laravel afterCommit enqueue path.",
+    "A deterministic exception before queue persistence represents loss in that gap; this is not a real process-kill or Redis/broker test.",
+    "The redelivery witness uses an in-memory set, not a production consumer transaction. Primary question validation remains documented-contract."
+  ]
+}

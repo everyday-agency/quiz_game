@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0561",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Localization",
+  "subtopic": "json-translation-file-key-collision",
+  "objective": {
+    "id": "laravel.json-translation-file-key-collision",
+    "text": "Avoid collisions between JSON translation keys and PHP translation filenames."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Avoid interpreting a short JSON-style key as an existing PHP translation group."
+  },
+  "prerequisites": [
+    "JSON translation keys",
+    "PHP translation groups",
+    "Key collisions"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "The current locale is en, en.json has no action key, and lang/en/action.php is the only matching PHP language file."
+    ],
+    "files": [
+      {
+        "path": "lang/en/action.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nreturn ['save' => 'Save', 'cancel' => 'Cancel'];\n"
+      }
+    ]
+  },
+  "stem": "Why can __(\"action\") return an array here instead of the expected untranslated string?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The translator combines all language files into one array for every lookup.",
+      "rationale": "Ordinary key lookup does not return all translation groups.",
+      "misconception": "Ordinary key lookup does not return all translation groups."
+    },
+    {
+      "id": "choice-2",
+      "text": "Every missing JSON key is converted to an empty array.",
+      "rationale": "The array comes from the matching PHP group, not a universal missing-key conversion.",
+      "misconception": "The array comes from the matching PHP group, not a universal missing-key conversion."
+    },
+    {
+      "id": "choice-3",
+      "text": "The key collides with a PHP translation group filename, so that group can be returned.",
+      "rationale": "Without a matching JSON entry, lookup can interpret action as a PHP translation group and retrieve its array.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "The en locale requires every translation to be an array rather than a string.",
+      "rationale": "The locale does not impose that value type; the lookup target determines it.",
+      "misconception": "The locale does not impose that value type; the lookup target determines it."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Without a matching JSON entry, lookup can interpret action as a PHP translation group and retrieve its array.",
+    "trace": [
+      "Ordinary key lookup does not return all translation groups.",
+      "The array comes from the matching PHP group, not a universal missing-key conversion.",
+      "Without a matching JSON entry, lookup can interpret action as a PHP translation group and retrieve its array.",
+      "The locale does not impose that value type; the lookup target determines it."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "{\"save\":\"Save\",\"cancel\":\"Cancel\"}",
+    "probe": "echo json_encode(__('action'));",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/localization#using-translation-strings-as-keys"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0366",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Mail queueing",
+  "subtopic": "queued-mail-locale-restoration",
+  "objective": {
+    "id": "laravel.queued-mail-locale-restoration",
+    "text": "Preserve a queued mailable locale while restoring the worker application locale after rendering."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Apply a per-message locale without leaking it into later work in the worker process."
+  },
+  "prerequisites": [
+    "Localized mailables",
+    "Queued mail",
+    "Worker locale lifetime"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The worker locale is en. A mailable is queued with locale(\"fr\"), and its template translates Receipt. Both translations exist. Which locale behavior is expected while sending and immediately afterwards?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The message uses English because queued mail discards locale metadata.",
+      "rationale": "Laravel preserves the mailable locale for queued delivery.",
+      "misconception": "Laravel preserves the mailable locale for queued delivery."
+    },
+    {
+      "id": "choice-2",
+      "text": "Rendering fails unless the worker’s global locale was already fr.",
+      "rationale": "A mailable can explicitly request a locale different from the worker default.",
+      "misconception": "A mailable can explicitly request a locale different from the worker default."
+    },
+    {
+      "id": "choice-3",
+      "text": "The message uses French; the application locale returns to en after rendering.",
+      "rationale": "The mailable carries its chosen locale and applies it within a scope that restores the previous locale.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "The message uses French and permanently switches the worker to fr.",
+      "rationale": "The locale scope restores the prior application locale after the operation.",
+      "misconception": "The locale scope restores the prior application locale after the operation."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The mailable carries its chosen locale and applies it within a scope that restores the previous locale.",
+    "trace": [
+      "Laravel preserves the mailable locale for queued delivery.",
+      "A mailable can explicitly request a locale different from the worker default.",
+      "The mailable carries its chosen locale and applies it within a scope that restores the previous locale.",
+      "The locale scope restores the prior application locale after the operation."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "Reçu:en",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nif (! is_dir(resource_path('views/mail'))) {\n    mkdir(resource_path('views/mail'), 0700, true);\n}\nfile_put_contents(resource_path('views/mail/simple.blade.php'), 'Receipt');\nclass SimpleMail extends Illuminate\\Mail\\Mailable\n{\n    use Illuminate\\Bus\\Queueable;\n    use Illuminate\\Queue\\SerializesModels;\n\n    public function envelope(): Illuminate\\Mail\\Mailables\\Envelope\n    {\n        return new Illuminate\\Mail\\Mailables\\Envelope(subject: 'Receipt');\n    }\n\n    public function content(): Illuminate\\Mail\\Mailables\\Content\n    {\n        return new Illuminate\\Mail\\Mailables\\Content(view: 'mail.simple');\n    }\n}\nfile_put_contents(lang_path('en.json'), '{\"Receipt\":\"Receipt\"}');\nfile_put_contents(lang_path('fr.json'), '{\"Receipt\":\"Reçu\"}');\nfile_put_contents(resource_path('views/mail/simple.blade.php'), \"{{ __('Receipt') }}\");\nclass LocalizedMail extends SimpleMail implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n}\nIlluminate\\Support\\Facades\\Mail::to('a@example.test')->locale('fr')->queue(new LocalizedMail());\napp('queue')->connection()->pop()->fire();\n$message = app('mailer')->getSymfonyTransport()->messages()->first()->getOriginalMessage();\necho $message->getHtmlBody().':'.app()->getLocale();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/mail#localizing-mailables"
+  ]
+}

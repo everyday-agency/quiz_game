@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0050",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "code-review",
+  "topic": "Signed URLs",
+  "subtopic": "ignored-signature-query-trust",
+  "objective": {
+    "id": "laravel.ignored-signature-query-trust",
+    "text": "Assess the trust boundary created by ignoring a query parameter during signature validation."
+  },
+  "difficulty": {
+    "level": "Advanced",
+    "audience": "advanced",
+    "rationale": "Identify which data remains authenticated after an explicit signature exclusion."
+  },
+  "prerequisites": [
+    "Signed query strings",
+    "Authorization",
+    "Input validation"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An export link signs the account path but ignores the query parameter format during validation. The UI currently sends format=csv. Which review comment correctly describes the security boundary?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Treat format as caller-controlled and validate it against allowed formats; the signature does not protect its value.",
+      "rationale": "An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Reject every link with format because ignored parameters always invalidate signatures.",
+      "rationale": "Ignoring a parameter intentionally permits it to vary without invalidating the signature.",
+      "misconception": "Ignoring a parameter intentionally permits it to vary without invalidating the signature."
+    },
+    {
+      "id": "choice-3",
+      "text": "Treat format as trusted because the account path is signed.",
+      "rationale": "Authenticating the path does not authenticate a query parameter explicitly excluded from verification.",
+      "misconception": "Authenticating the path does not authenticate a query parameter explicitly excluded from verification."
+    },
+    {
+      "id": "choice-4",
+      "text": "Use the presence of a signature as authorization for any account ID supplied in the body.",
+      "rationale": "The signed URL authenticates only its covered data and does not authenticate unrelated request body values.",
+      "misconception": "The signed URL authenticates only its covered data and does not authenticate unrelated request body values."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.",
+    "trace": [
+      "An ignored parameter can be changed while the signature remains valid, so its value needs independent validation.",
+      "Ignoring a parameter intentionally permits it to vary without invalidating the signature.",
+      "Authenticating the path does not authenticate a query parameter explicitly excluded from verification.",
+      "The signed URL authenticates only its covered data and does not authenticate unrelated request body values."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,true]",
+    "probe": "app('router')->get('/accounts/{account}/export', fn () => '')->name('export');\napp('router')->getRoutes()->refreshNameLookups();\n$base = app('url')->signedRoute('export', ['account' => 3]);\n$a = Illuminate\\Http\\Request::create($base.'&format=csv');\n$b = Illuminate\\Http\\Request::create($base.'&format=json');\necho json_encode([app('url')->hasValidSignature($a, true, ['format']), app('url')->hasValidSignature($b, true, ['format'])]);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/urls#validating-signed-route-requests"
+  ]
+}

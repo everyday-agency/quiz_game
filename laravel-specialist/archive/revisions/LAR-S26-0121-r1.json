@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0121",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Validation",
+  "subtopic": "image-dimensions-versus-size",
+  "objective": {
+    "id": "laravel.image-dimensions-versus-size",
+    "text": "Restrict uploaded image dimensions separately from file size and MIME type."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Enforce a visual constraint independently of byte size and content type."
+  },
+  "prerequisites": [
+    "Uploaded image validation",
+    "Pixel dimensions",
+    "File size"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "An avatar must be a valid image no larger than 200 KB and at least 100 by 100 pixels. The current image|max:200 rules accept a tiny 30 by 20 PNG. Which additional rule enforces the missing requirement?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "mimes:png,jpg",
+      "rationale": "Allowed file types do not establish minimum pixel dimensions.",
+      "misconception": "Allowed file types do not establish minimum pixel dimensions."
+    },
+    {
+      "id": "choice-2",
+      "text": "min:100",
+      "rationale": "For an uploaded file, min measures file size in kilobytes, not width or height.",
+      "misconception": "For an uploaded file, min measures file size in kilobytes, not width or height."
+    },
+    {
+      "id": "choice-3",
+      "text": "size:100",
+      "rationale": "For a file, size requires a particular file size rather than a 100-pixel dimension.",
+      "misconception": "For a file, size requires a particular file size rather than a 100-pixel dimension."
+    },
+    {
+      "id": "choice-4",
+      "text": "dimensions:min_width=100,min_height=100",
+      "rationale": "The dimensions rule checks image pixel dimensions, complementing the image-content and byte-size checks.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The dimensions rule checks image pixel dimensions, complementing the image-content and byte-size checks.",
+    "trace": [
+      "Allowed file types do not establish minimum pixel dimensions.",
+      "For an uploaded file, min measures file size in kilobytes, not width or height.",
+      "For a file, size requires a particular file size rather than a 100-pixel dimension.",
+      "The dimensions rule checks image pixel dimensions, complementing the image-content and byte-size checks."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[false,true]",
+    "probe": "$results = [];\nforeach ([[30, 20], [100, 100]] as $i => [$width, $height]) {\n    $image = imagecreatetruecolor($width, $height);\n    $path = getcwd().'/image-'.$i.'.png';\n    imagepng($image, $path);\n    unset($image);\n    $file = new Illuminate\\Http\\UploadedFile($path, 'avatar.png', null, null, true);\n    $results[] = validator(['avatar' => $file], ['avatar' => 'image|max:200|dimensions:min_width=100,min_height=100'])->passes();\n}\necho json_encode($results);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-dimensions"
+  ]
+}

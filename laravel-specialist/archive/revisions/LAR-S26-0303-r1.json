@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0303",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "debugging",
+  "topic": "Queue dispatch",
+  "subtopic": "queue-name-versus-connection",
+  "objective": {
+    "id": "laravel.queue-name-versus-connection",
+    "text": "Distinguish a queue name from a queue connection when routing a job."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Configure transport and logical queue independently."
+  },
+  "prerequisites": [
+    "Queue connections",
+    "Named queues"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "The configured connection is named database; workers consume its imports queue. A job currently calls onConnection(\"imports\") and fails because no such connection exists. Which routing pair matches the configuration?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "onConnection(\"database\")->onQueue(\"imports\")",
+      "rationale": "The connection selects the configured driver, while onQueue selects the logical queue within it.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "onConnection(\"database.imports\")",
+      "rationale": "A dotted string is not automatically split into a connection and queue.",
+      "misconception": "A dotted string is not automatically split into a connection and queue."
+    },
+    {
+      "id": "choice-3",
+      "text": "onConnection(\"imports\")->onQueue(\"database\")",
+      "rationale": "This reverses the configured connection and queue names.",
+      "misconception": "This reverses the configured connection and queue names."
+    },
+    {
+      "id": "choice-4",
+      "text": "onQueue(\"database\")->onQueue(\"imports\")",
+      "rationale": "Repeated queue selection does not explicitly select the intended connection.",
+      "misconception": "Repeated queue selection does not explicitly select the intended connection."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The connection selects the configured driver, while onQueue selects the logical queue within it.",
+    "trace": [
+      "The connection selects the configured driver, while onQueue selects the logical queue within it.",
+      "A dotted string is not automatically split into a connection and queue.",
+      "This reverses the configured connection and queue names.",
+      "Repeated queue selection does not explicitly select the intended connection."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "imports",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass MarkWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public function handle(): void\n    {\n        app('cache')->put('handled', true);\n    }\n}\nIlluminate\\Support\\Facades\\Bus::dispatch((new MarkWork())->onConnection('database')->onQueue('imports'));\necho Illuminate\\Support\\Facades\\DB::table('jobs')->value('queue');",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#customizing-the-queue-and-connection"
+  ]
+}

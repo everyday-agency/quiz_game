@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0317",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Queue retries",
+  "subtopic": "backoff-array-last-value-fallback",
+  "objective": {
+    "id": "laravel.backoff-array-last-value-fallback",
+    "text": "Select a backoff delay from an attempt-indexed array with last-value fallback."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Map consecutive failed attempts to the configured retry delay sequence."
+  },
+  "prerequisites": [
+    "Queue retry backoff",
+    "Attempt numbering"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A job’s backoff() returns [10,30,120]. It remains eligible for retries. Which delays does the worker select after failed attempts 1, 2, 3 and 4?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "10,30,120,0",
+      "rationale": "Exhausting the explicit entries does not reset the delay to zero.",
+      "misconception": "Exhausting the explicit entries does not reset the delay to zero."
+    },
+    {
+      "id": "choice-2",
+      "text": "10,30,120,10",
+      "rationale": "The backoff sequence does not cycle back to its start.",
+      "misconception": "The backoff sequence does not cycle back to its start."
+    },
+    {
+      "id": "choice-3",
+      "text": "0,10,30,120",
+      "rationale": "The first failed attempt uses the first configured entry rather than an implicit zero delay.",
+      "misconception": "The first failed attempt uses the first configured entry rather than an implicit zero delay."
+    },
+    {
+      "id": "choice-4",
+      "text": "10,30,120,120",
+      "rationale": "The attempt selects the corresponding delay, and attempts beyond the array use its final value.",
+      "misconception": null
+    }
+  ],
+  "correctOptionId": "choice-4",
+  "explanation": {
+    "summary": "The attempt selects the corresponding delay, and attempts beyond the array use its final value.",
+    "trace": [
+      "Exhausting the explicit entries does not reset the delay to zero.",
+      "The backoff sequence does not cycle back to its start.",
+      "The first failed attempt uses the first configured entry rather than an implicit zero delay.",
+      "The attempt selects the corresponding delay, and attempts beyond the array use its final value."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "10,30,120,120",
+    "probe": "$job = new class\n{\n    public int $attempt = 1;\n\n    public function attempts(): int\n    {\n        return $this->attempt;\n    }\n\n    public function backoff(): string\n    {\n        return '10,30,120';\n    }\n};\n$method = new ReflectionMethod(Illuminate\\Queue\\Worker::class, 'calculateBackoff');\n$worker = app('queue.worker');\n$options = new Illuminate\\Queue\\WorkerOptions();\n$values = [];\nfor ($job->attempt = 1; $job->attempt <= 4; $job->attempt++) {\n    $values[] = $method->invoke($worker, $job, $options);\n}\necho implode(',', $values);",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#dealing-with-failed-jobs"
+  ]
+}

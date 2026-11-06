@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0580",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Performance",
+  "subtopic": "index-workload-read-write-tradeoff",
+  "objective": {
+    "id": "laravel.index-workload-read-write-tradeoff",
+    "text": "Recognize that adding an index has write and storage costs as well as possible read benefits."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Evaluate an index against both the read path it helps and the write workload it must maintain."
+  },
+  "prerequisites": [
+    "Database indexes",
+    "Query plans",
+    "Write workload"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "A PostgreSQL table receives frequent writes. A candidate index improves one report in a representative query plan."
+    ],
+    "files": []
+  },
+  "stem": "Which additional evidence is most useful before accepting the index for production?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Whether every model has at least the same number of indexes.",
+      "rationale": "Uniform index counts are not a workload-based justification for this index.",
+      "misconception": "Uniform index counts are not a workload-based justification for this index."
+    },
+    {
+      "id": "choice-2",
+      "text": "Whether one cached report response is fast after the index is created.",
+      "rationale": "A cache hit need not exercise the indexed query or expose write costs.",
+      "misconception": "A cache hit need not exercise the indexed query or expose write costs."
+    },
+    {
+      "id": "choice-3",
+      "text": "Its effect on write latency, storage and the overall representative workload.",
+      "rationale": "An index can improve a read while imposing maintenance and storage costs elsewhere; the full workload determines the tradeoff.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Whether the Laravel migration file contains fewer lines after adding the index.",
+      "rationale": "Migration source length does not measure the database workload tradeoff.",
+      "misconception": "Migration source length does not measure the database workload tradeoff."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "An index can improve a read while imposing maintenance and storage costs elsewhere; the full workload determines the tradeoff.",
+    "trace": [
+      "Uniform index counts are not a workload-based justification for this index.",
+      "A cache hit need not exercise the indexed query or expose write costs.",
+      "An index can improve a read while imposing maintenance and storage costs elsewhere; the full workload determines the tradeoff.",
+      "Migration source length does not measure the database workload tradeoff."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "sourceRoot": "reference",
+    "source": "index-overhead.txt",
+    "contains": [
+      "write",
+      "storage"
+    ],
+    "reason": "PostgreSQL index overhead contract plus the stated workload. No PostgreSQL benchmark or production index is executed.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/migrations#creating-indexes",
+    "https://www.postgresql.org/docs/18/indexes.html"
+  ]
+}

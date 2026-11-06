@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0410",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Storage concurrency",
+  "subtopic": "filesystem-append-concurrency-boundary",
+  "objective": {
+    "id": "laravel.filesystem-append-concurrency-boundary",
+    "text": "Recognize that filesystem append implemented as read-modify-write is not a concurrent logging guarantee."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Recognize a lost-update risk that a convenient storage method does not eliminate."
+  },
+  "prerequisites": [
+    "Storage append",
+    "Read-modify-write races",
+    "Concurrent writers"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [
+      "Several worker processes append to the same object; no external lock or serialization exists."
+    ],
+    "files": []
+  },
+  "stem": "A design uses Storage::append for a shared audit trail because its method name sounds like an atomic append. What must the review account for?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "The adapter can read and rewrite the object; concurrent writers need an appropriate serialization or logging design.",
+      "rationale": "The filesystem adapter’s append implementation reads existing contents and writes the combined result; that is not a cross-process atomic-append guarantee.",
+      "misconception": null
+    },
+    {
+      "id": "choice-2",
+      "text": "Switching the disk from local to object storage guarantees atomic line appends.",
+      "rationale": "Changing adapters does not give this generic read-and-rewrite helper an atomic line-append contract.",
+      "misconception": "Changing adapters does not give this generic read-and-rewrite helper an atomic line-append contract."
+    },
+    {
+      "id": "choice-3",
+      "text": "append always acquires a distributed lock based on the object key.",
+      "rationale": "The adapter does not automatically acquire a shared application lock around the read and write.",
+      "misconception": "The adapter does not automatically acquire a shared application lock around the read and write."
+    },
+    {
+      "id": "choice-4",
+      "text": "Newline separation prevents two workers from overwriting each other’s changes.",
+      "rationale": "Separators affect formatting, not concurrent read-modify-write interleavings.",
+      "misconception": "Separators affect formatting, not concurrent read-modify-write interleavings."
+    }
+  ],
+  "correctOptionId": "choice-1",
+  "explanation": {
+    "summary": "The filesystem adapter’s append implementation reads existing contents and writes the combined result; that is not a cross-process atomic-append guarantee.",
+    "trace": [
+      "The filesystem adapter’s append implementation reads existing contents and writes the combined result; that is not a cross-process atomic-append guarantee.",
+      "Changing adapters does not give this generic read-and-rewrite helper an atomic line-append contract.",
+      "The adapter does not automatically acquire a shared application lock around the read and write.",
+      "Separators affect formatting, not concurrent read-modify-write interleavings."
+    ]
+  },
+  "validation": {
+    "kind": "documented-contract",
+    "source": "Illuminate/Filesystem/FilesystemAdapter.php",
+    "contains": [
+      "if ($this->fileExists($path))",
+      "return $this->put($path, $this->get($path).$separator.$data);"
+    ],
+    "reason": "The adapter implements append through get and put. This contract check identifies a missing concurrency guarantee; it does not claim to simulate concurrent remote writes.",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/filesystem#prepending-and-appending-to-files"
+  ]
+}

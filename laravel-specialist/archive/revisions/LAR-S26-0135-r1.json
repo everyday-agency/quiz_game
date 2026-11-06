@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0135",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "architecture",
+  "topic": "Validation",
+  "subtopic": "validation-database-race",
+  "objective": {
+    "id": "laravel.validation-database-race",
+    "text": "Treat validation as a point-in-time check rather than a concurrency guarantee."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Identify the final invariant boundary when two pre-write checks both pass."
+  },
+  "prerequisites": [
+    "Unique validation",
+    "Concurrent requests",
+    "Database constraints"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "Two requests validate the same available slug before either inserts it. Both unique checks pass. The system must store at most one row for that slug. Which design remains correct under this interleaving?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Run the same unique rule twice immediately before each insert.",
+      "rationale": "Another request can still interleave after the last check; repeated checking does not provide atomic enforcement.",
+      "misconception": "Another request can still interleave after the last check; repeated checking does not provide atomic enforcement."
+    },
+    {
+      "id": "choice-2",
+      "text": "Rely on the two successful unique validations as reservations.",
+      "rationale": "Validation checks current state but does not reserve the slug for the later insert.",
+      "misconception": "Validation checks current state but does not reserve the slug for the later insert."
+    },
+    {
+      "id": "choice-3",
+      "text": "Enforce a database unique constraint and translate the losing insert into an appropriate conflict response.",
+      "rationale": "The database enforces the invariant at the write boundary; a prior validation query cannot reserve the value against another request.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Wrap each validation and insert in a default-isolation transaction without any uniqueness constraint.",
+      "rationale": "Ordinary transactions alone do not universally prevent this check-then-insert race on a missing key.",
+      "misconception": "Ordinary transactions alone do not universally prevent this check-then-insert race on a missing key."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The database enforces the invariant at the write boundary; a prior validation query cannot reserve the value against another request.",
+    "trace": [
+      "Another request can still interleave after the last check; repeated checking does not provide atomic enforcement.",
+      "Validation checks current state but does not reserve the slug for the later insert.",
+      "The database enforces the invariant at the write boundary; a prior validation query cannot reserve the value against another request.",
+      "Ordinary transactions alone do not universally prevent this check-then-insert race on a missing key."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "[true,true]:constraint",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('slugs', function ($table) {\n    $table->id();\n    $table->string('slug')->unique();\n});\n$rules = ['slug' => 'unique:slugs,slug'];\n$data = ['slug' => 'release-notes'];\n$a = validator($data, $rules)->passes();\n$b = validator($data, $rules)->passes();\necho json_encode([$a, $b]).':';\nIlluminate\\Support\\Facades\\DB::table('slugs')->insert($data);\ntry {\n    Illuminate\\Support\\Facades\\DB::table('slugs')->insert($data);\n} catch (Illuminate\\Database\\UniqueConstraintViolationException $e) {\n    echo 'constraint';\n}",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/validation#rule-unique",
+    "https://laravel.com/docs/13.x/migrations#creating-indexes"
+  ]
+}

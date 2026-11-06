@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {adapt} from './build-laravel-review.mjs';
+const read=p=>JSON.parse(readFileSync(p));
+const records=Array.from({length:6},(_,i)=>read('laravel-specialist/batches/batch-'+String(i+1).padStart(2,'0')+'.json')).flat();
+const mappings=read('laravel-specialist/curriculum-mappings.json').questions;
+export const LARAVEL_BANK=records.map(q=>adapt(q,mappings[q.id],'laravel-specialist-beta-v1'));
+assert.equal(LARAVEL_BANK.length,600);
+assert.deepEqual(LARAVEL_BANK.map(q=>q.id),Array.from({length:600},(_,i)=>'LAR-S26-'+String(i+1).padStart(4,'0')));
+const manifest=read('release/laravel-beta/manifest.json');
+assert.equal(createHash('sha256').update(JSON.stringify(LARAVEL_BANK)).digest('hex'),manifest.laravelSha256,'Laravel content changed after release freeze');
+writeFileSync('js/laravel-bank.mjs','// Laravel Specialist Beta; reviewed static content, no executable validation fixtures.\nexport default '+JSON.stringify(LARAVEL_BANK)+';\n');
+console.log('Prepared 600 authorized Laravel Beta questions.');

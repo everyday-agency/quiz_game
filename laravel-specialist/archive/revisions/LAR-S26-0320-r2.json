@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0320",
+  "revision": 2,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Queue failures",
+  "subtopic": "manual-fail-terminal-job-state",
+  "objective": {
+    "id": "laravel.manual-fail-terminal-job-state",
+    "text": "Distinguish explicitly failing a job from throwing an exception eligible for retry."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish an explicit terminal failure from releasing a retryable exception."
+  },
+  "prerequisites": [
+    "InteractsWithQueue fail",
+    "Failed callbacks",
+    "Retry lifecycle"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A job is allowed five attempts but its first handler calls $this->fail(new RuntimeException(\"invalid input\")); return;. What does explicit fail request?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "Treat the job as successful because the handler then returns normally.",
+      "rationale": "The explicit failed state is not undone by returning from handle.",
+      "misconception": "The explicit failed state is not undone by returning from handle."
+    },
+    {
+      "id": "choice-2",
+      "text": "Ignore the failure until the fifth attempt because maxTries has priority.",
+      "rationale": "A job can fail itself before exhausting the retry count.",
+      "misconception": "A job can fail itself before exhausting the retry count."
+    },
+    {
+      "id": "choice-3",
+      "text": "Explicitly fail and remove the job; remaining attempts are not used.",
+      "rationale": "Manual failure is an explicit terminal decision that invokes failure handling; the numerical retry allowance does not override it.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "Release the job immediately and consume only one of the five permitted attempts.",
+      "rationale": "That describes release or a retryable worker exception path, not explicit fail.",
+      "misconception": "That describes release or a retryable worker exception path, not explicit fail."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "Manual failure is an explicit terminal decision that invokes failure handling; the numerical retry allowance does not override it.",
+    "trace": [
+      "The explicit failed state is not undone by returning from handle.",
+      "A job can fail itself before exhausting the retry count.",
+      "Manual failure is an explicit terminal decision that invokes failure handling; the numerical retry allowance does not override it.",
+      "That describes release or a retryable worker exception path, not explicit fail."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "failed:0",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nclass RejectWork implements Illuminate\\Contracts\\Queue\\ShouldQueue\n{\n    use Illuminate\\Foundation\\Queue\\Queueable;\n\n    public $tries = 5;\n\n    public function handle(): void\n    {\n        $this->fail(new RuntimeException('invalid input'));\n\n        return;\n    }\n}\nIlluminate\\Support\\Facades\\Bus::dispatch(new RejectWork());\n$job = app('queue')->connection()->pop();\n$job->fire();\necho ($job->hasFailed() ? 'failed' : 'success').':'.Illuminate\\Support\\Facades\\DB::table('jobs')->count();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#manually-failing-a-job"
+  ]
+}

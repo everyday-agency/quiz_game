@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0315",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "execution",
+  "topic": "Queue retries",
+  "subtopic": "release-does-not-return",
+  "objective": {
+    "id": "laravel.release-does-not-return",
+    "text": "Recognize that releasing a job does not return from the current handle method."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Distinguish queue state mutation from returning out of the current handler."
+  },
+  "prerequisites": [
+    "Job release",
+    "PHP control flow"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": [
+      {
+        "path": "probe.php",
+        "kind": "complete-file",
+        "source": "<?php\n\nuse Illuminate\\Contracts\\Queue\\ShouldQueue;\nuse Illuminate\\Foundation\\Queue\\Queueable;\n\nclass RetryLater implements ShouldQueue\n{\n    use Queueable;\n\n    public function handle(): void\n    {\n        $this->release(30);\n\n        echo 'continued';\n    }\n}\n"
+      }
+    ]
+  },
+  "stem": "The worker runs this handler once. What is printed during that invocation?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "continued twice immediately because release invokes handle again recursively.",
+      "rationale": "Release schedules later availability rather than recursively re-entering handle.",
+      "misconception": "Release schedules later availability rather than recursively re-entering handle."
+    },
+    {
+      "id": "choice-2",
+      "text": "Nothing; release automatically returns from handle.",
+      "rationale": "release does not perform a PHP return on behalf of its caller.",
+      "misconception": "release does not perform a PHP return on behalf of its caller."
+    },
+    {
+      "id": "choice-3",
+      "text": "continued; release changes queue state but does not exit the method.",
+      "rationale": "The following statement still runs unless the handler returns or otherwise stops control flow.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "A fatal error because released jobs cannot execute any following PHP statement.",
+      "rationale": "Queue state does not prohibit ordinary statements from running after release.",
+      "misconception": "Queue state does not prohibit ordinary statements from running after release."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "The following statement still runs unless the handler returns or otherwise stops control flow.",
+    "trace": [
+      "Release schedules later availability rather than recursively re-entering handle.",
+      "release does not perform a PHP return on behalf of its caller.",
+      "The following statement still runs unless the handler returns or otherwise stops control flow.",
+      "Queue state does not prohibit ordinary statements from running after release."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "continued",
+    "probe": "Illuminate\\Support\\Facades\\Schema::create('jobs', function ($t) {\n    $t->bigIncrements('id');\n    $t->string('queue')->index();\n    $t->longText('payload');\n    $t->unsignedTinyInteger('attempts');\n    $t->unsignedInteger('reserved_at')->nullable();\n    $t->unsignedInteger('available_at');\n    $t->unsignedInteger('created_at');\n});\nconfig([\n    'queue.default' => 'database',\n    'queue.connections.database' => [\n        'driver' => 'database',\n        'connection' => 'sqlite',\n        'table' => 'jobs',\n        'queue' => 'default',\n        'retry_after' => 90,\n        'after_commit' => false,\n    ],\n]);\nrequire getcwd().'/probe.php';\nIlluminate\\Support\\Facades\\Bus::dispatch(new RetryLater());\napp('queue')->connection()->pop()->fire();",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/queues#manually-releasing-a-job"
+  ]
+}

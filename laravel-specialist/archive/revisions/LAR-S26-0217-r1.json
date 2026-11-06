@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0217",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Eloquent casts",
+  "subtopic": "array-object-in-place-tracking",
+  "objective": {
+    "id": "laravel.array-object-in-place-tracking",
+    "text": "Use an object-backed array cast when in-place mutation must be tracked."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Choose an object-backed representation for a required in-place update API."
+  },
+  "prerequisites": [
+    "Eloquent custom casts",
+    "ArrayObject"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A settings model must support $model->settings[\"theme\"] = \"dark\"; $model->save(); without a local-array reassignment. The JSON column must remain structured data. Which cast is intended for this interface?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "'json:unicode'",
+      "rationale": "This controls array JSON serialization behavior, not mutable offset access through an object-backed cast.",
+      "misconception": "This controls array JSON serialization behavior, not mutable offset access through an object-backed cast."
+    },
+    {
+      "id": "choice-2",
+      "text": "'object'",
+      "rationale": "A generic decoded object is not the ArrayObject offset interface requested here.",
+      "misconception": "A generic decoded object is not the ArrayObject offset interface requested here."
+    },
+    {
+      "id": "choice-3",
+      "text": "Illuminate\\Database\\Eloquent\\Casts\\AsArrayObject::class",
+      "rationale": "AsArrayObject supplies a cached mutable object and integrates its state with persistence.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "'array'",
+      "rationale": "The primitive array cast does not make overloaded offset modification work in place.",
+      "misconception": "The primitive array cast does not make overloaded offset modification work in place."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "AsArrayObject supplies a cached mutable object and integrates its state with persistence.",
+    "trace": [
+      "This controls array JSON serialization behavior, not mutable offset access through an object-backed cast.",
+      "A generic decoded object is not the ArrayObject offset interface requested here.",
+      "AsArrayObject supplies a cached mutable object and integrates its state with persistence.",
+      "The primitive array cast does not make overloaded offset modification work in place."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "dark",
+    "probe": "use Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Support\\Facades\\DB;\n\nSchema::create('records', function ($table) {\n    $table->id();\n    $table->string('name')->default('old');\n    $table->string('code')->nullable();\n    $table->integer('version')->default(1);\n    $table->text('data')->nullable();\n    $table->timestamps();\n});\n\nclass Record extends Model\n{\n    protected $table = 'records';\n    protected $guarded = [];\n}\n\n$record = Record::create(['name' => 'old', 'code' => 'A']);\n$record->mergeCasts(['data' => Illuminate\\Database\\Eloquent\\Casts\\AsArrayObject::class]);\n$record->data = ['theme' => 'light'];\n$record->data['theme'] = 'dark';\n$record->save();\necho json_decode(DB::table('records')->value('data'), true)['theme'];",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/eloquent-mutators#array-object-and-collection-casting"
+  ]
+}

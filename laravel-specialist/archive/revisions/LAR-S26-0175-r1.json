@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "technology": "laravel",
+  "collectionId": "laravel-specialist-review-v1",
+  "id": "LAR-S26-0175",
+  "revision": 1,
+  "status": "draft",
+  "responseType": "single-choice",
+  "format": "implementation",
+  "topic": "Blade caching",
+  "subtopic": "compiled-view-cache-boundary",
+  "objective": {
+    "id": "laravel.compiled-view-cache-boundary",
+    "text": "Recompile deployed Blade views without confusing compiled templates with application data."
+  },
+  "difficulty": {
+    "level": "Intermediate",
+    "audience": "intermediate",
+    "rationale": "Clear generated templates without treating user/application cache data as the same cache."
+  },
+  "prerequisites": [
+    "Compiled Blade views",
+    "Artisan cache commands",
+    "Deployment"
+  ],
+  "runtime": {
+    "php": [
+      "8.4",
+      "8.5"
+    ],
+    "laravel": "13.x",
+    "validatedLaravel": "13.40.0",
+    "sapi": "Isolated CLI Laravel harness unless another context is explicitly stated",
+    "errorPolicy": "E_ALL; UTC; no external services or application data"
+  },
+  "context": {
+    "assumptions": [],
+    "files": []
+  },
+  "stem": "A deployment procedure needs to remove generated compiled Blade templates so they can be rebuilt from the current sources. It must not flush application cache entries such as user counters. Which command targets that artifact?",
+  "options": [
+    {
+      "id": "choice-1",
+      "text": "php artisan route:clear",
+      "rationale": "This removes the route cache, not compiled Blade templates.",
+      "misconception": "This removes the route cache, not compiled Blade templates."
+    },
+    {
+      "id": "choice-2",
+      "text": "php artisan config:clear",
+      "rationale": "This removes cached configuration, not generated view files.",
+      "misconception": "This removes cached configuration, not generated view files."
+    },
+    {
+      "id": "choice-3",
+      "text": "php artisan view:clear",
+      "rationale": "view:clear removes compiled view files; it is separate from flushing the application cache store.",
+      "misconception": null
+    },
+    {
+      "id": "choice-4",
+      "text": "php artisan cache:clear",
+      "rationale": "That targets the application cache store and can remove the counters the requirement preserves.",
+      "misconception": "That targets the application cache store and can remove the counters the requirement preserves."
+    }
+  ],
+  "correctOptionId": "choice-3",
+  "explanation": {
+    "summary": "view:clear removes compiled view files; it is separate from flushing the application cache store.",
+    "trace": [
+      "This removes the route cache, not compiled Blade templates.",
+      "This removes cached configuration, not generated view files.",
+      "view:clear removes compiled view files; it is separate from flushing the application cache store.",
+      "That targets the application cache store and can remove the counters the requirement preserves."
+    ]
+  },
+  "validation": {
+    "kind": "runtime",
+    "stdout": "compiled:cleared",
+    "probe": "file_put_contents(resource_path('views/sample.blade.php'), 'Hello {{ $name }}');\nview('sample', ['name' => 'Ada'])->render();\n$path = app('blade.compiler')->getCompiledPath(resource_path('views/sample.blade.php'));\necho (is_file($path) ? 'compiled' : 'missing').':';\nIlluminate\\Support\\Facades\\Artisan::call('view:clear');\nclearstatcache();\necho is_file($path) ? 'still-present' : 'cleared';",
+    "status": "unvalidated",
+    "independentEditorialReview": "pending"
+  },
+  "curriculum": {
+    "lessonIds": null,
+    "lessonMappingStatus": "unmapped",
+    "coverageComplete": false
+  },
+  "references": [
+    "https://laravel.com/docs/13.x/views#optimizing-views"
+  ]
+}

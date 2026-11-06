@@ -1,0 +1,51 @@
+Laravel Specialist review schema, version 1
+
+The approved PHP record shape is retained with technology=laravel and a separate
+collection ID. Stable IDs LAR-S26-0001..LAR-S26-0600 are explicitly authored, never
+derived from array position, topic order, curriculum position, or answer order.
+Revision is an integer. Corrected published-to-review revisions are archived;
+earlier substantive draft corrections are archived too.
+
+Each record has:
+- format: execution, debugging, code-review, implementation, testing, architecture
+- topic, subtopic, objective {id,text}: one assessable decision or behavior
+- difficulty {level,audience,rationale}, prerequisites
+- runtime {php:[8.4,8.5],laravel:13.x,validatedLaravel:13.40.0,sapi,errorPolicy}
+- context {assumptions,files:[{path,kind,source,scope?}]}
+- stem; four options {id,text,rationale,misconception}; correctOptionId
+- explanation {summary,trace}; authoritative documentation references
+- validation: executable fixture or explicit documented contract, status, pending
+  independentEditorialReview
+- curriculum: the working mapping snapshot at authoring
+
+File kinds are complete-file, fragment, blade, or configuration. A complete PHP
+file has one PHP opening tag and valid file syntax. It is an application file,
+not necessarily a standalone script: autoloading/bootstrap is supplied by the
+stated Laravel context. Fragments have an explicit scope and a documented lint
+wrapper. Blade is compiled by Laravel when executable evidence is provided.
+No PHP runs in the quiz browser.
+
+The local technical runner executes only author-inspected source hashes in fresh
+temporary applications. It uses real Composer-locked Laravel, empty subprocess
+environments, filesystem restrictions, disabled network/process entry points,
+array/local drivers, and SQLite memory databases. Fixtures are trusted local
+test code, not user-supplied code. This is NOT a general-purpose hostile-code
+sandbox. No application data, production service, or external database is used.
+
+Evidence records actual stdout, exit status, PHP version, framework version,
+question-source hash, harness hash and lock hash. Documented-contract evidence
+records the inspected framework source path/hash, contract interpretation and
+all option rationales; it is never labelled runtime-verified. Lexical checks
+cannot prove semantic accuracy or independent approval.
+
+Accepted batch JSON files are local review snapshots. Their status is
+internal-validated; independent approval remains pending. Student projections
+exclude validation probes and framework dependencies. The Laravel-only review
+build is separate from the production PHP build and uses a separate progress
+key. No activation is implied by local acceptance.
+
+curriculum-mappings.json is the editable authoritative mapping overlay. Its
+revision is independent of question revisions and IDs. Only completed Lessons
+1-8 may be mapped. Eloquent and future/advanced prerequisites remain null unless
+their full coverage is formally established later. A question can be studied
+without any lesson mapping.

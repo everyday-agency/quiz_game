@@ -1,0 +1,717 @@
+{
+  "createdAt": "2026-11-06T12:15:14.452Z",
+  "count": 600,
+  "ids": [
+    "LAR-S26-0001",
+    "LAR-S26-0600"
+  ],
+  "batches": [
+    {
+      "batch": 1,
+      "count": 100,
+      "runtime": 88,
+      "contracts": 12,
+      "sourceHash": "30b65b55718f2082f0d0eb548b8306a28f99cd15a8b4f5c52664110f3976359d",
+      "acceptedHash": "02602a169d55a6a3a89b9c34bc6f9b550142d2d33d7213d6d13e93d82c47f99d"
+    },
+    {
+      "batch": 2,
+      "count": 100,
+      "runtime": 95,
+      "contracts": 5,
+      "sourceHash": "8e8492b775180edc1ef29cc7e442264a055926f2784bbfd52f29941d779079ce",
+      "acceptedHash": "00364847686aeb0567bc4563142040be03b28c0d7e75f5f99a9526ff5e9d1b84"
+    },
+    {
+      "batch": 3,
+      "count": 100,
+      "runtime": 97,
+      "contracts": 3,
+      "sourceHash": "b7c19fdcabf10e5c28297c2e81ad7b45335837ac253cfd5666aefd12b4732f78",
+      "acceptedHash": "56b950f8a1886ae50e1c16942046cab60ee1bb32eaa48b24d73eac41ddb544d7"
+    },
+    {
+      "batch": 4,
+      "count": 100,
+      "runtime": 94,
+      "contracts": 6,
+      "sourceHash": "4af575f6a37aeae0aead4b54fc74a0e9d26e00c7b204d41adceb2f5e20b6a113",
+      "acceptedHash": "ee513c56874db464908b41b2e5ccda0a32944ab70f39f963a91bceb698ca6cb4"
+    },
+    {
+      "batch": 5,
+      "count": 100,
+      "runtime": 93,
+      "contracts": 7,
+      "sourceHash": "75cfe1321af965d6afc98bc40894cc0a99e8ac7c693cdc7b535d83e78b757485",
+      "acceptedHash": "a5a3359347d86afc875fd4b6570e89b806cc844dd8f6d570a3df7224429a601b"
+    },
+    {
+      "batch": 6,
+      "count": 100,
+      "runtime": 89,
+      "contracts": 11,
+      "sourceHash": "bb691340eedbee1e8d811f53f8efcab4f075aab3d3d1a2abba0ed523fc510d6d",
+      "acceptedHash": "6eea9d0d12fa5753a5f78e188a6508a0877fa6c4b5fc63d71904d428e058a630"
+    }
+  ],
+  "formats": {
+    "architecture": 48,
+    "code-review": 86,
+    "debugging": 80,
+    "execution": 211,
+    "implementation": 109,
+    "testing": 66
+  },
+  "difficulty": {
+    "Advanced": 7,
+    "Foundation": 239,
+    "Intermediate": 354
+  },
+  "keyPositions": {
+    "1": 164,
+    "2": 137,
+    "3": 159,
+    "4": 140
+  },
+  "topicCounts": {
+    "API pagination": 3,
+    "API resource security": 1,
+    "API resources": 10,
+    "API responses": 1,
+    "Application architecture": 9,
+    "Architecture tests": 1,
+    "Artisan": 5,
+    "Authentication": 6,
+    "Authentication security": 1,
+    "Authentication state": 1,
+    "Authentication tests": 1,
+    "Authorization": 9,
+    "Blade": 12,
+    "Blade caching": 1,
+    "Blade components": 8,
+    "Blade forms": 4,
+    "Broadcast events": 2,
+    "Broadcast integration": 1,
+    "Broadcast security": 1,
+    "Bulk processing": 4,
+    "Cache architecture": 1,
+    "Cache concurrency": 1,
+    "Cache consistency": 1,
+    "Cache durability": 1,
+    "Cache expiration": 2,
+    "Cache freshness": 1,
+    "Cache invalidation": 1,
+    "Cache keys": 1,
+    "Cache locks": 3,
+    "Cache memoization": 1,
+    "Cache retrieval": 3,
+    "Cache tags": 2,
+    "Cache tests": 1,
+    "Collections": 9,
+    "Configuration": 4,
+    "Console tests": 1,
+    "Context": 2,
+    "Context and queues": 1,
+    "Controllers": 7,
+    "Cookie security": 1,
+    "Database concurrency": 3,
+    "Database connections": 2,
+    "Database indexes": 2,
+    "Database observability": 1,
+    "Database tests": 4,
+    "Deployment": 10,
+    "Deployment basics": 1,
+    "Deployment security": 1,
+    "Domain events": 1,
+    "Eager loading": 5,
+    "Eloquent accessors": 2,
+    "Eloquent casts": 8,
+    "Eloquent concurrency": 1,
+    "Eloquent models": 9,
+    "Eloquent scopes": 1,
+    "Eloquent serialization": 3,
+    "Eloquent state": 6,
+    "Email verification": 2,
+    "Encryption": 1,
+    "Encryption failures": 1,
+    "Encryption formats": 1,
+    "Encryption integrity": 1,
+    "Encryption rotation": 1,
+    "Error control flow": 2,
+    "Event architecture": 2,
+    "Event diagnostics": 1,
+    "Event discovery": 1,
+    "Event listeners": 3,
+    "Event subscribers": 1,
+    "Event tests": 3,
+    "Events": 4,
+    "Exception context": 1,
+    "Exception rendering": 1,
+    "Exception reporting": 3,
+    "Exception responses": 2,
+    "Exception severity": 1,
+    "Facades": 1,
+    "Factories": 4,
+    "Factory tests": 1,
+    "Form Requests": 15,
+    "Framework upgrades": 1,
+    "Frontend CORS": 1,
+    "Frontend assets": 3,
+    "Frontend security": 1,
+    "Frontend sessions": 1,
+    "HTTP client": 1,
+    "HTTP client authentication": 2,
+    "HTTP client bodies": 1,
+    "HTTP client concurrency": 1,
+    "HTTP client contracts": 1,
+    "HTTP client errors": 1,
+    "HTTP client headers": 1,
+    "HTTP client negotiation": 1,
+    "HTTP client responses": 2,
+    "HTTP client retries": 4,
+    "HTTP client tests": 3,
+    "HTTP client timeouts": 1,
+    "HTTP client uploads": 1,
+    "HTTP requests": 21,
+    "HTTP responses": 5,
+    "HTTP tests": 9,
+    "Helpers": 2,
+    "Inertia props": 1,
+    "Inertia protocol": 1,
+    "Inertia validation": 1,
+    "Inertia versioning": 1,
+    "Integration consistency": 1,
+    "Integration contracts": 1,
+    "Integration resilience": 3,
+    "Job batches": 3,
+    "Job chains": 3,
+    "Lazy collections": 1,
+    "Localization": 9,
+    "Localization tests": 1,
+    "Logging": 1,
+    "Logging context": 3,
+    "Logging security": 1,
+    "Logging stacks": 1,
+    "Long-lived workers": 2,
+    "Mail addressing": 1,
+    "Mail attachments": 2,
+    "Mail configuration": 1,
+    "Mail delivery": 1,
+    "Mail events": 1,
+    "Mail headers": 1,
+    "Mail queueing": 3,
+    "Mail rendering": 2,
+    "Mail security": 1,
+    "Mail tests": 3,
+    "Maintenance": 1,
+    "Middleware": 8,
+    "Migrations": 4,
+    "Notification data": 1,
+    "Notification tests": 1,
+    "Notifications": 8,
+    "Outbound request security": 1,
+    "Package configuration": 1,
+    "Package integration": 3,
+    "Pagination": 2,
+    "Parallel tests": 1,
+    "Password confirmation": 1,
+    "Password reset expiry": 1,
+    "Password reset lifecycle": 1,
+    "Password reset storage": 1,
+    "Password reset throttling": 1,
+    "Performance": 2,
+    "Pipeline": 2,
+    "Pivot relationships": 9,
+    "Polymorphic relationships": 4,
+    "Proxies and hosts": 3,
+    "Query Builder": 12,
+    "Queue dispatch": 3,
+    "Queue failures": 3,
+    "Queue idempotency": 2,
+    "Queue lifecycle": 2,
+    "Queue middleware": 4,
+    "Queue payloads": 1,
+    "Queue rate limits": 1,
+    "Queue retries": 4,
+    "Queue safety": 1,
+    "Queue serialization": 3,
+    "Queue tests": 2,
+    "Queue timeouts": 1,
+    "Queue transactions": 2,
+    "Queue uniqueness": 3,
+    "Queue workers": 2,
+    "Rate limiting": 1,
+    "Relationship aggregates": 3,
+    "Relationship queries": 3,
+    "Relationships": 6,
+    "Request diagnostics": 1,
+    "Retry control flow": 1,
+    "Route binding": 6,
+    "Routing": 10,
+    "Scheduling": 12,
+    "Scheduling architecture": 1,
+    "Scheduling tests": 1,
+    "Security architecture": 2,
+    "Seeders": 1,
+    "Service container": 17,
+    "Service providers": 3,
+    "Service tests": 1,
+    "Session authentication": 1,
+    "Sessions and CSRF": 8,
+    "Signed URLs": 3,
+    "Soft deletes and indexes": 1,
+    "Storage": 2,
+    "Storage concurrency": 1,
+    "Storage consistency": 1,
+    "Storage deployment": 1,
+    "Storage errors": 1,
+    "Storage operations": 2,
+    "Storage responses": 1,
+    "Storage security": 2,
+    "Storage streams": 1,
+    "Storage tests": 1,
+    "Storage uploads": 1,
+    "Storage visibility": 1,
+    "Strings": 1,
+    "Time tests": 1,
+    "Transaction tests": 1,
+    "Transactions": 4,
+    "URLs and redirects": 4,
+    "Upload delivery security": 1,
+    "Validation": 35,
+    "Webhook authenticity": 1,
+    "Webhook freshness": 1
+  },
+  "curriculum": {
+    "mapped": 138,
+    "unmapped": 462,
+    "lessonCounts": {
+      "1": 29,
+      "2": 24,
+      "3": 16,
+      "4": 23,
+      "5": 37,
+      "6": 32,
+      "7": 11,
+      "8": 12
+    },
+    "note": "Working topic mappings to completed Lessons 1–8 only; detailed lesson contents must be confirmed before using them as an exam eligibility gate. Future lessons remain null."
+  },
+  "validation": {
+    "php": [
+      "8.5.2",
+      "8.4.17"
+    ],
+    "laravel": "13.40.0",
+    "inertia": "3.7.0",
+    "runtimePerVersion": 556,
+    "contractsPerVersion": 44,
+    "totalQuestionVersionChecks": 1200,
+    "fileKinds": {
+      "complete-file": 124,
+      "fragment": 6,
+      "blade": 23
+    }
+  },
+  "wording": {
+    "uniqueLongest": 146,
+    "uniqueShortest": 131,
+    "outliers": [
+      {
+        "id": "LAR-S26-0596",
+        "uniqueLongest": true,
+        "uniqueShortest": false,
+        "ratio": 2.33
+      }
+    ],
+    "note": "Length signals are heuristics. Exact short outputs are not padded to equal length."
+  },
+  "duplicates": {
+    "normalizedWholeQuestionDuplicates": 0,
+    "duplicateObjectiveIds": 0,
+    "lexicalCandidates": 44,
+    "lexicalDispositions": [
+      {
+        "a": "LAR-S26-0017",
+        "b": "LQ-420",
+        "kind": "legacy",
+        "similarity": 0.25,
+        "disposition": "retained",
+        "reason": "Inactive legacy content shares a broad curriculum concept. The new item has separately authored context, options, explanation and evidence; no legacy record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0095",
+        "b": "LAR-S26-0035",
+        "kind": "current",
+        "similarity": 0.24,
+        "disposition": "retained",
+        "reason": "Artisan signature parsing and argument defaults differ from PHP callback defaults for optional URI parameters."
+      },
+      {
+        "a": "LAR-S26-0042",
+        "b": "LQ-308",
+        "kind": "legacy",
+        "similarity": 0.233,
+        "disposition": "retained",
+        "reason": "Inactive legacy content shares a broad curriculum concept. The new item has separately authored context, options, explanation and evidence; no legacy record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0055",
+        "b": "LAR-S26-0031",
+        "kind": "current",
+        "similarity": 0.222,
+        "disposition": "retained",
+        "reason": "204 status normalization and HEAD route/method handling require different protocol facts."
+      },
+      {
+        "a": "LAR-S26-0079",
+        "b": "LQ-413",
+        "kind": "legacy",
+        "similarity": 0.214,
+        "disposition": "retained",
+        "reason": "Inactive legacy content shares a broad curriculum concept. The new item has separately authored context, options, explanation and evidence; no legacy record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0017",
+        "b": "LQ-417",
+        "kind": "legacy",
+        "similarity": 0.2,
+        "disposition": "retained",
+        "reason": "Inactive legacy content shares a broad curriculum concept. The new item has separately authored context, options, explanation and evidence; no legacy record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0075",
+        "b": "LAR-S26-0074",
+        "kind": "current",
+        "similarity": 0.194,
+        "disposition": "retained",
+        "reason": "Request-body media type versus response preference is distinct from weighting available response representations."
+      },
+      {
+        "a": "LAR-S26-0140",
+        "b": "LQ-314",
+        "kind": "legacy",
+        "similarity": 0.429,
+        "disposition": "retained",
+        "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0157",
+        "b": "LAR-S26-0156",
+        "kind": "current",
+        "similarity": 0.25,
+        "disposition": "retained",
+        "reason": "Nested parent/current loop state is different from one loop index-versus-iteration offset."
+      },
+      {
+        "a": "LAR-S26-0174",
+        "b": "LAR-S26-0126",
+        "kind": "current",
+        "similarity": 0.242,
+        "disposition": "retained",
+        "reason": "This tests restoration of a temporary view variable, not selection of a named error bag alone."
+      },
+      {
+        "a": "LAR-S26-0135",
+        "b": "LQ-045",
+        "kind": "legacy",
+        "similarity": 0.237,
+        "disposition": "retained",
+        "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0147",
+        "b": "LQ-314",
+        "kind": "legacy",
+        "similarity": 0.214,
+        "disposition": "retained",
+        "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0125",
+        "b": "LAR-S26-0106",
+        "kind": "current",
+        "similarity": 0.212,
+        "disposition": "retained",
+        "reason": "Custom-message pattern matching differs from concrete wildcard error-path expansion."
+      },
+      {
+        "a": "LAR-S26-0127",
+        "b": "LAR-S26-0074",
+        "kind": "accepted",
+        "similarity": 0.194,
+        "disposition": "retained",
+        "reason": "The API validation response contract adds exception handling, status and nested error keys; earlier 0074 distinguishes request body type from response preference."
+      },
+      {
+        "a": "LAR-S26-0179",
+        "b": "LQ-360",
+        "kind": "legacy",
+        "similarity": 0.194,
+        "disposition": "retained",
+        "reason": "Inactive legacy content overlaps a required curriculum topic. New question/context/alternatives were authored independently; no old record is reactivated."
+      },
+      {
+        "a": "LAR-S26-0281",
+        "b": "LQ-110",
+        "kind": "legacy",
+        "similarity": 0.267,
+        "decision": "Legacy tests a thrown exception; new question traces normal completion returning false. Fresh execution and all-new realistic alternatives.",
+        "reason": "Legacy tests a thrown exception; new question traces normal completion returning false. Fresh execution and all-new realistic alternatives."
+      },
+      {
+        "a": "LAR-S26-0251",
+        "b": "LAR-S26-0250",
+        "kind": "current",
+        "similarity": 0.265,
+        "decision": "One existing pivot update differs from additive set synchronization that also adds links and updates metadata.",
+        "reason": "One existing pivot update differs from additive set synchronization that also adds links and updates metadata."
+      },
+      {
+        "a": "LAR-S26-0241",
+        "b": "LAR-S26-0236",
+        "kind": "current",
+        "similarity": 0.261,
+        "decision": "Cached collection versus a fresh relationship query differs from an aggregate existence projection that never hydrates children.",
+        "reason": "Cached collection versus a fresh relationship query differs from an aggregate existence projection that never hydrates children."
+      },
+      {
+        "a": "LAR-S26-0255",
+        "b": "LAR-S26-0251",
+        "kind": "current",
+        "similarity": 0.259,
+        "decision": "Removing a link while retaining its target differs from updating one association attribute without detaching other links.",
+        "reason": "Removing a link while retaining its target differs from updating one association attribute without detaching other links."
+      },
+      {
+        "a": "LAR-S26-0275",
+        "b": "LQ-104",
+        "kind": "legacy",
+        "similarity": 0.235,
+        "decision": "Same necessary curriculum concept in the inactive legacy archive, but independently authored regression context, plausible alternatives and a real two-page cursor witness. No second copy in the new bank.",
+        "reason": "Same necessary curriculum concept in the inactive legacy archive, but independently authored regression context, plausible alternatives and a real two-page cursor witness. No second copy in the new bank."
+      },
+      {
+        "a": "LAR-S26-0240",
+        "b": "LQ-094",
+        "kind": "legacy",
+        "similarity": 0.231,
+        "decision": "Same necessary key-retention concept in the inactive archive, now concrete column diagnosis and observed empty versus matched child sets. Original wording and technical alternatives; not a duplicate within the accepted new bank.",
+        "reason": "Same necessary key-retention concept in the inactive archive, now concrete column diagnosis and observed empty versus matched child sets. Original wording and technical alternatives; not a duplicate within the accepted new bank."
+      },
+      {
+        "a": "LAR-S26-0232",
+        "b": "LAR-S26-0231",
+        "kind": "current",
+        "similarity": 0.226,
+        "decision": "Custom owner-key mapping is distinct from choosing relationship direction from foreign-key location.",
+        "reason": "Custom owner-key mapping is distinct from choosing relationship direction from foreign-key location."
+      },
+      {
+        "a": "LAR-S26-0244",
+        "b": "LQ-097",
+        "kind": "legacy",
+        "similarity": 0.216,
+        "decision": "Inverse parent hydration with chaperone is different from ordinary forward eager loading; the parent is already available.",
+        "reason": "Inverse parent hydration with chaperone is different from ordinary forward eager loading; the parent is already available."
+      },
+      {
+        "a": "LAR-S26-0263",
+        "b": "LAR-S26-0235",
+        "kind": "current",
+        "similarity": 0.2,
+        "decision": "Key/value list shape differs from a relationship count projection.",
+        "reason": "Key/value list shape differs from a relationship count projection."
+      },
+      {
+        "a": "LAR-S26-0298",
+        "b": "LAR-S26-0278",
+        "kind": "current",
+        "similarity": 0.2,
+        "decision": "Scoped suppression and restoration of model events differs from Query Builder bypassing the model lifecycle altogether.",
+        "reason": "Scoped suppression and restoration of model events differs from Query Builder bypassing the model lifecycle altogether."
+      },
+      {
+        "a": "LAR-S26-0257",
+        "b": "LQ-088",
+        "kind": "legacy",
+        "similarity": 0.194,
+        "decision": "New diagnostic requires matching the pivot schema to both automatically written timestamps; inactive legacy asks only why timestamps are enabled.",
+        "reason": "New diagnostic requires matching the pivot schema to both automatically written timestamps; inactive legacy asks only why timestamps are enabled."
+      },
+      {
+        "a": "LAR-S26-0384",
+        "b": "LAR-S26-0381",
+        "kind": "current",
+        "similarity": 0.286,
+        "decision": "Recipient-level ID correlation differs from the number of recipient/channel jobs. Actual payload restoration checks the identifier grouping.",
+        "reason": "Recipient-level ID correlation differs from the number of recipient/channel jobs. Actual payload restoration checks the identifier grouping."
+      },
+      {
+        "a": "LAR-S26-0339",
+        "b": "LQ-209",
+        "kind": "legacy",
+        "similarity": 0.25,
+        "decision": "An inactive legacy curriculum overlap. New independently authored deployment diagnosis and concrete alternatives; only one worker-reload question exists in the new bank.",
+        "reason": "An inactive legacy curriculum overlap. New independently authored deployment diagnosis and concrete alternatives; only one worker-reload question exists in the new bank."
+      },
+      {
+        "a": "LAR-S26-0381",
+        "b": "LAR-S26-0377",
+        "kind": "current",
+        "similarity": 0.243,
+        "decision": "Queue work-unit cardinality differs from per-recipient channel selection.",
+        "reason": "Queue work-unit cardinality differs from per-recipient channel selection."
+      },
+      {
+        "a": "LAR-S26-0314",
+        "b": "LQ-119",
+        "kind": "legacy",
+        "similarity": 0.222,
+        "decision": "The new outbox question also requires surviving a relay crash after publication and tolerating duplicate delivery. Same established architectural pattern, not copied question wording or options.",
+        "reason": "The new outbox question also requires surviving a relay crash after publication and tolerating duplicate delivery. Same established architectural pattern, not copied question wording or options."
+      },
+      {
+        "a": "LAR-S26-0305",
+        "b": "LAR-S26-0210",
+        "kind": "accepted",
+        "similarity": 0.214,
+        "decision": "Queued model restoration reads current database state; dirty/wasChanged tracking compares model state around a save. Shared model vocabulary only.",
+        "reason": "Queued model restoration reads current database state; dirty/wasChanged tracking compares model state around a save. Shared model vocabulary only."
+      },
+      {
+        "a": "LAR-S26-0359",
+        "b": "LAR-S26-0351",
+        "kind": "current",
+        "similarity": 0.214,
+        "decision": "Two event emissions with one registration differ from one event with two listener registrations. Diagnostic counts explicitly separate the defects.",
+        "reason": "Two event emissions with one registration differ from one event with two listener registrations. Diagnostic counts explicitly separate the defects."
+      },
+      {
+        "a": "LAR-S26-0339",
+        "b": "LQ-136",
+        "kind": "legacy",
+        "similarity": 0.205,
+        "decision": "The legacy archive itself repeats this objective. The new bank contains one independently validated worker-reload assessment.",
+        "reason": "The legacy archive itself repeats this objective. The new bank contains one independently validated worker-reload assessment."
+      },
+      {
+        "a": "LAR-S26-0327",
+        "b": "LQ-142",
+        "kind": "legacy",
+        "similarity": 0.2,
+        "decision": "Inactive legacy combines shared locks and lease sizing. New question isolates cross-class key identity with actual generated-key evidence; lock expiry is separately assessed under a crash-recovery objective.",
+        "reason": "Inactive legacy combines shared locks and lease sizing. New question isolates cross-class key identity with actual generated-key evidence; lock expiry is separately assessed under a crash-recovery objective."
+      },
+      {
+        "a": "LAR-S26-0325",
+        "b": "LAR-S26-0323",
+        "kind": "current",
+        "similarity": 0.191,
+        "decision": "Cross-node shared lock storage differs from a single dispatch uniqueness lifecycle. The runtime compares two isolated stores against one shared repository.",
+        "reason": "Cross-node shared lock storage differs from a single dispatch uniqueness lifecycle. The runtime compares two isolated stores against one shared repository."
+      },
+      {
+        "a": "LAR-S26-0402",
+        "b": "LAR-S26-0363",
+        "kind": "accepted",
+        "similarity": 0.323,
+        "decision": "retain-distinct",
+        "reason": "Upload return-value interpretation versus selecting a mail attachment disk API. The latter supplies the relative-key premise; the former tests it."
+      },
+      {
+        "a": "LAR-S26-0440",
+        "b": "LAR-S26-0438",
+        "kind": "current",
+        "similarity": 0.259,
+        "decision": "retain-distinct",
+        "reason": "Transport exception despite throw=false versus total attempt counting. Different outcomes and misconceptions."
+      },
+      {
+        "a": "LAR-S26-0407",
+        "b": "LAR-S26-0402",
+        "kind": "current",
+        "similarity": 0.233,
+        "decision": "retain-distinct",
+        "reason": "URL generation does not change access visibility versus the upload return value being a relative key."
+      },
+      {
+        "a": "LAR-S26-0440",
+        "b": "LAR-S26-0439",
+        "kind": "current",
+        "similarity": 0.219,
+        "decision": "retain-distinct",
+        "reason": "No response after transport failure despite throw=false versus default final RequestException after real HTTP error responses."
+      },
+      {
+        "a": "LAR-S26-0541",
+        "b": "LQ-387",
+        "kind": "legacy",
+        "similarity": 0.231,
+        "decision": "retain-distinct",
+        "reason": "New two-stage execution trace distinguishes map result independence and subsequent transform mutation; the archived legacy item is a method-definition prompt, is inactive and is not imported."
+      },
+      {
+        "a": "LAR-S26-0528",
+        "b": "LAR-S26-0526",
+        "kind": "current",
+        "similarity": 0.208,
+        "decision": "retain-distinct",
+        "reason": "Issuance throttle control flow (no creation or delivery) versus configuration units and separate expiration semantics."
+      },
+      {
+        "a": "LAR-S26-0514",
+        "b": "LAR-S26-0206",
+        "kind": "accepted",
+        "similarity": 0.2,
+        "decision": "retain-distinct",
+        "reason": "Diagnostic Context scope restoration including newly added keys versus Eloquent mass-assignment protection scope. Related scoped-lifetime principle, different framework state and concrete regression."
+      },
+      {
+        "a": "LAR-S26-0531",
+        "b": "LAR-S26-0193",
+        "kind": "accepted",
+        "similarity": 0.2,
+        "decision": "retain-distinct",
+        "reason": "Request-only once login persistence versus credential verification with attempt. Distinct authentication contract."
+      },
+      {
+        "a": "LAR-S26-0557",
+        "b": "LAR-S26-0071",
+        "kind": "accepted",
+        "similarity": 0.2,
+        "decision": "retain-distinct",
+        "reason": "Translation empty-string/key fallback versus Request header presence/default behavior. Shared missing-value theme, different framework APIs and outcomes."
+      }
+    ],
+    "weightedCandidates": [
+      {
+        "a": "LAR-S26-0157",
+        "b": "LAR-S26-0156",
+        "similarity": 0.476,
+        "aObjective": "Access the parent loop when rendering nested iteration.",
+        "bObjective": "Trace loop iteration and index values without off-by-one display errors.",
+        "decision": "retain-distinct",
+        "reason": "Nested $loop->parent access and outer iteration identity versus index/iteration offsets in one loop; different variable lookup and execution trace."
+      },
+      {
+        "a": "LAR-S26-0531",
+        "b": "LAR-S26-0193",
+        "similarity": 0.434,
+        "aObjective": "Authenticate a single request with once without persisting a login session.",
+        "bObjective": "Authenticate a session-backed request without persisting submitted plaintext credentials.",
+        "decision": "retain-distinct",
+        "reason": "Auth::once request-only state versus Auth::attempt credential checking and session persistence; distinct method contracts."
+      }
+    ],
+    "note": "All candidate pairs and adjacent objective families received author review. Similarity scores do not prove semantic uniqueness."
+  },
+  "archive": {
+    "legacyCount": 600,
+    "revisedQuestionCount": 221,
+    "archivedVersions": 231
+  },
+  "independentApproval": "pending",
+  "productionActivation": false
+}
