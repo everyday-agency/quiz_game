@@ -30,8 +30,6 @@
     </nav>
   </header>
 
-  <div class="subject-picker"><label for="subjectSelect">Subject</label><select id="subjectSelect" aria-label="Subject"></select></div>
-
   <main id="main">
     <section id="homeView" class="view active" aria-labelledby="heroTitle">
       <div class="home-shell">
@@ -52,6 +50,11 @@
             </div>
             <span class="question-total" id="availableCount">Loading questions…</span>
           </div>
+
+          <fieldset class="control-group">
+            <legend>Subject</legend>
+            <div class="track-grid" id="subjectControl"></div>
+          </fieldset>
 
           <fieldset class="control-group">
             <legend>Session size</legend>

@@ -69,7 +69,7 @@ try{
     await call('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,...point});
     await call('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,...point});
   };
-  const key=async(key,code,virtual)=>{await call('Input.dispatchKeyEvent',{type:'keyDown',key,code,windowsVirtualKeyCode:virtual});await call('Input.dispatchKeyEvent',{type:'keyUp',key,code,windowsVirtualKeyCode:virtual});};
+  const key=async(key,code,virtual)=>{await call('Input.dispatchKeyEvent',{type:'keyDown',key,code,windowsVirtualKeyCode:virtual,...(key==='Enter'?{text:'\r'}:{})});await call('Input.dispatchKeyEvent',{type:'keyUp',key,code,windowsVirtualKeyCode:virtual});};
   const shot=async name=>{await evaluate(`Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))`);const r=await call('Page.captureScreenshot',{format:'png'});await writeFile(join(reportDir,`${name}.png`),Buffer.from(r.data,'base64'));};
   const select=async(selector,index)=>{await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});e.focus();e.selectedIndex=${index};e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));})()`);assert.equal(await evaluate(`document.querySelector(${JSON.stringify(selector)}).selectedIndex`),index,selector);};
   const stats=()=>evaluate(`({main:localStorage.getItem('underTheHoodStats'),legacy:localStorage.getItem('laravelQuizStats'),pilot:localStorage.getItem('underTheHoodPhpPilotV1Stats'),preview:localStorage.getItem('underTheHoodPhpEngineerReviewV1Stats'),unrelated:localStorage.getItem('unrelated-app'),php:localStorage.getItem('underTheHoodPhpEngineerV1Stats'),laravelReview:localStorage.getItem('underTheHoodLaravelSpecialistReviewV1Stats'),release:JSON.parse(localStorage.getItem('underTheHoodLaravelSpecialistBetaV1Stats'))})`);
@@ -81,8 +81,9 @@ try{
   const started=Date.now();
   await loadPage('Page.navigate',{url:base});
   await until(`document.querySelector('#lifetimeCount')?.textContent==='620 PHP answers'`);
-  assert.deepEqual(await evaluate(`[...document.querySelector('#subjectSelect').options].map(o=>o.textContent)`),['PHP Engineer — 620 questions','Laravel Specialist (Beta) — 600 questions']);
-  await select('#subjectSelect',1);
+  assert.deepEqual(await evaluate(`[...document.querySelectorAll('.setup-card #subjectControl button')].map(b=>({name:b.querySelector('strong').textContent,count:b.querySelector('small').textContent,pressed:b.getAttribute('aria-pressed')}))`),[{name:'PHP Engineer',count:'620 questions',pressed:'true'},{name:'Laravel Specialist (Beta)',count:'600 questions',pressed:'false'}]);
+  assert.equal(await evaluate(`document.querySelectorAll('.subject-picker,#subjectSelect').length`),0);
+  await click('#subjectControl [data-subject="Laravel"]');
   const initialCount=REVIEW_BANK.filter(q=>q.difficulty!=='Advanced').length;
   await until(`document.querySelector('#availableCount')?.textContent==='${initialCount} available'`);
   const loadMs=Date.now()-started;
@@ -96,7 +97,18 @@ try{
   assert.equal(await evaluate(`document.querySelectorAll('.review-filters').length`),0);
   await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
   assert(await evaluate(`document.documentElement.scrollWidth<=innerWidth`));
+  await evaluate(`document.querySelector('.setup-card').scrollIntoView({block:'start',behavior:'instant'})`);
   await shot('review-home-mobile');
+  await click('#subjectControl [data-subject="PHP"]');
+  await key('Tab','Tab',9);
+  assert.equal(await evaluate(`document.activeElement.dataset.subject`),'Laravel');
+  await key('Enter','Enter',13);
+  assert.equal(await evaluate(`document.querySelector('#subjectControl [data-subject="Laravel"]').getAttribute('aria-pressed')`),'true');
+  assert.equal(await evaluate(`document.querySelectorAll('#subjectControl [aria-pressed="true"]').length`),1);
+  assert.equal(await evaluate(`document.querySelector('#availableCount').textContent`),'595 available');
+  assert.equal((await stats()).php,'{"answered":620,"correct":500,"sessions":10,"best":90}');
+  check('subject buttons are inside setup, fit mobile, and switch exclusively with mouse and keyboard');
+
   await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false});
   check('setup has no extra review filters on desktop/mobile; default difficulty selection remains intact');
   await click('#difficultyControl input[value="Advanced"]');await until(`document.querySelector('#availableCount').textContent==='600 available'`);
@@ -202,14 +214,16 @@ try{
     await click('[data-view="bank"]');
     assert((await evaluate(`document.querySelector('#bankCount').textContent`)).startsWith('600 of 600 scenarios'));
   }
-  await select('#subjectSelect',0);
+  await click('[data-view="home"]');
+  await click('#subjectControl [data-subject="PHP"]');
   assert.equal(await evaluate(`document.querySelector('#lifetimeCount').textContent`),'620 PHP answers');
   await click('[data-view="bank"]');
   assert((await evaluate(`document.querySelector('#bankCount').textContent`)).startsWith('620 of 620 scenarios'));
-  await select('#subjectSelect',1);
+  await click('[data-view="home"]');
+  await click('#subjectControl [data-subject="Laravel"]');
   assert.equal(await evaluate(`document.querySelector('#lifetimeCount').textContent`),'620 Laravel answers');
   await loadPage('Page.reload');
-  await until(`document.querySelector('#subjectSelect')?.value==='Laravel' && document.querySelector('#lifetimeCount').textContent==='620 Laravel answers'`);
+  await until(`document.querySelector('#subjectControl [data-subject="Laravel"]')?.getAttribute('aria-pressed')==='true' && document.querySelector('#lifetimeCount').textContent==='620 Laravel answers'`);
   assert.equal((await stats()).php,'{"answered":620,"correct":500,"sessions":10,"best":90}');
   assert.equal((await stats()).laravelReview,'{"answered":600,"correct":450,"sessions":8,"best":80}');
   assert.deepEqual((await stats()).release,finished);

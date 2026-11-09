@@ -691,16 +691,31 @@ try {
   $('#historicalProgress').hidden = !HISTORICAL_KEYS.some(key => localStorage.getItem(key) !== null);
 } catch { /* Storage is optional. */ }
 
-const subjectSelect = $('#subjectSelect');
+const subjectControl = $('#subjectControl');
 for (const subject of SUBJECTS) {
-  const option = document.createElement('option');
-  option.value = subject.track;
-  option.textContent = `${subject.label} — ${subject.count} questions`;
-  subjectSelect.append(option);
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'track-choice';
+  button.dataset.subject = subject.track;
+  const mark = document.createElement('span');
+  mark.className = 'track-mark';
+  mark.setAttribute('aria-hidden', 'true');
+  mark.textContent = subject.track === 'Laravel' ? 'L' : subject.track;
+  const copy = document.createElement('span');
+  const name = document.createElement('strong');
+  name.textContent = subject.label;
+  const detail = document.createElement('small');
+  detail.textContent = `${subject.count} questions`;
+  copy.append(name, detail);
+  button.append(mark, copy);
+  button.addEventListener('click', () => switchSubject(subject));
+  subjectControl.append(button);
 }
-subjectSelect.value = activeSubject.track;
 
 function updateSubjectCopy() {
+  subjectControl.querySelectorAll('button').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.subject === activeSubject.track));
+  });
   document.documentElement.dataset.collection = activeSubject.collectionId;
   $('#subjectCount').textContent = `${activeSubject.count} ${activeSubject.label} questions`;
   $('#subjectVersions').textContent = activeSubject.track === 'Laravel' ? 'Laravel 13 · PHP 8.4 / 8.5' : 'PHP 8.4 / 8.5';
@@ -709,13 +724,13 @@ function updateSubjectCopy() {
   $('#bankDescription').textContent = `Browse ${activeSubject.track} execution, debugging, testing and engineering scenarios. Answers stay folded until you deliberately reveal them.`;
   $('.lifetime-score').title = `Completed answers in ${activeSubject.label}`;
 }
-subjectSelect.addEventListener('change', () => {
+function switchSubject(subject) {
+  if (subject === activeSubject) return;
   if (state.view === 'quiz' && state.answers.length && !state.completed &&
       !window.confirm('Switch subjects? Current answers will not be saved.')) {
-    subjectSelect.value = activeSubject.track;
     return;
   }
-  activeSubject = SUBJECTS.find(subject => subject.track === subjectSelect.value);
+  activeSubject = subject;
   const url = new URL(location.href);
   if (activeSubject === SUBJECTS[0]) url.searchParams.delete('subject');
   else url.searchParams.set('subject', activeSubject.track.toLowerCase());
@@ -733,8 +748,8 @@ subjectSelect.addEventListener('change', () => {
   updateSubjectCopy();
   updateAvailable();
   updateLifetime();
-  showView('home');
-});
+  if (state.view !== 'home') showView('home');
+}
 updateSubjectCopy();
 
 setupTopics();
